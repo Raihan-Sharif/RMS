@@ -5,9 +5,10 @@ namespace RMS.Infrastructure.HealthChecks
 {
     public class DatabaseHealthCheck : IHealthCheck
     {
-        private readonly ApplicationDbContext _context;
+        private readonly DbEfbtxLbslContext _context;
+        //private readonly ApplicationDbContext _context;
 
-        public DatabaseHealthCheck(ApplicationDbContext context)
+        public DatabaseHealthCheck(DbEfbtxLbslContext context)
         {
             _context = context;
         }

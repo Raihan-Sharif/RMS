@@ -11,12 +11,12 @@ namespace RMS.Infrastructure.Repositories;
 
 public class Repository<T> : IRepository<T> where T : class
 {
-    protected readonly ApplicationDbContext _context;
+    protected readonly DbEfbtxLbslContext _context;
     protected readonly DbSet<T> _dbSet;
     protected readonly ILogger<Repository<T>> _logger;
     private readonly IEntityType _entityType;
 
-    public Repository(ApplicationDbContext context, ILogger<Repository<T>> logger)
+    public Repository(DbEfbtxLbslContext context, ILogger<Repository<T>> logger)
     {
         _context = context;
         _dbSet = context.Set<T>();

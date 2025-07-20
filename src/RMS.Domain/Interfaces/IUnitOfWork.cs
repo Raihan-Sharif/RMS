@@ -4,14 +4,15 @@ namespace RMS.Domain.Interfaces;
 
 public interface IUnitOfWork : IDisposable
 {
+    // Domain entities (for your existing RMS entities)
     IRepository<User> Users { get; }
     IRepository<RiskAssessment> RiskAssessments { get; }
     IRepository<AuditLog> AuditLogs { get; }
-    IRepository<UsrInfo> UsrInfos { get; } // Now uses generic repository
 
-    // Generic method to get any repository
-    IRepository<TEntity> Repository<TEntity>() where TEntity : class;
+    // Database entities (for scaffolded entities)
+    IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class;
 
+    // Transaction management
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     Task BeginTransactionAsync(CancellationToken cancellationToken = default);
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);

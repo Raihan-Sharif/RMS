@@ -16,1807 +16,1807 @@ public partial class DbEfbtxLbslContext : DbContext
     {
     }
 
-    public virtual DbSet<AccContDtl> AccContDtls { get; set; }
+    public virtual DbSet<AccContDtlDbEntity> AccContDtls { get; set; }
 
-    public virtual DbSet<AccContDtlHistory> AccContDtlHistories { get; set; }
+    public virtual DbSet<AccContDtlHistoryDbEntity> AccContDtlHistories { get; set; }
 
-    public virtual DbSet<AccContType> AccContTypes { get; set; }
+    public virtual DbSet<AccContTypeDbEntity> AccContTypes { get; set; }
 
-    public virtual DbSet<AccPymtCont> AccPymtConts { get; set; }
+    public virtual DbSet<AccPymtContDbEntity> AccPymtConts { get; set; }
 
-    public virtual DbSet<AccPymtContHistory> AccPymtContHistories { get; set; }
+    public virtual DbSet<AccPymtContHistoryDbEntity> AccPymtContHistories { get; set; }
 
-    public virtual DbSet<AccPymtExcp> AccPymtExcps { get; set; }
+    public virtual DbSet<AccPymtExcpDbEntity> AccPymtExcps { get; set; }
 
-    public virtual DbSet<AccPymtRefNo> AccPymtRefNos { get; set; }
+    public virtual DbSet<AccPymtRefNoDbEntity> AccPymtRefNos { get; set; }
 
-    public virtual DbSet<AccPymtRefNoHistory> AccPymtRefNoHistories { get; set; }
+    public virtual DbSet<AccPymtRefNoHistoryDbEntity> AccPymtRefNoHistories { get; set; }
 
-    public virtual DbSet<AccPymtStatus> AccPymtStatuses { get; set; }
+    public virtual DbSet<AccPymtStatusDbEntity> AccPymtStatuses { get; set; }
 
-    public virtual DbSet<AccTrustDtl> AccTrustDtls { get; set; }
+    public virtual DbSet<AccTrustDtlDbEntity> AccTrustDtls { get; set; }
 
-    public virtual DbSet<AccTrustSumm> AccTrustSumms { get; set; }
+    public virtual DbSet<AccTrustSummDbEntity> AccTrustSumms { get; set; }
 
-    public virtual DbSet<AccTrustSummOthCcy> AccTrustSummOthCcies { get; set; }
+    public virtual DbSet<AccTrustSummOthCcyDbEntity> AccTrustSummOthCcies { get; set; }
 
-    public virtual DbSet<AccountSummary> AccountSummaries { get; set; }
+    public virtual DbSet<AccountSummaryDbEntity> AccountSummaries { get; set; }
 
-    public virtual DbSet<AccountSummary202403011751> AccountSummary202403011751s { get; set; }
+    public virtual DbSet<AccountSummary202403011751DbEntity> AccountSummary202403011751s { get; set; }
 
-    public virtual DbSet<AccountSummaryHistory> AccountSummaryHistories { get; set; }
+    public virtual DbSet<AccountSummaryHistoryDbEntity> AccountSummaryHistories { get; set; }
 
-    public virtual DbSet<AlgoOrder> AlgoOrders { get; set; }
+    public virtual DbSet<AlgoOrderDbEntity> AlgoOrders { get; set; }
 
-    public virtual DbSet<AlgoOrderHistory> AlgoOrderHistories { get; set; }
+    public virtual DbSet<AlgoOrderHistoryDbEntity> AlgoOrderHistories { get; set; }
 
-    public virtual DbSet<AllClient> AllClients { get; set; }
+    public virtual DbSet<AllClientDbEntity> AllClients { get; set; }
 
-    public virtual DbSet<AllUserClient> AllUserClients { get; set; }
+    public virtual DbSet<AllUserClientDbEntity> AllUserClients { get; set; }
 
-    public virtual DbSet<Announcement> Announcements { get; set; }
+    public virtual DbSet<AnnouncementDbEntity> Announcements { get; set; }
 
-    public virtual DbSet<AnnouncementsControl> AnnouncementsControls { get; set; }
+    public virtual DbSet<AnnouncementsControlDbEntity> AnnouncementsControls { get; set; }
 
-    public virtual DbSet<AnnouncementsControlUsr> AnnouncementsControlUsrs { get; set; }
+    public virtual DbSet<AnnouncementsControlUsrDbEntity> AnnouncementsControlUsrs { get; set; }
 
-    public virtual DbSet<ArchiveTablesLog> ArchiveTablesLogs { get; set; }
+    public virtual DbSet<ArchiveTablesLogDbEntity> ArchiveTablesLogs { get; set; }
 
-    public virtual DbSet<BannerInfo> BannerInfos { get; set; }
+    public virtual DbSet<BannerInfoDbEntity> BannerInfos { get; set; }
 
-    public virtual DbSet<BeTask202403261024> BeTask202403261024s { get; set; }
+    public virtual DbSet<BeTask202403261024DbEntity> BeTask202403261024s { get; set; }
 
-    public virtual DbSet<BeTask202404291342> BeTask202404291342s { get; set; }
+    public virtual DbSet<BeTask202404291342DbEntity> BeTask202404291342s { get; set; }
 
-    public virtual DbSet<BeTask202406250955> BeTask202406250955s { get; set; }
+    public virtual DbSet<BeTask202406250955DbEntity> BeTask202406250955s { get; set; }
 
-    public virtual DbSet<BebrkInfoStartTask> BebrkInfoStartTasks { get; set; }
+    public virtual DbSet<BebrkInfoStartTaskDbEntity> BebrkInfoStartTasks { get; set; }
 
-    public virtual DbSet<BemidDayStartTask> BemidDayStartTasks { get; set; }
+    public virtual DbSet<BemidDayStartTaskDbEntity> BemidDayStartTasks { get; set; }
 
-    public virtual DbSet<BerptStartTask> BerptStartTasks { get; set; }
+    public virtual DbSet<BerptStartTaskDbEntity> BerptStartTasks { get; set; }
 
-    public virtual DbSet<BestartTask> BestartTasks { get; set; }
+    public virtual DbSet<BestartTaskDbEntity> BestartTasks { get; set; }
 
-    public virtual DbSet<Betask> Betasks { get; set; }
+    public virtual DbSet<BetaskDbEntity> Betasks { get; set; }
 
-    public virtual DbSet<Betask20150727> Betask20150727s { get; set; }
+    public virtual DbSet<Betask20150727DbEntity> Betask20150727s { get; set; }
 
-    public virtual DbSet<Betask20210621> Betask20210621s { get; set; }
+    public virtual DbSet<Betask20210621DbEntity> Betask20210621s { get; set; }
 
-    public virtual DbSet<Betask202205171150> Betask202205171150s { get; set; }
+    public virtual DbSet<Betask202205171150DbEntity> Betask202205171150s { get; set; }
 
-    public virtual DbSet<Betask202404031550> Betask202404031550s { get; set; }
+    public virtual DbSet<Betask202404031550DbEntity> Betask202404031550s { get; set; }
 
-    public virtual DbSet<Betask202406281351> Betask202406281351s { get; set; }
+    public virtual DbSet<Betask202406281351DbEntity> Betask202406281351s { get; set; }
 
-    public virtual DbSet<BetaskKibbNewTask> BetaskKibbNewTasks { get; set; }
+    public virtual DbSet<BetaskKibbNewTaskDbEntity> BetaskKibbNewTasks { get; set; }
 
-    public virtual DbSet<BetaskKibbNewTasks20210625> BetaskKibbNewTasks20210625s { get; set; }
+    public virtual DbSet<BetaskKibbNewTasks20210625DbEntity> BetaskKibbNewTasks20210625s { get; set; }
 
-    public virtual DbSet<BetaskLog> BetaskLogs { get; set; }
+    public virtual DbSet<BetaskLogDbEntity> BetaskLogs { get; set; }
 
-    public virtual DbSet<BidSetting> BidSettings { get; set; }
+    public virtual DbSet<BidSettingDbEntity> BidSettings { get; set; }
 
-    public virtual DbSet<BroadcastMsgMaint> BroadcastMsgMaints { get; set; }
+    public virtual DbSet<BroadcastMsgMaintDbEntity> BroadcastMsgMaints { get; set; }
 
-    public virtual DbSet<BroadcastMsgMaintArchive> BroadcastMsgMaintArchives { get; set; }
+    public virtual DbSet<BroadcastMsgMaintArchiveDbEntity> BroadcastMsgMaintArchives { get; set; }
 
-    public virtual DbSet<BroadcastMsgMaintUserRead> BroadcastMsgMaintUserReads { get; set; }
+    public virtual DbSet<BroadcastMsgMaintUserReadDbEntity> BroadcastMsgMaintUserReads { get; set; }
 
-    public virtual DbSet<BuyingInDefaulter> BuyingInDefaulters { get; set; }
+    public virtual DbSet<BuyingInDefaulterDbEntity> BuyingInDefaulters { get; set; }
 
-    public virtual DbSet<CareOrderAssignment> CareOrderAssignments { get; set; }
+    public virtual DbSet<CareOrderAssignmentDbEntity> CareOrderAssignments { get; set; }
 
-    public virtual DbSet<CareOrderGroup> CareOrderGroups { get; set; }
+    public virtual DbSet<CareOrderGroupDbEntity> CareOrderGroups { get; set; }
 
-    public virtual DbSet<CareOrderGroupStock> CareOrderGroupStocks { get; set; }
+    public virtual DbSet<CareOrderGroupStockDbEntity> CareOrderGroupStocks { get; set; }
 
-    public virtual DbSet<CareOrderPlaced> CareOrderPlaceds { get; set; }
+    public virtual DbSet<CareOrderPlacedDbEntity> CareOrderPlaceds { get; set; }
 
-    public virtual DbSet<CareOrderRouteDtl> CareOrderRouteDtls { get; set; }
+    public virtual DbSet<CareOrderRouteDtlDbEntity> CareOrderRouteDtls { get; set; }
 
-    public virtual DbSet<ClientList> ClientLists { get; set; }
+    public virtual DbSet<ClientListDbEntity> ClientLists { get; set; }
 
-    public virtual DbSet<ClientOrderInfo> ClientOrderInfos { get; set; }
+    public virtual DbSet<ClientOrderInfoDbEntity> ClientOrderInfos { get; set; }
 
-    public virtual DbSet<ClientOrderInfoArchive> ClientOrderInfoArchives { get; set; }
+    public virtual DbSet<ClientOrderInfoArchiveDbEntity> ClientOrderInfoArchives { get; set; }
 
-    public virtual DbSet<ClientSetOff> ClientSetOffs { get; set; }
+    public virtual DbSet<ClientSetOffDbEntity> ClientSetOffs { get; set; }
 
-    public virtual DbSet<ClientTradeInfo> ClientTradeInfos { get; set; }
+    public virtual DbSet<ClientTradeInfoDbEntity> ClientTradeInfos { get; set; }
 
-    public virtual DbSet<ClientTradeInfoArchive> ClientTradeInfoArchives { get; set; }
+    public virtual DbSet<ClientTradeInfoArchiveDbEntity> ClientTradeInfoArchives { get; set; }
 
-    public virtual DbSet<ClientTradeInfoBatch> ClientTradeInfoBatches { get; set; }
+    public virtual DbSet<ClientTradeInfoBatchDbEntity> ClientTradeInfoBatches { get; set; }
 
-    public virtual DbSet<ClientTradeInfoBatchArchive> ClientTradeInfoBatchArchives { get; set; }
+    public virtual DbSet<ClientTradeInfoBatchArchiveDbEntity> ClientTradeInfoBatchArchives { get; set; }
 
-    public virtual DbSet<ClientTurnOver> ClientTurnOvers { get; set; }
+    public virtual DbSet<ClientTurnOverDbEntity> ClientTurnOvers { get; set; }
 
-    public virtual DbSet<ClntAcct> ClntAccts { get; set; }
+    public virtual DbSet<ClntAcctDbEntity> ClntAccts { get; set; }
 
-    public virtual DbSet<ClntAcct202201281900> ClntAcct202201281900s { get; set; }
+    public virtual DbSet<ClntAcct202201281900DbEntity> ClntAcct202201281900s { get; set; }
 
-    public virtual DbSet<ClntAcct20240220> ClntAcct20240220s { get; set; }
+    public virtual DbSet<ClntAcct20240220DbEntity> ClntAcct20240220s { get; set; }
 
-    public virtual DbSet<ClntAcct202406211438> ClntAcct202406211438s { get; set; }
+    public virtual DbSet<ClntAcct202406211438DbEntity> ClntAcct202406211438s { get; set; }
 
-    public virtual DbSet<ClntAcctDeleted> ClntAcctDeleteds { get; set; }
+    public virtual DbSet<ClntAcctDeletedDbEntity> ClntAcctDeleteds { get; set; }
 
-    public virtual DbSet<ClntAcctTest> ClntAcctTests { get; set; }
+    public virtual DbSet<ClntAcctTestDbEntity> ClntAcctTests { get; set; }
 
-    public virtual DbSet<ClntBankAccInfo> ClntBankAccInfos { get; set; }
+    public virtual DbSet<ClntBankAccInfoDbEntity> ClntBankAccInfos { get; set; }
 
-    public virtual DbSet<ClntChgBrch> ClntChgBrches { get; set; }
+    public virtual DbSet<ClntChgBrchDbEntity> ClntChgBrches { get; set; }
 
-    public virtual DbSet<ClntChgBrchLog> ClntChgBrchLogs { get; set; }
+    public virtual DbSet<ClntChgBrchLogDbEntity> ClntChgBrchLogs { get; set; }
 
-    public virtual DbSet<ClntChgBrchLogArchive> ClntChgBrchLogArchives { get; set; }
+    public virtual DbSet<ClntChgBrchLogArchiveDbEntity> ClntChgBrchLogArchives { get; set; }
 
-    public virtual DbSet<ClntCshWithdrawLimitHistory> ClntCshWithdrawLimitHistories { get; set; }
+    public virtual DbSet<ClntCshWithdrawLimitHistoryDbEntity> ClntCshWithdrawLimitHistories { get; set; }
 
-    public virtual DbSet<ClntDefList> ClntDefLists { get; set; }
+    public virtual DbSet<ClntDefListDbEntity> ClntDefLists { get; set; }
 
-    public virtual DbSet<ClntFslist> ClntFslists { get; set; }
+    public virtual DbSet<ClntFslistDbEntity> ClntFslists { get; set; }
 
-    public virtual DbSet<ClntInfoA> ClntInfoAs { get; set; }
+    public virtual DbSet<ClntInfoADbEntity> ClntInfoAs { get; set; }
 
-    public virtual DbSet<ClntInfoB> ClntInfoBs { get; set; }
+    public virtual DbSet<ClntInfoBDbEntity> ClntInfoBs { get; set; }
 
-    public virtual DbSet<ClntLimitDtl> ClntLimitDtls { get; set; }
+    public virtual DbSet<ClntLimitDtlDbEntity> ClntLimitDtls { get; set; }
 
-    public virtual DbSet<ClntLimitDtlHistory> ClntLimitDtlHistories { get; set; }
+    public virtual DbSet<ClntLimitDtlHistoryDbEntity> ClntLimitDtlHistories { get; set; }
 
-    public virtual DbSet<ClntMaster> ClntMasters { get; set; }
+    public virtual DbSet<ClntMasterDbEntity> ClntMasters { get; set; }
 
-    public virtual DbSet<ClntMaster202406211438> ClntMaster202406211438s { get; set; }
+    public virtual DbSet<ClntMaster202406211438DbEntity> ClntMaster202406211438s { get; set; }
 
-    public virtual DbSet<ClntMasterTest> ClntMasterTests { get; set; }
+    public virtual DbSet<ClntMasterTestDbEntity> ClntMasterTests { get; set; }
 
-    public virtual DbSet<ClntNotUpdatedDf10740> ClntNotUpdatedDf10740s { get; set; }
+    public virtual DbSet<ClntNotUpdatedDf10740DbEntity> ClntNotUpdatedDf10740s { get; set; }
 
-    public virtual DbSet<ClntOdrDate> ClntOdrDates { get; set; }
+    public virtual DbSet<ClntOdrDateDbEntity> ClntOdrDates { get; set; }
 
-    public virtual DbSet<ClntSettFile> ClntSettFiles { get; set; }
+    public virtual DbSet<ClntSettFileDbEntity> ClntSettFiles { get; set; }
 
-    public virtual DbSet<ClntStatementFile> ClntStatementFiles { get; set; }
+    public virtual DbSet<ClntStatementFileDbEntity> ClntStatementFiles { get; set; }
 
-    public virtual DbSet<ClntStkCtrl> ClntStkCtrls { get; set; }
+    public virtual DbSet<ClntStkCtrlDbEntity> ClntStkCtrls { get; set; }
 
-    public virtual DbSet<ClntStkDtl> ClntStkDtls { get; set; }
+    public virtual DbSet<ClntStkDtlDbEntity> ClntStkDtls { get; set; }
 
-    public virtual DbSet<ClntStkSumm> ClntStkSumms { get; set; }
+    public virtual DbSet<ClntStkSummDbEntity> ClntStkSumms { get; set; }
 
-    public virtual DbSet<ClntTrustAcTrnx> ClntTrustAcTrnxes { get; set; }
+    public virtual DbSet<ClntTrustAcTrnxDbEntity> ClntTrustAcTrnxes { get; set; }
 
-    public virtual DbSet<ClntXchg> ClntXchgs { get; set; }
+    public virtual DbSet<ClntXchgDbEntity> ClntXchgs { get; set; }
 
-    public virtual DbSet<ClntXchg202406211438> ClntXchg202406211438s { get; set; }
+    public virtual DbSet<ClntXchg202406211438DbEntity> ClntXchg202406211438s { get; set; }
 
-    public virtual DbSet<ClrAcct> ClrAccts { get; set; }
+    public virtual DbSet<ClrAcctDbEntity> ClrAccts { get; set; }
 
-    public virtual DbSet<ColumnName> ColumnNames { get; set; }
+    public virtual DbSet<ColumnNameDbEntity> ColumnNames { get; set; }
 
-    public virtual DbSet<ComMngtMoveWltest> ComMngtMoveWltests { get; set; }
+    public virtual DbSet<ComMngtMoveWltestDbEntity> ComMngtMoveWltests { get; set; }
 
-    public virtual DbSet<ComMngtTokenTest> ComMngtTokenTests { get; set; }
+    public virtual DbSet<ComMngtTokenTestDbEntity> ComMngtTokenTests { get; set; }
 
-    public virtual DbSet<CompanyCodeMaintenance> CompanyCodeMaintenances { get; set; }
+    public virtual DbSet<CompanyCodeMaintenanceDbEntity> CompanyCodeMaintenances { get; set; }
 
-    public virtual DbSet<ConditionInfo> ConditionInfos { get; set; }
+    public virtual DbSet<ConditionInfoDbEntity> ConditionInfos { get; set; }
 
-    public virtual DbSet<ConfirmClOrdId> ConfirmClOrdIds { get; set; }
+    public virtual DbSet<ConfirmClOrdIdDbEntity> ConfirmClOrdIds { get; set; }
 
-    public virtual DbSet<ConfirmClOrdId20220325> ConfirmClOrdId20220325s { get; set; }
+    public virtual DbSet<ConfirmClOrdId20220325DbEntity> ConfirmClOrdId20220325s { get; set; }
 
-    public virtual DbSet<ConfirmExTrsno> ConfirmExTrsnos { get; set; }
+    public virtual DbSet<ConfirmExTrsnoDbEntity> ConfirmExTrsnos { get; set; }
 
-    public virtual DbSet<ContraDetail> ContraDetails { get; set; }
+    public virtual DbSet<ContraDetailDbEntity> ContraDetails { get; set; }
 
-    public virtual DbSet<ContraGain> ContraGains { get; set; }
+    public virtual DbSet<ContraGainDbEntity> ContraGains { get; set; }
 
-    public virtual DbSet<ContraGainsHistory> ContraGainsHistories { get; set; }
+    public virtual DbSet<ContraGainsHistoryDbEntity> ContraGainsHistories { get; set; }
 
-    public virtual DbSet<ContraLoss> ContraLosses { get; set; }
+    public virtual DbSet<ContraLossDbEntity> ContraLosses { get; set; }
 
-    public virtual DbSet<ContraLossesHistory> ContraLossesHistories { get; set; }
+    public virtual DbSet<ContraLossesHistoryDbEntity> ContraLossesHistories { get; set; }
 
-    public virtual DbSet<ContraLossesHistoryArchive> ContraLossesHistoryArchives { get; set; }
+    public virtual DbSet<ContraLossesHistoryArchiveDbEntity> ContraLossesHistoryArchives { get; set; }
 
-    public virtual DbSet<ContraSetOff> ContraSetOffs { get; set; }
+    public virtual DbSet<ContraSetOffDbEntity> ContraSetOffs { get; set; }
 
-    public virtual DbSet<ContraSummary> ContraSummaries { get; set; }
+    public virtual DbSet<ContraSummaryDbEntity> ContraSummaries { get; set; }
 
-    public virtual DbSet<ContractSummary> ContractSummaries { get; set; }
+    public virtual DbSet<ContractSummaryDbEntity> ContractSummaries { get; set; }
 
-    public virtual DbSet<ContractSummaryDel> ContractSummaryDels { get; set; }
+    public virtual DbSet<ContractSummaryDelDbEntity> ContractSummaryDels { get; set; }
 
-    public virtual DbSet<CountryList> CountryLists { get; set; }
+    public virtual DbSet<CountryListDbEntity> CountryLists { get; set; }
 
-    public virtual DbSet<CpreconFlag> CpreconFlags { get; set; }
+    public virtual DbSet<CpreconFlagDbEntity> CpreconFlags { get; set; }
 
-    public virtual DbSet<Csprofile> Csprofiles { get; set; }
+    public virtual DbSet<CsprofileDbEntity> Csprofiles { get; set; }
 
-    public virtual DbSet<DailyBizDone> DailyBizDones { get; set; }
+    public virtual DbSet<DailyBizDoneDbEntity> DailyBizDones { get; set; }
 
-    public virtual DbSet<DayEndCalcAvgPrice> DayEndCalcAvgPrices { get; set; }
+    public virtual DbSet<DayEndCalcAvgPriceDbEntity> DayEndCalcAvgPrices { get; set; }
 
-    public virtual DbSet<DbgenFileCount> DbgenFileCounts { get; set; }
+    public virtual DbSet<DbgenFileCountDbEntity> DbgenFileCounts { get; set; }
 
-    public virtual DbSet<DbreplicationEmailLastSendDateTime> DbreplicationEmailLastSendDateTimes { get; set; }
+    public virtual DbSet<DbreplicationEmailLastSendDateTimeDbEntity> DbreplicationEmailLastSendDateTimes { get; set; }
 
-    public virtual DbSet<DbreplicationLastUpdateDateTime> DbreplicationLastUpdateDateTimes { get; set; }
+    public virtual DbSet<DbreplicationLastUpdateDateTimeDbEntity> DbreplicationLastUpdateDateTimes { get; set; }
 
-    public virtual DbSet<Dbtdeclaration> Dbtdeclarations { get; set; }
+    public virtual DbSet<DbtdeclarationDbEntity> Dbtdeclarations { get; set; }
 
-    public virtual DbSet<DbtdeclarationHistory> DbtdeclarationHistories { get; set; }
+    public virtual DbSet<DbtdeclarationHistoryDbEntity> DbtdeclarationHistories { get; set; }
 
-    public virtual DbSet<Dbtqueue> Dbtqueues { get; set; }
+    public virtual DbSet<DbtqueueDbEntity> Dbtqueues { get; set; }
 
-    public virtual DbSet<Dbtstatus> Dbtstatuses { get; set; }
+    public virtual DbSet<DbtstatusDbEntity> Dbtstatuses { get; set; }
 
-    public virtual DbSet<DbtstatusHistory> DbtstatusHistories { get; set; }
+    public virtual DbSet<DbtstatusHistoryDbEntity> DbtstatusHistories { get; set; }
 
-    public virtual DbSet<DebugCr11127> DebugCr11127s { get; set; }
+    public virtual DbSet<DebugCr11127DbEntity> DebugCr11127s { get; set; }
 
-    public virtual DbSet<Delisted> Delisteds { get; set; }
+    public virtual DbSet<DelistedDbEntity> Delisteds { get; set; }
 
-    public virtual DbSet<Delisted2> Delisted2s { get; set; }
+    public virtual DbSet<Delisted2DbEntity> Delisted2s { get; set; }
 
-    public virtual DbSet<DelistedStock> DelistedStocks { get; set; }
+    public virtual DbSet<DelistedStockDbEntity> DelistedStocks { get; set; }
 
-    public virtual DbSet<DmaorderAssignment> DmaorderAssignments { get; set; }
+    public virtual DbSet<DmaorderAssignmentDbEntity> DmaorderAssignments { get; set; }
 
-    public virtual DbSet<DocType> DocTypes { get; set; }
+    public virtual DbSet<DocTypeDbEntity> DocTypes { get; set; }
 
-    public virtual DbSet<DummyEmail> DummyEmails { get; set; }
+    public virtual DbSet<DummyEmailDbEntity> DummyEmails { get; set; }
 
-    public virtual DbSet<DummyTable0> DummyTable0s { get; set; }
+    public virtual DbSet<DummyTable0DbEntity> DummyTable0s { get; set; }
 
-    public virtual DbSet<EDocument> EDocuments { get; set; }
+    public virtual DbSet<EDocumentDbEntity> EDocuments { get; set; }
 
-    public virtual DbSet<EcmEfForceSelling> EcmEfForceSellings { get; set; }
+    public virtual DbSet<EcmEfForceSellingDbEntity> EcmEfForceSellings { get; set; }
 
-    public virtual DbSet<EcmEfMrgnCall> EcmEfMrgnCalls { get; set; }
+    public virtual DbSet<EcmEfMrgnCallDbEntity> EcmEfMrgnCalls { get; set; }
 
-    public virtual DbSet<EcmTemp> EcmTemps { get; set; }
+    public virtual DbSet<EcmTempDbEntity> EcmTemps { get; set; }
 
-    public virtual DbSet<EcmmoneyProcessedRefNo> EcmmoneyProcessedRefNos { get; set; }
+    public virtual DbSet<EcmmoneyProcessedRefNoDbEntity> EcmmoneyProcessedRefNos { get; set; }
 
-    public virtual DbSet<Ecmuser> Ecmusers { get; set; }
+    public virtual DbSet<EcmuserDbEntity> Ecmusers { get; set; }
 
-    public virtual DbSet<EcosUsrIdexist> EcosUsrIdexists { get; set; }
+    public virtual DbSet<EcosUsrIdexistDbEntity> EcosUsrIdexists { get; set; }
 
-    public virtual DbSet<EcosUsrType> EcosUsrTypes { get; set; }
+    public virtual DbSet<EcosUsrTypeDbEntity> EcosUsrTypes { get; set; }
 
-    public virtual DbSet<Edsvariable> Edsvariables { get; set; }
+    public virtual DbSet<EdsvariableDbEntity> Edsvariables { get; set; }
 
-    public virtual DbSet<Efcptemp> Efcptemps { get; set; }
+    public virtual DbSet<EfcptempDbEntity> Efcptemps { get; set; }
 
-    public virtual DbSet<Eftestclientlist> Eftestclientlists { get; set; }
+    public virtual DbSet<EftestclientlistDbEntity> Eftestclientlists { get; set; }
 
-    public virtual DbSet<EmlBetask> EmlBetasks { get; set; }
+    public virtual DbSet<EmlBetaskDbEntity> EmlBetasks { get; set; }
 
-    public virtual DbSet<EmlInfo> EmlInfos { get; set; }
+    public virtual DbSet<EmlInfoDbEntity> EmlInfos { get; set; }
 
-    public virtual DbSet<EmlInfo202405131529> EmlInfo202405131529s { get; set; }
+    public virtual DbSet<EmlInfo202405131529DbEntity> EmlInfo202405131529s { get; set; }
 
-    public virtual DbSet<EmlLegend> EmlLegends { get; set; }
+    public virtual DbSet<EmlLegendDbEntity> EmlLegends { get; set; }
 
-    public virtual DbSet<EmlNoti> EmlNotis { get; set; }
+    public virtual DbSet<EmlNotiDbEntity> EmlNotis { get; set; }
 
-    public virtual DbSet<EmlNoti202201281900> EmlNoti202201281900s { get; set; }
+    public virtual DbSet<EmlNoti202201281900DbEntity> EmlNoti202201281900s { get; set; }
 
-    public virtual DbSet<EmlNoti202405131421> EmlNoti202405131421s { get; set; }
+    public virtual DbSet<EmlNoti202405131421DbEntity> EmlNoti202405131421s { get; set; }
 
-    public virtual DbSet<EmptyStkName> EmptyStkNames { get; set; }
+    public virtual DbSet<EmptyStkNameDbEntity> EmptyStkNames { get; set; }
 
-    public virtual DbSet<EmptyStkName2> EmptyStkName2s { get; set; }
+    public virtual DbSet<EmptyStkName2DbEntity> EmptyStkName2s { get; set; }
 
-    public virtual DbSet<EnqConcerrentUser> EnqConcerrentUsers { get; set; }
+    public virtual DbSet<EnqConcerrentUserDbEntity> EnqConcerrentUsers { get; set; }
 
-    public virtual DbSet<EnqMatchedTrade> EnqMatchedTrades { get; set; }
+    public virtual DbSet<EnqMatchedTradeDbEntity> EnqMatchedTrades { get; set; }
 
-    public virtual DbSet<EnqOrderInQueue> EnqOrderInQueues { get; set; }
+    public virtual DbSet<EnqOrderInQueueDbEntity> EnqOrderInQueues { get; set; }
 
-    public virtual DbSet<EnqSubmittedOrder> EnqSubmittedOrders { get; set; }
+    public virtual DbSet<EnqSubmittedOrderDbEntity> EnqSubmittedOrders { get; set; }
 
-    public virtual DbSet<EnqUsrActvn> EnqUsrActvns { get; set; }
+    public virtual DbSet<EnqUsrActvnDbEntity> EnqUsrActvns { get; set; }
 
-    public virtual DbSet<EnqUsrActvnHist> EnqUsrActvnHists { get; set; }
+    public virtual DbSet<EnqUsrActvnHistDbEntity> EnqUsrActvnHists { get; set; }
 
-    public virtual DbSet<EodclntOnInd> EodclntOnInds { get; set; }
+    public virtual DbSet<EodclntOnIndDbEntity> EodclntOnInds { get; set; }
 
-    public virtual DbSet<EodonlineTradeDtl> EodonlineTradeDtls { get; set; }
+    public virtual DbSet<EodonlineTradeDtlDbEntity> EodonlineTradeDtls { get; set; }
 
-    public virtual DbSet<EodtradeDone> EodtradeDones { get; set; }
+    public virtual DbSet<EodtradeDoneDbEntity> EodtradeDones { get; set; }
 
-    public virtual DbSet<EpDuitNowInitPymtMsgDtl> EpDuitNowInitPymtMsgDtls { get; set; }
+    public virtual DbSet<EpDuitNowInitPymtMsgDtlDbEntity> EpDuitNowInitPymtMsgDtls { get; set; }
 
-    public virtual DbSet<EpFpxdbCrAuthCode> EpFpxdbCrAuthCodes { get; set; }
+    public virtual DbSet<EpFpxdbCrAuthCodeDbEntity> EpFpxdbCrAuthCodes { get; set; }
 
-    public virtual DbSet<EpFpxdepBk> EpFpxdepBks { get; set; }
+    public virtual DbSet<EpFpxdepBkDbEntity> EpFpxdepBks { get; set; }
 
-    public virtual DbSet<EpFpxmsgDtl> EpFpxmsgDtls { get; set; }
+    public virtual DbSet<EpFpxmsgDtlDbEntity> EpFpxmsgDtls { get; set; }
 
-    public virtual DbSet<EpPaymentContract> EpPaymentContracts { get; set; }
+    public virtual DbSet<EpPaymentContractDbEntity> EpPaymentContracts { get; set; }
 
-    public virtual DbSet<EpPaymentContract202403011751> EpPaymentContract202403011751s { get; set; }
+    public virtual DbSet<EpPaymentContract202403011751DbEntity> EpPaymentContract202403011751s { get; set; }
 
-    public virtual DbSet<EpPaymentContract202406141409> EpPaymentContract202406141409s { get; set; }
+    public virtual DbSet<EpPaymentContract202406141409DbEntity> EpPaymentContract202406141409s { get; set; }
 
-    public virtual DbSet<EpPaymentRefNo> EpPaymentRefNos { get; set; }
+    public virtual DbSet<EpPaymentRefNoDbEntity> EpPaymentRefNos { get; set; }
 
-    public virtual DbSet<EpPaymentRefNo202303161221> EpPaymentRefNo202303161221s { get; set; }
+    public virtual DbSet<EpPaymentRefNo202303161221DbEntity> EpPaymentRefNo202303161221s { get; set; }
 
-    public virtual DbSet<EpPaymentRefNo202402090950> EpPaymentRefNo202402090950s { get; set; }
+    public virtual DbSet<EpPaymentRefNo202402090950DbEntity> EpPaymentRefNo202402090950s { get; set; }
 
-    public virtual DbSet<EpPaymentRefNo202403011751> EpPaymentRefNo202403011751s { get; set; }
+    public virtual DbSet<EpPaymentRefNo202403011751DbEntity> EpPaymentRefNo202403011751s { get; set; }
 
-    public virtual DbSet<EpPaymentStatusHistory> EpPaymentStatusHistories { get; set; }
+    public virtual DbSet<EpPaymentStatusHistoryDbEntity> EpPaymentStatusHistories { get; set; }
 
-    public virtual DbSet<EpPaymentStatusHistory202403011751> EpPaymentStatusHistory202403011751s { get; set; }
+    public virtual DbSet<EpPaymentStatusHistory202403011751DbEntity> EpPaymentStatusHistory202403011751s { get; set; }
 
-    public virtual DbSet<EpPaymentStatusHistory202406141415> EpPaymentStatusHistory202406141415s { get; set; }
+    public virtual DbSet<EpPaymentStatusHistory202406141415DbEntity> EpPaymentStatusHistory202406141415s { get; set; }
 
-    public virtual DbSet<EpPaymentStatusHistory202406141417> EpPaymentStatusHistory202406141417s { get; set; }
+    public virtual DbSet<EpPaymentStatusHistory202406141417DbEntity> EpPaymentStatusHistory202406141417s { get; set; }
 
-    public virtual DbSet<EpPaymentcontract20180906> EpPaymentcontract20180906s { get; set; }
+    public virtual DbSet<EpPaymentcontract20180906DbEntity> EpPaymentcontract20180906s { get; set; }
 
-    public virtual DbSet<EpPaymentrefno20180906> EpPaymentrefno20180906s { get; set; }
+    public virtual DbSet<EpPaymentrefno20180906DbEntity> EpPaymentrefno20180906s { get; set; }
 
-    public virtual DbSet<ErrAcctList> ErrAcctLists { get; set; }
+    public virtual DbSet<ErrAcctListDbEntity> ErrAcctLists { get; set; }
 
-    public virtual DbSet<ExcelForceEcmShareLog> ExcelForceEcmShareLogs { get; set; }
+    public virtual DbSet<ExcelForceEcmShareLogDbEntity> ExcelForceEcmShareLogs { get; set; }
 
-    public virtual DbSet<ExcelForceEcmShareLogTemp> ExcelForceEcmShareLogTemps { get; set; }
+    public virtual DbSet<ExcelForceEcmShareLogTempDbEntity> ExcelForceEcmShareLogTemps { get; set; }
 
-    public virtual DbSet<ExcelForceEcmShareTemp> ExcelForceEcmShareTemps { get; set; }
+    public virtual DbSet<ExcelForceEcmShareTempDbEntity> ExcelForceEcmShareTemps { get; set; }
 
-    public virtual DbSet<ExecutionReport> ExecutionReports { get; set; }
+    public virtual DbSet<ExecutionReportDbEntity> ExecutionReports { get; set; }
 
-    public virtual DbSet<ExecutionType> ExecutionTypes { get; set; }
+    public virtual DbSet<ExecutionTypeDbEntity> ExecutionTypes { get; set; }
 
-    public virtual DbSet<ExtrClientUsrInfo> ExtrClientUsrInfos { get; set; }
+    public virtual DbSet<ExtrClientUsrInfoDbEntity> ExtrClientUsrInfos { get; set; }
 
-    public virtual DbSet<ExtrUsrAccessEx> ExtrUsrAccessexes { get; set; }
+    public virtual DbSet<ExtrUsrAccessExDbEntity> ExtrUsrAccessexes { get; set; }
 
-    public virtual DbSet<FixTraderId> FixTraderIds { get; set; }
+    public virtual DbSet<FixTraderIdDbEntity> FixTraderIds { get; set; }
 
-    public virtual DbSet<ForceSellContract> ForceSellContracts { get; set; }
+    public virtual DbSet<ForceSellContractDbEntity> ForceSellContracts { get; set; }
 
-    public virtual DbSet<FormBizProcConsolidateCont> FormBizProcConsolidateConts { get; set; }
+    public virtual DbSet<FormBizProcConsolidateContDbEntity> FormBizProcConsolidateConts { get; set; }
 
-    public virtual DbSet<FormBizProcDirectWd> FormBizProcDirectWds { get; set; }
+    public virtual DbSet<FormBizProcDirectWdDbEntity> FormBizProcDirectWds { get; set; }
 
-    public virtual DbSet<FormBizProcForeignCont> FormBizProcForeignConts { get; set; }
+    public virtual DbSet<FormBizProcForeignContDbEntity> FormBizProcForeignConts { get; set; }
 
-    public virtual DbSet<FormBizProcMailUplift> FormBizProcMailUplifts { get; set; }
+    public virtual DbSet<FormBizProcMailUpliftDbEntity> FormBizProcMailUplifts { get; set; }
 
-    public virtual DbSet<FormBizProcManualBi> FormBizProcManualBis { get; set; }
+    public virtual DbSet<FormBizProcManualBiDbEntity> FormBizProcManualBis { get; set; }
 
-    public virtual DbSet<FormBizProcNotCotr> FormBizProcNotCotrs { get; set; }
+    public virtual DbSet<FormBizProcNotCotrDbEntity> FormBizProcNotCotrs { get; set; }
 
-    public virtual DbSet<FormBizProcRemisierTrnx> FormBizProcRemisierTrnxes { get; set; }
+    public virtual DbSet<FormBizProcRemisierTrnxDbEntity> FormBizProcRemisierTrnxes { get; set; }
 
-    public virtual DbSet<FormCreditDailyCotrRpt> FormCreditDailyCotrRpts { get; set; }
+    public virtual DbSet<FormCreditDailyCotrRptDbEntity> FormCreditDailyCotrRpts { get; set; }
 
-    public virtual DbSet<FormCreditDbttrnx> FormCreditDbttrnxes { get; set; }
+    public virtual DbSet<FormCreditDbttrnxDbEntity> FormCreditDbttrnxes { get; set; }
 
-    public virtual DbSet<FormCreditDeclaration> FormCreditDeclarations { get; set; }
+    public virtual DbSet<FormCreditDeclarationDbEntity> FormCreditDeclarations { get; set; }
 
-    public virtual DbSet<FormCreditEarmark> FormCreditEarmarks { get; set; }
+    public virtual DbSet<FormCreditEarmarkDbEntity> FormCreditEarmarks { get; set; }
 
-    public virtual DbSet<FormCreditLeave> FormCreditLeaves { get; set; }
+    public virtual DbSet<FormCreditLeaveDbEntity> FormCreditLeaves { get; set; }
 
-    public virtual DbSet<FormCreditNegoBrkgC> FormCreditNegoBrkgCs { get; set; }
+    public virtual DbSet<FormCreditNegoBrkgCDbEntity> FormCreditNegoBrkgCs { get; set; }
 
-    public virtual DbSet<FormCreditRelease> FormCreditReleases { get; set; }
+    public virtual DbSet<FormCreditReleaseDbEntity> FormCreditReleases { get; set; }
 
-    public virtual DbSet<FormCreditUpliftLmt> FormCreditUpliftLmts { get; set; }
+    public virtual DbSet<FormCreditUpliftLmtDbEntity> FormCreditUpliftLmts { get; set; }
 
-    public virtual DbSet<FormCreditWithdrawal> FormCreditWithdrawals { get; set; }
+    public virtual DbSet<FormCreditWithdrawalDbEntity> FormCreditWithdrawals { get; set; }
 
-    public virtual DbSet<FormFinanceRecovery> FormFinanceRecoveries { get; set; }
+    public virtual DbSet<FormFinanceRecoveryDbEntity> FormFinanceRecoveries { get; set; }
 
-    public virtual DbSet<FormFinanceRequisition> FormFinanceRequisitions { get; set; }
+    public virtual DbSet<FormFinanceRequisitionDbEntity> FormFinanceRequisitions { get; set; }
 
-    public virtual DbSet<FormFinanceReversal> FormFinanceReversals { get; set; }
+    public virtual DbSet<FormFinanceReversalDbEntity> FormFinanceReversals { get; set; }
 
-    public virtual DbSet<FormFinanceTrustAcWd> FormFinanceTrustAcWds { get; set; }
+    public virtual DbSet<FormFinanceTrustAcWdDbEntity> FormFinanceTrustAcWds { get; set; }
 
-    public virtual DbSet<FormOptGrp> FormOptGrps { get; set; }
+    public virtual DbSet<FormOptGrpDbEntity> FormOptGrps { get; set; }
 
-    public virtual DbSet<FormOptLst> FormOptLsts { get; set; }
+    public virtual DbSet<FormOptLstDbEntity> FormOptLsts { get; set; }
 
-    public virtual DbSet<FormShrMrgnChqWdShrTrf> FormShrMrgnChqWdShrTrves { get; set; }
+    public virtual DbSet<FormShrMrgnChqWdShrTrfDbEntity> FormShrMrgnChqWdShrTrves { get; set; }
 
-    public virtual DbSet<FormShrMrgnPayment> FormShrMrgnPayments { get; set; }
+    public virtual DbSet<FormShrMrgnPaymentDbEntity> FormShrMrgnPayments { get; set; }
 
-    public virtual DbSet<FormTrnxDtl> FormTrnxDtls { get; set; }
+    public virtual DbSet<FormTrnxDtlDbEntity> FormTrnxDtls { get; set; }
 
-    public virtual DbSet<Fpxcharge> Fpxcharges { get; set; }
+    public virtual DbSet<FpxchargeDbEntity> Fpxcharges { get; set; }
 
-    public virtual DbSet<FpxresEmailSett> FpxresEmailSetts { get; set; }
+    public virtual DbSet<FpxresEmailSettDbEntity> FpxresEmailSetts { get; set; }
 
-    public virtual DbSet<Fpxresponse> Fpxresponses { get; set; }
+    public virtual DbSet<FpxresponseDbEntity> Fpxresponses { get; set; }
 
-    public virtual DbSet<FsttradeInfo> FsttradeInfos { get; set; }
+    public virtual DbSet<FsttradeInfoDbEntity> FsttradeInfos { get; set; }
 
-    public virtual DbSet<FsttradeInfoHistory> FsttradeInfoHistories { get; set; }
+    public virtual DbSet<FsttradeInfoHistoryDbEntity> FsttradeInfoHistories { get; set; }
 
-    public virtual DbSet<GtdclOrdId> GtdclOrdIds { get; set; }
+    public virtual DbSet<GtdclOrdIdDbEntity> GtdclOrdIds { get; set; }
 
-    public virtual DbSet<Hd14421log> Hd14421logs { get; set; }
+    public virtual DbSet<Hd14421logDbEntity> Hd14421logs { get; set; }
 
-    public virtual DbSet<InsageSetting> InsageSettings { get; set; }
+    public virtual DbSet<InsageSettingDbEntity> InsageSettings { get; set; }
 
-    public virtual DbSet<InternalAcct> InternalAccts { get; set; }
+    public virtual DbSet<InternalAcctDbEntity> InternalAccts { get; set; }
 
-    public virtual DbSet<IntraDayOrdCotr> IntraDayOrdCotrs { get; set; }
+    public virtual DbSet<IntraDayOrdCotrDbEntity> IntraDayOrdCotrs { get; set; }
 
-    public virtual DbSet<IntraDayOrdCotrDtl> IntraDayOrdCotrDtls { get; set; }
+    public virtual DbSet<IntraDayOrdCotrDtlDbEntity> IntraDayOrdCotrDtls { get; set; }
 
-    public virtual DbSet<ItrBosshareInfo> ItrBosshareInfos { get; set; }
+    public virtual DbSet<ItrBosshareInfoDbEntity> ItrBosshareInfos { get; set; }
 
-    public virtual DbSet<ItrFileTrnx> ItrFileTrnxes { get; set; }
+    public virtual DbSet<ItrFileTrnxDbEntity> ItrFileTrnxes { get; set; }
 
-    public virtual DbSet<Keyword> Keywords { get; set; }
+    public virtual DbSet<KeywordDbEntity> Keywords { get; set; }
 
-    public virtual DbSet<KeywordsScreener> KeywordsScreeners { get; set; }
+    public virtual DbSet<KeywordsScreenerDbEntity> KeywordsScreeners { get; set; }
 
-    public virtual DbSet<KldataEf> KldataEfs { get; set; }
+    public virtual DbSet<KldataEfDbEntity> KldataEfs { get; set; }
 
-    public virtual DbSet<LbMembership> LbMemberships { get; set; }
+    public virtual DbSet<LbMembershipDbEntity> LbMemberships { get; set; }
 
-    public virtual DbSet<LbUser> LbUsers { get; set; }
+    public virtual DbSet<LbUserDbEntity> LbUsers { get; set; }
 
-    public virtual DbSet<LbUserpassword> LbUserpasswords { get; set; }
+    public virtual DbSet<LbUserpasswordDbEntity> LbUserpasswords { get; set; }
 
-    public virtual DbSet<LimitInfo> LimitInfos { get; set; }
+    public virtual DbSet<LimitInfoDbEntity> LimitInfos { get; set; }
 
-    public virtual DbSet<LimitInfo202406211438> LimitInfo202406211438s { get; set; }
+    public virtual DbSet<LimitInfo202406211438DbEntity> LimitInfo202406211438s { get; set; }
 
-    public virtual DbSet<LimitInfoClntXchg> LimitInfoClntXchgs { get; set; }
+    public virtual DbSet<LimitInfoClntXchgDbEntity> LimitInfoClntXchgs { get; set; }
 
-    public virtual DbSet<LimitInfoCo> LimitInfoCos { get; set; }
+    public virtual DbSet<LimitInfoCoDbEntity> LimitInfoCos { get; set; }
 
-    public virtual DbSet<LimitInfoCoBrch> LimitInfoCoBrches { get; set; }
+    public virtual DbSet<LimitInfoCoBrchDbEntity> LimitInfoCoBrches { get; set; }
 
-    public virtual DbSet<LimitInfoStkXchg> LimitInfoStkXchgs { get; set; }
+    public virtual DbSet<LimitInfoStkXchgDbEntity> LimitInfoStkXchgs { get; set; }
 
-    public virtual DbSet<LimitInfoUsr> LimitInfoUsrs { get; set; }
+    public virtual DbSet<LimitInfoUsrDbEntity> LimitInfoUsrs { get; set; }
 
-    public virtual DbSet<LimitInfoUsrXchg> LimitInfoUsrXchgs { get; set; }
+    public virtual DbSet<LimitInfoUsrXchgDbEntity> LimitInfoUsrXchgs { get; set; }
 
-    public virtual DbSet<LinkOrderQueue> LinkOrderQueues { get; set; }
+    public virtual DbSet<LinkOrderQueueDbEntity> LinkOrderQueues { get; set; }
 
-    public virtual DbSet<LogInfo> LogInfos { get; set; }
+    public virtual DbSet<LogInfoDbEntity> LogInfos { get; set; }
 
-    public virtual DbSet<LogInfo202201281859> LogInfo202201281859s { get; set; }
+    public virtual DbSet<LogInfo202201281859DbEntity> LogInfo202201281859s { get; set; }
 
-    public virtual DbSet<LogInfoGrp> LogInfoGrps { get; set; }
+    public virtual DbSet<LogInfoGrpDbEntity> LogInfoGrps { get; set; }
 
-    public virtual DbSet<ManualOrderFilled> ManualOrderFilleds { get; set; }
+    public virtual DbSet<ManualOrderFilledDbEntity> ManualOrderFilleds { get; set; }
 
-    public virtual DbSet<MassQuote> MassQuotes { get; set; }
+    public virtual DbSet<MassQuoteDbEntity> MassQuotes { get; set; }
 
-    public virtual DbSet<MassQuoteClOrdId> MassQuoteClOrdIds { get; set; }
+    public virtual DbSet<MassQuoteClOrdIdDbEntity> MassQuoteClOrdIds { get; set; }
 
-    public virtual DbSet<MassQuoteList> MassQuoteLists { get; set; }
+    public virtual DbSet<MassQuoteListDbEntity> MassQuoteLists { get; set; }
 
-    public virtual DbSet<MassQuoteQueue> MassQuoteQueues { get; set; }
+    public virtual DbSet<MassQuoteQueueDbEntity> MassQuoteQueues { get; set; }
 
-    public virtual DbSet<MimosSvcInfo> MimosSvcInfos { get; set; }
+    public virtual DbSet<MimosSvcInfoDbEntity> MimosSvcInfos { get; set; }
 
-    public virtual DbSet<MimosSvcInfoHist> MimosSvcInfoHists { get; set; }
+    public virtual DbSet<MimosSvcInfoHistDbEntity> MimosSvcInfoHists { get; set; }
 
-    public virtual DbSet<MinBidSize> MinBidSizes { get; set; }
+    public virtual DbSet<MinBidSizeDbEntity> MinBidSizes { get; set; }
 
-    public virtual DbSet<MinBidSizes20181010> MinBidSizes20181010s { get; set; }
+    public virtual DbSet<MinBidSizes20181010DbEntity> MinBidSizes20181010s { get; set; }
 
-    public virtual DbSet<MiscSetOff> MiscSetOffs { get; set; }
+    public virtual DbSet<MiscSetOffDbEntity> MiscSetOffs { get; set; }
 
-    public virtual DbSet<MstActiveBrch> MstActiveBrches { get; set; }
+    public virtual DbSet<MstActiveBrchDbEntity> MstActiveBrches { get; set; }
 
-    public virtual DbSet<MstBank> MstBanks { get; set; }
+    public virtual DbSet<MstBankDbEntity> MstBanks { get; set; }
 
-    public virtual DbSet<MstBidLmt> MstBidLmts { get; set; }
+    public virtual DbSet<MstBidLmtDbEntity> MstBidLmts { get; set; }
 
-    public virtual DbSet<MstBidLmtDtl> MstBidLmtDtls { get; set; }
+    public virtual DbSet<MstBidLmtDtlDbEntity> MstBidLmtDtls { get; set; }
 
-    public virtual DbSet<MstBrchGrp> MstBrchGrps { get; set; }
+    public virtual DbSet<MstBrchGrpDbEntity> MstBrchGrps { get; set; }
 
-    public virtual DbSet<MstBrk> MstBrks { get; set; }
+    public virtual DbSet<MstBrkDbEntity> MstBrks { get; set; }
 
-    public virtual DbSet<MstClntExp> MstClntExps { get; set; }
+    public virtual DbSet<MstClntExpDbEntity> MstClntExps { get; set; }
 
-    public virtual DbSet<MstClntExps202406211438> MstClntExps202406211438s { get; set; }
+    public virtual DbSet<MstClntExps202406211438DbEntity> MstClntExps202406211438s { get; set; }
 
-    public virtual DbSet<MstClntExps202407151738> MstClntExps202407151738s { get; set; }
+    public virtual DbSet<MstClntExps202407151738DbEntity> MstClntExps202407151738s { get; set; }
 
-    public virtual DbSet<MstClntExpsBak20221209> MstClntExpsBak20221209s { get; set; }
+    public virtual DbSet<MstClntExpsBak20221209DbEntity> MstClntExpsBak20221209s { get; set; }
 
-    public virtual DbSet<MstClntExpsNew> MstClntExpsNews { get; set; }
+    public virtual DbSet<MstClntExpsNewDbEntity> MstClntExpsNews { get; set; }
 
-    public virtual DbSet<MstClntNettLmtExp> MstClntNettLmtExps { get; set; }
+    public virtual DbSet<MstClntNettLmtExpDbEntity> MstClntNettLmtExps { get; set; }
 
-    public virtual DbSet<MstClntType> MstClntTypes { get; set; }
+    public virtual DbSet<MstClntTypeDbEntity> MstClntTypes { get; set; }
 
-    public virtual DbSet<MstClntType202301161607> MstClntType202301161607s { get; set; }
+    public virtual DbSet<MstClntType202301161607DbEntity> MstClntType202301161607s { get; set; }
 
-    public virtual DbSet<MstClntXchgExp> MstClntXchgExps { get; set; }
+    public virtual DbSet<MstClntXchgExpDbEntity> MstClntXchgExps { get; set; }
 
-    public virtual DbSet<MstClntXchgExps202406211438> MstClntXchgExps202406211438s { get; set; }
+    public virtual DbSet<MstClntXchgExps202406211438DbEntity> MstClntXchgExps202406211438s { get; set; }
 
-    public virtual DbSet<MstClntXchgExps202407151739> MstClntXchgExps202407151739s { get; set; }
+    public virtual DbSet<MstClntXchgExps202407151739DbEntity> MstClntXchgExps202407151739s { get; set; }
 
-    public virtual DbSet<MstClntXchgExpsBak20221116> MstClntXchgExpsBak20221116s { get; set; }
+    public virtual DbSet<MstClntXchgExpsBak20221116DbEntity> MstClntXchgExpsBak20221116s { get; set; }
 
-    public virtual DbSet<MstClntXchgExpsNew> MstClntXchgExpsNews { get; set; }
+    public virtual DbSet<MstClntXchgExpsNewDbEntity> MstClntXchgExpsNews { get; set; }
 
-    public virtual DbSet<MstClntXchgExpsNew1> MstClntXchgExpsNew1s { get; set; }
+    public virtual DbSet<MstClntXchgExpsNew1DbEntity> MstClntXchgExpsNew1s { get; set; }
 
-    public virtual DbSet<MstClntXexp> MstClntXexps { get; set; }
+    public virtual DbSet<MstClntXexpDbEntity> MstClntXexps { get; set; }
 
-    public virtual DbSet<MstCo> MstCos { get; set; }
+    public virtual DbSet<MstCoDbEntity> MstCos { get; set; }
 
-    public virtual DbSet<MstCoBrch> MstCoBrches { get; set; }
+    public virtual DbSet<MstCoBrchDbEntity> MstCoBrches { get; set; }
 
-    public virtual DbSet<MstCoBrchEcm> MstCoBrchEcms { get; set; }
+    public virtual DbSet<MstCoBrchEcmDbEntity> MstCoBrchEcms { get; set; }
 
-    public virtual DbSet<MstCoBrchExp> MstCoBrchExps { get; set; }
+    public virtual DbSet<MstCoBrchExpDbEntity> MstCoBrchExps { get; set; }
 
-    public virtual DbSet<MstCoBrchExpsBak20221209> MstCoBrchExpsBak20221209s { get; set; }
+    public virtual DbSet<MstCoBrchExpsBak20221209DbEntity> MstCoBrchExpsBak20221209s { get; set; }
 
-    public virtual DbSet<MstCoBrchExpsNew> MstCoBrchExpsNews { get; set; }
+    public virtual DbSet<MstCoBrchExpsNewDbEntity> MstCoBrchExpsNews { get; set; }
 
-    public virtual DbSet<MstCoBrchXchgPrcFeed> MstCoBrchXchgPrcFeeds { get; set; }
+    public virtual DbSet<MstCoBrchXchgPrcFeedDbEntity> MstCoBrchXchgPrcFeeds { get; set; }
 
-    public virtual DbSet<MstCoExp> MstCoExps { get; set; }
+    public virtual DbSet<MstCoExpDbEntity> MstCoExps { get; set; }
 
-    public virtual DbSet<MstCoExpsBak20221209> MstCoExpsBak20221209s { get; set; }
+    public virtual DbSet<MstCoExpsBak20221209DbEntity> MstCoExpsBak20221209s { get; set; }
 
-    public virtual DbSet<MstCoExpsNew> MstCoExpsNews { get; set; }
+    public virtual DbSet<MstCoExpsNewDbEntity> MstCoExpsNews { get; set; }
 
-    public virtual DbSet<MstCountry> MstCountries { get; set; }
+    public virtual DbSet<MstCountryDbEntity> MstCountries { get; set; }
 
-    public virtual DbSet<MstCountryExp> MstCountryExps { get; set; }
+    public virtual DbSet<MstCountryExpDbEntity> MstCountryExps { get; set; }
 
-    public virtual DbSet<MstCurcy> MstCurcies { get; set; }
+    public virtual DbSet<MstCurcyDbEntity> MstCurcies { get; set; }
 
-    public virtual DbSet<MstDept> MstDepts { get; set; }
+    public virtual DbSet<MstDeptDbEntity> MstDepts { get; set; }
 
-    public virtual DbSet<MstDeptContact> MstDeptContacts { get; set; }
+    public virtual DbSet<MstDeptContactDbEntity> MstDeptContacts { get; set; }
 
-    public virtual DbSet<MstDocument> MstDocuments { get; set; }
+    public virtual DbSet<MstDocumentDbEntity> MstDocuments { get; set; }
 
-    public virtual DbSet<MstDuitNowBank> MstDuitNowBanks { get; set; }
+    public virtual DbSet<MstDuitNowBankDbEntity> MstDuitNowBanks { get; set; }
 
-    public virtual DbSet<MstDuitNowBankProd> MstDuitNowBankProds { get; set; }
+    public virtual DbSet<MstDuitNowBankProdDbEntity> MstDuitNowBankProds { get; set; }
 
-    public virtual DbSet<MstDuitNowReasonCode> MstDuitNowReasonCodes { get; set; }
+    public virtual DbSet<MstDuitNowReasonCodeDbEntity> MstDuitNowReasonCodes { get; set; }
 
-    public virtual DbSet<MstDuitNowStatusCode> MstDuitNowStatusCodes { get; set; }
+    public virtual DbSet<MstDuitNowStatusCodeDbEntity> MstDuitNowStatusCodes { get; set; }
 
-    public virtual DbSet<MstEduLvl> MstEduLvls { get; set; }
+    public virtual DbSet<MstEduLvlDbEntity> MstEduLvls { get; set; }
 
-    public virtual DbSet<MstEprod> MstEprods { get; set; }
+    public virtual DbSet<MstEprodDbEntity> MstEprods { get; set; }
 
-    public virtual DbSet<MstFbmstk> MstFbmstks { get; set; }
+    public virtual DbSet<MstFbmstkDbEntity> MstFbmstks { get; set; }
 
-    public virtual DbSet<MstForm> MstForms { get; set; }
+    public virtual DbSet<MstFormDbEntity> MstForms { get; set; }
 
-    public virtual DbSet<MstFpxbank> MstFpxbanks { get; set; }
+    public virtual DbSet<MstFpxbankDbEntity> MstFpxbanks { get; set; }
 
-    public virtual DbSet<MstGlobalClntEcosLimitExp> MstGlobalClntEcosLimitExps { get; set; }
+    public virtual DbSet<MstGlobalClntEcosLimitExpDbEntity> MstGlobalClntEcosLimitExps { get; set; }
 
-    public virtual DbSet<MstGlobalLimitExp> MstGlobalLimitExps { get; set; }
+    public virtual DbSet<MstGlobalLimitExpDbEntity> MstGlobalLimitExps { get; set; }
 
-    public virtual DbSet<MstHld> MstHlds { get; set; }
+    public virtual DbSet<MstHldDbEntity> MstHlds { get; set; }
 
-    public virtual DbSet<MstIncGrp> MstIncGrps { get; set; }
+    public virtual DbSet<MstIncGrpDbEntity> MstIncGrps { get; set; }
 
-    public virtual DbSet<MstInstrStpDty> MstInstrStpDties { get; set; }
+    public virtual DbSet<MstInstrStpDtyDbEntity> MstInstrStpDties { get; set; }
 
-    public virtual DbSet<MstInternalAcType> MstInternalAcTypes { get; set; }
+    public virtual DbSet<MstInternalAcTypeDbEntity> MstInternalAcTypes { get; set; }
 
-    public virtual DbSet<MstLegalStat> MstLegalStats { get; set; }
+    public virtual DbSet<MstLegalStatDbEntity> MstLegalStats { get; set; }
 
-    public virtual DbSet<MstMsgList> MstMsgLists { get; set; }
+    public virtual DbSet<MstMsgListDbEntity> MstMsgLists { get; set; }
 
-    public virtual DbSet<MstMsgList20191113> MstMsgList20191113s { get; set; }
+    public virtual DbSet<MstMsgList20191113DbEntity> MstMsgList20191113s { get; set; }
 
-    public virtual DbSet<MstMsgList202201281900> MstMsgList202201281900s { get; set; }
+    public virtual DbSet<MstMsgList202201281900DbEntity> MstMsgList202201281900s { get; set; }
 
-    public virtual DbSet<MstMultiXchgOptList> MstMultiXchgOptLists { get; set; }
+    public virtual DbSet<MstMultiXchgOptListDbEntity> MstMultiXchgOptLists { get; set; }
 
-    public virtual DbSet<MstOccup> MstOccups { get; set; }
+    public virtual DbSet<MstOccupDbEntity> MstOccups { get; set; }
 
-    public virtual DbSet<MstOff9Bank> MstOff9Banks { get; set; }
+    public virtual DbSet<MstOff9BankDbEntity> MstOff9Banks { get; set; }
 
-    public virtual DbSet<MstOptList> MstOptLists { get; set; }
+    public virtual DbSet<MstOptListDbEntity> MstOptLists { get; set; }
 
-    public virtual DbSet<MstOptList20160819> MstOptList20160819s { get; set; }
+    public virtual DbSet<MstOptList20160819DbEntity> MstOptList20160819s { get; set; }
 
-    public virtual DbSet<MstOptList20191112> MstOptList20191112s { get; set; }
+    public virtual DbSet<MstOptList20191112DbEntity> MstOptList20191112s { get; set; }
 
-    public virtual DbSet<MstOptList202201281859> MstOptList202201281859s { get; set; }
+    public virtual DbSet<MstOptList202201281859DbEntity> MstOptList202201281859s { get; set; }
 
-    public virtual DbSet<MstOptList202406061351> MstOptList202406061351s { get; set; }
+    public virtual DbSet<MstOptList202406061351DbEntity> MstOptList202406061351s { get; set; }
 
-    public virtual DbSet<MstOptListBk20160217> MstOptListBk20160217s { get; set; }
+    public virtual DbSet<MstOptListBk20160217DbEntity> MstOptListBk20160217s { get; set; }
 
-    public virtual DbSet<MstOrderGroup> MstOrderGroups { get; set; }
+    public virtual DbSet<MstOrderGroupDbEntity> MstOrderGroups { get; set; }
 
-    public virtual DbSet<MstPayeeInfo> MstPayeeInfos { get; set; }
+    public virtual DbSet<MstPayeeInfoDbEntity> MstPayeeInfos { get; set; }
 
-    public virtual DbSet<MstRldClnt> MstRldClnts { get; set; }
+    public virtual DbSet<MstRldClntDbEntity> MstRldClnts { get; set; }
 
-    public virtual DbSet<MstStk> MstStks { get; set; }
+    public virtual DbSet<MstStkDbEntity> MstStks { get; set; }
 
-    public virtual DbSet<MstStk20161006> MstStk20161006s { get; set; }
+    public virtual DbSet<MstStk20161006DbEntity> MstStk20161006s { get; set; }
 
-    public virtual DbSet<MstStk20190802> MstStk20190802s { get; set; }
+    public virtual DbSet<MstStk20190802DbEntity> MstStk20190802s { get; set; }
 
-    public virtual DbSet<MstStk20200309> MstStk20200309s { get; set; }
+    public virtual DbSet<MstStk20200309DbEntity> MstStk20200309s { get; set; }
 
-    public virtual DbSet<MstStk20211206> MstStk20211206s { get; set; }
+    public virtual DbSet<MstStk20211206DbEntity> MstStk20211206s { get; set; }
 
-    public virtual DbSet<MstStkBackup181210> MstStkBackup181210s { get; set; }
+    public virtual DbSet<MstStkBackup181210DbEntity> MstStkBackup181210s { get; set; }
 
-    public virtual DbSet<MstStkBk190621Err> MstStkBk190621Errs { get; set; }
+    public virtual DbSet<MstStkBk190621ErrDbEntity> MstStkBk190621Errs { get; set; }
 
-    public virtual DbSet<MstStkBk220801> MstStkBk220801s { get; set; }
+    public virtual DbSet<MstStkBk220801DbEntity> MstStkBk220801s { get; set; }
 
-    public virtual DbSet<MstStkBrd> MstStkBrds { get; set; }
+    public virtual DbSet<MstStkBrdDbEntity> MstStkBrds { get; set; }
 
-    public virtual DbSet<MstStkBrdExp> MstStkBrdExps { get; set; }
+    public virtual DbSet<MstStkBrdExpDbEntity> MstStkBrdExps { get; set; }
 
-    public virtual DbSet<MstStkExp> MstStkExps { get; set; }
+    public virtual DbSet<MstStkExpDbEntity> MstStkExps { get; set; }
 
-    public virtual DbSet<MstStkExpsBackup> MstStkExpsBackups { get; set; }
+    public virtual DbSet<MstStkExpsBackupDbEntity> MstStkExpsBackups { get; set; }
 
-    public virtual DbSet<MstStkExpsBak20221209> MstStkExpsBak20221209s { get; set; }
+    public virtual DbSet<MstStkExpsBak20221209DbEntity> MstStkExpsBak20221209s { get; set; }
 
-    public virtual DbSet<MstStkExpsTest> MstStkExpsTests { get; set; }
+    public virtual DbSet<MstStkExpsTestDbEntity> MstStkExpsTests { get; set; }
 
-    public virtual DbSet<MstStkHlbsmf181210> MstStkHlbsmf181210s { get; set; }
+    public virtual DbSet<MstStkHlbsmf181210DbEntity> MstStkHlbsmf181210s { get; set; }
 
-    public virtual DbSet<MstStkInstrTypeCdSecCatCd> MstStkInstrTypeCdSecCatCds { get; set; }
+    public virtual DbSet<MstStkInstrTypeCdSecCatCdDbEntity> MstStkInstrTypeCdSecCatCds { get; set; }
 
-    public virtual DbSet<MstStkIpo> MstStkIpos { get; set; }
+    public virtual DbSet<MstStkIpoDbEntity> MstStkIpos { get; set; }
 
-    public virtual DbSet<MstStkIpotest> MstStkIpotests { get; set; }
+    public virtual DbSet<MstStkIpotestDbEntity> MstStkIpotests { get; set; }
 
-    public virtual DbSet<MstStkProd> MstStkProds { get; set; }
+    public virtual DbSet<MstStkProdDbEntity> MstStkProds { get; set; }
 
-    public virtual DbSet<MstStkSect> MstStkSects { get; set; }
+    public virtual DbSet<MstStkSectDbEntity> MstStkSects { get; set; }
 
-    public virtual DbSet<MstStkSect20181218> MstStkSect20181218s { get; set; }
+    public virtual DbSet<MstStkSect20181218DbEntity> MstStkSect20181218s { get; set; }
 
-    public virtual DbSet<MstStkTemp> MstStkTemps { get; set; }
+    public virtual DbSet<MstStkTempDbEntity> MstStkTemps { get; set; }
 
-    public virtual DbSet<MstStkTest> MstStkTests { get; set; }
+    public virtual DbSet<MstStkTestDbEntity> MstStkTests { get; set; }
 
-    public virtual DbSet<MstStkXchg> MstStkXchgs { get; set; }
+    public virtual DbSet<MstStkXchgDbEntity> MstStkXchgs { get; set; }
 
-    public virtual DbSet<MstStkXchgExp> MstStkXchgExps { get; set; }
+    public virtual DbSet<MstStkXchgExpDbEntity> MstStkXchgExps { get; set; }
 
-    public virtual DbSet<MstStkXchgExpsBak20221209> MstStkXchgExpsBak20221209s { get; set; }
+    public virtual DbSet<MstStkXchgExpsBak20221209DbEntity> MstStkXchgExpsBak20221209s { get; set; }
 
-    public virtual DbSet<MstStkXchgExpsNew> MstStkXchgExpsNews { get; set; }
+    public virtual DbSet<MstStkXchgExpsNewDbEntity> MstStkXchgExpsNews { get; set; }
 
-    public virtual DbSet<MstSubAccountCrOrder> MstSubAccountCrOrders { get; set; }
+    public virtual DbSet<MstSubAccountCrOrderDbEntity> MstSubAccountCrOrders { get; set; }
 
-    public virtual DbSet<MstTrxnCost> MstTrxnCosts { get; set; }
+    public virtual DbSet<MstTrxnCostDbEntity> MstTrxnCosts { get; set; }
 
-    public virtual DbSet<MstTrxnCost20190124> MstTrxnCost20190124s { get; set; }
+    public virtual DbSet<MstTrxnCost20190124DbEntity> MstTrxnCost20190124s { get; set; }
 
-    public virtual DbSet<MstTrxnCostAcc> MstTrxnCostAccs { get; set; }
+    public virtual DbSet<MstTrxnCostAccDbEntity> MstTrxnCostAccs { get; set; }
 
-    public virtual DbSet<MstTrxnCostBrkgRate> MstTrxnCostBrkgRates { get; set; }
+    public virtual DbSet<MstTrxnCostBrkgRateDbEntity> MstTrxnCostBrkgRates { get; set; }
 
-    public virtual DbSet<MstUsrExp> MstUsrExps { get; set; }
+    public virtual DbSet<MstUsrExpDbEntity> MstUsrExps { get; set; }
 
-    public virtual DbSet<MstUsrExpsBak20221209> MstUsrExpsBak20221209s { get; set; }
+    public virtual DbSet<MstUsrExpsBak20221209DbEntity> MstUsrExpsBak20221209s { get; set; }
 
-    public virtual DbSet<MstUsrExpsNew> MstUsrExpsNews { get; set; }
+    public virtual DbSet<MstUsrExpsNewDbEntity> MstUsrExpsNews { get; set; }
 
-    public virtual DbSet<MstUsrXchgExp> MstUsrXchgExps { get; set; }
+    public virtual DbSet<MstUsrXchgExpDbEntity> MstUsrXchgExps { get; set; }
 
-    public virtual DbSet<MstUsrXchgExpsNew> MstUsrXchgExpsNews { get; set; }
+    public virtual DbSet<MstUsrXchgExpsNewDbEntity> MstUsrXchgExpsNews { get; set; }
 
-    public virtual DbSet<MstXchg> MstXchgs { get; set; }
+    public virtual DbSet<MstXchgDbEntity> MstXchgs { get; set; }
 
-    public virtual DbSet<Mstcobrch20130816> Mstcobrch20130816s { get; set; }
+    public virtual DbSet<Mstcobrch20130816DbEntity> Mstcobrch20130816s { get; set; }
 
-    public virtual DbSet<Mststk20190821> Mststk20190821s { get; set; }
+    public virtual DbSet<Mststk20190821DbEntity> Mststk20190821s { get; set; }
 
-    public virtual DbSet<MststkBk200203> MststkBk200203s { get; set; }
+    public virtual DbSet<MststkBk200203DbEntity> MststkBk200203s { get; set; }
 
-    public virtual DbSet<MststktestBk200204> MststktestBk200204s { get; set; }
+    public virtual DbSet<MststktestBk200204DbEntity> MststktestBk200204s { get; set; }
 
-    public virtual DbSet<MyAccProcDate> MyAccProcDates { get; set; }
+    public virtual DbSet<MyAccProcDateDbEntity> MyAccProcDates { get; set; }
 
-    public virtual DbSet<MyAccProcess> MyAccProcesses { get; set; }
+    public virtual DbSet<MyAccProcessDbEntity> MyAccProcesses { get; set; }
 
-    public virtual DbSet<N2nclientTradeInfo> N2nclientTradeInfos { get; set; }
+    public virtual DbSet<N2nclientTradeInfoDbEntity> N2nclientTradeInfos { get; set; }
 
-    public virtual DbSet<NewOrderSubmission2023718> NewOrderSubmission2023718s { get; set; }
+    public virtual DbSet<NewOrderSubmission2023718DbEntity> NewOrderSubmission2023718s { get; set; }
 
-    public virtual DbSet<NewTable> NewTables { get; set; }
+    public virtual DbSet<NewTableDbEntity> NewTables { get; set; }
 
-    public virtual DbSet<NotificationSetting> NotificationSettings { get; set; }
+    public virtual DbSet<NotificationSettingDbEntity> NotificationSettings { get; set; }
 
-    public virtual DbSet<Off9PaymentPnl> Off9PaymentPnls { get; set; }
+    public virtual DbSet<Off9PaymentPnlDbEntity> Off9PaymentPnls { get; set; }
 
-    public virtual DbSet<OmsusrSession> OmsusrSessions { get; set; }
+    public virtual DbSet<OmsusrSessionDbEntity> OmsusrSessions { get; set; }
 
-    public virtual DbSet<On9EnqPolicy> On9EnqPolicies { get; set; }
+    public virtual DbSet<On9EnqPolicyDbEntity> On9EnqPolicies { get; set; }
 
-    public virtual DbSet<On9EnqSetting> On9EnqSettings { get; set; }
+    public virtual DbSet<On9EnqSettingDbEntity> On9EnqSettings { get; set; }
 
-    public virtual DbSet<OrdRejReason> OrdRejReasons { get; set; }
+    public virtual DbSet<OrdRejReasonDbEntity> OrdRejReasons { get; set; }
 
-    public virtual DbSet<OrdStatus> OrdStatuses { get; set; }
+    public virtual DbSet<OrdStatusDbEntity> OrdStatuses { get; set; }
 
-    public virtual DbSet<OrdType> OrdTypes { get; set; }
+    public virtual DbSet<OrdTypeDbEntity> OrdTypes { get; set; }
 
-    public virtual DbSet<OrderClOrdId> OrderClOrdIds { get; set; }
+    public virtual DbSet<OrderClOrdIdDbEntity> OrderClOrdIds { get; set; }
 
-    public virtual DbSet<OrderClOrdId20141003> OrderClOrdId20141003s { get; set; }
+    public virtual DbSet<OrderClOrdId20141003DbEntity> OrderClOrdId20141003s { get; set; }
 
-    public virtual DbSet<OrderClOrdId20220325> OrderClOrdId20220325s { get; set; }
+    public virtual DbSet<OrderClOrdId20220325DbEntity> OrderClOrdId20220325s { get; set; }
 
-    public virtual DbSet<OrderClOrdIdEx> OrderClOrdIdices { get; set; }
+    public virtual DbSet<OrderClOrdIdExDbEntity> OrderClOrdIdices { get; set; }
 
-    public virtual DbSet<OrderConfirmEx> OrderConfirmExes { get; set; }
+    public virtual DbSet<OrderConfirmExDbEntity> OrderConfirmExes { get; set; }
 
-    public virtual DbSet<OrderConfirmExhistory> OrderConfirmExhistories { get; set; }
+    public virtual DbSet<OrderConfirmExhistoryDbEntity> OrderConfirmExhistories { get; set; }
 
-    public virtual DbSet<OrderConfirmExstatus> OrderConfirmExstatuses { get; set; }
+    public virtual DbSet<OrderConfirmExstatusDbEntity> OrderConfirmExstatuses { get; set; }
 
-    public virtual DbSet<OrderConfirmExstatusHistory> OrderConfirmExstatusHistories { get; set; }
+    public virtual DbSet<OrderConfirmExstatusHistoryDbEntity> OrderConfirmExstatusHistories { get; set; }
 
-    public virtual DbSet<OrderConfirmExstatusHistorySumm> OrderConfirmExstatusHistorySumms { get; set; }
+    public virtual DbSet<OrderConfirmExstatusHistorySummDbEntity> OrderConfirmExstatusHistorySumms { get; set; }
 
-    public virtual DbSet<OrderConfirmExstatusHistorySummArchive> OrderConfirmExstatusHistorySummArchives { get; set; }
+    public virtual DbSet<OrderConfirmExstatusHistorySummArchiveDbEntity> OrderConfirmExstatusHistorySummArchives { get; set; }
 
-    public virtual DbSet<OrderException> OrderExceptions { get; set; }
+    public virtual DbSet<OrderExceptionDbEntity> OrderExceptions { get; set; }
 
-    public virtual DbSet<OrderExceptionHistory> OrderExceptionHistories { get; set; }
+    public virtual DbSet<OrderExceptionHistoryDbEntity> OrderExceptionHistories { get; set; }
 
-    public virtual DbSet<OrderGroupDtl> OrderGroupDtls { get; set; }
+    public virtual DbSet<OrderGroupDtlDbEntity> OrderGroupDtls { get; set; }
 
-    public virtual DbSet<OrderMetadatum> OrderMetadata { get; set; }
+    public virtual DbSet<OrderMetadatumDbEntity> OrderMetadata { get; set; }
 
-    public virtual DbSet<OrderPlaced> OrderPlaceds { get; set; }
+    public virtual DbSet<OrderPlacedDbEntity> OrderPlaceds { get; set; }
 
-    public virtual DbSet<OrderPlacedGtd> OrderPlacedGtds { get; set; }
+    public virtual DbSet<OrderPlacedGtdDbEntity> OrderPlacedGtds { get; set; }
 
-    public virtual DbSet<OrderPlacedHistory> OrderPlacedHistories { get; set; }
+    public virtual DbSet<OrderPlacedHistoryDbEntity> OrderPlacedHistories { get; set; }
 
-    public virtual DbSet<OrderPlacedHistoryArchive> OrderPlacedHistoryArchives { get; set; }
+    public virtual DbSet<OrderPlacedHistoryArchiveDbEntity> OrderPlacedHistoryArchives { get; set; }
 
-    public virtual DbSet<OrderPlacedHistoryTest> OrderPlacedHistoryTests { get; set; }
+    public virtual DbSet<OrderPlacedHistoryTestDbEntity> OrderPlacedHistoryTests { get; set; }
 
-    public virtual DbSet<OrderPlacedTest> OrderPlacedTests { get; set; }
+    public virtual DbSet<OrderPlacedTestDbEntity> OrderPlacedTests { get; set; }
 
-    public virtual DbSet<OrderQueue> OrderQueues { get; set; }
+    public virtual DbSet<OrderQueueDbEntity> OrderQueues { get; set; }
 
-    public virtual DbSet<OrderQueueDelIdss> OrderQueueDelIdsses { get; set; }
+    public virtual DbSet<OrderQueueDelIdssDbEntity> OrderQueueDelIdsses { get; set; }
 
-    public virtual DbSet<OrderQueueDelLog> OrderQueueDelLogs { get; set; }
+    public virtual DbSet<OrderQueueDelLogDbEntity> OrderQueueDelLogs { get; set; }
 
-    public virtual DbSet<OrderQueueDelLogChgBrch> OrderQueueDelLogChgBrches { get; set; }
+    public virtual DbSet<OrderQueueDelLogChgBrchDbEntity> OrderQueueDelLogChgBrches { get; set; }
 
-    public virtual DbSet<OrderQueueHistory> OrderQueueHistories { get; set; }
+    public virtual DbSet<OrderQueueHistoryDbEntity> OrderQueueHistories { get; set; }
 
-    public virtual DbSet<OrderRejected> OrderRejecteds { get; set; }
+    public virtual DbSet<OrderRejectedDbEntity> OrderRejecteds { get; set; }
 
-    public virtual DbSet<OrderRejectedHistory> OrderRejectedHistories { get; set; }
+    public virtual DbSet<OrderRejectedHistoryDbEntity> OrderRejectedHistories { get; set; }
 
-    public virtual DbSet<OrderStatus> OrderStatuses { get; set; }
+    public virtual DbSet<OrderStatusDbEntity> OrderStatuses { get; set; }
 
-    public virtual DbSet<OrderStatusFlag> OrderStatusFlags { get; set; }
+    public virtual DbSet<OrderStatusFlagDbEntity> OrderStatusFlags { get; set; }
 
-    public virtual DbSet<OrderStatusHistory> OrderStatusHistories { get; set; }
+    public virtual DbSet<OrderStatusHistoryDbEntity> OrderStatusHistories { get; set; }
 
-    public virtual DbSet<OrderStatusHistorySumm> OrderStatusHistorySumms { get; set; }
+    public virtual DbSet<OrderStatusHistorySummDbEntity> OrderStatusHistorySumms { get; set; }
 
-    public virtual DbSet<OrderStatusHistorySumm1> OrderStatusHistorySumm1s { get; set; }
+    public virtual DbSet<OrderStatusHistorySumm1DbEntity> OrderStatusHistorySumm1s { get; set; }
 
-    public virtual DbSet<OrderStatusHistorySummArchive> OrderStatusHistorySummArchives { get; set; }
+    public virtual DbSet<OrderStatusHistorySummArchiveDbEntity> OrderStatusHistorySummArchives { get; set; }
 
-    public virtual DbSet<Osbill> Osbills { get; set; }
+    public virtual DbSet<OsbillDbEntity> Osbills { get; set; }
 
-    public virtual DbSet<OsbillHistory> OsbillHistories { get; set; }
+    public virtual DbSet<OsbillHistoryDbEntity> OsbillHistories { get; set; }
 
-    public virtual DbSet<OsbillHistoryArchive> OsbillHistoryArchives { get; set; }
+    public virtual DbSet<OsbillHistoryArchiveDbEntity> OsbillHistoryArchives { get; set; }
 
-    public virtual DbSet<OsclntInfoBatch2> OsclntInfoBatch2s { get; set; }
+    public virtual DbSet<OsclntInfoBatch2DbEntity> OsclntInfoBatch2s { get; set; }
 
-    public virtual DbSet<OsdueSettlement> OsdueSettlements { get; set; }
+    public virtual DbSet<OsdueSettlementDbEntity> OsdueSettlements { get; set; }
 
-    public virtual DbSet<OsdueSettlement2012> OsdueSettlement2012s { get; set; }
+    public virtual DbSet<OsdueSettlement2012DbEntity> OsdueSettlement2012s { get; set; }
 
-    public virtual DbSet<OsdueSettlementHistory> OsdueSettlementHistories { get; set; }
+    public virtual DbSet<OsdueSettlementHistoryDbEntity> OsdueSettlementHistories { get; set; }
 
-    public virtual DbSet<OsdueSettlementHistoryArchive> OsdueSettlementHistoryArchives { get; set; }
+    public virtual DbSet<OsdueSettlementHistoryArchiveDbEntity> OsdueSettlementHistoryArchives { get; set; }
 
-    public virtual DbSet<OsforcedSelling> OsforcedSellings { get; set; }
+    public virtual DbSet<OsforcedSellingDbEntity> OsforcedSellings { get; set; }
 
-    public virtual DbSet<OsforcedSelling2012> OsforcedSelling2012s { get; set; }
+    public virtual DbSet<OsforcedSelling2012DbEntity> OsforcedSelling2012s { get; set; }
 
-    public virtual DbSet<OsforcedSellingBak20241105> OsforcedSellingBak20241105s { get; set; }
+    public virtual DbSet<OsforcedSellingBak20241105DbEntity> OsforcedSellingBak20241105s { get; set; }
 
-    public virtual DbSet<OsforcedSellingHistory> OsforcedSellingHistories { get; set; }
+    public virtual DbSet<OsforcedSellingHistoryDbEntity> OsforcedSellingHistories { get; set; }
 
-    public virtual DbSet<Osother> Osothers { get; set; }
+    public virtual DbSet<OsotherDbEntity> Osothers { get; set; }
 
-    public virtual DbSet<OsothersHistory> OsothersHistories { get; set; }
+    public virtual DbSet<OsothersHistoryDbEntity> OsothersHistories { get; set; }
 
-    public virtual DbSet<OsrpurchaseContract> OsrpurchaseContracts { get; set; }
+    public virtual DbSet<OsrpurchaseContractDbEntity> OsrpurchaseContracts { get; set; }
 
-    public virtual DbSet<OsrpurchaseContractsHistory> OsrpurchaseContractsHistories { get; set; }
+    public virtual DbSet<OsrpurchaseContractsHistoryDbEntity> OsrpurchaseContractsHistories { get; set; }
 
-    public virtual DbSet<OsrpurchaseContractsHistoryArchive> OsrpurchaseContractsHistoryArchives { get; set; }
+    public virtual DbSet<OsrpurchaseContractsHistoryArchiveDbEntity> OsrpurchaseContractsHistoryArchives { get; set; }
 
-    public virtual DbSet<OsrsalesContract> OsrsalesContracts { get; set; }
+    public virtual DbSet<OsrsalesContractDbEntity> OsrsalesContracts { get; set; }
 
-    public virtual DbSet<OsrsalesContractsHistory> OsrsalesContractsHistories { get; set; }
+    public virtual DbSet<OsrsalesContractsHistoryDbEntity> OsrsalesContractsHistories { get; set; }
 
-    public virtual DbSet<OssalesProceedsDue> OssalesProceedsDues { get; set; }
+    public virtual DbSet<OssalesProceedsDueDbEntity> OssalesProceedsDues { get; set; }
 
-    public virtual DbSet<OssalesProceedsDueHistory> OssalesProceedsDueHistories { get; set; }
+    public virtual DbSet<OssalesProceedsDueHistoryDbEntity> OssalesProceedsDueHistories { get; set; }
 
-    public virtual DbSet<PatchDataTable20140115> PatchDataTable20140115s { get; set; }
+    public virtual DbSet<PatchDataTable20140115DbEntity> PatchDataTable20140115s { get; set; }
 
-    public virtual DbSet<PatchUserInfo> PatchUserInfos { get; set; }
+    public virtual DbSet<PatchUserInfoDbEntity> PatchUserInfos { get; set; }
 
-    public virtual DbSet<PaymentContract> PaymentContracts { get; set; }
+    public virtual DbSet<PaymentContractDbEntity> PaymentContracts { get; set; }
 
-    public virtual DbSet<PaymentContractArchive> PaymentContractArchives { get; set; }
+    public virtual DbSet<PaymentContractArchiveDbEntity> PaymentContractArchives { get; set; }
 
-    public virtual DbSet<PaymentRecon> PaymentRecons { get; set; }
+    public virtual DbSet<PaymentReconDbEntity> PaymentRecons { get; set; }
 
-    public virtual DbSet<PaymentReconArchive> PaymentReconArchives { get; set; }
+    public virtual DbSet<PaymentReconArchiveDbEntity> PaymentReconArchives { get; set; }
 
-    public virtual DbSet<PaymentRefNo> PaymentRefNos { get; set; }
+    public virtual DbSet<PaymentRefNoDbEntity> PaymentRefNos { get; set; }
 
-    public virtual DbSet<PaymentRefNoArchive> PaymentRefNoArchives { get; set; }
+    public virtual DbSet<PaymentRefNoArchiveDbEntity> PaymentRefNoArchives { get; set; }
 
-    public virtual DbSet<PaymentRefNoException> PaymentRefNoExceptions { get; set; }
+    public virtual DbSet<PaymentRefNoExceptionDbEntity> PaymentRefNoExceptions { get; set; }
 
-    public virtual DbSet<PaymentRefNoExceptionArchive> PaymentRefNoExceptionArchives { get; set; }
+    public virtual DbSet<PaymentRefNoExceptionArchiveDbEntity> PaymentRefNoExceptionArchives { get; set; }
 
-    public virtual DbSet<PaymentStatus> PaymentStatuses { get; set; }
+    public virtual DbSet<PaymentStatusDbEntity> PaymentStatuses { get; set; }
 
-    public virtual DbSet<PfclntActSum> PfclntActSums { get; set; }
+    public virtual DbSet<PfclntActSumDbEntity> PfclntActSums { get; set; }
 
-    public virtual DbSet<PfclntActSumHistory> PfclntActSumHistories { get; set; }
+    public virtual DbSet<PfclntActSumHistoryDbEntity> PfclntActSumHistories { get; set; }
 
-    public virtual DbSet<PfclntInfo> PfclntInfos { get; set; }
+    public virtual DbSet<PfclntInfoDbEntity> PfclntInfos { get; set; }
 
-    public virtual DbSet<PortfolioClientTradeInfo> PortfolioClientTradeInfos { get; set; }
+    public virtual DbSet<PortfolioClientTradeInfoDbEntity> PortfolioClientTradeInfos { get; set; }
 
-    public virtual DbSet<PortfolioRealSummary> PortfolioRealSummaries { get; set; }
+    public virtual DbSet<PortfolioRealSummaryDbEntity> PortfolioRealSummaries { get; set; }
 
-    public virtual DbSet<PortfolioRealSummary20240220> PortfolioRealSummary20240220s { get; set; }
+    public virtual DbSet<PortfolioRealSummary20240220DbEntity> PortfolioRealSummary20240220s { get; set; }
 
-    public virtual DbSet<PortfolioRealSummary202406211438> PortfolioRealSummary202406211438s { get; set; }
+    public virtual DbSet<PortfolioRealSummary202406211438DbEntity> PortfolioRealSummary202406211438s { get; set; }
 
-    public virtual DbSet<PortfolioSetting> PortfolioSettings { get; set; }
+    public virtual DbSet<PortfolioSettingDbEntity> PortfolioSettings { get; set; }
 
-    public virtual DbSet<PortfolioSettingBrch> PortfolioSettingBrches { get; set; }
+    public virtual DbSet<PortfolioSettingBrchDbEntity> PortfolioSettingBrches { get; set; }
 
-    public virtual DbSet<Portfoliorealtransaction> Portfoliorealtransactions { get; set; }
+    public virtual DbSet<PortfoliorealtransactionDbEntity> Portfoliorealtransactions { get; set; }
 
-    public virtual DbSet<PriceAlert> PriceAlerts { get; set; }
+    public virtual DbSet<PriceAlertDbEntity> PriceAlerts { get; set; }
 
-    public virtual DbSet<ProcessDate> ProcessDates { get; set; }
+    public virtual DbSet<ProcessDateDbEntity> ProcessDates { get; set; }
 
-    public virtual DbSet<ProcessPymtReconExcp> ProcessPymtReconExcps { get; set; }
+    public virtual DbSet<ProcessPymtReconExcpDbEntity> ProcessPymtReconExcps { get; set; }
 
-    public virtual DbSet<ProdCodeList> ProdCodeLists { get; set; }
+    public virtual DbSet<ProdCodeListDbEntity> ProdCodeLists { get; set; }
 
-    public virtual DbSet<PwdGen> PwdGens { get; set; }
+    public virtual DbSet<PwdGenDbEntity> PwdGens { get; set; }
 
-    public virtual DbSet<PwdGenHenry0> PwdGenHenry0s { get; set; }
+    public virtual DbSet<PwdGenHenry0DbEntity> PwdGenHenry0s { get; set; }
 
-    public virtual DbSet<PwdGenLog> PwdGenLogs { get; set; }
+    public virtual DbSet<PwdGenLogDbEntity> PwdGenLogs { get; set; }
 
-    public virtual DbSet<PwdGenLogHenry0> PwdGenLogHenry0s { get; set; }
+    public virtual DbSet<PwdGenLogHenry0DbEntity> PwdGenLogHenry0s { get; set; }
 
-    public virtual DbSet<PwdQuestionList> PwdQuestionLists { get; set; }
+    public virtual DbSet<PwdQuestionListDbEntity> PwdQuestionLists { get; set; }
 
-    public virtual DbSet<PwdQuestionListEcm> PwdQuestionListEcms { get; set; }
+    public virtual DbSet<PwdQuestionListEcmDbEntity> PwdQuestionListEcms { get; set; }
 
-    public virtual DbSet<PymtRefNo> PymtRefNos { get; set; }
+    public virtual DbSet<PymtRefNoDbEntity> PymtRefNos { get; set; }
 
-    public virtual DbSet<PymtRefUnknownEmailLog> PymtRefUnknownEmailLogs { get; set; }
+    public virtual DbSet<PymtRefUnknownEmailLogDbEntity> PymtRefUnknownEmailLogs { get; set; }
 
-    public virtual DbSet<ResIdstkCode> ResIdstkCodes { get; set; }
+    public virtual DbSet<ResIdstkCodeDbEntity> ResIdstkCodes { get; set; }
 
-    public virtual DbSet<Research> Researches { get; set; }
+    public virtual DbSet<ResearchDbEntity> Researches { get; set; }
 
-    public virtual DbSet<ResearchAnalyst> ResearchAnalysts { get; set; }
+    public virtual DbSet<ResearchAnalystDbEntity> ResearchAnalysts { get; set; }
 
-    public virtual DbSet<ResearchCategory> ResearchCategories { get; set; }
+    public virtual DbSet<ResearchCategoryDbEntity> ResearchCategories { get; set; }
 
-    public virtual DbSet<RptOptGrp> RptOptGrps { get; set; }
+    public virtual DbSet<RptOptGrpDbEntity> RptOptGrps { get; set; }
 
-    public virtual DbSet<RptOptLst> RptOptLsts { get; set; }
+    public virtual DbSet<RptOptLstDbEntity> RptOptLsts { get; set; }
 
-    public virtual DbSet<RsaDeviceToken> RsaDeviceTokens { get; set; }
+    public virtual DbSet<RsaDeviceTokenDbEntity> RsaDeviceTokens { get; set; }
 
-    public virtual DbSet<RsaSetting> RsaSettings { get; set; }
+    public virtual DbSet<RsaSettingDbEntity> RsaSettings { get; set; }
 
-    public virtual DbSet<RsaUsrType> RsaUsrTypes { get; set; }
+    public virtual DbSet<RsaUsrTypeDbEntity> RsaUsrTypes { get; set; }
 
-    public virtual DbSet<ScnFundDatum> ScnFundData { get; set; }
+    public virtual DbSet<ScnFundDatumDbEntity> ScnFundData { get; set; }
 
-    public virtual DbSet<Scotr> Scotrs { get; set; }
+    public virtual DbSet<ScotrDbEntity> Scotrs { get; set; }
 
-    public virtual DbSet<Scotrshistory> Scotrshistories { get; set; }
+    public virtual DbSet<ScotrshistoryDbEntity> Scotrshistories { get; set; }
 
-    public virtual DbSet<Scotrssumm> Scotrssumms { get; set; }
+    public virtual DbSet<ScotrssummDbEntity> Scotrssumms { get; set; }
 
-    public virtual DbSet<ScotrssummHistory> ScotrssummHistories { get; set; }
+    public virtual DbSet<ScotrssummHistoryDbEntity> ScotrssummHistories { get; set; }
 
-    public virtual DbSet<ScreenerCriteriaGrp> ScreenerCriteriaGrps { get; set; }
+    public virtual DbSet<ScreenerCriteriaGrpDbEntity> ScreenerCriteriaGrps { get; set; }
 
-    public virtual DbSet<ScreenerCriterion> ScreenerCriteria { get; set; }
+    public virtual DbSet<ScreenerCriterionDbEntity> ScreenerCriteria { get; set; }
 
-    public virtual DbSet<ScreenerGrp> ScreenerGrps { get; set; }
+    public virtual DbSet<ScreenerGrpDbEntity> ScreenerGrps { get; set; }
 
-    public virtual DbSet<ScreenerList> ScreenerLists { get; set; }
+    public virtual DbSet<ScreenerListDbEntity> ScreenerLists { get; set; }
 
-    public virtual DbSet<Set5> Set5s { get; set; }
+    public virtual DbSet<Set5DbEntity> Set5s { get; set; }
 
-    public virtual DbSet<ShareConsolidate> ShareConsolidates { get; set; }
+    public virtual DbSet<ShareConsolidateDbEntity> ShareConsolidates { get; set; }
 
-    public virtual DbSet<ShareConsolidationRecon> ShareConsolidationRecons { get; set; }
+    public virtual DbSet<ShareConsolidationReconDbEntity> ShareConsolidationRecons { get; set; }
 
-    public virtual DbSet<ShareInfo> ShareInfos { get; set; }
+    public virtual DbSet<ShareInfoDbEntity> ShareInfos { get; set; }
 
-    public virtual DbSet<ShareInfo20240220> ShareInfo20240220s { get; set; }
+    public virtual DbSet<ShareInfo20240220DbEntity> ShareInfo20240220s { get; set; }
 
-    public virtual DbSet<ShareInfo202406211438> ShareInfo202406211438s { get; set; }
+    public virtual DbSet<ShareInfo202406211438DbEntity> ShareInfo202406211438s { get; set; }
 
-    public virtual DbSet<ShareInfoRemoved> ShareInfoRemoveds { get; set; }
+    public virtual DbSet<ShareInfoRemovedDbEntity> ShareInfoRemoveds { get; set; }
 
-    public virtual DbSet<ShareInfoStk> ShareInfoStks { get; set; }
+    public virtual DbSet<ShareInfoStkDbEntity> ShareInfoStks { get; set; }
 
-    public virtual DbSet<ShareInfoStkBrch> ShareInfoStkBrches { get; set; }
+    public virtual DbSet<ShareInfoStkBrchDbEntity> ShareInfoStkBrches { get; set; }
 
-    public virtual DbSet<SiteMenu> SiteMenus { get; set; }
+    public virtual DbSet<SiteMenuDbEntity> SiteMenus { get; set; }
 
-    public virtual DbSet<SiteMenu202201281859> SiteMenu202201281859s { get; set; }
+    public virtual DbSet<SiteMenu202201281859DbEntity> SiteMenu202201281859s { get; set; }
 
-    public virtual DbSet<SiteMenu20241023> SiteMenu20241023s { get; set; }
+    public virtual DbSet<SiteMenu20241023DbEntity> SiteMenu20241023s { get; set; }
 
-    public virtual DbSet<SiteMenuBak20240408> SiteMenuBak20240408s { get; set; }
+    public virtual DbSet<SiteMenuBak20240408DbEntity> SiteMenuBak20240408s { get; set; }
 
-    public virtual DbSet<SiteMenuBak20240920> SiteMenuBak20240920s { get; set; }
+    public virtual DbSet<SiteMenuBak20240920DbEntity> SiteMenuBak20240920s { get; set; }
 
-    public virtual DbSet<SiteMenuBck> SiteMenuBcks { get; set; }
+    public virtual DbSet<SiteMenuBckDbEntity> SiteMenuBcks { get; set; }
 
-    public virtual DbSet<SiteMenuGrp> SiteMenuGrps { get; set; }
+    public virtual DbSet<SiteMenuGrpDbEntity> SiteMenuGrps { get; set; }
 
-    public virtual DbSet<Sitemenu20130704> Sitemenu20130704s { get; set; }
+    public virtual DbSet<Sitemenu20130704DbEntity> Sitemenu20130704s { get; set; }
 
-    public virtual DbSet<SmfupdateOrder> SmfupdateOrders { get; set; }
+    public virtual DbSet<SmfupdateOrderDbEntity> SmfupdateOrders { get; set; }
 
-    public virtual DbSet<SsokeyGen> SsokeyGens { get; set; }
+    public virtual DbSet<SsokeyGenDbEntity> SsokeyGens { get; set; }
 
-    public virtual DbSet<StateList> StateLists { get; set; }
+    public virtual DbSet<StateListDbEntity> StateLists { get; set; }
 
-    public virtual DbSet<StkCtrl> StkCtrls { get; set; }
+    public virtual DbSet<StkCtrlDbEntity> StkCtrls { get; set; }
 
-    public virtual DbSet<StkCtrl20220303> StkCtrl20220303s { get; set; }
+    public virtual DbSet<StkCtrl20220303DbEntity> StkCtrl20220303s { get; set; }
 
-    public virtual DbSet<StkEnt> StkEnts { get; set; }
+    public virtual DbSet<StkEntDbEntity> StkEnts { get; set; }
 
-    public virtual DbSet<StkIdea> StkIdeas { get; set; }
+    public virtual DbSet<StkIdeaDbEntity> StkIdeas { get; set; }
 
-    public virtual DbSet<StockFinancialInfo> StockFinancialInfos { get; set; }
+    public virtual DbSet<StockFinancialInfoDbEntity> StockFinancialInfos { get; set; }
 
-    public virtual DbSet<StockMktFinancialInfo> StockMktFinancialInfos { get; set; }
+    public virtual DbSet<StockMktFinancialInfoDbEntity> StockMktFinancialInfos { get; set; }
 
-    public virtual DbSet<SysLmtType> SysLmtTypes { get; set; }
+    public virtual DbSet<SysLmtTypeDbEntity> SysLmtTypes { get; set; }
 
-    public virtual DbSet<TaskDependency> TaskDependencies { get; set; }
+    public virtual DbSet<TaskDependencyDbEntity> TaskDependencies { get; set; }
 
-    public virtual DbSet<TaskDependency20150727> TaskDependency20150727s { get; set; }
+    public virtual DbSet<TaskDependency20150727DbEntity> TaskDependency20150727s { get; set; }
 
-    public virtual DbSet<TaskDependency20210621> TaskDependency20210621s { get; set; }
+    public virtual DbSet<TaskDependency20210621DbEntity> TaskDependency20210621s { get; set; }
 
-    public virtual DbSet<TaskDependency202404291349> TaskDependency202404291349s { get; set; }
+    public virtual DbSet<TaskDependency202404291349DbEntity> TaskDependency202404291349s { get; set; }
 
-    public virtual DbSet<TaskDependency202406250958> TaskDependency202406250958s { get; set; }
+    public virtual DbSet<TaskDependency202406250958DbEntity> TaskDependency202406250958s { get; set; }
 
-    public virtual DbSet<TaskDependencyKibbNewTask> TaskDependencyKibbNewTasks { get; set; }
+    public virtual DbSet<TaskDependencyKibbNewTaskDbEntity> TaskDependencyKibbNewTasks { get; set; }
 
-    public virtual DbSet<TaskDependencyKibbNewTasks20210625> TaskDependencyKibbNewTasks20210625s { get; set; }
+    public virtual DbSet<TaskDependencyKibbNewTasks20210625DbEntity> TaskDependencyKibbNewTasks20210625s { get; set; }
 
-    public virtual DbSet<TaskFrequency> TaskFrequencies { get; set; }
+    public virtual DbSet<TaskFrequencyDbEntity> TaskFrequencies { get; set; }
 
-    public virtual DbSet<TaskFrequency20150727> TaskFrequency20150727s { get; set; }
+    public virtual DbSet<TaskFrequency20150727DbEntity> TaskFrequency20150727s { get; set; }
 
-    public virtual DbSet<TaskFrequency20210621> TaskFrequency20210621s { get; set; }
+    public virtual DbSet<TaskFrequency20210621DbEntity> TaskFrequency20210621s { get; set; }
 
-    public virtual DbSet<TaskFrequency202205171150> TaskFrequency202205171150s { get; set; }
+    public virtual DbSet<TaskFrequency202205171150DbEntity> TaskFrequency202205171150s { get; set; }
 
-    public virtual DbSet<TaskFrequency202403261047> TaskFrequency202403261047s { get; set; }
+    public virtual DbSet<TaskFrequency202403261047DbEntity> TaskFrequency202403261047s { get; set; }
 
-    public virtual DbSet<TaskFrequency202404031550> TaskFrequency202404031550s { get; set; }
+    public virtual DbSet<TaskFrequency202404031550DbEntity> TaskFrequency202404031550s { get; set; }
 
-    public virtual DbSet<TaskFrequency202404291346> TaskFrequency202404291346s { get; set; }
+    public virtual DbSet<TaskFrequency202404291346DbEntity> TaskFrequency202404291346s { get; set; }
 
-    public virtual DbSet<TaskFrequency202406250957> TaskFrequency202406250957s { get; set; }
+    public virtual DbSet<TaskFrequency202406250957DbEntity> TaskFrequency202406250957s { get; set; }
 
-    public virtual DbSet<TaskFrequency202406281353> TaskFrequency202406281353s { get; set; }
+    public virtual DbSet<TaskFrequency202406281353DbEntity> TaskFrequency202406281353s { get; set; }
 
-    public virtual DbSet<TaskFrequencyKibbNewTask> TaskFrequencyKibbNewTasks { get; set; }
+    public virtual DbSet<TaskFrequencyKibbNewTaskDbEntity> TaskFrequencyKibbNewTasks { get; set; }
 
-    public virtual DbSet<TaskFrequencyKibbNewTasks20210625> TaskFrequencyKibbNewTasks20210625s { get; set; }
+    public virtual DbSet<TaskFrequencyKibbNewTasks20210625DbEntity> TaskFrequencyKibbNewTasks20210625s { get; set; }
 
-    public virtual DbSet<TaskLog> TaskLogs { get; set; }
+    public virtual DbSet<TaskLogDbEntity> TaskLogs { get; set; }
 
-    public virtual DbSet<TaskStatusEntity> TaskStatuses { get; set; }
+    public virtual DbSet<TaskStatusDbEntity> TaskStatuses { get; set; }
 
-    public virtual DbSet<TaskStatusLog> TaskStatusLogs { get; set; }
+    public virtual DbSet<TaskStatusLogDbEntity> TaskStatusLogs { get; set; }
 
-    public virtual DbSet<TempPayTran> TempPayTrans { get; set; }
+    public virtual DbSet<TempPayTranDbEntity> TempPayTrans { get; set; }
 
-    public virtual DbSet<TempShareInfo> TempShareInfos { get; set; }
+    public virtual DbSet<TempShareInfoDbEntity> TempShareInfos { get; set; }
 
-    public virtual DbSet<TempStkIndicator> TempStkIndicators { get; set; }
+    public virtual DbSet<TempStkIndicatorDbEntity> TempStkIndicators { get; set; }
 
-    public virtual DbSet<TempStockInfo> TempStockInfos { get; set; }
+    public virtual DbSet<TempStockInfoDbEntity> TempStockInfos { get; set; }
 
-    public virtual DbSet<TempTbl> TempTbls { get; set; }
+    public virtual DbSet<TempTblDbEntity> TempTbls { get; set; }
 
-    public virtual DbSet<Test> Tests { get; set; }
+    public virtual DbSet<TestDbEntity> Tests { get; set; }
 
-    public virtual DbSet<TimeInForce> TimeInForces { get; set; }
+    public virtual DbSet<TimeInForceDbEntity> TimeInForces { get; set; }
 
-    public virtual DbSet<TmpOetrd> TmpOetrds { get; set; }
+    public virtual DbSet<TmpOetrdDbEntity> TmpOetrds { get; set; }
 
-    public virtual DbSet<TmpPortfolioBal> TmpPortfolioBals { get; set; }
+    public virtual DbSet<TmpPortfolioBalDbEntity> TmpPortfolioBals { get; set; }
 
-    public virtual DbSet<Tncaccept> Tncaccepts { get; set; }
+    public virtual DbSet<TncacceptDbEntity> Tncaccepts { get; set; }
 
-    public virtual DbSet<Tncmaint> Tncmaints { get; set; }
+    public virtual DbSet<TncmaintDbEntity> Tncmaints { get; set; }
 
-    public virtual DbSet<TraceMstStkUpdate> TraceMstStkUpdates { get; set; }
+    public virtual DbSet<TraceMstStkUpdateDbEntity> TraceMstStkUpdates { get; set; }
 
-    public virtual DbSet<TradeSplit> TradeSplits { get; set; }
+    public virtual DbSet<TradeSplitDbEntity> TradeSplits { get; set; }
 
-    public virtual DbSet<TransMovement> TransMovements { get; set; }
+    public virtual DbSet<TransMovementDbEntity> TransMovements { get; set; }
 
-    public virtual DbSet<TransMovementHistory> TransMovementHistories { get; set; }
+    public virtual DbSet<TransMovementHistoryDbEntity> TransMovementHistories { get; set; }
 
-    public virtual DbSet<Transaction> Transactions { get; set; }
+    public virtual DbSet<TransactionDbEntity> Transactions { get; set; }
 
-    public virtual DbSet<TransactionType> TransactionTypes { get; set; }
+    public virtual DbSet<TransactionTypeDbEntity> TransactionTypes { get; set; }
 
-    public virtual DbSet<Transactions123> Transactions123s { get; set; }
+    public virtual DbSet<Transactions123DbEntity> Transactions123s { get; set; }
 
-    public virtual DbSet<TransactionsArchive> TransactionsArchives { get; set; }
+    public virtual DbSet<TransactionsArchiveDbEntity> TransactionsArchives { get; set; }
 
-    public virtual DbSet<TransactionsHistory> TransactionsHistories { get; set; }
+    public virtual DbSet<TransactionsHistoryDbEntity> TransactionsHistories { get; set; }
 
-    public virtual DbSet<TransactionsHistory2011> TransactionsHistory2011s { get; set; }
+    public virtual DbSet<TransactionsHistory2011DbEntity> TransactionsHistory2011s { get; set; }
 
-    public virtual DbSet<TransactionsHistory2012> TransactionsHistory2012s { get; set; }
+    public virtual DbSet<TransactionsHistory2012DbEntity> TransactionsHistory2012s { get; set; }
 
-    public virtual DbSet<TransactionsHistory2012202406211438> TransactionsHistory2012202406211438s { get; set; }
+    public virtual DbSet<TransactionsHistory2012202406211438DbEntity> TransactionsHistory2012202406211438s { get; set; }
 
-    public virtual DbSet<TransactionsHistory2013> TransactionsHistory2013s { get; set; }
+    public virtual DbSet<TransactionsHistory2013DbEntity> TransactionsHistory2013s { get; set; }
 
-    public virtual DbSet<TransactionsHistory2014> TransactionsHistory2014s { get; set; }
+    public virtual DbSet<TransactionsHistory2014DbEntity> TransactionsHistory2014s { get; set; }
 
-    public virtual DbSet<TransactionsHistory2015> TransactionsHistory2015s { get; set; }
+    public virtual DbSet<TransactionsHistory2015DbEntity> TransactionsHistory2015s { get; set; }
 
-    public virtual DbSet<TransactionsHistory2016> TransactionsHistory2016s { get; set; }
+    public virtual DbSet<TransactionsHistory2016DbEntity> TransactionsHistory2016s { get; set; }
 
-    public virtual DbSet<TransactionsHistory2017> TransactionsHistory2017s { get; set; }
+    public virtual DbSet<TransactionsHistory2017DbEntity> TransactionsHistory2017s { get; set; }
 
-    public virtual DbSet<TransactionsHistory202406211438> TransactionsHistory202406211438s { get; set; }
+    public virtual DbSet<TransactionsHistory202406211438DbEntity> TransactionsHistory202406211438s { get; set; }
 
-    public virtual DbSet<TransactionsHistoryBak20240910> TransactionsHistoryBak20240910s { get; set; }
+    public virtual DbSet<TransactionsHistoryBak20240910DbEntity> TransactionsHistoryBak20240910s { get; set; }
 
-    public virtual DbSet<TransactionsHistoryTemp> TransactionsHistoryTemps { get; set; }
+    public virtual DbSet<TransactionsHistoryTempDbEntity> TransactionsHistoryTemps { get; set; }
 
-    public virtual DbSet<TransactionsRealized> TransactionsRealizeds { get; set; }
+    public virtual DbSet<TransactionsRealizedDbEntity> TransactionsRealizeds { get; set; }
 
-    public virtual DbSet<TransactionsRealized20130828> TransactionsRealized20130828s { get; set; }
+    public virtual DbSet<TransactionsRealized20130828DbEntity> TransactionsRealized20130828s { get; set; }
 
-    public virtual DbSet<TransactionsRealizedEx> TransactionsRealizedices { get; set; }
+    public virtual DbSet<TransactionsRealizedExDbEntity> TransactionsRealizedices { get; set; }
 
-    public virtual DbSet<TransactionsRealizedHistory> TransactionsRealizedHistories { get; set; }
+    public virtual DbSet<TransactionsRealizedHistoryDbEntity> TransactionsRealizedHistories { get; set; }
 
-    public virtual DbSet<TransactionsRealizedHistory20210524> TransactionsRealizedHistory20210524s { get; set; }
+    public virtual DbSet<TransactionsRealizedHistory20210524DbEntity> TransactionsRealizedHistory20210524s { get; set; }
 
-    public virtual DbSet<TransactionsTemp> TransactionsTemps { get; set; }
+    public virtual DbSet<TransactionsTempDbEntity> TransactionsTemps { get; set; }
 
-    public virtual DbSet<TrdgPinGen> TrdgPinGens { get; set; }
+    public virtual DbSet<TrdgPinGenDbEntity> TrdgPinGens { get; set; }
 
-    public virtual DbSet<TrdgPinGenLog> TrdgPinGenLogs { get; set; }
+    public virtual DbSet<TrdgPinGenLogDbEntity> TrdgPinGenLogs { get; set; }
 
-    public virtual DbSet<TxnProdVer> TxnProdVers { get; set; }
+    public virtual DbSet<TxnProdVerDbEntity> TxnProdVers { get; set; }
 
-    public virtual DbSet<UserFavourite> UserFavourites { get; set; }
+    public virtual DbSet<UserFavouriteDbEntity> UserFavourites { get; set; }
 
-    public virtual DbSet<UserFavourites20130815> UserFavourites20130815s { get; set; }
+    public virtual DbSet<UserFavourites20130815DbEntity> UserFavourites20130815s { get; set; }
 
-    public virtual DbSet<UserFavourites20190920> UserFavourites20190920s { get; set; }
+    public virtual DbSet<UserFavourites20190920DbEntity> UserFavourites20190920s { get; set; }
 
-    public virtual DbSet<UserFavourites20240131> UserFavourites20240131s { get; set; }
+    public virtual DbSet<UserFavourites20240131DbEntity> UserFavourites20240131s { get; set; }
 
-    public virtual DbSet<UserFavouritesHistory> UserFavouritesHistories { get; set; }
+    public virtual DbSet<UserFavouritesHistoryDbEntity> UserFavouritesHistories { get; set; }
 
-    public virtual DbSet<UserRegistration> UserRegistrations { get; set; }
+    public virtual DbSet<UserRegistrationDbEntity> UserRegistrations { get; set; }
 
-    public virtual DbSet<UserRegistration202207211504> UserRegistration202207211504s { get; set; }
+    public virtual DbSet<UserRegistration202207211504DbEntity> UserRegistration202207211504s { get; set; }
 
-    public virtual DbSet<UserRegistrationEcm> UserRegistrationEcms { get; set; }
+    public virtual DbSet<UserRegistrationEcmDbEntity> UserRegistrationEcms { get; set; }
 
-    public virtual DbSet<UserRegistrationTest> UserRegistrationTests { get; set; }
+    public virtual DbSet<UserRegistrationTestDbEntity> UserRegistrationTests { get; set; }
 
-    public virtual DbSet<UsloginActvTime> UsloginActvTimes { get; set; }
+    public virtual DbSet<UsloginActvTimeDbEntity> UsloginActvTimes { get; set; }
 
-    public virtual DbSet<UsrAccess> UsrAccesses { get; set; }
+    public virtual DbSet<UsrAccessDbEntity> UsrAccesses { get; set; }
 
-    public virtual DbSet<UsrAccess202205171150> UsrAccess202205171150s { get; set; }
+    public virtual DbSet<UsrAccess202205171150DbEntity> UsrAccess202205171150s { get; set; }
 
-    public virtual DbSet<UsrAccess202404031545> UsrAccess202404031545s { get; set; }
+    public virtual DbSet<UsrAccess202404031545DbEntity> UsrAccess202404031545s { get; set; }
 
-    public virtual DbSet<UsrAccess202406281348> UsrAccess202406281348s { get; set; }
+    public virtual DbSet<UsrAccess202406281348DbEntity> UsrAccess202406281348s { get; set; }
 
-    public virtual DbSet<UsrAccessArchive> UsrAccessArchives { get; set; }
+    public virtual DbSet<UsrAccessArchiveDbEntity> UsrAccessArchives { get; set; }
 
-    public virtual DbSet<UsrAccessArchive202205171150> UsrAccessArchive202205171150s { get; set; }
+    public virtual DbSet<UsrAccessArchive202205171150DbEntity> UsrAccessArchive202205171150s { get; set; }
 
-    public virtual DbSet<UsrAccessArchive202404031545> UsrAccessArchive202404031545s { get; set; }
+    public virtual DbSet<UsrAccessArchive202404031545DbEntity> UsrAccessArchive202404031545s { get; set; }
 
-    public virtual DbSet<UsrAccessArchive202406281348> UsrAccessArchive202406281348s { get; set; }
+    public virtual DbSet<UsrAccessArchive202406281348DbEntity> UsrAccessArchive202406281348s { get; set; }
 
-    public virtual DbSet<UsrAccessEx> UsrAccessexes { get; set; }
+    public virtual DbSet<UsrAccessExDbEntity> UsrAccessexes { get; set; }
 
-    public virtual DbSet<UsrAccessExExtract> UsrAccessExExtracts { get; set; }
+    public virtual DbSet<UsrAccessExExtractDbEntity> UsrAccessExExtracts { get; set; }
 
-    public virtual DbSet<UsrAccessExSumm> UsrAccessExSumms { get; set; }
+    public virtual DbSet<UsrAccessExSummDbEntity> UsrAccessExSumms { get; set; }
 
-    public virtual DbSet<UsrAccessFa> UsrAccessFas { get; set; }
+    public virtual DbSet<UsrAccessFaDbEntity> UsrAccessFas { get; set; }
 
-    public virtual DbSet<UsrAccessLimit> UsrAccessLimits { get; set; }
+    public virtual DbSet<UsrAccessLimitDbEntity> UsrAccessLimits { get; set; }
 
-    public virtual DbSet<UsrAnalytic> UsrAnalytics { get; set; }
+    public virtual DbSet<UsrAnalyticDbEntity> UsrAnalytics { get; set; }
 
-    public virtual DbSet<UsrAuthLimit> UsrAuthLimits { get; set; }
+    public virtual DbSet<UsrAuthLimitDbEntity> UsrAuthLimits { get; set; }
 
-    public virtual DbSet<UsrBookmark> UsrBookmarks { get; set; }
+    public virtual DbSet<UsrBookmarkDbEntity> UsrBookmarks { get; set; }
 
-    public virtual DbSet<UsrClntList> UsrClntLists { get; set; }
+    public virtual DbSet<UsrClntListDbEntity> UsrClntLists { get; set; }
 
-    public virtual DbSet<UsrClntList20140115> UsrClntList20140115s { get; set; }
+    public virtual DbSet<UsrClntList20140115DbEntity> UsrClntList20140115s { get; set; }
 
-    public virtual DbSet<UsrClntListTest> UsrClntListTests { get; set; }
+    public virtual DbSet<UsrClntListTestDbEntity> UsrClntListTests { get; set; }
 
-    public virtual DbSet<UsrCoBrchAssign> UsrCoBrchAssigns { get; set; }
+    public virtual DbSet<UsrCoBrchAssignDbEntity> UsrCoBrchAssigns { get; set; }
 
-    public virtual DbSet<UsrDormantCtrl> UsrDormantCtrls { get; set; }
+    public virtual DbSet<UsrDormantCtrlDbEntity> UsrDormantCtrls { get; set; }
 
-    public virtual DbSet<UsrEcm2kibb> UsrEcm2kibbs { get; set; }
+    public virtual DbSet<UsrEcm2kibbDbEntity> UsrEcm2kibbs { get; set; }
 
-    public virtual DbSet<UsrEcmoney2Kibb> UsrEcmoney2Kibbs { get; set; }
+    public virtual DbSet<UsrEcmoney2KibbDbEntity> UsrEcmoney2Kibbs { get; set; }
 
-    public virtual DbSet<UsrEmailList> UsrEmailLists { get; set; }
+    public virtual DbSet<UsrEmailListDbEntity> UsrEmailLists { get; set; }
 
-    public virtual DbSet<UsrInfo> UsrInfos { get; set; }
+    public virtual DbSet<UsrInfoDbEntity> UsrInfos { get; set; }
 
-    public virtual DbSet<UsrInfo20140115> UsrInfo20140115s { get; set; }
+    public virtual DbSet<UsrInfo20140115DbEntity> UsrInfo20140115s { get; set; }
 
-    public virtual DbSet<UsrInfo20140826> UsrInfo20140826s { get; set; }
+    public virtual DbSet<UsrInfo20140826DbEntity> UsrInfo20140826s { get; set; }
 
-    public virtual DbSet<UsrInfoBak> UsrInfoBaks { get; set; }
+    public virtual DbSet<UsrInfoBakDbEntity> UsrInfoBaks { get; set; }
 
-    public virtual DbSet<UsrInfoTest> UsrInfoTests { get; set; }
+    public virtual DbSet<UsrInfoTestDbEntity> UsrInfoTests { get; set; }
 
-    public virtual DbSet<UsrInfoTest2> UsrInfoTest2s { get; set; }
+    public virtual DbSet<UsrInfoTest2DbEntity> UsrInfoTest2s { get; set; }
 
-    public virtual DbSet<UsrJwttoken> UsrJwttokens { get; set; }
+    public virtual DbSet<UsrJwttokenDbEntity> UsrJwttokens { get; set; }
 
-    public virtual DbSet<UsrKentradePlusInfo> UsrKentradePlusInfos { get; set; }
+    public virtual DbSet<UsrKentradePlusInfoDbEntity> UsrKentradePlusInfos { get; set; }
 
-    public virtual DbSet<UsrKentradePlusMonthlyReportBak20240628> UsrKentradePlusMonthlyReportBak20240628s { get; set; }
+    public virtual DbSet<UsrKentradePlusMonthlyReportBak20240628DbEntity> UsrKentradePlusMonthlyReportBak20240628s { get; set; }
 
-    public virtual DbSet<UsrKentradePlusMonthlyRpt> UsrKentradePlusMonthlyRpts { get; set; }
+    public virtual DbSet<UsrKentradePlusMonthlyRptDbEntity> UsrKentradePlusMonthlyRpts { get; set; }
 
-    public virtual DbSet<UsrLogin> UsrLogins { get; set; }
+    public virtual DbSet<UsrLoginDbEntity> UsrLogins { get; set; }
 
-    public virtual DbSet<UsrLogin202204270830> UsrLogin202204270830s { get; set; }
+    public virtual DbSet<UsrLogin202204270830DbEntity> UsrLogin202204270830s { get; set; }
 
-    public virtual DbSet<UsrLogin202205171149> UsrLogin202205171149s { get; set; }
+    public virtual DbSet<UsrLogin202205171149DbEntity> UsrLogin202205171149s { get; set; }
 
-    public virtual DbSet<UsrLogin202404031533> UsrLogin202404031533s { get; set; }
+    public virtual DbSet<UsrLogin202404031533DbEntity> UsrLogin202404031533s { get; set; }
 
-    public virtual DbSet<UsrLogin202406281340> UsrLogin202406281340s { get; set; }
+    public virtual DbSet<UsrLogin202406281340DbEntity> UsrLogin202406281340s { get; set; }
 
-    public virtual DbSet<UsrLoginActvTime> UsrLoginActvTimes { get; set; }
+    public virtual DbSet<UsrLoginActvTimeDbEntity> UsrLoginActvTimes { get; set; }
 
-    public virtual DbSet<UsrLoginActvTimeTemp> UsrLoginActvTimeTemps { get; set; }
+    public virtual DbSet<UsrLoginActvTimeTempDbEntity> UsrLoginActvTimeTemps { get; set; }
 
-    public virtual DbSet<UsrMobileDeviceId> UsrMobileDeviceIds { get; set; }
+    public virtual DbSet<UsrMobileDeviceIdDbEntity> UsrMobileDeviceIds { get; set; }
 
-    public virtual DbSet<UsrMobileDeviceId20240716> UsrMobileDeviceId20240716s { get; set; }
+    public virtual DbSet<UsrMobileDeviceId20240716DbEntity> UsrMobileDeviceId20240716s { get; set; }
 
-    public virtual DbSet<UsrMobileDeviceIdsendDtl> UsrMobileDeviceIdsendDtls { get; set; }
+    public virtual DbSet<UsrMobileDeviceIdsendDtlDbEntity> UsrMobileDeviceIdsendDtls { get; set; }
 
-    public virtual DbSet<UsrSession> UsrSessions { get; set; }
+    public virtual DbSet<UsrSessionDbEntity> UsrSessions { get; set; }
 
-    public virtual DbSet<UsrSetting> UsrSettings { get; set; }
+    public virtual DbSet<UsrSettingDbEntity> UsrSettings { get; set; }
 
-    public virtual DbSet<UsrSetting202204270831> UsrSetting202204270831s { get; set; }
+    public virtual DbSet<UsrSetting202204270831DbEntity> UsrSetting202204270831s { get; set; }
 
-    public virtual DbSet<UsrSetting202205171150> UsrSetting202205171150s { get; set; }
+    public virtual DbSet<UsrSetting202205171150DbEntity> UsrSetting202205171150s { get; set; }
 
-    public virtual DbSet<UsrSetting202311161504> UsrSetting202311161504s { get; set; }
+    public virtual DbSet<UsrSetting202311161504DbEntity> UsrSetting202311161504s { get; set; }
 
-    public virtual DbSet<UsrSetting202404031542> UsrSetting202404031542s { get; set; }
+    public virtual DbSet<UsrSetting202404031542DbEntity> UsrSetting202404031542s { get; set; }
 
-    public virtual DbSet<UsrSetting202406281346> UsrSetting202406281346s { get; set; }
+    public virtual DbSet<UsrSetting202406281346DbEntity> UsrSetting202406281346s { get; set; }
 
-    public virtual DbSet<UsrTypeAuthLimit> UsrTypeAuthLimits { get; set; }
+    public virtual DbSet<UsrTypeAuthLimitDbEntity> UsrTypeAuthLimits { get; set; }
 
-    public virtual DbSet<UsrTypeList> UsrTypeLists { get; set; }
+    public virtual DbSet<UsrTypeListDbEntity> UsrTypeLists { get; set; }
 
-    public virtual DbSet<UsrTypeProd> UsrTypeProds { get; set; }
+    public virtual DbSet<UsrTypeProdDbEntity> UsrTypeProds { get; set; }
 
-    public virtual DbSet<UsrTypeProd20130713> UsrTypeProd20130713s { get; set; }
+    public virtual DbSet<UsrTypeProd20130713DbEntity> UsrTypeProd20130713s { get; set; }
 
-    public virtual DbSet<UsrTypeProd20240405> UsrTypeProd20240405s { get; set; }
+    public virtual DbSet<UsrTypeProd20240405DbEntity> UsrTypeProd20240405s { get; set; }
 
-    public virtual DbSet<UsrTypeProd202410090945> UsrTypeProd202410090945s { get; set; }
+    public virtual DbSet<UsrTypeProd202410090945DbEntity> UsrTypeProd202410090945s { get; set; }
 
-    public virtual DbSet<UsrTypeXchg> UsrTypeXchgs { get; set; }
+    public virtual DbSet<UsrTypeXchgDbEntity> UsrTypeXchgs { get; set; }
 
-    public virtual DbSet<UsrXchg> UsrXchgs { get; set; }
+    public virtual DbSet<UsrXchgDbEntity> UsrXchgs { get; set; }
 
-    public virtual DbSet<UsrXchg202408231131> UsrXchg202408231131s { get; set; }
+    public virtual DbSet<UsrXchg202408231131DbEntity> UsrXchg202408231131s { get; set; }
 
-    public virtual DbSet<UsrXchgLog> UsrXchgLogs { get; set; }
+    public virtual DbSet<UsrXchgLogDbEntity> UsrXchgLogs { get; set; }
 
-    public virtual DbSet<UsrXchgModeChg> UsrXchgModeChgs { get; set; }
+    public virtual DbSet<UsrXchgModeChgDbEntity> UsrXchgModeChgs { get; set; }
 
-    public virtual DbSet<Usrtypeprod38> Usrtypeprod38s { get; set; }
+    public virtual DbSet<Usrtypeprod38DbEntity> Usrtypeprod38s { get; set; }
 
-    public virtual DbSet<ValRcvdByAutoPaymentResend> ValRcvdByAutoPaymentResends { get; set; }
+    public virtual DbSet<ValRcvdByAutoPaymentResendDbEntity> ValRcvdByAutoPaymentResends { get; set; }
 
-    public virtual DbSet<ValRcvdBySpupdPymtCont> ValRcvdBySpupdPymtConts { get; set; }
+    public virtual DbSet<ValRcvdBySpupdPymtContDbEntity> ValRcvdBySpupdPymtConts { get; set; }
 
-    public virtual DbSet<ValRcvdBySpupdPymtRefNo> ValRcvdBySpupdPymtRefNos { get; set; }
+    public virtual DbSet<ValRcvdBySpupdPymtRefNoDbEntity> ValRcvdBySpupdPymtRefNos { get; set; }
 
-    public virtual DbSet<ViewTest> ViewTests { get; set; }
+    public virtual DbSet<ViewTestDbEntity> ViewTests { get; set; }
 
-    public virtual DbSet<VwAccContDtl> VwAccContDtls { get; set; }
+    public virtual DbSet<VwAccContDtlDbEntity> VwAccContDtls { get; set; }
 
-    public virtual DbSet<VwClientInfo> VwClientInfos { get; set; }
+    public virtual DbSet<VwClientInfoDbEntity> VwClientInfos { get; set; }
 
-    public virtual DbSet<VwClientList> VwClientLists { get; set; }
+    public virtual DbSet<VwClientListDbEntity> VwClientLists { get; set; }
 
-    public virtual DbSet<VwClientMtdturnover> VwClientMtdturnovers { get; set; }
+    public virtual DbSet<VwClientMtdturnoverDbEntity> VwClientMtdturnovers { get; set; }
 
-    public virtual DbSet<VwClientMtdturnoverChart> VwClientMtdturnoverCharts { get; set; }
+    public virtual DbSet<VwClientMtdturnoverChartDbEntity> VwClientMtdturnoverCharts { get; set; }
 
-    public virtual DbSet<VwClientOsdueContraGain> VwClientOsdueContraGains { get; set; }
+    public virtual DbSet<VwClientOsdueContraGainDbEntity> VwClientOsdueContraGains { get; set; }
 
-    public virtual DbSet<VwClientOsdueContraLoss> VwClientOsdueContraLosses { get; set; }
+    public virtual DbSet<VwClientOsdueContraLossDbEntity> VwClientOsdueContraLosses { get; set; }
 
-    public virtual DbSet<VwClientOsdueCreditInterest> VwClientOsdueCreditInterests { get; set; }
+    public virtual DbSet<VwClientOsdueCreditInterestDbEntity> VwClientOsdueCreditInterests { get; set; }
 
-    public virtual DbSet<VwClientOsdueDebitInterest> VwClientOsdueDebitInterests { get; set; }
+    public virtual DbSet<VwClientOsdueDebitInterestDbEntity> VwClientOsdueDebitInterests { get; set; }
 
-    public virtual DbSet<VwClientOsduePurchase> VwClientOsduePurchases { get; set; }
+    public virtual DbSet<VwClientOsduePurchaseDbEntity> VwClientOsduePurchases { get; set; }
 
-    public virtual DbSet<VwClientOsdueSale> VwClientOsdueSales { get; set; }
+    public virtual DbSet<VwClientOsdueSaleDbEntity> VwClientOsdueSales { get; set; }
 
-    public virtual DbSet<VwClientOsdueSetoffGain> VwClientOsdueSetoffGains { get; set; }
+    public virtual DbSet<VwClientOsdueSetoffGainDbEntity> VwClientOsdueSetoffGains { get; set; }
 
-    public virtual DbSet<VwClientOsdueSetoffLoss> VwClientOsdueSetoffLosses { get; set; }
+    public virtual DbSet<VwClientOsdueSetoffLossDbEntity> VwClientOsdueSetoffLosses { get; set; }
 
-    public virtual DbSet<VwClientOsoverDueContraGain> VwClientOsoverDueContraGains { get; set; }
+    public virtual DbSet<VwClientOsoverDueContraGainDbEntity> VwClientOsoverDueContraGains { get; set; }
 
-    public virtual DbSet<VwClientOsoverDueContraLoss> VwClientOsoverDueContraLosses { get; set; }
+    public virtual DbSet<VwClientOsoverDueContraLossDbEntity> VwClientOsoverDueContraLosses { get; set; }
 
-    public virtual DbSet<VwClientOsoverDuePurchase> VwClientOsoverDuePurchases { get; set; }
+    public virtual DbSet<VwClientOsoverDuePurchaseDbEntity> VwClientOsoverDuePurchases { get; set; }
 
-    public virtual DbSet<VwClientOsoverDueSale> VwClientOsoverDueSales { get; set; }
+    public virtual DbSet<VwClientOsoverDueSaleDbEntity> VwClientOsoverDueSales { get; set; }
 
-    public virtual DbSet<VwClientOsoverdueCreditInterest> VwClientOsoverdueCreditInterests { get; set; }
+    public virtual DbSet<VwClientOsoverdueCreditInterestDbEntity> VwClientOsoverdueCreditInterests { get; set; }
 
-    public virtual DbSet<VwClientOsoverdueDebitInterest> VwClientOsoverdueDebitInterests { get; set; }
+    public virtual DbSet<VwClientOsoverdueDebitInterestDbEntity> VwClientOsoverdueDebitInterests { get; set; }
 
-    public virtual DbSet<VwClientOsoverdueSetoffGain> VwClientOsoverdueSetoffGains { get; set; }
+    public virtual DbSet<VwClientOsoverdueSetoffGainDbEntity> VwClientOsoverdueSetoffGains { get; set; }
 
-    public virtual DbSet<VwClientOsoverdueSetoffLoss> VwClientOsoverdueSetoffLosses { get; set; }
+    public virtual DbSet<VwClientOsoverdueSetoffLossDbEntity> VwClientOsoverdueSetoffLosses { get; set; }
 
-    public virtual DbSet<VwClientOsundueContraGain> VwClientOsundueContraGains { get; set; }
+    public virtual DbSet<VwClientOsundueContraGainDbEntity> VwClientOsundueContraGains { get; set; }
 
-    public virtual DbSet<VwClientOsundueContraLoss> VwClientOsundueContraLosses { get; set; }
+    public virtual DbSet<VwClientOsundueContraLossDbEntity> VwClientOsundueContraLosses { get; set; }
 
-    public virtual DbSet<VwClientOsundueCreditInterest> VwClientOsundueCreditInterests { get; set; }
+    public virtual DbSet<VwClientOsundueCreditInterestDbEntity> VwClientOsundueCreditInterests { get; set; }
 
-    public virtual DbSet<VwClientOsundueDebitInterest> VwClientOsundueDebitInterests { get; set; }
+    public virtual DbSet<VwClientOsundueDebitInterestDbEntity> VwClientOsundueDebitInterests { get; set; }
 
-    public virtual DbSet<VwClientOsunduePurchase> VwClientOsunduePurchases { get; set; }
+    public virtual DbSet<VwClientOsunduePurchaseDbEntity> VwClientOsunduePurchases { get; set; }
 
-    public virtual DbSet<VwClientOsundueSale> VwClientOsundueSales { get; set; }
+    public virtual DbSet<VwClientOsundueSaleDbEntity> VwClientOsundueSales { get; set; }
 
-    public virtual DbSet<VwClientOsundueSetoffGain> VwClientOsundueSetoffGains { get; set; }
+    public virtual DbSet<VwClientOsundueSetoffGainDbEntity> VwClientOsundueSetoffGains { get; set; }
 
-    public virtual DbSet<VwClientOsundueSetoffLoss> VwClientOsundueSetoffLosses { get; set; }
+    public virtual DbSet<VwClientOsundueSetoffLossDbEntity> VwClientOsundueSetoffLosses { get; set; }
 
-    public virtual DbSet<VwClientYtdturnover> VwClientYtdturnovers { get; set; }
+    public virtual DbSet<VwClientYtdturnoverDbEntity> VwClientYtdturnovers { get; set; }
 
-    public virtual DbSet<VwClientshareinfo> VwClientshareinfos { get; set; }
+    public virtual DbSet<VwClientshareinfoDbEntity> VwClientshareinfos { get; set; }
 
-    public virtual DbSet<VwClntChgBrchMigrateTableList> VwClntChgBrchMigrateTableLists { get; set; }
+    public virtual DbSet<VwClntChgBrchMigrateTableListDbEntity> VwClntChgBrchMigrateTableLists { get; set; }
 
-    public virtual DbSet<VwClntList> VwClntLists { get; set; }
+    public virtual DbSet<VwClntListDbEntity> VwClntLists { get; set; }
 
-    public virtual DbSet<VwEpContRemainingO> VwEpContRemainingOs { get; set; }
+    public virtual DbSet<VwEpContRemainingODbEntity> VwEpContRemainingOs { get; set; }
 
-    public virtual DbSet<VwMstStk> VwMstStks { get; set; }
+    public virtual DbSet<VwMstStkDbEntity> VwMstStks { get; set; }
 
-    public virtual DbSet<VwNotifierList> VwNotifierLists { get; set; }
+    public virtual DbSet<VwNotifierListDbEntity> VwNotifierLists { get; set; }
 
-    public virtual DbSet<VwOrderException> VwOrderExceptions { get; set; }
+    public virtual DbSet<VwOrderExceptionDbEntity> VwOrderExceptions { get; set; }
 
-    public virtual DbSet<VwOrderPlaced> VwOrderPlaceds { get; set; }
+    public virtual DbSet<VwOrderPlacedDbEntity> VwOrderPlaceds { get; set; }
 
-    public virtual DbSet<VwOrderPlacedEco> VwOrderPlacedEcos { get; set; }
+    public virtual DbSet<VwOrderPlacedEcoDbEntity> VwOrderPlacedEcos { get; set; }
 
-    public virtual DbSet<VwOrderStatus> VwOrderStatuses { get; set; }
+    public virtual DbSet<VwOrderStatusDbEntity> VwOrderStatuses { get; set; }
 
-    public virtual DbSet<VwOrderStatusEco> VwOrderStatusEcos { get; set; }
+    public virtual DbSet<VwOrderStatusEcoDbEntity> VwOrderStatusEcos { get; set; }
 
-    public virtual DbSet<VwSiteMenu> VwSiteMenus { get; set; }
+    public virtual DbSet<VwSiteMenuDbEntity> VwSiteMenus { get; set; }
 
-    public virtual DbSet<VwSiteMenuGrp> VwSiteMenuGrps { get; set; }
+    public virtual DbSet<VwSiteMenuGrpDbEntity> VwSiteMenuGrps { get; set; }
 
-    public virtual DbSet<VwSuperiorList> VwSuperiorLists { get; set; }
+    public virtual DbSet<VwSuperiorListDbEntity> VwSuperiorLists { get; set; }
 
-    public virtual DbSet<VwTaskBemgr> VwTaskBemgrs { get; set; }
+    public virtual DbSet<VwTaskBemgrDbEntity> VwTaskBemgrs { get; set; }
 
-    public virtual DbSet<VwTran> VwTrans { get; set; }
+    public virtual DbSet<VwTranDbEntity> VwTrans { get; set; }
 
-    public virtual DbSet<VwTransHistory> VwTransHistories { get; set; }
+    public virtual DbSet<VwTransHistoryDbEntity> VwTransHistories { get; set; }
 
-    public virtual DbSet<VwTransactionsRealized> VwTransactionsRealizeds { get; set; }
+    public virtual DbSet<VwTransactionsRealizedDbEntity> VwTransactionsRealizeds { get; set; }
 
-    public virtual DbSet<VwUserMtdturnover> VwUserMtdturnovers { get; set; }
+    public virtual DbSet<VwUserMtdturnoverDbEntity> VwUserMtdturnovers { get; set; }
 
-    public virtual DbSet<VwUserMtdturnoverChart> VwUserMtdturnoverCharts { get; set; }
+    public virtual DbSet<VwUserMtdturnoverChartDbEntity> VwUserMtdturnoverCharts { get; set; }
 
-    public virtual DbSet<VwUserOsdueContraGain> VwUserOsdueContraGains { get; set; }
+    public virtual DbSet<VwUserOsdueContraGainDbEntity> VwUserOsdueContraGains { get; set; }
 
-    public virtual DbSet<VwUserOsdueContraLoss> VwUserOsdueContraLosses { get; set; }
+    public virtual DbSet<VwUserOsdueContraLossDbEntity> VwUserOsdueContraLosses { get; set; }
 
-    public virtual DbSet<VwUserOsdueCreditInterest> VwUserOsdueCreditInterests { get; set; }
+    public virtual DbSet<VwUserOsdueCreditInterestDbEntity> VwUserOsdueCreditInterests { get; set; }
 
-    public virtual DbSet<VwUserOsdueDebitInterest> VwUserOsdueDebitInterests { get; set; }
+    public virtual DbSet<VwUserOsdueDebitInterestDbEntity> VwUserOsdueDebitInterests { get; set; }
 
-    public virtual DbSet<VwUserOsduePurchase> VwUserOsduePurchases { get; set; }
+    public virtual DbSet<VwUserOsduePurchaseDbEntity> VwUserOsduePurchases { get; set; }
 
-    public virtual DbSet<VwUserOsdueSale> VwUserOsdueSales { get; set; }
+    public virtual DbSet<VwUserOsdueSaleDbEntity> VwUserOsdueSales { get; set; }
 
-    public virtual DbSet<VwUserOsdueSetOffGain> VwUserOsdueSetOffGains { get; set; }
+    public virtual DbSet<VwUserOsdueSetOffGainDbEntity> VwUserOsdueSetOffGains { get; set; }
 
-    public virtual DbSet<VwUserOsdueSetOffLoss> VwUserOsdueSetOffLosses { get; set; }
+    public virtual DbSet<VwUserOsdueSetOffLossDbEntity> VwUserOsdueSetOffLosses { get; set; }
 
-    public virtual DbSet<VwUserOsoverDueContraGain> VwUserOsoverDueContraGains { get; set; }
+    public virtual DbSet<VwUserOsoverDueContraGainDbEntity> VwUserOsoverDueContraGains { get; set; }
 
-    public virtual DbSet<VwUserOsoverDueContraLoss> VwUserOsoverDueContraLosses { get; set; }
+    public virtual DbSet<VwUserOsoverDueContraLossDbEntity> VwUserOsoverDueContraLosses { get; set; }
 
-    public virtual DbSet<VwUserOsoverDueCreditInterest> VwUserOsoverDueCreditInterests { get; set; }
+    public virtual DbSet<VwUserOsoverDueCreditInterestDbEntity> VwUserOsoverDueCreditInterests { get; set; }
 
-    public virtual DbSet<VwUserOsoverDueDebitInterest> VwUserOsoverDueDebitInterests { get; set; }
+    public virtual DbSet<VwUserOsoverDueDebitInterestDbEntity> VwUserOsoverDueDebitInterests { get; set; }
 
-    public virtual DbSet<VwUserOsoverDuePurchase> VwUserOsoverDuePurchases { get; set; }
+    public virtual DbSet<VwUserOsoverDuePurchaseDbEntity> VwUserOsoverDuePurchases { get; set; }
 
-    public virtual DbSet<VwUserOsoverDueSetOffGain> VwUserOsoverDueSetOffGains { get; set; }
+    public virtual DbSet<VwUserOsoverDueSetOffGainDbEntity> VwUserOsoverDueSetOffGains { get; set; }
 
-    public virtual DbSet<VwUserOsoverDueSetOffLoss> VwUserOsoverDueSetOffLosses { get; set; }
+    public virtual DbSet<VwUserOsoverDueSetOffLossDbEntity> VwUserOsoverDueSetOffLosses { get; set; }
 
-    public virtual DbSet<VwUserOsoverdueSale> VwUserOsoverdueSales { get; set; }
+    public virtual DbSet<VwUserOsoverdueSaleDbEntity> VwUserOsoverdueSales { get; set; }
 
-    public virtual DbSet<VwUserOsunDueCreditInterest> VwUserOsunDueCreditInterests { get; set; }
+    public virtual DbSet<VwUserOsunDueCreditInterestDbEntity> VwUserOsunDueCreditInterests { get; set; }
 
-    public virtual DbSet<VwUserOsunDueDebitInterest> VwUserOsunDueDebitInterests { get; set; }
+    public virtual DbSet<VwUserOsunDueDebitInterestDbEntity> VwUserOsunDueDebitInterests { get; set; }
 
-    public virtual DbSet<VwUserOsunDueSetOffGain> VwUserOsunDueSetOffGains { get; set; }
+    public virtual DbSet<VwUserOsunDueSetOffGainDbEntity> VwUserOsunDueSetOffGains { get; set; }
 
-    public virtual DbSet<VwUserOsunDueSetOffLoss> VwUserOsunDueSetOffLosses { get; set; }
+    public virtual DbSet<VwUserOsunDueSetOffLossDbEntity> VwUserOsunDueSetOffLosses { get; set; }
 
-    public virtual DbSet<VwUserOsundueContraGain> VwUserOsundueContraGains { get; set; }
+    public virtual DbSet<VwUserOsundueContraGainDbEntity> VwUserOsundueContraGains { get; set; }
 
-    public virtual DbSet<VwUserOsundueContraLoss> VwUserOsundueContraLosses { get; set; }
+    public virtual DbSet<VwUserOsundueContraLossDbEntity> VwUserOsundueContraLosses { get; set; }
 
-    public virtual DbSet<VwUserOsunduePurchase> VwUserOsunduePurchases { get; set; }
+    public virtual DbSet<VwUserOsunduePurchaseDbEntity> VwUserOsunduePurchases { get; set; }
 
-    public virtual DbSet<VwUserOsundueSale> VwUserOsundueSales { get; set; }
+    public virtual DbSet<VwUserOsundueSaleDbEntity> VwUserOsundueSales { get; set; }
 
-    public virtual DbSet<VwUserYtdturnover> VwUserYtdturnovers { get; set; }
+    public virtual DbSet<VwUserYtdturnoverDbEntity> VwUserYtdturnovers { get; set; }
 
-    public virtual DbSet<VwUsrAccess> VwUsrAccesses { get; set; }
+    public virtual DbSet<VwUsrAccessDbEntity> VwUsrAccesses { get; set; }
 
-    public virtual DbSet<VwUsrInfo> VwUsrInfos { get; set; }
+    public virtual DbSet<VwUsrInfoDbEntity> VwUsrInfos { get; set; }
 
-    public virtual DbSet<VwUsrTypeProd> VwUsrTypeProds { get; set; }
+    public virtual DbSet<VwUsrTypeProdDbEntity> VwUsrTypeProds { get; set; }
 
-    public virtual DbSet<WinscoreSetting> WinscoreSettings { get; set; }
+    public virtual DbSet<WinscoreSettingDbEntity> WinscoreSettings { get; set; }
 
-    public virtual DbSet<XchgEarmark> XchgEarmarks { get; set; }
+    public virtual DbSet<XchgEarmarkDbEntity> XchgEarmarks { get; set; }
 
-    public virtual DbSet<XchgTradingHour> XchgTradingHours { get; set; }
+    public virtual DbSet<XchgTradingHourDbEntity> XchgTradingHours { get; set; }
 
-    public virtual DbSet<XlogAccTrustSummAutoReleaseEarmark> XlogAccTrustSummAutoReleaseEarmarks { get; set; }
+    public virtual DbSet<XlogAccTrustSummAutoReleaseEarmarkDbEntity> XlogAccTrustSummAutoReleaseEarmarks { get; set; }
 
-    public virtual DbSet<XlogAllowCounterControl> XlogAllowCounterControls { get; set; }
+    public virtual DbSet<XlogAllowCounterControlDbEntity> XlogAllowCounterControls { get; set; }
 
-    public virtual DbSet<XlogAnnouncement> XlogAnnouncements { get; set; }
+    public virtual DbSet<XlogAnnouncementDbEntity> XlogAnnouncements { get; set; }
 
-    public virtual DbSet<XlogAnnouncementsControl> XlogAnnouncementsControls { get; set; }
+    public virtual DbSet<XlogAnnouncementsControlDbEntity> XlogAnnouncementsControls { get; set; }
 
-    public virtual DbSet<XlogAnnouncementsControlUsr> XlogAnnouncementsControlUsrs { get; set; }
+    public virtual DbSet<XlogAnnouncementsControlUsrDbEntity> XlogAnnouncementsControlUsrs { get; set; }
 
-    public virtual DbSet<XlogBlockCounterControl> XlogBlockCounterControls { get; set; }
+    public virtual DbSet<XlogBlockCounterControlDbEntity> XlogBlockCounterControls { get; set; }
 
-    public virtual DbSet<XlogBrchExpsLimit6Sr> XlogBrchExpsLimit6Srs { get; set; }
+    public virtual DbSet<XlogBrchExpsLimit6SrDbEntity> XlogBrchExpsLimit6Srs { get; set; }
 
-    public virtual DbSet<XlogBrchExpsLimit6SrsHistory> XlogBrchExpsLimit6SrsHistories { get; set; }
+    public virtual DbSet<XlogBrchExpsLimit6SrsHistoryDbEntity> XlogBrchExpsLimit6SrsHistories { get; set; }
 
-    public virtual DbSet<XlogBrchExpsLimitExcp> XlogBrchExpsLimitExcps { get; set; }
+    public virtual DbSet<XlogBrchExpsLimitExcpDbEntity> XlogBrchExpsLimitExcps { get; set; }
 
-    public virtual DbSet<XlogBrchPrevDayOrd6Sr> XlogBrchPrevDayOrd6Srs { get; set; }
+    public virtual DbSet<XlogBrchPrevDayOrd6SrDbEntity> XlogBrchPrevDayOrd6Srs { get; set; }
 
-    public virtual DbSet<XlogBrchPrevDayOrd6SrsHistory> XlogBrchPrevDayOrd6SrsHistories { get; set; }
+    public virtual DbSet<XlogBrchPrevDayOrd6SrsHistoryDbEntity> XlogBrchPrevDayOrd6SrsHistories { get; set; }
 
-    public virtual DbSet<XlogBrchPrevDayOrdExcp> XlogBrchPrevDayOrdExcps { get; set; }
+    public virtual DbSet<XlogBrchPrevDayOrdExcpDbEntity> XlogBrchPrevDayOrdExcps { get; set; }
 
-    public virtual DbSet<XlogBrkExpsLimit6Sr> XlogBrkExpsLimit6Srs { get; set; }
+    public virtual DbSet<XlogBrkExpsLimit6SrDbEntity> XlogBrkExpsLimit6Srs { get; set; }
 
-    public virtual DbSet<XlogBrkExpsLimit6SrsHistory> XlogBrkExpsLimit6SrsHistories { get; set; }
+    public virtual DbSet<XlogBrkExpsLimit6SrsHistoryDbEntity> XlogBrkExpsLimit6SrsHistories { get; set; }
 
-    public virtual DbSet<XlogBrkExpsLimitExcp> XlogBrkExpsLimitExcps { get; set; }
+    public virtual DbSet<XlogBrkExpsLimitExcpDbEntity> XlogBrkExpsLimitExcps { get; set; }
 
-    public virtual DbSet<XlogBrkPrevDayOrd6Sr> XlogBrkPrevDayOrd6Srs { get; set; }
+    public virtual DbSet<XlogBrkPrevDayOrd6SrDbEntity> XlogBrkPrevDayOrd6Srs { get; set; }
 
-    public virtual DbSet<XlogBrkPrevDayOrd6SrsHistory> XlogBrkPrevDayOrd6SrsHistories { get; set; }
+    public virtual DbSet<XlogBrkPrevDayOrd6SrsHistoryDbEntity> XlogBrkPrevDayOrd6SrsHistories { get; set; }
 
-    public virtual DbSet<XlogBrkPrevDayOrdExcp> XlogBrkPrevDayOrdExcps { get; set; }
+    public virtual DbSet<XlogBrkPrevDayOrdExcpDbEntity> XlogBrkPrevDayOrdExcps { get; set; }
 
-    public virtual DbSet<XlogBrkPrevDayOrderExcp> XlogBrkPrevDayOrderExcps { get; set; }
+    public virtual DbSet<XlogBrkPrevDayOrderExcpDbEntity> XlogBrkPrevDayOrderExcps { get; set; }
 
-    public virtual DbSet<XlogBroadcastMsgMaint> XlogBroadcastMsgMaints { get; set; }
+    public virtual DbSet<XlogBroadcastMsgMaintDbEntity> XlogBroadcastMsgMaints { get; set; }
 
-    public virtual DbSet<XlogBuyingInDefaulter> XlogBuyingInDefaulters { get; set; }
+    public virtual DbSet<XlogBuyingInDefaulterDbEntity> XlogBuyingInDefaulters { get; set; }
 
-    public virtual DbSet<XlogClientTurnOver> XlogClientTurnOvers { get; set; }
+    public virtual DbSet<XlogClientTurnOverDbEntity> XlogClientTurnOvers { get; set; }
 
-    public virtual DbSet<XlogClntAcct> XlogClntAccts { get; set; }
+    public virtual DbSet<XlogClntAcctDbEntity> XlogClntAccts { get; set; }
 
-    public virtual DbSet<XlogClntAcctArchive> XlogClntAcctArchives { get; set; }
+    public virtual DbSet<XlogClntAcctArchiveDbEntity> XlogClntAcctArchives { get; set; }
 
-    public virtual DbSet<XlogClntBankAccInfo> XlogClntBankAccInfos { get; set; }
+    public virtual DbSet<XlogClntBankAccInfoDbEntity> XlogClntBankAccInfos { get; set; }
 
-    public virtual DbSet<XlogClntDefList> XlogClntDefLists { get; set; }
+    public virtual DbSet<XlogClntDefListDbEntity> XlogClntDefLists { get; set; }
 
-    public virtual DbSet<XlogClntDeletion6Sr> XlogClntDeletion6Srs { get; set; }
+    public virtual DbSet<XlogClntDeletion6SrDbEntity> XlogClntDeletion6Srs { get; set; }
 
-    public virtual DbSet<XlogClntDeletion6SrsHistory> XlogClntDeletion6SrsHistories { get; set; }
+    public virtual DbSet<XlogClntDeletion6SrsHistoryDbEntity> XlogClntDeletion6SrsHistories { get; set; }
 
-    public virtual DbSet<XlogClntDeletionExcp> XlogClntDeletionExcps { get; set; }
+    public virtual DbSet<XlogClntDeletionExcpDbEntity> XlogClntDeletionExcps { get; set; }
 
-    public virtual DbSet<XlogClntFslist> XlogClntFslists { get; set; }
+    public virtual DbSet<XlogClntFslistDbEntity> XlogClntFslists { get; set; }
 
-    public virtual DbSet<XlogClntInfo> XlogClntInfos { get; set; }
+    public virtual DbSet<XlogClntInfoDbEntity> XlogClntInfos { get; set; }
 
-    public virtual DbSet<XlogClntInfo6Sr> XlogClntInfo6Srs { get; set; }
+    public virtual DbSet<XlogClntInfo6SrDbEntity> XlogClntInfo6Srs { get; set; }
 
-    public virtual DbSet<XlogClntInfo6SrsHistory> XlogClntInfo6SrsHistories { get; set; }
+    public virtual DbSet<XlogClntInfo6SrsHistoryDbEntity> XlogClntInfo6SrsHistories { get; set; }
 
-    public virtual DbSet<XlogClntInfoExcp> XlogClntInfoExcps { get; set; }
+    public virtual DbSet<XlogClntInfoExcpDbEntity> XlogClntInfoExcps { get; set; }
 
-    public virtual DbSet<XlogClntInfoExcpArchive> XlogClntInfoExcpArchives { get; set; }
+    public virtual DbSet<XlogClntInfoExcpArchiveDbEntity> XlogClntInfoExcpArchives { get; set; }
 
-    public virtual DbSet<XlogClntLimit6Sr> XlogClntLimit6Srs { get; set; }
+    public virtual DbSet<XlogClntLimit6SrDbEntity> XlogClntLimit6Srs { get; set; }
 
-    public virtual DbSet<XlogClntLimit6SrsHistory> XlogClntLimit6SrsHistories { get; set; }
+    public virtual DbSet<XlogClntLimit6SrsHistoryDbEntity> XlogClntLimit6SrsHistories { get; set; }
 
-    public virtual DbSet<XlogClntLimitExcp> XlogClntLimitExcps { get; set; }
+    public virtual DbSet<XlogClntLimitExcpDbEntity> XlogClntLimitExcps { get; set; }
 
-    public virtual DbSet<XlogClntLimitExcpArchive> XlogClntLimitExcpArchives { get; set; }
+    public virtual DbSet<XlogClntLimitExcpArchiveDbEntity> XlogClntLimitExcpArchives { get; set; }
 
-    public virtual DbSet<XlogClntPrevDayOrd6Sr> XlogClntPrevDayOrd6Srs { get; set; }
+    public virtual DbSet<XlogClntPrevDayOrd6SrDbEntity> XlogClntPrevDayOrd6Srs { get; set; }
 
-    public virtual DbSet<XlogClntPrevDayOrd6SrsHistory> XlogClntPrevDayOrd6SrsHistories { get; set; }
+    public virtual DbSet<XlogClntPrevDayOrd6SrsHistoryDbEntity> XlogClntPrevDayOrd6SrsHistories { get; set; }
 
-    public virtual DbSet<XlogClntPrevDayOrdExcp> XlogClntPrevDayOrdExcps { get; set; }
+    public virtual DbSet<XlogClntPrevDayOrdExcpDbEntity> XlogClntPrevDayOrdExcps { get; set; }
 
-    public virtual DbSet<XlogClntSusp6Sr> XlogClntSusp6Srs { get; set; }
+    public virtual DbSet<XlogClntSusp6SrDbEntity> XlogClntSusp6Srs { get; set; }
 
-    public virtual DbSet<XlogClntSusp6SrsHistory> XlogClntSusp6SrsHistories { get; set; }
+    public virtual DbSet<XlogClntSusp6SrsHistoryDbEntity> XlogClntSusp6SrsHistories { get; set; }
 
-    public virtual DbSet<XlogClntSuspExcp> XlogClntSuspExcps { get; set; }
+    public virtual DbSet<XlogClntSuspExcpDbEntity> XlogClntSuspExcps { get; set; }
 
-    public virtual DbSet<XlogClntXchg> XlogClntXchgs { get; set; }
+    public virtual DbSet<XlogClntXchgDbEntity> XlogClntXchgs { get; set; }
 
-    public virtual DbSet<XlogContraDetail> XlogContraDetails { get; set; }
+    public virtual DbSet<XlogContraDetailDbEntity> XlogContraDetails { get; set; }
 
-    public virtual DbSet<XlogContraSetOff> XlogContraSetOffs { get; set; }
+    public virtual DbSet<XlogContraSetOffDbEntity> XlogContraSetOffs { get; set; }
 
-    public virtual DbSet<XlogContraSummary> XlogContraSummaries { get; set; }
+    public virtual DbSet<XlogContraSummaryDbEntity> XlogContraSummaries { get; set; }
 
-    public virtual DbSet<XlogContractSummary> XlogContractSummaries { get; set; }
+    public virtual DbSet<XlogContractSummaryDbEntity> XlogContractSummaries { get; set; }
 
-    public virtual DbSet<XlogDlrExpsLimit6Sr> XlogDlrExpsLimit6Srs { get; set; }
+    public virtual DbSet<XlogDlrExpsLimit6SrDbEntity> XlogDlrExpsLimit6Srs { get; set; }
 
-    public virtual DbSet<XlogDlrExpsLimit6SrsHistory> XlogDlrExpsLimit6SrsHistories { get; set; }
+    public virtual DbSet<XlogDlrExpsLimit6SrsHistoryDbEntity> XlogDlrExpsLimit6SrsHistories { get; set; }
 
-    public virtual DbSet<XlogDlrExpsLimitExcp> XlogDlrExpsLimitExcps { get; set; }
+    public virtual DbSet<XlogDlrExpsLimitExcpDbEntity> XlogDlrExpsLimitExcps { get; set; }
 
-    public virtual DbSet<XlogDlrExpsLimitExcpArchive> XlogDlrExpsLimitExcpArchives { get; set; }
+    public virtual DbSet<XlogDlrExpsLimitExcpArchiveDbEntity> XlogDlrExpsLimitExcpArchives { get; set; }
 
-    public virtual DbSet<XlogDlrPrevDayOrd6Sr> XlogDlrPrevDayOrd6Srs { get; set; }
+    public virtual DbSet<XlogDlrPrevDayOrd6SrDbEntity> XlogDlrPrevDayOrd6Srs { get; set; }
 
-    public virtual DbSet<XlogDlrPrevDayOrd6SrsHistory> XlogDlrPrevDayOrd6SrsHistories { get; set; }
+    public virtual DbSet<XlogDlrPrevDayOrd6SrsHistoryDbEntity> XlogDlrPrevDayOrd6SrsHistories { get; set; }
 
-    public virtual DbSet<XlogDlrPrevDayOrdExcp> XlogDlrPrevDayOrdExcps { get; set; }
+    public virtual DbSet<XlogDlrPrevDayOrdExcpDbEntity> XlogDlrPrevDayOrdExcps { get; set; }
 
-    public virtual DbSet<XlogDlrReassign6Sr> XlogDlrReassign6Srs { get; set; }
+    public virtual DbSet<XlogDlrReassign6SrDbEntity> XlogDlrReassign6Srs { get; set; }
 
-    public virtual DbSet<XlogDlrReassign6SrsHistory> XlogDlrReassign6SrsHistories { get; set; }
+    public virtual DbSet<XlogDlrReassign6SrsHistoryDbEntity> XlogDlrReassign6SrsHistories { get; set; }
 
-    public virtual DbSet<XlogDlrReassignExcp> XlogDlrReassignExcps { get; set; }
+    public virtual DbSet<XlogDlrReassignExcpDbEntity> XlogDlrReassignExcps { get; set; }
 
-    public virtual DbSet<XlogDlrSusp6Sr> XlogDlrSusp6Srs { get; set; }
+    public virtual DbSet<XlogDlrSusp6SrDbEntity> XlogDlrSusp6Srs { get; set; }
 
-    public virtual DbSet<XlogDlrSusp6SrsHistory> XlogDlrSusp6SrsHistories { get; set; }
+    public virtual DbSet<XlogDlrSusp6SrsHistoryDbEntity> XlogDlrSusp6SrsHistories { get; set; }
 
-    public virtual DbSet<XlogDlrSuspExcp> XlogDlrSuspExcps { get; set; }
+    public virtual DbSet<XlogDlrSuspExcpDbEntity> XlogDlrSuspExcps { get; set; }
 
-    public virtual DbSet<XlogEcosmarketDepthMaint> XlogEcosmarketDepthMaints { get; set; }
+    public virtual DbSet<XlogEcosmarketDepthMaintDbEntity> XlogEcosmarketDepthMaints { get; set; }
 
-    public virtual DbSet<XlogEndDayStartTask> XlogEndDayStartTasks { get; set; }
+    public virtual DbSet<XlogEndDayStartTaskDbEntity> XlogEndDayStartTasks { get; set; }
 
-    public virtual DbSet<XlogEndDayTask> XlogEndDayTasks { get; set; }
+    public virtual DbSet<XlogEndDayTaskDbEntity> XlogEndDayTasks { get; set; }
 
-    public virtual DbSet<XlogEpAccountSummaryTrust> XlogEpAccountSummaryTrusts { get; set; }
+    public virtual DbSet<XlogEpAccountSummaryTrustDbEntity> XlogEpAccountSummaryTrusts { get; set; }
 
-    public virtual DbSet<XlogEpAccountSummaryTrust202403011751> XlogEpAccountSummaryTrust202403011751s { get; set; }
+    public virtual DbSet<XlogEpAccountSummaryTrust202403011751DbEntity> XlogEpAccountSummaryTrust202403011751s { get; set; }
 
-    public virtual DbSet<XlogEpPaymentContract> XlogEpPaymentContracts { get; set; }
+    public virtual DbSet<XlogEpPaymentContractDbEntity> XlogEpPaymentContracts { get; set; }
 
-    public virtual DbSet<XlogEpayment> XlogEpayments { get; set; }
+    public virtual DbSet<XlogEpaymentDbEntity> XlogEpayments { get; set; }
 
-    public virtual DbSet<XlogFpxresponse> XlogFpxresponses { get; set; }
+    public virtual DbSet<XlogFpxresponseDbEntity> XlogFpxresponses { get; set; }
 
-    public virtual DbSet<XlogGtcexpiryPeriod> XlogGtcexpiryPeriods { get; set; }
+    public virtual DbSet<XlogGtcexpiryPeriodDbEntity> XlogGtcexpiryPeriods { get; set; }
 
-    public virtual DbSet<XlogItrFileTrnx> XlogItrFileTrnxes { get; set; }
+    public virtual DbSet<XlogItrFileTrnxDbEntity> XlogItrFileTrnxes { get; set; }
 
-    public virtual DbSet<XlogLimitInfo> XlogLimitInfos { get; set; }
+    public virtual DbSet<XlogLimitInfoDbEntity> XlogLimitInfos { get; set; }
 
-    public virtual DbSet<XlogMarketDepthMaint> XlogMarketDepthMaints { get; set; }
+    public virtual DbSet<XlogMarketDepthMaintDbEntity> XlogMarketDepthMaints { get; set; }
 
-    public virtual DbSet<XlogMiscSetOff> XlogMiscSetOffs { get; set; }
+    public virtual DbSet<XlogMiscSetOffDbEntity> XlogMiscSetOffs { get; set; }
 
-    public virtual DbSet<XlogMstBrk> XlogMstBrks { get; set; }
+    public virtual DbSet<XlogMstBrkDbEntity> XlogMstBrks { get; set; }
 
-    public virtual DbSet<XlogMstClntExp> XlogMstClntExps { get; set; }
+    public virtual DbSet<XlogMstClntExpDbEntity> XlogMstClntExps { get; set; }
 
-    public virtual DbSet<XlogMstClntExpsArchive> XlogMstClntExpsArchives { get; set; }
+    public virtual DbSet<XlogMstClntExpsArchiveDbEntity> XlogMstClntExpsArchives { get; set; }
 
-    public virtual DbSet<XlogMstClntTradeSett> XlogMstClntTradeSetts { get; set; }
+    public virtual DbSet<XlogMstClntTradeSettDbEntity> XlogMstClntTradeSetts { get; set; }
 
-    public virtual DbSet<XlogMstClntTradeSettArchive> XlogMstClntTradeSettArchives { get; set; }
+    public virtual DbSet<XlogMstClntTradeSettArchiveDbEntity> XlogMstClntTradeSettArchives { get; set; }
 
-    public virtual DbSet<XlogMstClntXchgExp> XlogMstClntXchgExps { get; set; }
+    public virtual DbSet<XlogMstClntXchgExpDbEntity> XlogMstClntXchgExps { get; set; }
 
-    public virtual DbSet<XlogMstClntXchgTrade> XlogMstClntXchgTrades { get; set; }
+    public virtual DbSet<XlogMstClntXchgTradeDbEntity> XlogMstClntXchgTrades { get; set; }
 
-    public virtual DbSet<XlogMstCo> XlogMstCos { get; set; }
+    public virtual DbSet<XlogMstCoDbEntity> XlogMstCos { get; set; }
 
-    public virtual DbSet<XlogMstCoBrch> XlogMstCoBrches { get; set; }
+    public virtual DbSet<XlogMstCoBrchDbEntity> XlogMstCoBrches { get; set; }
 
-    public virtual DbSet<XlogMstCoBrchExp> XlogMstCoBrchExps { get; set; }
+    public virtual DbSet<XlogMstCoBrchExpDbEntity> XlogMstCoBrchExps { get; set; }
 
-    public virtual DbSet<XlogMstCoBrchTradeSett> XlogMstCoBrchTradeSetts { get; set; }
+    public virtual DbSet<XlogMstCoBrchTradeSettDbEntity> XlogMstCoBrchTradeSetts { get; set; }
 
-    public virtual DbSet<XlogMstCoExp> XlogMstCoExps { get; set; }
+    public virtual DbSet<XlogMstCoExpDbEntity> XlogMstCoExps { get; set; }
 
-    public virtual DbSet<XlogMstCoTradeSett> XlogMstCoTradeSetts { get; set; }
+    public virtual DbSet<XlogMstCoTradeSettDbEntity> XlogMstCoTradeSetts { get; set; }
 
-    public virtual DbSet<XlogMstCountry> XlogMstCountries { get; set; }
+    public virtual DbSet<XlogMstCountryDbEntity> XlogMstCountries { get; set; }
 
-    public virtual DbSet<XlogMstCountryExp> XlogMstCountryExps { get; set; }
+    public virtual DbSet<XlogMstCountryExpDbEntity> XlogMstCountryExps { get; set; }
 
-    public virtual DbSet<XlogMstCrOrder> XlogMstCrOrders { get; set; }
+    public virtual DbSet<XlogMstCrOrderDbEntity> XlogMstCrOrders { get; set; }
 
-    public virtual DbSet<XlogMstCurcy> XlogMstCurcies { get; set; }
+    public virtual DbSet<XlogMstCurcyDbEntity> XlogMstCurcies { get; set; }
 
-    public virtual DbSet<XlogMstDmaorder> XlogMstDmaorders { get; set; }
+    public virtual DbSet<XlogMstDmaorderDbEntity> XlogMstDmaorders { get; set; }
 
-    public virtual DbSet<XlogMstForm> XlogMstForms { get; set; }
+    public virtual DbSet<XlogMstFormDbEntity> XlogMstForms { get; set; }
 
-    public virtual DbSet<XlogMstGlobalClntEcosLimitExp> XlogMstGlobalClntEcosLimitExps { get; set; }
+    public virtual DbSet<XlogMstGlobalClntEcosLimitExpDbEntity> XlogMstGlobalClntEcosLimitExps { get; set; }
 
-    public virtual DbSet<XlogMstGlobalLimitExp> XlogMstGlobalLimitExps { get; set; }
+    public virtual DbSet<XlogMstGlobalLimitExpDbEntity> XlogMstGlobalLimitExps { get; set; }
 
-    public virtual DbSet<XlogMstHld> XlogMstHlds { get; set; }
+    public virtual DbSet<XlogMstHldDbEntity> XlogMstHlds { get; set; }
 
-    public virtual DbSet<XlogMstInstrStpDty> XlogMstInstrStpDties { get; set; }
+    public virtual DbSet<XlogMstInstrStpDtyDbEntity> XlogMstInstrStpDties { get; set; }
 
-    public virtual DbSet<XlogMstInternalAcType> XlogMstInternalAcTypes { get; set; }
+    public virtual DbSet<XlogMstInternalAcTypeDbEntity> XlogMstInternalAcTypes { get; set; }
 
-    public virtual DbSet<XlogMstLegalStat> XlogMstLegalStats { get; set; }
+    public virtual DbSet<XlogMstLegalStatDbEntity> XlogMstLegalStats { get; set; }
 
-    public virtual DbSet<XlogMstOrderGroup> XlogMstOrderGroups { get; set; }
+    public virtual DbSet<XlogMstOrderGroupDbEntity> XlogMstOrderGroups { get; set; }
 
-    public virtual DbSet<XlogMstStk> XlogMstStks { get; set; }
+    public virtual DbSet<XlogMstStkDbEntity> XlogMstStks { get; set; }
 
-    public virtual DbSet<XlogMstStkBrdExp> XlogMstStkBrdExps { get; set; }
+    public virtual DbSet<XlogMstStkBrdExpDbEntity> XlogMstStkBrdExps { get; set; }
 
-    public virtual DbSet<XlogMstStkExp> XlogMstStkExps { get; set; }
+    public virtual DbSet<XlogMstStkExpDbEntity> XlogMstStkExps { get; set; }
 
-    public virtual DbSet<XlogMstStkExpsBrch> XlogMstStkExpsBrches { get; set; }
+    public virtual DbSet<XlogMstStkExpsBrchDbEntity> XlogMstStkExpsBrches { get; set; }
 
-    public virtual DbSet<XlogMstStkTradeSett> XlogMstStkTradeSetts { get; set; }
+    public virtual DbSet<XlogMstStkTradeSettDbEntity> XlogMstStkTradeSetts { get; set; }
 
-    public virtual DbSet<XlogMstStkTradeSettBrch> XlogMstStkTradeSettBrches { get; set; }
+    public virtual DbSet<XlogMstStkTradeSettBrchDbEntity> XlogMstStkTradeSettBrches { get; set; }
 
-    public virtual DbSet<XlogMstStkTradeSettBrchCtrl> XlogMstStkTradeSettBrchCtrls { get; set; }
+    public virtual DbSet<XlogMstStkTradeSettBrchCtrlDbEntity> XlogMstStkTradeSettBrchCtrls { get; set; }
 
-    public virtual DbSet<XlogMstStkXchg> XlogMstStkXchgs { get; set; }
+    public virtual DbSet<XlogMstStkXchgDbEntity> XlogMstStkXchgs { get; set; }
 
-    public virtual DbSet<XlogMstStkXchgExp> XlogMstStkXchgExps { get; set; }
+    public virtual DbSet<XlogMstStkXchgExpDbEntity> XlogMstStkXchgExps { get; set; }
 
-    public virtual DbSet<XlogMstStkXchgTradeSett> XlogMstStkXchgTradeSetts { get; set; }
+    public virtual DbSet<XlogMstStkXchgTradeSettDbEntity> XlogMstStkXchgTradeSetts { get; set; }
 
-    public virtual DbSet<XlogMstTrxnCost> XlogMstTrxnCosts { get; set; }
+    public virtual DbSet<XlogMstTrxnCostDbEntity> XlogMstTrxnCosts { get; set; }
 
-    public virtual DbSet<XlogMstUsrExp> XlogMstUsrExps { get; set; }
+    public virtual DbSet<XlogMstUsrExpDbEntity> XlogMstUsrExps { get; set; }
 
-    public virtual DbSet<XlogMstUsrExpsArchive> XlogMstUsrExpsArchives { get; set; }
+    public virtual DbSet<XlogMstUsrExpsArchiveDbEntity> XlogMstUsrExpsArchives { get; set; }
 
-    public virtual DbSet<XlogMstUsrTradeSett> XlogMstUsrTradeSetts { get; set; }
+    public virtual DbSet<XlogMstUsrTradeSettDbEntity> XlogMstUsrTradeSetts { get; set; }
 
-    public virtual DbSet<XlogMstUsrXchgExp> XlogMstUsrXchgExps { get; set; }
+    public virtual DbSet<XlogMstUsrXchgExpDbEntity> XlogMstUsrXchgExps { get; set; }
 
-    public virtual DbSet<XlogMstUsrXchgTrade> XlogMstUsrXchgTrades { get; set; }
+    public virtual DbSet<XlogMstUsrXchgTradeDbEntity> XlogMstUsrXchgTrades { get; set; }
 
-    public virtual DbSet<XlogNotificationSetting> XlogNotificationSettings { get; set; }
+    public virtual DbSet<XlogNotificationSettingDbEntity> XlogNotificationSettings { get; set; }
 
-    public virtual DbSet<XlogOn9Tagging> XlogOn9Taggings { get; set; }
+    public virtual DbSet<XlogOn9TaggingDbEntity> XlogOn9Taggings { get; set; }
 
-    public virtual DbSet<XlogOrderGroupDtl> XlogOrderGroupDtls { get; set; }
+    public virtual DbSet<XlogOrderGroupDtlDbEntity> XlogOrderGroupDtls { get; set; }
 
-    public virtual DbSet<XlogOrderQueue> XlogOrderQueues { get; set; }
+    public virtual DbSet<XlogOrderQueueDbEntity> XlogOrderQueues { get; set; }
 
-    public virtual DbSet<XlogOrderTypeAdj> XlogOrderTypeAdjs { get; set; }
+    public virtual DbSet<XlogOrderTypeAdjDbEntity> XlogOrderTypeAdjs { get; set; }
 
-    public virtual DbSet<XlogPaymentRefNo> XlogPaymentRefNos { get; set; }
+    public virtual DbSet<XlogPaymentRefNoDbEntity> XlogPaymentRefNos { get; set; }
 
-    public virtual DbSet<XlogPfclntInfo> XlogPfclntInfos { get; set; }
+    public virtual DbSet<XlogPfclntInfoDbEntity> XlogPfclntInfos { get; set; }
 
-    public virtual DbSet<XlogPriceAlert> XlogPriceAlerts { get; set; }
+    public virtual DbSet<XlogPriceAlertDbEntity> XlogPriceAlerts { get; set; }
 
-    public virtual DbSet<XlogResearch> XlogResearches { get; set; }
+    public virtual DbSet<XlogResearchDbEntity> XlogResearches { get; set; }
 
-    public virtual DbSet<XlogResearchAnalyst> XlogResearchAnalysts { get; set; }
+    public virtual DbSet<XlogResearchAnalystDbEntity> XlogResearchAnalysts { get; set; }
 
-    public virtual DbSet<XlogResearchCategory> XlogResearchCategories { get; set; }
+    public virtual DbSet<XlogResearchCategoryDbEntity> XlogResearchCategories { get; set; }
 
-    public virtual DbSet<XlogRldClntList> XlogRldClntLists { get; set; }
+    public virtual DbSet<XlogRldClntListDbEntity> XlogRldClntLists { get; set; }
 
-    public virtual DbSet<XlogShareInfo> XlogShareInfos { get; set; }
+    public virtual DbSet<XlogShareInfoDbEntity> XlogShareInfos { get; set; }
 
-    public virtual DbSet<XlogShareInfoExcp> XlogShareInfoExcps { get; set; }
+    public virtual DbSet<XlogShareInfoExcpDbEntity> XlogShareInfoExcps { get; set; }
 
-    public virtual DbSet<XlogShareInfoExcp20240220> XlogShareInfoExcp20240220s { get; set; }
+    public virtual DbSet<XlogShareInfoExcp20240220DbEntity> XlogShareInfoExcp20240220s { get; set; }
 
-    public virtual DbSet<XlogStkCtrl> XlogStkCtrls { get; set; }
+    public virtual DbSet<XlogStkCtrlDbEntity> XlogStkCtrls { get; set; }
 
-    public virtual DbSet<XlogStkIdea> XlogStkIdeas { get; set; }
+    public virtual DbSet<XlogStkIdeaDbEntity> XlogStkIdeas { get; set; }
 
-    public virtual DbSet<XlogStockControlClientList> XlogStockControlClientLists { get; set; }
+    public virtual DbSet<XlogStockControlClientListDbEntity> XlogStockControlClientLists { get; set; }
 
-    public virtual DbSet<XlogT8forceSellingList6Sr> XlogT8forceSellingList6Srs { get; set; }
+    public virtual DbSet<XlogT8forceSellingList6SrDbEntity> XlogT8forceSellingList6Srs { get; set; }
 
-    public virtual DbSet<XlogT8forceSellingList6SrsHistory> XlogT8forceSellingList6SrsHistories { get; set; }
+    public virtual DbSet<XlogT8forceSellingList6SrsHistoryDbEntity> XlogT8forceSellingList6SrsHistories { get; set; }
 
-    public virtual DbSet<XlogT8forceSellingListExcp> XlogT8forceSellingListExcps { get; set; }
+    public virtual DbSet<XlogT8forceSellingListExcpDbEntity> XlogT8forceSellingListExcps { get; set; }
 
-    public virtual DbSet<XlogThresholdLimitExcp> XlogThresholdLimitExcps { get; set; }
+    public virtual DbSet<XlogThresholdLimitExcpDbEntity> XlogThresholdLimitExcps { get; set; }
 
-    public virtual DbSet<XlogTncmaint> XlogTncmaints { get; set; }
+    public virtual DbSet<XlogTncmaintDbEntity> XlogTncmaints { get; set; }
 
-    public virtual DbSet<XlogTransaction> XlogTransactions { get; set; }
+    public virtual DbSet<XlogTransactionDbEntity> XlogTransactions { get; set; }
 
-    public virtual DbSet<XlogUserDeletion6Sr> XlogUserDeletion6Srs { get; set; }
+    public virtual DbSet<XlogUserDeletion6SrDbEntity> XlogUserDeletion6Srs { get; set; }
 
-    public virtual DbSet<XlogUserDeletion6SrsHistory> XlogUserDeletion6SrsHistories { get; set; }
+    public virtual DbSet<XlogUserDeletion6SrsHistoryDbEntity> XlogUserDeletion6SrsHistories { get; set; }
 
-    public virtual DbSet<XlogUserDeletionExcp> XlogUserDeletionExcps { get; set; }
+    public virtual DbSet<XlogUserDeletionExcpDbEntity> XlogUserDeletionExcps { get; set; }
 
-    public virtual DbSet<XlogUserFavouritesRemoveDelistedStk> XlogUserFavouritesRemoveDelistedStks { get; set; }
+    public virtual DbSet<XlogUserFavouritesRemoveDelistedStkDbEntity> XlogUserFavouritesRemoveDelistedStks { get; set; }
 
-    public virtual DbSet<XlogUsrAuthLimit> XlogUsrAuthLimits { get; set; }
+    public virtual DbSet<XlogUsrAuthLimitDbEntity> XlogUsrAuthLimits { get; set; }
 
-    public virtual DbSet<XlogUsrCtrlInfoExcp> XlogUsrCtrlInfoExcps { get; set; }
+    public virtual DbSet<XlogUsrCtrlInfoExcpDbEntity> XlogUsrCtrlInfoExcps { get; set; }
 
-    public virtual DbSet<XlogUsrDeviceInfo> XlogUsrDeviceInfos { get; set; }
+    public virtual DbSet<XlogUsrDeviceInfoDbEntity> XlogUsrDeviceInfos { get; set; }
 
-    public virtual DbSet<XlogUsrInfo> XlogUsrInfos { get; set; }
+    public virtual DbSet<XlogUsrInfoDbEntity> XlogUsrInfos { get; set; }
 
-    public virtual DbSet<XlogUsrInfo20140115> XlogUsrInfo20140115s { get; set; }
+    public virtual DbSet<XlogUsrInfo20140115DbEntity> XlogUsrInfo20140115s { get; set; }
 
-    public virtual DbSet<XlogUsrInfo6Sr> XlogUsrInfo6Srs { get; set; }
+    public virtual DbSet<XlogUsrInfo6SrDbEntity> XlogUsrInfo6Srs { get; set; }
 
-    public virtual DbSet<XlogUsrInfo6SrsHistory> XlogUsrInfo6SrsHistories { get; set; }
+    public virtual DbSet<XlogUsrInfo6SrsHistoryDbEntity> XlogUsrInfo6SrsHistories { get; set; }
 
-    public virtual DbSet<XlogUsrInfoArchive> XlogUsrInfoArchives { get; set; }
+    public virtual DbSet<XlogUsrInfoArchiveDbEntity> XlogUsrInfoArchives { get; set; }
 
-    public virtual DbSet<XlogUsrInfoExcp> XlogUsrInfoExcps { get; set; }
+    public virtual DbSet<XlogUsrInfoExcpDbEntity> XlogUsrInfoExcps { get; set; }
 
-    public virtual DbSet<XlogUsrInfoExcpArchive> XlogUsrInfoExcpArchives { get; set; }
+    public virtual DbSet<XlogUsrInfoExcpArchiveDbEntity> XlogUsrInfoExcpArchives { get; set; }
 
-    public virtual DbSet<XlogUsrInfoRegMember> XlogUsrInfoRegMembers { get; set; }
+    public virtual DbSet<XlogUsrInfoRegMemberDbEntity> XlogUsrInfoRegMembers { get; set; }
 
-    public virtual DbSet<XlogUsrKentradePlusInfo> XlogUsrKentradePlusInfos { get; set; }
+    public virtual DbSet<XlogUsrKentradePlusInfoDbEntity> XlogUsrKentradePlusInfos { get; set; }
 
-    public virtual DbSet<XlogUsrLogin> XlogUsrLogins { get; set; }
+    public virtual DbSet<XlogUsrLoginDbEntity> XlogUsrLogins { get; set; }
 
-    public virtual DbSet<XlogUsrMobileDeviceId> XlogUsrMobileDeviceIds { get; set; }
+    public virtual DbSet<XlogUsrMobileDeviceIdDbEntity> XlogUsrMobileDeviceIds { get; set; }
 
-    public virtual DbSet<XlogUsrRegInfo6Sr> XlogUsrRegInfo6Srs { get; set; }
+    public virtual DbSet<XlogUsrRegInfo6SrDbEntity> XlogUsrRegInfo6Srs { get; set; }
 
-    public virtual DbSet<XlogUsrRegInfo6SrsHistory> XlogUsrRegInfo6SrsHistories { get; set; }
+    public virtual DbSet<XlogUsrRegInfo6SrsHistoryDbEntity> XlogUsrRegInfo6SrsHistories { get; set; }
 
-    public virtual DbSet<XlogUsrRegInfoExcp> XlogUsrRegInfoExcps { get; set; }
+    public virtual DbSet<XlogUsrRegInfoExcpDbEntity> XlogUsrRegInfoExcps { get; set; }
 
-    public virtual DbSet<XlogUsrSetting> XlogUsrSettings { get; set; }
+    public virtual DbSet<XlogUsrSettingDbEntity> XlogUsrSettings { get; set; }
 
-    public virtual DbSet<XlogUsrTypeAuthLimit> XlogUsrTypeAuthLimits { get; set; }
+    public virtual DbSet<XlogUsrTypeAuthLimitDbEntity> XlogUsrTypeAuthLimits { get; set; }
 
-    public virtual DbSet<XlogUsrTypeList> XlogUsrTypeLists { get; set; }
+    public virtual DbSet<XlogUsrTypeListDbEntity> XlogUsrTypeLists { get; set; }
 
-    public virtual DbSet<XlogUsrTypeListProd> XlogUsrTypeListProds { get; set; }
+    public virtual DbSet<XlogUsrTypeListProdDbEntity> XlogUsrTypeListProds { get; set; }
 
-    public virtual DbSet<XlogUsrXchg> XlogUsrXchgs { get; set; }
+    public virtual DbSet<XlogUsrXchgDbEntity> XlogUsrXchgs { get; set; }
 
-    public virtual DbSet<XlogUsrXchg202408231343> XlogUsrXchg202408231343s { get; set; }
+    public virtual DbSet<XlogUsrXchg202408231343DbEntity> XlogUsrXchg202408231343s { get; set; }
 
-    public virtual DbSet<XlogZmbmsresend> XlogZmbmsresends { get; set; }
+    public virtual DbSet<XlogZmbmsresendDbEntity> XlogZmbmsresends { get; set; }
 
-    public virtual DbSet<Zmbmsinfo> Zmbmsinfos { get; set; }
+    public virtual DbSet<ZmbmsinfoDbEntity> Zmbmsinfos { get; set; }
 
-    public virtual DbSet<ZmbmsinfoFst> ZmbmsinfoFsts { get; set; }
+    public virtual DbSet<ZmbmsinfoFstDbEntity> ZmbmsinfoFsts { get; set; }
 
-    public virtual DbSet<ZmbmsinfoHistory> ZmbmsinfoHistories { get; set; }
+    public virtual DbSet<ZmbmsinfoHistoryDbEntity> ZmbmsinfoHistories { get; set; }
 
-    public virtual DbSet<ZmbmsinfoHistoryFst> ZmbmsinfoHistoryFsts { get; set; }
+    public virtual DbSet<ZmbmsinfoHistoryFstDbEntity> ZmbmsinfoHistoryFsts { get; set; }
 
-    public virtual DbSet<Zmbmsresend> Zmbmsresends { get; set; }
+    public virtual DbSet<ZmbmsresendDbEntity> Zmbmsresends { get; set; }
 
-    public virtual DbSet<ZmbmsresendHistory> ZmbmsresendHistories { get; set; }
+    public virtual DbSet<ZmbmsresendHistoryDbEntity> ZmbmsresendHistories { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -1824,7 +1824,7 @@ public partial class DbEfbtxLbslContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<AccContDtl>(entity =>
+        modelBuilder.Entity<AccContDtlDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -1897,7 +1897,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sTag");
         });
 
-        modelBuilder.Entity<AccContDtlHistory>(entity =>
+        modelBuilder.Entity<AccContDtlHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -1970,7 +1970,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sTag");
         });
 
-        modelBuilder.Entity<AccContType>(entity =>
+        modelBuilder.Entity<AccContTypeDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -1997,7 +1997,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sContType");
         });
 
-        modelBuilder.Entity<AccPymtCont>(entity =>
+        modelBuilder.Entity<AccPymtContDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -2048,7 +2048,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sPymtRefNo");
         });
 
-        modelBuilder.Entity<AccPymtContHistory>(entity =>
+        modelBuilder.Entity<AccPymtContHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -2088,7 +2088,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sPymtRefNo");
         });
 
-        modelBuilder.Entity<AccPymtExcp>(entity =>
+        modelBuilder.Entity<AccPymtExcpDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -2139,7 +2139,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sUsrID");
         });
 
-        modelBuilder.Entity<AccPymtRefNo>(entity =>
+        modelBuilder.Entity<AccPymtRefNoDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -2221,7 +2221,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sUsrID");
         });
 
-        modelBuilder.Entity<AccPymtRefNoHistory>(entity =>
+        modelBuilder.Entity<AccPymtRefNoHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -2299,7 +2299,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sUsrID");
         });
 
-        modelBuilder.Entity<AccPymtStatus>(entity =>
+        modelBuilder.Entity<AccPymtStatusDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -2319,7 +2319,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sPymtStatusDesc");
         });
 
-        modelBuilder.Entity<AccTrustDtl>(entity =>
+        modelBuilder.Entity<AccTrustDtlDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -2355,7 +2355,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sRecType");
         });
 
-        modelBuilder.Entity<AccTrustSumm>(entity =>
+        modelBuilder.Entity<AccTrustSummDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SClientCode, e.SCoBrchCode }).HasName("PK__AccTrust__CC9A263F5E1D0604");
 
@@ -2380,7 +2380,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("dtLastUpdateDate");
         });
 
-        modelBuilder.Entity<AccTrustSummOthCcy>(entity =>
+        modelBuilder.Entity<AccTrustSummOthCcyDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -2409,7 +2409,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sCurrency");
         });
 
-        modelBuilder.Entity<AccountSummary>(entity =>
+        modelBuilder.Entity<AccountSummaryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.CoBrchCode, e.Currency });
 
@@ -2461,7 +2461,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TrustAmtEarmark).HasColumnType("decimal(18, 2)");
         });
 
-        modelBuilder.Entity<AccountSummary202403011751>(entity =>
+        modelBuilder.Entity<AccountSummary202403011751DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -2513,7 +2513,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TrustAmtEarmark).HasColumnType("decimal(18, 2)");
         });
 
-        modelBuilder.Entity<AccountSummaryHistory>(entity =>
+        modelBuilder.Entity<AccountSummaryHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -2566,7 +2566,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TrustAmtEarmark).HasColumnType("decimal(18, 2)");
         });
 
-        modelBuilder.Entity<AlgoOrder>(entity =>
+        modelBuilder.Entity<AlgoOrderDbEntity>(entity =>
         {
             entity.HasKey(e => e.OrderSeqNo);
 
@@ -2618,7 +2618,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<AlgoOrderHistory>(entity =>
+        modelBuilder.Entity<AlgoOrderHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.OrderSeqNo, e.PlaceOrderTime });
 
@@ -2669,7 +2669,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<AllClient>(entity =>
+        modelBuilder.Entity<AllClientDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -2690,7 +2690,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("ClntOICNo");
         });
 
-        modelBuilder.Entity<AllUserClient>(entity =>
+        modelBuilder.Entity<AllUserClientDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -2721,7 +2721,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrPassNo).HasMaxLength(30);
         });
 
-        modelBuilder.Entity<Announcement>(entity =>
+        modelBuilder.Entity<AnnouncementDbEntity>(entity =>
         {
             entity.HasKey(e => e.NewsId);
 
@@ -2758,7 +2758,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.ViewMode).HasDefaultValueSql("('')");
         });
 
-        modelBuilder.Entity<AnnouncementsControl>(entity =>
+        modelBuilder.Entity<AnnouncementsControlDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.NewsId, e.UsrType });
 
@@ -2767,7 +2767,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NewsId).HasColumnName("NewsID");
         });
 
-        modelBuilder.Entity<AnnouncementsControlUsr>(entity =>
+        modelBuilder.Entity<AnnouncementsControlUsrDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.NewsId, e.UsrId, e.CoBrchCode });
 
@@ -2783,7 +2783,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ArchiveTablesLog>(entity =>
+        modelBuilder.Entity<ArchiveTablesLogDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ArchiveDate, e.ArchiveDateTime, e.DatabaseName, e.TableName });
 
@@ -2812,7 +2812,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<BannerInfo>(entity =>
+        modelBuilder.Entity<BannerInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.BannerId, e.LastUpdated });
 
@@ -2847,7 +2847,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<BeTask202403261024>(entity =>
+        modelBuilder.Entity<BeTask202403261024DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -2876,7 +2876,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TaskName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<BeTask202404291342>(entity =>
+        modelBuilder.Entity<BeTask202404291342DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -2905,7 +2905,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TaskName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<BeTask202406250955>(entity =>
+        modelBuilder.Entity<BeTask202406250955DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -2934,7 +2934,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TaskName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<BebrkInfoStartTask>(entity =>
+        modelBuilder.Entity<BebrkInfoStartTaskDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -2954,7 +2954,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<BemidDayStartTask>(entity =>
+        modelBuilder.Entity<BemidDayStartTaskDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -2974,7 +2974,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<BerptStartTask>(entity =>
+        modelBuilder.Entity<BerptStartTaskDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -2994,7 +2994,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<BestartTask>(entity =>
+        modelBuilder.Entity<BestartTaskDbEntity>(entity =>
         {
             entity.HasKey(e => e.TaskCat);
 
@@ -3014,7 +3014,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<Betask>(entity =>
+        modelBuilder.Entity<BetaskDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.TaskCat, e.TaskId });
 
@@ -3046,7 +3046,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TaskName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<Betask20150727>(entity =>
+        modelBuilder.Entity<Betask20150727DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -3090,7 +3090,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TaskName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<Betask20210621>(entity =>
+        modelBuilder.Entity<Betask20210621DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -3119,7 +3119,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TaskName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<Betask202205171150>(entity =>
+        modelBuilder.Entity<Betask202205171150DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -3148,7 +3148,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TaskName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<Betask202404031550>(entity =>
+        modelBuilder.Entity<Betask202404031550DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -3177,7 +3177,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TaskName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<Betask202406281351>(entity =>
+        modelBuilder.Entity<Betask202406281351DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -3206,7 +3206,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TaskName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<BetaskKibbNewTask>(entity =>
+        modelBuilder.Entity<BetaskKibbNewTaskDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -3235,7 +3235,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TaskName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<BetaskKibbNewTasks20210625>(entity =>
+        modelBuilder.Entity<BetaskKibbNewTasks20210625DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -3264,7 +3264,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TaskName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<BetaskLog>(entity =>
+        modelBuilder.Entity<BetaskLogDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.TaskId, e.TimeStamp, e.SeqNo });
 
@@ -3278,7 +3278,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Status).HasMaxLength(256);
         });
 
-        modelBuilder.Entity<BidSetting>(entity =>
+        modelBuilder.Entity<BidSettingDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Price, e.XchgCode });
 
@@ -3292,7 +3292,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Size).HasColumnType("decimal(7, 3)");
         });
 
-        modelBuilder.Entity<BroadcastMsgMaint>(entity =>
+        modelBuilder.Entity<BroadcastMsgMaintDbEntity>(entity =>
         {
             entity.HasKey(e => e.NewsId);
 
@@ -3325,7 +3325,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.ValidTo).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<BroadcastMsgMaintArchive>(entity =>
+        modelBuilder.Entity<BroadcastMsgMaintArchiveDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -3355,7 +3355,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.ValidTo).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<BroadcastMsgMaintUserRead>(entity =>
+        modelBuilder.Entity<BroadcastMsgMaintUserReadDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.NewsId, e.Channel, e.UserId });
 
@@ -3372,7 +3372,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.ReadDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<BuyingInDefaulter>(entity =>
+        modelBuilder.Entity<BuyingInDefaulterDbEntity>(entity =>
         {
             entity.HasKey(e => e.TransId).HasName("PK_BuyingInDefaulterTmp");
 
@@ -3403,7 +3403,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TransactDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<CareOrderAssignment>(entity =>
+        modelBuilder.Entity<CareOrderAssignmentDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.ClntCode, e.CoBrchCode });
 
@@ -3421,7 +3421,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<CareOrderGroup>(entity =>
+        modelBuilder.Entity<CareOrderGroupDbEntity>(entity =>
         {
             entity.HasKey(e => e.GroupId);
 
@@ -3445,7 +3445,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<CareOrderGroupStock>(entity =>
+        modelBuilder.Entity<CareOrderGroupStockDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.GroupId, e.StockCode, e.XchgCode });
 
@@ -3459,7 +3459,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<CareOrderPlaced>(entity =>
+        modelBuilder.Entity<CareOrderPlacedDbEntity>(entity =>
         {
             entity.HasKey(e => e.SequenceNo).IsClustered(false);
 
@@ -3510,7 +3510,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<CareOrderRouteDtl>(entity =>
+        modelBuilder.Entity<CareOrderRouteDtlDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.RouteDtlNo, e.SequenceNo, e.RouteSeqNo }).IsClustered(false);
 
@@ -3560,7 +3560,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ClientList>(entity =>
+        modelBuilder.Entity<ClientListDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UserId, e.ClientCode, e.OriginateUserId });
 
@@ -3581,7 +3581,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.IsAssociated).HasDefaultValue(0);
         });
 
-        modelBuilder.Entity<ClientOrderInfo>(entity =>
+        modelBuilder.Entity<ClientOrderInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.TransSeqNo, e.OrderDateTime });
 
@@ -3621,7 +3621,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TerminalId).HasColumnName("TerminalID");
         });
 
-        modelBuilder.Entity<ClientOrderInfoArchive>(entity =>
+        modelBuilder.Entity<ClientOrderInfoArchiveDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.TransSeqNo, e.OrderDateTime });
 
@@ -3661,7 +3661,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TerminalId).HasColumnName("TerminalID");
         });
 
-        modelBuilder.Entity<ClientSetOff>(entity =>
+        modelBuilder.Entity<ClientSetOffDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.TransDate });
 
@@ -3687,7 +3687,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<ClientTradeInfo>(entity =>
+        modelBuilder.Entity<ClientTradeInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.TransSeqNo, e.MatchedTime });
 
@@ -3722,7 +3722,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Trsno).HasColumnName("TRSNo");
         });
 
-        modelBuilder.Entity<ClientTradeInfoArchive>(entity =>
+        modelBuilder.Entity<ClientTradeInfoArchiveDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.TransSeqNo, e.MatchedTime });
 
@@ -3757,7 +3757,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Trsno).HasColumnName("TRSNo");
         });
 
-        modelBuilder.Entity<ClientTradeInfoBatch>(entity =>
+        modelBuilder.Entity<ClientTradeInfoBatchDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -3787,7 +3787,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Trsno).HasColumnName("TRSNo");
         });
 
-        modelBuilder.Entity<ClientTradeInfoBatchArchive>(entity =>
+        modelBuilder.Entity<ClientTradeInfoBatchArchiveDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -3817,7 +3817,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Trsno).HasColumnName("TRSNo");
         });
 
-        modelBuilder.Entity<ClientTurnOver>(entity =>
+        modelBuilder.Entity<ClientTurnOverDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.BranchCode, e.ClntCode, e.Year, e.Month, e.Source }).HasName("PK_ClientTurnOver_1");
 
@@ -3840,7 +3840,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TurnOver).HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<ClntAcct>(entity =>
+        modelBuilder.Entity<ClntAcctDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClntCode, e.CoBrchCode }).HasName("PK_ClntAcct_1");
 
@@ -3970,7 +3970,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("W8BenInd");
         });
 
-        modelBuilder.Entity<ClntAcct202201281900>(entity =>
+        modelBuilder.Entity<ClntAcct202201281900DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -4074,7 +4074,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("W8BenInd");
         });
 
-        modelBuilder.Entity<ClntAcct20240220>(entity =>
+        modelBuilder.Entity<ClntAcct20240220DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -4187,7 +4187,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("W8BenInd");
         });
 
-        modelBuilder.Entity<ClntAcct202406211438>(entity =>
+        modelBuilder.Entity<ClntAcct202406211438DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -4300,7 +4300,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("W8BenInd");
         });
 
-        modelBuilder.Entity<ClntAcctDeleted>(entity =>
+        modelBuilder.Entity<ClntAcctDeletedDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -4315,7 +4315,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.DeletedDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<ClntAcctTest>(entity =>
+        modelBuilder.Entity<ClntAcctTestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -4328,7 +4328,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("GCIF");
         });
 
-        modelBuilder.Entity<ClntBankAccInfo>(entity =>
+        modelBuilder.Entity<ClntBankAccInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SCoBrchCode, e.SClntCode }).HasName("PK_ClntBankAccInfo_1");
 
@@ -4364,7 +4364,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sMCA");
         });
 
-        modelBuilder.Entity<ClntChgBrch>(entity =>
+        modelBuilder.Entity<ClntChgBrchDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClntCode, e.NewBrchCode });
 
@@ -4388,7 +4388,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<ClntChgBrchLog>(entity =>
+        modelBuilder.Entity<ClntChgBrchLogDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SequenceNo, e.LogTime }).HasName("PK_ClntChgBrch_Log_LogTime_SequenceNo");
 
@@ -4398,7 +4398,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.LogTime).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<ClntChgBrchLogArchive>(entity =>
+        modelBuilder.Entity<ClntChgBrchLogArchiveDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SequenceNo, e.LogTime }).HasName("PK_ClntChgBrch_Log_Archive_LogTime_SequenceNo");
 
@@ -4407,7 +4407,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.LogTime).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<ClntCshWithdrawLimitHistory>(entity =>
+        modelBuilder.Entity<ClntCshWithdrawLimitHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -4424,7 +4424,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.WithdrawalLimit).HasColumnType("decimal(20, 2)");
         });
 
-        modelBuilder.Entity<ClntDefList>(entity =>
+        modelBuilder.Entity<ClntDefListDbEntity>(entity =>
         {
             entity.HasKey(e => e.RefNo);
 
@@ -4446,7 +4446,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.MemCirNoLifted).HasMaxLength(10);
         });
 
-        modelBuilder.Entity<ClntFslist>(entity =>
+        modelBuilder.Entity<ClntFslistDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoBrchCode, e.ClntCode });
 
@@ -4471,7 +4471,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ClntInfoA>(entity =>
+        modelBuilder.Entity<ClntInfoADbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -4495,7 +4495,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("Column 3");
         });
 
-        modelBuilder.Entity<ClntInfoB>(entity =>
+        modelBuilder.Entity<ClntInfoBDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -4519,7 +4519,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("Column 3");
         });
 
-        modelBuilder.Entity<ClntLimitDtl>(entity =>
+        modelBuilder.Entity<ClntLimitDtlDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.RefNo, e.OrderDate, e.CoBrchCode, e.ClntCode, e.SequenceNo }).HasName("PK_ClntLimitDtl_1");
 
@@ -4552,7 +4552,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ClntLimitDtlHistory>(entity =>
+        modelBuilder.Entity<ClntLimitDtlHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.RefNo, e.OrderDate, e.CoBrchCode, e.ClntCode, e.SequenceNo }).HasName("PK_ClntLimitDtlHistory_1");
 
@@ -4584,7 +4584,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ClntMaster>(entity =>
+        modelBuilder.Entity<ClntMasterDbEntity>(entity =>
         {
             entity.HasKey(e => e.Gcif);
 
@@ -4644,7 +4644,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("");
         });
 
-        modelBuilder.Entity<ClntMaster202406211438>(entity =>
+        modelBuilder.Entity<ClntMaster202406211438DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -4687,7 +4687,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ClntMasterTest>(entity =>
+        modelBuilder.Entity<ClntMasterTestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -4701,7 +4701,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("GCIF");
         });
 
-        modelBuilder.Entity<ClntNotUpdatedDf10740>(entity =>
+        modelBuilder.Entity<ClntNotUpdatedDf10740DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -4723,7 +4723,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<ClntOdrDate>(entity =>
+        modelBuilder.Entity<ClntOdrDateDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoBrchCode, e.ClntCode });
 
@@ -4739,7 +4739,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.LastTradingDateOn).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<ClntSettFile>(entity =>
+        modelBuilder.Entity<ClntSettFileDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.TrnxDate, e.TrnxNo, e.CoBrchCode, e.ClntCode, e.TrnxRefNo });
 
@@ -4770,7 +4770,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ClntStatementFile>(entity =>
+        modelBuilder.Entity<ClntStatementFileDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FileId, e.FileDate, e.FileType, e.CoBrchCode, e.ClntCode });
 
@@ -4796,7 +4796,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ClntStkCtrl>(entity =>
+        modelBuilder.Entity<ClntStkCtrlDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClntCode, e.CoBrchCode, e.XchgCode, e.StkCode, e.CtrlStatus });
 
@@ -4809,7 +4809,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.CtrlStatus).HasMaxLength(1);
         });
 
-        modelBuilder.Entity<ClntStkDtl>(entity =>
+        modelBuilder.Entity<ClntStkDtlDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CstrxnDocType, e.ClntCode, e.StkCode, e.CstrxnDocNo }).HasFillFactor(90);
 
@@ -4861,7 +4861,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("CSVerifyDate");
         });
 
-        modelBuilder.Entity<ClntStkSumm>(entity =>
+        modelBuilder.Entity<ClntStkSummDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoBrchCode, e.ClntCode, e.StkCode });
 
@@ -4904,7 +4904,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.StkThirdQty).HasDefaultValue(0L);
         });
 
-        modelBuilder.Entity<ClntTrustAcTrnx>(entity =>
+        modelBuilder.Entity<ClntTrustAcTrnxDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.TransactionDate });
 
@@ -4920,7 +4920,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TransactionAmount).HasColumnType("decimal(10, 2)");
         });
 
-        modelBuilder.Entity<ClntXchg>(entity =>
+        modelBuilder.Entity<ClntXchgDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.BranchCode, e.ClientCode, e.XchgCode, e.Type }).HasName("PK_ClntXchg");
 
@@ -4952,7 +4952,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.StartDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<ClntXchg202406211438>(entity =>
+        modelBuilder.Entity<ClntXchg202406211438DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -4983,7 +4983,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ClrAcct>(entity =>
+        modelBuilder.Entity<ClrAcctDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -5023,7 +5023,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TRADER CODE");
         });
 
-        modelBuilder.Entity<ColumnName>(entity =>
+        modelBuilder.Entity<ColumnNameDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -5034,7 +5034,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ComMngtMoveWltest>(entity =>
+        modelBuilder.Entity<ComMngtMoveWltestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -5043,7 +5043,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.ProjCd).HasMaxLength(20);
         });
 
-        modelBuilder.Entity<ComMngtTokenTest>(entity =>
+        modelBuilder.Entity<ComMngtTokenTestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -5065,7 +5065,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<CompanyCodeMaintenance>(entity =>
+        modelBuilder.Entity<CompanyCodeMaintenanceDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -5093,7 +5093,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<ConditionInfo>(entity =>
+        modelBuilder.Entity<ConditionInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.OrderSeqNo, e.ConditionId }).IsClustered(false);
 
@@ -5104,7 +5104,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ConfirmClOrdId>(entity =>
+        modelBuilder.Entity<ConfirmClOrdIdDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SequenceNo, e.ClOrdId, e.OrderType, e.XchgCode });
 
@@ -5122,7 +5122,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("");
         });
 
-        modelBuilder.Entity<ConfirmClOrdId20220325>(entity =>
+        modelBuilder.Entity<ConfirmClOrdId20220325DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -5139,7 +5139,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ConfirmExTrsno>(entity =>
+        modelBuilder.Entity<ConfirmExTrsnoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SequenceNo, e.Trsno, e.OrderType }).HasFillFactor(90);
 
@@ -5154,7 +5154,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ContraDetail>(entity =>
+        modelBuilder.Entity<ContraDetailDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ContraNo, e.BranchCode, e.ClientCode, e.ContractDate, e.ContractNo });
 
@@ -5197,7 +5197,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ContraGain>(entity =>
+        modelBuilder.Entity<ContraGainDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.ContraNo, e.CoBrchCode }).HasName("PK_ContraGains_1");
 
@@ -5237,7 +5237,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ContraGainsHistory>(entity =>
+        modelBuilder.Entity<ContraGainsHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.ContraNo, e.CoBrchCode, e.LastUpdateDate }).HasName("PK_ContraGains_History");
 
@@ -5280,7 +5280,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ContraLoss>(entity =>
+        modelBuilder.Entity<ContraLossDbEntity>(entity =>
         {
             entity.HasNoKey();
 
@@ -5332,7 +5332,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ContraLossesHistory>(entity =>
+        modelBuilder.Entity<ContraLossesHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -5387,7 +5387,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ContraLossesHistoryArchive>(entity =>
+        modelBuilder.Entity<ContraLossesHistoryArchiveDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -5439,7 +5439,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ContraSetOff>(entity =>
+        modelBuilder.Entity<ContraSetOffDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.BranchCode, e.TransNo, e.TransDate }).HasName("PK_ContraSetOff_1");
 
@@ -5469,7 +5469,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("");
         });
 
-        modelBuilder.Entity<ContraSummary>(entity =>
+        modelBuilder.Entity<ContraSummaryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.BranchCode, e.ClientCode, e.ContraNo, e.ContraDate })
                 .HasName("PK_CotrSumm")
@@ -5522,7 +5522,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ContractSummary>(entity =>
+        modelBuilder.Entity<ContractSummaryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.BranchCode, e.ClientCode, e.ContractDate, e.ContractNo })
                 .HasName("PK_ContSumm")
@@ -5596,7 +5596,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("");
         });
 
-        modelBuilder.Entity<ContractSummaryDel>(entity =>
+        modelBuilder.Entity<ContractSummaryDelDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.TrxnDate, e.BranchCode, e.ClientCode, e.ContractNo, e.ContractDate });
 
@@ -5643,7 +5643,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Value).HasColumnType("decimal(10, 2)");
         });
 
-        modelBuilder.Entity<CountryList>(entity =>
+        modelBuilder.Entity<CountryListDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -5657,7 +5657,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<CpreconFlag>(entity =>
+        modelBuilder.Entity<CpreconFlagDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -5679,7 +5679,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("ReconDone_on_time");
         });
 
-        modelBuilder.Entity<Csprofile>(entity =>
+        modelBuilder.Entity<CsprofileDbEntity>(entity =>
         {
             entity.HasKey(e => e.ClntCode).HasName("PK_CSProfile_1");
 
@@ -5717,7 +5717,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<DailyBizDone>(entity =>
+        modelBuilder.Entity<DailyBizDoneDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClntCode, e.CoBrchCode, e.ContDocNo, e.ContTrxDate, e.CancelRepInd });
 
@@ -5784,7 +5784,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<DayEndCalcAvgPrice>(entity =>
+        modelBuilder.Entity<DayEndCalcAvgPriceDbEntity>(entity =>
         {
             entity.HasKey(e => e.Oid);
 
@@ -5809,7 +5809,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<DbgenFileCount>(entity =>
+        modelBuilder.Entity<DbgenFileCountDbEntity>(entity =>
         {
             entity.HasKey(e => e.Item);
 
@@ -5824,7 +5824,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<DbreplicationEmailLastSendDateTime>(entity =>
+        modelBuilder.Entity<DbreplicationEmailLastSendDateTimeDbEntity>(entity =>
         {
             entity.HasKey(e => e.LastSendDateTime);
 
@@ -5833,7 +5833,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.LastSendDateTime).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<DbreplicationLastUpdateDateTime>(entity =>
+        modelBuilder.Entity<DbreplicationLastUpdateDateTimeDbEntity>(entity =>
         {
             entity.HasKey(e => e.LastUpdateDateTime);
 
@@ -5842,7 +5842,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.LastUpdateDateTime).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<Dbtdeclaration>(entity =>
+        modelBuilder.Entity<DbtdeclarationDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Timestamp, e.Tcsref }).HasName("PK_DBTDeclaration_1");
 
@@ -5893,7 +5893,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TraderID");
         });
 
-        modelBuilder.Entity<DbtdeclarationHistory>(entity =>
+        modelBuilder.Entity<DbtdeclarationHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Timestamp, e.Tcsref });
 
@@ -5944,7 +5944,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TraderID");
         });
 
-        modelBuilder.Entity<Dbtqueue>(entity =>
+        modelBuilder.Entity<DbtqueueDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -5972,7 +5972,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Dbtstatus>(entity =>
+        modelBuilder.Entity<DbtstatusDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.MemberRef, e.Timestamp, e.StatusSeqNo });
 
@@ -5986,7 +5986,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<DbtstatusHistory>(entity =>
+        modelBuilder.Entity<DbtstatusHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.MemberRef, e.Timestamp, e.StatusSeqNo });
 
@@ -6000,7 +6000,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<DebugCr11127>(entity =>
+        modelBuilder.Entity<DebugCr11127DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6012,7 +6012,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("timestamp");
         });
 
-        modelBuilder.Entity<Delisted>(entity =>
+        modelBuilder.Entity<DelistedDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6036,7 +6036,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("SECURITY NAME");
         });
 
-        modelBuilder.Entity<Delisted2>(entity =>
+        modelBuilder.Entity<Delisted2DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6056,7 +6056,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("stksname");
         });
 
-        modelBuilder.Entity<DelistedStock>(entity =>
+        modelBuilder.Entity<DelistedStockDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6080,7 +6080,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("stkcode");
         });
 
-        modelBuilder.Entity<DmaorderAssignment>(entity =>
+        modelBuilder.Entity<DmaorderAssignmentDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.ClntCode, e.CoBrchCode });
 
@@ -6099,7 +6099,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.DisabledDma).HasColumnName("DisabledDMA");
         });
 
-        modelBuilder.Entity<DocType>(entity =>
+        modelBuilder.Entity<DocTypeDbEntity>(entity =>
         {
             entity.HasKey(e => e.DocType1).HasName("PK_MstDocType_1");
 
@@ -6114,7 +6114,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<DummyEmail>(entity =>
+        modelBuilder.Entity<DummyEmailDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6126,7 +6126,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Email).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<DummyTable0>(entity =>
+        modelBuilder.Entity<DummyTable0DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6137,7 +6137,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Email).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<EDocument>(entity =>
+        modelBuilder.Entity<EDocumentDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.DocId, e.ProcDate }).HasFillFactor(90);
 
@@ -6163,7 +6163,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<EcmEfForceSelling>(entity =>
+        modelBuilder.Entity<EcmEfForceSellingDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6236,7 +6236,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("tran_date");
         });
 
-        modelBuilder.Entity<EcmEfMrgnCall>(entity =>
+        modelBuilder.Entity<EcmEfMrgnCallDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6295,7 +6295,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("tdr_code");
         });
 
-        modelBuilder.Entity<EcmTemp>(entity =>
+        modelBuilder.Entity<EcmTempDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6396,7 +6396,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("trust_bal");
         });
 
-        modelBuilder.Entity<EcmmoneyProcessedRefNo>(entity =>
+        modelBuilder.Entity<EcmmoneyProcessedRefNoDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6411,7 +6411,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sPymtRefNo");
         });
 
-        modelBuilder.Entity<Ecmuser>(entity =>
+        modelBuilder.Entity<EcmuserDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrId);
 
@@ -6423,7 +6423,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<EcosUsrIdexist>(entity =>
+        modelBuilder.Entity<EcosUsrIdexistDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6435,14 +6435,14 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<EcosUsrType>(entity =>
+        modelBuilder.Entity<EcosUsrTypeDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
                 .ToTable("EcosUsrType");
         });
 
-        modelBuilder.Entity<Edsvariable>(entity =>
+        modelBuilder.Entity<EdsvariableDbEntity>(entity =>
         {
             entity.HasKey(e => e.VariableName).IsClustered(false);
 
@@ -6458,7 +6458,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<Efcptemp>(entity =>
+        modelBuilder.Entity<EfcptempDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6559,7 +6559,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("trust_bal");
         });
 
-        modelBuilder.Entity<Eftestclientlist>(entity =>
+        modelBuilder.Entity<EftestclientlistDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6598,7 +6598,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<EmlBetask>(entity =>
+        modelBuilder.Entity<EmlBetaskDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.TaskDate, e.TaskCat, e.TaskId, e.EmlId });
 
@@ -6620,7 +6620,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("ReceiverCCAddr");
         });
 
-        modelBuilder.Entity<EmlInfo>(entity =>
+        modelBuilder.Entity<EmlInfoDbEntity>(entity =>
         {
             entity.HasKey(e => e.EmlId);
 
@@ -6634,7 +6634,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.EmlSubject).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<EmlInfo202405131529>(entity =>
+        modelBuilder.Entity<EmlInfo202405131529DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6646,7 +6646,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.EmlSubject).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<EmlLegend>(entity =>
+        modelBuilder.Entity<EmlLegendDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6658,7 +6658,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.EmlLegendId).HasColumnName("EmlLegendID");
         });
 
-        modelBuilder.Entity<EmlNoti>(entity =>
+        modelBuilder.Entity<EmlNotiDbEntity>(entity =>
         {
             entity.HasKey(e => e.EmlId);
 
@@ -6692,7 +6692,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<EmlNoti202201281900>(entity =>
+        modelBuilder.Entity<EmlNoti202201281900DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6721,7 +6721,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<EmlNoti202405131421>(entity =>
+        modelBuilder.Entity<EmlNoti202405131421DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6750,7 +6750,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<EmptyStkName>(entity =>
+        modelBuilder.Entity<EmptyStkNameDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6770,7 +6770,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("stksname");
         });
 
-        modelBuilder.Entity<EmptyStkName2>(entity =>
+        modelBuilder.Entity<EmptyStkName2DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6789,7 +6789,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("StksName ");
         });
 
-        modelBuilder.Entity<EnqConcerrentUser>(entity =>
+        modelBuilder.Entity<EnqConcerrentUserDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Date, e.BranchCode });
 
@@ -6805,7 +6805,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Ecosguest).HasColumnName("ECOSGuest");
         });
 
-        modelBuilder.Entity<EnqMatchedTrade>(entity =>
+        modelBuilder.Entity<EnqMatchedTradeDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Date, e.BranchCode });
 
@@ -6817,7 +6817,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Btxmobility).HasColumnName("BTXMobility");
         });
 
-        modelBuilder.Entity<EnqOrderInQueue>(entity =>
+        modelBuilder.Entity<EnqOrderInQueueDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Id, e.Date, e.BranchCode, e.RemisierId });
 
@@ -6838,7 +6838,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.OddLotOrderGtd).HasColumnName("OddLotOrderGTD");
         });
 
-        modelBuilder.Entity<EnqSubmittedOrder>(entity =>
+        modelBuilder.Entity<EnqSubmittedOrderDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Date, e.BranchCode });
 
@@ -6852,7 +6852,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Btxmobility).HasColumnName("BTXMobility");
         });
 
-        modelBuilder.Entity<EnqUsrActvn>(entity =>
+        modelBuilder.Entity<EnqUsrActvnDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6869,7 +6869,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<EnqUsrActvnHist>(entity =>
+        modelBuilder.Entity<EnqUsrActvnHistDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6886,7 +6886,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<EodclntOnInd>(entity =>
+        modelBuilder.Entity<EodclntOnIndDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6904,7 +6904,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.ProcessDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<EodonlineTradeDtl>(entity =>
+        modelBuilder.Entity<EodonlineTradeDtlDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6930,7 +6930,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<EodtradeDone>(entity =>
+        modelBuilder.Entity<EodtradeDoneDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -6966,7 +6966,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<EpDuitNowInitPymtMsgDtl>(entity =>
+        modelBuilder.Entity<EpDuitNowInitPymtMsgDtlDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.InitPymtDt, e.PymtRefNo, e.MsgId, e.TrxId, e.EndToEndId });
 
@@ -7032,7 +7032,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<EpFpxdbCrAuthCode>(entity =>
+        modelBuilder.Entity<EpFpxdbCrAuthCodeDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -7048,7 +7048,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sAuthDesc");
         });
 
-        modelBuilder.Entity<EpFpxdepBk>(entity =>
+        modelBuilder.Entity<EpFpxdepBkDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -7065,7 +7065,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<EpFpxmsgDtl>(entity =>
+        modelBuilder.Entity<EpFpxmsgDtlDbEntity>(entity =>
         {
             entity.HasKey(e => e.ISeqNo);
 
@@ -7189,7 +7189,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sFPX_Version");
         });
 
-        modelBuilder.Entity<EpPaymentContract>(entity =>
+        modelBuilder.Entity<EpPaymentContractDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.PaymentRefNo, e.ContractNo });
 
@@ -7282,7 +7282,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("WdrwlK2NumOfRetry");
         });
 
-        modelBuilder.Entity<EpPaymentContract202403011751>(entity =>
+        modelBuilder.Entity<EpPaymentContract202403011751DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -7361,7 +7361,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.WdrwlK2numOfRetry).HasColumnName("WdrwlK2NumOfRetry");
         });
 
-        modelBuilder.Entity<EpPaymentContract202406141409>(entity =>
+        modelBuilder.Entity<EpPaymentContract202406141409DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -7440,7 +7440,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.WdrwlK2numOfRetry).HasColumnName("WdrwlK2NumOfRetry");
         });
 
-        modelBuilder.Entity<EpPaymentRefNo>(entity =>
+        modelBuilder.Entity<EpPaymentRefNoDbEntity>(entity =>
         {
             entity.HasKey(e => e.PaymentRefNo).HasName("PK_EP_PaymentRefNo_1");
 
@@ -7499,7 +7499,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<EpPaymentRefNo202303161221>(entity =>
+        modelBuilder.Entity<EpPaymentRefNo202303161221DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -7556,7 +7556,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<EpPaymentRefNo202402090950>(entity =>
+        modelBuilder.Entity<EpPaymentRefNo202402090950DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -7613,7 +7613,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<EpPaymentRefNo202403011751>(entity =>
+        modelBuilder.Entity<EpPaymentRefNo202403011751DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -7670,7 +7670,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<EpPaymentStatusHistory>(entity =>
+        modelBuilder.Entity<EpPaymentStatusHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.DtCreateDate, e.SPaymentRefNo, e.SContractNo, e.Id });
 
@@ -7704,7 +7704,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sTrxnStatusSrc");
         });
 
-        modelBuilder.Entity<EpPaymentStatusHistory202403011751>(entity =>
+        modelBuilder.Entity<EpPaymentStatusHistory202403011751DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -7738,7 +7738,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sTrxnStatusSrc");
         });
 
-        modelBuilder.Entity<EpPaymentStatusHistory202406141415>(entity =>
+        modelBuilder.Entity<EpPaymentStatusHistory202406141415DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -7772,7 +7772,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sTrxnStatusSrc");
         });
 
-        modelBuilder.Entity<EpPaymentStatusHistory202406141417>(entity =>
+        modelBuilder.Entity<EpPaymentStatusHistory202406141417DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -7806,7 +7806,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sTrxnStatusSrc");
         });
 
-        modelBuilder.Entity<EpPaymentcontract20180906>(entity =>
+        modelBuilder.Entity<EpPaymentcontract20180906DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -7880,7 +7880,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UpdateBosflag).HasColumnName("UpdateBOSFlag");
         });
 
-        modelBuilder.Entity<EpPaymentrefno20180906>(entity =>
+        modelBuilder.Entity<EpPaymentrefno20180906DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -7937,7 +7937,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<ErrAcctList>(entity =>
+        modelBuilder.Entity<ErrAcctListDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -7948,7 +7948,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.PrntBrchCode).HasMaxLength(10);
         });
 
-        modelBuilder.Entity<ExcelForceEcmShareLog>(entity =>
+        modelBuilder.Entity<ExcelForceEcmShareLogDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -8063,7 +8063,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("trust_bal");
         });
 
-        modelBuilder.Entity<ExcelForceEcmShareLogTemp>(entity =>
+        modelBuilder.Entity<ExcelForceEcmShareLogTempDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -8179,7 +8179,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("trust_bal");
         });
 
-        modelBuilder.Entity<ExcelForceEcmShareTemp>(entity =>
+        modelBuilder.Entity<ExcelForceEcmShareTempDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -8280,7 +8280,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("trust_bal");
         });
 
-        modelBuilder.Entity<ExecutionReport>(entity =>
+        modelBuilder.Entity<ExecutionReportDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -8359,7 +8359,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ExecutionType>(entity =>
+        modelBuilder.Entity<ExecutionTypeDbEntity>(entity =>
         {
             entity.HasKey(e => e.ExecType);
 
@@ -8373,7 +8373,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ExtrClientUsrInfo>(entity =>
+        modelBuilder.Entity<ExtrClientUsrInfoDbEntity>(entity =>
         {
             entity.HasKey(e => e.Usrid);
 
@@ -8436,7 +8436,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ExtrUsrAccessEx>(entity =>
+        modelBuilder.Entity<ExtrUsrAccessExDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrId);
 
@@ -8449,7 +8449,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrLastUpdated).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<FixTraderId>(entity =>
+        modelBuilder.Entity<FixTraderIdDbEntity>(entity =>
         {
             entity.HasKey(e => e.FixTraderId1);
 
@@ -8461,7 +8461,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.ShariahFixTraderId).HasColumnName("ShariahFixTraderID");
         });
 
-        modelBuilder.Entity<ForceSellContract>(entity =>
+        modelBuilder.Entity<ForceSellContractDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.BranchCode, e.ClientCode, e.ContractNo, e.ContractDate })
                 .HasName("PK_ContractForceSell")
@@ -8511,7 +8511,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Value).HasColumnType("decimal(10, 2)");
         });
 
-        modelBuilder.Entity<FormBizProcConsolidateCont>(entity =>
+        modelBuilder.Entity<FormBizProcConsolidateContDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate }).HasName("PK_BizProcConsolidateCont");
 
@@ -8533,7 +8533,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<FormBizProcDirectWd>(entity =>
+        modelBuilder.Entity<FormBizProcDirectWdDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate, e.SeqNo });
 
@@ -8569,7 +8569,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<FormBizProcForeignCont>(entity =>
+        modelBuilder.Entity<FormBizProcForeignContDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate, e.SeqNo });
 
@@ -8605,7 +8605,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<FormBizProcMailUplift>(entity =>
+        modelBuilder.Entity<FormBizProcMailUpliftDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate });
 
@@ -8627,7 +8627,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<FormBizProcManualBi>(entity =>
+        modelBuilder.Entity<FormBizProcManualBiDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate });
 
@@ -8650,7 +8650,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<FormBizProcNotCotr>(entity =>
+        modelBuilder.Entity<FormBizProcNotCotrDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate, e.SeqNo });
 
@@ -8699,7 +8699,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<FormBizProcRemisierTrnx>(entity =>
+        modelBuilder.Entity<FormBizProcRemisierTrnxDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate, e.SeqNo });
 
@@ -8722,7 +8722,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<FormCreditDailyCotrRpt>(entity =>
+        modelBuilder.Entity<FormCreditDailyCotrRptDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate, e.SeqNo });
 
@@ -8753,7 +8753,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TASetOffAmt");
         });
 
-        modelBuilder.Entity<FormCreditDbttrnx>(entity =>
+        modelBuilder.Entity<FormCreditDbttrnxDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate });
 
@@ -8790,7 +8790,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<FormCreditDeclaration>(entity =>
+        modelBuilder.Entity<FormCreditDeclarationDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate });
 
@@ -8817,7 +8817,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(15, 4)");
         });
 
-        modelBuilder.Entity<FormCreditEarmark>(entity =>
+        modelBuilder.Entity<FormCreditEarmarkDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate, e.SeqNo });
 
@@ -8837,7 +8837,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.EarmarkAmt).HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<FormCreditLeave>(entity =>
+        modelBuilder.Entity<FormCreditLeaveDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate });
 
@@ -8868,7 +8868,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrIDRelief");
         });
 
-        modelBuilder.Entity<FormCreditNegoBrkgC>(entity =>
+        modelBuilder.Entity<FormCreditNegoBrkgCDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate });
 
@@ -8893,7 +8893,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TrdMoreThan).HasColumnType("decimal(15, 4)");
         });
 
-        modelBuilder.Entity<FormCreditRelease>(entity =>
+        modelBuilder.Entity<FormCreditReleaseDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate });
 
@@ -8912,7 +8912,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.ReleaseAmt).HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<FormCreditUpliftLmt>(entity =>
+        modelBuilder.Entity<FormCreditUpliftLmtDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate, e.SeqNo });
 
@@ -8930,7 +8930,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.CurrExps).HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<FormCreditWithdrawal>(entity =>
+        modelBuilder.Entity<FormCreditWithdrawalDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate });
 
@@ -8944,7 +8944,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.WdSumAmt).HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<FormFinanceRecovery>(entity =>
+        modelBuilder.Entity<FormFinanceRecoveryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate, e.SeqNo });
 
@@ -8975,7 +8975,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("PurDSADAmt");
         });
 
-        modelBuilder.Entity<FormFinanceRequisition>(entity =>
+        modelBuilder.Entity<FormFinanceRequisitionDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate, e.SeqNo });
 
@@ -8999,7 +8999,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<FormFinanceReversal>(entity =>
+        modelBuilder.Entity<FormFinanceReversalDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate, e.SeqNo });
 
@@ -9019,7 +9019,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.RevTotalAmt).HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<FormFinanceTrustAcWd>(entity =>
+        modelBuilder.Entity<FormFinanceTrustAcWdDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate });
 
@@ -9042,7 +9042,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.WdSumAmt).HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<FormOptGrp>(entity =>
+        modelBuilder.Entity<FormOptGrpDbEntity>(entity =>
         {
             entity.HasKey(e => e.FormGrpId);
 
@@ -9060,7 +9060,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.InActiveIconUrl).HasMaxLength(300);
         });
 
-        modelBuilder.Entity<FormOptLst>(entity =>
+        modelBuilder.Entity<FormOptLstDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormGrpId, e.FormId });
 
@@ -9087,7 +9087,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.FormTitle).HasMaxLength(500);
         });
 
-        modelBuilder.Entity<FormShrMrgnChqWdShrTrf>(entity =>
+        modelBuilder.Entity<FormShrMrgnChqWdShrTrfDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate, e.SeqNo });
 
@@ -9107,7 +9107,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<FormShrMrgnPayment>(entity =>
+        modelBuilder.Entity<FormShrMrgnPaymentDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormRefNo, e.TrnxDate });
 
@@ -9140,7 +9140,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("NTARefPNo");
         });
 
-        modelBuilder.Entity<FormTrnxDtl>(entity =>
+        modelBuilder.Entity<FormTrnxDtlDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.FormGrpId, e.FormId, e.FormRefNo, e.TrnxDate });
 
@@ -9158,7 +9158,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.PrintDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<Fpxcharge>(entity =>
+        modelBuilder.Entity<FpxchargeDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -9169,7 +9169,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("FPXCharge");
         });
 
-        modelBuilder.Entity<FpxresEmailSett>(entity =>
+        modelBuilder.Entity<FpxresEmailSettDbEntity>(entity =>
         {
             entity.HasKey(e => e.SeqNo);
 
@@ -9189,7 +9189,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Fpxresponse>(entity =>
+        modelBuilder.Entity<FpxresponseDbEntity>(entity =>
         {
             entity.HasKey(e => e.RespCode);
 
@@ -9203,7 +9203,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<FsttradeInfo>(entity =>
+        modelBuilder.Entity<FsttradeInfoDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -9264,7 +9264,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<FsttradeInfoHistory>(entity =>
+        modelBuilder.Entity<FsttradeInfoHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -9325,7 +9325,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<GtdclOrdId>(entity =>
+        modelBuilder.Entity<GtdclOrdIdDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SequenceNo, e.ClOrdId, e.XchgCode }).HasName("PK_GTDClOrdId_1");
 
@@ -9343,7 +9343,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Hd14421log>(entity =>
+        modelBuilder.Entity<Hd14421logDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -9355,7 +9355,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<InsageSetting>(entity =>
+        modelBuilder.Entity<InsageSettingDbEntity>(entity =>
         {
             entity.HasKey(e => e.Code);
 
@@ -9381,7 +9381,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<InternalAcct>(entity =>
+        modelBuilder.Entity<InternalAcctDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoBrchCode, e.ClntSname, e.ClntCdsno });
 
@@ -9406,7 +9406,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<IntraDayOrdCotr>(entity =>
+        modelBuilder.Entity<IntraDayOrdCotrDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoBrchCode, e.ClntCode, e.StkCode }).HasName("PK_IntraDayOrdCotrSum");
 
@@ -9428,7 +9428,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SellReinstateAmt).HasColumnType("decimal(20, 2)");
         });
 
-        modelBuilder.Entity<IntraDayOrdCotrDtl>(entity =>
+        modelBuilder.Entity<IntraDayOrdCotrDtlDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.TrxnDate, e.TrxnSequenceNo, e.CoBrchCode, e.ClntCode, e.StkCode, e.ContOrderType, e.ContOrderDate, e.ContractNo, e.SequenceNo });
 
@@ -9456,7 +9456,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.CotrPrc).HasColumnType("decimal(10, 4)");
         });
 
-        modelBuilder.Entity<ItrBosshareInfo>(entity =>
+        modelBuilder.Entity<ItrBosshareInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoBrchCode, e.ClntCode, e.XchgCode, e.StkCode });
 
@@ -9480,7 +9480,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.OpenSqty).HasColumnName("OpenSQty");
         });
 
-        modelBuilder.Entity<ItrFileTrnx>(entity =>
+        modelBuilder.Entity<ItrFileTrnxDbEntity>(entity =>
         {
             entity.HasKey(e => e.FileId);
 
@@ -9494,7 +9494,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.OriFileName).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<Keyword>(entity =>
+        modelBuilder.Entity<KeywordDbEntity>(entity =>
         {
             entity.Property(e => e.KeywordId).HasColumnName("KeywordID");
             entity.Property(e => e.KeyMapPath).HasMaxLength(255);
@@ -9508,7 +9508,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NodeId).HasColumnName("NodeID");
         });
 
-        modelBuilder.Entity<KeywordsScreener>(entity =>
+        modelBuilder.Entity<KeywordsScreenerDbEntity>(entity =>
         {
             entity.HasKey(e => e.KeywordId).HasName("PK_KeywordsScr");
 
@@ -9526,7 +9526,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TableName).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<KldataEf>(entity =>
+        modelBuilder.Entity<KldataEfDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -9550,7 +9550,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("rcode");
         });
 
-        modelBuilder.Entity<LbMembership>(entity =>
+        modelBuilder.Entity<LbMembershipDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -9622,7 +9622,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("USERID");
         });
 
-        modelBuilder.Entity<LbUser>(entity =>
+        modelBuilder.Entity<LbUserDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -9664,7 +9664,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("USERNAME");
         });
 
-        modelBuilder.Entity<LbUserpassword>(entity =>
+        modelBuilder.Entity<LbUserpasswordDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -9689,7 +9689,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("USERID");
         });
 
-        modelBuilder.Entity<LimitInfo>(entity =>
+        modelBuilder.Entity<LimitInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.BranchCode, e.ClientCode });
 
@@ -9766,7 +9766,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<LimitInfo202406211438>(entity =>
+        modelBuilder.Entity<LimitInfo202406211438DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -9827,7 +9827,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TodaySoldAmt).HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<LimitInfoClntXchg>(entity =>
+        modelBuilder.Entity<LimitInfoClntXchgDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.BranchCode, e.ClientCode, e.XchgCode });
 
@@ -9852,7 +9852,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TodaySoldAmt).HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<LimitInfoCo>(entity =>
+        modelBuilder.Entity<LimitInfoCoDbEntity>(entity =>
         {
             entity.HasKey(e => e.CoCode);
 
@@ -9902,7 +9902,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<LimitInfoCoBrch>(entity =>
+        modelBuilder.Entity<LimitInfoCoBrchDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoCode, e.CoBrchCode });
 
@@ -9955,7 +9955,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<LimitInfoStkXchg>(entity =>
+        modelBuilder.Entity<LimitInfoStkXchgDbEntity>(entity =>
         {
             entity.HasKey(e => e.XchgCode);
 
@@ -10005,7 +10005,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<LimitInfoUsr>(entity =>
+        modelBuilder.Entity<LimitInfoUsrDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrId);
 
@@ -10056,7 +10056,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<LimitInfoUsrXchg>(entity =>
+        modelBuilder.Entity<LimitInfoUsrXchgDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.XchgCode });
 
@@ -10076,7 +10076,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TodaySoldAmt).HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<LinkOrderQueue>(entity =>
+        modelBuilder.Entity<LinkOrderQueueDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.LinkOrderSeqNo, e.OrderSeqNo })
                 .HasName("PK_OCOOrderQueue")
@@ -10140,7 +10140,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<LogInfo>(entity =>
+        modelBuilder.Entity<LogInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.RptGrpId, e.RptId }).HasName("PK_RptInfo");
 
@@ -10157,7 +10157,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TableName).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<LogInfo202201281859>(entity =>
+        modelBuilder.Entity<LogInfo202201281859DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -10174,7 +10174,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TableName).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<LogInfoGrp>(entity =>
+        modelBuilder.Entity<LogInfoGrpDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -10186,7 +10186,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.RptGrpViewNodeId).HasColumnName("RptGrpViewNodeID");
         });
 
-        modelBuilder.Entity<ManualOrderFilled>(entity =>
+        modelBuilder.Entity<ManualOrderFilledDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -10225,7 +10225,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MassQuote>(entity =>
+        modelBuilder.Entity<MassQuoteDbEntity>(entity =>
         {
             entity.HasKey(e => e.MassQuoteId).IsClustered(false);
 
@@ -10237,7 +10237,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.OrderDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<MassQuoteClOrdId>(entity =>
+        modelBuilder.Entity<MassQuoteClOrdIdDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SequenceNo, e.ClOrdId, e.SecondaryClOrdId }).IsClustered(false);
 
@@ -10251,7 +10251,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MassQuoteList>(entity =>
+        modelBuilder.Entity<MassQuoteListDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.MassQuoteId, e.SequenceNo }).IsClustered(false);
 
@@ -10260,7 +10260,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.MassQuoteId).HasColumnName("MassQuoteID");
         });
 
-        modelBuilder.Entity<MassQuoteQueue>(entity =>
+        modelBuilder.Entity<MassQuoteQueueDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.MassQuoteId, e.OrderSeqNo }).IsClustered(false);
 
@@ -10322,7 +10322,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MimosSvcInfo>(entity =>
+        modelBuilder.Entity<MimosSvcInfoDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -10348,7 +10348,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MimosSvcInfoHist>(entity =>
+        modelBuilder.Entity<MimosSvcInfoHistDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -10373,7 +10373,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MinBidSize>(entity =>
+        modelBuilder.Entity<MinBidSizeDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.CurrencyCode, e.PriceBidType, e.Price });
 
@@ -10387,7 +10387,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.BidSize).HasColumnType("decimal(10, 3)");
         });
 
-        modelBuilder.Entity<MinBidSizes20181010>(entity =>
+        modelBuilder.Entity<MinBidSizes20181010DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -10403,7 +10403,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MiscSetOff>(entity =>
+        modelBuilder.Entity<MiscSetOffDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.BranchCode, e.TransNo, e.TransDate });
 
@@ -10435,7 +10435,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("");
         });
 
-        modelBuilder.Entity<MstActiveBrch>(entity =>
+        modelBuilder.Entity<MstActiveBrchDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoCode, e.CoBrchCode });
 
@@ -10449,7 +10449,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstBank>(entity =>
+        modelBuilder.Entity<MstBankDbEntity>(entity =>
         {
             entity.HasKey(e => e.BankCode);
 
@@ -10463,7 +10463,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstBidLmt>(entity =>
+        modelBuilder.Entity<MstBidLmtDbEntity>(entity =>
         {
             entity.ToTable("MstBidLmt");
 
@@ -10476,7 +10476,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstBidLmtDtl>(entity =>
+        modelBuilder.Entity<MstBidLmtDtlDbEntity>(entity =>
         {
             entity.ToTable("MstBidLmtDtl");
 
@@ -10486,7 +10486,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SharePrc).HasColumnType("decimal(10, 4)");
         });
 
-        modelBuilder.Entity<MstBrchGrp>(entity =>
+        modelBuilder.Entity<MstBrchGrpDbEntity>(entity =>
         {
             entity.HasKey(e => e.BrchGrpCode);
 
@@ -10500,7 +10500,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstBrk>(entity =>
+        modelBuilder.Entity<MstBrkDbEntity>(entity =>
         {
             entity.HasKey(e => e.BrkCode);
 
@@ -10522,7 +10522,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("N");
         });
 
-        modelBuilder.Entity<MstClntExp>(entity =>
+        modelBuilder.Entity<MstClntExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoBrchCode, e.ClntCode });
 
@@ -10646,7 +10646,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("ECOSTotalPct");
         });
 
-        modelBuilder.Entity<MstClntExps202406211438>(entity =>
+        modelBuilder.Entity<MstClntExps202406211438DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -10770,7 +10770,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("ECOSTotalPct");
         });
 
-        modelBuilder.Entity<MstClntExps202407151738>(entity =>
+        modelBuilder.Entity<MstClntExps202407151738DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -10894,7 +10894,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("ECOSTotalPct");
         });
 
-        modelBuilder.Entity<MstClntExpsBak20221209>(entity =>
+        modelBuilder.Entity<MstClntExpsBak20221209DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -11018,7 +11018,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("ECOSTotalPct");
         });
 
-        modelBuilder.Entity<MstClntExpsNew>(entity =>
+        modelBuilder.Entity<MstClntExpsNewDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoBrchCode, e.ClntCode });
 
@@ -11140,7 +11140,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TodaySoldAmt).HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<MstClntNettLmtExp>(entity =>
+        modelBuilder.Entity<MstClntNettLmtExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoBrchCode, e.ClntCode, e.UpdatedDate }).HasName("PK_MstClntNettLmtExp_1");
 
@@ -11157,7 +11157,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstClntType>(entity =>
+        modelBuilder.Entity<MstClntTypeDbEntity>(entity =>
         {
             entity.HasKey(e => e.ClntType).HasName("PK_ClntType");
 
@@ -11169,7 +11169,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.ClntTypeDesc).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<MstClntType202301161607>(entity =>
+        modelBuilder.Entity<MstClntType202301161607DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -11181,7 +11181,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.ClntTypeDesc).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<MstClntXchgExp>(entity =>
+        modelBuilder.Entity<MstClntXchgExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoBrchCode, e.ClntCode, e.XchgCode });
 
@@ -11221,7 +11221,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Percentage).HasColumnType("decimal(7, 4)");
         });
 
-        modelBuilder.Entity<MstClntXchgExps202406211438>(entity =>
+        modelBuilder.Entity<MstClntXchgExps202406211438DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -11260,7 +11260,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstClntXchgExps202407151739>(entity =>
+        modelBuilder.Entity<MstClntXchgExps202407151739DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -11299,7 +11299,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstClntXchgExpsBak20221116>(entity =>
+        modelBuilder.Entity<MstClntXchgExpsBak20221116DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -11338,7 +11338,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstClntXchgExpsNew>(entity =>
+        modelBuilder.Entity<MstClntXchgExpsNewDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -11377,7 +11377,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstClntXchgExpsNew1>(entity =>
+        modelBuilder.Entity<MstClntXchgExpsNew1DbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoBrchCode, e.ClntCode, e.XchgCode }).HasName("PK_MstClntXchgExpsNew");
 
@@ -11427,7 +11427,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TodaySoldAmt).HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<MstClntXexp>(entity =>
+        modelBuilder.Entity<MstClntXexpDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -11442,7 +11442,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("ClntExpsFSTAmt");
         });
 
-        modelBuilder.Entity<MstCo>(entity =>
+        modelBuilder.Entity<MstCoDbEntity>(entity =>
         {
             entity.HasKey(e => e.CoCode);
 
@@ -11460,7 +11460,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrAccessLimitDefStartTime).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<MstCoBrch>(entity =>
+        modelBuilder.Entity<MstCoBrchDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoCode, e.CoBrchCode });
 
@@ -11482,7 +11482,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstCoBrchEcm>(entity =>
+        modelBuilder.Entity<MstCoBrchEcmDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoCode, e.CoBrchCode });
 
@@ -11507,7 +11507,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstCoBrchExp>(entity =>
+        modelBuilder.Entity<MstCoBrchExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoCode, e.CoBrchCode });
 
@@ -11605,7 +11605,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("CoBrchUsrTotalTLimit");
         });
 
-        modelBuilder.Entity<MstCoBrchExpsBak20221209>(entity =>
+        modelBuilder.Entity<MstCoBrchExpsBak20221209DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -11705,7 +11705,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstCoBrchExpsNew>(entity =>
+        modelBuilder.Entity<MstCoBrchExpsNewDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoCode, e.CoBrchCode });
 
@@ -11784,7 +11784,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TodaySoldAmt).HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<MstCoBrchXchgPrcFeed>(entity =>
+        modelBuilder.Entity<MstCoBrchXchgPrcFeedDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoCode, e.CoBrchCode, e.XchgCode });
 
@@ -11807,7 +11807,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstCoExp>(entity =>
+        modelBuilder.Entity<MstCoExpDbEntity>(entity =>
         {
             entity.HasKey(e => e.CoCode);
 
@@ -11878,7 +11878,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.CoSellTrnxLimit).HasColumnType("decimal(20, 2)");
         });
 
-        modelBuilder.Entity<MstCoExpsBak20221209>(entity =>
+        modelBuilder.Entity<MstCoExpsBak20221209DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -11951,7 +11951,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.CoSellTrnxLimit).HasColumnType("decimal(20, 2)");
         });
 
-        modelBuilder.Entity<MstCoExpsNew>(entity =>
+        modelBuilder.Entity<MstCoExpsNewDbEntity>(entity =>
         {
             entity.HasKey(e => e.CoCode);
 
@@ -12003,7 +12003,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TodaySoldAmt).HasColumnType("decimal(15, 2)");
         });
 
-        modelBuilder.Entity<MstCountry>(entity =>
+        modelBuilder.Entity<MstCountryDbEntity>(entity =>
         {
             entity.HasKey(e => e.CountryCode);
 
@@ -12017,7 +12017,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstCountryExp>(entity =>
+        modelBuilder.Entity<MstCountryExpDbEntity>(entity =>
         {
             entity.HasKey(e => e.CountryCode);
 
@@ -12059,7 +12059,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.CountrySellTrnxLimit).HasColumnType("decimal(20, 2)");
         });
 
-        modelBuilder.Entity<MstCurcy>(entity =>
+        modelBuilder.Entity<MstCurcyDbEntity>(entity =>
         {
             entity.HasKey(e => e.CurcyCode);
 
@@ -12079,7 +12079,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.CurcySellRate).HasColumnType("decimal(11, 8)");
         });
 
-        modelBuilder.Entity<MstDept>(entity =>
+        modelBuilder.Entity<MstDeptDbEntity>(entity =>
         {
             entity.HasKey(e => e.DeptId);
 
@@ -12094,7 +12094,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstDeptContact>(entity =>
+        modelBuilder.Entity<MstDeptContactDbEntity>(entity =>
         {
             entity.ToTable("MstDeptContact");
 
@@ -12114,7 +12114,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstDocument>(entity =>
+        modelBuilder.Entity<MstDocumentDbEntity>(entity =>
         {
             entity.HasKey(e => e.DocId);
 
@@ -12130,7 +12130,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.DocType).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<MstDuitNowBank>(entity =>
+        modelBuilder.Entity<MstDuitNowBankDbEntity>(entity =>
         {
             entity.HasKey(e => e.BankId);
 
@@ -12159,7 +12159,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.LastUpdateDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<MstDuitNowBankProd>(entity =>
+        modelBuilder.Entity<MstDuitNowBankProdDbEntity>(entity =>
         {
             entity.HasKey(e => e.BankId);
 
@@ -12188,7 +12188,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.LastUpdateDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<MstDuitNowReasonCode>(entity =>
+        modelBuilder.Entity<MstDuitNowReasonCodeDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ReasonCode, e.StatusCode });
 
@@ -12203,7 +12203,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstDuitNowStatusCode>(entity =>
+        modelBuilder.Entity<MstDuitNowStatusCodeDbEntity>(entity =>
         {
             entity.HasKey(e => e.StatusCode);
 
@@ -12218,7 +12218,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstEduLvl>(entity =>
+        modelBuilder.Entity<MstEduLvlDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -12230,7 +12230,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstEprod>(entity =>
+        modelBuilder.Entity<MstEprodDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -12247,7 +12247,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstFbmstk>(entity =>
+        modelBuilder.Entity<MstFbmstkDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.StkCode });
 
@@ -12263,7 +12263,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Fbm).HasColumnName("FBM");
         });
 
-        modelBuilder.Entity<MstForm>(entity =>
+        modelBuilder.Entity<MstFormDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.DeptId, e.FormId });
 
@@ -12297,7 +12297,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("N");
         });
 
-        modelBuilder.Entity<MstFpxbank>(entity =>
+        modelBuilder.Entity<MstFpxbankDbEntity>(entity =>
         {
             entity.HasKey(e => e.BankId);
 
@@ -12315,7 +12315,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstGlobalClntEcosLimitExp>(entity =>
+        modelBuilder.Entity<MstGlobalClntEcosLimitExpDbEntity>(entity =>
         {
             entity.HasKey(e => e.ExpLevelType);
 
@@ -12327,7 +12327,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.LimitChangePctg).HasColumnType("decimal(5, 2)");
         });
 
-        modelBuilder.Entity<MstGlobalLimitExp>(entity =>
+        modelBuilder.Entity<MstGlobalLimitExpDbEntity>(entity =>
         {
             entity.HasKey(e => e.ExpsType);
 
@@ -12340,7 +12340,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstHld>(entity =>
+        modelBuilder.Entity<MstHldDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.HldDate, e.XchgCode });
 
@@ -12360,7 +12360,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstIncGrp>(entity =>
+        modelBuilder.Entity<MstIncGrpDbEntity>(entity =>
         {
             entity.HasKey(e => e.IncGrpCode);
 
@@ -12373,7 +12373,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.IncMinVal).HasColumnType("numeric(18, 0)");
         });
 
-        modelBuilder.Entity<MstInstrStpDty>(entity =>
+        modelBuilder.Entity<MstInstrStpDtyDbEntity>(entity =>
         {
             entity.HasKey(e => e.InstrTypeCd).HasName("PK__MstInstr__7E42F4C6DDEC3BBB");
 
@@ -12388,7 +12388,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.StpDtyVal).HasColumnType("decimal(18, 2)");
         });
 
-        modelBuilder.Entity<MstInternalAcType>(entity =>
+        modelBuilder.Entity<MstInternalAcTypeDbEntity>(entity =>
         {
             entity.HasKey(e => e.InternalAcTypeCode);
 
@@ -12402,7 +12402,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstLegalStat>(entity =>
+        modelBuilder.Entity<MstLegalStatDbEntity>(entity =>
         {
             entity.HasKey(e => e.LegalStatCode);
 
@@ -12416,7 +12416,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstMsgList>(entity =>
+        modelBuilder.Entity<MstMsgListDbEntity>(entity =>
         {
             entity.HasKey(e => e.MsgId).HasName("PK_MsgID");
 
@@ -12431,7 +12431,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstMsgList20191113>(entity =>
+        modelBuilder.Entity<MstMsgList20191113DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -12446,7 +12446,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("MsgID");
         });
 
-        modelBuilder.Entity<MstMsgList202201281900>(entity =>
+        modelBuilder.Entity<MstMsgList202201281900DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -12461,7 +12461,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("MsgID");
         });
 
-        modelBuilder.Entity<MstMultiXchgOptList>(entity =>
+        modelBuilder.Entity<MstMultiXchgOptListDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.OptGrpVal }).HasName("PK_MstMultiXchgOptList_1");
 
@@ -12476,7 +12476,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.OptText).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<MstOccup>(entity =>
+        modelBuilder.Entity<MstOccupDbEntity>(entity =>
         {
             entity.HasKey(e => e.OccupCode);
 
@@ -12487,7 +12487,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstOff9Bank>(entity =>
+        modelBuilder.Entity<MstOff9BankDbEntity>(entity =>
         {
             entity.HasKey(e => e.BankCode);
 
@@ -12504,7 +12504,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstOptList>(entity =>
+        modelBuilder.Entity<MstOptListDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.OptGrp, e.OptVal }).HasName("PK_MstOptList_1");
 
@@ -12514,7 +12514,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.OptText).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<MstOptList20160819>(entity =>
+        modelBuilder.Entity<MstOptList20160819DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -12524,7 +12524,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.OptVal).HasMaxLength(10);
         });
 
-        modelBuilder.Entity<MstOptList20191112>(entity =>
+        modelBuilder.Entity<MstOptList20191112DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -12534,7 +12534,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.OptVal).HasMaxLength(10);
         });
 
-        modelBuilder.Entity<MstOptList202201281859>(entity =>
+        modelBuilder.Entity<MstOptList202201281859DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -12544,7 +12544,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.OptVal).HasMaxLength(10);
         });
 
-        modelBuilder.Entity<MstOptList202406061351>(entity =>
+        modelBuilder.Entity<MstOptList202406061351DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -12554,7 +12554,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.OptVal).HasMaxLength(10);
         });
 
-        modelBuilder.Entity<MstOptListBk20160217>(entity =>
+        modelBuilder.Entity<MstOptListBk20160217DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -12564,7 +12564,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.OptVal).HasMaxLength(10);
         });
 
-        modelBuilder.Entity<MstOrderGroup>(entity =>
+        modelBuilder.Entity<MstOrderGroupDbEntity>(entity =>
         {
             entity.HasKey(e => e.GroupCode);
 
@@ -12584,7 +12584,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstPayeeInfo>(entity =>
+        modelBuilder.Entity<MstPayeeInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.PaymentBank, e.CoBrchCode });
 
@@ -12599,7 +12599,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrPwd).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<MstRldClnt>(entity =>
+        modelBuilder.Entity<MstRldClntDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.ClntCode, e.CoBrchCode });
 
@@ -12617,7 +12617,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstStk>(entity =>
+        modelBuilder.Entity<MstStkDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.StkCode });
 
@@ -12711,7 +12711,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.YearLow).HasColumnType("decimal(18, 6)");
         });
 
-        modelBuilder.Entity<MstStk20161006>(entity =>
+        modelBuilder.Entity<MstStk20161006DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -12772,7 +12772,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstStk20190802>(entity =>
+        modelBuilder.Entity<MstStk20190802DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -12857,7 +12857,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.YearLow).HasColumnType("decimal(18, 6)");
         });
 
-        modelBuilder.Entity<MstStk20200309>(entity =>
+        modelBuilder.Entity<MstStk20200309DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -12942,7 +12942,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.YearLow).HasColumnType("decimal(18, 6)");
         });
 
-        modelBuilder.Entity<MstStk20211206>(entity =>
+        modelBuilder.Entity<MstStk20211206DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -13027,7 +13027,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.YearLow).HasColumnType("decimal(18, 6)");
         });
 
-        modelBuilder.Entity<MstStkBackup181210>(entity =>
+        modelBuilder.Entity<MstStkBackup181210DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -13104,7 +13104,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.YearLow).HasColumnType("decimal(18, 6)");
         });
 
-        modelBuilder.Entity<MstStkBk190621Err>(entity =>
+        modelBuilder.Entity<MstStkBk190621ErrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -13203,7 +13203,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstStkBk220801>(entity =>
+        modelBuilder.Entity<MstStkBk220801DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -13288,7 +13288,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.YearLow).HasColumnType("decimal(18, 6)");
         });
 
-        modelBuilder.Entity<MstStkBrd>(entity =>
+        modelBuilder.Entity<MstStkBrdDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.BrdCode }).HasName("PK_MstStkBrd_1");
 
@@ -13299,7 +13299,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.BrdDesc).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<MstStkBrdExp>(entity =>
+        modelBuilder.Entity<MstStkBrdExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.BrdCode }).HasName("PK_MstStkBrdExps_1");
 
@@ -13312,7 +13312,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.AllowPdt).HasColumnName("AllowPDT");
         });
 
-        modelBuilder.Entity<MstStkExp>(entity =>
+        modelBuilder.Entity<MstStkExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.StkCode, e.CoBrchCode, e.CoInd });
 
@@ -13388,7 +13388,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstStkExpsBackup>(entity =>
+        modelBuilder.Entity<MstStkExpsBackupDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -13435,7 +13435,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstStkExpsBak20221209>(entity =>
+        modelBuilder.Entity<MstStkExpsBak20221209DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -13508,7 +13508,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstStkExpsTest>(entity =>
+        modelBuilder.Entity<MstStkExpsTestDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.StkCode, e.CoBrchCode, e.CoInd });
 
@@ -13586,7 +13586,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstStkHlbsmf181210>(entity =>
+        modelBuilder.Entity<MstStkHlbsmf181210DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -13634,14 +13634,14 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.YearLow).HasColumnType("decimal(18, 6)");
         });
 
-        modelBuilder.Entity<MstStkInstrTypeCdSecCatCd>(entity =>
+        modelBuilder.Entity<MstStkInstrTypeCdSecCatCdDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.InstrTypeCd, e.SecCatCd });
 
             entity.ToTable("MstStkInstrTypeCdSecCatCd");
         });
 
-        modelBuilder.Entity<MstStkIpo>(entity =>
+        modelBuilder.Entity<MstStkIpoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.StkCode });
 
@@ -13671,7 +13671,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("StkSName");
         });
 
-        modelBuilder.Entity<MstStkIpotest>(entity =>
+        modelBuilder.Entity<MstStkIpotestDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.StkCode });
 
@@ -13701,7 +13701,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("StkSName");
         });
 
-        modelBuilder.Entity<MstStkProd>(entity =>
+        modelBuilder.Entity<MstStkProdDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.StkCode });
 
@@ -13774,7 +13774,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.StkUpperLmtPrice).HasColumnType("decimal(7, 3)");
         });
 
-        modelBuilder.Entity<MstStkSect>(entity =>
+        modelBuilder.Entity<MstStkSectDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.BrdCode, e.SectCode }).HasName("PK_MstStkSect_1");
 
@@ -13786,7 +13786,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SectDesc).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<MstStkSect20181218>(entity =>
+        modelBuilder.Entity<MstStkSect20181218DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -13798,7 +13798,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgCode).HasMaxLength(10);
         });
 
-        modelBuilder.Entity<MstStkTemp>(entity =>
+        modelBuilder.Entity<MstStkTempDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.StkCode });
 
@@ -13892,7 +13892,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.YearLow).HasColumnType("decimal(18, 6)");
         });
 
-        modelBuilder.Entity<MstStkTest>(entity =>
+        modelBuilder.Entity<MstStkTestDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.StkCode });
 
@@ -13978,7 +13978,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.YearLow).HasColumnType("decimal(18, 6)");
         });
 
-        modelBuilder.Entity<MstStkXchg>(entity =>
+        modelBuilder.Entity<MstStkXchgDbEntity>(entity =>
         {
             entity.HasKey(e => e.XchgCode);
 
@@ -14003,7 +14003,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<MstStkXchgExp>(entity =>
+        modelBuilder.Entity<MstStkXchgExpDbEntity>(entity =>
         {
             entity.HasKey(e => e.XchgCode);
 
@@ -14074,7 +14074,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgSellTrnxLimit).HasColumnType("decimal(20, 2)");
         });
 
-        modelBuilder.Entity<MstStkXchgExpsBak20221209>(entity =>
+        modelBuilder.Entity<MstStkXchgExpsBak20221209DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -14147,7 +14147,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgSellTrnxLimit).HasColumnType("decimal(20, 2)");
         });
 
-        modelBuilder.Entity<MstStkXchgExpsNew>(entity =>
+        modelBuilder.Entity<MstStkXchgExpsNewDbEntity>(entity =>
         {
             entity.HasKey(e => e.XchgCode);
 
@@ -14199,7 +14199,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgSellTrnxLimit).HasColumnType("decimal(20, 2)");
         });
 
-        modelBuilder.Entity<MstSubAccountCrOrder>(entity =>
+        modelBuilder.Entity<MstSubAccountCrOrderDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SubAccount, e.ClntCode });
 
@@ -14213,7 +14213,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstTrxnCost>(entity =>
+        modelBuilder.Entity<MstTrxnCostDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -14246,7 +14246,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.StampDutyVal).HasColumnType("decimal(18, 2)");
         });
 
-        modelBuilder.Entity<MstTrxnCost20190124>(entity =>
+        modelBuilder.Entity<MstTrxnCost20190124DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -14270,7 +14270,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.StampDutyVal).HasColumnType("decimal(18, 2)");
         });
 
-        modelBuilder.Entity<MstTrxnCostAcc>(entity =>
+        modelBuilder.Entity<MstTrxnCostAccDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -14306,7 +14306,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.StampDutyVal).HasColumnType("decimal(18, 2)");
         });
 
-        modelBuilder.Entity<MstTrxnCostBrkgRate>(entity =>
+        modelBuilder.Entity<MstTrxnCostBrkgRateDbEntity>(entity =>
         {
             entity.HasKey(e => e.SeqNo);
 
@@ -14318,7 +14318,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Rate).HasColumnType("decimal(18, 4)");
         });
 
-        modelBuilder.Entity<MstUsrExp>(entity =>
+        modelBuilder.Entity<MstUsrExpDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrId);
 
@@ -14413,7 +14413,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrTdayAmend).HasColumnName("UsrTDayAmend");
         });
 
-        modelBuilder.Entity<MstUsrExpsBak20221209>(entity =>
+        modelBuilder.Entity<MstUsrExpsBak20221209DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -14506,7 +14506,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrTdayAmend).HasColumnName("UsrTDayAmend");
         });
 
-        modelBuilder.Entity<MstUsrExpsNew>(entity =>
+        modelBuilder.Entity<MstUsrExpsNewDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrId);
 
@@ -14581,7 +14581,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrTdayAmend).HasColumnName("UsrTDayAmend");
         });
 
-        modelBuilder.Entity<MstUsrXchgExp>(entity =>
+        modelBuilder.Entity<MstUsrXchgExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.XchgCode });
 
@@ -14611,7 +14611,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstUsrXchgExpsNew>(entity =>
+        modelBuilder.Entity<MstUsrXchgExpsNewDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.XchgCode });
 
@@ -14648,7 +14648,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MstXchg>(entity =>
+        modelBuilder.Entity<MstXchgDbEntity>(entity =>
         {
             entity.HasKey(e => e.XchgCode);
 
@@ -14665,7 +14665,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Mstcobrch20130816>(entity =>
+        modelBuilder.Entity<Mstcobrch20130816DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -14693,7 +14693,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Mststk20190821>(entity =>
+        modelBuilder.Entity<Mststk20190821DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -14792,7 +14792,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MststkBk200203>(entity =>
+        modelBuilder.Entity<MststkBk200203DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -14877,7 +14877,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.YearLow).HasColumnType("decimal(18, 6)");
         });
 
-        modelBuilder.Entity<MststktestBk200204>(entity =>
+        modelBuilder.Entity<MststktestBk200204DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -14962,7 +14962,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.YearLow).HasColumnType("decimal(18, 6)");
         });
 
-        modelBuilder.Entity<MyAccProcDate>(entity =>
+        modelBuilder.Entity<MyAccProcDateDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -14977,7 +14977,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<MyAccProcess>(entity =>
+        modelBuilder.Entity<MyAccProcessDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -14986,7 +14986,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.LastUpdated).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<N2nclientTradeInfo>(entity =>
+        modelBuilder.Entity<N2nclientTradeInfoDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -15038,7 +15038,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<NewOrderSubmission2023718>(entity =>
+        modelBuilder.Entity<NewOrderSubmission2023718DbEntity>(entity =>
         {
             entity.HasKey(e => e.RowNumber).HasName("PK__NewOrder__AAAC09D8A50BF93A");
 
@@ -15059,7 +15059,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TextData).HasColumnType("ntext");
         });
 
-        modelBuilder.Entity<NewTable>(entity =>
+        modelBuilder.Entity<NewTableDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -15116,7 +15116,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("Task Name");
         });
 
-        modelBuilder.Entity<NotificationSetting>(entity =>
+        modelBuilder.Entity<NotificationSettingDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.DevId });
 
@@ -15133,7 +15133,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Ipo).HasColumnName("IPO");
         });
 
-        modelBuilder.Entity<Off9PaymentPnl>(entity =>
+        modelBuilder.Entity<Off9PaymentPnlDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.BkCode, e.BkDesc, e.BkAcctCode });
 
@@ -15150,7 +15150,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OmsusrSession>(entity =>
+        modelBuilder.Entity<OmsusrSessionDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SvrId, e.SvrSource, e.UsrId, e.UsrSessionId });
 
@@ -15171,7 +15171,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.LastUpdate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<On9EnqPolicy>(entity =>
+        modelBuilder.Entity<On9EnqPolicyDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.On9EnqId, e.On9EnqSysType }).HasName("PK_On9EnqPolicy_1");
 
@@ -15181,7 +15181,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.On9EnqAllowSelect).HasDefaultValue(true);
         });
 
-        modelBuilder.Entity<On9EnqSetting>(entity =>
+        modelBuilder.Entity<On9EnqSettingDbEntity>(entity =>
         {
             entity.HasKey(e => e.On9EnqId);
 
@@ -15197,7 +15197,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.On9EnqRedirectUrl).HasMaxLength(500);
         });
 
-        modelBuilder.Entity<OrdRejReason>(entity =>
+        modelBuilder.Entity<OrdRejReasonDbEntity>(entity =>
         {
             entity.HasKey(e => e.OrdRejReason1);
 
@@ -15212,7 +15212,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrdStatus>(entity =>
+        modelBuilder.Entity<OrdStatusDbEntity>(entity =>
         {
             entity.HasKey(e => e.OrdStatus1);
 
@@ -15227,7 +15227,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrdType>(entity =>
+        modelBuilder.Entity<OrdTypeDbEntity>(entity =>
         {
             entity.HasKey(e => e.OrdType1).HasName("PK_OrderType");
 
@@ -15242,7 +15242,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderClOrdId>(entity =>
+        modelBuilder.Entity<OrderClOrdIdDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SequenceNo, e.ClOrdId, e.XchgCode }).HasName("PK_OrderClOrdId_1");
 
@@ -15260,7 +15260,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderClOrdId20141003>(entity =>
+        modelBuilder.Entity<OrderClOrdId20141003DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -15277,7 +15277,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderClOrdId20220325>(entity =>
+        modelBuilder.Entity<OrderClOrdId20220325DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -15294,7 +15294,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderClOrdIdEx>(entity =>
+        modelBuilder.Entity<OrderClOrdIdExDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SequenceNo, e.ClOrdId });
 
@@ -15308,7 +15308,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderConfirmEx>(entity =>
+        modelBuilder.Entity<OrderConfirmExDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Timestamp, e.OrderNo });
 
@@ -15367,7 +15367,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("");
         });
 
-        modelBuilder.Entity<OrderConfirmExhistory>(entity =>
+        modelBuilder.Entity<OrderConfirmExhistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Timestamp, e.OrderNo, e.TimestampFmt }).HasName("PK_OrderConfirmExHistory");
 
@@ -15426,7 +15426,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("");
         });
 
-        modelBuilder.Entity<OrderConfirmExstatus>(entity =>
+        modelBuilder.Entity<OrderConfirmExstatusDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SequenceNo, e.Timestamp, e.StatusSeqNo });
 
@@ -15446,7 +15446,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<OrderConfirmExstatusHistory>(entity =>
+        modelBuilder.Entity<OrderConfirmExstatusHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Timestamp, e.StatusSeqNo, e.ClOrdId });
 
@@ -15466,7 +15466,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<OrderConfirmExstatusHistorySumm>(entity =>
+        modelBuilder.Entity<OrderConfirmExstatusHistorySummDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.OrderNo, e.TimestampFmt, e.Timestamp, e.StatusSeqNo });
 
@@ -15481,7 +15481,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderConfirmExstatusHistorySummArchive>(entity =>
+        modelBuilder.Entity<OrderConfirmExstatusHistorySummArchiveDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.OrderNo, e.TimestampFmt, e.Timestamp, e.StatusSeqNo }).HasName("PK_OrderConfirmEXStatusHistorySumm_Arcv");
 
@@ -15496,7 +15496,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderException>(entity =>
+        modelBuilder.Entity<OrderExceptionDbEntity>(entity =>
         {
             entity.HasKey(e => e.SequenceNo).IsClustered(false);
 
@@ -15622,7 +15622,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgGtd).HasColumnName("XchgGTD");
         });
 
-        modelBuilder.Entity<OrderExceptionHistory>(entity =>
+        modelBuilder.Entity<OrderExceptionHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SequenceNo, e.TimestampFmt }).IsClustered(false);
 
@@ -15748,7 +15748,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgGtd).HasColumnName("XchgGTD");
         });
 
-        modelBuilder.Entity<OrderGroupDtl>(entity =>
+        modelBuilder.Entity<OrderGroupDtlDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.GroupCode, e.UsrId });
 
@@ -15759,7 +15759,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<OrderMetadatum>(entity =>
+        modelBuilder.Entity<OrderMetadatumDbEntity>(entity =>
         {
             entity.HasKey(e => e.OrderSeqNo).IsClustered(false);
 
@@ -15796,7 +15796,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderPlaced>(entity =>
+        modelBuilder.Entity<OrderPlacedDbEntity>(entity =>
         {
             entity.HasKey(e => e.SequenceNo).IsClustered(false);
 
@@ -15945,7 +15945,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgGtd).HasColumnName("XchgGTD");
         });
 
-        modelBuilder.Entity<OrderPlacedGtd>(entity =>
+        modelBuilder.Entity<OrderPlacedGtdDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -16068,7 +16068,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderPlacedHistory>(entity =>
+        modelBuilder.Entity<OrderPlacedHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Timestamp, e.SequenceNo, e.TimestampFmt });
 
@@ -16215,7 +16215,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgGtd).HasColumnName("XchgGTD");
         });
 
-        modelBuilder.Entity<OrderPlacedHistoryArchive>(entity =>
+        modelBuilder.Entity<OrderPlacedHistoryArchiveDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Timestamp, e.SequenceNo, e.TimestampFmt });
 
@@ -16344,7 +16344,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderPlacedHistoryTest>(entity =>
+        modelBuilder.Entity<OrderPlacedHistoryTestDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Timestamp, e.SequenceNo, e.TimestampFmt });
 
@@ -16470,7 +16470,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderPlacedTest>(entity =>
+        modelBuilder.Entity<OrderPlacedTestDbEntity>(entity =>
         {
             entity.HasKey(e => e.Timestamp).IsClustered(false);
 
@@ -16480,7 +16480,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.MatchedAmount).HasColumnType("decimal(15, 4)");
         });
 
-        modelBuilder.Entity<OrderQueue>(entity =>
+        modelBuilder.Entity<OrderQueueDbEntity>(entity =>
         {
             entity.HasKey(e => e.OrderSeqNo).IsClustered(false);
 
@@ -16582,7 +16582,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderQueueDelIdss>(entity =>
+        modelBuilder.Entity<OrderQueueDelIdssDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.OrderSeqNo, e.OrderDate }).IsClustered(false);
 
@@ -16670,7 +16670,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderQueueDelLog>(entity =>
+        modelBuilder.Entity<OrderQueueDelLogDbEntity>(entity =>
         {
             entity.HasKey(e => e.OrderSeqNo).IsClustered(false);
 
@@ -16761,7 +16761,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderQueueDelLogChgBrch>(entity =>
+        modelBuilder.Entity<OrderQueueDelLogChgBrchDbEntity>(entity =>
         {
             entity.HasKey(e => e.OrderSeqNo).IsClustered(false);
 
@@ -16847,7 +16847,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderQueueHistory>(entity =>
+        modelBuilder.Entity<OrderQueueHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.OrderSeqNo, e.TimestampFmt }).IsClustered(false);
 
@@ -16941,7 +16941,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderRejected>(entity =>
+        modelBuilder.Entity<OrderRejectedDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Timestamp, e.SequenceNo });
 
@@ -17066,7 +17066,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderRejectedHistory>(entity =>
+        modelBuilder.Entity<OrderRejectedHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Timestamp, e.SequenceNo, e.TimestampFmt }).IsClustered(false);
 
@@ -17191,7 +17191,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderStatus>(entity =>
+        modelBuilder.Entity<OrderStatusDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SequenceNo, e.Timestamp, e.StatusSeqNo }).IsClustered(false);
 
@@ -17208,7 +17208,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<OrderStatusFlag>(entity =>
+        modelBuilder.Entity<OrderStatusFlagDbEntity>(entity =>
         {
             entity.HasKey(e => e.Status);
 
@@ -17224,7 +17224,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderStatusHistory>(entity =>
+        modelBuilder.Entity<OrderStatusHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SequenceNo, e.TimeStamp, e.StatusSeqNo, e.TimestampFmt });
 
@@ -17241,7 +17241,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<OrderStatusHistorySumm>(entity =>
+        modelBuilder.Entity<OrderStatusHistorySummDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SequenceNo, e.TimestampFmt, e.Timestamp, e.StatusSeqNo });
 
@@ -17253,7 +17253,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderStatusHistorySumm1>(entity =>
+        modelBuilder.Entity<OrderStatusHistorySumm1DbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SequenceNo, e.TimestampFmt, e.Timestamp, e.StatusSeqNo });
 
@@ -17265,7 +17265,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OrderStatusHistorySummArchive>(entity =>
+        modelBuilder.Entity<OrderStatusHistorySummArchiveDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SequenceNo, e.TimestampFmt, e.Timestamp, e.StatusSeqNo }).HasName("PK_OrderStatusHistorySumm_Arcv");
 
@@ -17277,7 +17277,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Osbill>(entity =>
+        modelBuilder.Entity<OsbillDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -17326,7 +17326,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UnitPrice).HasColumnType("numeric(20, 8)");
         });
 
-        modelBuilder.Entity<OsbillHistory>(entity =>
+        modelBuilder.Entity<OsbillHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -17376,7 +17376,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UnitPrice).HasColumnType("numeric(20, 8)");
         });
 
-        modelBuilder.Entity<OsbillHistoryArchive>(entity =>
+        modelBuilder.Entity<OsbillHistoryArchiveDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -17426,7 +17426,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(20, 8)");
         });
 
-        modelBuilder.Entity<OsclntInfoBatch2>(entity =>
+        modelBuilder.Entity<OsclntInfoBatch2DbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SClntCode, e.SCoBrchCode, e.SCurrency });
 
@@ -17446,7 +17446,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sCurrency");
         });
 
-        modelBuilder.Entity<OsdueSettlement>(entity =>
+        modelBuilder.Entity<OsdueSettlementDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.ContractNo, e.TradeDate, e.CoBrchCode });
 
@@ -17511,7 +17511,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("BM");
         });
 
-        modelBuilder.Entity<OsdueSettlement2012>(entity =>
+        modelBuilder.Entity<OsdueSettlement2012DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -17560,7 +17560,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(20, 8)");
         });
 
-        modelBuilder.Entity<OsdueSettlementHistory>(entity =>
+        modelBuilder.Entity<OsdueSettlementHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -17622,7 +17622,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OsdueSettlementHistoryArchive>(entity =>
+        modelBuilder.Entity<OsdueSettlementHistoryArchiveDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -17681,7 +17681,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OsforcedSelling>(entity =>
+        modelBuilder.Entity<OsforcedSellingDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.ContractNo, e.TradeDate, e.CoBrchCode }).HasName("PK_OSForcedSelling_1");
 
@@ -17737,7 +17737,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("BM");
         });
 
-        modelBuilder.Entity<OsforcedSelling2012>(entity =>
+        modelBuilder.Entity<OsforcedSelling2012DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -17777,7 +17777,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(14, 8)");
         });
 
-        modelBuilder.Entity<OsforcedSellingBak20241105>(entity =>
+        modelBuilder.Entity<OsforcedSellingBak20241105DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -17829,7 +17829,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OsforcedSellingHistory>(entity =>
+        modelBuilder.Entity<OsforcedSellingHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.ContractNo, e.TradeDate, e.CoBrchCode, e.LastUpdateDate }).HasName("PK_OSForcedSelling_History");
 
@@ -17882,7 +17882,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Osother>(entity =>
+        modelBuilder.Entity<OsotherDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.ContractNo, e.TradeDate, e.CoBrchCode }).HasName("PK_[OSOthers");
 
@@ -17922,7 +17922,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(20, 8)");
         });
 
-        modelBuilder.Entity<OsothersHistory>(entity =>
+        modelBuilder.Entity<OsothersHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.ContractNo, e.TradeDate, e.CoBrchCode, e.LastUpdateDate }).HasName("PK_[OSOthersHistory");
 
@@ -17963,7 +17963,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(20, 8)");
         });
 
-        modelBuilder.Entity<OsrpurchaseContract>(entity =>
+        modelBuilder.Entity<OsrpurchaseContractDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.ContractNo, e.TradeDate, e.CoBrchCode });
 
@@ -18028,7 +18028,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("BM");
         });
 
-        modelBuilder.Entity<OsrpurchaseContractsHistory>(entity =>
+        modelBuilder.Entity<OsrpurchaseContractsHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -18090,7 +18090,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OsrpurchaseContractsHistoryArchive>(entity =>
+        modelBuilder.Entity<OsrpurchaseContractsHistoryArchiveDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -18149,7 +18149,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OsrsalesContract>(entity =>
+        modelBuilder.Entity<OsrsalesContractDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.ContractNo, e.TradeDate, e.CoBrchCode });
 
@@ -18201,7 +18201,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("BM");
         });
 
-        modelBuilder.Entity<OsrsalesContractsHistory>(entity =>
+        modelBuilder.Entity<OsrsalesContractsHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.ContractNo, e.TradeDate, e.CoBrchCode, e.LastUpdateDate });
 
@@ -18251,7 +18251,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<OssalesProceedsDue>(entity =>
+        modelBuilder.Entity<OssalesProceedsDueDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.ContractNo, e.TradeDate, e.CoBrchCode });
 
@@ -18309,7 +18309,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("BM");
         });
 
-        modelBuilder.Entity<OssalesProceedsDueHistory>(entity =>
+        modelBuilder.Entity<OssalesProceedsDueHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.ContractNo, e.TradeDate, e.CoBrchCode, e.LastUpdateDate });
 
@@ -18365,7 +18365,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<PatchDataTable20140115>(entity =>
+        modelBuilder.Entity<PatchDataTable20140115DbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClntCode, e.UsrName, e.PatchUsrName });
 
@@ -18382,7 +18382,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<PatchUserInfo>(entity =>
+        modelBuilder.Entity<PatchUserInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.UsrName });
 
@@ -18395,7 +18395,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.PatchUsrName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<PaymentContract>(entity =>
+        modelBuilder.Entity<PaymentContractDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.PaymentRefNo, e.ContractNo });
 
@@ -18447,7 +18447,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UpdateBOSFlag");
         });
 
-        modelBuilder.Entity<PaymentContractArchive>(entity =>
+        modelBuilder.Entity<PaymentContractArchiveDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -18469,7 +18469,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<PaymentRecon>(entity =>
+        modelBuilder.Entity<PaymentReconDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -18539,7 +18539,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<PaymentReconArchive>(entity =>
+        modelBuilder.Entity<PaymentReconArchiveDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -18601,7 +18601,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<PaymentRefNo>(entity =>
+        modelBuilder.Entity<PaymentRefNoDbEntity>(entity =>
         {
             entity.HasKey(e => e.PaymentRefNo1).HasName("PK_PaymentRefNo_1");
 
@@ -18684,7 +18684,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TrxnDateTime).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<PaymentRefNoArchive>(entity =>
+        modelBuilder.Entity<PaymentRefNoArchiveDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -18734,7 +18734,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<PaymentRefNoException>(entity =>
+        modelBuilder.Entity<PaymentRefNoExceptionDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -18747,7 +18747,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<PaymentRefNoExceptionArchive>(entity =>
+        modelBuilder.Entity<PaymentRefNoExceptionArchiveDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -18760,7 +18760,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<PaymentStatus>(entity =>
+        modelBuilder.Entity<PaymentStatusDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -18779,7 +18779,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<PfclntActSum>(entity =>
+        modelBuilder.Entity<PfclntActSumDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoBrchCode, e.ClntCode });
 
@@ -18818,7 +18818,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.WithdrawalRatio).HasColumnType("decimal(18, 2)");
         });
 
-        modelBuilder.Entity<PfclntActSumHistory>(entity =>
+        modelBuilder.Entity<PfclntActSumHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoBrchCode, e.ClntCode, e.RecDate });
 
@@ -18858,7 +18858,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.WithdrawalRatio).HasColumnType("decimal(18, 2)");
         });
 
-        modelBuilder.Entity<PfclntInfo>(entity =>
+        modelBuilder.Entity<PfclntInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoBrchCode, e.ClntCode });
 
@@ -18873,7 +18873,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.InitCapital).HasColumnType("decimal(18, 2)");
         });
 
-        modelBuilder.Entity<PortfolioClientTradeInfo>(entity =>
+        modelBuilder.Entity<PortfolioClientTradeInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.TransSeqNo, e.MatchedTime });
 
@@ -18908,7 +18908,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Trsno).HasColumnName("TRSNo");
         });
 
-        modelBuilder.Entity<PortfolioRealSummary>(entity =>
+        modelBuilder.Entity<PortfolioRealSummaryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.BranchCode, e.StockCode, e.XchgCode });
 
@@ -18954,7 +18954,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("VWAvgBuyPriceIncOvh");
         });
 
-        modelBuilder.Entity<PortfolioRealSummary20240220>(entity =>
+        modelBuilder.Entity<PortfolioRealSummary20240220DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -18991,7 +18991,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<PortfolioRealSummary202406211438>(entity =>
+        modelBuilder.Entity<PortfolioRealSummary202406211438DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -19028,7 +19028,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<PortfolioSetting>(entity =>
+        modelBuilder.Entity<PortfolioSettingDbEntity>(entity =>
         {
             entity.HasKey(e => e.PfSetId);
 
@@ -19045,7 +19045,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<PortfolioSettingBrch>(entity =>
+        modelBuilder.Entity<PortfolioSettingBrchDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CompanyCode, e.PfSetId });
 
@@ -19060,7 +19060,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Portfoliorealtransaction>(entity =>
+        modelBuilder.Entity<PortfoliorealtransactionDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -19094,7 +19094,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<PriceAlert>(entity =>
+        modelBuilder.Entity<PriceAlertDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.ClntCode, e.AlertId });
 
@@ -19125,7 +19125,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("StkSName");
         });
 
-        modelBuilder.Entity<ProcessDate>(entity =>
+        modelBuilder.Entity<ProcessDateDbEntity>(entity =>
         {
             entity.HasKey(e => e.ProcessDate1);
 
@@ -19136,7 +19136,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("ProcessDate");
         });
 
-        modelBuilder.Entity<ProcessPymtReconExcp>(entity =>
+        modelBuilder.Entity<ProcessPymtReconExcpDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -19159,7 +19159,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ProdCodeList>(entity =>
+        modelBuilder.Entity<ProdCodeListDbEntity>(entity =>
         {
             entity.HasKey(e => e.ProdCode).HasName("PK_ProductCodeList");
 
@@ -19171,7 +19171,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<PwdGen>(entity =>
+        modelBuilder.Entity<PwdGenDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.UsrId });
 
@@ -19188,7 +19188,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<PwdGenHenry0>(entity =>
+        modelBuilder.Entity<PwdGenHenry0DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -19202,7 +19202,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrPwdChngDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<PwdGenLog>(entity =>
+        modelBuilder.Entity<PwdGenLogDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.LogDate, e.UsrId, e.UsrPwdChngDate }).HasName("PK_PwdGenLog_1");
 
@@ -19222,7 +19222,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("");
         });
 
-        modelBuilder.Entity<PwdGenLogHenry0>(entity =>
+        modelBuilder.Entity<PwdGenLogHenry0DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -19237,7 +19237,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrPwdChngDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<PwdQuestionList>(entity =>
+        modelBuilder.Entity<PwdQuestionListDbEntity>(entity =>
         {
             entity.HasKey(e => e.PwdQuestionId).HasName("PK_PwdQuesionList");
 
@@ -19251,7 +19251,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<PwdQuestionListEcm>(entity =>
+        modelBuilder.Entity<PwdQuestionListEcmDbEntity>(entity =>
         {
             entity.HasKey(e => e.PwdQuestionId).HasName("PK_PwdQuesionListECM");
 
@@ -19265,7 +19265,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<PymtRefNo>(entity =>
+        modelBuilder.Entity<PymtRefNoDbEntity>(entity =>
         {
             entity.HasKey(e => e.PaymentRefNo);
 
@@ -19274,7 +19274,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.PaymentRefNo).ValueGeneratedNever();
         });
 
-        modelBuilder.Entity<PymtRefUnknownEmailLog>(entity =>
+        modelBuilder.Entity<PymtRefUnknownEmailLogDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -19287,7 +19287,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sPymtRefNo");
         });
 
-        modelBuilder.Entity<ResIdstkCode>(entity =>
+        modelBuilder.Entity<ResIdstkCodeDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -19302,7 +19302,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Research>(entity =>
+        modelBuilder.Entity<ResearchDbEntity>(entity =>
         {
             entity.HasKey(e => e.ResId);
 
@@ -19334,7 +19334,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("");
         });
 
-        modelBuilder.Entity<ResearchAnalyst>(entity =>
+        modelBuilder.Entity<ResearchAnalystDbEntity>(entity =>
         {
             entity.HasKey(e => e.AnalystCode);
 
@@ -19351,7 +19351,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ResearchCategory>(entity =>
+        modelBuilder.Entity<ResearchCategoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CategoryId, e.CategoryCode });
 
@@ -19366,7 +19366,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<RptOptGrp>(entity =>
+        modelBuilder.Entity<RptOptGrpDbEntity>(entity =>
         {
             entity.HasKey(e => e.RptGrpId);
 
@@ -19380,7 +19380,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.RptGrpDesc).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<RptOptLst>(entity =>
+        modelBuilder.Entity<RptOptLstDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.RptGrpId, e.RptId }).HasName("PK_RptOptLst_1");
 
@@ -19396,7 +19396,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.RptFileName).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<RsaDeviceToken>(entity =>
+        modelBuilder.Entity<RsaDeviceTokenDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrId);
 
@@ -19412,7 +19412,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.LastUpdatedDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<RsaSetting>(entity =>
+        modelBuilder.Entity<RsaSettingDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -19434,7 +19434,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<RsaUsrType>(entity =>
+        modelBuilder.Entity<RsaUsrTypeDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrType);
 
@@ -19443,7 +19443,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrType).ValueGeneratedNever();
         });
 
-        modelBuilder.Entity<ScnFundDatum>(entity =>
+        modelBuilder.Entity<ScnFundDatumDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.StkCode, e.XchgCode });
 
@@ -19600,7 +19600,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("dYOYRevenue");
         });
 
-        modelBuilder.Entity<Scotr>(entity =>
+        modelBuilder.Entity<ScotrDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SellerCdsno, e.Trsno, e.BuyerCdsno, e.OrderNo }).HasName("PK_SCOTRS_1");
 
@@ -19660,7 +19660,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TerminalID");
         });
 
-        modelBuilder.Entity<Scotrshistory>(entity =>
+        modelBuilder.Entity<ScotrshistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CreateDate, e.SellerCdsno, e.Trsno, e.BuyerCdsno, e.OrderNo }).HasName("PK_SCOTRSHistory_1");
 
@@ -19721,7 +19721,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TerminalID");
         });
 
-        modelBuilder.Entity<Scotrssumm>(entity =>
+        modelBuilder.Entity<ScotrssummDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CoBrchCode, e.ClntCode, e.OrderNo, e.Trsno });
 
@@ -19758,7 +19758,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TerminalID");
         });
 
-        modelBuilder.Entity<ScotrssummHistory>(entity =>
+        modelBuilder.Entity<ScotrssummHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CreateDate, e.CoBrchCode, e.ClntCode, e.OrderNo, e.Trsno });
 
@@ -19796,7 +19796,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TerminalID");
         });
 
-        modelBuilder.Entity<ScreenerCriteriaGrp>(entity =>
+        modelBuilder.Entity<ScreenerCriteriaGrpDbEntity>(entity =>
         {
             entity.HasKey(e => e.CriteriaGrpId);
 
@@ -19817,7 +19817,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ScreenerCriterion>(entity =>
+        modelBuilder.Entity<ScreenerCriterionDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.CriteriaGrpId, e.CriteriaId });
 
@@ -19851,7 +19851,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ScreenerGrp>(entity =>
+        modelBuilder.Entity<ScreenerGrpDbEntity>(entity =>
         {
             entity.ToTable("ScreenerGrp");
 
@@ -19863,7 +19863,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ScreenerList>(entity =>
+        modelBuilder.Entity<ScreenerListDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ScreenerGrpId, e.ScreenerId });
 
@@ -19888,7 +19888,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Set5>(entity =>
+        modelBuilder.Entity<Set5DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -19955,7 +19955,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ShareConsolidate>(entity =>
+        modelBuilder.Entity<ShareConsolidateDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.StkCode, e.StartDate });
 
@@ -19974,7 +19974,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ShareConsolidationRecon>(entity =>
+        modelBuilder.Entity<ShareConsolidationReconDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20026,7 +20026,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TimeStamp).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<ShareInfo>(entity =>
+        modelBuilder.Entity<ShareInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.BranchCode, e.ClientCode, e.StockCode, e.XchgCode }).HasName("PK_ShareInfo_1");
 
@@ -20081,7 +20081,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TodayTransferOutQty).HasDefaultValue(0);
         });
 
-        modelBuilder.Entity<ShareInfo20240220>(entity =>
+        modelBuilder.Entity<ShareInfo20240220DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20111,7 +20111,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<ShareInfo202406211438>(entity =>
+        modelBuilder.Entity<ShareInfo202406211438DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20141,7 +20141,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<ShareInfoRemoved>(entity =>
+        modelBuilder.Entity<ShareInfoRemovedDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20172,7 +20172,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<ShareInfoStk>(entity =>
+        modelBuilder.Entity<ShareInfoStkDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.StkCode, e.CoCode });
 
@@ -20231,7 +20231,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TodaySoldQty).HasDefaultValue(0);
         });
 
-        modelBuilder.Entity<ShareInfoStkBrch>(entity =>
+        modelBuilder.Entity<ShareInfoStkBrchDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.StkCode, e.CoCode, e.CoBrchCode });
 
@@ -20293,7 +20293,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TodaySoldQty).HasDefaultValue(0);
         });
 
-        modelBuilder.Entity<SiteMenu>(entity =>
+        modelBuilder.Entity<SiteMenuDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.NodeSystemType, e.NodeGrpId, e.NodeId, e.NodeProdCode });
 
@@ -20322,7 +20322,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NodeUrl).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<SiteMenu202201281859>(entity =>
+        modelBuilder.Entity<SiteMenu202201281859DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20349,7 +20349,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NodeUrl).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<SiteMenu20241023>(entity =>
+        modelBuilder.Entity<SiteMenu20241023DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20376,7 +20376,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NodeUrl).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<SiteMenuBak20240408>(entity =>
+        modelBuilder.Entity<SiteMenuBak20240408DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20403,7 +20403,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NodeUrl).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<SiteMenuBak20240920>(entity =>
+        modelBuilder.Entity<SiteMenuBak20240920DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20430,7 +20430,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NodeUrl).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<SiteMenuBck>(entity =>
+        modelBuilder.Entity<SiteMenuBckDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20457,7 +20457,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NodeUrl).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<SiteMenuGrp>(entity =>
+        modelBuilder.Entity<SiteMenuGrpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.NodeGrpSystemType, e.NodeGrpId });
 
@@ -20472,7 +20472,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NodeGrpInActiveTabUrl).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<Sitemenu20130704>(entity =>
+        modelBuilder.Entity<Sitemenu20130704DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20499,7 +20499,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NodeUrl).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<SmfupdateOrder>(entity =>
+        modelBuilder.Entity<SmfupdateOrderDbEntity>(entity =>
         {
             entity.HasKey(e => e.RecordNo).HasName("PK_SMFReleaseOrder");
 
@@ -20539,7 +20539,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Timestamp).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<SsokeyGen>(entity =>
+        modelBuilder.Entity<SsokeyGenDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20556,7 +20556,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("SSO_Site");
         });
 
-        modelBuilder.Entity<StateList>(entity =>
+        modelBuilder.Entity<StateListDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20570,7 +20570,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<StkCtrl>(entity =>
+        modelBuilder.Entity<StkCtrlDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.DataType, e.DataCode, e.CtrlType, e.CtrlCode });
 
@@ -20600,7 +20600,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgCode).HasMaxLength(10);
         });
 
-        modelBuilder.Entity<StkCtrl20220303>(entity =>
+        modelBuilder.Entity<StkCtrl20220303DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20624,7 +20624,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgCode).HasMaxLength(10);
         });
 
-        modelBuilder.Entity<StkEnt>(entity =>
+        modelBuilder.Entity<StkEntDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.StkCode, e.ExDate, e.LodgeDate });
 
@@ -20646,7 +20646,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<StkIdea>(entity =>
+        modelBuilder.Entity<StkIdeaDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.XchgCode, e.StkCode, e.LogUsr });
 
@@ -20674,7 +20674,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.LastUpdateDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<StockFinancialInfo>(entity =>
+        modelBuilder.Entity<StockFinancialInfoDbEntity>(entity =>
         {
             entity.HasKey(e => e.StockCode);
 
@@ -20688,7 +20688,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<StockMktFinancialInfo>(entity =>
+        modelBuilder.Entity<StockMktFinancialInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Type, e.Sector });
 
@@ -20705,7 +20705,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<SysLmtType>(entity =>
+        modelBuilder.Entity<SysLmtTypeDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20714,7 +20714,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SysLmtType1).HasColumnName("SysLmtType");
         });
 
-        modelBuilder.Entity<TaskDependency>(entity =>
+        modelBuilder.Entity<TaskDependencyDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.TaskId, e.TaskCat, e.Dependency });
 
@@ -20729,7 +20729,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TaskDependency20150727>(entity =>
+        modelBuilder.Entity<TaskDependency20150727DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20744,7 +20744,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TaskID");
         });
 
-        modelBuilder.Entity<TaskDependency20210621>(entity =>
+        modelBuilder.Entity<TaskDependency20210621DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20759,7 +20759,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TaskID");
         });
 
-        modelBuilder.Entity<TaskDependency202404291349>(entity =>
+        modelBuilder.Entity<TaskDependency202404291349DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20774,7 +20774,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TaskID");
         });
 
-        modelBuilder.Entity<TaskDependency202406250958>(entity =>
+        modelBuilder.Entity<TaskDependency202406250958DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20789,7 +20789,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TaskID");
         });
 
-        modelBuilder.Entity<TaskDependencyKibbNewTask>(entity =>
+        modelBuilder.Entity<TaskDependencyKibbNewTaskDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20804,7 +20804,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TaskID");
         });
 
-        modelBuilder.Entity<TaskDependencyKibbNewTasks20210625>(entity =>
+        modelBuilder.Entity<TaskDependencyKibbNewTasks20210625DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20819,7 +20819,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TaskID");
         });
 
-        modelBuilder.Entity<TaskFrequency>(entity =>
+        modelBuilder.Entity<TaskFrequencyDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.TaskId, e.TaskCat, e.Frequency, e.Ref1, e.Ref2 });
 
@@ -20835,7 +20835,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<TaskFrequency20150727>(entity =>
+        modelBuilder.Entity<TaskFrequency20150727DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20851,7 +20851,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TaskID");
         });
 
-        modelBuilder.Entity<TaskFrequency20210621>(entity =>
+        modelBuilder.Entity<TaskFrequency20210621DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20867,7 +20867,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TaskID");
         });
 
-        modelBuilder.Entity<TaskFrequency202205171150>(entity =>
+        modelBuilder.Entity<TaskFrequency202205171150DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20883,7 +20883,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TaskID");
         });
 
-        modelBuilder.Entity<TaskFrequency202403261047>(entity =>
+        modelBuilder.Entity<TaskFrequency202403261047DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20899,7 +20899,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TaskID");
         });
 
-        modelBuilder.Entity<TaskFrequency202404031550>(entity =>
+        modelBuilder.Entity<TaskFrequency202404031550DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20915,7 +20915,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TaskID");
         });
 
-        modelBuilder.Entity<TaskFrequency202404291346>(entity =>
+        modelBuilder.Entity<TaskFrequency202404291346DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20931,7 +20931,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TaskID");
         });
 
-        modelBuilder.Entity<TaskFrequency202406250957>(entity =>
+        modelBuilder.Entity<TaskFrequency202406250957DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20947,7 +20947,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TaskID");
         });
 
-        modelBuilder.Entity<TaskFrequency202406281353>(entity =>
+        modelBuilder.Entity<TaskFrequency202406281353DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20963,7 +20963,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TaskID");
         });
 
-        modelBuilder.Entity<TaskFrequencyKibbNewTask>(entity =>
+        modelBuilder.Entity<TaskFrequencyKibbNewTaskDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20979,7 +20979,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TaskID");
         });
 
-        modelBuilder.Entity<TaskFrequencyKibbNewTasks20210625>(entity =>
+        modelBuilder.Entity<TaskFrequencyKibbNewTasks20210625DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -20995,7 +20995,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TaskID");
         });
 
-        modelBuilder.Entity<TaskLog>(entity =>
+        modelBuilder.Entity<TaskLogDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.LogTime, e.TaskCat, e.TaskId, e.Status, e.TaskDate });
 
@@ -21012,7 +21012,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TaskDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<TaskStatusEntity>(entity =>
+        modelBuilder.Entity<TaskStatusDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.TaskCat, e.TaskId, e.TaskDate });
 
@@ -21029,7 +21029,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<TaskStatusLog>(entity =>
+        modelBuilder.Entity<TaskStatusLogDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.TaskCat, e.TaskId, e.TaskDate });
 
@@ -21047,7 +21047,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TaskStartTime).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<TempPayTran>(entity =>
+        modelBuilder.Entity<TempPayTranDbEntity>(entity =>
         {
             entity.HasNoKey();
 
@@ -21065,7 +21065,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sPaymentRef");
         });
 
-        modelBuilder.Entity<TempShareInfo>(entity =>
+        modelBuilder.Entity<TempShareInfoDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -21085,7 +21085,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TempStkIndicator>(entity =>
+        modelBuilder.Entity<TempStkIndicatorDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -21105,7 +21105,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TempStockInfo>(entity =>
+        modelBuilder.Entity<TempStockInfoDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -21125,7 +21125,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TempTbl>(entity =>
+        modelBuilder.Entity<TempTblDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -21150,7 +21150,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sCoBrchCode");
         });
 
-        modelBuilder.Entity<Test>(entity =>
+        modelBuilder.Entity<TestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -21183,7 +21183,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TimeInForce>(entity =>
+        modelBuilder.Entity<TimeInForceDbEntity>(entity =>
         {
             entity.HasKey(e => e.TimeInForce1);
 
@@ -21198,7 +21198,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TmpOetrd>(entity =>
+        modelBuilder.Entity<TmpOetrdDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -21269,7 +21269,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TmpPortfolioBal>(entity =>
+        modelBuilder.Entity<TmpPortfolioBalDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClntCode, e.CoBrchCode, e.StkCode });
 
@@ -21286,7 +21286,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Tncaccept>(entity =>
+        modelBuilder.Entity<TncacceptDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.DateTime, e.UsrId });
 
@@ -21314,7 +21314,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("");
         });
 
-        modelBuilder.Entity<Tncmaint>(entity =>
+        modelBuilder.Entity<TncmaintDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.Id });
 
@@ -21347,7 +21347,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TraceMstStkUpdate>(entity =>
+        modelBuilder.Entity<TraceMstStkUpdateDbEntity>(entity =>
         {
             entity.ToTable("TraceMstStkUpdate");
 
@@ -21374,7 +21374,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TradeSplit>(entity =>
+        modelBuilder.Entity<TradeSplitDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -21415,7 +21415,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<TransMovement>(entity =>
+        modelBuilder.Entity<TransMovementDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.CoBrchCode, e.Currency, e.TrxDateTime, e.PrinTrxNo, e.TrxRefNo, e.MvmSeqNo });
 
@@ -21460,7 +21460,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransMovementHistory>(entity =>
+        modelBuilder.Entity<TransMovementHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClientCode, e.CoBrchCode, e.Currency, e.TrxDateTime, e.PrinTrxNo, e.TrxRefNo, e.MvmSeqNo, e.LastUpdateDate });
 
@@ -21506,7 +21506,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Transaction>(entity =>
+        modelBuilder.Entity<TransactionDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Oid, e.TransDate, e.ClientCode });
 
@@ -21566,7 +21566,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionType>(entity =>
+        modelBuilder.Entity<TransactionTypeDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -21580,7 +21580,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Transactions123>(entity =>
+        modelBuilder.Entity<Transactions123DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -21639,7 +21639,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionsArchive>(entity =>
+        modelBuilder.Entity<TransactionsArchiveDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.RecDate, e.Oid, e.TransDate, e.ClientCode });
 
@@ -21694,7 +21694,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UploadDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<TransactionsHistory>(entity =>
+        modelBuilder.Entity<TransactionsHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Oid, e.TransDate, e.ClientCode });
 
@@ -21754,7 +21754,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionsHistory2011>(entity =>
+        modelBuilder.Entity<TransactionsHistory2011DbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Oid, e.TransDate, e.ClientCode });
 
@@ -21814,7 +21814,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionsHistory2012>(entity =>
+        modelBuilder.Entity<TransactionsHistory2012DbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Oid, e.TransDate, e.ClientCode });
 
@@ -21874,7 +21874,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionsHistory2012202406211438>(entity =>
+        modelBuilder.Entity<TransactionsHistory2012202406211438DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -21934,7 +21934,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionsHistory2013>(entity =>
+        modelBuilder.Entity<TransactionsHistory2013DbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Oid, e.TransDate, e.ClientCode });
 
@@ -21994,7 +21994,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionsHistory2014>(entity =>
+        modelBuilder.Entity<TransactionsHistory2014DbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Oid, e.TransDate, e.ClientCode });
 
@@ -22054,7 +22054,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionsHistory2015>(entity =>
+        modelBuilder.Entity<TransactionsHistory2015DbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Oid, e.TransDate, e.ClientCode });
 
@@ -22114,7 +22114,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionsHistory2016>(entity =>
+        modelBuilder.Entity<TransactionsHistory2016DbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Oid, e.TransDate, e.ClientCode });
 
@@ -22174,7 +22174,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionsHistory2017>(entity =>
+        modelBuilder.Entity<TransactionsHistory2017DbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Oid, e.TransDate, e.ClientCode });
 
@@ -22234,7 +22234,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionsHistory202406211438>(entity =>
+        modelBuilder.Entity<TransactionsHistory202406211438DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -22294,7 +22294,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionsHistoryBak20240910>(entity =>
+        modelBuilder.Entity<TransactionsHistoryBak20240910DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -22354,7 +22354,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionsHistoryTemp>(entity =>
+        modelBuilder.Entity<TransactionsHistoryTempDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -22414,7 +22414,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionsRealized>(entity =>
+        modelBuilder.Entity<TransactionsRealizedDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Id, e.Timestamp, e.SeqNo });
 
@@ -22458,7 +22458,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionsRealized20130828>(entity =>
+        modelBuilder.Entity<TransactionsRealized20130828DbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Id, e.Timestamp, e.ClntCode }).HasName("PK_TransactionsRealized_1");
 
@@ -22502,7 +22502,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionsRealizedEx>(entity =>
+        modelBuilder.Entity<TransactionsRealizedExDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -22541,7 +22541,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionsRealizedHistory>(entity =>
+        modelBuilder.Entity<TransactionsRealizedHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -22580,7 +22580,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionsRealizedHistory20210524>(entity =>
+        modelBuilder.Entity<TransactionsRealizedHistory20210524DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -22617,7 +22617,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TransactionsTemp>(entity =>
+        modelBuilder.Entity<TransactionsTempDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -22685,7 +22685,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TrdgPinGen>(entity =>
+        modelBuilder.Entity<TrdgPinGenDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.UsrId });
 
@@ -22703,7 +22703,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<TrdgPinGenLog>(entity =>
+        modelBuilder.Entity<TrdgPinGenLogDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.LogDate, e.UsrId, e.UsrTrdgPinChngDate });
 
@@ -22724,7 +22724,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("");
         });
 
-        modelBuilder.Entity<TxnProdVer>(entity =>
+        modelBuilder.Entity<TxnProdVerDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.PlatCode, e.ReleaseVer });
 
@@ -22745,7 +22745,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.ReleaseDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<UserFavourite>(entity =>
+        modelBuilder.Entity<UserFavouriteDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UserId, e.FavGroup });
 
@@ -22758,7 +22758,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("");
         });
 
-        modelBuilder.Entity<UserFavourites20130815>(entity =>
+        modelBuilder.Entity<UserFavourites20130815DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -22772,7 +22772,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<UserFavourites20190920>(entity =>
+        modelBuilder.Entity<UserFavourites20190920DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -22786,7 +22786,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<UserFavourites20240131>(entity =>
+        modelBuilder.Entity<UserFavourites20240131DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -22800,7 +22800,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<UserFavouritesHistory>(entity =>
+        modelBuilder.Entity<UserFavouritesHistoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.Date, e.UserId, e.FavGroup });
 
@@ -22816,7 +22816,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValue("");
         });
 
-        modelBuilder.Entity<UserRegistration>(entity =>
+        modelBuilder.Entity<UserRegistrationDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrId);
 
@@ -22936,7 +22936,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<UserRegistration202207211504>(entity =>
+        modelBuilder.Entity<UserRegistration202207211504DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -23056,7 +23056,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<UserRegistrationEcm>(entity =>
+        modelBuilder.Entity<UserRegistrationEcmDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrId);
 
@@ -23138,7 +23138,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<UserRegistrationTest>(entity =>
+        modelBuilder.Entity<UserRegistrationTestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -23150,7 +23150,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<UsloginActvTime>(entity =>
+        modelBuilder.Entity<UsloginActvTimeDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -23167,7 +23167,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("Column 2");
         });
 
-        modelBuilder.Entity<UsrAccess>(entity =>
+        modelBuilder.Entity<UsrAccessDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrSeqNo, e.UsrId }).HasName("PK_UsrLogin");
 
@@ -23185,7 +23185,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrRemoteAdd).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<UsrAccess202205171150>(entity =>
+        modelBuilder.Entity<UsrAccess202205171150DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -23202,7 +23202,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrSeqNo).ValueGeneratedOnAdd();
         });
 
-        modelBuilder.Entity<UsrAccess202404031545>(entity =>
+        modelBuilder.Entity<UsrAccess202404031545DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -23219,7 +23219,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrSeqNo).ValueGeneratedOnAdd();
         });
 
-        modelBuilder.Entity<UsrAccess202406281348>(entity =>
+        modelBuilder.Entity<UsrAccess202406281348DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -23236,7 +23236,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrSeqNo).ValueGeneratedOnAdd();
         });
 
-        modelBuilder.Entity<UsrAccessArchive>(entity =>
+        modelBuilder.Entity<UsrAccessArchiveDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrSeqNo, e.UsrId, e.UsrLastUpdated });
 
@@ -23253,7 +23253,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrRemoteAdd).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<UsrAccessArchive202205171150>(entity =>
+        modelBuilder.Entity<UsrAccessArchive202205171150DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -23269,7 +23269,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrRemoteAdd).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<UsrAccessArchive202404031545>(entity =>
+        modelBuilder.Entity<UsrAccessArchive202404031545DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -23285,7 +23285,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrRemoteAdd).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<UsrAccessArchive202406281348>(entity =>
+        modelBuilder.Entity<UsrAccessArchive202406281348DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -23301,7 +23301,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrRemoteAdd).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<UsrAccessEx>(entity =>
+        modelBuilder.Entity<UsrAccessExDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrSeqNo).HasName("PK_UsrLoginEx");
 
@@ -23321,7 +23321,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrRemoteAdd).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<UsrAccessExExtract>(entity =>
+        modelBuilder.Entity<UsrAccessExExtractDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrSeqNo);
 
@@ -23334,7 +23334,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrLastUpdated).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<UsrAccessExSumm>(entity =>
+        modelBuilder.Entity<UsrAccessExSummDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.UsrIdyymm });
 
@@ -23348,7 +23348,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrLastUpdated).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<UsrAccessFa>(entity =>
+        modelBuilder.Entity<UsrAccessFaDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.AccessDate });
 
@@ -23361,7 +23361,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.AccessDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<UsrAccessLimit>(entity =>
+        modelBuilder.Entity<UsrAccessLimitDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrId);
 
@@ -23383,7 +23383,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrAccessLimitStartTime).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<UsrAnalytic>(entity =>
+        modelBuilder.Entity<UsrAnalyticDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.ClickDateTime, e.UsrId, e.NodeTitle, e.NodeGrpId });
 
@@ -23401,7 +23401,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<UsrAuthLimit>(entity =>
+        modelBuilder.Entity<UsrAuthLimitDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrId);
 
@@ -23459,7 +23459,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrAuthTotalTopUpAmt).HasColumnType("decimal(20, 2)");
         });
 
-        modelBuilder.Entity<UsrBookmark>(entity =>
+        modelBuilder.Entity<UsrBookmarkDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.NodeSystemType, e.NodeGrpId, e.NodeId, e.SeqNo });
 
@@ -23473,7 +23473,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NodeId).HasColumnName("NodeID");
         });
 
-        modelBuilder.Entity<UsrClntList>(entity =>
+        modelBuilder.Entity<UsrClntListDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.CoBrchCode, e.ClntCode });
 
@@ -23491,7 +23491,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<UsrClntList20140115>(entity =>
+        modelBuilder.Entity<UsrClntList20140115DbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.CoBrchCode, e.ClntCode });
 
@@ -23509,7 +23509,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<UsrClntListTest>(entity =>
+        modelBuilder.Entity<UsrClntListTestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -23522,7 +23522,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<UsrCoBrchAssign>(entity =>
+        modelBuilder.Entity<UsrCoBrchAssignDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.CoCode, e.CoBrchCode });
 
@@ -23535,7 +23535,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.CoBrchCode).HasMaxLength(6);
         });
 
-        modelBuilder.Entity<UsrDormantCtrl>(entity =>
+        modelBuilder.Entity<UsrDormantCtrlDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrType);
 
@@ -23544,7 +23544,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrType).ValueGeneratedNever();
         });
 
-        modelBuilder.Entity<UsrEcm2kibb>(entity =>
+        modelBuilder.Entity<UsrEcm2kibbDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrId);
 
@@ -23556,7 +23556,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<UsrEcmoney2Kibb>(entity =>
+        modelBuilder.Entity<UsrEcmoney2KibbDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrId);
 
@@ -23568,7 +23568,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<UsrEmailList>(entity =>
+        modelBuilder.Entity<UsrEmailListDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -23589,7 +23589,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<UsrInfo>(entity =>
+        modelBuilder.Entity<UsrInfoDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrId);
 
@@ -23717,7 +23717,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValueSql("((0))");
         });
 
-        modelBuilder.Entity<UsrInfo20140115>(entity =>
+        modelBuilder.Entity<UsrInfo20140115DbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrId).HasName("PK_UsrInfo_20130115");
 
@@ -23815,7 +23815,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<UsrInfo20140826>(entity =>
+        modelBuilder.Entity<UsrInfo20140826DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -23910,7 +23910,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<UsrInfoBak>(entity =>
+        modelBuilder.Entity<UsrInfoBakDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -24004,7 +24004,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<UsrInfoTest>(entity =>
+        modelBuilder.Entity<UsrInfoTestDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrId);
 
@@ -24083,7 +24083,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasDefaultValueSql("((0))");
         });
 
-        modelBuilder.Entity<UsrInfoTest2>(entity =>
+        modelBuilder.Entity<UsrInfoTest2DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -24100,7 +24100,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrType).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<UsrJwttoken>(entity =>
+        modelBuilder.Entity<UsrJwttokenDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrId).HasName("PK_UsrJWTToken_UsrID");
 
@@ -24118,7 +24118,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<UsrKentradePlusInfo>(entity =>
+        modelBuilder.Entity<UsrKentradePlusInfoDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrId);
 
@@ -24150,7 +24150,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<UsrKentradePlusMonthlyReportBak20240628>(entity =>
+        modelBuilder.Entity<UsrKentradePlusMonthlyReportBak20240628DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -24179,7 +24179,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<UsrKentradePlusMonthlyRpt>(entity =>
+        modelBuilder.Entity<UsrKentradePlusMonthlyRptDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.LastUpdatedDate });
 
@@ -24209,7 +24209,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<UsrLogin>(entity =>
+        modelBuilder.Entity<UsrLoginDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrId).HasName("PK_UsrLogin_UsrID");
 
@@ -24258,7 +24258,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrTwoFactorAuthBypassExpiryDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<UsrLogin202204270830>(entity =>
+        modelBuilder.Entity<UsrLogin202204270830DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -24287,7 +24287,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrTrdgPinStat).HasMaxLength(1);
         });
 
-        modelBuilder.Entity<UsrLogin202205171149>(entity =>
+        modelBuilder.Entity<UsrLogin202205171149DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -24325,7 +24325,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrTrdgPinStat).HasMaxLength(1);
         });
 
-        modelBuilder.Entity<UsrLogin202404031533>(entity =>
+        modelBuilder.Entity<UsrLogin202404031533DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -24364,7 +24364,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrTwoFactorAuthBypassExpiryDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<UsrLogin202406281340>(entity =>
+        modelBuilder.Entity<UsrLogin202406281340DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -24393,7 +24393,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrTrdgPinStat).HasMaxLength(1);
         });
 
-        modelBuilder.Entity<UsrLoginActvTime>(entity =>
+        modelBuilder.Entity<UsrLoginActvTimeDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.UsrLogin });
 
@@ -24405,7 +24405,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrActiveTime).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<UsrLoginActvTimeTemp>(entity =>
+        modelBuilder.Entity<UsrLoginActvTimeTempDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -24417,7 +24417,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<UsrMobileDeviceId>(entity =>
+        modelBuilder.Entity<UsrMobileDeviceIdDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.DeviceId, e.PlatCode, e.Uuid, e.ReleaseVer });
 
@@ -24444,7 +24444,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrLastUpdated).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<UsrMobileDeviceId20240716>(entity =>
+        modelBuilder.Entity<UsrMobileDeviceId20240716DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -24471,7 +24471,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UUID");
         });
 
-        modelBuilder.Entity<UsrMobileDeviceIdsendDtl>(entity =>
+        modelBuilder.Entity<UsrMobileDeviceIdsendDtlDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.NewsId, e.UsrId, e.DeviceId, e.PlatCode, e.Uuid, e.LogDate, e.MessageSend });
 
@@ -24497,7 +24497,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrLastUpdated).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<UsrSession>(entity =>
+        modelBuilder.Entity<UsrSessionDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.UsrSessionId, e.SystemType }).HasName("PK_UsrSession_1");
 
@@ -24519,7 +24519,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<UsrSetting>(entity =>
+        modelBuilder.Entity<UsrSettingDbEntity>(entity =>
         {
             entity.HasKey(e => e.SetId);
 
@@ -24532,7 +24532,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SetValue).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<UsrSetting202204270831>(entity =>
+        modelBuilder.Entity<UsrSetting202204270831DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -24543,7 +24543,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SetValue).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<UsrSetting202205171150>(entity =>
+        modelBuilder.Entity<UsrSetting202205171150DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -24554,7 +24554,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SetValue).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<UsrSetting202311161504>(entity =>
+        modelBuilder.Entity<UsrSetting202311161504DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -24565,7 +24565,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SetValue).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<UsrSetting202404031542>(entity =>
+        modelBuilder.Entity<UsrSetting202404031542DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -24576,7 +24576,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SetValue).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<UsrSetting202406281346>(entity =>
+        modelBuilder.Entity<UsrSetting202406281346DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -24587,7 +24587,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SetValue).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<UsrTypeAuthLimit>(entity =>
+        modelBuilder.Entity<UsrTypeAuthLimitDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrType);
 
@@ -24642,7 +24642,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrTypeAuthTotalTopUpAmt).HasColumnType("decimal(20, 2)");
         });
 
-        modelBuilder.Entity<UsrTypeList>(entity =>
+        modelBuilder.Entity<UsrTypeListDbEntity>(entity =>
         {
             entity.HasKey(e => e.UsrType).HasName("PK_UserType");
 
@@ -24699,35 +24699,35 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrTypeDesc).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<UsrTypeProd>(entity =>
+        modelBuilder.Entity<UsrTypeProdDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrType, e.ProdCode });
 
             entity.ToTable("UsrTypeProd");
         });
 
-        modelBuilder.Entity<UsrTypeProd20130713>(entity =>
+        modelBuilder.Entity<UsrTypeProd20130713DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
                 .ToTable("UsrTypeProd_20130713");
         });
 
-        modelBuilder.Entity<UsrTypeProd20240405>(entity =>
+        modelBuilder.Entity<UsrTypeProd20240405DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
                 .ToTable("UsrTypeProd_20240405");
         });
 
-        modelBuilder.Entity<UsrTypeProd202410090945>(entity =>
+        modelBuilder.Entity<UsrTypeProd202410090945DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
                 .ToTable("UsrTypeProd_20241009_0945");
         });
 
-        modelBuilder.Entity<UsrTypeXchg>(entity =>
+        modelBuilder.Entity<UsrTypeXchgDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrType, e.XchgCode });
 
@@ -24738,7 +24738,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("XChgCode");
         });
 
-        modelBuilder.Entity<UsrXchg>(entity =>
+        modelBuilder.Entity<UsrXchgDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.UsrId, e.XchgCode, e.Type });
 
@@ -24770,7 +24770,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<UsrXchg202408231131>(entity =>
+        modelBuilder.Entity<UsrXchg202408231131DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -24796,7 +24796,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<UsrXchgLog>(entity =>
+        modelBuilder.Entity<UsrXchgLogDbEntity>(entity =>
         {
             entity.ToTable("UsrXchg_Log");
 
@@ -24854,7 +24854,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgCode).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<UsrXchgModeChg>(entity =>
+        modelBuilder.Entity<UsrXchgModeChgDbEntity>(entity =>
         {
             entity.ToTable("UsrXchg_ModeChg");
 
@@ -24878,14 +24878,14 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgCode).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<Usrtypeprod38>(entity =>
+        modelBuilder.Entity<Usrtypeprod38DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
                 .ToTable("usrtypeprod_38");
         });
 
-        modelBuilder.Entity<ValRcvdByAutoPaymentResend>(entity =>
+        modelBuilder.Entity<ValRcvdByAutoPaymentResendDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -24913,7 +24913,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sPymtRefNo");
         });
 
-        modelBuilder.Entity<ValRcvdBySpupdPymtCont>(entity =>
+        modelBuilder.Entity<ValRcvdBySpupdPymtContDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -24940,7 +24940,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sRemark");
         });
 
-        modelBuilder.Entity<ValRcvdBySpupdPymtRefNo>(entity =>
+        modelBuilder.Entity<ValRcvdBySpupdPymtRefNoDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25002,7 +25002,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sSPType");
         });
 
-        modelBuilder.Entity<ViewTest>(entity =>
+        modelBuilder.Entity<ViewTestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25013,7 +25013,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VwAccContDtl>(entity =>
+        modelBuilder.Entity<VwAccContDtlDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25076,7 +25076,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VwClientInfo>(entity =>
+        modelBuilder.Entity<VwClientInfoDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25225,7 +25225,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VwClientList>(entity =>
+        modelBuilder.Entity<VwClientListDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25243,7 +25243,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrId).HasMaxLength(16);
         });
 
-        modelBuilder.Entity<VwClientMtdturnover>(entity =>
+        modelBuilder.Entity<VwClientMtdturnoverDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25265,7 +25265,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VwClientMtdturnoverChart>(entity =>
+        modelBuilder.Entity<VwClientMtdturnoverChartDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25287,7 +25287,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VwClientOsdueContraGain>(entity =>
+        modelBuilder.Entity<VwClientOsdueContraGainDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25304,7 +25304,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TotalOSContraGain");
         });
 
-        modelBuilder.Entity<VwClientOsdueContraLoss>(entity =>
+        modelBuilder.Entity<VwClientOsdueContraLossDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25321,7 +25321,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TotalOSContraLoss");
         });
 
-        modelBuilder.Entity<VwClientOsdueCreditInterest>(entity =>
+        modelBuilder.Entity<VwClientOsdueCreditInterestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25335,7 +25335,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TotalOSAccruedInterest");
         });
 
-        modelBuilder.Entity<VwClientOsdueDebitInterest>(entity =>
+        modelBuilder.Entity<VwClientOsdueDebitInterestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25349,7 +25349,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TotalOSAccruedInterest");
         });
 
-        modelBuilder.Entity<VwClientOsduePurchase>(entity =>
+        modelBuilder.Entity<VwClientOsduePurchaseDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25366,7 +25366,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("totalospurchase");
         });
 
-        modelBuilder.Entity<VwClientOsdueSale>(entity =>
+        modelBuilder.Entity<VwClientOsdueSaleDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25383,7 +25383,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("totalossale");
         });
 
-        modelBuilder.Entity<VwClientOsdueSetoffGain>(entity =>
+        modelBuilder.Entity<VwClientOsdueSetoffGainDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25400,7 +25400,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TotalOSSetOffAmount");
         });
 
-        modelBuilder.Entity<VwClientOsdueSetoffLoss>(entity =>
+        modelBuilder.Entity<VwClientOsdueSetoffLossDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25417,7 +25417,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TotalOSSetOffAmount");
         });
 
-        modelBuilder.Entity<VwClientOsoverDueContraGain>(entity =>
+        modelBuilder.Entity<VwClientOsoverDueContraGainDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25434,7 +25434,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TotalOSContraGain");
         });
 
-        modelBuilder.Entity<VwClientOsoverDueContraLoss>(entity =>
+        modelBuilder.Entity<VwClientOsoverDueContraLossDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25451,7 +25451,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TotalOSContraLoss");
         });
 
-        modelBuilder.Entity<VwClientOsoverDuePurchase>(entity =>
+        modelBuilder.Entity<VwClientOsoverDuePurchaseDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25468,7 +25468,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("totalospurchase");
         });
 
-        modelBuilder.Entity<VwClientOsoverDueSale>(entity =>
+        modelBuilder.Entity<VwClientOsoverDueSaleDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25485,7 +25485,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("totalossale");
         });
 
-        modelBuilder.Entity<VwClientOsoverdueCreditInterest>(entity =>
+        modelBuilder.Entity<VwClientOsoverdueCreditInterestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25499,7 +25499,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TotalOSAccruedInterest");
         });
 
-        modelBuilder.Entity<VwClientOsoverdueDebitInterest>(entity =>
+        modelBuilder.Entity<VwClientOsoverdueDebitInterestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25513,7 +25513,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TotalOSAccruedInterest");
         });
 
-        modelBuilder.Entity<VwClientOsoverdueSetoffGain>(entity =>
+        modelBuilder.Entity<VwClientOsoverdueSetoffGainDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25530,7 +25530,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TotalOSSetOffAmount");
         });
 
-        modelBuilder.Entity<VwClientOsoverdueSetoffLoss>(entity =>
+        modelBuilder.Entity<VwClientOsoverdueSetoffLossDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25547,7 +25547,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TotalOSSetOffAmount");
         });
 
-        modelBuilder.Entity<VwClientOsundueContraGain>(entity =>
+        modelBuilder.Entity<VwClientOsundueContraGainDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25564,7 +25564,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TotalOSContraGain");
         });
 
-        modelBuilder.Entity<VwClientOsundueContraLoss>(entity =>
+        modelBuilder.Entity<VwClientOsundueContraLossDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25581,7 +25581,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TotalOSContraLoss");
         });
 
-        modelBuilder.Entity<VwClientOsundueCreditInterest>(entity =>
+        modelBuilder.Entity<VwClientOsundueCreditInterestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25595,7 +25595,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TotalOSAccruedInterest");
         });
 
-        modelBuilder.Entity<VwClientOsundueDebitInterest>(entity =>
+        modelBuilder.Entity<VwClientOsundueDebitInterestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25609,7 +25609,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TotalOSAccruedInterest");
         });
 
-        modelBuilder.Entity<VwClientOsunduePurchase>(entity =>
+        modelBuilder.Entity<VwClientOsunduePurchaseDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25626,7 +25626,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("totalospurchase");
         });
 
-        modelBuilder.Entity<VwClientOsundueSale>(entity =>
+        modelBuilder.Entity<VwClientOsundueSaleDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25643,7 +25643,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("totalossale");
         });
 
-        modelBuilder.Entity<VwClientOsundueSetoffGain>(entity =>
+        modelBuilder.Entity<VwClientOsundueSetoffGainDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25660,7 +25660,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TotalOSSetOffAmount");
         });
 
-        modelBuilder.Entity<VwClientOsundueSetoffLoss>(entity =>
+        modelBuilder.Entity<VwClientOsundueSetoffLossDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25677,7 +25677,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TotalOSSetOffAmount");
         });
 
-        modelBuilder.Entity<VwClientYtdturnover>(entity =>
+        modelBuilder.Entity<VwClientYtdturnoverDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25698,7 +25698,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VwClientshareinfo>(entity =>
+        modelBuilder.Entity<VwClientshareinfoDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25720,7 +25720,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<VwClntChgBrchMigrateTableList>(entity =>
+        modelBuilder.Entity<VwClntChgBrchMigrateTableListDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25730,7 +25730,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TableName).HasMaxLength(128);
         });
 
-        modelBuilder.Entity<VwClntList>(entity =>
+        modelBuilder.Entity<VwClntListDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25763,7 +25763,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<VwEpContRemainingO>(entity =>
+        modelBuilder.Entity<VwEpContRemainingODbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25795,7 +25795,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VwMstStk>(entity =>
+        modelBuilder.Entity<VwMstStkDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25823,7 +25823,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VwNotifierList>(entity =>
+        modelBuilder.Entity<VwNotifierListDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25835,7 +25835,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<VwOrderException>(entity =>
+        modelBuilder.Entity<VwOrderExceptionDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -25965,7 +25965,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgGtd).HasColumnName("XchgGTD");
         });
 
-        modelBuilder.Entity<VwOrderPlaced>(entity =>
+        modelBuilder.Entity<VwOrderPlacedDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26073,7 +26073,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgGtd).HasColumnName("XchgGTD");
         });
 
-        modelBuilder.Entity<VwOrderPlacedEco>(entity =>
+        modelBuilder.Entity<VwOrderPlacedEcoDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26185,7 +26185,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VwOrderStatus>(entity =>
+        modelBuilder.Entity<VwOrderStatusDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26203,7 +26203,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TimeStamp).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<VwOrderStatusEco>(entity =>
+        modelBuilder.Entity<VwOrderStatusEcoDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26219,7 +26219,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Timestamp).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<VwSiteMenu>(entity =>
+        modelBuilder.Entity<VwSiteMenuDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26246,7 +26246,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NodeUrl).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<VwSiteMenuGrp>(entity =>
+        modelBuilder.Entity<VwSiteMenuGrpDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26261,7 +26261,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NodeGrpInActiveTabUrl).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<VwSuperiorList>(entity =>
+        modelBuilder.Entity<VwSuperiorListDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26273,7 +26273,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<VwTaskBemgr>(entity =>
+        modelBuilder.Entity<VwTaskBemgrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26297,7 +26297,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.TaskName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<VwTran>(entity =>
+        modelBuilder.Entity<VwTranDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26350,7 +26350,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VwTransHistory>(entity =>
+        modelBuilder.Entity<VwTransHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26410,7 +26410,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VwTransactionsRealized>(entity =>
+        modelBuilder.Entity<VwTransactionsRealizedDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26446,7 +26446,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VwUserMtdturnover>(entity =>
+        modelBuilder.Entity<VwUserMtdturnoverDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26472,7 +26472,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VwUserMtdturnoverChart>(entity =>
+        modelBuilder.Entity<VwUserMtdturnoverChartDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26493,7 +26493,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VwUserOsdueContraGain>(entity =>
+        modelBuilder.Entity<VwUserOsdueContraGainDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26508,7 +26508,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsdueContraLoss>(entity =>
+        modelBuilder.Entity<VwUserOsdueContraLossDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26523,7 +26523,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsdueCreditInterest>(entity =>
+        modelBuilder.Entity<VwUserOsdueCreditInterestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26538,7 +26538,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsdueDebitInterest>(entity =>
+        modelBuilder.Entity<VwUserOsdueDebitInterestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26553,7 +26553,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsduePurchase>(entity =>
+        modelBuilder.Entity<VwUserOsduePurchaseDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26568,7 +26568,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsdueSale>(entity =>
+        modelBuilder.Entity<VwUserOsdueSaleDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26583,7 +26583,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsdueSetOffGain>(entity =>
+        modelBuilder.Entity<VwUserOsdueSetOffGainDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26598,7 +26598,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsdueSetOffLoss>(entity =>
+        modelBuilder.Entity<VwUserOsdueSetOffLossDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26613,7 +26613,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsoverDueContraGain>(entity =>
+        modelBuilder.Entity<VwUserOsoverDueContraGainDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26628,7 +26628,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsoverDueContraLoss>(entity =>
+        modelBuilder.Entity<VwUserOsoverDueContraLossDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26643,7 +26643,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsoverDueCreditInterest>(entity =>
+        modelBuilder.Entity<VwUserOsoverDueCreditInterestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26658,7 +26658,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsoverDueDebitInterest>(entity =>
+        modelBuilder.Entity<VwUserOsoverDueDebitInterestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26673,7 +26673,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsoverDuePurchase>(entity =>
+        modelBuilder.Entity<VwUserOsoverDuePurchaseDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26688,7 +26688,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsoverDueSetOffGain>(entity =>
+        modelBuilder.Entity<VwUserOsoverDueSetOffGainDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26703,7 +26703,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsoverDueSetOffLoss>(entity =>
+        modelBuilder.Entity<VwUserOsoverDueSetOffLossDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26718,7 +26718,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsoverdueSale>(entity =>
+        modelBuilder.Entity<VwUserOsoverdueSaleDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26733,7 +26733,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsunDueCreditInterest>(entity =>
+        modelBuilder.Entity<VwUserOsunDueCreditInterestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26748,7 +26748,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsunDueDebitInterest>(entity =>
+        modelBuilder.Entity<VwUserOsunDueDebitInterestDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26763,7 +26763,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsunDueSetOffGain>(entity =>
+        modelBuilder.Entity<VwUserOsunDueSetOffGainDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26778,7 +26778,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsunDueSetOffLoss>(entity =>
+        modelBuilder.Entity<VwUserOsunDueSetOffLossDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26793,7 +26793,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsundueContraGain>(entity =>
+        modelBuilder.Entity<VwUserOsundueContraGainDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26808,7 +26808,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsundueContraLoss>(entity =>
+        modelBuilder.Entity<VwUserOsundueContraLossDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26823,7 +26823,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsunduePurchase>(entity =>
+        modelBuilder.Entity<VwUserOsunduePurchaseDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26838,7 +26838,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserOsundueSale>(entity =>
+        modelBuilder.Entity<VwUserOsundueSaleDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26853,7 +26853,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("userid");
         });
 
-        modelBuilder.Entity<VwUserYtdturnover>(entity =>
+        modelBuilder.Entity<VwUserYtdturnoverDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26878,7 +26878,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VwUsrAccess>(entity =>
+        modelBuilder.Entity<VwUsrAccessDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -26895,7 +26895,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrSeqNo).ValueGeneratedOnAdd();
         });
 
-        modelBuilder.Entity<VwUsrInfo>(entity =>
+        modelBuilder.Entity<VwUsrInfoDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27006,14 +27006,14 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VwUsrTypeProd>(entity =>
+        modelBuilder.Entity<VwUsrTypeProdDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
                 .ToView("vw_UsrTypeProd");
         });
 
-        modelBuilder.Entity<WinscoreSetting>(entity =>
+        modelBuilder.Entity<WinscoreSettingDbEntity>(entity =>
         {
             entity.HasKey(e => e.BrkCode);
 
@@ -27051,7 +27051,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrIDMode");
         });
 
-        modelBuilder.Entity<XchgEarmark>(entity =>
+        modelBuilder.Entity<XchgEarmarkDbEntity>(entity =>
         {
             entity.HasKey(e => e.XchgCode).IsClustered(false);
 
@@ -27062,7 +27062,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XchgTradingHour>(entity =>
+        modelBuilder.Entity<XchgTradingHourDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27093,7 +27093,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("xchgCode");
         });
 
-        modelBuilder.Entity<XlogAccTrustSummAutoReleaseEarmark>(entity =>
+        modelBuilder.Entity<XlogAccTrustSummAutoReleaseEarmarkDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27123,7 +27123,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sCoBrchCode");
         });
 
-        modelBuilder.Entity<XlogAllowCounterControl>(entity =>
+        modelBuilder.Entity<XlogAllowCounterControlDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -27150,7 +27150,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogAnnouncement>(entity =>
+        modelBuilder.Entity<XlogAnnouncementDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -27178,7 +27178,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NewsId).HasColumnName("NewsID");
         });
 
-        modelBuilder.Entity<XlogAnnouncementsControl>(entity =>
+        modelBuilder.Entity<XlogAnnouncementsControlDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogUsr, e.LogDate, e.LogAction });
 
@@ -27195,7 +27195,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NewsId).HasColumnName("NewsID");
         });
 
-        modelBuilder.Entity<XlogAnnouncementsControlUsr>(entity =>
+        modelBuilder.Entity<XlogAnnouncementsControlUsrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27219,7 +27219,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogBlockCounterControl>(entity =>
+        modelBuilder.Entity<XlogBlockCounterControlDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -27246,7 +27246,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogBrchExpsLimit6Sr>(entity =>
+        modelBuilder.Entity<XlogBrchExpsLimit6SrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27275,7 +27275,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogBrchExpsLimit6SrsHistory>(entity =>
+        modelBuilder.Entity<XlogBrchExpsLimit6SrsHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27303,7 +27303,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogBrchExpsLimitExcp>(entity =>
+        modelBuilder.Entity<XlogBrchExpsLimitExcpDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27335,7 +27335,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogBrchPrevDayOrd6Sr>(entity =>
+        modelBuilder.Entity<XlogBrchPrevDayOrd6SrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27354,7 +27354,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.ServerId).HasColumnName("ServerID");
         });
 
-        modelBuilder.Entity<XlogBrchPrevDayOrd6SrsHistory>(entity =>
+        modelBuilder.Entity<XlogBrchPrevDayOrd6SrsHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27372,7 +27372,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.ServerId).HasColumnName("ServerID");
         });
 
-        modelBuilder.Entity<XlogBrchPrevDayOrdExcp>(entity =>
+        modelBuilder.Entity<XlogBrchPrevDayOrdExcpDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27394,7 +27394,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.ServerId).HasColumnName("ServerID");
         });
 
-        modelBuilder.Entity<XlogBrkExpsLimit6Sr>(entity =>
+        modelBuilder.Entity<XlogBrkExpsLimit6SrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27423,7 +27423,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogBrkExpsLimit6SrsHistory>(entity =>
+        modelBuilder.Entity<XlogBrkExpsLimit6SrsHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27451,7 +27451,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogBrkExpsLimitExcp>(entity =>
+        modelBuilder.Entity<XlogBrkExpsLimitExcpDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27483,7 +27483,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogBrkPrevDayOrd6Sr>(entity =>
+        modelBuilder.Entity<XlogBrkPrevDayOrd6SrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27502,7 +27502,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.ServerId).HasColumnName("ServerID");
         });
 
-        modelBuilder.Entity<XlogBrkPrevDayOrd6SrsHistory>(entity =>
+        modelBuilder.Entity<XlogBrkPrevDayOrd6SrsHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27520,7 +27520,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.ServerId).HasColumnName("ServerID");
         });
 
-        modelBuilder.Entity<XlogBrkPrevDayOrdExcp>(entity =>
+        modelBuilder.Entity<XlogBrkPrevDayOrdExcpDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27542,7 +27542,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.ServerId).HasColumnName("ServerID");
         });
 
-        modelBuilder.Entity<XlogBrkPrevDayOrderExcp>(entity =>
+        modelBuilder.Entity<XlogBrkPrevDayOrderExcpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate });
 
@@ -27566,7 +27566,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("ServerID");
         });
 
-        modelBuilder.Entity<XlogBroadcastMsgMaint>(entity =>
+        modelBuilder.Entity<XlogBroadcastMsgMaintDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -27593,7 +27593,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NewsId).HasColumnName("NewsID");
         });
 
-        modelBuilder.Entity<XlogBuyingInDefaulter>(entity =>
+        modelBuilder.Entity<XlogBuyingInDefaulterDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -27621,7 +27621,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogClientTurnOver>(entity =>
+        modelBuilder.Entity<XlogClientTurnOverDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -27653,7 +27653,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<XlogClntAcct>(entity =>
+        modelBuilder.Entity<XlogClntAcctDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -27680,7 +27680,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogClntAcctArchive>(entity =>
+        modelBuilder.Entity<XlogClntAcctArchiveDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -27707,7 +27707,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogClntBankAccInfo>(entity =>
+        modelBuilder.Entity<XlogClntBankAccInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -27738,7 +27738,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogClntDefList>(entity =>
+        modelBuilder.Entity<XlogClntDefListDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -27756,7 +27756,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NewVal).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<XlogClntDeletion6Sr>(entity =>
+        modelBuilder.Entity<XlogClntDeletion6SrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27776,7 +27776,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SeqNo).ValueGeneratedOnAdd();
         });
 
-        modelBuilder.Entity<XlogClntDeletion6SrsHistory>(entity =>
+        modelBuilder.Entity<XlogClntDeletion6SrsHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27795,7 +27795,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.LogDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<XlogClntDeletionExcp>(entity =>
+        modelBuilder.Entity<XlogClntDeletionExcpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.BranchId, e.ClntCode });
 
@@ -27818,7 +27818,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogClntFslist>(entity =>
+        modelBuilder.Entity<XlogClntFslistDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -27844,7 +27844,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NewVal).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<XlogClntInfo>(entity =>
+        modelBuilder.Entity<XlogClntInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -27871,7 +27871,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogClntInfo6Sr>(entity =>
+        modelBuilder.Entity<XlogClntInfo6SrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27926,7 +27926,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SeqNo).ValueGeneratedOnAdd();
         });
 
-        modelBuilder.Entity<XlogClntInfo6SrsHistory>(entity =>
+        modelBuilder.Entity<XlogClntInfo6SrsHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -27980,7 +27980,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogClntInfoExcp>(entity =>
+        modelBuilder.Entity<XlogClntInfoExcpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate });
 
@@ -28035,7 +28035,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogClntInfoExcpArchive>(entity =>
+        modelBuilder.Entity<XlogClntInfoExcpArchiveDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate });
 
@@ -28090,7 +28090,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogClntLimit6Sr>(entity =>
+        modelBuilder.Entity<XlogClntLimit6SrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -28118,7 +28118,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogClntLimit6SrsHistory>(entity =>
+        modelBuilder.Entity<XlogClntLimit6SrsHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -28145,7 +28145,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogClntLimitExcp>(entity =>
+        modelBuilder.Entity<XlogClntLimitExcpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.BranchId, e.ClntCode });
 
@@ -28176,7 +28176,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogClntLimitExcpArchive>(entity =>
+        modelBuilder.Entity<XlogClntLimitExcpArchiveDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.BranchId, e.ClntCode });
 
@@ -28206,7 +28206,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogClntPrevDayOrd6Sr>(entity =>
+        modelBuilder.Entity<XlogClntPrevDayOrd6SrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -28227,7 +28227,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SeqNo).ValueGeneratedOnAdd();
         });
 
-        modelBuilder.Entity<XlogClntPrevDayOrd6SrsHistory>(entity =>
+        modelBuilder.Entity<XlogClntPrevDayOrd6SrsHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -28247,7 +28247,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.PrevTotalDayOrder).HasColumnType("decimal(20, 2)");
         });
 
-        modelBuilder.Entity<XlogClntPrevDayOrdExcp>(entity =>
+        modelBuilder.Entity<XlogClntPrevDayOrdExcpDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -28271,7 +28271,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SeqNo).ValueGeneratedOnAdd();
         });
 
-        modelBuilder.Entity<XlogClntSusp6Sr>(entity =>
+        modelBuilder.Entity<XlogClntSusp6SrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -28300,7 +28300,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SeqNo).ValueGeneratedOnAdd();
         });
 
-        modelBuilder.Entity<XlogClntSusp6SrsHistory>(entity =>
+        modelBuilder.Entity<XlogClntSusp6SrsHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -28328,7 +28328,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogClntSuspExcp>(entity =>
+        modelBuilder.Entity<XlogClntSuspExcpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.BranchId, e.ClntCode });
 
@@ -28360,7 +28360,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogClntXchg>(entity =>
+        modelBuilder.Entity<XlogClntXchgDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.XchgCode, e.Item });
 
@@ -28397,7 +28397,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogContraDetail>(entity =>
+        modelBuilder.Entity<XlogContraDetailDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -28430,7 +28430,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogContraSetOff>(entity =>
+        modelBuilder.Entity<XlogContraSetOffDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -28464,7 +28464,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogContraSummary>(entity =>
+        modelBuilder.Entity<XlogContraSummaryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -28496,7 +28496,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogContractSummary>(entity =>
+        modelBuilder.Entity<XlogContractSummaryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -28531,7 +28531,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogDlrExpsLimit6Sr>(entity =>
+        modelBuilder.Entity<XlogDlrExpsLimit6SrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -28560,7 +28560,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogDlrExpsLimit6SrsHistory>(entity =>
+        modelBuilder.Entity<XlogDlrExpsLimit6SrsHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -28588,7 +28588,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogDlrExpsLimitExcp>(entity =>
+        modelBuilder.Entity<XlogDlrExpsLimitExcpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.BranchId, e.DealerId });
 
@@ -28620,7 +28620,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogDlrExpsLimitExcpArchive>(entity =>
+        modelBuilder.Entity<XlogDlrExpsLimitExcpArchiveDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.BranchId, e.DealerId });
 
@@ -28652,7 +28652,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogDlrPrevDayOrd6Sr>(entity =>
+        modelBuilder.Entity<XlogDlrPrevDayOrd6SrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -28673,7 +28673,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SeqNo).ValueGeneratedOnAdd();
         });
 
-        modelBuilder.Entity<XlogDlrPrevDayOrd6SrsHistory>(entity =>
+        modelBuilder.Entity<XlogDlrPrevDayOrd6SrsHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -28693,7 +28693,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.PrevTotalDayOrder).HasColumnType("decimal(20, 2)");
         });
 
-        modelBuilder.Entity<XlogDlrPrevDayOrdExcp>(entity =>
+        modelBuilder.Entity<XlogDlrPrevDayOrdExcpDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -28717,7 +28717,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SeqNo).ValueGeneratedOnAdd();
         });
 
-        modelBuilder.Entity<XlogDlrReassign6Sr>(entity =>
+        modelBuilder.Entity<XlogDlrReassign6SrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -28744,7 +28744,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SeqNo).ValueGeneratedOnAdd();
         });
 
-        modelBuilder.Entity<XlogDlrReassign6SrsHistory>(entity =>
+        modelBuilder.Entity<XlogDlrReassign6SrsHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -28770,7 +28770,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogDlrReassignExcp>(entity =>
+        modelBuilder.Entity<XlogDlrReassignExcpDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -28800,7 +28800,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SeqNo).ValueGeneratedOnAdd();
         });
 
-        modelBuilder.Entity<XlogDlrSusp6Sr>(entity =>
+        modelBuilder.Entity<XlogDlrSusp6SrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -28830,7 +28830,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SeqNo).ValueGeneratedOnAdd();
         });
 
-        modelBuilder.Entity<XlogDlrSusp6SrsHistory>(entity =>
+        modelBuilder.Entity<XlogDlrSusp6SrsHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -28859,7 +28859,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogDlrSuspExcp>(entity =>
+        modelBuilder.Entity<XlogDlrSuspExcpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.BranchId, e.DealerId });
 
@@ -28892,7 +28892,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogEcosmarketDepthMaint>(entity =>
+        modelBuilder.Entity<XlogEcosmarketDepthMaintDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -28921,7 +28921,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogEndDayStartTask>(entity =>
+        modelBuilder.Entity<XlogEndDayStartTaskDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -28946,7 +28946,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogEndDayTask>(entity =>
+        modelBuilder.Entity<XlogEndDayTaskDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -28975,7 +28975,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("TaskID");
         });
 
-        modelBuilder.Entity<XlogEpAccountSummaryTrust>(entity =>
+        modelBuilder.Entity<XlogEpAccountSummaryTrustDbEntity>(entity =>
         {
             entity.HasKey(e => e.ISeqNo).HasName("PK_XLogEPAccountSummaryTrust");
 
@@ -29062,7 +29062,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sTransType");
         });
 
-        modelBuilder.Entity<XlogEpAccountSummaryTrust202403011751>(entity =>
+        modelBuilder.Entity<XlogEpAccountSummaryTrust202403011751DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -29147,7 +29147,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("sTransType");
         });
 
-        modelBuilder.Entity<XlogEpPaymentContract>(entity =>
+        modelBuilder.Entity<XlogEpPaymentContractDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29178,7 +29178,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogEpayment>(entity =>
+        modelBuilder.Entity<XlogEpaymentDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29209,7 +29209,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogFpxresponse>(entity =>
+        modelBuilder.Entity<XlogFpxresponseDbEntity>(entity =>
         {
             entity.HasKey(e => e.SeqNo);
 
@@ -29231,7 +29231,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogGtcexpiryPeriod>(entity =>
+        modelBuilder.Entity<XlogGtcexpiryPeriodDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29256,7 +29256,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogItrFileTrnx>(entity =>
+        modelBuilder.Entity<XlogItrFileTrnxDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29283,7 +29283,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogLimitInfo>(entity =>
+        modelBuilder.Entity<XlogLimitInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29310,7 +29310,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMarketDepthMaint>(entity =>
+        modelBuilder.Entity<XlogMarketDepthMaintDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29339,7 +29339,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogMiscSetOff>(entity =>
+        modelBuilder.Entity<XlogMiscSetOffDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29373,7 +29373,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstBrk>(entity =>
+        modelBuilder.Entity<XlogMstBrkDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29399,7 +29399,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstClntExp>(entity =>
+        modelBuilder.Entity<XlogMstClntExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29426,7 +29426,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstClntExpsArchive>(entity =>
+        modelBuilder.Entity<XlogMstClntExpsArchiveDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29453,7 +29453,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstClntTradeSett>(entity =>
+        modelBuilder.Entity<XlogMstClntTradeSettDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29480,7 +29480,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstClntTradeSettArchive>(entity =>
+        modelBuilder.Entity<XlogMstClntTradeSettArchiveDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29507,7 +29507,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstClntXchgExp>(entity =>
+        modelBuilder.Entity<XlogMstClntXchgExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.XchgCode, e.Item });
 
@@ -29541,7 +29541,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstClntXchgTrade>(entity =>
+        modelBuilder.Entity<XlogMstClntXchgTradeDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29575,7 +29575,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstCo>(entity =>
+        modelBuilder.Entity<XlogMstCoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29601,7 +29601,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstCoBrch>(entity =>
+        modelBuilder.Entity<XlogMstCoBrchDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29628,7 +29628,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstCoBrchExp>(entity =>
+        modelBuilder.Entity<XlogMstCoBrchExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29655,7 +29655,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstCoBrchTradeSett>(entity =>
+        modelBuilder.Entity<XlogMstCoBrchTradeSettDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29682,7 +29682,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstCoExp>(entity =>
+        modelBuilder.Entity<XlogMstCoExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29708,7 +29708,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstCoTradeSett>(entity =>
+        modelBuilder.Entity<XlogMstCoTradeSettDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29734,7 +29734,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstCountry>(entity =>
+        modelBuilder.Entity<XlogMstCountryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29760,7 +29760,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstCountryExp>(entity =>
+        modelBuilder.Entity<XlogMstCountryExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29786,7 +29786,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstCrOrder>(entity =>
+        modelBuilder.Entity<XlogMstCrOrderDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29816,7 +29816,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogMstCurcy>(entity =>
+        modelBuilder.Entity<XlogMstCurcyDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29842,7 +29842,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstDmaorder>(entity =>
+        modelBuilder.Entity<XlogMstDmaorderDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29872,7 +29872,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogMstForm>(entity =>
+        modelBuilder.Entity<XlogMstFormDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29906,7 +29906,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstGlobalClntEcosLimitExp>(entity =>
+        modelBuilder.Entity<XlogMstGlobalClntEcosLimitExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item }).HasName("PK_XLogMstGlobalClntEcosLimitExps_1");
 
@@ -29927,7 +29927,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NewVal).HasMaxLength(4000);
         });
 
-        modelBuilder.Entity<XlogMstGlobalLimitExp>(entity =>
+        modelBuilder.Entity<XlogMstGlobalLimitExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29966,7 +29966,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<XlogMstHld>(entity =>
+        modelBuilder.Entity<XlogMstHldDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -29994,7 +29994,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstInstrStpDty>(entity =>
+        modelBuilder.Entity<XlogMstInstrStpDtyDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item }).HasName("PK__XLogMstI__ADBC407CA5F94152");
 
@@ -30017,7 +30017,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NewVal).HasMaxLength(1500);
         });
 
-        modelBuilder.Entity<XlogMstInternalAcType>(entity =>
+        modelBuilder.Entity<XlogMstInternalAcTypeDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30043,7 +30043,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstLegalStat>(entity =>
+        modelBuilder.Entity<XlogMstLegalStatDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30069,7 +30069,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstOrderGroup>(entity =>
+        modelBuilder.Entity<XlogMstOrderGroupDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30095,7 +30095,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstStk>(entity =>
+        modelBuilder.Entity<XlogMstStkDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30126,7 +30126,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstStkBrdExp>(entity =>
+        modelBuilder.Entity<XlogMstStkBrdExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30157,7 +30157,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstStkExp>(entity =>
+        modelBuilder.Entity<XlogMstStkExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30185,7 +30185,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgCode).HasMaxLength(6);
         });
 
-        modelBuilder.Entity<XlogMstStkExpsBrch>(entity =>
+        modelBuilder.Entity<XlogMstStkExpsBrchDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30213,7 +30213,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgCode).HasMaxLength(6);
         });
 
-        modelBuilder.Entity<XlogMstStkTradeSett>(entity =>
+        modelBuilder.Entity<XlogMstStkTradeSettDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30243,7 +30243,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgCode).HasMaxLength(6);
         });
 
-        modelBuilder.Entity<XlogMstStkTradeSettBrch>(entity =>
+        modelBuilder.Entity<XlogMstStkTradeSettBrchDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30273,7 +30273,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgCode).HasMaxLength(6);
         });
 
-        modelBuilder.Entity<XlogMstStkTradeSettBrchCtrl>(entity =>
+        modelBuilder.Entity<XlogMstStkTradeSettBrchCtrlDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30307,7 +30307,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstStkXchg>(entity =>
+        modelBuilder.Entity<XlogMstStkXchgDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30333,7 +30333,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgCode).HasMaxLength(10);
         });
 
-        modelBuilder.Entity<XlogMstStkXchgExp>(entity =>
+        modelBuilder.Entity<XlogMstStkXchgExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30359,7 +30359,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgCode).HasMaxLength(5);
         });
 
-        modelBuilder.Entity<XlogMstStkXchgTradeSett>(entity =>
+        modelBuilder.Entity<XlogMstStkXchgTradeSettDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30385,7 +30385,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.XchgCode).HasMaxLength(5);
         });
 
-        modelBuilder.Entity<XlogMstTrxnCost>(entity =>
+        modelBuilder.Entity<XlogMstTrxnCostDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30406,7 +30406,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NewVal).HasMaxLength(1500);
         });
 
-        modelBuilder.Entity<XlogMstUsrExp>(entity =>
+        modelBuilder.Entity<XlogMstUsrExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30434,7 +30434,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogMstUsrExpsArchive>(entity =>
+        modelBuilder.Entity<XlogMstUsrExpsArchiveDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30462,7 +30462,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogMstUsrTradeSett>(entity =>
+        modelBuilder.Entity<XlogMstUsrTradeSettDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30490,7 +30490,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogMstUsrXchgExp>(entity =>
+        modelBuilder.Entity<XlogMstUsrXchgExpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30522,7 +30522,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogMstUsrXchgTrade>(entity =>
+        modelBuilder.Entity<XlogMstUsrXchgTradeDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item }).HasName("PK_XLogMstUsrXchgXLogMstUsrXchgTrade");
 
@@ -30554,7 +30554,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogNotificationSetting>(entity =>
+        modelBuilder.Entity<XlogNotificationSettingDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30579,7 +30579,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogOn9Tagging>(entity =>
+        modelBuilder.Entity<XlogOn9TaggingDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -30605,7 +30605,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogOrderGroupDtl>(entity =>
+        modelBuilder.Entity<XlogOrderGroupDtlDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30637,7 +30637,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogOrderQueue>(entity =>
+        modelBuilder.Entity<XlogOrderQueueDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30673,7 +30673,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.Remarks).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<XlogOrderTypeAdj>(entity =>
+        modelBuilder.Entity<XlogOrderTypeAdjDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30701,7 +30701,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogPaymentRefNo>(entity =>
+        modelBuilder.Entity<XlogPaymentRefNoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.LogDate, e.PaymentRefNo, e.ContractNo });
 
@@ -30755,7 +30755,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("transDate");
         });
 
-        modelBuilder.Entity<XlogPfclntInfo>(entity =>
+        modelBuilder.Entity<XlogPfclntInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30782,7 +30782,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogPriceAlert>(entity =>
+        modelBuilder.Entity<XlogPriceAlertDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30807,7 +30807,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogResearch>(entity =>
+        modelBuilder.Entity<XlogResearchDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30832,7 +30832,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.ResId).HasColumnName("ResID");
         });
 
-        modelBuilder.Entity<XlogResearchAnalyst>(entity =>
+        modelBuilder.Entity<XlogResearchAnalystDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30858,7 +30858,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogResearchCategory>(entity =>
+        modelBuilder.Entity<XlogResearchCategoryDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30885,7 +30885,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogRldClntList>(entity =>
+        modelBuilder.Entity<XlogRldClntListDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30914,7 +30914,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogShareInfo>(entity =>
+        modelBuilder.Entity<XlogShareInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -30952,7 +30952,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<XlogShareInfoExcp>(entity =>
+        modelBuilder.Entity<XlogShareInfoExcpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.BranchId, e.ClntCode });
 
@@ -30987,7 +30987,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogShareInfoExcp20240220>(entity =>
+        modelBuilder.Entity<XlogShareInfoExcp20240220DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -31022,7 +31022,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogStkCtrl>(entity =>
+        modelBuilder.Entity<XlogStkCtrlDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item }).HasName("PK_XLogstkCtrl");
 
@@ -31044,7 +31044,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NewVal).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<XlogStkIdea>(entity =>
+        modelBuilder.Entity<XlogStkIdeaDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -31069,7 +31069,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogStockControlClientList>(entity =>
+        modelBuilder.Entity<XlogStockControlClientListDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item }).HasName("PK_XLogStockControlClntList");
 
@@ -31102,7 +31102,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogT8forceSellingList6Sr>(entity =>
+        modelBuilder.Entity<XlogT8forceSellingList6SrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -31136,7 +31136,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogT8forceSellingList6SrsHistory>(entity =>
+        modelBuilder.Entity<XlogT8forceSellingList6SrsHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -31169,7 +31169,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogT8forceSellingListExcp>(entity =>
+        modelBuilder.Entity<XlogT8forceSellingListExcpDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -31206,7 +31206,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogThresholdLimitExcp>(entity =>
+        modelBuilder.Entity<XlogThresholdLimitExcpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -31260,7 +31260,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogTncmaint>(entity =>
+        modelBuilder.Entity<XlogTncmaintDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.XchgCode, e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -31289,7 +31289,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogTransaction>(entity =>
+        modelBuilder.Entity<XlogTransactionDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -31331,7 +31331,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogUserDeletion6Sr>(entity =>
+        modelBuilder.Entity<XlogUserDeletion6SrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -31352,7 +31352,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogUserDeletion6SrsHistory>(entity =>
+        modelBuilder.Entity<XlogUserDeletion6SrsHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -31372,7 +31372,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogUserDeletionExcp>(entity =>
+        modelBuilder.Entity<XlogUserDeletionExcpDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -31396,7 +31396,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogUserFavouritesRemoveDelistedStk>(entity =>
+        modelBuilder.Entity<XlogUserFavouritesRemoveDelistedStkDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.InsertDate, e.InsertDateTime, e.UserId, e.FavGroup });
 
@@ -31414,7 +31414,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogUsrAuthLimit>(entity =>
+        modelBuilder.Entity<XlogUsrAuthLimitDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -31433,7 +31433,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogUsrCtrlInfoExcp>(entity =>
+        modelBuilder.Entity<XlogUsrCtrlInfoExcpDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -31456,7 +31456,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogUsrDeviceInfo>(entity =>
+        modelBuilder.Entity<XlogUsrDeviceInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -31481,7 +31481,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogUsrInfo>(entity =>
+        modelBuilder.Entity<XlogUsrInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item }).HasName("PK_XLogUsrInfo_1");
 
@@ -31506,7 +31506,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogUsrInfo20140115>(entity =>
+        modelBuilder.Entity<XlogUsrInfo20140115DbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item }).HasName("PK_XLogUsrInfo__20140115");
 
@@ -31530,7 +31530,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogUsrInfo6Sr>(entity =>
+        modelBuilder.Entity<XlogUsrInfo6SrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -31571,7 +31571,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogUsrInfo6SrsHistory>(entity =>
+        modelBuilder.Entity<XlogUsrInfo6SrsHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -31611,7 +31611,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogUsrInfoArchive>(entity =>
+        modelBuilder.Entity<XlogUsrInfoArchiveDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item }).HasName("PK_XLogUsrInfo_Archive_1");
 
@@ -31636,7 +31636,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogUsrInfoExcp>(entity =>
+        modelBuilder.Entity<XlogUsrInfoExcpDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.CoBrchCode, e.UsrId });
 
@@ -31676,7 +31676,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogUsrInfoExcpArchive>(entity =>
+        modelBuilder.Entity<XlogUsrInfoExcpArchiveDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.CoBrchCode, e.UsrId });
 
@@ -31716,7 +31716,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogUsrInfoRegMember>(entity =>
+        modelBuilder.Entity<XlogUsrInfoRegMemberDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -31733,7 +31733,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogUsrKentradePlusInfo>(entity =>
+        modelBuilder.Entity<XlogUsrKentradePlusInfoDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -31758,7 +31758,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogUsrLogin>(entity =>
+        modelBuilder.Entity<XlogUsrLoginDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -31777,7 +31777,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogUsrMobileDeviceId>(entity =>
+        modelBuilder.Entity<XlogUsrMobileDeviceIdDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -31805,7 +31805,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UUID");
         });
 
-        modelBuilder.Entity<XlogUsrRegInfo6Sr>(entity =>
+        modelBuilder.Entity<XlogUsrRegInfo6SrDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -31849,7 +31849,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogUsrRegInfo6SrsHistory>(entity =>
+        modelBuilder.Entity<XlogUsrRegInfo6SrsHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -31892,7 +31892,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogUsrRegInfoExcp>(entity =>
+        modelBuilder.Entity<XlogUsrRegInfoExcpDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -31939,7 +31939,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogUsrSetting>(entity =>
+        modelBuilder.Entity<XlogUsrSettingDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -31955,7 +31955,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NewVal).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<XlogUsrTypeAuthLimit>(entity =>
+        modelBuilder.Entity<XlogUsrTypeAuthLimitDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -31975,7 +31975,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NewVal).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<XlogUsrTypeList>(entity =>
+        modelBuilder.Entity<XlogUsrTypeListDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -32002,7 +32002,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NewVal).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<XlogUsrTypeListProd>(entity =>
+        modelBuilder.Entity<XlogUsrTypeListProdDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.LogUsr, e.UsrType, e.Item }).HasName("PK_XLogUsrTypeList");
 
@@ -32018,7 +32018,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.NewVal).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<XlogUsrXchg>(entity =>
+        modelBuilder.Entity<XlogUsrXchgDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.XchgCode, e.Item });
 
@@ -32053,7 +32053,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<XlogUsrXchg202408231343>(entity =>
+        modelBuilder.Entity<XlogUsrXchg202408231343DbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -32088,7 +32088,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<XlogZmbmsresend>(entity =>
+        modelBuilder.Entity<XlogZmbmsresendDbEntity>(entity =>
         {
             entity.HasKey(e => new { e.SeqNo, e.LogDate, e.LogAction, e.Item });
 
@@ -32112,7 +32112,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Zmbmsinfo>(entity =>
+        modelBuilder.Entity<ZmbmsinfoDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -32180,7 +32180,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrId).HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<ZmbmsinfoFst>(entity =>
+        modelBuilder.Entity<ZmbmsinfoFstDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -32251,7 +32251,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<ZmbmsinfoHistory>(entity =>
+        modelBuilder.Entity<ZmbmsinfoHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -32319,7 +32319,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.UsrId).HasColumnName("UsrID");
         });
 
-        modelBuilder.Entity<ZmbmsinfoHistoryFst>(entity =>
+        modelBuilder.Entity<ZmbmsinfoHistoryFstDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -32390,7 +32390,7 @@ public partial class DbEfbtxLbslContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Zmbmsresend>(entity =>
+        modelBuilder.Entity<ZmbmsresendDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -32406,7 +32406,7 @@ public partial class DbEfbtxLbslContext : DbContext
             entity.Property(e => e.SubmissionTime).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<ZmbmsresendHistory>(entity =>
+        modelBuilder.Entity<ZmbmsresendHistoryDbEntity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -32429,3 +32429,4 @@ public partial class DbEfbtxLbslContext : DbContext
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
+

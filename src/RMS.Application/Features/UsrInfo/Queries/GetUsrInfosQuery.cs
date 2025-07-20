@@ -1,105 +1,137 @@
-﻿using System.Linq.Expressions;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using RMS.Application.Models.DTOs;
 using RMS.Domain.Interfaces;
-using RMS.Domain.Entities;
 using RMS.Shared.Extensions;
 using RMS.Shared.Models;
+using System.Linq.Expressions;
+using RMS.Domain.Entities;
 
-namespace RMS.Application.Features.UsrInfo.Queries;
-
-public class GetUsrInfosQuery : IRequest<PagedResult<UsrInfoDto>>
+namespace RMS.Application.Features.UsrInfo.Queries
 {
-    public int PageNumber { get; set; } = 1;
-    public int PageSize { get; set; } = 10;
-    public string? UsrStatus { get; set; }
-    public string? CoCode { get; set; }
-    public string? DlrCode { get; set; }
-}
-
-public class GetUsrInfosQueryHandler : IRequestHandler<GetUsrInfosQuery, PagedResult<UsrInfoDto>>
-{
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IMapper _mapper;
-    private readonly ILogger<GetUsrInfosQueryHandler> _logger;
-
-    public GetUsrInfosQueryHandler(
-        IUnitOfWork unitOfWork,
-        IMapper mapper,
-        ILogger<GetUsrInfosQueryHandler> logger)
+    // Keep your existing query class - NO CHANGES NEEDED
+    public class GetUsrInfosQuery : IRequest<PagedResult<UsrInfoDto>>
     {
-        _unitOfWork = unitOfWork;
-        _mapper = mapper;
-        _logger = logger;
+        public int PageNumber { get; set; } = 1;
+        public int PageSize { get; set; } = 10;
+        public string? UsrStatus { get; set; }
+        public string? CoCode { get; set; }
+        public string? DlrCode { get; set; }
+        public string? RmsType { get; set; }
+        public string? SearchTerm { get; set; }
     }
 
-    public async Task<PagedResult<UsrInfoDto>> Handle(GetUsrInfosQuery request, CancellationToken cancellationToken)
+    // UPDATE THIS HANDLER to use generic repository
+    public class GetUsrInfosQueryHandler : IRequestHandler<GetUsrInfosQuery, PagedResult<UsrInfoDto>>
     {
-        _logger.LogInformation("=== GetUsrInfosQueryHandler.Handle START ===");
-        _logger.LogInformation("Request: PageNumber={PageNumber}, PageSize={PageSize}, UsrStatus={UsrStatus}, CoCode={CoCode}, DlrCode={DlrCode}",
-            request.PageNumber, request.PageSize, request.UsrStatus, request.CoCode, request.DlrCode);
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+        private readonly ILogger<GetUsrInfosQueryHandler> _logger;
 
-        try
+        public GetUsrInfosQueryHandler(
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            ILogger<GetUsrInfosQueryHandler> logger)
         {
-            // Log repository info
-            var pkName = _unitOfWork.UsrInfos.GetPrimaryKeyName();
-            var pkType = _unitOfWork.UsrInfos.GetPrimaryKeyType();
-            _logger.LogInformation("UsrInfo Primary Key: {PrimaryKeyName} ({PrimaryKeyType})", pkName, pkType.Name);
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+            _logger = logger;
+        }
 
-            var predicate = BuildPredicate(request);
-            _logger.LogInformation("Predicate built successfully");
+        public async Task<PagedResult<UsrInfoDto>> Handle(GetUsrInfosQuery request, CancellationToken cancellationToken)
+        {
+            _logger.LogInformation("Processing GetUsrInfosQuery - Page: {PageNumber}, Size: {PageSize}",
+                request.PageNumber, request.PageSize);
 
-            _logger.LogInformation("Calling GetPagedAsync...");
-            var pagedResult = await _unitOfWork.UsrInfos.GetPagedAsync(
-                request.PageNumber, request.PageSize, predicate, cancellationToken);
-
-            _logger.LogInformation("GetPagedAsync completed. Total items: {TotalCount}, Retrieved: {ItemCount}",
-                pagedResult.TotalCount, pagedResult.Data.Count());
-
-            var mappedData = _mapper.Map<IEnumerable<UsrInfoDto>>(pagedResult.Data);
-            _logger.LogInformation("Mapping completed. Mapped items count: {MappedCount}", mappedData.Count());
-
-            var result = new PagedResult<UsrInfoDto>
+            try
             {
-                Data = mappedData,
-                TotalCount = pagedResult.TotalCount,
-                PageNumber = pagedResult.PageNumber,
-                PageSize = pagedResult.PageSize
-            };
+                // Validate parameters
+                if (request.PageNumber < 1) request.PageNumber = 1;
+                if (request.PageSize < 1 || request.PageSize > 100) request.PageSize = 10;
 
-            _logger.LogInformation("=== GetUsrInfosQueryHandler.Handle END SUCCESS ===");
-            return result;
+                // Use the new generic repository for UsrInfo
+                var repository = _unitOfWork.Repository<RMS.Domain.Entities.UsrInfo>();
+
+                // Build predicate for filtering
+                var predicate = BuildPredicate(request);
+
+                // Get paged data using generic repository
+                var pagedResult = await repository.GetPagedAsync(
+                    request.PageNumber,
+                    request.PageSize,
+                    predicate,
+                    orderBy: null, // Will use default ordering (UsrId)
+                    ascending: true,
+                    cancellationToken);
+
+                _logger.LogInformation("Retrieved {ItemCount} UsrInfo records out of {TotalCount} total",
+                    pagedResult.Data.Count(), pagedResult.TotalCount);
+
+                // Map to DTOs
+                var mappedData = _mapper.Map<IEnumerable<UsrInfoDto>>(pagedResult.Data);
+
+                var result = new PagedResult<UsrInfoDto>
+                {
+                    Data = mappedData,
+                    TotalCount = pagedResult.TotalCount,
+                    PageNumber = pagedResult.PageNumber,
+                    PageSize = pagedResult.PageSize
+                };
+
+                _logger.LogInformation("Successfully processed GetUsrInfosQuery");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error processing GetUsrInfosQuery");
+                throw;
+            }
         }
-        catch (Exception ex)
+
+        private Expression<Func<RMS.Domain.Entities.UsrInfo, bool>>? BuildPredicate(GetUsrInfosQuery request)
         {
-            _logger.LogError(ex, "Error in GetUsrInfosQueryHandler.Handle");
-            throw;
+            Expression<Func<RMS.Domain.Entities.UsrInfo, bool>>? predicate = null;
+
+            // Filter by status
+            if (!string.IsNullOrWhiteSpace(request.UsrStatus))
+            {
+                predicate = x => x.UsrStatus == request.UsrStatus.Trim();
+            }
+
+            // Filter by company code
+            if (!string.IsNullOrWhiteSpace(request.CoCode))
+            {
+                var codePredicate = (Expression<Func<RMS.Domain.Entities.UsrInfo, bool>>)(x => x.CoCode == request.CoCode.Trim());
+                predicate = predicate == null ? codePredicate : predicate.And(codePredicate);
+            }
+
+            // Filter by dealer code
+            if (!string.IsNullOrWhiteSpace(request.DlrCode))
+            {
+                var dlrPredicate = (Expression<Func<RMS.Domain.Entities.UsrInfo, bool>>)(x => x.DlrCode == request.DlrCode.Trim());
+                predicate = predicate == null ? dlrPredicate : predicate.And(dlrPredicate);
+            }
+
+            // Filter by RMS type
+            if (!string.IsNullOrWhiteSpace(request.RmsType))
+            {
+                var rmsTypePredicate = (Expression<Func<RMS.Domain.Entities.UsrInfo, bool>>)(x => x.RmsType == request.RmsType.Trim());
+                predicate = predicate == null ? rmsTypePredicate : predicate.And(rmsTypePredicate);
+            }
+
+            // Search term (search in UsrId, UsrName, UsrEmail)
+            if (!string.IsNullOrWhiteSpace(request.SearchTerm))
+            {
+                var searchTerm = request.SearchTerm.Trim();
+                var searchPredicate = (Expression<Func<RMS.Domain.Entities.UsrInfo, bool>>)(x =>
+                    x.UsrId.Contains(searchTerm) ||
+                    (x.UsrName != null && x.UsrName.Contains(searchTerm)) ||
+                    (x.UsrEmail != null && x.UsrEmail.Contains(searchTerm)));
+                predicate = predicate == null ? searchPredicate : predicate.And(searchPredicate);
+            }
+
+            return predicate;
         }
-    }
-
-    private static Expression<Func<RMS.Domain.Entities.UsrInfo, bool>>? BuildPredicate(GetUsrInfosQuery request)
-    {
-        Expression<Func<RMS.Domain.Entities.UsrInfo, bool>>? predicate = null;
-
-        if (!string.IsNullOrEmpty(request.UsrStatus))
-        {
-            predicate = x => x.UsrStatus == request.UsrStatus;
-        }
-
-        if (!string.IsNullOrEmpty(request.CoCode))
-        {
-            var codePredicate = (Expression<Func<RMS.Domain.Entities.UsrInfo, bool>>)(x => x.CoCode == request.CoCode);
-            predicate = predicate == null ? codePredicate : predicate.And(codePredicate);
-        }
-
-        if (!string.IsNullOrEmpty(request.DlrCode))
-        {
-            var dlrPredicate = (Expression<Func<RMS.Domain.Entities.UsrInfo, bool>>)(x => x.DlrCode == request.DlrCode);
-            predicate = predicate == null ? dlrPredicate : predicate.And(dlrPredicate);
-        }
-
-        return predicate;
     }
 }

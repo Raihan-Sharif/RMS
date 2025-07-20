@@ -31,8 +31,133 @@ namespace RMS.Infrastructure.Data
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             // Map domain UsrInfo to database table
-            modelBuilder.Entity<UsrInfo>().ToTable("UsrInfo");
-            modelBuilder.Entity<UsrInfo>().HasKey(x => x.UsrId);
+            modelBuilder.Entity<UsrInfo>(entity =>
+            {
+                entity.HasKey(e => e.UsrId);
+
+                entity.ToTable("UsrInfo");
+
+                entity.Property(e => e.UsrId)
+                    .HasMaxLength(16)
+                    .IsUnicode(false)
+                    .HasColumnName("UsrID");
+                entity.Property(e => e.Bfesname)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasDefaultValue("")
+                    .HasColumnName("BFESName");
+                entity.Property(e => e.Category)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+                entity.Property(e => e.ChannelUpdFlag)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasDefaultValue("N");
+                entity.Property(e => e.ClntCode)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+                entity.Property(e => e.CoBrchCode)
+                    .HasMaxLength(6)
+                    .IsUnicode(false);
+                entity.Property(e => e.CoCode).HasMaxLength(5);
+                entity.Property(e => e.DlrCode)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+                entity.Property(e => e.GtcexpiryPeriod).HasColumnName("GTCExpiryPeriod");
+                entity.Property(e => e.MimosMigrateDt).HasColumnType("datetime");
+                entity.Property(e => e.MimosMigrateDtRms)
+                    .HasColumnType("datetime")
+                    .HasColumnName("MimosMigrateDt_rms");
+                entity.Property(e => e.MktDepthEndDate).HasColumnType("datetime");
+                entity.Property(e => e.MktDepthStartDate).HasColumnType("datetime");
+                entity.Property(e => e.OriUsrEmail).HasMaxLength(255);
+                entity.Property(e => e.Pid)
+                    .HasMaxLength(40)
+                    .IsUnicode(false)
+                    .HasColumnName("PID");
+                entity.Property(e => e.PidRms)
+                    .HasMaxLength(40)
+                    .IsUnicode(false)
+                    .HasColumnName("PID_rms");
+                entity.Property(e => e.Pidflag)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasDefaultValue("N")
+                    .HasColumnName("PIDFlag");
+                entity.Property(e => e.PidflagRms)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasDefaultValue("N")
+                    .HasColumnName("PIDFlag_rms");
+                entity.Property(e => e.RmsType)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .HasDefaultValue("");
+                entity.Property(e => e.ThirdPartyUsrId)
+                    .HasMaxLength(16)
+                    .IsUnicode(false)
+                    .HasDefaultValue("")
+                    .HasColumnName("ThirdPartyUsrID");
+                entity.Property(e => e.UsrAccessFa)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasDefaultValue("Y")
+                    .HasColumnName("UsrAccessFA");
+                entity.Property(e => e.UsrAddr).HasMaxLength(250);
+                entity.Property(e => e.UsrAssctPwd).HasMaxLength(8);
+                entity.Property(e => e.UsrBtxmode)
+                    .HasMaxLength(1)
+                    .HasColumnName("UsrBTXMode");
+                entity.Property(e => e.UsrChannel)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+                entity.Property(e => e.UsrCreationDate).HasColumnType("datetime");
+                entity.Property(e => e.UsrDob)
+                    .HasColumnType("datetime")
+                    .HasColumnName("UsrDOB");
+                entity.Property(e => e.UsrEmail)
+                    .HasMaxLength(255)
+                    .HasComment("M - Male; F - Female; ");
+                entity.Property(e => e.UsrExpiryDate).HasColumnType("datetime");
+                entity.Property(e => e.UsrFax).HasMaxLength(15);
+                entity.Property(e => e.UsrGender)
+                    .HasMaxLength(2)
+                    .HasComment("M - Male; F - Female; ");
+                entity.Property(e => e.UsrGtdmode)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasDefaultValue("B")
+                    .HasColumnName("UsrGTDMode");
+                entity.Property(e => e.UsrLastUpdatedDate).HasColumnType("datetime");
+                entity.Property(e => e.UsrLicenseNo).HasMaxLength(30);
+                entity.Property(e => e.UsrMobile).HasMaxLength(15);
+                entity.Property(e => e.UsrName).HasMaxLength(255);
+                entity.Property(e => e.UsrNicno)
+                    .HasMaxLength(30)
+                    .HasColumnName("UsrNICNo");
+                entity.Property(e => e.UsrNotifierId).HasColumnName("UsrNotifierID");
+                entity.Property(e => e.UsrPassNo).HasMaxLength(30);
+                entity.Property(e => e.UsrPhone).HasMaxLength(15);
+                entity.Property(e => e.UsrQualify)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+                entity.Property(e => e.UsrRace)
+                    .HasMaxLength(50)
+                    .HasComment("M - Male; F - Female; ");
+                entity.Property(e => e.UsrRegisterDate).HasColumnType("datetime");
+                entity.Property(e => e.UsrResignDate).HasColumnType("datetime");
+                entity.Property(e => e.UsrStatus)
+                    .HasMaxLength(1)
+                    .HasComment("A - Active; S - Suspend; C - Close; ");
+                entity.Property(e => e.UsrSuperiorId).HasColumnName("UsrSuperiorID");
+                entity.Property(e => e.UsrTdrdate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("UsrTDRDate");
+                entity.Property(e => e.WithoutClntList)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("((0))");
+            });
 
             // Global query filter for soft delete
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())

@@ -8,38 +8,46 @@ using RMS.Infrastructure.Data;
 using RMS.Infrastructure.Repositories;
 using RMS.Infrastructure.Services;
 using RMS.Infrastructure.HealthChecks;
+using RMS.Infrastructure.Mappings;
 
-namespace RMS.Infrastructure;
-
-public static class DependencyInjection
+namespace RMS.Infrastructure
 {
-    public static IServiceCollection AddInfrastructure(
-        this IServiceCollection services,
-        IConfiguration configuration)
+    public static class DependencyInjection
     {
-        // Database - DB First approach
-        services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+        public static IServiceCollection AddInfrastructure(
+            this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            // Database - Use scaffolded DbContext with proper connection string injection
+            services.AddDbContext<DbEfbtxLbslContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-        // Generic Repository - works with any entity
-        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
+            // Entity Mapping Registry
+            services.AddSingleton<IEntityMapper, EntityMappingRegistry>();
 
-        // Services
-        services.AddScoped<IConfigurationService, ConfigurationService>();
-        services.AddScoped<ICacheService, CacheService>();
-        services.AddScoped<ISecurityService, SecurityService>();
-        services.AddScoped<IHandshakeService, HandshakeService>();
-        services.AddHttpClient<IExternalTokenService, ExternalTokenService>();
+            // Add Infrastructure AutoMapper Profile
+            services.AddAutoMapper(typeof(InfrastructureMappingProfile));
 
-        // Memory Cache
-        services.AddMemoryCache();
+            // Repository implementations (implements Domain interfaces)
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-        // Health Checks
-        services.AddHealthChecks()
-            .AddCheck<DatabaseHealthCheck>("database", HealthStatus.Unhealthy)
-            .AddCheck<ExternalApiHealthCheck>("external-api", HealthStatus.Degraded);
+            // Application Services (implements Application interfaces)
+            services.AddScoped<IConfigurationService, ConfigurationService>();
+            services.AddScoped<ICacheService, CacheService>();
+            services.AddScoped<ISecurityService, SecurityService>();
+            services.AddScoped<IHandshakeService, HandshakeService>();
+            services.AddHttpClient<IExternalTokenService, ExternalTokenService>();
 
-        return services;
+            // Memory Cache
+            services.AddMemoryCache();
+
+            // Health Checks
+            services.AddHealthChecks()
+                .AddCheck<DatabaseHealthCheck>("database", HealthStatus.Unhealthy)
+                .AddCheck<ExternalApiHealthCheck>("external-api", HealthStatus.Degraded);
+
+            return services;
+        }
     }
 }
