@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace RMS.Infrastructure.Data.Entities;
+
+public partial class OrderStatus
+{
+    public int SequenceNo { get; set; }
+
+    public DateTime Timestamp { get; set; }
+
+    public int TerminalId { get; set; }
+
+    public string OrderNo { get; set; } = null!;
+
+    public string Status { get; set; } = null!;
+
+    public int StatusSeqNo { get; set; }
+}

@@ -1,0 +1,461 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Projects\\LBSL Projects\\RMS\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\rms.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\rms.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.webapi\\controllers\\usrinfocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\controllers\\usrinfocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\features\\usrinfo\\queries\\getusrinfosquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\features\\usrinfo\\queries\\getusrinfosquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\features\\usrinfo\\commands\\deleteusrinfocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\features\\usrinfo\\commands\\deleteusrinfocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\features\\usrinfo\\commands\\updateusrinfocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\features\\usrinfo\\commands\\updateusrinfocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\features\\usrinfo\\commands\\createusrinfocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\features\\usrinfo\\commands\\createusrinfocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\mappings\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\mappings\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\features\\usrinfo\\queries\\getusrinfobyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\features\\usrinfo\\queries\\getusrinfobyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.infrastructure\\repositories\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\repositories\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.domain\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|solutionrelative:src\\rms.domain\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.infrastructure\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.domain\\interfaces\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|solutionrelative:src\\rms.domain\\interfaces\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.domain\\entities\\usrinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|solutionrelative:src\\rms.domain\\entities\\usrinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.infrastructure\\services\\externaltokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\services\\externaltokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.webapi\\security\\tokenauthenticationmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\security\\tokenauthenticationmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.infrastructure\\services\\securityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\services\\securityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.webapi\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.webapi\\filters\\securityrequirementsoperationfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\filters\\securityrequirementsoperationfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.webapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.webapi\\controllers\\handshakecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\controllers\\handshakecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\models\\auth\\handshakemodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\models\\auth\\handshakemodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\models\\auth\\handshaketokeninfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\models\\auth\\handshaketokeninfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:13:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CreateUsrInfoCommand.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Commands\\CreateUsrInfoCommand.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Features\\UsrInfo\\Commands\\CreateUsrInfoCommand.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Commands\\CreateUsrInfoCommand.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Features\\UsrInfo\\Commands\\CreateUsrInfoCommand.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAcwCUAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:25:35.95Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MappingProfile.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Mappings\\MappingProfile.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Mappings\\MappingProfile.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Mappings\\MappingProfile.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Mappings\\MappingProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:23:00.564Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RMS.Application.csproj",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\RMS.Application.csproj",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\RMS.Application.csproj",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\RMS.Application.csproj",
+              "RelativeToolTip": "src\\RMS.Application\\RMS.Application.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-17T12:22:52.633Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\DependencyInjection.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\DependencyInjection.cs",
+              "RelativeToolTip": "src\\RMS.Infrastructure\\DependencyInjection.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAA1wBEAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:22:39.143Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UsrInfoController.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Controllers\\UsrInfoController.cs",
+              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Controllers\\UsrInfoController.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Controllers\\UsrInfoController.cs",
+              "RelativeToolTip": "src\\RMS.WebAPI\\Controllers\\UsrInfoController.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAiwCcAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T07:17:55.728Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\appsettings.json",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\appsettings.json",
+              "RelativeToolTip": "src\\RMS.WebAPI\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAwwBMAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-17T06:41:21.663Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GetUsrInfosQuery.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfosQuery.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfosQuery.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfosQuery.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfosQuery.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T11:41:01.118Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UpdateUsrInfoCommand.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Commands\\UpdateUsrInfoCommand.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Features\\UsrInfo\\Commands\\UpdateUsrInfoCommand.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Commands\\UpdateUsrInfoCommand.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Features\\UsrInfo\\Commands\\UpdateUsrInfoCommand.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAYwC8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:26:00.343Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DeleteUsrInfoCommand.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Commands\\DeleteUsrInfoCommand.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Features\\UsrInfo\\Commands\\DeleteUsrInfoCommand.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Commands\\DeleteUsrInfoCommand.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Features\\UsrInfo\\Commands\\DeleteUsrInfoCommand.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAA+wCEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:26:35.505Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "GetUsrInfoByIdQuery.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfoByIdQuery.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfoByIdQuery.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfoByIdQuery.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfoByIdQuery.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAcwC4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:21:09.771Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Domain\\Interfaces\\IRepository.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Domain\\Interfaces\\IRepository.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Domain\\Interfaces\\IRepository.cs",
+              "RelativeToolTip": "src\\RMS.Domain\\Interfaces\\IRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:07:03.612Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\DependencyInjection.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\DependencyInjection.cs",
+              "RelativeToolTip": "src\\RMS.Application\\DependencyInjection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:08:22.391Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "IUnitOfWork.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Domain\\Interfaces\\IUnitOfWork.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Domain\\Interfaces\\IUnitOfWork.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Domain\\Interfaces\\IUnitOfWork.cs",
+              "RelativeToolTip": "src\\RMS.Domain\\Interfaces\\IUnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:06:04.564Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UsrInfo.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Domain\\Entities\\UsrInfo.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Domain\\Entities\\UsrInfo.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Domain\\Entities\\UsrInfo.cs",
+              "RelativeToolTip": "src\\RMS.Domain\\Entities\\UsrInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:05:47.5Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "TokenAuthenticationMiddleware.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Security\\TokenAuthenticationMiddleware.cs",
+              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Security\\TokenAuthenticationMiddleware.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Security\\TokenAuthenticationMiddleware.cs",
+              "RelativeToolTip": "src\\RMS.WebAPI\\Security\\TokenAuthenticationMiddleware.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAmwEgAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T07:46:53.516Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ExternalTokenService.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Services\\ExternalTokenService.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\Services\\ExternalTokenService.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Services\\ExternalTokenService.cs",
+              "RelativeToolTip": "src\\RMS.Infrastructure\\Services\\ExternalTokenService.cs",
+              "ViewState": "AgIAALUAAAAAAAAAAAAmwMgAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T06:47:43.68Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Repositories\\Repository.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\Repositories\\Repository.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Repositories\\Repository.cs",
+              "RelativeToolTip": "src\\RMS.Infrastructure\\Repositories\\Repository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T11:31:09.971Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Repositories\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\Repositories\\UnitOfWork.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Repositories\\UnitOfWork.cs",
+              "RelativeToolTip": "src\\RMS.Infrastructure\\Repositories\\UnitOfWork.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAADwv0gAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T11:28:39.367Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ServiceCollectionExtensions.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Extensions\\ServiceCollectionExtensions.cs",
+              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Extensions\\ServiceCollectionExtensions.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Extensions\\ServiceCollectionExtensions.cs",
+              "RelativeToolTip": "src\\RMS.WebAPI\\Extensions\\ServiceCollectionExtensions.cs",
+              "ViewState": "AgIAAIsAAAAAAAAAAAAmwA8AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T08:34:36.512Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Program.cs",
+              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Program.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Program.cs",
+              "RelativeToolTip": "src\\RMS.WebAPI\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T07:45:12.494Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "src\\RMS.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAxwGsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T11:27:39.43Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "SecurityService.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Services\\SecurityService.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\Services\\SecurityService.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Services\\SecurityService.cs",
+              "RelativeToolTip": "src\\RMS.Infrastructure\\Services\\SecurityService.cs",
+              "ViewState": "AgIAANcAAAAAAAAAAAAAwAIBAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T07:06:09.974Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "SecurityRequirementsOperationFilter.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Filters\\SecurityRequirementsOperationFilter.cs",
+              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Filters\\SecurityRequirementsOperationFilter.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Filters\\SecurityRequirementsOperationFilter.cs",
+              "RelativeToolTip": "src\\RMS.WebAPI\\Filters\\SecurityRequirementsOperationFilter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEMAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T08:40:15.658Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "src\\RMS.WebAPI\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAzwDoAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T06:44:56.857Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "HandshakeController.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Controllers\\HandshakeController.cs",
+              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Controllers\\HandshakeController.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Controllers\\HandshakeController.cs",
+              "RelativeToolTip": "src\\RMS.WebAPI\\Controllers\\HandshakeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHIAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T08:44:14.933Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "HandshakeTokenInfo.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Models\\Auth\\HandshakeTokenInfo.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Models\\Auth\\HandshakeTokenInfo.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Models\\Auth\\HandshakeTokenInfo.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Models\\Auth\\HandshakeTokenInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T08:49:49.763Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "HandshakeModels.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Models\\Auth\\HandshakeModels.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Models\\Auth\\HandshakeModels.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Models\\Auth\\HandshakeModels.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Models\\Auth\\HandshakeModels.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAABAwC4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T08:50:16.652Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
