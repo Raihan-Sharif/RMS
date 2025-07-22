@@ -9,25 +9,21 @@ namespace RMS.Application.Mappings
     {
         public MappingProfile()
         {
-            // Domain entity mappings (existing)
-            CreateMap<User, UserDto>()
-                .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"));
-
-            CreateMap<RiskAssessment, RiskAssessmentDto>();
+            // Domain entity mappings
             CreateMap<AuditLog, AuditLogDto>();
 
-            // Infrastructure entity mappings (scaffolded entities)
-            //CreateMap<Infrastructure.Data.Entities.UsrInfo, UsrInfoDto>();
+            // UsrInfo mappings - Map directly to/from domain entity
+            CreateMap<UsrInfo, UsrInfoDto>().ReverseMap();
 
-            //CreateMap<CreateUsrInfoRequest, Infrastructure.Data.Entities.UsrInfo>()
-            //    .ForMember(dest => dest.UsrCreationDate, opt => opt.Ignore())
-            //    .ForMember(dest => dest.UsrLastUpdatedDate, opt => opt.Ignore());
+            CreateMap<CreateUsrInfoRequest, UsrInfo>()
+                .ForMember(dest => dest.UsrCreationDate, opt => opt.MapFrom(src => DateTime.UtcNow))
+                .ForMember(dest => dest.UsrLastUpdatedDate, opt => opt.MapFrom(src => DateTime.UtcNow));
 
-            //CreateMap<UpdateUsrInfoRequest, Infrastructure.Data.Entities.UsrInfo>()
-            //    .ForMember(dest => dest.UsrId, opt => opt.Ignore()) // Don't update primary key
-            //    .ForMember(dest => dest.UsrCreationDate, opt => opt.Ignore()) // Don't update creation date
-            //    .ForMember(dest => dest.UsrLastUpdatedDate, opt => opt.Ignore()) // Will be set automatically
-            //    .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null)); // Only map non-null values
+            CreateMap<UpdateUsrInfoRequest, UsrInfo>()
+                .ForMember(dest => dest.UsrId, opt => opt.Ignore()) // Don't update primary key
+                .ForMember(dest => dest.UsrCreationDate, opt => opt.Ignore()) // Don't update creation date
+                .ForMember(dest => dest.UsrLastUpdatedDate, opt => opt.MapFrom(src => DateTime.UtcNow))
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null)); // Only map non-null values
         }
     }
 }

@@ -61,8 +61,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "RMS API V1");
-        c.RoutePrefix = "";
+        c.RoutePrefix = "swagger"; // Swagger available at /swagger
+        c.DocumentTitle = "RMS API Documentation";
     });
+
+    // Redirect root to swagger for convenience
+    app.MapGet("/", () => Results.Redirect("/swagger"));
 }
 
 app.UseHttpsRedirection();

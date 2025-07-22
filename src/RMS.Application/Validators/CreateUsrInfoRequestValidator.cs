@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using RMS.Application.Features.UsrInfo.Commands;
 using RMS.Application.Models.Requests;
 using System;
 using System.Collections.Generic;

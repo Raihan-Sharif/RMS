@@ -57,6 +57,7 @@ namespace RMS.Application.Common.Behaviors
                 }
             }
 
+            // Fixed: Pass the cancellationToken to next()
             return await next();
         }
     }

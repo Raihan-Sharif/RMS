@@ -1,0 +1,74 @@
+dotnet ef dbcontext scaffold "Server=192.168.100.48;Database=DB_EFBTX_LBSL;User Id=sa;Password=Excel@123force;TrustServerCertificate=true;" Microsoft.EntityFrameworkCore.SqlServer --project src/RMS.Infrastructure --startup-project src/RMS.WebAPI --context-dir Data --output-dir Data/Entities --force
+
+-- these under 2 command not works ----
+dotnet ef dbcontext scaffold "Server=192.168.100.48;Database=DB_EFBTX_LBSL;User Id=sa;Password=Excel@123force;TrustServerCertificate=true;" Microsoft.EntityFrameworkCore.SqlServer --table TaskStatus=TaskStatusEntity --project src/RMS.Infrastructure --startup-project src/RMS.WebAPI --context-dir Data --output-dir Data/Entities --force
+
+dotnet ef dbcontext scaffold "Server=192.168.100.48;Database=DB_EFBTX_LBSL;User Id=sa;Password=Excel@123force;TrustServerCertificate=true;" Microsoft.EntityFrameworkCore.SqlServer --table dbo.TaskStatus=TaskStatusEntity --project src/RMS.Infrastructure --startup-project src/RMS.WebAPI --context-dir Data --output-dir Data/Entities --force
+
+
+
+
+
+---- scaffold file and class name modification ---
+
+$entityPath = "D:\Projects\LBSL Projects\RMS\src\RMS.Infrastructure\Data\Entities"
+
+Get-ChildItem -Path $entityPath -Filter *.cs | ForEach-Object {
+    $file = $_.FullName
+    $originalName = $_.BaseName
+    $newName = "${originalName}DbEntity"
+    
+    Write-Host "Would rename class $originalName → $newName in $file"
+}
+
+----- Revers (Remove PostFix [DbEntity] from File and Class name)
+
+$entityPath = "D:\Projects\LBSL Projects\RMS\src\RMS.Infrastructure\Data\Entities"
+
+Get-ChildItem -Path $entityPath -Filter *DbEntity.cs | ForEach-Object {
+    $file = $_.FullName
+    $dbEntityName = $_.BaseName           # e.g., UsrInfoDbEntity
+    $originalName = $dbEntityName -replace "DbEntity$", ""  # UsrInfo
+
+    Write-Host "Renaming class $dbEntityName → $originalName in file: $file"
+
+    # Replace class name in the file content
+    (Get-Content $file) `
+    -replace "(\b(public|internal|private)?\s*class\s+)$dbEntityName\b", "`$1$originalName" `
+    | Set-Content $file
+
+    # Rename the file
+    $newFileName = "$originalName.cs"
+    Rename-Item -Path $file -NewName $newFileName
+}
+
+
+
+---- now rename the DbContext file related entity name ----
+
+# Path to your DbContext file
+$contextPath = "D:\Projects\LBSL Projects\RMS\src\RMS.Infrastructure\Data\DbEfbtxLbslContext.cs"
+
+# Load the file content
+$content = Get-Content $contextPath -Raw
+
+# Get the path to your Entities folder to collect all entity class names
+$entitiesPath = "D:\Projects\LBSL Projects\RMS\src\RMS.Infrastructure\Data\Entities"
+
+# Loop through all entity class names
+Get-ChildItem -Path $entitiesPath -Filter *.cs | ForEach-Object {
+    $originalName = $_.BaseName -replace "DbEntity$", ""
+    $newName = "$originalName`DbEntity"
+
+    # Replace <ClassName> with <ClassNameDbEntity>
+    $content = $content -replace "(?<=<)$originalName(?=>)", $newName
+
+    # Replace spaces (e.g., "DbSet ClassName " → "DbSet ClassNameDbEntity ")
+    $content = $content -replace "DbSet\s+$originalName\b", "DbSet<$newName>"
+
+    # Replace Entity<ClassName>( to Entity<ClassNameDbEntity>(
+    $content = $content -replace "Entity<$originalName>", "Entity<$newName>"
+}
+
+# Save the updated content back
+Set-Content -Path $contextPath -Value $content -Encoding UTF8

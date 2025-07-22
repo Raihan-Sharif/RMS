@@ -9,13 +9,13 @@ namespace RMS.Domain.Events
 {
     public class UserCreatedEvent : IDomainEvent
     {
-        public UserCreatedEvent(User user)
+        public UserCreatedEvent(UsrInfo user)
         {
             User = user;
             OccurredOn = DateTime.UtcNow;
         }
 
-        public User User { get; }
+        public UsrInfo User { get; }
         public DateTime OccurredOn { get; }
     }
 }

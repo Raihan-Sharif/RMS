@@ -1,11 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using MediatR;
 using RMS.Application.Common.Behaviors;
 
@@ -17,12 +12,18 @@ namespace RMS.Application
         {
             var assembly = Assembly.GetExecutingAssembly();
 
+            // Add AutoMapper
             services.AddAutoMapper(assembly);
+
+            // Add FluentValidation
             services.AddValidatorsFromAssembly(assembly);
 
+            // Add MediatR with correct configuration for version 12.x
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(assembly);
+
+                // Add behaviors - correct syntax for MediatR 12.x
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             });
 

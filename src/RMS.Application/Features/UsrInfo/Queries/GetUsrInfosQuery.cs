@@ -10,7 +10,6 @@ using RMS.Domain.Entities;
 
 namespace RMS.Application.Features.UsrInfo.Queries
 {
-    // Keep your existing query class - NO CHANGES NEEDED
     public class GetUsrInfosQuery : IRequest<PagedResult<UsrInfoDto>>
     {
         public int PageNumber { get; set; } = 1;
@@ -22,7 +21,6 @@ namespace RMS.Application.Features.UsrInfo.Queries
         public string? SearchTerm { get; set; }
     }
 
-    // UPDATE THIS HANDLER to use generic repository
     public class GetUsrInfosQueryHandler : IRequestHandler<GetUsrInfosQuery, PagedResult<UsrInfoDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -50,20 +48,20 @@ namespace RMS.Application.Features.UsrInfo.Queries
                 if (request.PageNumber < 1) request.PageNumber = 1;
                 if (request.PageSize < 1 || request.PageSize > 100) request.PageSize = 10;
 
-                // Use the new generic repository for UsrInfo
+                // Use the generic repository for UsrInfo
                 var repository = _unitOfWork.Repository<RMS.Domain.Entities.UsrInfo>();
 
                 // Build predicate for filtering
                 var predicate = BuildPredicate(request);
 
-                // Get paged data using generic repository
+                // FIXED: Use correct method signature for IGenericRepository
                 var pagedResult = await repository.GetPagedAsync(
-                    request.PageNumber,
-                    request.PageSize,
-                    predicate,
-                    orderBy: null, // Will use default ordering (UsrId)
+                    pageNumber: request.PageNumber,
+                    pageSize: request.PageSize,
+                    predicate: predicate,
+                    orderBy: null, // Will use default primary key ordering
                     ascending: true,
-                    cancellationToken);
+                    cancellationToken: cancellationToken);
 
                 _logger.LogInformation("Retrieved {ItemCount} UsrInfo records out of {TotalCount} total",
                     pagedResult.Data.Count(), pagedResult.TotalCount);
@@ -71,16 +69,13 @@ namespace RMS.Application.Features.UsrInfo.Queries
                 // Map to DTOs
                 var mappedData = _mapper.Map<IEnumerable<UsrInfoDto>>(pagedResult.Data);
 
-                var result = new PagedResult<UsrInfoDto>
+                return new PagedResult<UsrInfoDto>
                 {
                     Data = mappedData,
                     TotalCount = pagedResult.TotalCount,
                     PageNumber = pagedResult.PageNumber,
                     PageSize = pagedResult.PageSize
                 };
-
-                _logger.LogInformation("Successfully processed GetUsrInfosQuery");
-                return result;
             }
             catch (Exception ex)
             {

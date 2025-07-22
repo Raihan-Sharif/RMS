@@ -8,7 +8,6 @@ using RMS.Infrastructure.Data;
 using RMS.Infrastructure.Repositories;
 using RMS.Infrastructure.Services;
 using RMS.Infrastructure.HealthChecks;
-using RMS.Infrastructure.Mappings;
 
 namespace RMS.Infrastructure
 {
@@ -20,16 +19,25 @@ namespace RMS.Infrastructure
         {
             // Database - Use scaffolded DbContext with proper connection string injection
             services.AddDbContext<DbEfbtxLbslContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            {
+                var connectionString = configuration.GetConnectionString("DefaultConnection");
+                options.UseSqlServer(connectionString);
 
-            // Entity Mapping Registry
-            services.AddSingleton<IEntityMapper, EntityMappingRegistry>();
+                // Enable sensitive data logging in development
+                if (configuration.GetValue<string>("ASPNETCORE_ENVIRONMENT") == "Development")
+                {
+                    options.EnableSensitiveDataLogging();
+                    options.EnableDetailedErrors();
+                }
+            });
 
-            // Add Infrastructure AutoMapper Profile
-            services.AddAutoMapper(typeof(InfrastructureMappingProfile));
+            // Remove EntityMapper and InfrastructureMapping - not needed since we use domain entities directly
+            // services.AddSingleton<IEntityMapper, EntityMappingRegistry>();
+            // services.AddAutoMapper(typeof(InfrastructureMappingProfile));
 
-            // Repository implementations (implements Domain interfaces)
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            // Repository implementations - Register the simplified repositories
+            services.AddScoped(typeof(IGenericRepository<>), typeof(SimpleGenericRepository<>));
+            services.AddScoped(typeof(IRepository<>), typeof(SimpleRepository<>)); // Use simplified repository
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             // Application Services (implements Application interfaces)

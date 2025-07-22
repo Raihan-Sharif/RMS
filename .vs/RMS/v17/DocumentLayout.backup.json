@@ -1,114 +1,201 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Projects\\LBSL Projects\\RMS\\",
+  "WorkspaceRootPath": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\rms.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\rms.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Repositories\\Repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\RMS.Infrastructure\\Repositories\\Repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.webapi\\controllers\\usrinfocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\controllers\\usrinfocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\features\\usrinfo\\queries\\getusrinfosquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\features\\usrinfo\\queries\\getusrinfosquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\features\\usrinfo\\commands\\deleteusrinfocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\features\\usrinfo\\commands\\deleteusrinfocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\features\\usrinfo\\commands\\updateusrinfocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\features\\usrinfo\\commands\\updateusrinfocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\features\\usrinfo\\commands\\createusrinfocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\features\\usrinfo\\commands\\createusrinfocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\mappings\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\mappings\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\features\\usrinfo\\queries\\getusrinfobyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\features\\usrinfo\\queries\\getusrinfobyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.infrastructure\\repositories\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\repositories\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.domain\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|solutionrelative:src\\rms.domain\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.infrastructure\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.domain\\interfaces\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|solutionrelative:src\\rms.domain\\interfaces\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.domain\\entities\\usrinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|solutionrelative:src\\rms.domain\\entities\\usrinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.infrastructure\\services\\externaltokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\services\\externaltokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.webapi\\security\\tokenauthenticationmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\security\\tokenauthenticationmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.infrastructure\\services\\securityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\services\\securityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.webapi\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.webapi\\filters\\securityrequirementsoperationfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\filters\\securityrequirementsoperationfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.webapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.webapi\\services\\currentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\services\\currentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.webapi\\controllers\\usrinfocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\controllers\\usrinfocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.infrastructure\\services\\externaltokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\services\\externaltokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5590CE5-F3F2-4AC5-AA21-2D8A9E093A05}|src\\RMS.Shared\\RMS.Shared.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.shared\\models\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5590CE5-F3F2-4AC5-AA21-2D8A9E093A05}|src\\RMS.Shared\\RMS.Shared.csproj|solutionrelative:src\\rms.shared\\models\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5590CE5-F3F2-4AC5-AA21-2D8A9E093A05}|src\\RMS.Shared\\RMS.Shared.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.shared\\constants\\appconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5590CE5-F3F2-4AC5-AA21-2D8A9E093A05}|src\\RMS.Shared\\RMS.Shared.csproj|solutionrelative:src\\rms.shared\\constants\\appconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.infrastructure\\repositories\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\repositories\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.infrastructure\\data\\dbefbtxlbslcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\data\\dbefbtxlbslcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.application\\validators\\updateusrinforequestvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\validators\\updateusrinforequestvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.application\\validators\\createusrinfocommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\validators\\createusrinfocommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.application\\validators\\getusrinfosqueryvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\validators\\getusrinfosqueryvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.application\\models\\dtos\\usrinfodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\models\\dtos\\usrinfodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.application\\mappings\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\mappings\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.application\\features\\usrinfo\\queries\\getusrinfosquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\features\\usrinfo\\queries\\getusrinfosquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.application\\features\\usrinfo\\commands\\createusrinfocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\features\\usrinfo\\commands\\createusrinfocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.domain\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|solutionrelative:src\\rms.domain\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.domain\\interfaces\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|solutionrelative:src\\rms.domain\\interfaces\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.domain\\common\\validationerrordetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|solutionrelative:src\\rms.domain\\common\\validationerrordetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.domain\\entities\\usrinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|solutionrelative:src\\rms.domain\\entities\\usrinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.infrastructure\\data\\configurations\\auditlogconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\data\\configurations\\auditlogconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.domain\\events\\usercreatedevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|solutionrelative:src\\rms.domain\\events\\usercreatedevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.domain\\events\\idomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\RMS.Domain\\RMS.Domain.csproj|solutionrelative:src\\rms.domain\\events\\idomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.webapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.webapi\\controllers\\handshakecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.webapi\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.webapi\\controllers\\handshakecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\controllers\\handshakecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\models\\auth\\handshakemodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.webapi\\rms.webapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\rms.webapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.infrastructure\\repositories\\simplegenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\repositories\\simplegenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.infrastructure\\repositories\\simplerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\repositories\\simplerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.application\\validators\\createusrinforequestvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\validators\\createusrinforequestvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.application\\rms.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\rms.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.infrastructure\\rms.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\rms.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.application\\common\\behaviors\\validationbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\common\\behaviors\\validationbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.webapi\\security\\customauthorizationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\security\\customauthorizationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.infrastructure\\healthchecks\\databasehealthcheck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\healthchecks\\databasehealthcheck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.application\\features\\usrinfo\\commands\\deleteusrinfocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\features\\usrinfo\\commands\\deleteusrinfocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.application\\features\\usrinfo\\commands\\updateusrinfocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\features\\usrinfo\\commands\\updateusrinfocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.application\\features\\usrinfo\\queries\\getusrinfobyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\features\\usrinfo\\queries\\getusrinfobyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\raihan.sharif\\AppData\\Local\\Temp\\.vsdbgsrc\\abba077035e90a395828270c0dc682162f8b63e531f6195695ad9df77d930690\\ControllerActionInvoker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.infrastructure\\services\\securityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\RMS.Infrastructure\\RMS.Infrastructure.csproj|solutionrelative:src\\rms.infrastructure\\services\\securityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.webapi\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.webapi\\filters\\securityrequirementsoperationfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\RMS.WebAPI\\RMS.WebAPI.csproj|solutionrelative:src\\rms.webapi\\filters\\securityrequirementsoperationfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.application\\models\\auth\\handshakemodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\models\\auth\\handshakemodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|d:\\projects\\lbsl projects\\rms\\src\\rms.application\\models\\auth\\handshaketokeninfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|c:\\users\\raihan.sharif\\desktop\\rms\\src\\rms.application\\models\\auth\\handshaketokeninfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\RMS.Application\\RMS.Application.csproj|solutionrelative:src\\rms.application\\models\\auth\\handshaketokeninfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Data\\Entities\\UsrInfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\RMS.Infrastructure\\Data\\Entities\\UsrInfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Repositories\\GenericRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\RMS.Infrastructure\\Repositories\\GenericRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -118,7 +205,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -130,230 +217,539 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CreateUsrInfoCommand.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Commands\\CreateUsrInfoCommand.cs",
-              "RelativeDocumentMoniker": "src\\RMS.Application\\Features\\UsrInfo\\Commands\\CreateUsrInfoCommand.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Commands\\CreateUsrInfoCommand.cs",
-              "RelativeToolTip": "src\\RMS.Application\\Features\\UsrInfo\\Commands\\CreateUsrInfoCommand.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAcwCUAAAA1AAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "ExternalTokenService.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Services\\ExternalTokenService.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\Services\\ExternalTokenService.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Services\\ExternalTokenService.cs",
+              "RelativeToolTip": "src\\RMS.Infrastructure\\Services\\ExternalTokenService.cs",
+              "ViewState": "AgIAALUAAAAAAAAAAAAmwMcAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T12:25:35.95Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "MappingProfile.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Mappings\\MappingProfile.cs",
-              "RelativeDocumentMoniker": "src\\RMS.Application\\Mappings\\MappingProfile.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Mappings\\MappingProfile.cs",
-              "RelativeToolTip": "src\\RMS.Application\\Mappings\\MappingProfile.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T12:23:00.564Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RMS.Application.csproj",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\RMS.Application.csproj",
-              "RelativeDocumentMoniker": "src\\RMS.Application\\RMS.Application.csproj",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\RMS.Application.csproj",
-              "RelativeToolTip": "src\\RMS.Application\\RMS.Application.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-07-17T12:22:52.633Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-17T06:47:43.68Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "AppConstants.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Shared\\Constants\\AppConstants.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Shared\\Constants\\AppConstants.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Shared\\Constants\\AppConstants.cs",
+              "RelativeToolTip": "src\\RMS.Shared\\Constants\\AppConstants.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T06:32:04.772Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ApiResponse.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Shared\\Models\\ApiResponse.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Shared\\Models\\ApiResponse.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Shared\\Models\\ApiResponse.cs",
+              "RelativeToolTip": "src\\RMS.Shared\\Models\\ApiResponse.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAA/wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T06:32:12.044Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CurrentUserService.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\Services\\CurrentUserService.cs",
+              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Services\\CurrentUserService.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\Services\\CurrentUserService.cs",
+              "RelativeToolTip": "src\\RMS.WebAPI\\Services\\CurrentUserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T10:09:51.738Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DbEfbtxLbslContext.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Data\\DbEfbtxLbslContext.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\Data\\DbEfbtxLbslContext.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Data\\DbEfbtxLbslContext.cs",
+              "RelativeToolTip": "src\\RMS.Infrastructure\\Data\\DbEfbtxLbslContext.cs",
+              "ViewState": "AgIAALBcAAAAAAAAAAAAwBoHAABRAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T10:52:44.83Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "DependencyInjection.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\DependencyInjection.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\DependencyInjection.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\DependencyInjection.cs",
+              "RelativeToolTip": "src\\RMS.Application\\DependencyInjection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:08:22.391Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\DependencyInjection.cs",
               "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\DependencyInjection.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\DependencyInjection.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\DependencyInjection.cs",
               "RelativeToolTip": "src\\RMS.Infrastructure\\DependencyInjection.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAA1wBEAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAABEAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-17T12:22:39.143Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UsrInfoController.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Controllers\\UsrInfoController.cs",
-              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Controllers\\UsrInfoController.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Controllers\\UsrInfoController.cs",
-              "RelativeToolTip": "src\\RMS.WebAPI\\Controllers\\UsrInfoController.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAiwCcAAAAhAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\Program.cs",
+              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\Program.cs",
+              "RelativeToolTip": "src\\RMS.WebAPI\\Program.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAD4AAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T07:17:55.728Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-17T07:45:12.494Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\appsettings.json",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\appsettings.json",
               "RelativeDocumentMoniker": "src\\RMS.WebAPI\\appsettings.json",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\appsettings.json",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\appsettings.json",
               "RelativeToolTip": "src\\RMS.WebAPI\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAwwBMAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAABMAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-07-17T06:41:21.663Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "GetUsrInfosQuery.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfosQuery.cs",
-              "RelativeDocumentMoniker": "src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfosQuery.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfosQuery.cs",
-              "RelativeToolTip": "src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfosQuery.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T11:41:01.118Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UpdateUsrInfoCommand.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Commands\\UpdateUsrInfoCommand.cs",
-              "RelativeDocumentMoniker": "src\\RMS.Application\\Features\\UsrInfo\\Commands\\UpdateUsrInfoCommand.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Commands\\UpdateUsrInfoCommand.cs",
-              "RelativeToolTip": "src\\RMS.Application\\Features\\UsrInfo\\Commands\\UpdateUsrInfoCommand.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAYwC8AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T12:26:00.343Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DeleteUsrInfoCommand.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Commands\\DeleteUsrInfoCommand.cs",
-              "RelativeDocumentMoniker": "src\\RMS.Application\\Features\\UsrInfo\\Commands\\DeleteUsrInfoCommand.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Commands\\DeleteUsrInfoCommand.cs",
-              "RelativeToolTip": "src\\RMS.Application\\Features\\UsrInfo\\Commands\\DeleteUsrInfoCommand.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAA+wCEAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T12:26:35.505Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "GetUsrInfoByIdQuery.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfoByIdQuery.cs",
-              "RelativeDocumentMoniker": "src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfoByIdQuery.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfoByIdQuery.cs",
-              "RelativeToolTip": "src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfoByIdQuery.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAcwC4AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T12:21:09.771Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "IRepository.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Domain\\Interfaces\\IRepository.cs",
-              "RelativeDocumentMoniker": "src\\RMS.Domain\\Interfaces\\IRepository.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Domain\\Interfaces\\IRepository.cs",
-              "RelativeToolTip": "src\\RMS.Domain\\Interfaces\\IRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T12:07:03.612Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "DependencyInjection.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\DependencyInjection.cs",
-              "RelativeDocumentMoniker": "src\\RMS.Application\\DependencyInjection.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\DependencyInjection.cs",
-              "RelativeToolTip": "src\\RMS.Application\\DependencyInjection.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T12:08:22.391Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "IUnitOfWork.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Domain\\Interfaces\\IUnitOfWork.cs",
-              "RelativeDocumentMoniker": "src\\RMS.Domain\\Interfaces\\IUnitOfWork.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Domain\\Interfaces\\IUnitOfWork.cs",
-              "RelativeToolTip": "src\\RMS.Domain\\Interfaces\\IUnitOfWork.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T12:06:04.564Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "UsrInfo.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Domain\\Entities\\UsrInfo.cs",
-              "RelativeDocumentMoniker": "src\\RMS.Domain\\Entities\\UsrInfo.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Domain\\Entities\\UsrInfo.cs",
-              "RelativeToolTip": "src\\RMS.Domain\\Entities\\UsrInfo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T12:05:47.5Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "TokenAuthenticationMiddleware.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Security\\TokenAuthenticationMiddleware.cs",
-              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Security\\TokenAuthenticationMiddleware.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Security\\TokenAuthenticationMiddleware.cs",
-              "RelativeToolTip": "src\\RMS.WebAPI\\Security\\TokenAuthenticationMiddleware.cs",
-              "ViewState": "AgIAADgAAAAAAAAAAAAmwEgAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T07:46:53.516Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "ExternalTokenService.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Services\\ExternalTokenService.cs",
-              "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\Services\\ExternalTokenService.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Services\\ExternalTokenService.cs",
-              "RelativeToolTip": "src\\RMS.Infrastructure\\Services\\ExternalTokenService.cs",
-              "ViewState": "AgIAALUAAAAAAAAAAAAmwMgAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T06:47:43.68Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 0,
               "Title": "Repository.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Repositories\\Repository.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Repositories\\Repository.cs",
               "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\Repositories\\Repository.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Repositories\\Repository.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Repositories\\Repository.cs",
               "RelativeToolTip": "src\\RMS.Infrastructure\\Repositories\\Repository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-17T11:31:09.971Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 4,
+              "Title": "UsrInfoController.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\Controllers\\UsrInfoController.cs",
+              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Controllers\\UsrInfoController.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\Controllers\\UsrInfoController.cs",
+              "RelativeToolTip": "src\\RMS.WebAPI\\Controllers\\UsrInfoController.cs",
+              "ViewState": "AgIAAHsAAAAAAAAAAAA0wIUAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T07:17:55.728Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "UpdateUsrInfoRequestValidator.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Validators\\UpdateUsrInfoRequestValidator.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Validators\\UpdateUsrInfoRequestValidator.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Validators\\UpdateUsrInfoRequestValidator.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Validators\\UpdateUsrInfoRequestValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T06:30:04.121Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "GetUsrInfosQueryValidator.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Validators\\GetUsrInfosQueryValidator.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Validators\\GetUsrInfosQueryValidator.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Validators\\GetUsrInfosQueryValidator.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Validators\\GetUsrInfosQueryValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T11:30:59.834Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "UsrInfoDto.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Models\\DTOs\\UsrInfoDto.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Models\\DTOs\\UsrInfoDto.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Models\\DTOs\\UsrInfoDto.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Models\\DTOs\\UsrInfoDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T06:28:56.687Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "UnitOfWork.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Repositories\\UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Repositories\\UnitOfWork.cs",
               "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\Repositories\\UnitOfWork.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Repositories\\UnitOfWork.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Repositories\\UnitOfWork.cs",
               "RelativeToolTip": "src\\RMS.Infrastructure\\Repositories\\UnitOfWork.cs",
-              "ViewState": "AgIAAD8AAAAAAAAAAADwv0gAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-17T11:28:39.367Z"
             },
             {
               "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "GetUsrInfosQuery.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfosQuery.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfosQuery.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfosQuery.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfosQuery.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAADwv4MAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T11:41:01.118Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "CreateUsrInfoCommand.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Commands\\CreateUsrInfoCommand.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Features\\UsrInfo\\Commands\\CreateUsrInfoCommand.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Commands\\CreateUsrInfoCommand.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Features\\UsrInfo\\Commands\\CreateUsrInfoCommand.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAA0wDsAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:25:35.95Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "IUnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Domain\\Interfaces\\IUnitOfWork.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Domain\\Interfaces\\IUnitOfWork.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Domain\\Interfaces\\IUnitOfWork.cs",
+              "RelativeToolTip": "src\\RMS.Domain\\Interfaces\\IUnitOfWork.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAqwA8AAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:06:04.564Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 20,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Domain\\Interfaces\\IRepository.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Domain\\Interfaces\\IRepository.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Domain\\Interfaces\\IRepository.cs",
+              "RelativeToolTip": "src\\RMS.Domain\\Interfaces\\IRepository.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAiwAUAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:07:03.612Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CreateUsrInfoCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Validators\\CreateUsrInfoCommandValidator.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Validators\\CreateUsrInfoCommandValidator.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Validators\\CreateUsrInfoCommandValidator.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Validators\\CreateUsrInfoCommandValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T11:32:29.527Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "ValidationErrorDetail.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Domain\\Common\\ValidationErrorDetail.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Domain\\Common\\ValidationErrorDetail.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Domain\\Common\\ValidationErrorDetail.cs",
+              "RelativeToolTip": "src\\RMS.Domain\\Common\\ValidationErrorDetail.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T06:26:44.287Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "MappingProfile.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Mappings\\MappingProfile.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Mappings\\MappingProfile.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Mappings\\MappingProfile.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Mappings\\MappingProfile.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:23:00.564Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "src\\RMS.WebAPI\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAgwFoAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T06:44:56.857Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "UsrInfo.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Domain\\Entities\\UsrInfo.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Domain\\Entities\\UsrInfo.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Domain\\Entities\\UsrInfo.cs",
+              "RelativeToolTip": "src\\RMS.Domain\\Entities\\UsrInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:05:47.5Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "UsrInfo.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Data\\Entities\\UsrInfo.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\Data\\Entities\\UsrInfo.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Data\\Entities\\UsrInfo.cs",
+              "RelativeToolTip": "src\\RMS.Infrastructure\\Data\\Entities\\UsrInfo.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAcwAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T04:51:21.528Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "BaseController.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\Controllers\\BaseController.cs",
+              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Controllers\\BaseController.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\Controllers\\BaseController.cs",
+              "RelativeToolTip": "src\\RMS.WebAPI\\Controllers\\BaseController.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAUwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T05:31:27.276Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "UserCreatedEvent.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Domain\\Events\\UserCreatedEvent.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Domain\\Events\\UserCreatedEvent.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Domain\\Events\\UserCreatedEvent.cs",
+              "RelativeToolTip": "src\\RMS.Domain\\Events\\UserCreatedEvent.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAIA1wBEAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T05:35:44.047Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "IDomainEvent.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Domain\\Events\\IDomainEvent.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Domain\\Events\\IDomainEvent.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Domain\\Events\\IDomainEvent.cs",
+              "RelativeToolTip": "src\\RMS.Domain\\Events\\IDomainEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T05:36:22.648Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "AuditLogConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Data\\Configurations\\AuditLogConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\Data\\Configurations\\AuditLogConfiguration.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Data\\Configurations\\AuditLogConfiguration.cs",
+              "RelativeToolTip": "src\\RMS.Infrastructure\\Data\\Configurations\\AuditLogConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T05:41:52.355Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "RMS.WebAPI.csproj",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\RMS.WebAPI.csproj",
+              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\RMS.WebAPI.csproj",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\RMS.WebAPI.csproj",
+              "RelativeToolTip": "src\\RMS.WebAPI\\RMS.WebAPI.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-20T07:19:52.611Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "CreateUsrInfoRequestValidator.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Validators\\CreateUsrInfoRequestValidator.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Validators\\CreateUsrInfoRequestValidator.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Validators\\CreateUsrInfoRequestValidator.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Validators\\CreateUsrInfoRequestValidator.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAA2wDIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T11:31:51.658Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "HandshakeController.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\Controllers\\HandshakeController.cs",
+              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Controllers\\HandshakeController.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\Controllers\\HandshakeController.cs",
+              "RelativeToolTip": "src\\RMS.WebAPI\\Controllers\\HandshakeController.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAA0wHIAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T08:44:14.933Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "SimpleRepository.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Repositories\\SimpleRepository.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\Repositories\\SimpleRepository.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Repositories\\SimpleRepository.cs",
+              "RelativeToolTip": "src\\RMS.Infrastructure\\Repositories\\SimpleRepository.cs",
+              "ViewState": "AgIAACkBAAAAAAAAAAA0wEwBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T11:29:41.441Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "SimpleGenericRepository.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Repositories\\SimpleGenericRepository.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\Repositories\\SimpleGenericRepository.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Repositories\\SimpleGenericRepository.cs",
+              "RelativeToolTip": "src\\RMS.Infrastructure\\Repositories\\SimpleGenericRepository.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAowBwAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T11:34:00.515Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "RMS.Infrastructure.csproj",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\RMS.Infrastructure.csproj",
+              "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\RMS.Infrastructure.csproj",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\RMS.Infrastructure.csproj",
+              "RelativeToolTip": "src\\RMS.Infrastructure\\RMS.Infrastructure.csproj",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACoAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-20T07:18:31.545Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "RMS.Application.csproj",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\RMS.Application.csproj",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\RMS.Application.csproj",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\RMS.Application.csproj",
+              "RelativeToolTip": "src\\RMS.Application\\RMS.Application.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-17T12:22:52.633Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "ValidationBehavior.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Common\\Behaviors\\ValidationBehavior.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Common\\Behaviors\\ValidationBehavior.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Common\\Behaviors\\ValidationBehavior.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Common\\Behaviors\\ValidationBehavior.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAiwBcAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T10:40:35.823Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "CustomAuthorizationHandler.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\Security\\CustomAuthorizationHandler.cs",
+              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Security\\CustomAuthorizationHandler.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\Security\\CustomAuthorizationHandler.cs",
+              "RelativeToolTip": "src\\RMS.WebAPI\\Security\\CustomAuthorizationHandler.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T10:10:10.018Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Repositories\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\Repositories\\GenericRepository.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Repositories\\GenericRepository.cs",
+              "RelativeToolTip": "src\\RMS.Infrastructure\\Repositories\\GenericRepository.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABcAAABoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T09:52:19.472Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "DatabaseHealthCheck.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\HealthChecks\\DatabaseHealthCheck.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\HealthChecks\\DatabaseHealthCheck.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\HealthChecks\\DatabaseHealthCheck.cs",
+              "RelativeToolTip": "src\\RMS.Infrastructure\\HealthChecks\\DatabaseHealthCheck.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T06:11:54.352Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "GetUsrInfoByIdQuery.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfoByIdQuery.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfoByIdQuery.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfoByIdQuery.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Features\\UsrInfo\\Queries\\GetUsrInfoByIdQuery.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAA4wCUAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:21:09.771Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "UpdateUsrInfoCommand.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Commands\\UpdateUsrInfoCommand.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Features\\UsrInfo\\Commands\\UpdateUsrInfoCommand.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Commands\\UpdateUsrInfoCommand.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Features\\UsrInfo\\Commands\\UpdateUsrInfoCommand.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAIBBwB0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:26:00.343Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "DeleteUsrInfoCommand.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Commands\\DeleteUsrInfoCommand.cs",
+              "RelativeDocumentMoniker": "src\\RMS.Application\\Features\\UsrInfo\\Commands\\DeleteUsrInfoCommand.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Features\\UsrInfo\\Commands\\DeleteUsrInfoCommand.cs",
+              "RelativeToolTip": "src\\RMS.Application\\Features\\UsrInfo\\Commands\\DeleteUsrInfoCommand.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAIBAwCoAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T12:26:35.505Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "ControllerActionInvoker.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\AppData\\Local\\Temp\\.vsdbgsrc\\abba077035e90a395828270c0dc682162f8b63e531f6195695ad9df77d930690\\ControllerActionInvoker.cs",
+              "RelativeDocumentMoniker": "..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\abba077035e90a395828270c0dc682162f8b63e531f6195695ad9df77d930690\\ControllerActionInvoker.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\AppData\\Local\\Temp\\.vsdbgsrc\\abba077035e90a395828270c0dc682162f8b63e531f6195695ad9df77d930690\\ControllerActionInvoker.cs [Read Only]",
+              "RelativeToolTip": "..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\abba077035e90a395828270c0dc682162f8b63e531f6195695ad9df77d930690\\ControllerActionInvoker.cs [Read Only]",
+              "ViewState": "AgIAALcBAAAAAAAAAAAmwMUBAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T05:31:00.675Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
               "Title": "ServiceCollectionExtensions.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Extensions\\ServiceCollectionExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\Extensions\\ServiceCollectionExtensions.cs",
               "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Extensions\\ServiceCollectionExtensions.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Extensions\\ServiceCollectionExtensions.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\Extensions\\ServiceCollectionExtensions.cs",
               "RelativeToolTip": "src\\RMS.WebAPI\\Extensions\\ServiceCollectionExtensions.cs",
               "ViewState": "AgIAAIsAAAAAAAAAAAAmwA8AAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -361,35 +757,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Program.cs",
-              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Program.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Program.cs",
-              "RelativeToolTip": "src\\RMS.WebAPI\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T07:45:12.494Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "src\\RMS.Infrastructure\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAxwGsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T11:27:39.43Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 42,
               "Title": "SecurityService.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Services\\SecurityService.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Services\\SecurityService.cs",
               "RelativeDocumentMoniker": "src\\RMS.Infrastructure\\Services\\SecurityService.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Infrastructure\\Services\\SecurityService.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Infrastructure\\Services\\SecurityService.cs",
               "RelativeToolTip": "src\\RMS.Infrastructure\\Services\\SecurityService.cs",
               "ViewState": "AgIAANcAAAAAAAAAAAAAwAIBAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -397,11 +769,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 44,
               "Title": "SecurityRequirementsOperationFilter.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Filters\\SecurityRequirementsOperationFilter.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\Filters\\SecurityRequirementsOperationFilter.cs",
               "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Filters\\SecurityRequirementsOperationFilter.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Filters\\SecurityRequirementsOperationFilter.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.WebAPI\\Filters\\SecurityRequirementsOperationFilter.cs",
               "RelativeToolTip": "src\\RMS.WebAPI\\Filters\\SecurityRequirementsOperationFilter.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEMAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -409,35 +781,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Controllers\\AuthController.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "src\\RMS.WebAPI\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAzwDoAAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T06:44:56.857Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "HandshakeController.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Controllers\\HandshakeController.cs",
-              "RelativeDocumentMoniker": "src\\RMS.WebAPI\\Controllers\\HandshakeController.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.WebAPI\\Controllers\\HandshakeController.cs",
-              "RelativeToolTip": "src\\RMS.WebAPI\\Controllers\\HandshakeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHIAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T08:44:14.933Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 46,
               "Title": "HandshakeTokenInfo.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Models\\Auth\\HandshakeTokenInfo.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Models\\Auth\\HandshakeTokenInfo.cs",
               "RelativeDocumentMoniker": "src\\RMS.Application\\Models\\Auth\\HandshakeTokenInfo.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Models\\Auth\\HandshakeTokenInfo.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Models\\Auth\\HandshakeTokenInfo.cs",
               "RelativeToolTip": "src\\RMS.Application\\Models\\Auth\\HandshakeTokenInfo.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -445,13 +793,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 45,
               "Title": "HandshakeModels.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Models\\Auth\\HandshakeModels.cs",
+              "DocumentMoniker": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Models\\Auth\\HandshakeModels.cs",
               "RelativeDocumentMoniker": "src\\RMS.Application\\Models\\Auth\\HandshakeModels.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\RMS\\src\\RMS.Application\\Models\\Auth\\HandshakeModels.cs",
+              "ToolTip": "C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\RMS.Application\\Models\\Auth\\HandshakeModels.cs",
               "RelativeToolTip": "src\\RMS.Application\\Models\\Auth\\HandshakeModels.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAABAwC4AAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAgwC4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-17T08:50:16.652Z"
             }
