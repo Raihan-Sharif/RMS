@@ -1,0 +1,644 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LB.DAL.Core.Common.Fakes</name>
+    </assembly>
+    <members>
+        <member name="T:LB.DAL.Core.Common.Fakes.ShimLB_DAL">
+            <summary>Shim type of LB.DAL.Core.Common.LB_DAL</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.ShimLB_DAL.#ctor(LB.DAL.Core.Common.LB_DAL)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="T:LB.DAL.Core.Common.Fakes.ShimLB_DAL.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.AllInstances.Dispose">
+            <summary>Sets the Shim of LB_DAL.Dispose(LB_DAL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.AllInstances.DisposeBoolean">
+            <summary>Sets the Shim of LB_DAL.Dispose(LB_DAL this, Boolean disposing)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.AllInstances.LB_ExecuteNonQueryAsyncStringListOfLB_DALParamCommandType">
+            <summary>Sets the Shim of LB_DAL.LB_ExecuteNonQueryAsync(LB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.AllInstances.LB_ExecuteNonQueryStringListOfLB_DALParamCommandType">
+            <summary>Sets the Shim of LB_DAL.LB_ExecuteNonQuery(LB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.AllInstances.LB_ExecuteScalarAsyncStringListOfLB_DALParamCommandType">
+            <summary>Sets the Shim of LB_DAL.LB_ExecuteScalarAsync(LB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.AllInstances.LB_ExecuteScalarStringListOfLB_DALParamCommandType">
+            <summary>Sets the Shim of LB_DAL.LB_ExecuteScalar(LB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.AllInstances.LB_GetConnection">
+            <summary>Sets the Shim of LB_DAL.LB_GetConnection(LB_DAL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.AllInstances.LB_GetConnectionAsync">
+            <summary>Sets the Shim of LB_DAL.LB_GetConnectionAsync(LB_DAL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.AllInstances.LB_GetDBOutParamValuesToGenericParamListDbCommandListOfLB_DALParam">
+            <summary>Sets the Shim of LB_DAL.LB_GetDBOutParamValuesToGenericParamList(LB_DAL this, DbCommand Comm, List`1 Param)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.AllInstances.LB_TransactionAbort">
+            <summary>Sets the Shim of LB_DAL.LB_TransactionAbort(LB_DAL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.AllInstances.LB_TransactionAbortAsync">
+            <summary>Sets the Shim of LB_DAL.LB_TransactionAbortAsync(LB_DAL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.AllInstances.LB_TransactionBegin">
+            <summary>Sets the Shim of LB_DAL.LB_TransactionBegin(LB_DAL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.AllInstances.LB_TransactionBeginAsync">
+            <summary>Sets the Shim of LB_DAL.LB_TransactionBeginAsync(LB_DAL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.AllInstances.LB_TransactionCommit">
+            <summary>Sets the Shim of LB_DAL.LB_TransactionCommit(LB_DAL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.AllInstances.LB_TransactionCommitAsync">
+            <summary>Sets the Shim of LB_DAL.LB_TransactionCommitAsync(LB_DAL this)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.ShimLB_DAL.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.ShimLB_DAL.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.ShimLB_DAL.Bind(LB.DAL.Core.Common.ILB_DAL)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.ShimLB_DAL.Bind(System.IDisposable)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.Constructor">
+            <summary>Sets the Shim of LB_DAL.LB_DAL(LB_DAL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.Dispose">
+            <summary>Sets the Shim of LB_DAL.Dispose(LB_DAL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.DisposeBoolean">
+            <summary>Sets the Shim of LB_DAL.Dispose(LB_DAL this, Boolean disposing)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.LB_ExecuteNonQueryAsyncStringListOfLB_DALParamCommandType">
+            <summary>Sets the Shim of LB_DAL.LB_ExecuteNonQueryAsync(LB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.LB_ExecuteNonQueryStringListOfLB_DALParamCommandType">
+            <summary>Sets the Shim of LB_DAL.LB_ExecuteNonQuery(LB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.LB_ExecuteScalarAsyncStringListOfLB_DALParamCommandType">
+            <summary>Sets the Shim of LB_DAL.LB_ExecuteScalarAsync(LB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.LB_ExecuteScalarStringListOfLB_DALParamCommandType">
+            <summary>Sets the Shim of LB_DAL.LB_ExecuteScalar(LB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.LB_GetConnection">
+            <summary>Sets the Shim of LB_DAL.LB_GetConnection(LB_DAL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.LB_GetConnectionAsync">
+            <summary>Sets the Shim of LB_DAL.LB_GetConnectionAsync(LB_DAL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.LB_GetDBOutParamValuesToGenericParamListDbCommandListOfLB_DALParam">
+            <summary>Sets the Shim of LB_DAL.LB_GetDBOutParamValuesToGenericParamList(LB_DAL this, DbCommand Comm, List`1 Param)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.LB_TransactionAbort">
+            <summary>Sets the Shim of LB_DAL.LB_TransactionAbort(LB_DAL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.LB_TransactionAbortAsync">
+            <summary>Sets the Shim of LB_DAL.LB_TransactionAbortAsync(LB_DAL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.LB_TransactionBegin">
+            <summary>Sets the Shim of LB_DAL.LB_TransactionBegin(LB_DAL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.LB_TransactionBeginAsync">
+            <summary>Sets the Shim of LB_DAL.LB_TransactionBeginAsync(LB_DAL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.LB_TransactionCommit">
+            <summary>Sets the Shim of LB_DAL.LB_TransactionCommit(LB_DAL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL.LB_TransactionCommitAsync">
+            <summary>Sets the Shim of LB_DAL.LB_TransactionCommitAsync(LB_DAL this)</summary>
+        </member>
+        <member name="T:LB.DAL.Core.Common.Fakes.ShimLB_DALParam">
+            <summary>Shim type of LB.DAL.Core.Common.LB_DALParam</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.#ctor(LB.DAL.Core.Common.LB_DALParam)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="T:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.AllInstances.DbDataTypeGet">
+            <summary>Sets the Shim of LB_DALParam.get_DbDataType(LB_DALParam this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.AllInstances.DbDataTypeSetLB_DbSpecificInfoEnum">
+            <summary>Sets the Shim of LB_DALParam.set_DbDataType(LB_DALParam this, LB_DbSpecificInfoEnum value)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.AllInstances.DirectionGet">
+            <summary>Sets the Shim of LB_DALParam.get_Direction(LB_DALParam this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.AllInstances.DirectionSetParameterDirection">
+            <summary>Sets the Shim of LB_DALParam.set_Direction(LB_DALParam this, ParameterDirection value)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.AllInstances.ParamSizeGet">
+            <summary>Sets the Shim of LB_DALParam.get_ParamSize(LB_DALParam this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.AllInstances.ParamSizeSetInt32">
+            <summary>Sets the Shim of LB_DALParam.set_ParamSize(LB_DALParam this, Int32 value)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.AllInstances.ParameterNameGet">
+            <summary>Sets the Shim of LB_DALParam.get_ParameterName(LB_DALParam this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.AllInstances.ParameterNameSetString">
+            <summary>Sets the Shim of LB_DALParam.set_ParameterName(LB_DALParam this, String value)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.AllInstances.ValueGet">
+            <summary>Sets the Shim of LB_DALParam.get_Value(LB_DALParam this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.AllInstances.ValueSetObject">
+            <summary>Sets the Shim of LB_DALParam.set_Value(LB_DALParam this, Object value)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.ConstructorStringObject">
+            <summary>Sets the Shim of LB_DALParam.LB_DALParam(LB_DALParam this, String ParamName, Object ParamValue)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.ConstructorStringObjectParameterDirection">
+            <summary>Sets the Shim of LB_DALParam.LB_DALParam(LB_DALParam this, String ParamName, Object ParamValue, ParameterDirection ParamDirection)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.ConstructorStringObjectParameterDirectionLB_DbSpecificInfoEnum">
+            <summary>Sets the Shim of LB_DALParam.LB_DALParam(LB_DALParam this, String ParamName, Object ParamValue, ParameterDirection ParamDirection, LB_DbSpecificInfoEnum DbDataType)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.ConstructorStringObjectParameterDirectionLB_DbSpecificInfoEnumInt32">
+            <summary>Sets the Shim of LB_DALParam.LB_DALParam(LB_DALParam this, String ParamName, Object ParamValue, ParameterDirection ParamDirection, LB_DbSpecificInfoEnum DbDataType, Int32 ParamSize)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.DbDataTypeGet">
+            <summary>Sets the Shim of LB_DALParam.get_DbDataType(LB_DALParam this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.DbDataTypeSetLB_DbSpecificInfoEnum">
+            <summary>Sets the Shim of LB_DALParam.set_DbDataType(LB_DALParam this, LB_DbSpecificInfoEnum value)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.DirectionGet">
+            <summary>Sets the Shim of LB_DALParam.get_Direction(LB_DALParam this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.DirectionSetParameterDirection">
+            <summary>Sets the Shim of LB_DALParam.set_Direction(LB_DALParam this, ParameterDirection value)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.ListDalParamsForExceptionListOfLB_DALParam">
+            <summary>Sets the Shim of LB_DALParam.ListDalParamsForException(List`1 Param)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.ParamSizeGet">
+            <summary>Sets the Shim of LB_DALParam.get_ParamSize(LB_DALParam this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.ParamSizeSetInt32">
+            <summary>Sets the Shim of LB_DALParam.set_ParamSize(LB_DALParam this, Int32 value)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.ParameterNameGet">
+            <summary>Sets the Shim of LB_DALParam.get_ParameterName(LB_DALParam this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.ParameterNameSetString">
+            <summary>Sets the Shim of LB_DALParam.set_ParameterName(LB_DALParam this, String value)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.ValueGet">
+            <summary>Sets the Shim of LB_DALParam.get_Value(LB_DALParam this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DALParam.ValueSetObject">
+            <summary>Sets the Shim of LB_DALParam.set_Value(LB_DALParam this, Object value)</summary>
+        </member>
+        <member name="T:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL">
+            <summary>Shim type of LB.DAL.Core.Common.LB_DAL_SQL</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.#ctor(LB.DAL.Core.Common.LB_DAL_SQL)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="T:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.AllInstances.LB_AddParamsToCommandDbCommandListOfLB_DALParamBoolean">
+            <summary>Sets the Shim of LB_DAL_SQL.LB_AddParamsToCommand(LB_DAL_SQL this, DbCommand comm, List`1 Param, Boolean RequireRefCursor)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.AllInstances.LB_CommandTimeoutGet">
+            <summary>Sets the Shim of LB_DAL_SQL.get_LB_CommandTimeout(LB_DAL_SQL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.AllInstances.LB_CommandTimeoutSetInt32">
+            <summary>Sets the Shim of LB_DAL_SQL.set_LB_CommandTimeout(LB_DAL_SQL this, Int32 value)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.AllInstances.LB_GetDbDataReaderAsyncStringListOfLB_DALParamCommandTypeCommandBehavior">
+            <summary>Sets the Shim of LB_DAL_SQL.LB_GetDbDataReaderAsync(LB_DAL_SQL this, String TextOrSPName, List`1 Param, CommandType ComType, CommandBehavior ComBehavior)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.AllInstances.LB_GetDbDataReaderStringListOfLB_DALParamCommandTypeCommandBehavior">
+            <summary>Sets the Shim of LB_DAL_SQL.LB_GetDbDataReader(LB_DAL_SQL this, String TextOrSPName, List`1 Param, CommandType ComType, CommandBehavior ComBehavior)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.AllInstances.LB_GetParameterForSqlStringString">
+            <summary>Sets the Shim of LB_DAL_SQL.LB_GetParameterForSqlString(LB_DAL_SQL this, String Fieldname)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.AllInstances.LB_IsolationLevelGet">
+            <summary>Sets the Shim of LB_DAL_SQL.get_LB_IsolationLevel(LB_DAL_SQL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.AllInstances.LB_IsolationLevelSetIsolationLevel">
+            <summary>Sets the Shim of LB_DAL_SQL.set_LB_IsolationLevel(LB_DAL_SQL this, IsolationLevel value)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.AllInstances.LB_WriteToServerAsyncStringDataTable">
+            <summary>Sets the Shim of LB_DAL_SQL.LB_WriteToServerAsync(LB_DAL_SQL this, String DestTableName, DataTable dt)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.AllInstances.LB_WriteToServerStringDataTable">
+            <summary>Sets the Shim of LB_DAL_SQL.LB_WriteToServer(LB_DAL_SQL this, String DestTableName, DataTable dt)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.AllInstances.ParamPrefixGet">
+            <summary>Sets the Shim of LB_DAL_SQL.get_ParamPrefix(LB_DAL_SQL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.AllInstances.ProviderInvariantNameGet">
+            <summary>Sets the Shim of LB_DAL_SQL.get_ProviderInvariantName(LB_DAL_SQL this)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.Bind(LB.DAL.Core.Common.ILB_DAL)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.Bind(System.IDisposable)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.ConstructorString">
+            <summary>Sets the Shim of LB_DAL_SQL.LB_DAL_SQL(LB_DAL_SQL this, String ConnectionString)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.LB_AddParamsToCommandDbCommandListOfLB_DALParamBoolean">
+            <summary>Sets the Shim of LB_DAL_SQL.LB_AddParamsToCommand(LB_DAL_SQL this, DbCommand comm, List`1 Param, Boolean RequireRefCursor)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.LB_CommandTimeoutGet">
+            <summary>Sets the Shim of LB_DAL_SQL.get_LB_CommandTimeout(LB_DAL_SQL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.LB_CommandTimeoutSetInt32">
+            <summary>Sets the Shim of LB_DAL_SQL.set_LB_CommandTimeout(LB_DAL_SQL this, Int32 value)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.LB_GetDbDataReaderAsyncStringListOfLB_DALParamCommandTypeCommandBehavior">
+            <summary>Sets the Shim of LB_DAL_SQL.LB_GetDbDataReaderAsync(LB_DAL_SQL this, String TextOrSPName, List`1 Param, CommandType ComType, CommandBehavior ComBehavior)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.LB_GetDbDataReaderStringListOfLB_DALParamCommandTypeCommandBehavior">
+            <summary>Sets the Shim of LB_DAL_SQL.LB_GetDbDataReader(LB_DAL_SQL this, String TextOrSPName, List`1 Param, CommandType ComType, CommandBehavior ComBehavior)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.LB_GetParameterForSqlStringString">
+            <summary>Sets the Shim of LB_DAL_SQL.LB_GetParameterForSqlString(LB_DAL_SQL this, String Fieldname)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.LB_IsolationLevelGet">
+            <summary>Sets the Shim of LB_DAL_SQL.get_LB_IsolationLevel(LB_DAL_SQL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.LB_IsolationLevelSetIsolationLevel">
+            <summary>Sets the Shim of LB_DAL_SQL.set_LB_IsolationLevel(LB_DAL_SQL this, IsolationLevel value)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.LB_WriteToServerAsyncStringDataTable">
+            <summary>Sets the Shim of LB_DAL_SQL.LB_WriteToServerAsync(LB_DAL_SQL this, String DestTableName, DataTable dt)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.LB_WriteToServerStringDataTable">
+            <summary>Sets the Shim of LB_DAL_SQL.LB_WriteToServer(LB_DAL_SQL this, String DestTableName, DataTable dt)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.ParamPrefixGet">
+            <summary>Sets the Shim of LB_DAL_SQL.get_ParamPrefix(LB_DAL_SQL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.ShimLB_DAL_SQL.ProviderInvariantNameGet">
+            <summary>Sets the Shim of LB_DAL_SQL.get_ProviderInvariantName(LB_DAL_SQL this)</summary>
+        </member>
+        <member name="T:LB.DAL.Core.Common.Fakes.StubILB_DAL">
+            <summary>Stub type of LB.DAL.Core.Common.ILB_DAL</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubILB_DAL.#ctor">
+            <summary>Initializes a new instance of type StubILB_DAL</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB#DAL#Core#Common#ILB_DAL#LB_ExecuteNonQuery(System.String,System.Collections.Generic.List{LB.DAL.Core.Common.LB_DALParam},System.Data.CommandType)">
+            <summary>Sets the Stub of ILB_DAL.LB_ExecuteNonQuery(ILB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB#DAL#Core#Common#ILB_DAL#LB_ExecuteNonQueryAsync(System.String,System.Collections.Generic.List{LB.DAL.Core.Common.LB_DALParam},System.Data.CommandType)">
+            <summary>Sets the Stub of ILB_DAL.LB_ExecuteNonQueryAsync(ILB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB#DAL#Core#Common#ILB_DAL#LB_ExecuteScalar(System.String,System.Collections.Generic.List{LB.DAL.Core.Common.LB_DALParam},System.Data.CommandType)">
+            <summary>Sets the Stub of ILB_DAL.LB_ExecuteScalar(ILB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB#DAL#Core#Common#ILB_DAL#LB_ExecuteScalarAsync(System.String,System.Collections.Generic.List{LB.DAL.Core.Common.LB_DALParam},System.Data.CommandType)">
+            <summary>Sets the Stub of ILB_DAL.LB_ExecuteScalarAsync(ILB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB#DAL#Core#Common#ILB_DAL#LB_GetConnection">
+            <summary>Sets the Stub of ILB_DAL.LB_GetConnection(ILB_DAL this)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB#DAL#Core#Common#ILB_DAL#LB_GetConnectionAsync">
+            <summary>Sets the Stub of ILB_DAL.LB_GetConnectionAsync(ILB_DAL this)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB#DAL#Core#Common#ILB_DAL#LB_GetDbDataReader(System.String,System.Collections.Generic.List{LB.DAL.Core.Common.LB_DALParam},System.Data.CommandType,System.Data.CommandBehavior)">
+            <summary>Sets the Stub of ILB_DAL.LB_GetDbDataReader(ILB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType, CommandBehavior ComBehavior)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB#DAL#Core#Common#ILB_DAL#LB_GetDbDataReaderAsync(System.String,System.Collections.Generic.List{LB.DAL.Core.Common.LB_DALParam},System.Data.CommandType,System.Data.CommandBehavior)">
+            <summary>Sets the Stub of ILB_DAL.LB_GetDbDataReaderAsync(ILB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType, CommandBehavior ComBehavior)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB#DAL#Core#Common#ILB_DAL#LB_TransactionAbort">
+            <summary>Sets the Stub of ILB_DAL.LB_TransactionAbort(ILB_DAL this)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB#DAL#Core#Common#ILB_DAL#LB_TransactionAbortAsync">
+            <summary>Sets the Stub of ILB_DAL.LB_TransactionAbortAsync(ILB_DAL this)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB#DAL#Core#Common#ILB_DAL#LB_TransactionBegin">
+            <summary>Sets the Stub of ILB_DAL.LB_TransactionBegin(ILB_DAL this)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB#DAL#Core#Common#ILB_DAL#LB_TransactionBeginAsync">
+            <summary>Sets the Stub of ILB_DAL.LB_TransactionBeginAsync(ILB_DAL this)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB#DAL#Core#Common#ILB_DAL#LB_TransactionCommit">
+            <summary>Sets the Stub of ILB_DAL.LB_TransactionCommit(ILB_DAL this)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB#DAL#Core#Common#ILB_DAL#LB_TransactionCommitAsync">
+            <summary>Sets the Stub of ILB_DAL.LB_TransactionCommitAsync(ILB_DAL this)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB#DAL#Core#Common#ILB_DAL#LB_WriteToServer(System.String,System.Data.DataTable)">
+            <summary>Sets the Stub of ILB_DAL.LB_WriteToServer(ILB_DAL this, String DestTableName, DataTable dt)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB#DAL#Core#Common#ILB_DAL#LB_WriteToServerAsync(System.String,System.Data.DataTable)">
+            <summary>Sets the Stub of ILB_DAL.LB_WriteToServerAsync(ILB_DAL this, String DestTableName, DataTable dt)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB_ExecuteNonQueryAsyncStringListOfLB_DALParamCommandType">
+            <summary>Sets the stub of ILB_DAL.LB_ExecuteNonQueryAsync(ILB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB_ExecuteNonQueryStringListOfLB_DALParamCommandType">
+            <summary>Sets the stub of ILB_DAL.LB_ExecuteNonQuery(ILB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB_ExecuteScalarAsyncStringListOfLB_DALParamCommandType">
+            <summary>Sets the stub of ILB_DAL.LB_ExecuteScalarAsync(ILB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB_ExecuteScalarStringListOfLB_DALParamCommandType">
+            <summary>Sets the stub of ILB_DAL.LB_ExecuteScalar(ILB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB_GetConnection">
+            <summary>Sets the stub of ILB_DAL.LB_GetConnection(ILB_DAL this)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB_GetConnectionAsync">
+            <summary>Sets the stub of ILB_DAL.LB_GetConnectionAsync(ILB_DAL this)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB_GetDbDataReaderAsyncStringListOfLB_DALParamCommandTypeCommandBehavior">
+            <summary>Sets the stub of ILB_DAL.LB_GetDbDataReaderAsync(ILB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType, CommandBehavior ComBehavior)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB_GetDbDataReaderStringListOfLB_DALParamCommandTypeCommandBehavior">
+            <summary>Sets the stub of ILB_DAL.LB_GetDbDataReader(ILB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType, CommandBehavior ComBehavior)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB_TransactionAbort">
+            <summary>Sets the stub of ILB_DAL.LB_TransactionAbort(ILB_DAL this)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB_TransactionAbortAsync">
+            <summary>Sets the stub of ILB_DAL.LB_TransactionAbortAsync(ILB_DAL this)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB_TransactionBegin">
+            <summary>Sets the stub of ILB_DAL.LB_TransactionBegin(ILB_DAL this)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB_TransactionBeginAsync">
+            <summary>Sets the stub of ILB_DAL.LB_TransactionBeginAsync(ILB_DAL this)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB_TransactionCommit">
+            <summary>Sets the stub of ILB_DAL.LB_TransactionCommit(ILB_DAL this)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB_TransactionCommitAsync">
+            <summary>Sets the stub of ILB_DAL.LB_TransactionCommitAsync(ILB_DAL this)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB_WriteToServerAsyncStringDataTable">
+            <summary>Sets the stub of ILB_DAL.LB_WriteToServerAsync(ILB_DAL this, String DestTableName, DataTable dt)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubILB_DAL.LB_WriteToServerStringDataTable">
+            <summary>Sets the stub of ILB_DAL.LB_WriteToServer(ILB_DAL this, String DestTableName, DataTable dt)</summary>
+        </member>
+        <member name="T:LB.DAL.Core.Common.Fakes.StubLB_DAL">
+            <summary>Stub type of LB.DAL.Core.Common.LB_DAL</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL.AttachBackingFieldToLB_CommandTimeout">
+            <summary>Attaches delegates to emulate StubLB_DAL.LB_CommandTimeout as a property with a backing field.</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL.AttachBackingFieldToLB_IsolationLevel">
+            <summary>Attaches delegates to emulate StubLB_DAL.LB_IsolationLevel as a property with a backing field.</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.StubLB_DAL.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL.CommandTimeoutGetLB">
+            <summary>Sets the stub of LB_DAL.get_LB_CommandTimeout(LB_DAL this)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL.CommandTimeoutSetLBInt32">
+            <summary>Sets the stub of LB_DAL.set_LB_CommandTimeout(LB_DAL this, Int32 value)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL.Dispose(System.Boolean)">
+            <summary>Sets the Stub of LB_DAL.Dispose(LB_DAL this, Boolean disposing)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL.DisposeBoolean">
+            <summary>Sets the stub of LB_DAL.Dispose(LB_DAL this, Boolean disposing)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL.InitializeStub">
+            <summary>Initializes a new instance of type StubLB_DAL</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.StubLB_DAL.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.StubLB_DAL.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL.IsolationLevelGetLB">
+            <summary>Sets the stub of LB_DAL.get_LB_IsolationLevel(LB_DAL this)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL.IsolationLevelSetLBIsolationLevel">
+            <summary>Sets the stub of LB_DAL.set_LB_IsolationLevel(LB_DAL this, IsolationLevel value)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL.LB_AddParamsToCommand(System.Data.Common.DbCommand,System.Collections.Generic.List{LB.DAL.Core.Common.LB_DALParam},System.Boolean)">
+            <summary>Sets the Stub of LB_DAL.LB_AddParamsToCommand(LB_DAL this, DbCommand Comm, List`1 Param, Boolean RequireRefCursor)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL.LB_AddParamsToCommandDbCommandListOfLB_DALParamBoolean">
+            <summary>Sets the stub of LB_DAL.LB_AddParamsToCommand(LB_DAL this, DbCommand Comm, List`1 Param, Boolean RequireRefCursor)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.StubLB_DAL.LB_CommandTimeout">
+            <summary>Sets the stub of LB_DAL.get_LB_CommandTimeout(LB_DAL this)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL.LB_GetDbDataReader(System.String,System.Collections.Generic.List{LB.DAL.Core.Common.LB_DALParam},System.Data.CommandType,System.Data.CommandBehavior)">
+            <summary>Sets the Stub of LB_DAL.LB_GetDbDataReader(LB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType, CommandBehavior ComBehavior)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL.LB_GetDbDataReaderAsync(System.String,System.Collections.Generic.List{LB.DAL.Core.Common.LB_DALParam},System.Data.CommandType,System.Data.CommandBehavior)">
+            <summary>Sets the Stub of LB_DAL.LB_GetDbDataReaderAsync(LB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType, CommandBehavior ComBehavior)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL.LB_GetDbDataReaderAsyncStringListOfLB_DALParamCommandTypeCommandBehavior">
+            <summary>Sets the stub of LB_DAL.LB_GetDbDataReaderAsync(LB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType, CommandBehavior ComBehavior)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL.LB_GetDbDataReaderStringListOfLB_DALParamCommandTypeCommandBehavior">
+            <summary>Sets the stub of LB_DAL.LB_GetDbDataReader(LB_DAL this, String TextOrSPName, List`1 Param, CommandType ComType, CommandBehavior ComBehavior)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL.LB_GetParameterForSqlString(System.String)">
+            <summary>Sets the Stub of LB_DAL.LB_GetParameterForSqlString(LB_DAL this, String Fieldname)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL.LB_GetParameterForSqlStringString">
+            <summary>Sets the stub of LB_DAL.LB_GetParameterForSqlString(LB_DAL this, String Fieldname)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.StubLB_DAL.LB_IsolationLevel">
+            <summary>Sets the stub of LB_DAL.get_LB_IsolationLevel(LB_DAL this)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL.LB_WriteToServer(System.String,System.Data.DataTable)">
+            <summary>Sets the Stub of LB_DAL.LB_WriteToServer(LB_DAL this, String DestTableName, DataTable dt)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL.LB_WriteToServerAsync(System.String,System.Data.DataTable)">
+            <summary>Sets the Stub of LB_DAL.LB_WriteToServerAsync(LB_DAL this, String DestTableName, DataTable dt)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL.LB_WriteToServerAsyncStringDataTable">
+            <summary>Sets the stub of LB_DAL.LB_WriteToServerAsync(LB_DAL this, String DestTableName, DataTable dt)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL.LB_WriteToServerStringDataTable">
+            <summary>Sets the stub of LB_DAL.LB_WriteToServer(LB_DAL this, String DestTableName, DataTable dt)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.StubLB_DAL.ParamPrefix">
+            <summary>Sets the stub of LB_DAL.get_ParamPrefix(LB_DAL this)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL.ParamPrefixGet">
+            <summary>Sets the stub of LB_DAL.get_ParamPrefix(LB_DAL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.StubLB_DAL.ProviderInvariantName">
+            <summary>Sets the stub of LB_DAL.get_ProviderInvariantName(LB_DAL this)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL.ProviderInvariantNameGet">
+            <summary>Sets the stub of LB_DAL.get_ProviderInvariantName(LB_DAL this)</summary>
+        </member>
+        <member name="T:LB.DAL.Core.Common.Fakes.StubLB_DALParam">
+            <summary>Stub type of LB.DAL.Core.Common.LB_DALParam</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DALParam.#ctor(System.String,System.Object)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DALParam.#ctor(System.String,System.Object,System.Data.ParameterDirection)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DALParam.#ctor(System.String,System.Object,System.Data.ParameterDirection,LB.DAL.Core.Common.Definition.LB_DbSpecificInfoEnum)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DALParam.#ctor(System.String,System.Object,System.Data.ParameterDirection,LB.DAL.Core.Common.Definition.LB_DbSpecificInfoEnum,System.Int32)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.StubLB_DALParam.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DALParam.InitializeStub">
+            <summary>Initializes a new instance of type StubLB_DALParam</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.StubLB_DALParam.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.StubLB_DALParam.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL">
+            <summary>Stub type of LB.DAL.Core.Common.LB_DAL_SQL</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.#ctor(System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.AttachBackingFieldToLB_CommandTimeout">
+            <summary>Attaches delegates to emulate StubLB_DAL_SQL.LB_CommandTimeout as a property with a backing field.</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.AttachBackingFieldToLB_IsolationLevel">
+            <summary>Attaches delegates to emulate StubLB_DAL_SQL.LB_IsolationLevel as a property with a backing field.</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.CommandTimeoutGetLB">
+            <summary>Sets the stub of LB_DAL_SQL.get_LB_CommandTimeout(LB_DAL_SQL this)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.CommandTimeoutSetLBInt32">
+            <summary>Sets the stub of LB_DAL_SQL.set_LB_CommandTimeout(LB_DAL_SQL this, Int32 value)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.Dispose(System.Boolean)">
+            <summary>Sets the Stub of LB_DAL.Dispose(LB_DAL this, Boolean disposing)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.DisposeBoolean">
+            <summary>Sets the stub of LB_DAL.Dispose(LB_DAL this, Boolean disposing)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.InitializeStub">
+            <summary>Initializes a new instance of type StubLB_DAL_SQL</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.IsolationLevelGetLB">
+            <summary>Sets the stub of LB_DAL_SQL.get_LB_IsolationLevel(LB_DAL_SQL this)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.IsolationLevelSetLBIsolationLevel">
+            <summary>Sets the stub of LB_DAL_SQL.set_LB_IsolationLevel(LB_DAL_SQL this, IsolationLevel value)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.LB_AddParamsToCommand(System.Data.Common.DbCommand,System.Collections.Generic.List{LB.DAL.Core.Common.LB_DALParam},System.Boolean)">
+            <summary>Sets the Stub of LB_DAL_SQL.LB_AddParamsToCommand(LB_DAL_SQL this, DbCommand comm, List`1 Param, Boolean RequireRefCursor)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.LB_AddParamsToCommandDbCommandListOfLB_DALParamBoolean">
+            <summary>Sets the stub of LB_DAL_SQL.LB_AddParamsToCommand(LB_DAL_SQL this, DbCommand comm, List`1 Param, Boolean RequireRefCursor)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.LB_CommandTimeout">
+            <summary>Sets the stub of LB_DAL_SQL.get_LB_CommandTimeout(LB_DAL_SQL this)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.LB_GetDbDataReader(System.String,System.Collections.Generic.List{LB.DAL.Core.Common.LB_DALParam},System.Data.CommandType,System.Data.CommandBehavior)">
+            <summary>Sets the Stub of LB_DAL_SQL.LB_GetDbDataReader(LB_DAL_SQL this, String TextOrSPName, List`1 Param, CommandType ComType, CommandBehavior ComBehavior)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.LB_GetDbDataReaderAsync(System.String,System.Collections.Generic.List{LB.DAL.Core.Common.LB_DALParam},System.Data.CommandType,System.Data.CommandBehavior)">
+            <summary>Sets the Stub of LB_DAL_SQL.LB_GetDbDataReaderAsync(LB_DAL_SQL this, String TextOrSPName, List`1 Param, CommandType ComType, CommandBehavior ComBehavior)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.LB_GetDbDataReaderAsyncStringListOfLB_DALParamCommandTypeCommandBehavior">
+            <summary>Sets the stub of LB_DAL_SQL.LB_GetDbDataReaderAsync(LB_DAL_SQL this, String TextOrSPName, List`1 Param, CommandType ComType, CommandBehavior ComBehavior)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.LB_GetDbDataReaderStringListOfLB_DALParamCommandTypeCommandBehavior">
+            <summary>Sets the stub of LB_DAL_SQL.LB_GetDbDataReader(LB_DAL_SQL this, String TextOrSPName, List`1 Param, CommandType ComType, CommandBehavior ComBehavior)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.LB_GetParameterForSqlString(System.String)">
+            <summary>Sets the Stub of LB_DAL_SQL.LB_GetParameterForSqlString(LB_DAL_SQL this, String Fieldname)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.LB_GetParameterForSqlStringString">
+            <summary>Sets the stub of LB_DAL_SQL.LB_GetParameterForSqlString(LB_DAL_SQL this, String Fieldname)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.LB_IsolationLevel">
+            <summary>Sets the stub of LB_DAL_SQL.get_LB_IsolationLevel(LB_DAL_SQL this)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.LB_WriteToServer(System.String,System.Data.DataTable)">
+            <summary>Sets the Stub of LB_DAL_SQL.LB_WriteToServer(LB_DAL_SQL this, String DestTableName, DataTable dt)</summary>
+        </member>
+        <member name="M:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.LB_WriteToServerAsync(System.String,System.Data.DataTable)">
+            <summary>Sets the Stub of LB_DAL_SQL.LB_WriteToServerAsync(LB_DAL_SQL this, String DestTableName, DataTable dt)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.LB_WriteToServerAsyncStringDataTable">
+            <summary>Sets the stub of LB_DAL_SQL.LB_WriteToServerAsync(LB_DAL_SQL this, String DestTableName, DataTable dt)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.LB_WriteToServerStringDataTable">
+            <summary>Sets the stub of LB_DAL_SQL.LB_WriteToServer(LB_DAL_SQL this, String DestTableName, DataTable dt)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.ParamPrefix">
+            <summary>Sets the stub of LB_DAL_SQL.get_ParamPrefix(LB_DAL_SQL this)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.ParamPrefixGet">
+            <summary>Sets the stub of LB_DAL_SQL.get_ParamPrefix(LB_DAL_SQL this)</summary>
+        </member>
+        <member name="P:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.ProviderInvariantName">
+            <summary>Sets the stub of LB_DAL_SQL.get_ProviderInvariantName(LB_DAL_SQL this)</summary>
+        </member>
+        <member name="F:LB.DAL.Core.Common.Fakes.StubLB_DAL_SQL.ProviderInvariantNameGet">
+            <summary>Sets the stub of LB_DAL_SQL.get_ProviderInvariantName(LB_DAL_SQL this)</summary>
+        </member>
+    </members>
+</doc>
