@@ -1,14 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using SimRMS.Application.Interfaces;
 using SimRMS.Domain.Interfaces;
-using SimRMS.Infrastructure.Data;
 using SimRMS.Infrastructure.Repositories;
 using SimRMS.Infrastructure.Services;
 using SimRMS.Infrastructure.HealthChecks;
+using SimRMS.Infrastructure.UnitOfWork;
 using LB.DAL.Core.Common;
+using SimRMS.Domain.Interfaces.Repo;
 
 namespace SimRMS.Infrastructure
 {
@@ -18,24 +18,20 @@ namespace SimRMS.Infrastructure
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            // LB.DAL Configuration
+            // LB.DAL Configuration - following your exact KeyedServices pattern
             var connectionString = configuration.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException("DefaultConnection string is required");
 
-            // Register LB.DAL as Scoped for proper transaction support
-            services.AddScoped<ILB_DAL>(provider =>
+            // Register LB_DAL with KeyedServices (as per your CityRepository pattern)
+            services.AddKeyedScoped<ILB_DAL>("DBApplication", (provider, key) =>
             {
                 return new LB_DAL_SQL(connectionString);
             });
 
-            // Register Entity Mapper
-            services.AddSingleton<IEntityMapper, EntityMapper>();
-
-            // Repository implementations
-            services.AddScoped(typeof(ILBRepository<>), typeof(LBRepository<>));
-            services.AddScoped<UsrInfoRepository>();
-            services.AddScoped<UsrLoginRepository>();
-            services.AddScoped<IUnitOfWork, LBUnitOfWork>();
+            // Register Domain Interfaces with Infrastructure Implementations
+            // This is the Clean Architecture dependency inversion
+            services.AddScoped<IUsrInfoRepository, UsrInfoRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
 
             // Application Services (implements Application interfaces)
             services.AddScoped<IConfigurationService, ConfigurationService>();
@@ -47,7 +43,7 @@ namespace SimRMS.Infrastructure
             // Memory Cache
             services.AddMemoryCache();
 
-            // Health Checks
+            // Health Checks (optional)
             services.AddHealthChecks()
                 .AddCheck<LBDALHealthCheck>("database", HealthStatus.Unhealthy)
                 .AddCheck<ExternalApiHealthCheck>("external-api", HealthStatus.Degraded);

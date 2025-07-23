@@ -12,8 +12,13 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.0" />
     <!-- Use the official MediatR package -->
     <PackageReference Include="MediatR" Version="12.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.1" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Common\Queries\" />
   </ItemGroup>
 
   <PropertyGroup>

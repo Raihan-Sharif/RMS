@@ -3,12 +3,13 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using SimRMS.Application.Models.DTOs;
 using SimRMS.Application.Models.Requests;
-using SimRMS.Domain.Exceptions;
 using SimRMS.Domain.Interfaces;
 using SimRMS.Domain.Entities;
+using SimRMS.Domain.Exceptions;
 
 namespace SimRMS.Application.Features.UsrInfo.Commands
 {
+    // UPDATE COMMAND
     public class UpdateUsrInfoCommand : IRequest<UsrInfoDto>
     {
         public string UsrId { get; set; } = null!;
@@ -39,24 +40,23 @@ namespace SimRMS.Application.Features.UsrInfo.Commands
             {
                 await _unitOfWork.EnsureConnectionAsync(cancellationToken);
 
-                // Get existing user using domain interface
+                // Business validation - Get existing user
                 var existingUser = await _unitOfWork.UsrInfoRepository.GetByUserIdAsync(request.UsrId, cancellationToken);
-
                 if (existingUser == null)
                     throw new NotFoundException(nameof(UsrInfo), request.UsrId);
 
-                // Check for duplicate email if provided and different from current
+                // Business validation - Check for duplicate email if provided and different from current
                 if (!string.IsNullOrEmpty(request.Request.UsrEmail) &&
                     request.Request.UsrEmail != existingUser.UsrEmail)
                 {
                     var emailExists = await _unitOfWork.UsrInfoRepository.ExistsByEmailAsync(request.Request.UsrEmail, request.UsrId, cancellationToken);
                     if (emailExists)
                     {
-                        throw new InvalidOperationException($"Another user with email '{request.Request.UsrEmail}' already exists");
+                        throw new DomainException($"Another user with email '{request.Request.UsrEmail}' already exists");
                     }
                 }
 
-                // Map the update request to the existing entity (only non-null values)
+                // Map update request to existing entity (only non-null values)
                 _mapper.Map(request.Request, existingUser);
 
                 // Use transaction for data integrity
@@ -64,11 +64,12 @@ namespace SimRMS.Application.Features.UsrInfo.Commands
 
                 try
                 {
-                    // Use domain interface method
+                    // Update through domain repository
                     var updatedUser = await _unitOfWork.UsrInfoRepository.UpdateUserAsync(existingUser, cancellationToken);
 
                     await _unitOfWork.CommitTransactionAsync(cancellationToken);
 
+                    // Map to DTO for response
                     var result = _mapper.Map<UsrInfoDto>(updatedUser);
                     _logger.LogInformation("Successfully updated UsrInfo: {UsrId}", request.UsrId);
 

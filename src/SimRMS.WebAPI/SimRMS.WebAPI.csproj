@@ -25,12 +25,13 @@
 
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
     <PackageReference Include="AspNetCoreRateLimit" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.1" />
+
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RMS.Infrastructure\RMS.Infrastructure.csproj" />
-    <ProjectReference Include="..\RMS.Shared\RMS.Shared.csproj" />
+    <ProjectReference Include="..\SimRMS.Infrastructure\SimRMS.Infrastructure.csproj" />
+    <ProjectReference Include="..\SimRMS.Shared\SimRMS.Shared.csproj" />
   </ItemGroup>
 
   <!-- Copy LB.DAL.Core.Common.dll to output directory -->

@@ -24,7 +24,7 @@ namespace SimRMS.Infrastructure.HealthChecks
                 await _dal.LB_GetConnectionAsync();
 
                 // Execute a simple scalar query to verify database is responding
-                var result = await _dal.LB_ExecuteScalarAsync("SELECT 1", commandType: CommandType.Text);
+                var result = await _dal.LB_ExecuteScalarAsync("SELECT 1",null, CommandType.Text);
 
                 if (result != null && result.ToString() == "1")
                 {

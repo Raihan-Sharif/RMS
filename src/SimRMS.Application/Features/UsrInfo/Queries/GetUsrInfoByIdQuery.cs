@@ -2,12 +2,14 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using SimRMS.Application.Models.DTOs;
-using SimRMS.Domain.Exceptions;
 using SimRMS.Domain.Interfaces;
 using SimRMS.Domain.Entities;
+using SimRMS.Domain.Exceptions;
+using SimRMS.Shared.Models;
 
 namespace SimRMS.Application.Features.UsrInfo.Queries
 {
+    // GET BY ID QUERY
     public class GetUsrInfoByIdQuery : IRequest<UsrInfoDto>
     {
         public string UsrId { get; set; } = null!;
@@ -43,7 +45,7 @@ namespace SimRMS.Application.Features.UsrInfo.Queries
 
                 await _unitOfWork.EnsureConnectionAsync(cancellationToken);
 
-                // Use domain interface method
+                // Get user through domain repository
                 var usrInfo = await _unitOfWork.UsrInfoRepository.GetByUserIdAsync(request.UsrId.Trim(), cancellationToken);
 
                 if (usrInfo == null)
@@ -52,6 +54,7 @@ namespace SimRMS.Application.Features.UsrInfo.Queries
                     throw new NotFoundException(nameof(UsrInfo), request.UsrId);
                 }
 
+                // Map to DTO for response
                 var result = _mapper.Map<UsrInfoDto>(usrInfo);
                 _logger.LogInformation("Successfully retrieved UsrInfo for UsrId: {UsrId}", request.UsrId);
 

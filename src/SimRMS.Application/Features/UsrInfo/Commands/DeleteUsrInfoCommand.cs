@@ -6,6 +6,7 @@ using SimRMS.Domain.Entities;
 
 namespace SimRMS.Application.Features.UsrInfo.Commands
 {
+    // DELETE COMMAND
     public class DeleteUsrInfoCommand : IRequest<bool>
     {
         public string UsrId { get; set; } = null!;
@@ -32,23 +33,22 @@ namespace SimRMS.Application.Features.UsrInfo.Commands
             {
                 await _unitOfWork.EnsureConnectionAsync(cancellationToken);
 
-                // Check if user exists using domain interface
+                // Business validation - Check if user exists
                 var existingUser = await _unitOfWork.UsrInfoRepository.GetByUserIdAsync(request.UsrId, cancellationToken);
-
                 if (existingUser == null)
                     throw new NotFoundException(nameof(UsrInfo), request.UsrId);
 
-                // Use transaction for data integrity (deletes from related tables too)
+                // Use transaction for data integrity
                 await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
                 try
                 {
-                    // Use domain interface method (handles related tables)
+                    // Delete through domain repository
                     var deleted = await _unitOfWork.UsrInfoRepository.DeleteUserAsync(request.UsrId, cancellationToken);
 
                     if (!deleted)
                     {
-                        throw new InvalidOperationException($"Failed to delete user with ID '{request.UsrId}'");
+                        throw new DomainException($"Failed to delete user with ID '{request.UsrId}'");
                     }
 
                     await _unitOfWork.CommitTransactionAsync(cancellationToken);
