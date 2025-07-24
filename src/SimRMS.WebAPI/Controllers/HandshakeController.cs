@@ -32,7 +32,7 @@ namespace SimRMS.WebAPI.Controllers
             try
             {
                 // Validate app credentials
-                var validAppId = _configurationService.GetValue<string>("AppCredentials:AppId", "RMS_APP_2024");
+                var validAppId = _configurationService.GetValue<string>("AppCredentials:AppId", "RMS_APP_2025");
                 var validAppSecret = await _configurationService.GetSecretStringAsync("AppCredentials:AppSecret");
 
                 if (request.AppId != validAppId || request.AppSecret != validAppSecret)

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using SimRMS.Application.Interfaces;
+using System.Collections.Concurrent;
 using System.Text.Json;
 
 namespace SimRMS.Infrastructure.Services
@@ -9,6 +10,8 @@ namespace SimRMS.Infrastructure.Services
     {
         private readonly IMemoryCache _cache;
         private readonly ILogger<CacheService> _logger;
+        private readonly ConcurrentDictionary<string, SemaphoreSlim> _locks = new();
+        private readonly ConcurrentHashSet<string> _cacheKeys = new();
 
         public CacheService(IMemoryCache cache, ILogger<CacheService> logger)
         {
@@ -16,94 +19,129 @@ namespace SimRMS.Infrastructure.Services
             _logger = logger;
         }
 
-        public Task<T?> GetAsync<T>(string key)
+        public async Task<T?> GetAsync<T>(string key)
         {
             try
             {
                 if (_cache.TryGetValue(key, out var value))
                 {
                     if (value is T typedValue)
-                        return Task.FromResult<T?>(typedValue);
+                        return typedValue;
 
                     if (value is string jsonString)
-                    {
-                        var deserializedValue = JsonSerializer.Deserialize<T>(jsonString);
-                        return Task.FromResult<T?>(deserializedValue);
-                    }
+                        return JsonSerializer.Deserialize<T>(jsonString);
                 }
 
-                return Task.FromResult<T?>(default(T));
+                return default(T);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting cache key {Key}", key);
-                return Task.FromResult<T?>(default(T));
+                _logger.LogError(ex, "Cache GET error for key: {Key}", key);
+                return default(T);
             }
         }
 
-        public Task SetAsync<T>(string key, T value, TimeSpan? expiration = null)
+        public async Task SetAsync<T>(string key, T value, TimeSpan? expiration = null)
         {
             try
             {
-                var options = new MemoryCacheEntryOptions();
+                var options = new MemoryCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = expiration ?? TimeSpan.FromHours(1),
+                    SlidingExpiration = TimeSpan.FromMinutes(20),
+                    Priority = CacheItemPriority.High
+                    // REMOVED: Size property to avoid conflicts
+                };
 
-                if (expiration.HasValue)
-                    options.SetAbsoluteExpiration(expiration.Value);
-                else
-                    options.SetAbsoluteExpiration(TimeSpan.FromHours(1)); // Default 1 hour
-
-                options.SetSlidingExpiration(TimeSpan.FromMinutes(20)); // Sliding expiration
+                // Add eviction callback for cleanup
+                options.RegisterPostEvictionCallback((k, v, reason, state) =>
+                {
+                    _cacheKeys.TryRemove(k.ToString()!);
+                    _locks.TryRemove(k.ToString()!, out _);
+                });
 
                 _cache.Set(key, value, options);
-
-                return Task.CompletedTask;
+                _cacheKeys.Add(key);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error setting cache key {Key}", key);
-                return Task.CompletedTask;
+                _logger.LogError(ex, "Cache SET error for key: {Key}", key);
             }
-        }
-
-        public Task RemoveAsync(string key)
-        {
-            try
-            {
-                _cache.Remove(key);
-                return Task.CompletedTask;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error removing cache key {Key}", key);
-                return Task.CompletedTask;
-            }
-        }
-
-        public Task<bool> ExistsAsync(string key)
-        {
-            return Task.FromResult(_cache.TryGetValue(key, out _));
-        }
-
-        public Task RemovePatternAsync(string pattern)
-        {
-            // Note: IMemoryCache doesn't support pattern removal
-            // This is a simplified implementation
-            // For production, consider using Redis with pattern support
-            _logger.LogWarning("Pattern removal not fully supported in MemoryCache for pattern: {Pattern}", pattern);
-            return Task.CompletedTask;
         }
 
         public async Task<T> GetOrSetAsync<T>(string key, Func<Task<T>> factory, TimeSpan? expiration = null)
         {
             var cachedValue = await GetAsync<T>(key);
-
             if (cachedValue != null)
                 return cachedValue;
 
-            var value = await factory();
-            await SetAsync(key, value, expiration);
+            // Prevent cache stampede using semaphore
+            var semaphore = _locks.GetOrAdd(key, _ => new SemaphoreSlim(1, 1));
 
-            return value;
+            await semaphore.WaitAsync();
+            try
+            {
+                // Double-check after acquiring lock
+                cachedValue = await GetAsync<T>(key);
+                if (cachedValue != null)
+                    return cachedValue;
+
+                var value = await factory();
+                await SetAsync(key, value, expiration);
+                return value;
+            }
+            finally
+            {
+                semaphore.Release();
+            }
         }
+
+        public async Task RemoveAsync(string key)
+        {
+            _cache.Remove(key);
+            _cacheKeys.TryRemove(key);
+            _locks.TryRemove(key, out _);
+        }
+
+        public async Task RemovePatternAsync(string pattern)
+        {
+            var keysToRemove = _cacheKeys.Where(k => k.Contains(pattern)).ToList();
+            foreach (var key in keysToRemove)
+            {
+                await RemoveAsync(key);
+            }
+        }
+
+        public Task<bool> ExistsAsync(string key) => Task.FromResult(_cache.TryGetValue(key, out _));
+    }
+
+    // Thread-safe HashSet for tracking cache keys
+    public class ConcurrentHashSet<T> : IDisposable
+    {
+        private readonly HashSet<T> _hashSet = new();
+        private readonly ReaderWriterLockSlim _lock = new();
+
+        public void Add(T item)
+        {
+            _lock.EnterWriteLock();
+            try { _hashSet.Add(item); }
+            finally { _lock.ExitWriteLock(); }
+        }
+
+        public bool TryRemove(T item)
+        {
+            _lock.EnterWriteLock();
+            try { return _hashSet.Remove(item); }
+            finally { _lock.ExitWriteLock(); }
+        }
+
+        public IEnumerable<T> Where(Func<T, bool> predicate)
+        {
+            _lock.EnterReadLock();
+            try { return _hashSet.Where(predicate).ToList(); }
+            finally { _lock.ExitReadLock(); }
+        }
+
+        public void Dispose() => _lock?.Dispose();
     }
 }

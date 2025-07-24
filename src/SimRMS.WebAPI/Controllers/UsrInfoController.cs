@@ -44,13 +44,15 @@ namespace SimRMS.WebAPI.Controllers
         /// <param name="rmsType">Filter by RMS type</param>
         /// <param name="searchTerm">Search in UsrId, UsrName, or UsrEmail</param>
         /// <returns>Paginated list of user information</returns>
+
+
         [HttpGet]
         [Authorize(Policy = "ViewUsers")]
-        [ProducesResponseType(typeof(ApiResponse<PagedResult<UsrInfoDto>>), 200)]
+        [ProducesResponseType(typeof(ApiResponse<IEnumerable<UsrInfoDto>>), 200)]
         [ProducesResponseType(typeof(ApiResponse<object>), 400)]
         [ProducesResponseType(typeof(ApiResponse<object>), 401)]
         [ProducesResponseType(typeof(ApiResponse<object>), 403)]
-        public async Task<ActionResult<ApiResponse<PagedResult<UsrInfoDto>>>> GetUsrInfos(
+        public async Task<ActionResult<ApiResponse<IEnumerable<UsrInfoDto>>>> GetUsrInfos(
             [FromQuery] int pageNumber = 1,
             [FromQuery] int pageSize = 10,
             [FromQuery] string? usrStatus = null,
@@ -59,29 +61,23 @@ namespace SimRMS.WebAPI.Controllers
             [FromQuery] string? rmsType = null,
             [FromQuery] string? searchTerm = null)
         {
-            try
-            {
-                _logger.LogInformation("Getting UsrInfo list - Page: {PageNumber}, Size: {PageSize}, Status: {UsrStatus}, CoCode: {CoCode}, DlrCode: {DlrCode}",
-                    pageNumber, pageSize, usrStatus, coCode, dlrCode);
 
-                var result = await _mediator.Send(new GetUsrInfosQuery
-                {
-                    PageNumber = pageNumber,
-                    PageSize = pageSize,
-                    UsrStatus = usrStatus,
-                    CoCode = coCode,
-                    DlrCode = dlrCode,
-                    RmsType = rmsType,
-                    SearchTerm = searchTerm
-                });
+            _logger.LogInformation("Getting UsrInfo list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
-                return Ok(result, $"Retrieved {result.Data.Count()} records out of {result.TotalCount} total");
-            }
-            catch (Exception ex)
+            var result = await _mediator.Send(new GetUsrInfosQuery
             {
-                _logger.LogError(ex, "Error getting UsrInfo list");
-                return BadRequest<PagedResult<UsrInfoDto>>("Error retrieving user information list");
-            }
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                UsrStatus = usrStatus,
+                CoCode = coCode,
+                DlrCode = dlrCode,
+                RmsType = rmsType,
+                SearchTerm = searchTerm
+            });
+
+            // Use the new paged result method
+            return Ok(result, $"Retrieved {result.Data.Count()} records out of {result.TotalCount} total");
+
         }
 
         /// <summary>
@@ -96,27 +92,16 @@ namespace SimRMS.WebAPI.Controllers
         [ProducesResponseType(typeof(ApiResponse<object>), 404)]
         public async Task<ActionResult<ApiResponse<UsrInfoDto>>> GetUsrInfo(string usrId)
         {
-            try
+            if (string.IsNullOrWhiteSpace(usrId))
             {
-                if (string.IsNullOrWhiteSpace(usrId))
-                {
-                    return BadRequest<UsrInfoDto>("User ID is required");
-                }
+                return BadRequest<UsrInfoDto>("User ID is required");
+            }
 
-                _logger.LogInformation("Getting UsrInfo by ID: {UsrId}", usrId);
+            _logger.LogInformation("Getting UsrInfo by ID: {UsrId}", usrId);
 
-                var result = await _mediator.Send(new GetUsrInfoByIdQuery { UsrId = usrId });
-                return Ok(result, "User information retrieved successfully");
-            }
-            catch (NotFoundException)
-            {
-                return NotFound<UsrInfoDto>($"User with ID '{usrId}' not found");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error getting UsrInfo by ID: {UsrId}", usrId);
-                return BadRequest<UsrInfoDto>("Error retrieving user information");
-            }
+            var result = await _mediator.Send(new GetUsrInfoByIdQuery { UsrId = usrId });
+            return Ok(result, "User information retrieved successfully");
+
         }
 
         /// <summary>
@@ -130,27 +115,17 @@ namespace SimRMS.WebAPI.Controllers
         [ProducesResponseType(typeof(ApiResponse<object>), 400)]
         public async Task<ActionResult<ApiResponse<UsrInfoDto>>> CreateUsrInfo([FromBody] CreateUsrInfoRequest request)
         {
-            try
-            {
-                if (request == null)
-                {
-                    return BadRequest<UsrInfoDto>("Request body is required");
-                }
 
-                _logger.LogInformation("Creating new UsrInfo: {UsrId}", request.UsrId);
+            if (request == null)
+            {
+                return BadRequest<UsrInfoDto>("Request body is required");
+            }
 
-                var result = await _mediator.Send(new CreateUsrInfoCommand { Request = request });
-                return Ok(result, "User information created successfully");
-            }
-            catch (InvalidOperationException ex)
-            {
-                return BadRequest<UsrInfoDto>(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error creating UsrInfo: {UsrId}", request?.UsrId);
-                return BadRequest<UsrInfoDto>("Error creating user information");
-            }
+            _logger.LogInformation("Creating new UsrInfo: {UsrId}", request.UsrId);
+
+            var result = await _mediator.Send(new CreateUsrInfoCommand { Request = request });
+            return Ok(result, "User information created successfully");
+
         }
 
         /// <summary>
@@ -166,32 +141,22 @@ namespace SimRMS.WebAPI.Controllers
         [ProducesResponseType(typeof(ApiResponse<object>), 404)]
         public async Task<ActionResult<ApiResponse<UsrInfoDto>>> UpdateUsrInfo(string usrId, [FromBody] UpdateUsrInfoRequest request)
         {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(usrId))
-                {
-                    return BadRequest<UsrInfoDto>("User ID is required");
-                }
 
-                if (request == null)
-                {
-                    return BadRequest<UsrInfoDto>("Request body is required");
-                }
-
-                _logger.LogInformation("Updating UsrInfo: {UsrId}", usrId);
-
-                var result = await _mediator.Send(new UpdateUsrInfoCommand { UsrId = usrId, Request = request });
-                return Ok(result, "User information updated successfully");
-            }
-            catch (NotFoundException)
+            if (string.IsNullOrWhiteSpace(usrId))
             {
-                return NotFound<UsrInfoDto>($"User with ID '{usrId}' not found");
+                return BadRequest<UsrInfoDto>("User ID is required");
             }
-            catch (Exception ex)
+
+            if (request == null)
             {
-                _logger.LogError(ex, "Error updating UsrInfo: {UsrId}", usrId);
-                return BadRequest<UsrInfoDto>("Error updating user information");
+                return BadRequest<UsrInfoDto>("Request body is required");
             }
+
+            _logger.LogInformation("Updating UsrInfo: {UsrId}", usrId);
+
+            var result = await _mediator.Send(new UpdateUsrInfoCommand { UsrId = usrId, Request = request });
+            return Ok(result, "User information updated successfully");
+
         }
 
         /// <summary>
@@ -206,27 +171,18 @@ namespace SimRMS.WebAPI.Controllers
         [ProducesResponseType(typeof(ApiResponse<object>), 404)]
         public async Task<ActionResult<ApiResponse<bool>>> DeleteUsrInfo(string usrId)
         {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(usrId))
-                {
-                    return BadRequest<bool>("User ID is required");
-                }
 
-                _logger.LogInformation("Deleting UsrInfo: {UsrId}", usrId);
+            if (string.IsNullOrWhiteSpace(usrId))
+            {
+                return BadRequest<bool>("User ID is required");
+            }
 
-                var result = await _mediator.Send(new DeleteUsrInfoCommand { UsrId = usrId });
-                return Ok(result, "User information deleted successfully");
-            }
-            catch (NotFoundException)
-            {
-                return NotFound<bool>($"User with ID '{usrId}' not found");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error deleting UsrInfo: {UsrId}", usrId);
-                return BadRequest<bool>("Error deleting user information");
-            }
+            _logger.LogInformation("Deleting UsrInfo: {UsrId}", usrId);
+
+            var result = await _mediator.Send(new DeleteUsrInfoCommand { UsrId = usrId });
+            return Ok(result, "User information deleted successfully");
+
+
         }
 
         /// <summary>
@@ -240,26 +196,17 @@ namespace SimRMS.WebAPI.Controllers
         [ProducesResponseType(404)]
         public async Task<ActionResult> CheckUsrInfoExists(string usrId)
         {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(usrId))
-                {
-                    return BadRequest();
-                }
 
-                var query = new GetUsrInfoByIdQuery { UsrId = usrId };
-                await _mediator.Send(query);
+            if (string.IsNullOrWhiteSpace(usrId))
+            {
+                return BadRequest();
+            }
 
-                return Ok();
-            }
-            catch (NotFoundException)
-            {
-                return NotFound();
-            }
-            catch (Exception)
-            {
-                return StatusCode(500);
-            }
+            var query = new GetUsrInfoByIdQuery { UsrId = usrId };
+           var user = await _mediator.Send(query);
+
+            return Ok();
+
         }
 
         /// <summary>
@@ -268,40 +215,15 @@ namespace SimRMS.WebAPI.Controllers
         /// <returns>User information statistics</returns>
         [HttpGet("statistics")]
         [Authorize(Policy = "ViewUsers")]
-        [ProducesResponseType(typeof(ApiResponse<object>), 200)]
-        public async Task<ActionResult<ApiResponse<object>>> GetUsrInfoStatistics()
+        [ProducesResponseType(typeof(ApiResponse<UserStatisticsDto>), 200)]
+        public async Task<ActionResult<ApiResponse<UserStatisticsDto>>> GetUsrInfoStatistics()
         {
-            try
-            {
-                _logger.LogInformation("Getting UsrInfo statistics");
+            _logger.LogInformation("Getting UsrInfo statistics");
 
-                // Get all users and calculate statistics
-                var allUsersQuery = new GetUsrInfosQuery { PageNumber = 1, PageSize = int.MaxValue };
-                var allUsers = await _mediator.Send(allUsersQuery);
+            // Use the dedicated statistics query instead of loading all users
+            var statistics = await _mediator.Send(new GetUsrInfoStatisticsQuery());
 
-                var statistics = new
-                {
-                    TotalUsers = allUsers.TotalCount,
-                    ActiveUsers = allUsers.Data.Count(u => u.UsrStatus == "A"),
-                    SuspendedUsers = allUsers.Data.Count(u => u.UsrStatus == "S"),
-                    ClosedUsers = allUsers.Data.Count(u => u.UsrStatus == "C"),
-                    RmsTypes = allUsers.Data.GroupBy(u => u.RmsType)
-                        .Select(g => new { RmsType = g.Key, Count = g.Count() })
-                        .ToList(),
-                    CompanyCodes = allUsers.Data.Where(u => !string.IsNullOrEmpty(u.CoCode))
-                        .GroupBy(u => u.CoCode)
-                        .Select(g => new { CoCode = g.Key, Count = g.Count() })
-                        .ToList()
-                };
-
-                // return Ok(statistics, "Statistics retrieved successfully");
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error getting UsrInfo statistics");
-                return BadRequest<object>("Error retrieving statistics");
-            }
+            return Ok(statistics, "Statistics retrieved successfully");
         }
     }
 }

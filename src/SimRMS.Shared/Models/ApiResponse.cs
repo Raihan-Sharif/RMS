@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SimRMS.Shared.Models
+﻿namespace SimRMS.Shared.Models
 {
     public class ApiResponse<T>
     {
@@ -16,13 +10,17 @@ namespace SimRMS.Shared.Models
         public string TraceId { get; set; } = string.Empty;
         public string? Version { get; set; }
 
-        public static ApiResponse<T> SuccessResult(T data, string message = "Success")
+        // Pagination info for list responses
+        public PaginationInfo? Pagination { get; set; }
+
+        public static ApiResponse<T> SuccessResult(T data, string message = "Success", PaginationInfo? pagination = null)
         {
             return new ApiResponse<T>
             {
                 Success = true,
                 Message = message,
-                Data = data
+                Data = data,
+                Pagination = pagination
             };
         }
 
@@ -32,8 +30,19 @@ namespace SimRMS.Shared.Models
             {
                 Success = false,
                 Message = message,
+                Data = default(T),
                 Errors = errors ?? new List<string>()
             };
         }
+    }
+
+    public class PaginationInfo
+    {
+        public int TotalCount { get; set; }
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
+        public int TotalPages { get; set; }
+        public bool HasPreviousPage { get; set; }
+        public bool HasNextPage { get; set; }
     }
 }

@@ -12,18 +12,16 @@ namespace SimRMS.Application
         {
             var assembly = Assembly.GetExecutingAssembly();
 
-            // Add AutoMapper
+            // AutoMapper
             services.AddAutoMapper(assembly);
 
-            // Add FluentValidation
+            // FluentValidation
             services.AddValidatorsFromAssembly(assembly);
 
-            // Add MediatR with correct configuration for version 12.x
+            // MediatR with behaviors
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(assembly);
-
-                // Add behaviors - correct syntax for MediatR 12.x
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             });
 

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SimRMS.Application.Interfaces;
-using SimRMS.Shared.Constants;
 using SimRMS.Shared.Models;
 
 namespace SimRMS.WebAPI.Controllers
@@ -15,22 +14,29 @@ namespace SimRMS.WebAPI.Controllers
             _configurationService = configurationService;
         }
 
-        protected string GetDynamicRoute()
-        {
-            var isVersioningEnabled = _configurationService.IsApiVersioningEnabled;
-            var defaultVersion = _configurationService.GetApiVersion();
-
-            if (isVersioningEnabled)
-            {
-                return $"api/v{defaultVersion}/[controller]";
-            }
-
-            return "api/[controller]";
-        }
-
+        // For single objects
         protected ActionResult<ApiResponse<T>> Ok<T>(T data, string message = "Success")
         {
             var response = ApiResponse<T>.SuccessResult(data, message);
+            response.TraceId = HttpContext.TraceIdentifier;
+            response.Version = _configurationService.GetApiVersion();
+            return base.Ok(response);
+        }
+
+        // For paged results - converts PagedResult to standardized ApiResponse
+        protected ActionResult<ApiResponse<IEnumerable<T>>> Ok<T>(PagedResult<T> pagedResult, string message = "Success")
+        {
+            var pagination = new PaginationInfo
+            {
+                TotalCount = pagedResult.TotalCount,
+                PageNumber = pagedResult.PageNumber,
+                PageSize = pagedResult.PageSize,
+                TotalPages = pagedResult.TotalPages,
+                HasPreviousPage = pagedResult.HasPreviousPage,
+                HasNextPage = pagedResult.HasNextPage
+            };
+
+            var response = ApiResponse<IEnumerable<T>>.SuccessResult(pagedResult.Data, message, pagination);
             response.TraceId = HttpContext.TraceIdentifier;
             response.Version = _configurationService.GetApiVersion();
             return base.Ok(response);

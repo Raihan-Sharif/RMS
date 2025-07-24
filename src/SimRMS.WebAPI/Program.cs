@@ -19,11 +19,14 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 
-// Add services
+// Add basic services (keep in Program.cs)
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-// Add custom services
+// FIXED: Remove SizeLimit to avoid conflict with AspNetCoreRateLimit
+builder.Services.AddMemoryCache(); // Simple configuration without size limit
+
+// Add project-specific services
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddWebApiServices(builder.Configuration);
@@ -38,19 +41,11 @@ using (var scope = app.Services.CreateScope())
 
     try
     {
-        //var handshakeResult = await handshakeService.PerformHandshakeAsync();
-        //if (handshakeResult)
-        //{
-        //    logger.LogInformation("Handshake completed successfully at {Time}", DateTime.UtcNow);
-        //}
-        //else
-        //{
-        //    logger.LogWarning("Handshake failed - continuing with degraded service");
-        //}
+        logger.LogInformation("Application initialized successfully at {Time}", DateTime.UtcNow);
     }
     catch (Exception ex)
     {
-        logger.LogError(ex, "Error during handshake process");
+        logger.LogError(ex, "Error during application initialization");
     }
 }
 
@@ -61,21 +56,22 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "RMS API V1");
-        c.RoutePrefix = "swagger"; // Swagger available at /swagger
+        c.RoutePrefix = "swagger";
         c.DocumentTitle = "RMS API Documentation";
     });
 
-    // Redirect root to swagger for convenience
     app.MapGet("/", () => Results.Redirect("/swagger"));
 }
 
 app.UseHttpsRedirection();
 app.UseCors("DefaultPolicy");
 
+// FIXED: Middleware pipeline order
 app.UseMiddleware<RequestLoggingMiddleware>();
+app.UseMiddleware<PerformanceMiddleware>(); // Move before exception handling
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseMiddleware<SecurityHeadersMiddleware>();
-app.UseMiddleware<TokenAuthenticationMiddleware>(); // This handles token validation on every request
+app.UseMiddleware<TokenAuthenticationMiddleware>();
 
 app.UseIpRateLimiting();
 
