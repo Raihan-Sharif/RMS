@@ -34,12 +34,4 @@
     <ProjectReference Include="..\SimRMS.Shared\SimRMS.Shared.csproj" />
   </ItemGroup>
 
-  <!-- Copy LB.DAL.Core.Common.dll to output directory -->
-  <ItemGroup>
-    <Content Include="..\..\lib\LB.DAL.Core.Common.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <Visible>false</Visible>
-    </Content>
-  </ItemGroup>
-
 </Project>

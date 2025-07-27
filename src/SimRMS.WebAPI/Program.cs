@@ -6,6 +6,7 @@ using SimRMS.WebAPI.Security;
 using SimRMS.Application.Interfaces;
 using Serilog;
 using AspNetCoreRateLimit;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,8 +50,11 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-// Configure pipeline
-if (app.Environment.IsDevelopment())
+// swagger configuration with production enabled swagger ui if configured
+var enableSwagger = builder.Configuration.GetValue<bool>("Swagger:EnableInProduction", false);
+var isDevelopment = app.Environment.IsDevelopment();
+
+if (isDevelopment || enableSwagger)
 {
     app.UseSwagger();
     app.UseSwaggerUI(c =>
@@ -58,9 +62,21 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "RMS API V1");
         c.RoutePrefix = "swagger";
         c.DocumentTitle = "RMS API Documentation";
+
+        // Security configurations for production
+        if (!isDevelopment)
+        {
+            c.SupportedSubmitMethods(SubmitMethod.Get); // Read-only in production
+            c.DocExpansion(DocExpansion.None); // Collapse by default
+            c.DefaultModelExpandDepth(1);
+        }
     });
 
-    app.MapGet("/", () => Results.Redirect("/swagger"));
+    // Only redirect to swagger in development
+    if (isDevelopment)
+    {
+        app.MapGet("/", () => Results.Redirect("/swagger"));
+    }
 }
 
 app.UseHttpsRedirection();
