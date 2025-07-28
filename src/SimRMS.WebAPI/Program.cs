@@ -1,4 +1,4 @@
-using SimRMS.Application;
+﻿using SimRMS.Application;
 using SimRMS.Infrastructure;
 using SimRMS.WebAPI.Extensions;
 using SimRMS.WebAPI.Middleware;
@@ -52,6 +52,7 @@ using (var scope = app.Services.CreateScope())
 
 // swagger configuration with production enabled swagger ui if configured
 var enableSwagger = builder.Configuration.GetValue<bool>("Swagger:EnableInProduction", false);
+var swaggerMode = builder.Configuration.GetValue<string>("Swagger:ProductionMode", "ReadOnly"); // ReadOnly, Limited, Full
 var isDevelopment = app.Environment.IsDevelopment();
 
 if (isDevelopment || enableSwagger)
@@ -63,13 +64,69 @@ if (isDevelopment || enableSwagger)
         c.RoutePrefix = "swagger";
         c.DocumentTitle = "RMS API Documentation";
 
-        // Security configurations for production
+        // NEW: Flexible security configurations for production
         if (!isDevelopment)
         {
-            c.SupportedSubmitMethods(SubmitMethod.Get); // Read-only in production
-            c.DocExpansion(DocExpansion.None); // Collapse by default
-            c.DefaultModelExpandDepth(1);
+            switch (swaggerMode.ToLower())
+            {
+                case "readonly":
+                    // Documentation only - no API execution
+                    c.SupportedSubmitMethods(); // No methods supported
+                    c.DocExpansion(DocExpansion.None);
+                    c.DefaultModelExpandDepth(1);
+                    break;
+
+                case "limited":
+                    // Only safe methods (GET, HEAD, OPTIONS)
+                    c.SupportedSubmitMethods(SubmitMethod.Get, SubmitMethod.Head, SubmitMethod.Options);
+                    c.DocExpansion(DocExpansion.List);
+                    c.DefaultModelExpandDepth(2);
+                    break;
+
+                case "full":
+                    // All methods enabled (use with caution in production)
+                    c.SupportedSubmitMethods(SubmitMethod.Get, SubmitMethod.Post, SubmitMethod.Put,
+                                           SubmitMethod.Delete, SubmitMethod.Head, SubmitMethod.Options,
+                                           SubmitMethod.Patch);
+                    c.DocExpansion(DocExpansion.List);
+                    c.DefaultModelExpandDepth(2);
+
+                    // Add security warning for full mode
+                    c.HeadContent = @"
+                        <style>
+                            .swagger-ui .topbar { background-color: #ff6b35; }
+                            .swagger-ui .topbar .download-url-wrapper { display: none; }
+                        </style>
+                        <div style='background: #ff6b35; color: white; padding: 10px; text-align: center; font-weight: bold;'>
+                            ⚠️ PRODUCTION ENVIRONMENT - USE WITH CAUTION ⚠️
+                        </div>";
+                    break;
+
+                default:
+                    // Default to ReadOnly if invalid mode specified
+                    c.SupportedSubmitMethods();
+                    c.DocExpansion(DocExpansion.None);
+                    c.DefaultModelExpandDepth(1);
+                    break;
+            }
         }
+        else
+        {
+            // Development - full functionality
+            c.SupportedSubmitMethods(SubmitMethod.Get, SubmitMethod.Post, SubmitMethod.Put,
+                                   SubmitMethod.Delete, SubmitMethod.Head, SubmitMethod.Options,
+                                   SubmitMethod.Patch);
+            c.DocExpansion(DocExpansion.List);
+            c.DefaultModelExpandDepth(3);
+        }
+
+        // Common configurations
+        c.DisplayRequestDuration();
+        c.EnableTryItOutByDefault();
+        c.ShowExtensions();
+        c.EnableValidator();
+        c.EnableDeepLinking();
+        c.EnableFilter();
     });
 
     // Only redirect to swagger in development
