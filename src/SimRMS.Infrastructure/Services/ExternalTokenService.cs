@@ -169,7 +169,7 @@ namespace SimRMS.Infrastructure.Services
                     return false;
                 }
 
-                // Build payload exactly like your working code
+                // Build payload exactly like working code
                 string payload = "{ \"HEADER\":{ \"Content-Type\": \"application/json\", \"LBSL_REQ_TYPE\": \"2\" }, \"DATA\":{ \"PID\": \"" + userId + "\", \"TOKEN\": \"" + token + "\" } }";
 
                 _logger.LogDebug("Validation payload: {Payload}", payload);

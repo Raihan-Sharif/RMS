@@ -5,9 +5,11 @@ using SimRMS.Shared.Models;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace SimRMS.WebAPI.Controllers
+namespace SimRMS.WebAPI.Controllers.V1
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")] // ONLY versioned route
+    [ApiController]
+    [ApiVersion("1.0")]
     public class HandshakeController : BaseController
     {
         private readonly IConfigurationService _configurationService;
@@ -27,12 +29,13 @@ namespace SimRMS.WebAPI.Controllers
         }
 
         [HttpPost]
+        [MapToApiVersion("1.0")]
         public async Task<ActionResult<ApiResponse<HandshakeResponse>>> Handshake([FromBody] HandshakeRequest request)
         {
             try
             {
                 // Validate app credentials
-                var validAppId = _configurationService.GetValue<string>("AppCredentials:AppId", "RMS_APP_2025");
+                var validAppId = _configurationService.GetValue("AppCredentials:AppId", "RMS_APP_2025");
                 var validAppSecret = await _configurationService.GetSecretStringAsync("AppCredentials:AppSecret");
 
                 if (request.AppId != validAppId || request.AppSecret != validAppSecret)
@@ -74,6 +77,7 @@ namespace SimRMS.WebAPI.Controllers
         }
 
         [HttpPost("validate")]
+        [MapToApiVersion("1.0")]
         public async Task<ActionResult<ApiResponse<HandshakeValidationResponse>>> ValidateHandshake([FromBody] HandshakeValidationRequest request)
         {
             try

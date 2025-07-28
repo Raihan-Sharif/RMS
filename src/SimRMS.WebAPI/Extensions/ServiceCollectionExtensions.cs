@@ -8,6 +8,7 @@ using SimRMS.Shared.Constants;
 using SimRMS.WebAPI.Security;
 using SimRMS.WebAPI.Services;
 using SimRMS.WebAPI.Filters;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace SimRMS.WebAPI.Extensions
 {
@@ -19,28 +20,8 @@ namespace SimRMS.WebAPI.Extensions
             services.AddHttpContextAccessor();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 
-            // API Versioning - Dynamic configuration
-            var isVersioningEnabled = configuration.GetValue<bool>("ApiVersioning:Enabled", true);
-            var defaultVersion = configuration.GetValue<string>("ApiVersioning:DefaultVersion") ?? "1.0";
-
-            if (isVersioningEnabled)
-            {
-                services.AddApiVersioning(opt =>
-                {
-                    opt.DefaultApiVersion = ApiVersion.Parse(defaultVersion);
-                    opt.AssumeDefaultVersionWhenUnspecified = true;
-                    opt.ApiVersionReader = ApiVersionReader.Combine(
-                        new UrlSegmentApiVersionReader(),
-                        new HeaderApiVersionReader(AppConstants.Headers.ApiVersion),
-                        new QueryStringApiVersionReader("version"));
-                });
-
-                services.AddVersionedApiExplorer(setup =>
-                {
-                    setup.GroupNameFormat = "'v'VVV";
-                    setup.SubstituteApiVersionInUrl = true;
-                });
-            }
+            // Enhanced API Versioning - Keep your existing pattern, add versioning
+            AddEnhancedVersioning(services, configuration);
 
             // CORS
             services.AddCors(options =>
@@ -53,14 +34,14 @@ namespace SimRMS.WebAPI.Extensions
                 });
             });
 
-            // Rate Limiting
+            // Rate Limiting 
             services.Configure<IpRateLimitOptions>(configuration.GetSection("IpRateLimiting"));
             services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
             services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
             services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
             services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
 
-            // Custom Authorization
+            // Custom Authorization 
             services.AddAuthorization(options =>
             {
                 // Define policies based on permissions
@@ -98,9 +79,49 @@ namespace SimRMS.WebAPI.Extensions
 
             services.AddScoped<IAuthorizationHandler, CustomAuthorizationHandler>();
 
-            // Swagger
+            // Enhanced Swagger ( working base + versioning support)
+            AddEnhancedSwagger(services);
+
+            return services;
+        }
+
+        private static void AddEnhancedVersioning(IServiceCollection services, IConfiguration configuration)
+        {
+            // Dynamic versioning configuration
+            var isVersioningEnabled = configuration.GetValue<bool>("ApiVersioning:Enabled", true);
+            var defaultVersion = configuration.GetValue<string>("ApiVersioning:DefaultVersion", "1.0");
+
+            if (isVersioningEnabled)
+            {
+                services.AddApiVersioning(opt =>
+                {
+                    opt.DefaultApiVersion = ApiVersion.Parse(defaultVersion);
+                    opt.AssumeDefaultVersionWhenUnspecified = true;
+
+                    // Multiple version readers - enterprise flexibility
+                    opt.ApiVersionReader = ApiVersionReader.Combine(
+                        new HeaderApiVersionReader(AppConstants.Headers.ApiVersion),    // X-API-Version: 1.0
+                        new QueryStringApiVersionReader("version"),                      // ?version=1.0
+                        new UrlSegmentApiVersionReader()                                 // /v1/api/...
+                    );
+
+                    opt.ApiVersionSelector = new CurrentImplementationApiVersionSelector(opt);
+                });
+
+                services.AddVersionedApiExplorer(setup =>
+                {
+                    setup.GroupNameFormat = "'v'VVV";
+                    setup.SubstituteApiVersionInUrl = true;
+                    setup.AssumeDefaultVersionWhenUnspecified = true;
+                });
+            }
+        }
+
+        private static void AddEnhancedSwagger(IServiceCollection services)
+        {
             services.AddSwaggerGen(c =>
             {
+                // v1 configuration
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "Risk Management System API",
@@ -108,7 +129,15 @@ namespace SimRMS.WebAPI.Extensions
                     Description = "A comprehensive Risk Management System API built with .NET 8"
                 });
 
-                // X-Handshake-Token header
+                // Add v2 for versioning
+                c.SwaggerDoc("v2", new OpenApiInfo
+                {
+                    Title = "Risk Management System API",
+                    Version = "v2",
+                    Description = "Enhanced Risk Management System API with new features"
+                });
+
+                // security definitions
                 c.AddSecurityDefinition("X-Handshake-Token", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
@@ -118,7 +147,6 @@ namespace SimRMS.WebAPI.Extensions
                     Scheme = "X-Handshake-Token"
                 });
 
-                // JWT Bearer token header
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "JWT Authorization header using the Bearer scheme (e.g., 'Bearer {token}')",
@@ -129,10 +157,9 @@ namespace SimRMS.WebAPI.Extensions
                     BearerFormat = "JWT"
                 });
 
-                // Add security requirements for both tokens
+                // security requirements
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
-                    // Handshake Token Requirement
                     {
                         new OpenApiSecurityScheme
                         {
@@ -144,7 +171,6 @@ namespace SimRMS.WebAPI.Extensions
                         },
                         new string[] {}
                     },
-                    // Bearer Token Requirement
                     {
                         new OpenApiSecurityScheme
                         {
@@ -158,11 +184,51 @@ namespace SimRMS.WebAPI.Extensions
                     }
                 });
 
-                // Add operation filter to customize per-endpoint security
+                // operation filter
                 c.OperationFilter<SecurityRequirementsOperationFilter>();
-            });
 
-            return services;
+                // ENHANCED: Better version detection
+                // Just replace the DocInclusionPredicate part with this simpler version:
+
+                c.DocInclusionPredicate((version, desc) =>
+                {
+                    if (!desc.TryGetMethodInfo(out var methodInfo))
+                        return version == "v1";
+
+                    var controllerType = methodInfo.DeclaringType;
+                    if (controllerType == null)
+                        return version == "v1";
+
+                    var hasVersioning = controllerType.GetCustomAttributes(typeof(ApiVersionAttribute), true).Any();
+
+                    if (!hasVersioning)
+                        return version == "v1";
+
+                    var controllerVersions = controllerType
+                        .GetCustomAttributes(typeof(ApiVersionAttribute), true)
+                        .Cast<ApiVersionAttribute>()
+                        .SelectMany(attr => attr.Versions);
+
+                    var methodVersions = methodInfo
+                        .GetCustomAttributes(typeof(MapToApiVersionAttribute), true)
+                        .Cast<MapToApiVersionAttribute>()
+                        .SelectMany(attr => attr.Versions);
+
+                    var applicableVersions = methodVersions.Any() ? methodVersions : controllerVersions;
+
+                    // SIMPLE FIX: Extract major version number and compare
+                    foreach (var apiVersion in applicableVersions)
+                    {
+                        var majorVersion = apiVersion.MajorVersion; // 1 or 2
+                        if (version == $"v{majorVersion}")          // Compare with "v1" or "v2"
+                        {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                });
+            });
         }
     }
 }

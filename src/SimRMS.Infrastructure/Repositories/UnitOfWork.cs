@@ -8,7 +8,6 @@ namespace SimRMS.Infrastructure.UnitOfWork
 {
     /// <summary>
     /// Clean Architecture UnitOfWork implementation using LB.DAL
-    /// Follows your existing UnitOfWorkCustomer pattern
     /// </summary>
     public class UnitOfWork : IUnitOfWork
     {
@@ -34,7 +33,7 @@ namespace SimRMS.Infrastructure.UnitOfWork
         {
             get
             {
-                // Lazy initialization - following your pattern
+                // Lazy initialization 
                 _usrInfoRepository ??= _serviceProvider.GetRequiredService<IUsrInfoRepository>();
                 return _usrInfoRepository;
             }

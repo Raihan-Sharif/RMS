@@ -10,6 +10,7 @@ using SimRMS.Infrastructure.UnitOfWork;
 using SimRMS.Infrastructure.BackgroundServices;
 using LB.DAL.Core.Common;
 using SimRMS.Domain.Interfaces.Repo;
+using SimRMS.Shared.Models;
 
 namespace SimRMS.Infrastructure
 {
@@ -21,6 +22,9 @@ namespace SimRMS.Infrastructure
         {
             // Database Configuration
             AddDatabase(services, configuration);
+
+            // Configuration Options
+            AddConfigurationOptions(services, configuration);
 
             // Repositories & UnitOfWork
             AddRepositories(services);
@@ -38,6 +42,13 @@ namespace SimRMS.Infrastructure
             AddHealthChecks(services);
 
             return services;
+        }
+
+        private static void AddConfigurationOptions(IServiceCollection services, IConfiguration configuration)
+        {
+            // Security configuration
+            services.Configure<SecurityConfiguration>(
+                configuration.GetSection(SecurityConfiguration.SectionName));
         }
 
         private static void AddDatabase(IServiceCollection services, IConfiguration configuration)
@@ -61,6 +72,7 @@ namespace SimRMS.Infrastructure
             services.AddScoped<ICacheService, CacheService>();
             services.AddScoped<ISecurityService, SecurityService>();
             services.AddScoped<IHandshakeService, HandshakeService>();
+            services.AddScoped<ISecurityRouteService, SecurityRouteService>(); //  ignore route security for specific routes
         }
 
         private static void AddExternalServices(IServiceCollection services)

@@ -6,11 +6,11 @@ using SimRMS.Application.Models.Auth;
 using SimRMS.Shared.Models;
 using System.Security.Claims;
 
-namespace SimRMS.WebAPI.Controllers
+namespace SimRMS.WebAPI.Controllers.V1
 {
-
-
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")] // ONLY versioned route
+    [ApiController]
+    [ApiVersion("1.0")]
     public class AuthController : BaseController
     {
         private readonly ISecurityService _securityService;
@@ -30,6 +30,7 @@ namespace SimRMS.WebAPI.Controllers
         }
 
         [HttpPost("login")]
+        [MapToApiVersion("1.0")]
         public async Task<ActionResult<ApiResponse<LoginResponse>>> Login([FromBody] LoginRequest request)
         {
             // Validate handshake token
@@ -81,6 +82,7 @@ namespace SimRMS.WebAPI.Controllers
         }
 
         [HttpPost("logout")]
+        [MapToApiVersion("1.0")]
         [Authorize]
         public async Task<ActionResult<ApiResponse<string>>> Logout()
         {

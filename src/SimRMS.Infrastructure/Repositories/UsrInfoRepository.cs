@@ -11,7 +11,6 @@ namespace SimRMS.Infrastructure.Repositories
 {
     /// <summary>
     /// Infrastructure implementation of IUsrInfoRepository
-    /// Follows your existing CityRepository pattern with Clean Architecture
     /// </summary>
     public class UsrInfoRepository : IUsrInfoRepository
     {
@@ -223,7 +222,7 @@ namespace SimRMS.Infrastructure.Repositories
             return stats;
         }
 
-        #region Private Helper Methods - Following your existing patterns
+        #region Private Helper Methods
 
         private UsrInfo MapUsrInfoFromReader(DbDataReader dr)
         {

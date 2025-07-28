@@ -9,15 +9,17 @@ using SimRMS.Application.Models.Requests;
 using SimRMS.Shared.Models;
 using SimRMS.Domain.Exceptions;
 
-namespace SimRMS.WebAPI.Controllers
+namespace SimRMS.WebAPI.Controllers.V1
 {
     /// <summary>
     /// User Information Management API
     /// Handles CRUD operations for user information from the database
     /// </summary>
-    [Route("api/[controller]")]
-    [Authorize]
+    [Route("api/v{version:apiVersion}/[controller]")] // New versioned route
     [ApiController]
+    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
+    [Authorize]
     public class UsrInfoController : BaseController
     {
         private readonly IMediator _mediator;
@@ -47,6 +49,7 @@ namespace SimRMS.WebAPI.Controllers
 
 
         [HttpGet]
+        [MapToApiVersion("1.0")]
         [Authorize(Policy = "ViewUsers")]
         [ProducesResponseType(typeof(ApiResponse<IEnumerable<UsrInfoDto>>), 200)]
         [ProducesResponseType(typeof(ApiResponse<object>), 400)]
@@ -86,6 +89,7 @@ namespace SimRMS.WebAPI.Controllers
         /// <param name="usrId">User ID</param>
         /// <returns>User information details</returns>
         [HttpGet("{usrId}")]
+        [MapToApiVersion("1.0")]
         [Authorize(Policy = "ViewUsers")]
         [ProducesResponseType(typeof(ApiResponse<UsrInfoDto>), 200)]
         [ProducesResponseType(typeof(ApiResponse<object>), 400)]
@@ -110,6 +114,7 @@ namespace SimRMS.WebAPI.Controllers
         /// <param name="request">User information creation request</param>
         /// <returns>Created user information</returns>
         [HttpPost]
+        [MapToApiVersion("1.0")]
         [Authorize(Policy = "ManageUsers")]
         [ProducesResponseType(typeof(ApiResponse<UsrInfoDto>), 200)]
         [ProducesResponseType(typeof(ApiResponse<object>), 400)]
@@ -135,6 +140,7 @@ namespace SimRMS.WebAPI.Controllers
         /// <param name="request">User information update request</param>
         /// <returns>Updated user information</returns>
         [HttpPut("{usrId}")]
+        [MapToApiVersion("1.0")]
         [Authorize(Policy = "ManageUsers")]
         [ProducesResponseType(typeof(ApiResponse<UsrInfoDto>), 200)]
         [ProducesResponseType(typeof(ApiResponse<object>), 400)]
@@ -165,6 +171,7 @@ namespace SimRMS.WebAPI.Controllers
         /// <param name="usrId">User ID to delete</param>
         /// <returns>Deletion result</returns>
         [HttpDelete("{usrId}")]
+        [MapToApiVersion("1.0")]
         [Authorize(Policy = "ManageUsers")]
         [ProducesResponseType(typeof(ApiResponse<bool>), 200)]
         [ProducesResponseType(typeof(ApiResponse<object>), 400)]
@@ -191,6 +198,7 @@ namespace SimRMS.WebAPI.Controllers
         /// <param name="usrId">User ID to check</param>
         /// <returns>200 if exists, 404 if not found</returns>
         [HttpHead("{usrId}")]
+        [MapToApiVersion("1.0")]
         [Authorize(Policy = "ViewUsers")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -214,6 +222,7 @@ namespace SimRMS.WebAPI.Controllers
         /// </summary>
         /// <returns>User information statistics</returns>
         [HttpGet("statistics")]
+        [MapToApiVersion("2.0")]
         [Authorize(Policy = "ViewUsers")]
         [ProducesResponseType(typeof(ApiResponse<UserStatisticsDto>), 200)]
         public async Task<ActionResult<ApiResponse<UserStatisticsDto>>> GetUsrInfoStatistics()

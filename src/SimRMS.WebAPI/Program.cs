@@ -7,6 +7,7 @@ using SimRMS.Application.Interfaces;
 using Serilog;
 using AspNetCoreRateLimit;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,12 +21,10 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 
-// Add basic services (keep in Program.cs)
+// Add basic services
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-
-// FIXED: Remove SizeLimit to avoid conflict with AspNetCoreRateLimit
-builder.Services.AddMemoryCache(); // Simple configuration without size limit
+builder.Services.AddMemoryCache();
 
 // Add project-specific services
 builder.Services.AddApplication();
@@ -50,9 +49,9 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-// swagger configuration with production enabled swagger ui if configured
+// Enhanced Swagger configuration ( working base + versioning)
 var enableSwagger = builder.Configuration.GetValue<bool>("Swagger:EnableInProduction", false);
-var swaggerMode = builder.Configuration.GetValue<string>("Swagger:ProductionMode", "ReadOnly"); // ReadOnly, Limited, Full
+var swaggerMode = builder.Configuration.GetValue<string>("Swagger:ProductionMode", "ReadOnly");
 var isDevelopment = app.Environment.IsDevelopment();
 
 if (isDevelopment || enableSwagger)
@@ -60,38 +59,61 @@ if (isDevelopment || enableSwagger)
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "RMS API V1");
+        // Enhanced: Dynamic version discovery
+        try
+        {
+            var apiVersionDescriptionProvider = app.Services.GetService<IApiVersionDescriptionProvider>();
+            if (apiVersionDescriptionProvider != null)
+            {
+                // Configure endpoints dynamically
+                foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions.Reverse())
+                {
+                    c.SwaggerEndpoint(
+                        $"/swagger/{description.GroupName}/swagger.json",
+                        $"RMS API {description.GroupName.ToUpperInvariant()}");
+                }
+            }
+            else
+            {
+                // Fallback to your working configuration
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "RMS API V1");
+                c.SwaggerEndpoint("/swagger/v2/swagger.json", "RMS API V2");
+            }
+        }
+        catch
+        {
+            // Fallback to your working configuration
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "RMS API V1");
+            c.SwaggerEndpoint("/swagger/v2/swagger.json", "RMS API V2");
+        }
+
         c.RoutePrefix = "swagger";
         c.DocumentTitle = "RMS API Documentation";
 
-        // NEW: Flexible security configurations for production
+        // production configuration
         if (!isDevelopment)
         {
             switch (swaggerMode.ToLower())
             {
                 case "readonly":
-                    // Documentation only - no API execution
-                    c.SupportedSubmitMethods(); // No methods supported
+                    c.SupportedSubmitMethods();
                     c.DocExpansion(DocExpansion.None);
                     c.DefaultModelExpandDepth(1);
                     break;
 
                 case "limited":
-                    // Only safe methods (GET, HEAD, OPTIONS)
                     c.SupportedSubmitMethods(SubmitMethod.Get, SubmitMethod.Head, SubmitMethod.Options);
                     c.DocExpansion(DocExpansion.List);
                     c.DefaultModelExpandDepth(2);
                     break;
 
                 case "full":
-                    // All methods enabled (use with caution in production)
                     c.SupportedSubmitMethods(SubmitMethod.Get, SubmitMethod.Post, SubmitMethod.Put,
                                            SubmitMethod.Delete, SubmitMethod.Head, SubmitMethod.Options,
                                            SubmitMethod.Patch);
                     c.DocExpansion(DocExpansion.List);
                     c.DefaultModelExpandDepth(2);
 
-                    // Add security warning for full mode
                     c.HeadContent = @"
                         <style>
                             .swagger-ui .topbar { background-color: #ff6b35; }
@@ -103,7 +125,6 @@ if (isDevelopment || enableSwagger)
                     break;
 
                 default:
-                    // Default to ReadOnly if invalid mode specified
                     c.SupportedSubmitMethods();
                     c.DocExpansion(DocExpansion.None);
                     c.DefaultModelExpandDepth(1);
@@ -112,7 +133,6 @@ if (isDevelopment || enableSwagger)
         }
         else
         {
-            // Development - full functionality
             c.SupportedSubmitMethods(SubmitMethod.Get, SubmitMethod.Post, SubmitMethod.Put,
                                    SubmitMethod.Delete, SubmitMethod.Head, SubmitMethod.Options,
                                    SubmitMethod.Patch);
@@ -120,7 +140,7 @@ if (isDevelopment || enableSwagger)
             c.DefaultModelExpandDepth(3);
         }
 
-        // Common configurations
+        // configuration
         c.DisplayRequestDuration();
         c.EnableTryItOutByDefault();
         c.ShowExtensions();
@@ -129,7 +149,6 @@ if (isDevelopment || enableSwagger)
         c.EnableFilter();
     });
 
-    // Only redirect to swagger in development
     if (isDevelopment)
     {
         app.MapGet("/", () => Results.Redirect("/swagger"));
@@ -139,9 +158,9 @@ if (isDevelopment || enableSwagger)
 app.UseHttpsRedirection();
 app.UseCors("DefaultPolicy");
 
-// FIXED: Middleware pipeline order
+// middleware pipeline
 app.UseMiddleware<RequestLoggingMiddleware>();
-app.UseMiddleware<PerformanceMiddleware>(); // Move before exception handling
+app.UseMiddleware<PerformanceMiddleware>();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseMiddleware<SecurityHeadersMiddleware>();
 app.UseMiddleware<TokenAuthenticationMiddleware>();
@@ -156,7 +175,7 @@ app.MapHealthChecks("/health");
 
 try
 {
-    Log.Information("Starting Risk Management System API");
+    Log.Information("Starting Risk Management System API with Enhanced Versioning");
     await app.RunAsync();
 }
 catch (Exception ex)
