@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
-using SimRMS.Application.Features.UsrInfo.Commands;
-using SimRMS.Application.Features.UsrInfo.Queries;
+using SimRMS.Application.Features.UsrInfo;
 using SimRMS.Application.Models.Requests;
 
 namespace SimRMS.Application.Validators

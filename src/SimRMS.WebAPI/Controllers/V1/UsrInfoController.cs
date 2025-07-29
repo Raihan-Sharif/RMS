@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
-using SimRMS.Application.Features.UsrInfo.Commands;
-using SimRMS.Application.Features.UsrInfo.Queries;
+using SimRMS.Application.Features.UsrInfo;
 using SimRMS.Application.Interfaces;
 using SimRMS.Application.Models.DTOs;
 using SimRMS.Application.Models.Requests;
