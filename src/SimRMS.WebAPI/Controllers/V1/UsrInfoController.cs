@@ -1,99 +1,158 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MediatR;
-using SimRMS.Application.Features.UsrInfo;
+using FluentValidation;
 using SimRMS.Application.Interfaces;
+using SimRMS.Application.Interfaces.Services;
 using SimRMS.Application.Models.DTOs;
 using SimRMS.Application.Models.Requests;
 using SimRMS.Shared.Models;
-using SimRMS.Domain.Exceptions;
+using System.ComponentModel.DataAnnotations;
 
 namespace SimRMS.WebAPI.Controllers.V1
 {
     /// <summary>
     /// User Information Management API
-    /// Handles CRUD operations for user information from the database
+    /// Shows both simple and complex query validation approaches
+    /// Uses single request model for Create/Update operations
     /// </summary>
-    [Route("api/v{version:apiVersion}/[controller]")] // New versioned route
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [ApiVersion("1.0")]
     [ApiVersion("2.0")]
     [Authorize]
     public class UsrInfoController : BaseController
     {
-        private readonly IMediator _mediator;
+        private readonly IUsrInfoService _usrInfoService;
+        private readonly IValidator<GetUsersQuery> _getUsersQueryValidator;
         private readonly ILogger<UsrInfoController> _logger;
 
         public UsrInfoController(
-            IMediator mediator,
+            IUsrInfoService usrInfoService,
+            IValidator<GetUsersQuery> getUsersQueryValidator,
             IConfigurationService configurationService,
             ILogger<UsrInfoController> logger)
             : base(configurationService)
         {
-            _mediator = mediator;
+            _usrInfoService = usrInfoService;
+            _getUsersQueryValidator = getUsersQueryValidator;
             _logger = logger;
         }
 
         /// <summary>
-        /// Get paginated list of user information with optional filtering
+        /// APPROACH A: Simple Query Validation (Controller-level)
+        /// Get paginated list of users with basic query parameters
+        /// Validation done directly in controller
         /// </summary>
-        /// <param name="pageNumber">Page number (default: 1)</param>
-        /// <param name="pageSize">Page size (default: 10, max: 100)</param>
-        /// <param name="usrStatus">Filter by user status (A=Active, S=Suspend, C=Close)</param>
-        /// <param name="coCode">Filter by company code</param>
-        /// <param name="dlrCode">Filter by dealer code</param>
-        /// <param name="rmsType">Filter by RMS type</param>
-        /// <param name="searchTerm">Search in UsrId, UsrName, or UsrEmail</param>
-        /// <returns>Paginated list of user information</returns>
+        [HttpGet("simple")]
+        [MapToApiVersion("1.0")]
+        [Authorize(Policy = "ViewUsers")]
+        [ProducesResponseType(typeof(ApiResponse<IEnumerable<UsrInfoDto>>), 200)]
+        [ProducesResponseType(typeof(ApiResponse<object>), 400)]
+        public async Task<ActionResult<ApiResponse<IEnumerable<UsrInfoDto>>>> GetUsersSimple(
+            [FromQuery][Range(1, 1000)] int pageNumber = 1,
+            [FromQuery][Range(1, 100)] int pageSize = 10,
+            [FromQuery] string? usrStatus = null,
+            [FromQuery][StringLength(10)] string? coCode = null,
+            [FromQuery][StringLength(10)] string? dlrCode = null,
+            [FromQuery][StringLength(10)] string? rmsType = null,
+            [FromQuery][StringLength(100, MinimumLength = 2)] string? searchTerm = null,
+            CancellationToken cancellationToken = default)
+        {
+            _logger.LogInformation("Getting users (simple) - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
+            // Additional controller-level validation
+            if (!string.IsNullOrEmpty(usrStatus) && !new[] { "A", "S", "C" }.Contains(usrStatus))
+            {
+                return BadRequest<IEnumerable<UsrInfoDto>>("User status must be A (Active), S (Suspend), or C (Close)");
+            }
 
+            try
+            {
+                var result = await _usrInfoService.GetUsersAsync(
+                    pageNumber, pageSize, usrStatus, coCode, dlrCode, rmsType, searchTerm, cancellationToken);
+
+                return Ok(result, $"Retrieved {result.Data.Count()} records out of {result.TotalCount} total");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting users list (simple)");
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// APPROACH B: Complex Query Validation (FluentValidation)
+        /// Get paginated list of users with complex query object
+        /// Validation done using FluentValidation
+        /// </summary>
+        [HttpGet("advanced")]
+        [MapToApiVersion("2.0")]
+        [Authorize(Policy = "ViewUsers")]
+        [ProducesResponseType(typeof(ApiResponse<IEnumerable<UsrInfoDto>>), 200)]
+        [ProducesResponseType(typeof(ApiResponse<object>), 400)]
+        public async Task<ActionResult<ApiResponse<IEnumerable<UsrInfoDto>>>> GetUsersAdvanced(
+            [FromQuery] GetUsersQuery query,
+            CancellationToken cancellationToken = default)
+        {
+            _logger.LogInformation("Getting users (advanced) - Page: {PageNumber}, Size: {PageSize}", query.PageNumber, query.PageSize);
+
+            // Validate complex query using FluentValidation
+            var validationResult = await _getUsersQueryValidator.ValidateAsync(query, cancellationToken);
+            if (!validationResult.IsValid)
+            {
+                var errors = validationResult.Errors.Select(e => $"{e.PropertyName}: {e.ErrorMessage}").ToList();
+                return BadRequest<IEnumerable<UsrInfoDto>>("Invalid query parameters", errors);
+            }
+
+            try
+            {
+                var result = await _usrInfoService.GetUsersAsync(
+                    query.PageNumber, query.PageSize, query.UsrStatus, query.CoCode,
+                    query.DlrCode, query.RmsType, query.SearchTerm, cancellationToken);
+
+                return Ok(result, $"Retrieved {result.Data.Count()} records out of {result.TotalCount} total");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting users list (advanced)");
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Standard GET endpoint (uses simple approach)
+        /// </summary>
         [HttpGet]
         [MapToApiVersion("1.0")]
         [Authorize(Policy = "ViewUsers")]
         [ProducesResponseType(typeof(ApiResponse<IEnumerable<UsrInfoDto>>), 200)]
         [ProducesResponseType(typeof(ApiResponse<object>), 400)]
-        [ProducesResponseType(typeof(ApiResponse<object>), 401)]
-        [ProducesResponseType(typeof(ApiResponse<object>), 403)]
         public async Task<ActionResult<ApiResponse<IEnumerable<UsrInfoDto>>>> GetUsrInfos(
-            [FromQuery] int pageNumber = 1,
-            [FromQuery] int pageSize = 10,
+            [FromQuery][Range(1, 1000)] int pageNumber = 1,
+            [FromQuery][Range(1, 100)] int pageSize = 10,
             [FromQuery] string? usrStatus = null,
-            [FromQuery] string? coCode = null,
-            [FromQuery] string? dlrCode = null,
-            [FromQuery] string? rmsType = null,
-            [FromQuery] string? searchTerm = null)
+            [FromQuery][StringLength(10)] string? coCode = null,
+            [FromQuery][StringLength(10)] string? dlrCode = null,
+            [FromQuery][StringLength(10)] string? rmsType = null,
+            [FromQuery][StringLength(100, MinimumLength = 2)] string? searchTerm = null,
+            CancellationToken cancellationToken = default)
         {
-
-            _logger.LogInformation("Getting UsrInfo list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
-
-            var result = await _mediator.Send(new GetUsrInfosQuery
-            {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                UsrStatus = usrStatus,
-                CoCode = coCode,
-                DlrCode = dlrCode,
-                RmsType = rmsType,
-                SearchTerm = searchTerm
-            });
-
-            // Use the new paged result method
-            return Ok(result, $"Retrieved {result.Data.Count()} records out of {result.TotalCount} total");
-
+            // Simple validation approach (same as GetUsersSimple)
+            return await GetUsersSimple(pageNumber, pageSize, usrStatus, coCode, dlrCode, rmsType, searchTerm, cancellationToken);
         }
 
         /// <summary>
         /// Get user information by ID
         /// </summary>
-        /// <param name="usrId">User ID</param>
-        /// <returns>User information details</returns>
         [HttpGet("{usrId}")]
         [MapToApiVersion("1.0")]
         [Authorize(Policy = "ViewUsers")]
         [ProducesResponseType(typeof(ApiResponse<UsrInfoDto>), 200)]
         [ProducesResponseType(typeof(ApiResponse<object>), 400)]
         [ProducesResponseType(typeof(ApiResponse<object>), 404)]
-        public async Task<ActionResult<ApiResponse<UsrInfoDto>>> GetUsrInfo(string usrId)
+        public async Task<ActionResult<ApiResponse<UsrInfoDto>>> GetUsrInfo(
+            [Required][StringLength(50, MinimumLength = 1)] string usrId,
+            CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(usrId))
             {
@@ -102,24 +161,31 @@ namespace SimRMS.WebAPI.Controllers.V1
 
             _logger.LogInformation("Getting UsrInfo by ID: {UsrId}", usrId);
 
-            var result = await _mediator.Send(new GetUsrInfoByIdQuery { UsrId = usrId });
-            return Ok(result, "User information retrieved successfully");
-
+            try
+            {
+                var result = await _usrInfoService.GetUserByIdAsync(usrId, cancellationToken);
+                return Ok(result, "User information retrieved successfully");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting user by ID: {UsrId}", usrId);
+                throw;
+            }
         }
 
         /// <summary>
         /// Create new user information
+        /// Uses single request model with validation
         /// </summary>
-        /// <param name="request">User information creation request</param>
-        /// <returns>Created user information</returns>
         [HttpPost]
         [MapToApiVersion("1.0")]
         [Authorize(Policy = "ManageUsers")]
         [ProducesResponseType(typeof(ApiResponse<UsrInfoDto>), 200)]
         [ProducesResponseType(typeof(ApiResponse<object>), 400)]
-        public async Task<ActionResult<ApiResponse<UsrInfoDto>>> CreateUsrInfo([FromBody] CreateUsrInfoRequest request)
+        public async Task<ActionResult<ApiResponse<UsrInfoDto>>> CreateUsrInfo(
+            [FromBody] UsrInfoRequest request,
+            CancellationToken cancellationToken = default)
         {
-
             if (request == null)
             {
                 return BadRequest<UsrInfoDto>("Request body is required");
@@ -127,26 +193,33 @@ namespace SimRMS.WebAPI.Controllers.V1
 
             _logger.LogInformation("Creating new UsrInfo: {UsrId}", request.UsrId);
 
-            var result = await _mediator.Send(new CreateUsrInfoCommand { Request = request });
-            return Ok(result, "User information created successfully");
-
+            try
+            {
+                var result = await _usrInfoService.CreateUserAsync(request, cancellationToken);
+                return Ok(result, "User information created successfully");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error creating user: {UsrId}", request.UsrId);
+                throw;
+            }
         }
 
         /// <summary>
         /// Update existing user information
+        /// Uses single request model with validation
         /// </summary>
-        /// <param name="usrId">User ID to update</param>
-        /// <param name="request">User information update request</param>
-        /// <returns>Updated user information</returns>
         [HttpPut("{usrId}")]
         [MapToApiVersion("1.0")]
         [Authorize(Policy = "ManageUsers")]
         [ProducesResponseType(typeof(ApiResponse<UsrInfoDto>), 200)]
         [ProducesResponseType(typeof(ApiResponse<object>), 400)]
         [ProducesResponseType(typeof(ApiResponse<object>), 404)]
-        public async Task<ActionResult<ApiResponse<UsrInfoDto>>> UpdateUsrInfo(string usrId, [FromBody] UpdateUsrInfoRequest request)
+        public async Task<ActionResult<ApiResponse<UsrInfoDto>>> UpdateUsrInfo(
+            [Required][StringLength(50, MinimumLength = 1)] string usrId,
+            [FromBody] UsrInfoRequest request,
+            CancellationToken cancellationToken = default)
         {
-
             if (string.IsNullOrWhiteSpace(usrId))
             {
                 return BadRequest<UsrInfoDto>("User ID is required");
@@ -159,25 +232,31 @@ namespace SimRMS.WebAPI.Controllers.V1
 
             _logger.LogInformation("Updating UsrInfo: {UsrId}", usrId);
 
-            var result = await _mediator.Send(new UpdateUsrInfoCommand { UsrId = usrId, Request = request });
-            return Ok(result, "User information updated successfully");
-
+            try
+            {
+                var result = await _usrInfoService.UpdateUserAsync(usrId, request, cancellationToken);
+                return Ok(result, "User information updated successfully");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating user: {UsrId}", usrId);
+                throw;
+            }
         }
 
         /// <summary>
         /// Delete user information
         /// </summary>
-        /// <param name="usrId">User ID to delete</param>
-        /// <returns>Deletion result</returns>
         [HttpDelete("{usrId}")]
         [MapToApiVersion("1.0")]
         [Authorize(Policy = "ManageUsers")]
         [ProducesResponseType(typeof(ApiResponse<bool>), 200)]
         [ProducesResponseType(typeof(ApiResponse<object>), 400)]
         [ProducesResponseType(typeof(ApiResponse<object>), 404)]
-        public async Task<ActionResult<ApiResponse<bool>>> DeleteUsrInfo(string usrId)
+        public async Task<ActionResult<ApiResponse<bool>>> DeleteUsrInfo(
+            [Required][StringLength(50, MinimumLength = 1)] string usrId,
+            CancellationToken cancellationToken = default)
         {
-
             if (string.IsNullOrWhiteSpace(usrId))
             {
                 return BadRequest<bool>("User ID is required");
@@ -185,54 +264,69 @@ namespace SimRMS.WebAPI.Controllers.V1
 
             _logger.LogInformation("Deleting UsrInfo: {UsrId}", usrId);
 
-            var result = await _mediator.Send(new DeleteUsrInfoCommand { UsrId = usrId });
-            return Ok(result, "User information deleted successfully");
-
-
+            try
+            {
+                var result = await _usrInfoService.DeleteUserAsync(usrId, cancellationToken);
+                return Ok(result, "User information deleted successfully");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting user: {UsrId}", usrId);
+                throw;
+            }
         }
 
         /// <summary>
-        /// Check if user exists (HEAD request for existence check)
+        /// Check if user exists (HEAD request)
         /// </summary>
-        /// <param name="usrId">User ID to check</param>
-        /// <returns>200 if exists, 404 if not found</returns>
         [HttpHead("{usrId}")]
         [MapToApiVersion("1.0")]
         [Authorize(Policy = "ViewUsers")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult> CheckUsrInfoExists(string usrId)
+        public async Task<ActionResult> CheckUsrInfoExists(
+            [Required][StringLength(50, MinimumLength = 1)] string usrId,
+            CancellationToken cancellationToken = default)
         {
-
             if (string.IsNullOrWhiteSpace(usrId))
             {
                 return BadRequest();
             }
 
-            var query = new GetUsrInfoByIdQuery { UsrId = usrId };
-           var user = await _mediator.Send(query);
-
-            return Ok();
-
+            try
+            {
+                var exists = await _usrInfoService.UserExistsAsync(usrId, cancellationToken);
+                return exists ? Ok() : NotFound();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error checking if user exists: {UsrId}", usrId);
+                return StatusCode(500);
+            }
         }
 
         /// <summary>
         /// Get user information statistics
         /// </summary>
-        /// <returns>User information statistics</returns>
         [HttpGet("statistics")]
         [MapToApiVersion("2.0")]
         [Authorize(Policy = "ViewUsers")]
         [ProducesResponseType(typeof(ApiResponse<UserStatisticsDto>), 200)]
-        public async Task<ActionResult<ApiResponse<UserStatisticsDto>>> GetUsrInfoStatistics()
+        public async Task<ActionResult<ApiResponse<UserStatisticsDto>>> GetUsrInfoStatistics(
+            CancellationToken cancellationToken = default)
         {
             _logger.LogInformation("Getting UsrInfo statistics");
 
-            // Use the dedicated statistics query instead of loading all users
-            var statistics = await _mediator.Send(new GetUsrInfoStatisticsQuery());
-
-            return Ok(statistics, "Statistics retrieved successfully");
+            try
+            {
+                var statistics = await _usrInfoService.GetUserStatisticsAsync(cancellationToken);
+                return Ok(statistics, "Statistics retrieved successfully");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting user statistics");
+                throw;
+            }
         }
     }
 }
-

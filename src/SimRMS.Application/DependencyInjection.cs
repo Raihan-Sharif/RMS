@@ -1,29 +1,30 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using SimRMS.Application.Models.Requests;
+using SimRMS.Application.Validators;
 using System.Reflection;
-using MediatR;
-using SimRMS.Application.Common.Behaviors;
 
 namespace SimRMS.Application
 {
+    /// <summary>
+    /// Dependency injection configuration for Application layer
+    /// ✅ FIXED: Using single validator with working validation context
+    /// </summary>
     public static class DependencyInjection
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             var assembly = Assembly.GetExecutingAssembly();
 
-            // AutoMapper
+            // AutoMapper for entity/DTO mapping
             services.AddAutoMapper(assembly);
 
-            // FluentValidation
-            services.AddValidatorsFromAssembly(assembly);
+            // ✅ FIXED: Register single validator that handles both Create and Update
+            services.AddScoped<IValidator<UsrInfoRequest>, UsrInfoRequestValidator>();
 
-            // MediatR with behaviors
-            services.AddMediatR(cfg =>
-            {
-                cfg.RegisterServicesFromAssembly(assembly);
-                cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-            });
+            // Register other validators from assembly (general approach)
+            services.AddValidatorsFromAssembly(assembly, includeInternalTypes: false, filter: result =>
+                result.ValidatorType != typeof(UsrInfoRequestValidator)); // Avoid duplicate registration
 
             return services;
         }
