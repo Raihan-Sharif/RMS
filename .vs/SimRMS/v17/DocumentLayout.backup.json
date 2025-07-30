@@ -7,12 +7,60 @@
       "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\SimRMS.Infrastructure\\SimRMS.Infrastructure.csproj|solutionrelative:src\\simrms.infrastructure\\services\\usrinfoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\SimRMS.Infrastructure\\SimRMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.infrastructure\\common\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\SimRMS.Infrastructure\\SimRMS.Infrastructure.csproj|solutionrelative:src\\simrms.infrastructure\\common\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\SimRMS.Domain\\SimRMS.Domain.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.domain\\interfaces\\common\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\SimRMS.Domain\\SimRMS.Domain.csproj|solutionrelative:src\\simrms.domain\\interfaces\\common\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\SimRMS.Application\\SimRMS.Application.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\SimRMS.Application\\SimRMS.Application.csproj|solutionrelative:src\\simrms.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\SimRMS.Application\\SimRMS.Application.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.application\\validators\\usrinforequestvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\SimRMS.Application\\SimRMS.Application.csproj|solutionrelative:src\\simrms.application\\validators\\usrinforequestvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\SimRMS.Domain\\SimRMS.Domain.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.domain\\exceptions\\validationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\SimRMS.Domain\\SimRMS.Domain.csproj|solutionrelative:src\\simrms.domain\\exceptions\\validationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\SimRMS.Domain\\SimRMS.Domain.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.domain\\exceptions\\domainexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\SimRMS.Domain\\SimRMS.Domain.csproj|solutionrelative:src\\simrms.domain\\exceptions\\domainexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\SimRMS.WebAPI\\SimRMS.WebAPI.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\SimRMS.WebAPI\\SimRMS.WebAPI.csproj|solutionrelative:src\\simrms.webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\SimRMS.WebAPI\\SimRMS.WebAPI.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\SimRMS.WebAPI\\SimRMS.WebAPI.csproj|solutionrelative:src\\simrms.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\SimRMS.Infrastructure\\SimRMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.infrastructure\\simrms.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\SimRMS.Infrastructure\\SimRMS.Infrastructure.csproj|solutionrelative:src\\simrms.infrastructure\\simrms.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\SimRMS.Infrastructure\\SimRMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\SimRMS.Infrastructure\\SimRMS.Infrastructure.csproj|solutionrelative:src\\simrms.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\SimRMS.WebAPI\\SimRMS.WebAPI.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.webapi\\controllers\\v1\\usrinfocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\SimRMS.WebAPI\\SimRMS.WebAPI.csproj|solutionrelative:src\\simrms.webapi\\controllers\\v1\\usrinfocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\SimRMS.Application\\SimRMS.Application.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.application\\interfaces\\services\\iusrinfoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\SimRMS.Application\\SimRMS.Application.csproj|solutionrelative:src\\simrms.application\\interfaces\\services\\iusrinfoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\SimRMS.Domain\\SimRMS.Domain.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.domain\\interfaces\\common\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\SimRMS.Domain\\SimRMS.Domain.csproj|solutionrelative:src\\simrms.domain\\interfaces\\common\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\SimRMS.Application\\SimRMS.Application.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.application\\simrms.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\SimRMS.Application\\SimRMS.Application.csproj|solutionrelative:src\\simrms.application\\simrms.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\SimRMS.Infrastructure\\SimRMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.infrastructure\\common\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,26 +71,6 @@
       "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\SimRMS.Application\\SimRMS.Application.csproj|solutionrelative:src\\simrms.application\\models\\requests\\getusersquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\SimRMS.WebAPI\\SimRMS.WebAPI.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\SimRMS.WebAPI\\SimRMS.WebAPI.csproj|solutionrelative:src\\simrms.webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\SimRMS.Domain\\SimRMS.Domain.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.domain\\interfaces\\common\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\SimRMS.Domain\\SimRMS.Domain.csproj|solutionrelative:src\\simrms.domain\\interfaces\\common\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\SimRMS.Infrastructure\\SimRMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.infrastructure\\repositories\\usrinforepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\SimRMS.Infrastructure\\SimRMS.Infrastructure.csproj|solutionrelative:src\\simrms.infrastructure\\repositories\\usrinforepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\SimRMS.Infrastructure\\SimRMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\SimRMS.Infrastructure\\SimRMS.Infrastructure.csproj|solutionrelative:src\\simrms.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\SimRMS.Application\\SimRMS.Application.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.application\\mappings\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\SimRMS.Application\\SimRMS.Application.csproj|solutionrelative:src\\simrms.application\\mappings\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\SimRMS.Domain\\SimRMS.Domain.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.domain\\entities\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\SimRMS.Domain\\SimRMS.Domain.csproj|solutionrelative:src\\simrms.domain\\entities\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -51,24 +79,8 @@
       "RelativeMoniker": "D:0:0:{98316247-CE00-4161-9713-D2A2D3BF4985}|src\\SimRMS.Domain\\SimRMS.Domain.csproj|solutionrelative:src\\simrms.domain\\simrms.domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\SimRMS.Infrastructure\\SimRMS.Infrastructure.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.infrastructure\\simrms.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{F02A3E58-BB11-480C-A39C-DA81D6F11D1F}|src\\SimRMS.Infrastructure\\SimRMS.Infrastructure.csproj|solutionrelative:src\\simrms.infrastructure\\simrms.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\SimRMS.Application\\SimRMS.Application.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.application\\simrms.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\SimRMS.Application\\SimRMS.Application.csproj|solutionrelative:src\\simrms.application\\simrms.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\SimRMS.WebAPI\\SimRMS.WebAPI.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.webapi\\controllers\\v1\\usrinfocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A6BF31D4-DA02-4F3E-899E-44D23CDA93A6}|src\\SimRMS.WebAPI\\SimRMS.WebAPI.csproj|solutionrelative:src\\simrms.webapi\\controllers\\v1\\usrinfocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\SimRMS.Application\\SimRMS.Application.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.application\\models\\requests\\usrinforequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\SimRMS.Application\\SimRMS.Application.csproj|solutionrelative:src\\simrms.application\\models\\requests\\usrinforequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\SimRMS.Application\\SimRMS.Application.csproj|d:\\projects\\lbsl projects\\simrms\\src\\simrms.application\\interfaces\\services\\iusrinfoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{844D22C6-9119-4D8D-9609-24302879E100}|src\\SimRMS.Application\\SimRMS.Application.csproj|solutionrelative:src\\simrms.application\\interfaces\\services\\iusrinfoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -78,7 +90,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -90,41 +102,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "DependencyInjection.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Infrastructure\\DependencyInjection.cs",
-              "RelativeDocumentMoniker": "src\\SimRMS.Infrastructure\\DependencyInjection.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Infrastructure\\DependencyInjection.cs",
-              "RelativeToolTip": "src\\SimRMS.Infrastructure\\DependencyInjection.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAA1wGEAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "DomainException.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Domain\\Exceptions\\DomainException.cs",
+              "RelativeDocumentMoniker": "src\\SimRMS.Domain\\Exceptions\\DomainException.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Domain\\Exceptions\\DomainException.cs",
+              "RelativeToolTip": "src\\SimRMS.Domain\\Exceptions\\DomainException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T09:15:32.975Z",
+              "WhenOpened": "2025-07-30T11:19:14.879Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "MappingProfile.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\Mappings\\MappingProfile.cs",
-              "RelativeDocumentMoniker": "src\\SimRMS.Application\\Mappings\\MappingProfile.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\Mappings\\MappingProfile.cs",
-              "RelativeToolTip": "src\\SimRMS.Application\\Mappings\\MappingProfile.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAAAJAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "ValidationException.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Domain\\Exceptions\\ValidationException.cs",
+              "RelativeDocumentMoniker": "src\\SimRMS.Domain\\Exceptions\\ValidationException.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Domain\\Exceptions\\ValidationException.cs",
+              "RelativeToolTip": "src\\SimRMS.Domain\\Exceptions\\ValidationException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T09:13:43.714Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UnitOfWork.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Infrastructure\\Common\\UnitOfWork.cs",
-              "RelativeDocumentMoniker": "src\\SimRMS.Infrastructure\\Common\\UnitOfWork.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Infrastructure\\Common\\UnitOfWork.cs",
-              "RelativeToolTip": "src\\SimRMS.Infrastructure\\Common\\UnitOfWork.cs",
-              "ViewState": "AgIAAGsAAAAAAAAAAAA4wIUAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T07:55:52.303Z",
+              "WhenOpened": "2025-07-30T11:19:06.945Z",
               "EditorCaption": ""
             },
             {
@@ -135,54 +134,119 @@
               "RelativeDocumentMoniker": "src\\SimRMS.Infrastructure\\Services\\UsrInfoService.cs",
               "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Infrastructure\\Services\\UsrInfoService.cs",
               "RelativeToolTip": "src\\SimRMS.Infrastructure\\Services\\UsrInfoService.cs",
-              "ViewState": "AgIAAAUBAAAAAAAAAAA3wCIBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEcAAAAAAAAAAIA1wEkAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T09:06:13.087Z",
+              "WhenOpened": "2025-07-30T06:59:31.535Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Infrastructure\\Common\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "src\\SimRMS.Infrastructure\\Common\\GenericRepository.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Infrastructure\\Common\\GenericRepository.cs",
+              "RelativeToolTip": "src\\SimRMS.Infrastructure\\Common\\GenericRepository.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAA0wEkAAACRAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-30T06:57:41.221Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "IGenericRepository.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Domain\\Interfaces\\Common\\IGenericRepository.cs",
+              "RelativeDocumentMoniker": "src\\SimRMS.Domain\\Interfaces\\Common\\IGenericRepository.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Domain\\Interfaces\\Common\\IGenericRepository.cs",
+              "RelativeToolTip": "src\\SimRMS.Domain\\Interfaces\\Common\\IGenericRepository.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAcwBwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-30T06:55:56.776Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "src\\SimRMS.Application\\DependencyInjection.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\DependencyInjection.cs",
+              "RelativeToolTip": "src\\SimRMS.Application\\DependencyInjection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T09:16:04.278Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UsrInfoController.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.WebAPI\\Controllers\\V1\\UsrInfoController.cs",
+              "RelativeDocumentMoniker": "src\\SimRMS.WebAPI\\Controllers\\V1\\UsrInfoController.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.WebAPI\\Controllers\\V1\\UsrInfoController.cs",
+              "RelativeToolTip": "src\\SimRMS.WebAPI\\Controllers\\V1\\UsrInfoController.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAQwJAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T09:11:54.147Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "UsrInfoRequestValidator.cs",
               "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\Validators\\UsrInfoRequestValidator.cs",
               "RelativeDocumentMoniker": "src\\SimRMS.Application\\Validators\\UsrInfoRequestValidator.cs",
               "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\Validators\\UsrInfoRequestValidator.cs",
               "RelativeToolTip": "src\\SimRMS.Application\\Validators\\UsrInfoRequestValidator.cs",
-              "ViewState": "AgIAAOEAAAAAAAAAAAAswNwAAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T09:08:26.229Z",
+              "WhenOpened": "2025-07-30T07:02:19.625Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "SimRMS.Application",
+              "DocumentIndex": 14,
+              "Title": "SimRMS.Application.csproj",
               "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\SimRMS.Application.csproj",
               "RelativeDocumentMoniker": "src\\SimRMS.Application\\SimRMS.Application.csproj",
               "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\SimRMS.Application.csproj",
               "RelativeToolTip": "src\\SimRMS.Application\\SimRMS.Application.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2025-07-29T09:17:56.045Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "GetUsersQuery.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\Models\\Requests\\GetUsersQuery.cs",
-              "RelativeDocumentMoniker": "src\\SimRMS.Application\\Models\\Requests\\GetUsersQuery.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\Models\\Requests\\GetUsersQuery.cs",
-              "RelativeToolTip": "src\\SimRMS.Application\\Models\\Requests\\GetUsersQuery.cs",
-              "ViewState": "AgIAADoAAAAAAAAAAAAswEoAAAAIAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.WebAPI\\Program.cs",
+              "RelativeDocumentMoniker": "src\\SimRMS.WebAPI\\Program.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.WebAPI\\Program.cs",
+              "RelativeToolTip": "src\\SimRMS.WebAPI\\Program.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACkAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T09:13:16.683Z",
+              "WhenOpened": "2025-07-30T08:44:28.928Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "SimRMS.Infrastructure",
+              "DocumentIndex": 7,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.WebAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "src\\SimRMS.WebAPI\\appsettings.json",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.WebAPI\\appsettings.json",
+              "RelativeToolTip": "src\\SimRMS.WebAPI\\appsettings.json",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAwwDMAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-29T09:52:30.941Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "SimRMS.Infrastructure.csproj",
               "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Infrastructure\\SimRMS.Infrastructure.csproj",
               "RelativeDocumentMoniker": "src\\SimRMS.Infrastructure\\SimRMS.Infrastructure.csproj",
               "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Infrastructure\\SimRMS.Infrastructure.csproj",
@@ -194,34 +258,21 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 10,
               "Title": "DependencyInjection.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\DependencyInjection.cs",
-              "RelativeDocumentMoniker": "src\\SimRMS.Application\\DependencyInjection.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\DependencyInjection.cs",
-              "RelativeToolTip": "src\\SimRMS.Application\\DependencyInjection.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAABAAAAAAAAAA==",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Infrastructure\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "src\\SimRMS.Infrastructure\\DependencyInjection.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Infrastructure\\DependencyInjection.cs",
+              "RelativeToolTip": "src\\SimRMS.Infrastructure\\DependencyInjection.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAA2wAsAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T09:16:04.278Z",
+              "WhenOpened": "2025-07-29T09:15:32.975Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.WebAPI\\appsettings.json",
-              "RelativeDocumentMoniker": "src\\SimRMS.WebAPI\\appsettings.json",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.WebAPI\\appsettings.json",
-              "RelativeToolTip": "src\\SimRMS.WebAPI\\appsettings.json",
-              "ViewState": "AgIAACMAAAAAAAAAAAAAAEMAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-29T09:52:30.941Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "SimRMS.Domain",
+              "DocumentIndex": 18,
+              "Title": "SimRMS.Domain.csproj",
               "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Domain\\SimRMS.Domain.csproj",
               "RelativeDocumentMoniker": "src\\SimRMS.Domain\\SimRMS.Domain.csproj",
               "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Domain\\SimRMS.Domain.csproj",
@@ -233,20 +284,57 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 12,
+              "Title": "IUsrInfoService.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\Interfaces\\Services\\IUsrInfoService.cs",
+              "RelativeDocumentMoniker": "src\\SimRMS.Application\\Interfaces\\Services\\IUsrInfoService.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\Interfaces\\Services\\IUsrInfoService.cs",
+              "RelativeToolTip": "src\\SimRMS.Application\\Interfaces\\Services\\IUsrInfoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T07:59:48.177Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "IUnitOfWork.cs",
               "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Domain\\Interfaces\\Common\\IUnitOfWork.cs",
               "RelativeDocumentMoniker": "src\\SimRMS.Domain\\Interfaces\\Common\\IUnitOfWork.cs",
               "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Domain\\Interfaces\\Common\\IUnitOfWork.cs",
               "RelativeToolTip": "src\\SimRMS.Domain\\Interfaces\\Common\\IUnitOfWork.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-29T07:54:14.409Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 16,
+              "Title": "GetUsersQuery.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\Models\\Requests\\GetUsersQuery.cs",
+              "RelativeDocumentMoniker": "src\\SimRMS.Application\\Models\\Requests\\GetUsersQuery.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\Models\\Requests\\GetUsersQuery.cs",
+              "RelativeToolTip": "src\\SimRMS.Application\\Models\\Requests\\GetUsersQuery.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAAAswEoAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T09:13:16.683Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Infrastructure\\Common\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "src\\SimRMS.Infrastructure\\Common\\UnitOfWork.cs",
+              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Infrastructure\\Common\\UnitOfWork.cs",
+              "RelativeToolTip": "src\\SimRMS.Infrastructure\\Common\\UnitOfWork.cs",
+              "ViewState": "AgIAAGsAAAAAAAAAAAA4wIUAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T07:55:52.303Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
               "Title": "BaseEntity.cs",
               "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Domain\\Entities\\BaseEntity.cs",
               "RelativeDocumentMoniker": "src\\SimRMS.Domain\\Entities\\BaseEntity.cs",
@@ -254,38 +342,11 @@
               "RelativeToolTip": "src\\SimRMS.Domain\\Entities\\BaseEntity.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAIBBwBkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T09:20:49.102Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-29T09:20:49.102Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "UsrInfoRepository.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Infrastructure\\Repositories\\UsrInfoRepository.cs",
-              "RelativeDocumentMoniker": "src\\SimRMS.Infrastructure\\Repositories\\UsrInfoRepository.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Infrastructure\\Repositories\\UsrInfoRepository.cs",
-              "RelativeToolTip": "src\\SimRMS.Infrastructure\\Repositories\\UsrInfoRepository.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAA4wAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T09:46:15.817Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "UsrInfoController.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.WebAPI\\Controllers\\V1\\UsrInfoController.cs",
-              "RelativeDocumentMoniker": "src\\SimRMS.WebAPI\\Controllers\\V1\\UsrInfoController.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.WebAPI\\Controllers\\V1\\UsrInfoController.cs",
-              "RelativeToolTip": "src\\SimRMS.WebAPI\\Controllers\\V1\\UsrInfoController.cs",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAiwEsBAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T09:11:54.147Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "UsrInfoRequest.cs",
               "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\Models\\Requests\\UsrInfoRequest.cs",
               "RelativeDocumentMoniker": "src\\SimRMS.Application\\Models\\Requests\\UsrInfoRequest.cs",
@@ -293,21 +354,7 @@
               "RelativeToolTip": "src\\SimRMS.Application\\Models\\Requests\\UsrInfoRequest.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T09:03:56.228Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "IUsrInfoService.cs",
-              "DocumentMoniker": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\Interfaces\\Services\\IUsrInfoService.cs",
-              "RelativeDocumentMoniker": "src\\SimRMS.Application\\Interfaces\\Services\\IUsrInfoService.cs",
-              "ToolTip": "D:\\Projects\\LBSL Projects\\SimRMS\\src\\SimRMS.Application\\Interfaces\\Services\\IUsrInfoService.cs",
-              "RelativeToolTip": "src\\SimRMS.Application\\Interfaces\\Services\\IUsrInfoService.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAA0wBEAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T07:59:48.177Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-29T09:03:56.228Z"
             }
           ]
         }
