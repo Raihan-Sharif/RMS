@@ -43,6 +43,29 @@ namespace SimRMS.WebAPI.Middleware
                     Data = null,
                     TraceId = context.TraceIdentifier
                 },
+                FileSizeExceededException fileSizeEx => new ApiResponse<object>
+                {
+                    Success = false,
+                    Message = fileSizeEx.Message,
+                    Data = null,
+                    Errors = new List<string> { $"Max allowed: {fileSizeEx.MaxAllowedSize:N0} bytes", $"Actual: {fileSizeEx.ActualSize:N0} bytes" },
+                    TraceId = context.TraceIdentifier
+                },
+                InvalidFileTypeException fileTypeEx => new ApiResponse<object>
+                {
+                    Success = false,
+                    Message = fileTypeEx.Message,
+                    Data = null,
+                    Errors = new List<string> { $"File extension: {fileTypeEx.FileExtension}", $"Allowed: {string.Join(", ", fileTypeEx.AllowedExtensions)}" },
+                    TraceId = context.TraceIdentifier
+                },
+                FileOperationException fileOpEx => new ApiResponse<object>
+                {
+                    Success = false,
+                    Message = fileOpEx.Message,
+                    Data = null,
+                    TraceId = context.TraceIdentifier
+                },
                 ValidationException validationEx => new ApiResponse<object>
                 {
                     Success = false,
@@ -107,6 +130,9 @@ namespace SimRMS.WebAPI.Middleware
             context.Response.StatusCode = exception switch
             {
                 NotFoundException => (int)HttpStatusCode.NotFound,
+                FileSizeExceededException => (int)HttpStatusCode.BadRequest,
+                InvalidFileTypeException => (int)HttpStatusCode.BadRequest,
+                FileOperationException => (int)HttpStatusCode.InternalServerError,
                 ValidationException => (int)HttpStatusCode.BadRequest,
                 DomainException => (int)HttpStatusCode.BadRequest,
                 UnauthorizedAccessException => (int)HttpStatusCode.Unauthorized,

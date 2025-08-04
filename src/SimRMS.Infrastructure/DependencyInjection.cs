@@ -41,6 +41,7 @@ namespace SimRMS.Infrastructure
             services.AddScoped<ISecurityService, SecurityService>();
             services.AddScoped<IHandshakeService, HandshakeService>();
             services.AddScoped<ISecurityRouteService, SecurityRouteService>();
+            services.AddScoped<IFileService, FileService>();
 
             // External Services
             services.AddHttpClient<IExternalTokenService, ExternalTokenService>();
