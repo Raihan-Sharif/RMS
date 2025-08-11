@@ -1,5 +1,23 @@
 using SimRMS.Application.Models.DTOs;
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       IFileService Interface
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This interface defines methods for file upload, deletion, retrieval, and management.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+///
+
 namespace SimRMS.Application.Interfaces;
 
 public interface IFileService

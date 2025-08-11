@@ -1,6 +1,24 @@
 ﻿using SimRMS.Shared.Models;
 using System.Data;
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       IGenericRepository Interface
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This interface defines a generic repository pattern with enhanced capabilities for executing SQL queries, stored procedures, and bulk operations.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 namespace SimRMS.Domain.Interfaces.Common;
 
 /// <summary>

@@ -6,6 +6,26 @@ using SimRMS.Domain.Exceptions;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       File Service
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This service manages file uploads, downloads, deletions, and checks for file existence. File can be uploaded with or without replacement, and it supports multiple server configurations loaded from the configuration to manage file in Remote server or local server.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
+
 namespace SimRMS.Infrastructure.Services;
 
 public class FileService : IFileService

@@ -1,4 +1,21 @@
-﻿namespace SimRMS.Shared.Models
+﻿/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Api Response Model
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This class represents the structure of API responses to ensure consistency across the application.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+
+namespace SimRMS.Shared.Models
 {
     public class ApiResponse<T>
     {

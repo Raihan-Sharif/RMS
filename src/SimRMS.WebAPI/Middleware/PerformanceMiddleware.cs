@@ -1,5 +1,22 @@
 ﻿using System.Diagnostics;
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Performance Middleware
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Manage Performance Monitoring for API Requests
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+
 namespace SimRMS.WebAPI.Middleware
 {
     public class PerformanceMiddleware

@@ -4,6 +4,24 @@ using SimRMS.Application.Models.Requests;
 using SimRMS.Application.Validators;
 using System.Reflection;
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Dependency Injection for Application Layer
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This class configures the dependency injection for the application layer.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 namespace SimRMS.Application;
 
 public static class DependencyInjection

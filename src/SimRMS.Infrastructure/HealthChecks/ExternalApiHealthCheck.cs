@@ -1,6 +1,25 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 using SimRMS.Application.Interfaces;
 
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       External API Health Check
+/// Author:      Md. Raihan Sharif
+/// Purpose:     The health check for external API services, specifically for token validation.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 namespace SimRMS.Infrastructure.HealthChecks
 {
     public class ExternalApiHealthCheck : IHealthCheck

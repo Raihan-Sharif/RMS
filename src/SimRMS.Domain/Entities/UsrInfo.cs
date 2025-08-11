@@ -1,5 +1,24 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       UsrInfo Entity
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This class represents the user information entity in the system.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
+
 namespace SimRMS.Domain.Entities
 {
 

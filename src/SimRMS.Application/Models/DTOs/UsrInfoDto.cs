@@ -1,8 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       UsrInfoDto
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This class represents user information data transfer object (DTO) used in the application.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
 
 namespace SimRMS.Application.Models.DTOs
 {

@@ -1,4 +1,22 @@
-﻿namespace SimRMS.Application.Interfaces
+﻿/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       ISecurityRouteService Interface
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This interface defines methods for managing security routes in the application.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+///
+
+namespace SimRMS.Application.Interfaces
 {
     public interface ISecurityRouteService
     {

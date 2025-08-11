@@ -1,7 +1,22 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Logging;
 using SimRMS.Application.Interfaces;
-using SimRMS.Shared.Constants;
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Custom Authorization Handler
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Manage Custom Authorization Logic
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
 
 namespace SimRMS.WebAPI.Security
 {

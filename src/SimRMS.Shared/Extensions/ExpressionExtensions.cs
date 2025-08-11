@@ -1,9 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Expression Extensions
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Facilitate Logical Operations on Expressions for Filtering in LINQ Queries using AND/OR
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
 
 namespace SimRMS.Shared.Extensions
 {

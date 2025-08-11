@@ -2,11 +2,25 @@
 using SimRMS.Application.Interfaces;
 using SimRMS.Shared.Constants;
 using SimRMS.Shared.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Security Service
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This service manages user authentication, authorization, and session management.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
 
 namespace SimRMS.Infrastructure.Services
 {

@@ -4,6 +4,23 @@ using SimRMS.Application.Interfaces;
 using SimRMS.Shared.Constants;
 using System.Text.Json;
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Configuration Service
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This service provides access to application configuration settings for various purposes such as retrieving values, connection strings, and secrets.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+
 namespace SimRMS.Infrastructure.Services
 {
     public class ConfigurationService : IConfigurationService

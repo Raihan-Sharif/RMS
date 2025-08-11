@@ -1,3 +1,20 @@
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Invalid File Type Exception
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This class represents an exception that is thrown when a file type is invalid or not allowed. Keeping the domain model consistent by ensuring that only valid file types are processed.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+
 namespace SimRMS.Domain.Exceptions;
 
 public class InvalidFileTypeException : ValidationException

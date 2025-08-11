@@ -1,4 +1,21 @@
-﻿namespace SimRMS.Domain.Interfaces.Common;
+﻿/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       IUnitOfWork Interface
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This interface defines common transaction operations for UnitOfWork pattern
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+
+namespace SimRMS.Domain.Interfaces.Common;
 
 /// <summary>
 /// Simplified UnitOfWork interface with only common transaction operations

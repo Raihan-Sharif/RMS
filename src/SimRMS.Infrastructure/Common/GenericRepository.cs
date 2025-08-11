@@ -9,6 +9,26 @@ using System.Reflection;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Generic Repository
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Facilitate Common Database Operations with Enhanced Features for SPs and Bulk Operations
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
+
 namespace SimRMS.Infrastructure.Common;
 /// <summary>
 /// Enhanced Generic Repository with SP support and bulk operations

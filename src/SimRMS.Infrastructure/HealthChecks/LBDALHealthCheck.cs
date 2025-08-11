@@ -2,6 +2,25 @@
 using System.Data;
 using LB.DAL.Core.Common;
 
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       LB.DAL Health Check
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This class implements a health check for the LB.DAL database connection.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 namespace SimRMS.Infrastructure.HealthChecks
 {
     /// <summary>

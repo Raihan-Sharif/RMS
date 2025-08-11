@@ -1,8 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Handshake Models
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This class represents the structure of handshake token information used in the application.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 
 namespace SimRMS.Application.Models.Auth
 {

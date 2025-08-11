@@ -1,5 +1,23 @@
 ﻿using System;
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       UsrInfoRequest Model
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This class represents the request model for user information operations.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 namespace SimRMS.Application.Models.Requests
 {
     /// <summary>

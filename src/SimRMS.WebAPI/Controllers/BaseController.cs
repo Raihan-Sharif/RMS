@@ -2,6 +2,24 @@
 using SimRMS.Application.Interfaces;
 using SimRMS.Shared.Models;
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Base Controller
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Facilitate Common Functionality for All Controllers through Inheritance in ASP.NET Core Web API
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 namespace SimRMS.WebAPI.Controllers
 {
     [ApiController]

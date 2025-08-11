@@ -9,6 +9,25 @@ using AspNetCoreRateLimit;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Programm file (Main entry)
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Manage Full Application Startup and Configuration
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure Serilog

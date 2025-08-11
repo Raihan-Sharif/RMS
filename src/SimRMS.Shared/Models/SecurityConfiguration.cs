@@ -1,5 +1,23 @@
 ﻿using Microsoft.Extensions.Logging;
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Security Configuration and Route Matching Service
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This class provides configuration for security settings and uses a service to determine if a request path is allowed based on configured routes and prefixes.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 namespace SimRMS.Shared.Models
 {
     public class SecurityConfiguration

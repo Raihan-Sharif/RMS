@@ -1,8 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       AppConstants
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Fixed Constants for Application Configuration
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
 
 namespace SimRMS.Shared.Constants
 {

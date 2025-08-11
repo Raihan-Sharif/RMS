@@ -1,6 +1,24 @@
 ﻿using SimRMS.Application.Interfaces;
 using System.Security.Claims;
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Current User Service
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Manage Current User Context and Session Validation
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 namespace SimRMS.WebAPI.Services
 {
     public class CurrentUserService : ICurrentUserService

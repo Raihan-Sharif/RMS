@@ -4,6 +4,23 @@ using Microsoft.Extensions.Logging;
 using SimRMS.Domain.Interfaces.Common;
 
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       UnitOfWork
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Manage Unit of Work Pattern for Database Transactions by using lb.DAL.Core.Common
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+
 namespace SimRMS.Infrastructure.Common
 {
     /// <summary>

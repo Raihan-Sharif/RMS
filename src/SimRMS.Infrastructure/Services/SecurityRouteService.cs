@@ -3,6 +3,25 @@ using Microsoft.Extensions.Options;
 using SimRMS.Application.Interfaces;
 using SimRMS.Shared.Models;
 
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Security Route Service
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This service manages security routes and checks if a request path is allowed based on configured routes and prefixes.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 namespace SimRMS.Infrastructure.Services
 {
     public class SecurityRouteService : ISecurityRouteService

@@ -1,5 +1,22 @@
 ﻿using FluentValidation;
-using System.ComponentModel.DataAnnotations;
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       GetUsersQuery
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This class defines a complex query model for retrieving users with various filtering options.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
 
 namespace SimRMS.Application.Models.Requests
 {

@@ -1,8 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Handshake Token Info
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This class represents the information contained in a handshake token used for secure communication between client and server.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
 
 namespace SimRMS.Application.Models.Auth
 {

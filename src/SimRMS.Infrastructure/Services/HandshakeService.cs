@@ -1,10 +1,25 @@
 ﻿using Microsoft.Extensions.Logging;
 using SimRMS.Application.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Handshake Service
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This service manages the handshake process with the external token service.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 
 namespace SimRMS.Infrastructure.Services
 {

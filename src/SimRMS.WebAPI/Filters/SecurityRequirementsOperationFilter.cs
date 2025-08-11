@@ -1,6 +1,25 @@
 ﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Security Requirements Operation Filter
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Manage Security Requirements for API Endpoints
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 namespace SimRMS.WebAPI.Filters
 {
     public class SecurityRequirementsOperationFilter : IOperationFilter

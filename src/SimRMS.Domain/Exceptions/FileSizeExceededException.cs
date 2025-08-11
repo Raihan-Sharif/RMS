@@ -1,3 +1,21 @@
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       File Size Exceeded Exception
+/// Author:      Md. Raihan Sharif
+/// Purpose:     For handling file size validation errors in the domain layer and keeping the domain model consistent.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+
+
 namespace SimRMS.Domain.Exceptions;
 
 public class FileSizeExceededException : ValidationException

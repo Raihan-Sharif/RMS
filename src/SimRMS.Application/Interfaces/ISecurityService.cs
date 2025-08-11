@@ -1,9 +1,23 @@
 ﻿using SimRMS.Shared.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       ISecurity Service Interface
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This interface defines the contract for security-related operations in the application, including handshake, login, and user validation.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
 
 namespace SimRMS.Application.Interfaces
 {

@@ -1,12 +1,27 @@
 ﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SimRMS.Application.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
+
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       External Token Service
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This service handles token generation, validation, and revocation by communicating with an external token service.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 
 namespace SimRMS.Infrastructure.Services
 {

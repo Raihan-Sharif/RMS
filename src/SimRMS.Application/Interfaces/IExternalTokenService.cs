@@ -1,8 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       IExternalTokenService Interface
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This interface defines methods for managing external token operations such as generation, validation, and revocation.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+///
 
 namespace SimRMS.Application.Interfaces
 {

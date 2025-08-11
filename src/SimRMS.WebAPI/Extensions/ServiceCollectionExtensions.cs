@@ -10,6 +10,24 @@ using SimRMS.WebAPI.Services;
 using SimRMS.WebAPI.Filters;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Service Collection Extensions
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Manage Service Collection Extensions for Web API to Register Services in the Dependency Injection Container
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 namespace SimRMS.WebAPI.Extensions
 {
     public static class ServiceCollectionExtensions

@@ -1,8 +1,24 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Base Entity Class
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This class serves as the base for all domain entities, providing common properties and metadata.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
 
 namespace SimRMS.Domain.Entities
 {

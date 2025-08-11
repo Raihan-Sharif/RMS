@@ -1,4 +1,21 @@
-﻿namespace SimRMS.WebAPI.Middleware
+﻿/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Security Headers Middleware
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Manage Security Headers for HTTP Responses
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+
+namespace SimRMS.WebAPI.Middleware
 {
     public class SecurityHeadersMiddleware
     {

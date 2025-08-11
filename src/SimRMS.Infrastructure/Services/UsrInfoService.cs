@@ -9,6 +9,23 @@ using SimRMS.Domain.Interfaces.Common;
 using SimRMS.Shared.Models;
 using ValidationException = SimRMS.Domain.Exceptions.ValidationException;
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       UsrInfo Service
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This service provides optimized methods for managing user information
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+
 namespace SimRMS.Infrastructure.Services;
 
 /// <summary>

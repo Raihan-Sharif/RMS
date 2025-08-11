@@ -4,6 +4,24 @@ using Microsoft.Data.SqlClient;
 using SimRMS.Domain.Exceptions;
 using SimRMS.Shared.Models;
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Exception Handling Middleware
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Manage Global Exception Handling for API to Provide Consistent Error Responses
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 namespace SimRMS.WebAPI.Middleware
 {
     public class ExceptionHandlingMiddleware

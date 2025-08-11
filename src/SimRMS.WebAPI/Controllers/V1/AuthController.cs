@@ -6,6 +6,25 @@ using SimRMS.Application.Models.Auth;
 using SimRMS.Shared.Models;
 using System.Security.Claims;
 
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Authentication Controller
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Manage Authentication Operations for API Clients
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 namespace SimRMS.WebAPI.Controllers.V1
 {
     [Route("api/v{version:apiVersion}/[controller]")] // ONLY versioned route

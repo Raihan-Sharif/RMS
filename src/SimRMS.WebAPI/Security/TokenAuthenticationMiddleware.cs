@@ -4,6 +4,23 @@ using SimRMS.Application.Interfaces;
 using SimRMS.Application.Models.Auth;
 using SimRMS.Shared.Constants;
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Token Authentication Middleware
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Manage Token-Based Authentication and Authorization
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+
 namespace SimRMS.WebAPI.Security
 {
     public class TokenAuthenticationMiddleware

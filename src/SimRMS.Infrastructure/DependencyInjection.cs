@@ -11,6 +11,25 @@ using SimRMS.Infrastructure.BackgroundServices;
 using LB.DAL.Core.Common;
 using SimRMS.Shared.Models;
 
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Dependency Injection Configuration
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This class configures dependency injection for the infrastructure layer of the application.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 namespace SimRMS.Infrastructure
 {
     public static class DependencyInjection

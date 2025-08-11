@@ -1,4 +1,22 @@
-﻿namespace SimRMS.Application.Models.DTOs
+﻿/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       User Statistics DTO
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This class represents the data transfer object for user statistics.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
+namespace SimRMS.Application.Models.DTOs
 {
     public class UserStatisticsDto
     {

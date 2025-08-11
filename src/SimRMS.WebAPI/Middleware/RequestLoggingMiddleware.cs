@@ -1,5 +1,22 @@
 ﻿using System.Diagnostics;
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Request Logging Middleware
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Manage Request Logging for API Calls
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+
 namespace SimRMS.WebAPI.Middleware
 {
     public class RequestLoggingMiddleware

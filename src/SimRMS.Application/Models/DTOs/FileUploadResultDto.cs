@@ -1,3 +1,21 @@
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       File Upload Result DTO
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This class represents the result of a file upload operation, including the file path and any errors encountered.
+/// Creation:    03/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 namespace SimRMS.Application.Models.DTOs;
 
 public class FileUploadResultDto
