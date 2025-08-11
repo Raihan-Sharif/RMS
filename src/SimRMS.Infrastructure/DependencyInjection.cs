@@ -54,6 +54,8 @@ namespace SimRMS.Infrastructure
             // ✅ SIMPLIFIED: Business Services (much fewer lines of code)
             services.AddScoped<IUsrInfoService, UsrInfoService>();
 
+            services.AddScoped<ICompanyExposureService, CompanyExposureService>();
+
             // Application Infrastructure Services
             services.AddScoped<IConfigurationService, ConfigurationService>();
             services.AddScoped<ICacheService, CacheService>();

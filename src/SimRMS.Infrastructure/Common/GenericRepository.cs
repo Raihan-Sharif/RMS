@@ -429,18 +429,38 @@ public class GenericRepository : IGenericRepository
 
         var merged = new Dictionary<string, object>();
 
-        // Add existing parameters
-        var existingProps = existingParams.GetType().GetProperties();
-        foreach (var prop in existingProps)
+        // Handle existing parameters
+        if (existingParams is Dictionary<string, object> existingDict)
         {
-            merged[prop.Name] = prop.GetValue(existingParams) ?? DBNull.Value;
+            foreach (var kvp in existingDict)
+            {
+                merged[kvp.Key] = kvp.Value ?? DBNull.Value;
+            }
+        }
+        else
+        {
+            var existingProps = existingParams.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (var prop in existingProps)
+            {
+                merged[prop.Name] = prop.GetValue(existingParams) ?? DBNull.Value;
+            }
         }
 
-        // Add new parameters (overwrite if duplicate)
-        var newProps = newParams.GetType().GetProperties();
-        foreach (var prop in newProps)
+        // Handle new parameters
+        if (newParams is Dictionary<string, object> newDict)
         {
-            merged[prop.Name] = prop.GetValue(newParams) ?? DBNull.Value;
+            foreach (var kvp in newDict)
+            {
+                merged[kvp.Key] = kvp.Value ?? DBNull.Value;
+            }
+        }
+        else
+        {
+            var newProps = newParams.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (var prop in newProps)
+            {
+                merged[prop.Name] = prop.GetValue(newParams) ?? DBNull.Value;
+            }
         }
 
         return merged;
@@ -486,6 +506,143 @@ public class GenericRepository : IGenericRepository
         }
 
         return dataTable;
+    }
+
+    #endregion
+
+    #region Table Value Parameter Methods
+
+    /// <summary>
+    /// Executes stored procedure with table value parameter support using DataTable
+    /// This is a simplified version that works with your existing LB DAL
+    /// </summary>
+    public async Task<BulkOperationResult> ExecuteBulkStoredProcedureAsync(
+        string storedProcedureName, 
+        DataTable tableValueParameter,
+        string tableParamName,
+        object? additionalParams = null,
+        CancellationToken cancellationToken = default)
+    {
+        _logger.LogDebug("ExecuteBulkStoredProcedure: {StoredProcedureName}, Records: {RecordCount}", 
+            storedProcedureName, tableValueParameter.Rows.Count);
+
+        await _unitOfWork.EnsureConnectionAsync(cancellationToken);
+
+        try
+        {
+            // Create parameters list with table value parameter as DataTable
+            var paramList = new List<LB_DALParam>
+            {
+                new LB_DALParam(tableParamName, tableValueParameter)
+            };
+
+            // Add additional parameters
+            if (additionalParams != null)
+            {
+                var additionalDalParams = ConvertToDalParams(additionalParams);
+                if (additionalDalParams != null)
+                {
+                    paramList.AddRange(additionalDalParams);
+                }
+            }
+
+            // Execute stored procedure - your SP doesn't return a result set, so we use ExecuteNonQuery
+            int rowsAffected = await _dal.LB_ExecuteNonQueryAsync(storedProcedureName, paramList, CommandType.StoredProcedure);
+            
+            return new BulkOperationResult
+            {
+                RowsAffected = rowsAffected,
+                Status = "SUCCESS",
+                Message = $"Successfully processed {rowsAffected} records"
+            };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error executing bulk stored procedure: {StoredProcedureName}", storedProcedureName);
+            return new BulkOperationResult 
+            { 
+                RowsAffected = 0, 
+                Status = "ERROR", 
+                Message = $"Error: {ex.Message}" 
+            };
+        }
+    }
+
+    /// <summary>
+    /// Convert entities to DataTable for table value parameter usage
+    /// </summary>
+    public DataTable ConvertToTableValueParameter<T>(IEnumerable<T> entities) where T : class
+    {
+        var dataTable = new DataTable();
+        
+        if (!entities.Any())
+            return dataTable;
+
+        var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
+            .Where(p => p.CanRead)
+            .ToArray();
+
+        // Create columns based on properties
+        foreach (var prop in properties)
+        {
+            var columnType = GetDataTableColumnType(prop.PropertyType);
+            var column = dataTable.Columns.Add(prop.Name, columnType);
+            
+            // Allow null for nullable types
+            if (IsNullableType(prop.PropertyType))
+            {
+                column.AllowDBNull = true;
+            }
+        }
+
+        // Add rows
+        foreach (var entity in entities)
+        {
+            var row = dataTable.NewRow();
+            
+            foreach (var prop in properties)
+            {
+                var value = prop.GetValue(entity);
+                row[prop.Name] = value ?? DBNull.Value;
+            }
+            
+            dataTable.Rows.Add(row);
+        }
+
+        return dataTable;
+    }
+
+    private Type GetDataTableColumnType(Type propertyType)
+    {
+        // Handle nullable types
+        if (IsNullableType(propertyType))
+        {
+            propertyType = Nullable.GetUnderlyingType(propertyType)!;
+        }
+
+        // Map common types to DataTable compatible types
+        if (propertyType == typeof(string))
+            return typeof(string);
+        if (propertyType == typeof(int))
+            return typeof(int);
+        if (propertyType == typeof(long))
+            return typeof(long);
+        if (propertyType == typeof(decimal))
+            return typeof(decimal);
+        if (propertyType == typeof(bool))
+            return typeof(bool);
+        if (propertyType == typeof(DateTime))
+            return typeof(DateTime);
+        if (propertyType == typeof(byte))
+            return typeof(byte);
+
+        // Default to string for unknown types
+        return typeof(string);
+    }
+
+    private bool IsNullableType(Type type)
+    {
+        return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
     }
 
     #endregion

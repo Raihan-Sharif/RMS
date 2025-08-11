@@ -19,6 +19,7 @@ obj
 
 # Editor directories and files
 .vs/*
+.vs\*
 .vscode/*
 !.vscode/extensions.json
 .idea

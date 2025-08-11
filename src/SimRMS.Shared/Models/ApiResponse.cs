@@ -53,6 +53,35 @@ namespace SimRMS.Shared.Models
         }
     }
 
+    public class ApiResponse
+    {
+        public bool Success { get; set; }
+        public string Message { get; set; } = string.Empty;
+        public List<string> Errors { get; set; } = new();
+        public DateTime Timestamp { get; set; } = DateTime.UtcNow;
+        public string TraceId { get; set; } = string.Empty;
+        public string? Version { get; set; }
+
+        public static ApiResponse SuccessResult(string message = "Success")
+        {
+            return new ApiResponse
+            {
+                Success = true,
+                Message = message
+            };
+        }
+
+        public static ApiResponse Failure(string message, List<string>? errors = null)
+        {
+            return new ApiResponse
+            {
+                Success = false,
+                Message = message,
+                Errors = errors ?? new List<string>()
+            };
+        }
+    }
+
     public class PaginationInfo
     {
         public int TotalCount { get; set; }

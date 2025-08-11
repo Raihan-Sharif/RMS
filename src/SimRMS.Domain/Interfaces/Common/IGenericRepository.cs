@@ -44,5 +44,9 @@ public interface IGenericRepository
     Task<int> BulkInsertAsync<T>(IEnumerable<T> entities, string tableName, CancellationToken cancellationToken = default) where T : class;
     Task<int> BulkInsertDataTableAsync(DataTable dataTable, string tableName, CancellationToken cancellationToken = default);
     Task<int> BulkInsertFromFileAsync<T>(string filePath, string tableName, Func<string[], T> lineMapper, bool hasHeader = true, string delimiter = ",", CancellationToken cancellationToken = default) where T : class;
+
+    // Table Value Parameter methods
+    Task<BulkOperationResult> ExecuteBulkStoredProcedureAsync(string storedProcedureName, DataTable tableValueParameter, string tableParamName, object? additionalParams = null, CancellationToken cancellationToken = default);
+    DataTable ConvertToTableValueParameter<T>(IEnumerable<T> entities) where T : class;
 }
 

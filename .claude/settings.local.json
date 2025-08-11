@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(rm:*)",
+      "Bash(dotnet build)",
+      "Bash(del ITableValueParameterRepository.cs)",
+      "Bash(sqlcmd:*)",
+      "Bash(dotnet build:*)"
+    ],
+    "deny": []
+  }
+}
