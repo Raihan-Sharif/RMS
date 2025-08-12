@@ -6,7 +6,12 @@
       "Bash(dotnet build)",
       "Bash(del ITableValueParameterRepository.cs)",
       "Bash(sqlcmd:*)",
-      "Bash(dotnet build:*)"
+      "Bash(dotnet build:*)",
+      "Bash(dotnet clean:*)",
+      "Bash(dotnet run:*)",
+      "Bash(dotnet script:*)",
+      "Bash(taskkill:*)",
+      "Bash(del \"C:\\Users\\raihan.sharif\\Desktop\\RMS\\ValidationTest.cs\")"
     ],
     "deny": []
   }
