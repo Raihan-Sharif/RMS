@@ -1,5 +1,24 @@
 using System.ComponentModel.DataAnnotations;
 
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       MstCompanyWithExposure Entity
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Model representing the combined structure of MstCo and MstCoExps tables
+/// Creation:    11/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 namespace SimRMS.Domain.Entities
 {
     /// <summary>

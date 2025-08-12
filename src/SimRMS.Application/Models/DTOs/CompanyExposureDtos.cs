@@ -1,4 +1,20 @@
-using System.ComponentModel.DataAnnotations;
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Company Exposure DTOs
+/// Author:      Md. Raihan Sharif
+/// Purpose:     This class defines DTOs for company exposure data, combining MstCo and MstCoExps tables.
+/// Creation:    11/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+///
 
 namespace SimRMS.Application.Models.DTOs
 {

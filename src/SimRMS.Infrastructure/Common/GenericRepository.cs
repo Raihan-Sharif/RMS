@@ -20,6 +20,7 @@ using Microsoft.Extensions.Configuration;
 /// ===================================================================
 /// Modification History
 /// Author             Date         Description of Change
+/// Raihan Sharif     11/Aug/2025   Table Value Parameter support added & merged parameters updated
 /// -------------------------------------------------------------------
 /// [Missing]
 /// 

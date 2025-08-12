@@ -8,6 +8,25 @@ using SimRMS.WebAPI.Controllers;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Company Exposure Controller
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Manage Company with Exposure Operations
+/// Creation:    11/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
+
 namespace SimRMS.WebAPI.Controllers.V1
 {
     /// <summary>

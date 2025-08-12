@@ -1,3 +1,21 @@
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Bulk Operation Result Model
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Model for results of bulk operations using table value parameters
+/// Creation:    11/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 namespace SimRMS.Shared.Models
 {
     /// <summary>

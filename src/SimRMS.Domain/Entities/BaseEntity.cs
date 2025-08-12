@@ -13,7 +13,7 @@ using System.ComponentModel.DataAnnotations;
 /// Modification History
 /// Author             Date         Description of Change
 /// -------------------------------------------------------------------
-/// [Missing]
+/// Raihan       12-Aug-2025  Modify the class to include common properties for all entities same as database tables.
 /// 
 /// ===================================================================
 /// </para>
@@ -24,18 +24,30 @@ namespace SimRMS.Domain.Entities
 {
     public abstract class BaseEntity
     {
-        public Guid Id { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-        public string? CreatedBy { get; set; }
-        public string? UpdatedBy { get; set; }
-        public bool IsDeleted { get; set; }
-        public DateTime? DeletedAt { get; set; }
-        public string? DeletedBy { get; set; }
+        public string IPAddress { get; set; } = string.Empty; // varchar(39), not nullable
 
-        [Timestamp]
-        public byte[]? RowVersion { get; set; }
+        public int MakerId { get; set; } // int, not nullable
 
-        
+        public DateTime ActionDt { get; set; } // datetime, not nullable
+
+        public DateTime TransDt { get; set; } // date, not nullable
+
+        public byte ActionType { get; set; } // tinyint, not nullable (1: insert, 2: update, 3: delete)
+
+        public int? AuthId { get; set; } // int, nullable
+
+        public DateTime? AuthDt { get; set; } // datetime, nullable
+
+        public DateTime? AuthTransDt { get; set; } // date, nullable
+
+        public byte IsAuth { get; set; } // tinyint, not nullable (0: Unauth, 1: Auth, 2: Denied)
+
+        public byte AuthLevel { get; set; } // tinyint, not nullable (1: First, 2: Second, 3: Third)
+
+        public byte IsDel { get; set; } // tinyint, not nullable (0: Not Deleted, 1: Deleted)
+
+        public string? Remarks { get; set; } // varchar(200), nullable
     }
+
+
 }

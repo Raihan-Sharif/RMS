@@ -6,6 +6,24 @@ using SimRMS.Domain.Interfaces.Common;
 using SimRMS.Shared.Models;
 using System.Data;
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Company Exposure Service
+/// Author:      Md. Raihan Sharif
+/// Purpose:     Service implementation for Company with Exposure operations
+/// Creation:    11/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+/// 
+
 namespace SimRMS.Infrastructure.Services
 {
     /// <summary>

@@ -12,7 +12,7 @@ using System.Data;
 /// Modification History
 /// Author             Date         Description of Change
 /// -------------------------------------------------------------------
-/// [Missing]
+/// Raihan          11-Aug-2025  Added methods for bulk operations using table value parameters and SQL Bulk Copy.
 /// 
 /// ===================================================================
 /// </para>

@@ -1,5 +1,23 @@
 using System.ComponentModel.DataAnnotations;
 
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Company Exposure Request Models
+/// Author:      Md. Raihan Sharif
+/// Purpose:     These models are used for creating, updating, and upserting company exposure data.
+/// Creation:    11/Aug/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// [Missing]
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+///
+
 namespace SimRMS.Application.Models.Requests
 {
     /// <summary>
