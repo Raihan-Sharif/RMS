@@ -126,8 +126,7 @@ public class MstCoService : IMstCoService
                 IPAddress = GetClientIPAddress(),
                 MakerId = GetCurrentUserId(),
                 TransDt = DateTime.Today,
-                ActionType = (byte)ActionTypeEnum.UPDATE,
-                WFName = WorkflowEnum.MSTCO
+                ActionType = (byte)ActionTypeEnum.UPDATE
             };
 
             var rowsAffected = await _repository.ExecuteAsync(
