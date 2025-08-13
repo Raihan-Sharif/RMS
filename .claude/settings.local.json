@@ -12,7 +12,8 @@
       "Bash(dotnet script:*)",
       "Bash(taskkill:*)",
       "Bash(del \"C:\\Users\\raihan.sharif\\Desktop\\RMS\\ValidationTest.cs\")",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(del \"C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Application\\Validators\\CreateMstCoBrchRequestValidator.cs\")"
     ],
     "deny": []
   }
