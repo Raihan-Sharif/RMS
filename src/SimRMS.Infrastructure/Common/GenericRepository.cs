@@ -121,7 +121,52 @@ public class GenericRepository : IGenericRepository
         var dalParams = ConvertToDalParams(parameters);
         var commandType = isStoredProcedure ? CommandType.StoredProcedure : CommandType.Text;
 
+        // Check if we have any OUTPUT parameters (for backward compatibility, return first OUTPUT param value if exists)
+        if (isStoredProcedure && dalParams != null && HasOutputParameters(parameters))
+        {
+            var result = await ExecuteWithOutputAsync(sqlOrSp, parameters, cancellationToken);
+            return result.OutputValues.FirstOrDefault()?.Value is int intValue ? intValue : result.RowsAffected;
+        }
+
         return await _dal.LB_ExecuteNonQueryAsync(sqlOrSp, dalParams, commandType);
+    }
+
+    /// <summary>
+    /// Execute stored procedure and return both rows affected and OUTPUT parameter values
+    /// </summary>
+    public async Task<ExecuteResult> ExecuteWithOutputAsync(string storedProcedure, object? parameters = null, CancellationToken cancellationToken = default)
+    {
+        _logger.LogDebug("ExecuteWithOutput: {StoredProcedure}", storedProcedure);
+
+        await _unitOfWork.EnsureConnectionAsync(cancellationToken);
+
+        var result = new ExecuteResult();
+        var dalParams = ConvertToDalParamsWithDirection(parameters);
+
+        try
+        {
+            result.RowsAffected = await _dal.LB_ExecuteNonQueryAsync(storedProcedure, dalParams, CommandType.StoredProcedure);
+            
+            // Extract OUTPUT parameter values
+            if (dalParams != null)
+            {
+                foreach (var param in dalParams.Where(p => p.Direction == ParameterDirection.Output || p.Direction == ParameterDirection.InputOutput))
+                {
+                    result.OutputValues.Add(new OutputParameter
+                    {
+                        Name = param.ParameterName.TrimStart('@'),
+                        Value = param.Value == DBNull.Value ? null : param.Value
+                    });
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error executing stored procedure with OUTPUT parameters: {StoredProcedure}", storedProcedure);
+            throw;
+        }
+
+        return result;
     }
 
     public async Task<T> ExecuteScalarAsync<T>(string sqlOrSp, object? parameters = null, bool isStoredProcedure = false, CancellationToken cancellationToken = default)
@@ -646,5 +691,82 @@ public class GenericRepository : IGenericRepository
         return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
     }
 
+    private bool HasOutputParameters(object? parameters)
+    {
+        if (parameters == null) return false;
+
+        var properties = parameters.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        return properties.Any(p => IsOutputParameter(p.Name));
+    }
+
+    private bool IsOutputParameter(string parameterName)
+    {
+        // Common OUTPUT parameter naming patterns
+        var outputPatterns = new[] { "RowsAffected", "StatusCode", "StatusMsg", "TotalCount", "Result", "ReturnValue" };
+        return outputPatterns.Any(pattern => parameterName.Contains(pattern, StringComparison.OrdinalIgnoreCase));
+    }
+
+    private List<LB_DALParam>? ConvertToDalParamsWithDirection(object? parameters)
+    {
+        if (parameters == null) return null;
+
+        var dalParams = new List<LB_DALParam>();
+
+        // Handle anonymous objects and POCOs
+        var properties = parameters.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        foreach (var prop in properties)
+        {
+            var value = prop.GetValue(parameters) ?? DBNull.Value;
+            var param = new LB_DALParam(prop.Name, value);
+            
+            // Set direction based on parameter name patterns
+            if (IsOutputParameter(prop.Name))
+            {
+                param.Direction = ParameterDirection.Output;
+            }
+            else
+            {
+                param.Direction = ParameterDirection.Input;
+            }
+
+            dalParams.Add(param);
+        }
+
+        return dalParams;
+    }
+
     #endregion
+}
+
+/// <summary>
+/// Result class for stored procedures with OUTPUT parameters
+/// </summary>
+public class ExecuteResult
+{
+    public int RowsAffected { get; set; }
+    public List<OutputParameter> OutputValues { get; set; } = new List<OutputParameter>();
+
+    public T? GetOutputValue<T>(string parameterName)
+    {
+        var param = OutputValues.FirstOrDefault(p => p.Name.Equals(parameterName, StringComparison.OrdinalIgnoreCase));
+        if (param?.Value == null) return default(T);
+        
+        try
+        {
+            return (T)Convert.ChangeType(param.Value, typeof(T));
+        }
+        catch
+        {
+            return default(T);
+        }
+    }
+}
+
+/// <summary>
+/// OUTPUT parameter value container
+/// </summary>
+public class OutputParameter
+{
+    public string Name { get; set; } = string.Empty;
+    public object? Value { get; set; }
 }

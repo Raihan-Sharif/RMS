@@ -56,6 +56,7 @@ namespace SimRMS.Infrastructure
 
             services.AddScoped<ICompanyExposureService, CompanyExposureService>();
             services.AddScoped<IMstCoService, MstCoService>();
+            services.AddScoped<IBrokerBranchService, BrokerBranchService>();
 
             // Application Infrastructure Services
             services.AddScoped<IConfigurationService, ConfigurationService>();

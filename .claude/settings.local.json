@@ -11,7 +11,8 @@
       "Bash(dotnet run:*)",
       "Bash(dotnet script:*)",
       "Bash(taskkill:*)",
-      "Bash(del \"C:\\Users\\raihan.sharif\\Desktop\\RMS\\ValidationTest.cs\")"
+      "Bash(del \"C:\\Users\\raihan.sharif\\Desktop\\RMS\\ValidationTest.cs\")",
+      "Bash(mv:*)"
     ],
     "deny": []
   }
