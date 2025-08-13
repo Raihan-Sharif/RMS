@@ -9,6 +9,7 @@ using SimRMS.WebAPI.Security;
 using SimRMS.WebAPI.Services;
 using SimRMS.WebAPI.Filters;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using Microsoft.AspNetCore.Authentication;
 
 /// <summary>
 /// <para>
@@ -96,6 +97,10 @@ namespace SimRMS.WebAPI.Extensions
             });
 
             services.AddScoped<IAuthorizationHandler, CustomAuthorizationHandler>();
+
+            // Add Authentication scheme to prevent "No authenticationScheme was specified" error
+            services.AddAuthentication("Token")
+                .AddScheme<TokenAuthenticationSchemeOptions, TokenAuthenticationSchemeHandler>("Token", options => { });
 
             // Enhanced Swagger ( working base + versioning support)
             AddEnhancedSwagger(services);

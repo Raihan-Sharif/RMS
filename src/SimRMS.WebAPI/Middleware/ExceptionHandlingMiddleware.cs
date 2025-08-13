@@ -3,6 +3,7 @@ using System.Text.Json;
 using Microsoft.Data.SqlClient;
 using SimRMS.Domain.Exceptions;
 using SimRMS.Shared.Models;
+using Microsoft.AspNetCore.Authentication;
 
 /// <summary>
 /// <para>
@@ -44,6 +45,14 @@ namespace SimRMS.WebAPI.Middleware
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Unhandled exception occurred");
+                
+                // Don't handle the exception if the response has already started
+                if (context.Response.HasStarted)
+                {
+                    _logger.LogWarning("Response has already started, cannot modify response");
+                    throw;
+                }
+                
                 await HandleExceptionAsync(context, ex);
             }
         }
@@ -51,6 +60,12 @@ namespace SimRMS.WebAPI.Middleware
         private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = "application/json";
+            
+            // Set proper WWW-Authenticate header for authentication errors
+            if (IsAuthenticationException(exception))
+            {
+                context.Response.Headers["WWW-Authenticate"] = "Bearer";
+            }
 
             var response = exception switch
             {
@@ -99,11 +114,19 @@ namespace SimRMS.WebAPI.Middleware
                     Data = null,
                     TraceId = context.TraceIdentifier
                 },
-                // ADD: More specific error types
+                // ADD: Authentication-specific errors
+                InvalidOperationException invalidOpEx when invalidOpEx.Message.Contains("authenticationScheme") || 
+                                                            invalidOpEx.Message.Contains("DefaultChallengeScheme") => new ApiResponse<object>
+                {
+                    Success = false,
+                    Message = "Authentication required. Please provide a valid authorization token.",
+                    Data = null,
+                    TraceId = context.TraceIdentifier
+                },
                 UnauthorizedAccessException unauthorizedEx => new ApiResponse<object>
                 {
                     Success = false,
-                    Message = "Access denied",
+                    Message = "Access denied. You do not have permission to access this resource.",
                     Data = null,
                     TraceId = context.TraceIdentifier
                 },
@@ -153,7 +176,9 @@ namespace SimRMS.WebAPI.Middleware
                 FileOperationException => (int)HttpStatusCode.InternalServerError,
                 ValidationException => (int)HttpStatusCode.BadRequest,
                 DomainException => (int)HttpStatusCode.BadRequest,
-                UnauthorizedAccessException => (int)HttpStatusCode.Unauthorized,
+                InvalidOperationException invalidOpEx when invalidOpEx.Message.Contains("authenticationScheme") || 
+                                                            invalidOpEx.Message.Contains("DefaultChallengeScheme") => (int)HttpStatusCode.Unauthorized,
+                UnauthorizedAccessException => (int)HttpStatusCode.Forbidden,
                 ArgumentException => (int)HttpStatusCode.BadRequest,
                 TimeoutException => (int)HttpStatusCode.RequestTimeout,
                 HttpRequestException => (int)HttpStatusCode.ServiceUnavailable,
@@ -166,6 +191,17 @@ namespace SimRMS.WebAPI.Middleware
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
             await context.Response.WriteAsync(jsonResponse);
+        }
+        
+        private static bool IsAuthenticationException(Exception exception)
+        {
+            return exception switch
+            {
+                InvalidOperationException invalidOpEx when invalidOpEx.Message.Contains("authenticationScheme") || 
+                                                            invalidOpEx.Message.Contains("DefaultChallengeScheme") => true,
+                UnauthorizedAccessException => true,
+                _ => false
+            };
         }
     }
 }
