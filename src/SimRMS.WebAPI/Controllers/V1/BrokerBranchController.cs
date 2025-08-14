@@ -68,24 +68,16 @@ public class BrokerBranchController : BaseController
         [FromQuery] string? coCode = null,
         CancellationToken cancellationToken = default)
     {
-        try
-        {
-            _logger.LogInformation("Getting MstCoBrch list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+        _logger.LogInformation("Getting MstCoBrch list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
-            var result = await _brokerBranchService.GetMstCoBrchListAsync(
-                pageNumber: pageNumber,
-                pageSize: pageSize,
-                searchTerm: searchTerm,
-                coCode: coCode,
-                cancellationToken: cancellationToken);
+        var result = await _brokerBranchService.GetMstCoBrchListAsync(
+            pageNumber: pageNumber,
+            pageSize: pageSize,
+            searchTerm: searchTerm,
+            coCode: coCode,
+            cancellationToken: cancellationToken);
 
-            return Ok(result, "Market Stock Company Branches retrieved successfully");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error getting MstCoBrch list");
-            return BadRequest<IEnumerable<MstCoBrchDto>>("Failed to retrieve Market Stock Company Branches");
-        }
+        return Ok(result, "Market Stock Company Branches retrieved successfully");
     }
 
     /// <summary>
@@ -105,29 +97,16 @@ public class BrokerBranchController : BaseController
         [FromRoute, Required, MaxLength(6)] string coBrchCode,
         CancellationToken cancellationToken = default)
     {
-        try
-        {
-            _logger.LogInformation("Getting MstCoBrch by ID: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+        _logger.LogInformation("Getting MstCoBrch by ID: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
 
-            var branch = await _brokerBranchService.GetMstCoBrchByIdAsync(coCode, coBrchCode, cancellationToken);
+        var branch = await _brokerBranchService.GetMstCoBrchByIdAsync(coCode, coBrchCode, cancellationToken);
 
-            if (branch == null)
-            {
-                return NotFound<MstCoBrchDto>($"Market Stock Company Branch with code '{coCode}-{coBrchCode}' not found");
-            }
+        if (branch == null)
+        {
+            return NotFound<MstCoBrchDto>($"Market Stock Company Branch with code '{coCode}-{coBrchCode}' not found");
+        }
 
-            return Ok(branch, "Market Stock Company Branch retrieved successfully");
-        }
-        catch (ArgumentException ex)
-        {
-            _logger.LogWarning(ex, "Invalid branch code: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
-            return BadRequest<MstCoBrchDto>(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error getting MstCoBrch by ID: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
-            return BadRequest<MstCoBrchDto>("Failed to retrieve Market Stock Company Branch");
-        }
+        return Ok(branch, "Market Stock Company Branch retrieved successfully");
     }
 
     /// <summary>
@@ -145,43 +124,19 @@ public class BrokerBranchController : BaseController
         [FromBody, Required] CreateMstCoBrchRequest request,
         CancellationToken cancellationToken = default)
     {
-        try
-        {
-            _logger.LogInformation("Creating MstCoBrch: {CoCode}-{CoBrchCode}", request.CoCode, request.CoBrchCode);
+        _logger.LogInformation("Creating MstCoBrch: {CoCode}-{CoBrchCode}", request.CoCode, request.CoBrchCode);
 
-            var createdBranch = await _brokerBranchService.CreateMstCoBrchAsync(request, cancellationToken);
+        var createdBranch = await _brokerBranchService.CreateMstCoBrchAsync(request, cancellationToken);
 
-            return CreatedAtAction(
-                nameof(GetMstCoBrchById),
-                new { coCode = createdBranch.CoCode, coBrchCode = createdBranch.CoBrchCode },
-                new ApiResponse<MstCoBrchDto>
-                {
-                    Success = true,
-                    Data = createdBranch,
-                    Message = "Market Stock Company Branch created successfully"
-                });
-        }
-        catch (ArgumentNullException ex)
-        {
-            _logger.LogWarning(ex, "Invalid create request for MstCoBrch");
-            return BadRequest<MstCoBrchDto>(ex.Message);
-        }
-        catch (SimRMS.Domain.Exceptions.ValidationException ex)
-        {
-            _logger.LogWarning(ex, "Validation failed for MstCoBrch creation");
-            var errors = ex.ValidationErrors?.Select(e => e.ErrorMessage).ToList();
-            return BadRequest<MstCoBrchDto>("Validation failed", errors);
-        }
-        catch (SimRMS.Domain.Exceptions.DomainException ex)
-        {
-            _logger.LogWarning(ex, "Business rule violation for MstCoBrch creation");
-            return BadRequest<MstCoBrchDto>(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error creating MstCoBrch: {CoCode}-{CoBrchCode}", request.CoCode, request.CoBrchCode);
-            return BadRequest<MstCoBrchDto>("Failed to create Market Stock Company Branch");
-        }
+        return CreatedAtAction(
+            nameof(GetMstCoBrchById),
+            new { coCode = createdBranch.CoCode, coBrchCode = createdBranch.CoBrchCode },
+            new ApiResponse<MstCoBrchDto>
+            {
+                Success = true,
+                Data = createdBranch,
+                Message = "Market Stock Company Branch created successfully"
+            });
     }
 
     /// <summary>
@@ -203,43 +158,14 @@ public class BrokerBranchController : BaseController
         [FromBody, Required] UpdateMstCoBrchRequest request,
         CancellationToken cancellationToken = default)
     {
-        try
-        {
-            _logger.LogInformation("Updating MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+        _logger.LogInformation("Updating MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
 
-            request.CoCode = coCode;
-            request.CoBrchCode = coBrchCode;
+        request.CoCode = coCode;
+        request.CoBrchCode = coBrchCode;
 
-            var updatedBranch = await _brokerBranchService.UpdateMstCoBrchAsync(coCode, coBrchCode, request, cancellationToken);
+        var updatedBranch = await _brokerBranchService.UpdateMstCoBrchAsync(coCode, coBrchCode, request, cancellationToken);
 
-            return Ok(updatedBranch, "Market Stock Company Branch updated successfully");
-        }
-        catch (ArgumentException ex)
-        {
-            _logger.LogWarning(ex, "Invalid update request for MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
-            return BadRequest<MstCoBrchDto>(ex.Message);
-        }
-        catch (SimRMS.Domain.Exceptions.ValidationException ex)
-        {
-            _logger.LogWarning(ex, "Validation failed for MstCoBrch update: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
-            var errors = ex.ValidationErrors?.Select(e => e.ErrorMessage).ToList();
-            return BadRequest<MstCoBrchDto>("Validation failed", errors);
-        }
-        catch (SimRMS.Domain.Exceptions.NotFoundException ex)
-        {
-            _logger.LogWarning(ex, "MstCoBrch not found: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
-            return NotFound<MstCoBrchDto>(ex.Message);
-        }
-        catch (SimRMS.Domain.Exceptions.DomainException ex)
-        {
-            _logger.LogWarning(ex, "Business rule violation for MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
-            return BadRequest<MstCoBrchDto>(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error updating MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
-            return BadRequest<MstCoBrchDto>("Failed to update Market Stock Company Branch");
-        }
+        return Ok(updatedBranch, "Market Stock Company Branch updated successfully");
     }
 
     /// <summary>
@@ -261,44 +187,20 @@ public class BrokerBranchController : BaseController
         [FromBody] DeleteMstCoBrchRequest? request = null,
         CancellationToken cancellationToken = default)
     {
-        try
-        {
-            _logger.LogInformation("Deleting MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+        _logger.LogInformation("Deleting MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
 
-            request ??= new DeleteMstCoBrchRequest { CoCode = coCode, CoBrchCode = coBrchCode };
-            request.CoCode = coCode;
-            request.CoBrchCode = coBrchCode;
+        request ??= new DeleteMstCoBrchRequest { CoCode = coCode, CoBrchCode = coBrchCode };
+        request.CoCode = coCode;
+        request.CoBrchCode = coBrchCode;
 
-            var result = await _brokerBranchService.DeleteMstCoBrchAsync(coCode, coBrchCode, request, cancellationToken);
+        var result = await _brokerBranchService.DeleteMstCoBrchAsync(coCode, coBrchCode, request, cancellationToken);
 
-            if (!result)
-            {
-                return BadRequest<object>("Failed to delete Market Stock Company Branch");
-            }
-
-            return Ok(new object(), "Market Stock Company Branch deleted successfully");
-        }
-        catch (ArgumentException ex)
+        if (!result)
         {
-            _logger.LogWarning(ex, "Invalid delete request for MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
-            return BadRequest<object>(ex.Message);
-        }
-        catch (SimRMS.Domain.Exceptions.ValidationException ex)
-        {
-            _logger.LogWarning(ex, "Validation failed for MstCoBrch deletion: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
-            var errors = ex.ValidationErrors?.Select(e => e.ErrorMessage).ToList();
-            return BadRequest<object>("Validation failed", errors);
-        }
-        catch (SimRMS.Domain.Exceptions.NotFoundException ex)
-        {
-            _logger.LogWarning(ex, "MstCoBrch not found: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
-            return NotFound<object>(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error deleting MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
             return BadRequest<object>("Failed to delete Market Stock Company Branch");
         }
+
+        return Ok(new object(), "Market Stock Company Branch deleted successfully");
     }
 
     /// <summary>
@@ -317,16 +219,8 @@ public class BrokerBranchController : BaseController
         [FromRoute, Required, MaxLength(6)] string coBrchCode,
         CancellationToken cancellationToken = default)
     {
-        try
-        {
-            var exists = await _brokerBranchService.MstCoBrchExistsAsync(coCode, coBrchCode, cancellationToken);
-            
-            return exists ? Ok() : NotFound();
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error checking MstCoBrch existence: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
-            return BadRequest();
-        }
+        var exists = await _brokerBranchService.MstCoBrchExistsAsync(coCode, coBrchCode, cancellationToken);
+        
+        return exists ? Ok() : NotFound();
     }
 }

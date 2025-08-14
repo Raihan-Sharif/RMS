@@ -164,11 +164,61 @@ public class DeleteEntityRequestValidator : AbstractValidator<DeleteEntityReques
 - ❌ Don't duplicate validation logic
 
 #### Error Handling
-- ✅ Use domain-specific exceptions
-- ✅ Let middleware handle error responses
+- ✅ Use domain-specific exceptions (`ValidationException`, `DomainException`, `NotFoundException`)
+- ✅ Let middleware handle error responses - **NEVER** catch exceptions in controllers
+- ✅ Throw exceptions from services, let them bubble up to middleware
 - ✅ Provide clear, user-friendly error messages
+- ✅ Log exceptions at service layer with proper context
+- ✅ Re-throw domain exceptions as-is in catch blocks: `catch (DomainException) { throw; }`
+- ❌ **NEVER** catch exceptions in controllers and return `BadRequest()`
 - ❌ Don't catch and rethrow without adding value
 - ❌ Don't expose internal error details
+- ❌ Don't return false success responses when exceptions occur
+
+#### Exception Flow Pattern
+```csharp
+// ✅ CORRECT - Service throws domain exceptions
+public async Task<Entity> GetEntityAsync(int id)
+{
+    try 
+    {
+        return await _repository.GetAsync(id);
+    }
+    catch (ArgumentException ex)
+    {
+        _logger.LogError(ex, "Invalid arguments for entity retrieval");
+        throw new ValidationException($"Invalid parameters: {ex.Message}");
+    }
+    catch (Exception ex)
+    {
+        _logger.LogError(ex, "Error getting entity");
+        throw new DomainException($"Failed to retrieve entity: {ex.Message}");
+    }
+}
+
+// ✅ CORRECT - Controller lets exceptions bubble up
+[HttpGet("{id}")]
+public async Task<ActionResult<Entity>> GetEntity(int id)
+{
+    var entity = await _service.GetEntityAsync(id);
+    return Ok(entity);
+}
+
+// ❌ WRONG - Controller catches and masks exceptions
+[HttpGet("{id}")]
+public async Task<ActionResult<Entity>> GetEntity(int id)
+{
+    try 
+    {
+        var entity = await _service.GetEntityAsync(id);
+        return Ok(entity);
+    }
+    catch (Exception ex)
+    {
+        return BadRequest("Failed to get entity"); // DON'T DO THIS
+    }
+}
+```
 
 ## Authentication & Security
 
@@ -272,7 +322,9 @@ When working on SimRMS:
 5. **Use stored procedures exclusively** for database operations
 6. **Keep services focused** on single business areas
 7. **Maintain clean architecture** boundaries
-8. **Test thoroughly** after any changes
-9. **Update this file** when introducing new patterns or rules
+8. **NEVER catch exceptions in controllers** - let them bubble up to middleware
+9. **Always throw domain exceptions from services** - never return false success responses
+10. **Test thoroughly** after any changes
+11. **Update this file** when introducing new patterns or rules
 
 Remember: **Simplicity and consistency over complexity and innovation.**

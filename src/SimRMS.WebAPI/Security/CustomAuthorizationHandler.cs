@@ -42,35 +42,35 @@ namespace SimRMS.WebAPI.Security
         {
             try
             {
-                var userId = _currentUserService.UserId;
+                var userName = _currentUserService.UserName;
 
-                if (string.IsNullOrEmpty(userId))
+                if (string.IsNullOrEmpty(userName))
                 {
-                    _logger.LogWarning("Authorization failed: User ID is null or empty");
+                    _logger.LogWarning("Authorization failed: User ID is null or Empty");
                     context.Fail();
                     return;
                 }
 
                 // Check if user is active
-                var isActive = await _securityService.IsUserActiveAsync(userId);
+                var isActive = await _securityService.IsUserActiveAsync(userName);
                 if (!isActive)
                 {
-                    _logger.LogWarning("Authorization failed: User {UserId} is not active", userId);
+                    _logger.LogWarning("Authorization failed: User {userName} is not active", userName);
                     context.Fail();
                     return;
                 }
 
                 // Update user activity
-                await _securityService.UpdateUserActivityAsync(userId);
+                await _securityService.UpdateUserActivityAsync(userName);
 
                 // Check specific permission if required
                 if (!string.IsNullOrEmpty(requirement.Permission))
                 {
-                    var hasPermission = await _securityService.HasPermissionAsync(userId, requirement.Permission);
+                    var hasPermission = await _securityService.HasPermissionAsync(userName, requirement.Permission);
                     if (!hasPermission)
                     {
-                        _logger.LogWarning("Authorization failed: User {UserId} does not have permission {Permission}",
-                            userId, requirement.Permission);
+                        _logger.LogWarning("Authorization failed: User {userName} does not have permission {Permission}",
+                            userName, requirement.Permission);
                         context.Fail();
                         return;
                     }
@@ -79,11 +79,11 @@ namespace SimRMS.WebAPI.Security
                 // Check specific role if required
                 if (!string.IsNullOrEmpty(requirement.Role))
                 {
-                    var isInRole = await _securityService.IsInRoleAsync(userId, requirement.Role);
+                    var isInRole = await _securityService.IsInRoleAsync(userName, requirement.Role);
                     if (!isInRole)
                     {
-                        _logger.LogWarning("Authorization failed: User {UserId} is not in role {Role}",
-                            userId, requirement.Role);
+                        _logger.LogWarning("Authorization failed: User {userName} is not in role {Role}",
+                            userName, requirement.Role);
                         context.Fail();
                         return;
                     }

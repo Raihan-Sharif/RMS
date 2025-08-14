@@ -16,11 +16,13 @@
 /// </summary>
 ///
 
+using SimRMS.Shared.Models;
+
 namespace SimRMS.Application.Interfaces
 {
     public interface ICurrentUserService
     {
-        string? UserId { get; }
+        int UserId { get; }
         string? UserName { get; }
         string? Email { get; }
         string? FullName { get; }
@@ -31,5 +33,23 @@ namespace SimRMS.Application.Interfaces
         bool HasPermission(string permission);
         string? GetClaim(string claimType);
         Task<bool> ValidateSessionAsync();
+        
+        /// <summary>
+        /// Get the current user's ID from session (nullable version for backward compatibility)
+        /// </summary>
+        /// <returns>Current user ID or null if not authenticated</returns>
+        int? GetCurrentUserId();
+
+        /// <summary>
+        /// Get the current user session information
+        /// </summary>
+        /// <returns>User session or null if not authenticated</returns>
+        UserSession? GetCurrentUserSession();
+
+        /// <summary>
+        /// Get the client IP address from the HTTP request
+        /// </summary>
+        /// <returns>Client IP address or fallback IP if not available</returns>
+        string GetClientIPAddress();
     }
 }

@@ -24,15 +24,15 @@ namespace SimRMS.Application.Interfaces
     public interface ISecurityService
     {
         Task<UserSession?> AuthenticateAsync(string username, string password);
-        Task<bool> ValidateUserAsync(string userId);
-        Task<bool> AuthorizeAsync(string userId, string resource, string action);
-        Task<List<string>> GetUserRolesAsync(string userId);
-        Task<List<string>> GetUserPermissionsAsync(string userId);
-        Task<bool> HasPermissionAsync(string userId, string permission);
-        Task<bool> IsInRoleAsync(string userId, string role);
-        Task LogoutAsync(string userId);
-        Task<bool> IsUserActiveAsync(string userId);
-        Task<UserSession?> GetUserSessionAsync(string userId);
-        Task UpdateUserActivityAsync(string userId);
+        Task<bool> ValidateUserAsync(string username);
+        Task<bool> AuthorizeAsync(string username, string resource, string action);
+        Task<List<string>> GetUserRolesAsync(string username);
+        Task<List<string>> GetUserPermissionsAsync(string username);
+        Task<bool> HasPermissionAsync(string username, string permission);
+        Task<bool> IsInRoleAsync(string username, string role);
+        Task LogoutAsync(string username);
+        Task<bool> IsUserActiveAsync(string username);
+        Task<UserSession?> GetUserSessionAsync(string username);
+        Task UpdateUserActivityAsync(string username);
     }
 }

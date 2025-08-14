@@ -89,14 +89,15 @@ namespace SimRMS.WebAPI.Security
 
                     if (isValidToken)
                     {
-                        var userId = ExtractUserIdFromToken(userToken) ?? "UNKNOWN";
-                        var userSession = await securityService.GetUserSessionAsync(userId);
+                        var userName = ExtractUserNameFromToken(userToken) ?? "UNKNOWN";
+                        var userSession = await securityService.GetUserSessionAsync(userName);
 
                         if (userSession != null && userSession.IsActive)
                         {
                             var claimsIdentity = new ClaimsIdentity(new[]
                             {
-                                new Claim(ClaimTypes.NameIdentifier, userId),
+                                new Claim(ClaimTypes.NameIdentifier, userName),
+                                new Claim(ClaimTypes.Sid, userSession.UserId.ToString()),
                                 new Claim(ClaimTypes.Name, userSession.UserName),
                                 new Claim(ClaimTypes.Email, userSession.Email),
                                 new Claim("FullName", userSession.FullName),
@@ -120,9 +121,9 @@ namespace SimRMS.WebAPI.Security
                             context.User = principal;
 
                             // Update user activity
-                            await securityService.UpdateUserActivityAsync(userId);
+                            await securityService.UpdateUserActivityAsync(userName);
 
-                            _logger.LogDebug("User {UserId} authenticated successfully for route: {Path}", userId, context.Request.Path);
+                            _logger.LogDebug("User {userName} authenticated successfully for route: {Path}", userName, context.Request.Path);
                         }
                         else
                         {
@@ -160,7 +161,7 @@ namespace SimRMS.WebAPI.Security
             return null;
         }
 
-        private string? ExtractUserIdFromToken(string token)
+        private string? ExtractUserNameFromToken(string token)
         {
             try
             {

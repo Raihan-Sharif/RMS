@@ -68,11 +68,11 @@ namespace SimRMS.Infrastructure.Services
                     };
 
                     // Cache user session
-                    var cacheKey = $"{AppConstants.UserSessionCacheKey}{authResult.UserId}";
+                    var cacheKey = $"{AppConstants.UserSessionCacheKey}{authResult.UserName}";
                     await _cacheService.SetAsync(cacheKey, userSession, TimeSpan.FromHours(8));
 
                     // Cache user permissions
-                    var permissionsCacheKey = $"{AppConstants.PermissionsCacheKey}{authResult.UserId}";
+                    var permissionsCacheKey = $"{AppConstants.PermissionsCacheKey}{authResult.UserName}";
                     await _cacheService.SetAsync(permissionsCacheKey, authResult.Permissions, TimeSpan.FromHours(8));
 
                     return userSession;
@@ -87,11 +87,11 @@ namespace SimRMS.Infrastructure.Services
             }
         }
 
-        public async Task<bool> ValidateUserAsync(string userId)
+        public async Task<bool> ValidateUserAsync(string userName)
         {
             try
             {
-                var cacheKey = $"{AppConstants.UserSessionCacheKey}{userId}";
+                var cacheKey = $"{AppConstants.UserSessionCacheKey}{userName}";
                 var userSession = await _cacheService.GetAsync<UserSession>(cacheKey);
 
                 if (userSession != null && userSession.IsActive)
@@ -104,23 +104,23 @@ namespace SimRMS.Infrastructure.Services
 
                 // Call security DLL to validate user
                 // var isValid = await _securityProvider.ValidateUserAsync(userId);
-                var isValid = SimulateUserValidation(userId);
+                var isValid = SimulateUserValidation(userName);
 
                 return isValid;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "User validation failed for user {UserId}", userId);
+                _logger.LogError(ex, "User validation failed for user {userName}", userName);
                 return false;
             }
         }
 
-        public async Task<bool> AuthorizeAsync(string userId, string resource, string action)
+        public async Task<bool> AuthorizeAsync(string userName, string resource, string action)
         {
             try
             {
                 // Check cache first
-                var cacheKey = $"{AppConstants.PermissionsCacheKey}{userId}";
+                var cacheKey = $"{AppConstants.PermissionsCacheKey}{userName}";
                 var permissions = await _cacheService.GetAsync<List<string>>(cacheKey);
 
                 if (permissions != null)
@@ -131,23 +131,23 @@ namespace SimRMS.Infrastructure.Services
 
                 // Call security DLL for authorization
                 // var isAuthorized = await _securityProvider.AuthorizeAsync(userId, resource, action);
-                var isAuthorized = SimulateAuthorization(userId, resource, action);
+                var isAuthorized = SimulateAuthorization(userName, resource, action);
 
                 return isAuthorized;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Authorization failed for user {UserId}, resource {Resource}, action {Action}",
-                    userId, resource, action);
+                _logger.LogError(ex, "Authorization failed for user {UserName}, resource {Resource}, action {Action}",
+                    userName, resource, action);
                 return false;
             }
         }
 
-        public async Task<List<string>> GetUserRolesAsync(string userId)
+        public async Task<List<string>> GetUserRolesAsync(string userName)
         {
             try
             {
-                var cacheKey = $"{AppConstants.UserSessionCacheKey}{userId}";
+                var cacheKey = $"{AppConstants.UserSessionCacheKey}{userName}";
                 var userSession = await _cacheService.GetAsync<UserSession>(cacheKey);
 
                 if (userSession != null)
@@ -155,22 +155,22 @@ namespace SimRMS.Infrastructure.Services
 
                 // Call security DLL
                 // var roles = await _securityProvider.GetUserRolesAsync(userId);
-                var roles = SimulateGetUserRoles(userId);
+                var roles = SimulateGetUserRoles(userName);
 
                 return roles;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed to get user roles for user {UserId}", userId);
+                _logger.LogError(ex, "Failed to get user roles for user {UserName}", userName);
                 return new List<string>();
             }
         }
 
-        public async Task<List<string>> GetUserPermissionsAsync(string userId)
+        public async Task<List<string>> GetUserPermissionsAsync(string userName)
         {
             try
             {
-                var cacheKey = $"{AppConstants.PermissionsCacheKey}{userId}";
+                var cacheKey = $"{AppConstants.PermissionsCacheKey}{userName}";
                 var permissions = await _cacheService.GetAsync<List<string>>(cacheKey);
 
                 if (permissions != null)
@@ -178,7 +178,7 @@ namespace SimRMS.Infrastructure.Services
 
                 // Call security DLL
                 // var permissions = await _securityProvider.GetUserPermissionsAsync(userId);
-                permissions = SimulateGetUserPermissions(userId);
+                permissions = SimulateGetUserPermissions(userName);
 
                 // Cache the permissions
                 await _cacheService.SetAsync(cacheKey, permissions, TimeSpan.FromHours(8));
@@ -187,29 +187,29 @@ namespace SimRMS.Infrastructure.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed to get user permissions for user {UserId}", userId);
+                _logger.LogError(ex, "Failed to get user permissions for user {UserName}", userName);
                 return new List<string>();
             }
         }
 
-        public async Task<bool> HasPermissionAsync(string userId, string permission)
+        public async Task<bool> HasPermissionAsync(string userName, string permission)
         {
-            var permissions = await GetUserPermissionsAsync(userId);
+            var permissions = await GetUserPermissionsAsync(userName);
             return permissions.Contains(permission);
         }
 
-        public async Task<bool> IsInRoleAsync(string userId, string role)
+        public async Task<bool> IsInRoleAsync(string userName, string role)
         {
-            var roles = await GetUserRolesAsync(userId);
+            var roles = await GetUserRolesAsync(userName);
             return roles.Contains(role);
         }
 
-        public async Task LogoutAsync(string userId)
+        public async Task LogoutAsync(string userName)
         {
             try
             {
-                var sessionCacheKey = $"{AppConstants.UserSessionCacheKey}{userId}";
-                var permissionsCacheKey = $"{AppConstants.PermissionsCacheKey}{userId}";
+                var sessionCacheKey = $"{AppConstants.UserSessionCacheKey}{userName}";
+                var permissionsCacheKey = $"{AppConstants.PermissionsCacheKey}{userName}";
 
                 await _cacheService.RemoveAsync(sessionCacheKey);
                 await _cacheService.RemoveAsync(permissionsCacheKey);
@@ -217,33 +217,33 @@ namespace SimRMS.Infrastructure.Services
                 // Call upcoming security DLL logout
                 // await _securityProvider.LogoutAsync(userId);
 
-                _logger.LogInformation("User {UserId} logged out", userId);
+                _logger.LogInformation("User {UserName} logged out", userName);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Logout failed for user {UserId}", userId);
+                _logger.LogError(ex, "Logout failed for user {UserName}", userName);
             }
         }
 
-        public async Task<bool> IsUserActiveAsync(string userId)
+        public async Task<bool> IsUserActiveAsync(string userName)
         {
-            var userSession = await GetUserSessionAsync(userId);
+            var userSession = await GetUserSessionAsync(userName);
             return userSession?.IsActive ?? false;
         }
 
-        public async Task<UserSession?> GetUserSessionAsync(string userId)
+        public async Task<UserSession?> GetUserSessionAsync(string userName)
         {
-            var cacheKey = $"{AppConstants.UserSessionCacheKey}{userId}";
+            var cacheKey = $"{AppConstants.UserSessionCacheKey}{userName}";
             return await _cacheService.GetAsync<UserSession>(cacheKey);
         }
 
-        public async Task UpdateUserActivityAsync(string userId)
+        public async Task UpdateUserActivityAsync(string userName)
         {
-            var userSession = await GetUserSessionAsync(userId);
+            var userSession = await GetUserSessionAsync(userName);
             if (userSession != null)
             {
                 userSession.LastActivity = DateTime.UtcNow;
-                var cacheKey = $"{AppConstants.UserSessionCacheKey}{userId}";
+                var cacheKey = $"{AppConstants.UserSessionCacheKey}{userName}";
                 await _cacheService.SetAsync(cacheKey, userSession, TimeSpan.FromHours(8));
             }
         }
@@ -257,7 +257,8 @@ namespace SimRMS.Infrastructure.Services
                 return new AuthenticationResult
                 {
                     IsSuccess = true,
-                    UserId = "EFTEST01",
+                    UserId = 1,
+                    UserName = "EFTEST01",
                     Email = "EFTEST01@lbsbd.com",
                     FullName = "EFTEST01",
                     Roles = new List<string> { AppConstants.Roles.Admin, AppConstants.Roles.SuperAdmin },
@@ -274,30 +275,70 @@ namespace SimRMS.Infrastructure.Services
                 }
                 };
             }
+            else if (username == "EFTEST02" && password == "password")
+            {
+                return new AuthenticationResult
+                {
+                    IsSuccess = true,
+                    UserId = 2,
+                    UserName = "EFTEST02",
+                    Email = "EFTEST02@lbsbd.com",
+                    FullName = "EF TEST 02",
+                    Roles = new List<string> { AppConstants.Roles.Admin, AppConstants.Roles.SuperAdmin },
+                    Permissions = new List<string>
+                {
+                    AppConstants.Permissions.ManageSystem,
+                    AppConstants.Permissions.ManageUsers,
+                    AppConstants.Permissions.ViewReports,
+                    AppConstants.Permissions.CreateRisks,
+                    AppConstants.Permissions.UpdateRisks,
+                    AppConstants.Permissions.DeleteRisks,
+                    AppConstants.Permissions.ViewRisks,
+                    AppConstants.Permissions.ViewUsers,
+                }
+                };
+            }
+            else if (username == "EFTEST03" && password == "password")
+            {
+                return new AuthenticationResult
+                {
+                    IsSuccess = true,
+                    UserId = 3,
+                    UserName = "EFTEST03",
+                    Email = "EFTEST03@lbsbd.com",
+                    FullName = "EF TEST 03",
+                    Roles = new List<string> { AppConstants.Roles.User },
+                    Permissions = new List<string>
+                {
+                    AppConstants.Permissions.ViewRisks,
+                    AppConstants.Permissions.ViewUsers,
+                }
+                };
+            }
 
             return new AuthenticationResult { IsSuccess = false };
         }
 
-        private bool SimulateUserValidation(string userId)
+        private bool SimulateUserValidation(string userName)
         {
-            return !string.IsNullOrEmpty(userId);
+            return userName == "EFTEST01" || userName == "EFTEST02" || userName == "EFTEST03";
         }
 
-        private bool SimulateAuthorization(string userId, string resource, string action)
+        private bool SimulateAuthorization(string userName, string resource, string action)
         {
-            return userId == "EFTEST01"; // Simple simulation
+            return userName == "EFTEST01" || userName == "EFTEST02" || userName == "EFTEST03";
         }
 
-        private List<string> SimulateGetUserRoles(string userId)
+        private List<string> SimulateGetUserRoles(string userName)
         {
-            return userId == "EFTEST01"
+            return userName == "EFTEST01" || userName == "EFTEST02"
                 ? new List<string> { AppConstants.Roles.Admin, AppConstants.Roles.SuperAdmin }
                 : new List<string> { AppConstants.Roles.User };
         }
 
-        private List<string> SimulateGetUserPermissions(string userId)
+        private List<string> SimulateGetUserPermissions(string userName)
         {
-            return userId == "EFTEST01"
+            return userName == "EFTEST01" || userName == "EFTEST02"
                 ? new List<string>
                 {
                 AppConstants.Permissions.ManageSystem,
@@ -315,7 +356,8 @@ namespace SimRMS.Infrastructure.Services
         private class AuthenticationResult
         {
             public bool IsSuccess { get; set; }
-            public string UserId { get; set; } = string.Empty;
+            public int UserId { get; set; }
+            public string UserName { get; set; } = string.Empty;
             public string Email { get; set; } = string.Empty;
             public string FullName { get; set; } = string.Empty;
             public List<string> Roles { get; set; } = new();

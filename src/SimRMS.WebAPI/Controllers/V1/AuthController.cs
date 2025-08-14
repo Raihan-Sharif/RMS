@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SimRMS.Application.Interfaces;
 using SimRMS.Application.Models.Auth;
+using SimRMS.Shared.Constants;
 using SimRMS.Shared.Models;
 using System.Security.Claims;
 
@@ -76,7 +77,7 @@ namespace SimRMS.WebAPI.Controllers.V1
             }
 
             // Generate user token through external service
-            var userToken = await _tokenService.GenerateTokenAsync(userSession.UserId, new Dictionary<string, object>
+            var userToken = await _tokenService.GenerateTokenAsync(userSession.UserName, new Dictionary<string, object>
         {
             { "email", userSession.Email },
             { "fullName", userSession.FullName },
@@ -89,7 +90,7 @@ namespace SimRMS.WebAPI.Controllers.V1
                 HandshakeToken = handshakeToken, // Return the same handshake token
                 User = new UserInfo
                 {
-                    Id = userSession.UserId,
+                    UserId = userSession.UserId,
                     Username = userSession.UserName,
                     Email = userSession.Email,
                     FullName = userSession.FullName,
@@ -105,11 +106,11 @@ namespace SimRMS.WebAPI.Controllers.V1
         [Authorize]
         public async Task<ActionResult<ApiResponse<string>>> Logout()
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            if (!string.IsNullOrEmpty(userId))
+            var username = User.FindFirst(ClaimTypes.Name)?.Value;
+          
+            if (!string.IsNullOrEmpty(username))
             {
-                await _securityService.LogoutAsync(userId);
+                await _securityService.LogoutAsync(username);
 
                 // Revoke user token
                 var userToken = Request.Headers["Authorization"].FirstOrDefault()?.Replace("Bearer ", "");

@@ -61,7 +61,7 @@ namespace SimRMS.Infrastructure.Services
             }
         }
 
-        public async Task<string> GenerateTokenAsync(string userId, Dictionary<string, object>? additionalClaims = null)
+        public async Task<string> GenerateTokenAsync(string userName, Dictionary<string, object>? additionalClaims = null)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace SimRMS.Infrastructure.Services
                 var password = await _configurationService.GetSecretStringAsync("TokenService:Password");
 
                 // Build the payload exactly as the old app does, and use it directly
-                string payload = "{ \"HEADER\":{ \"Content-Type\": \"application/json\", \"LBSL_REQ_TYPE\": \"1\", \"LBSL_LGN_ID\": \"" + loginId + "\", \"LBSL_LGN_PWD\": \"" + password + "\" }, \"DATA\":{ \"PID\": \"" + userId + "\" } }";
+                string payload = "{ \"HEADER\":{ \"Content-Type\": \"application/json\", \"LBSL_REQ_TYPE\": \"1\", \"LBSL_LGN_ID\": \"" + loginId + "\", \"LBSL_LGN_PWD\": \"" + password + "\" }, \"DATA\":{ \"PID\": \"" + userName + "\" } }";
                 var content = new StringContent(payload, Encoding.UTF8, "application/json");
 
                 // Optionally clear headers, but do NOT add Content-Type manually (StringContent sets it)
@@ -85,10 +85,10 @@ namespace SimRMS.Infrastructure.Services
                 if (tokenResponse?.LBSL_JWT_TKN != null)
                 {
                     // Cache the token with PID
-                    var cacheKey = $"TOKEN_{userId}";
+                    var cacheKey = $"TOKEN_{userName}";
                     await _cacheService.SetAsync(cacheKey, tokenResponse.LBSL_JWT_TKN, TimeSpan.FromMinutes(25)); // Cache for 25 minutes
 
-                    _logger.LogInformation("Token generated successfully for user {UserId}", userId);
+                    _logger.LogInformation("Token generated successfully for user {userName}", userName);
                     return tokenResponse.LBSL_JWT_TKN;
                 }
 
@@ -96,7 +96,7 @@ namespace SimRMS.Infrastructure.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed to generate token for user {UserId}", userId);
+                _logger.LogError(ex, "Failed to generate token for user {userName}", userName);
                 throw;
             }
         }
