@@ -36,6 +36,7 @@ public static class DependencyInjection
         services.AddScoped<IValidator<CreateMstCoBrchRequest>, CreateMstCoBrchRequestValidator>();
         services.AddScoped<IValidator<UpdateMstCoBrchRequest>, UpdateMstCoBrchRequestValidator>();
         services.AddScoped<IValidator<DeleteMstCoBrchRequest>, DeleteMstCoBrchRequestValidator>();
+        services.AddScoped<IValidator<AuthorizeMstCoBrchRequest>, AuthorizeMstCoBrchRequestValidator>();
         services.AddValidatorsFromAssembly(assembly, includeInternalTypes: false);
 
         return services;

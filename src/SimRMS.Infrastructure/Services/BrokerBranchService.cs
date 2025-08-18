@@ -40,6 +40,7 @@ public class BrokerBranchService : IBrokerBranchService
     private readonly IValidator<CreateMstCoBrchRequest> _createValidator;
     private readonly IValidator<UpdateMstCoBrchRequest> _updateValidator;
     private readonly IValidator<DeleteMstCoBrchRequest> _deleteValidator;
+    private readonly IValidator<AuthorizeMstCoBrchRequest> _authorizeValidator;
     private readonly ICurrentUserService _currentUserService;
     private readonly ILogger<BrokerBranchService> _logger;
 
@@ -49,6 +50,7 @@ public class BrokerBranchService : IBrokerBranchService
         IValidator<CreateMstCoBrchRequest> createValidator,
         IValidator<UpdateMstCoBrchRequest> updateValidator,
         IValidator<DeleteMstCoBrchRequest> deleteValidator,
+        IValidator<AuthorizeMstCoBrchRequest> authorizeValidator,
         ICurrentUserService currentUserService,
         ILogger<BrokerBranchService> logger)
     {
@@ -57,6 +59,7 @@ public class BrokerBranchService : IBrokerBranchService
         _createValidator = createValidator;
         _updateValidator = updateValidator;
         _deleteValidator = deleteValidator;
+        _authorizeValidator = authorizeValidator;
         _currentUserService = currentUserService;
         _logger = logger;
     }
@@ -449,6 +452,125 @@ public class BrokerBranchService : IBrokerBranchService
         }
     }
 
+    #endregion
+
+    #region WF / Work Flow
+
+    public async Task<PagedResult<MstCoBrchDto>> GetUnauthorizedBranchListWFAsync(int pageNumber = 1, int pageSize = 10, string? searchTerm = null, string? coCode = null, CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting unauthorized MstCoBrch list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+
+        if (pageNumber < 1) pageNumber = 1;
+        if (pageSize < 1 || pageSize > 100) pageSize = 10;
+
+        try
+        {
+            var parameters = new
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                SortColumn = "CoCode",
+                SortDirection = "ASC",
+                CoCode = coCode,
+                SearchTerm = searchTerm,
+                isAuth = (byte)0, // Unauthorized records
+                MakerId = _currentUserService.UserId,
+                TotalCount = 0 // OUTPUT parameter for total count
+            };
+
+            _logger.LogDebug("Calling workflow SP with parameters: PageNumber={PageNumber}, PageSize={PageSize}, isAuth={IsAuth}, MakerId={MakerId}", 
+                pageNumber, pageSize, 0, _currentUserService.UserId);
+
+            // Now GenericRepository properly handles OUTPUT parameters for stored procedures
+            var result = await _repository.QueryPagedAsync<MstCoBrchDto>(
+                sqlOrSp: "LB_SP_GetBrokerBranchListWF",
+                pageNumber: pageNumber,
+                pageSize: pageSize,
+                parameters: parameters,
+                isStoredProcedure: true,
+                cancellationToken: cancellationToken);
+
+            _logger.LogDebug("Workflow SP returned TotalCount: {TotalCount}, Data count: {DataCount}", 
+                result.TotalCount, result.Data.Count());
+
+            return result;
+        }
+        catch (ArgumentException ex)
+        {
+            _logger.LogError(ex, "Invalid arguments for unauthorized MstCoBrch workflow list retrieval");
+            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting unauthorized MstCoBrch workflow list");
+            throw new DomainException($"Failed to retrieve unauthorized branches: {ex.Message}");
+        }
+    }
+
+
+
+    public async Task<bool> AuthorizeBranchWFAsync(string coCode, string coBrchCode, AuthorizeMstCoBrchRequest request, CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Authorizing MstCoBrch in workflow: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+
+        // Validate request
+        var validationResult = await _authorizeValidator.ValidateAsync(request, cancellationToken);
+        if (!validationResult.IsValid)
+        {
+            var errors = string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
+            _logger.LogWarning("Validation failed for authorization request: {Errors}", errors);
+            throw new ValidationException($"Validation failed: {errors}");
+        }
+
+        try
+        {
+            await _unitOfWork.BeginTransactionAsync(cancellationToken);
+            
+            var ipAddress = _currentUserService.GetClientIPAddress();
+            
+            var parameters = new
+            {
+                Action = request.ActionType, // Default is 2 for authorization
+                CoCode = coCode,
+                CoBrchCode = coBrchCode,
+                IPAddress = ipAddress,
+                AuthID = _currentUserService.UserId,
+                IsAuth = request.IsAuth,
+                ActionType = request.ActionType,
+                RowsAffected = 0 // OUTPUT parameter
+            };
+
+            var result = await _repository.ExecuteWithOutputAsync(
+                "LB_SP_AuthMstCoBrch",
+                parameters,
+                cancellationToken: cancellationToken);
+
+            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
+
+            if (rowsAffected > 0)
+            {
+                await _unitOfWork.CommitTransactionAsync(cancellationToken);
+                _logger.LogInformation("Successfully authorized MstCoBrch: {CoCode}-{CoBrchCode}, RowsAffected: {RowsAffected}", 
+                    coCode, coBrchCode, rowsAffected);
+                return true;
+            }
+            else
+            {
+                await _unitOfWork.RollbackTransactionAsync(cancellationToken);
+                _logger.LogWarning("No rows affected during authorization of MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+                throw new DomainException($"Failed to authorize branch: No records were updated");
+            }
+        }
+        catch (DomainException)
+        {
+            throw; // Re-throw domain exceptions as-is
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error authorizing MstCoBrch in workflow: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+            throw new DomainException($"Failed to authorize branch: {ex.Message}");
+        }
+    }
 
     #endregion
 }

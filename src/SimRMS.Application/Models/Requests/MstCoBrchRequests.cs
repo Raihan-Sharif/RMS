@@ -57,4 +57,13 @@ namespace SimRMS.Application.Models.Requests
         public string CoBrchCode { get; set; } = null!;
         public string? Remarks { get; set; }
     }
+
+    public class AuthorizeMstCoBrchRequest
+    {
+        public string CoCode { get; set; } = null!;
+        public string CoBrchCode { get; set; } = null!;
+        public byte ActionType { get; set; } = 2;
+        public byte IsAuth { get; set; } = 1;
+        public string? IPAddress { get; set; }
+    }
 }

@@ -143,4 +143,26 @@ namespace SimRMS.Application.Validators
             RuleFor(x => x.Remarks).ValidRemarks().When(x => !string.IsNullOrEmpty(x.Remarks));
         }
     }
+
+    /// <summary>
+    /// Validator for authorizing MstCoBrch in workflow
+    /// </summary>
+    public class AuthorizeMstCoBrchRequestValidator : AbstractValidator<AuthorizeMstCoBrchRequest>
+    {
+        public AuthorizeMstCoBrchRequestValidator()
+        {
+            RuleFor(x => x.CoCode).ValidCoCode();
+            RuleFor(x => x.CoBrchCode).ValidCoBrchCode();
+            
+            RuleFor(x => x.ActionType)
+                .Equal((byte)2).WithMessage("Action type must be 2 for authorization");
+            
+            RuleFor(x => x.IsAuth)
+                .Must(x => x == 0 || x == 1).WithMessage("IsAuth must be 0 (unauthorized) or 1 (authorized)");
+            
+            RuleFor(x => x.IPAddress)
+                .MaximumLength(39).WithMessage("IP Address cannot exceed 39 characters")
+                .When(x => !string.IsNullOrEmpty(x.IPAddress));
+        }
+    }
 }

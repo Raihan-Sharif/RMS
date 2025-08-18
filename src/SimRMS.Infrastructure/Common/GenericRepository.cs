@@ -340,45 +340,67 @@ public class GenericRepository : IGenericRepository
             TotalCount = 0 // Will be set as output parameter
         });
 
-        var dalParams = ConvertToDalParams(spParameters);
-
-        // Set TotalCount as output parameter
-        var totalCountParam = dalParams?.FirstOrDefault(p => p.ParameterName == "TotalCount");
-        if (totalCountParam != null)
-        {
-            totalCountParam.Direction = ParameterDirection.Output;
-        }
-
         var results = new List<T>();
         int totalCount = 0;
 
-        using var reader = await _dal.LB_GetDbDataReaderAsync(storedProcedureName, dalParams, CommandType.StoredProcedure);
-
-        // Read data from first result set
-        while (await reader.ReadAsync())
+        // Check if we have OUTPUT parameters that need special handling
+        if (HasOutputParameters(spParameters))
         {
-            // Try to get total count from column (if SP includes it)
-            if (totalCount == 0 && HasColumn(reader, "TotalCount"))
+            // For SPs with OUTPUT parameters, we need to use ExecuteNonQuery to capture OUTPUT values
+            // Then use a separate DataReader call for the data
+            
+            var dalParamsForOutput = ConvertToDalParamsWithDirection(spParameters);
+            
+            // First, execute the SP to get OUTPUT parameters (this also executes the data query but we ignore the result)
+            await _dal.LB_ExecuteNonQueryAsync(storedProcedureName, dalParamsForOutput, CommandType.StoredProcedure);
+            
+            // Extract OUTPUT parameter values
+            var totalCountParam = dalParamsForOutput?.FirstOrDefault(p => 
+                p.ParameterName.Equals("TotalCount", StringComparison.OrdinalIgnoreCase) &&
+                (p.Direction == ParameterDirection.Output || p.Direction == ParameterDirection.InputOutput));
+            
+            if (totalCountParam != null)
             {
-                totalCount = reader.GetInt32("TotalCount");
+                totalCount = Convert.ToInt32(totalCountParam.Value ?? 0);
             }
 
-            results.Add(MapFromReader<T>(reader));
-        }
+            // Now get the data using DataReader
+            var dalParamsForData = ConvertToDalParams(spParameters);
+            using var reader = await _dal.LB_GetDbDataReaderAsync(storedProcedureName, dalParamsForData, CommandType.StoredProcedure);
 
-        // If SP has second result set with just total count
-        if (totalCount == 0 && await reader.NextResultAsync())
-        {
-            if (await reader.ReadAsync())
+            // Read data from result set
+            while (await reader.ReadAsync())
             {
-                totalCount = reader.GetInt32(0); // First column should be count
+                results.Add(MapFromReader<T>(reader));
             }
         }
-
-        // If SP uses output parameter for total count
-        if (totalCount == 0 && totalCountParam != null)
+        else
         {
-            totalCount = Convert.ToInt32(totalCountParam.Value);
+            // Original logic for SPs without OUTPUT parameters
+            var dalParams = ConvertToDalParams(spParameters);
+
+            using var reader = await _dal.LB_GetDbDataReaderAsync(storedProcedureName, dalParams, CommandType.StoredProcedure);
+
+            // Read data from first result set
+            while (await reader.ReadAsync())
+            {
+                // Try to get total count from column (if SP includes it)
+                if (totalCount == 0 && HasColumn(reader, "TotalCount"))
+                {
+                    totalCount = reader.GetInt32("TotalCount");
+                }
+
+                results.Add(MapFromReader<T>(reader));
+            }
+
+            // If SP has second result set with just total count
+            if (totalCount == 0 && await reader.NextResultAsync())
+            {
+                if (await reader.ReadAsync())
+                {
+                    totalCount = reader.GetInt32(0); // First column should be count
+                }
+            }
         }
 
         return new PagedResult<T>
@@ -738,35 +760,3 @@ public class GenericRepository : IGenericRepository
     #endregion
 }
 
-/// <summary>
-/// Result class for stored procedures with OUTPUT parameters
-/// </summary>
-public class ExecuteResult
-{
-    public int RowsAffected { get; set; }
-    public List<OutputParameter> OutputValues { get; set; } = new List<OutputParameter>();
-
-    public T? GetOutputValue<T>(string parameterName)
-    {
-        var param = OutputValues.FirstOrDefault(p => p.Name.Equals(parameterName, StringComparison.OrdinalIgnoreCase));
-        if (param?.Value == null) return default(T);
-        
-        try
-        {
-            return (T)Convert.ChangeType(param.Value, typeof(T));
-        }
-        catch
-        {
-            return default(T);
-        }
-    }
-}
-
-/// <summary>
-/// OUTPUT parameter value container
-/// </summary>
-public class OutputParameter
-{
-    public string Name { get; set; } = string.Empty;
-    public object? Value { get; set; }
-}

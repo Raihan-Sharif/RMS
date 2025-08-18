@@ -16,5 +16,9 @@ namespace SimRMS.Application.Interfaces.Services
         Task<MstCoBrchDto> UpdateMstCoBrchAsync(string coCode, string coBrchCode, UpdateMstCoBrchRequest request, CancellationToken cancellationToken = default);
         Task<bool> DeleteMstCoBrchAsync(string coCode, string coBrchCode, DeleteMstCoBrchRequest request, CancellationToken cancellationToken = default);
         Task<bool> MstCoBrchExistsAsync(string coCode, string coBrchCode, CancellationToken cancellationToken = default);
+
+        // WF / Work Flow methods
+        Task<PagedResult<MstCoBrchDto>> GetUnauthorizedBranchListWFAsync(int pageNumber = 1, int pageSize = 10, string? searchTerm = null, string? coCode = null, CancellationToken cancellationToken = default);
+        Task<bool> AuthorizeBranchWFAsync(string coCode, string coBrchCode, AuthorizeMstCoBrchRequest request, CancellationToken cancellationToken = default);
     }
 }

@@ -223,4 +223,74 @@ public class BrokerBranchController : BaseController
         
         return exists ? Ok() : NotFound();
     }
+
+    #region Work Flow
+
+    /// <summary>
+    /// Get paginated list of unauthorized Market Stock Company Branches for workflow
+    /// </summary>
+    /// <param name="pageNumber">Page number (default: 1)</param>
+    /// <param name="pageSize">Page size (default: 10, max: 100)</param>
+    /// <param name="searchTerm">Search term for branch code or description</param>
+    /// <param name="coCode">Filter by specific company code</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>Paginated list of unauthorized branches</returns>
+    [HttpGet("wf/unauthorized")]
+    [ProducesResponseType(typeof(ApiResponse<IEnumerable<MstCoBrchDto>>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 400)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 401)]
+    public async Task<ActionResult<ApiResponse<IEnumerable<MstCoBrchDto>>>> GetUnauthorizedBranchListWF(
+        [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1,
+        [FromQuery, Range(1, 100)] int pageSize = 10,
+        [FromQuery] string? searchTerm = null,
+        [FromQuery] string? coCode = null,
+        CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting unauthorized MstCoBrch list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+
+        var result = await _brokerBranchService.GetUnauthorizedBranchListWFAsync(
+            pageNumber: pageNumber,
+            pageSize: pageSize,
+            searchTerm: searchTerm,
+            coCode: coCode,
+            cancellationToken: cancellationToken);
+
+        return Ok(result, "Unauthorized Market Stock Company Branches retrieved successfully");
+    }
+
+    /// <summary>
+    /// Authorize Market Stock Company Branch in workflow
+    /// </summary>
+    /// <param name="coCode">Company code</param>
+    /// <param name="coBrchCode">Branch code</param>
+    /// <param name="request">Authorization request</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>Authorization result</returns>
+    [HttpPost("wf/authorize/{coCode}/{coBrchCode}")]
+    [ProducesResponseType(typeof(ApiResponse<object>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 400)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 404)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 401)]
+    public async Task<ActionResult<ApiResponse<object>>> AuthorizeBranchWF(
+        [FromRoute, Required, MaxLength(5)] string coCode,
+        [FromRoute, Required, MaxLength(6)] string coBrchCode,
+        [FromBody, Required] AuthorizeMstCoBrchRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Authorizing MstCoBrch in workflow: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+
+        request.CoCode = coCode;
+        request.CoBrchCode = coBrchCode;
+
+        var result = await _brokerBranchService.AuthorizeBranchWFAsync(coCode, coBrchCode, request, cancellationToken);
+
+        if (!result)
+        {
+            return BadRequest<object>("Failed to authorize Market Stock Company Branch");
+        }
+
+        return Ok(new object(), "Market Stock Company Branch authorized successfully");
+    }
+
+    #endregion
 }
