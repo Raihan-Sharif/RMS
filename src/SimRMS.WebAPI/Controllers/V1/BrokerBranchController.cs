@@ -248,7 +248,7 @@ public class BrokerBranchController : BaseController
     {
         _logger.LogInformation("Getting unauthorized MstCoBrch list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
-        var result = await _brokerBranchService.GetUnauthorizedBranchListWFAsync(
+        var result = await _brokerBranchService.GetUnauthorizedListAsync(
             pageNumber: pageNumber,
             pageSize: pageSize,
             searchTerm: searchTerm,
@@ -282,7 +282,7 @@ public class BrokerBranchController : BaseController
         request.CoCode = coCode;
         request.CoBrchCode = coBrchCode;
 
-        var result = await _brokerBranchService.AuthorizeBranchWFAsync(coCode, coBrchCode, request, cancellationToken);
+        var result = await _brokerBranchService.AuthorizeBranchAsync(coCode, coBrchCode, request, cancellationToken);
 
         if (!result)
         {

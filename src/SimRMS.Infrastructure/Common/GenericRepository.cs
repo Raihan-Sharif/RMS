@@ -131,44 +131,6 @@ public class GenericRepository : IGenericRepository
         return await _dal.LB_ExecuteNonQueryAsync(sqlOrSp, dalParams, commandType);
     }
 
-    /// <summary>
-    /// Execute stored procedure and return both rows affected and OUTPUT parameter values
-    /// </summary>
-    public async Task<ExecuteResult> ExecuteWithOutputAsync(string storedProcedure, object? parameters = null, CancellationToken cancellationToken = default)
-    {
-        _logger.LogDebug("ExecuteWithOutput: {StoredProcedure}", storedProcedure);
-
-        await _unitOfWork.EnsureConnectionAsync(cancellationToken);
-
-        var result = new ExecuteResult();
-        var dalParams = ConvertToDalParamsWithDirection(parameters);
-
-        try
-        {
-            result.RowsAffected = await _dal.LB_ExecuteNonQueryAsync(storedProcedure, dalParams, CommandType.StoredProcedure);
-            
-            // Extract OUTPUT parameter values
-            if (dalParams != null)
-            {
-                foreach (var param in dalParams.Where(p => p.Direction == ParameterDirection.Output || p.Direction == ParameterDirection.InputOutput))
-                {
-                    result.OutputValues.Add(new OutputParameter
-                    {
-                        Name = param.ParameterName.TrimStart('@'),
-                        Value = param.Value == DBNull.Value ? null : param.Value
-                    });
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error executing stored procedure with OUTPUT parameters: {StoredProcedure}", storedProcedure);
-            throw;
-        }
-
-        return result;
-    }
-
     public async Task<T> ExecuteScalarAsync<T>(string sqlOrSp, object? parameters = null, bool isStoredProcedure = false, CancellationToken cancellationToken = default)
     {
         _logger.LogDebug("ExecuteScalar: {SqlOrSp}, SP: {IsStoredProcedure}", sqlOrSp, isStoredProcedure);
@@ -326,8 +288,9 @@ public class GenericRepository : IGenericRepository
         };
     }
 
+
     /// <summary>
-    /// Handle pagination for Stored Procedures
+    /// Handle pagination for Stored Procedures with proper OUTPUT parameter support
     /// SP should return data with TotalCount column OR use output parameter
     /// </summary>
     private async Task<PagedResult<T>> QueryPagedFromStoredProcedureAsync<T>(string storedProcedureName, int pageNumber, int pageSize, object? parameters, CancellationToken cancellationToken) where T : class
@@ -343,65 +306,62 @@ public class GenericRepository : IGenericRepository
         var results = new List<T>();
         int totalCount = 0;
 
-        // Check if we have OUTPUT parameters that need special handling
-        if (HasOutputParameters(spParameters))
+        // Convert parameters with proper direction settings for OUTPUT parameters
+        var dalParams = ConvertToDalParamsWithDirection(spParameters);
+
+        _logger.LogDebug("Executing SP {StoredProcedure} with {ParamCount} parameters",
+            storedProcedureName, dalParams?.Count ?? 0);
+
+        // FIXED: Single execution that handles both data AND output parameters
+        using var reader = await _dal.LB_GetDbDataReaderAsync(storedProcedureName, dalParams, CommandType.StoredProcedure);
+
+        // Read data from result set
+        while (await reader.ReadAsync())
         {
-            // For SPs with OUTPUT parameters, we need to use ExecuteNonQuery to capture OUTPUT values
-            // Then use a separate DataReader call for the data
-            
-            var dalParamsForOutput = ConvertToDalParamsWithDirection(spParameters);
-            
-            // First, execute the SP to get OUTPUT parameters (this also executes the data query but we ignore the result)
-            await _dal.LB_ExecuteNonQueryAsync(storedProcedureName, dalParamsForOutput, CommandType.StoredProcedure);
-            
-            // Extract OUTPUT parameter values
-            var totalCountParam = dalParamsForOutput?.FirstOrDefault(p => 
+            // Try to get total count from column (if SP includes it in result set)
+            if (totalCount == 0 && HasColumn(reader, "TotalCount"))
+            {
+                totalCount = reader.GetInt32("TotalCount");
+            }
+
+            results.Add(MapFromReader<T>(reader));
+        }
+
+        // FIXED: After DataReader is consumed, OUTPUT parameters are now available
+        // Extract OUTPUT parameter values from dalParams (they are populated by LB_DAL after execution)
+        if (totalCount == 0 && dalParams != null)
+        {
+            var totalCountParam = dalParams.FirstOrDefault(p =>
                 p.ParameterName.Equals("TotalCount", StringComparison.OrdinalIgnoreCase) &&
                 (p.Direction == ParameterDirection.Output || p.Direction == ParameterDirection.InputOutput));
-            
-            if (totalCountParam != null)
-            {
-                totalCount = Convert.ToInt32(totalCountParam.Value ?? 0);
-            }
 
-            // Now get the data using DataReader
-            var dalParamsForData = ConvertToDalParams(spParameters);
-            using var reader = await _dal.LB_GetDbDataReaderAsync(storedProcedureName, dalParamsForData, CommandType.StoredProcedure);
-
-            // Read data from result set
-            while (await reader.ReadAsync())
+            if (totalCountParam?.Value != null && totalCountParam.Value != DBNull.Value)
             {
-                results.Add(MapFromReader<T>(reader));
+                totalCount = Convert.ToInt32(totalCountParam.Value);
+                _logger.LogDebug("Retrieved TotalCount from OUTPUT parameter: {TotalCount}", totalCount);
             }
         }
-        else
+
+        // Fallback: If SP has second result set with just total count 
+        // Important: now we returnt 2 restults set for show the total count (cause lb db reader not handle output param). so total count now get here.
+        if (totalCount == 0 && await reader.NextResultAsync())
         {
-            // Original logic for SPs without OUTPUT parameters
-            var dalParams = ConvertToDalParams(spParameters);
-
-            using var reader = await _dal.LB_GetDbDataReaderAsync(storedProcedureName, dalParams, CommandType.StoredProcedure);
-
-            // Read data from first result set
-            while (await reader.ReadAsync())
+            if (await reader.ReadAsync())
             {
-                // Try to get total count from column (if SP includes it)
+                // Try to get total count from column ,SP includes it in 2nd result set
                 if (totalCount == 0 && HasColumn(reader, "TotalCount"))
                 {
                     totalCount = reader.GetInt32("TotalCount");
                 }
-
-                results.Add(MapFromReader<T>(reader));
-            }
-
-            // If SP has second result set with just total count
-            if (totalCount == 0 && await reader.NextResultAsync())
-            {
-                if (await reader.ReadAsync())
-                {
+                else
                     totalCount = reader.GetInt32(0); // First column should be count
-                }
+
+                _logger.LogDebug("Retrieved TotalCount from second result set: {TotalCount}", totalCount);
             }
         }
+
+        _logger.LogDebug("SP {StoredProcedure} returned {DataCount} records, TotalCount: {TotalCount}",
+            storedProcedureName, results.Count, totalCount);
 
         return new PagedResult<T>
         {
@@ -411,6 +371,141 @@ public class GenericRepository : IGenericRepository
             PageSize = pageSize
         };
     }
+
+    /// <summary>
+    /// FIXED: Improved OUTPUT parameter detection
+    /// </summary>
+    private bool HasOutputParameters(object? parameters)
+    {
+        if (parameters == null) return false;
+
+        var properties = parameters.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        return properties.Any(p => IsOutputParameter(p.Name));
+    }
+
+    /// <summary>
+    /// FIXED: Better OUTPUT parameter naming pattern detection
+    /// </summary>
+    private bool IsOutputParameter(string parameterName)
+    {
+        // Common OUTPUT parameter naming patterns
+        var outputPatterns = new[] {
+        "RowsAffected", "StatusCode", "StatusMsg", "TotalCount",
+        "Result", "ReturnValue", "Count", "Total", "RecordCount"
+    };
+
+        return outputPatterns.Any(pattern =>
+            parameterName.Equals(pattern, StringComparison.OrdinalIgnoreCase) ||
+            parameterName.EndsWith(pattern, StringComparison.OrdinalIgnoreCase));
+    }
+
+    /// <summary>
+    /// FIXED: Enhanced parameter conversion with proper direction setting
+    /// </summary>
+    private List<LB_DALParam>? ConvertToDalParamsWithDirection(object? parameters)
+    {
+        if (parameters == null) return null;
+
+        var dalParams = new List<LB_DALParam>();
+
+        // Handle Dictionary<string, object>
+        if (parameters is Dictionary<string, object> dict)
+        {
+            foreach (var kvp in dict)
+            {
+                var value = kvp.Value ?? DBNull.Value;
+                var direction = IsOutputParameter(kvp.Key) ? ParameterDirection.Output : ParameterDirection.Input;
+
+                // For OUTPUT parameters, ensure we have a proper initial value for size allocation
+                if (direction == ParameterDirection.Output && kvp.Key.Contains("Count", StringComparison.OrdinalIgnoreCase))
+                {
+                    value = 0; // For integer OUTPUT parameters
+                }
+
+                dalParams.Add(new LB_DALParam(kvp.Key, value, direction));
+            }
+            return dalParams;
+        }
+
+        // Handle anonymous objects and POCOs
+        var properties = parameters.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        foreach (var prop in properties)
+        {
+            var value = prop.GetValue(parameters) ?? DBNull.Value;
+            var direction = IsOutputParameter(prop.Name) ? ParameterDirection.Output : ParameterDirection.Input;
+
+            // For OUTPUT parameters, ensure we have a proper initial value for size allocation
+            if (direction == ParameterDirection.Output)
+            {
+                if (prop.Name.Contains("Count", StringComparison.OrdinalIgnoreCase))
+                {
+                    value = 0; // For integer OUTPUT parameters
+                }
+                else if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(string))
+                {
+                    value = new string(' ', 255); // Reserve space for string OUTPUT parameters
+                }
+            }
+
+            var param = new LB_DALParam(prop.Name, value, direction);
+            dalParams.Add(param);
+        }
+
+        return dalParams;
+    }
+
+    /// <summary>
+    /// Enhanced ExecuteWithOutputAsync that properly handles OUTPUT parameters
+    /// </summary>
+    public async Task<ExecuteResult> ExecuteWithOutputAsync(string storedProcedure, object? parameters = null, CancellationToken cancellationToken = default)
+    {
+        _logger.LogDebug("ExecuteWithOutput: {StoredProcedure}", storedProcedure);
+
+        await _unitOfWork.EnsureConnectionAsync(cancellationToken);
+
+        var result = new ExecuteResult();
+        var dalParams = ConvertToDalParamsWithDirection(parameters);
+
+        try
+        {
+            // Execute the stored procedure
+            result.RowsAffected = await _dal.LB_ExecuteNonQueryAsync(storedProcedure, dalParams, CommandType.StoredProcedure);
+
+            // FIXED: After execution, OUTPUT parameter values are automatically populated by LB_DAL
+            // Extract OUTPUT parameter values
+            if (dalParams != null)
+            {
+                foreach (var param in dalParams.Where(p => p.Direction == ParameterDirection.Output || p.Direction == ParameterDirection.InputOutput))
+                {
+                    result.OutputValues.Add(new OutputParameter
+                    {
+                        Name = param.ParameterName.TrimStart('@'),
+                        Value = param.Value == DBNull.Value ? null : param.Value
+                    });
+
+                    _logger.LogDebug("OUTPUT Parameter {Name}: {Value}", param.ParameterName, param.Value);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error executing stored procedure with OUTPUT parameters: {StoredProcedure}", storedProcedure);
+            throw;
+        }
+
+        return result;
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     private List<LB_DALParam>? ConvertToDalParams(object? parameters)
     {
@@ -585,13 +680,13 @@ public class GenericRepository : IGenericRepository
     /// This is a simplified version that works with your existing LB DAL
     /// </summary>
     public async Task<BulkOperationResult> ExecuteBulkStoredProcedureAsync(
-        string storedProcedureName, 
+        string storedProcedureName,
         DataTable tableValueParameter,
         string tableParamName,
         object? additionalParams = null,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogDebug("ExecuteBulkStoredProcedure: {StoredProcedureName}, Records: {RecordCount}", 
+        _logger.LogDebug("ExecuteBulkStoredProcedure: {StoredProcedureName}, Records: {RecordCount}",
             storedProcedureName, tableValueParameter.Rows.Count);
 
         await _unitOfWork.EnsureConnectionAsync(cancellationToken);
@@ -616,7 +711,7 @@ public class GenericRepository : IGenericRepository
 
             // Execute stored procedure - your SP doesn't return a result set, so we use ExecuteNonQuery
             int rowsAffected = await _dal.LB_ExecuteNonQueryAsync(storedProcedureName, paramList, CommandType.StoredProcedure);
-            
+
             return new BulkOperationResult
             {
                 RowsAffected = rowsAffected,
@@ -627,11 +722,11 @@ public class GenericRepository : IGenericRepository
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error executing bulk stored procedure: {StoredProcedureName}", storedProcedureName);
-            return new BulkOperationResult 
-            { 
-                RowsAffected = 0, 
-                Status = "ERROR", 
-                Message = $"Error: {ex.Message}" 
+            return new BulkOperationResult
+            {
+                RowsAffected = 0,
+                Status = "ERROR",
+                Message = $"Error: {ex.Message}"
             };
         }
     }
@@ -642,7 +737,7 @@ public class GenericRepository : IGenericRepository
     public DataTable ConvertToTableValueParameter<T>(IEnumerable<T> entities) where T : class
     {
         var dataTable = new DataTable();
-        
+
         if (!entities.Any())
             return dataTable;
 
@@ -655,7 +750,7 @@ public class GenericRepository : IGenericRepository
         {
             var columnType = GetDataTableColumnType(prop.PropertyType);
             var column = dataTable.Columns.Add(prop.Name, columnType);
-            
+
             // Allow null for nullable types
             if (IsNullableType(prop.PropertyType))
             {
@@ -667,13 +762,13 @@ public class GenericRepository : IGenericRepository
         foreach (var entity in entities)
         {
             var row = dataTable.NewRow();
-            
+
             foreach (var prop in properties)
             {
                 var value = prop.GetValue(entity);
                 row[prop.Name] = value ?? DBNull.Value;
             }
-            
+
             dataTable.Rows.Add(row);
         }
 
@@ -713,49 +808,8 @@ public class GenericRepository : IGenericRepository
         return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
     }
 
-    private bool HasOutputParameters(object? parameters)
-    {
-        if (parameters == null) return false;
 
-        var properties = parameters.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-        return properties.Any(p => IsOutputParameter(p.Name));
-    }
 
-    private bool IsOutputParameter(string parameterName)
-    {
-        // Common OUTPUT parameter naming patterns
-        var outputPatterns = new[] { "RowsAffected", "StatusCode", "StatusMsg", "TotalCount", "Result", "ReturnValue" };
-        return outputPatterns.Any(pattern => parameterName.Contains(pattern, StringComparison.OrdinalIgnoreCase));
-    }
-
-    private List<LB_DALParam>? ConvertToDalParamsWithDirection(object? parameters)
-    {
-        if (parameters == null) return null;
-
-        var dalParams = new List<LB_DALParam>();
-
-        // Handle anonymous objects and POCOs
-        var properties = parameters.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-        foreach (var prop in properties)
-        {
-            var value = prop.GetValue(parameters) ?? DBNull.Value;
-            var param = new LB_DALParam(prop.Name, value);
-            
-            // Set direction based on parameter name patterns
-            if (IsOutputParameter(prop.Name))
-            {
-                param.Direction = ParameterDirection.Output;
-            }
-            else
-            {
-                param.Direction = ParameterDirection.Input;
-            }
-
-            dalParams.Add(param);
-        }
-
-        return dalParams;
-    }
 
     #endregion
 }

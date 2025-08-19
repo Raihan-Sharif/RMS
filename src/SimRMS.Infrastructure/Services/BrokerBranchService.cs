@@ -456,7 +456,12 @@ public class BrokerBranchService : IBrokerBranchService
 
     #region WF / Work Flow
 
-    public async Task<PagedResult<MstCoBrchDto>> GetUnauthorizedBranchListWFAsync(int pageNumber = 1, int pageSize = 10, string? searchTerm = null, string? coCode = null, CancellationToken cancellationToken = default)
+    public async Task<PagedResult<MstCoBrchDto>> GetUnauthorizedListAsync(
+    int pageNumber = 1,
+    int pageSize = 10,
+    string? searchTerm = null,
+    string? coCode = null,
+    CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Getting unauthorized MstCoBrch list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
@@ -465,23 +470,24 @@ public class BrokerBranchService : IBrokerBranchService
 
         try
         {
-            var parameters = new
+            // FIXED: Proper parameter setup for OUTPUT parameter handling
+            var parameters = new Dictionary<string, object>
             {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                SortColumn = "CoCode",
-                SortDirection = "ASC",
-                CoCode = coCode,
-                SearchTerm = searchTerm,
-                isAuth = (byte)0, // Unauthorized records
-                MakerId = _currentUserService.UserId,
-                TotalCount = 0 // OUTPUT parameter for total count
+                ["PageNumber"] = pageNumber,
+                ["PageSize"] = pageSize,
+                ["SortColumn"] = "CoCode",
+                ["SortDirection"] = "ASC",
+                ["CoCode"] = coCode ?? (object)DBNull.Value,
+                ["SearchTerm"] = searchTerm ?? (object)DBNull.Value,
+                ["isAuth"] = (byte)0, // Unauthorized records
+                ["MakerId"] = _currentUserService.UserId,
+                ["TotalCount"] = 0 // OUTPUT parameter - will be populated by SP
             };
 
-            _logger.LogDebug("Calling workflow SP with parameters: PageNumber={PageNumber}, PageSize={PageSize}, isAuth={IsAuth}, MakerId={MakerId}", 
-                pageNumber, pageSize, 0, _currentUserService.UserId);
+            _logger.LogDebug("Calling SP {StoredProcedure} with parameters: PageNumber={PageNumber}, PageSize={PageSize}, isAuth={IsAuth}, MakerId={MakerId}",
+                "LB_SP_GetBrokerBranchListWF", pageNumber, pageSize, 0, _currentUserService.UserId);
 
-            // Now GenericRepository properly handles OUTPUT parameters for stored procedures
+            // FIXED: The GenericRepository now properly handles OUTPUT parameters in a single call
             var result = await _repository.QueryPagedAsync<MstCoBrchDto>(
                 sqlOrSp: "LB_SP_GetBrokerBranchListWF",
                 pageNumber: pageNumber,
@@ -490,26 +496,31 @@ public class BrokerBranchService : IBrokerBranchService
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
 
-            _logger.LogDebug("Workflow SP returned TotalCount: {TotalCount}, Data count: {DataCount}", 
+            _logger.LogDebug("SP returned TotalCount: {TotalCount}, Data count: {DataCount}",
                 result.TotalCount, result.Data.Count());
+
+            if (result.TotalCount == 0)
+            {
+                _logger.LogWarning("SP {StoredProcedure} returned TotalCount=0. Check OUTPUT parameter handling or SP logic.",
+                    "LB_SP_GetBrokerBranchListWF");
+            }
 
             return result;
         }
-        catch (ArgumentException ex)
-        {
-            _logger.LogError(ex, "Invalid arguments for unauthorized MstCoBrch workflow list retrieval");
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
-        }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting unauthorized MstCoBrch workflow list");
-            throw new DomainException($"Failed to retrieve unauthorized branches: {ex.Message}");
+            _logger.LogError(ex, "Error getting unauthorized broker branch list with parameters: PageNumber={PageNumber}, PageSize={PageSize}, CoCode={CoCode}, SearchTerm={SearchTerm}",
+                pageNumber, pageSize, coCode, searchTerm);
+            throw;
         }
     }
 
 
 
-    public async Task<bool> AuthorizeBranchWFAsync(string coCode, string coBrchCode, AuthorizeMstCoBrchRequest request, CancellationToken cancellationToken = default)
+
+
+
+    public async Task<bool> AuthorizeBranchAsync(string coCode, string coBrchCode, AuthorizeMstCoBrchRequest request, CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Authorizing MstCoBrch in workflow: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
 
