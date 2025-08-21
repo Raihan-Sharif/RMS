@@ -309,6 +309,13 @@ dotnet run --project SimRMS.WebAPI  # Run application
 - Track API response times
 - Set up alerting for critical errors
 
+## Modification History
+
+### DependencyInjection.cs - August 21, 2025
+**Author**: Claude Code Assistant  
+**Modified**: Infrastructure/DependencyInjection.cs  
+**Change**: Added `IWorkFlowService` service registration for workflow management functionality
+
 ---
 
 ## Quick Reference for Claude Code

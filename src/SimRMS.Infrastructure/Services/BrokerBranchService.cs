@@ -6,7 +6,6 @@ using SimRMS.Application.Models.Requests;
 using SimRMS.Domain.Interfaces.Common;
 using SimRMS.Shared.Models;
 using SimRMS.Domain.Exceptions;
-using System.ComponentModel.DataAnnotations;
 using SimRMS.Application.Interfaces;
 using SimRMS.Shared.Constants;
 using SimRMS.Domain.Common; // FIXED: Added missing import for ValidationErrorDetail
@@ -189,8 +188,7 @@ public class BrokerBranchService : IBrokerBranchService
                 ActionType = (byte)ActionTypeEnum.INSERT,
                 IsDel = 0,
                 Remarks = request.Remarks,
-                RowsAffected = 0,
-                InsertedCode = ""
+                RowsAffected = 0
             };
 
             _logger.LogDebug("Calling LB_SP_CrudMstCoBrch with Action=1 (INSERT) for branch code: {BranchCode}", generatedBranchCode);
@@ -211,8 +209,13 @@ public class BrokerBranchService : IBrokerBranchService
                 throw new DomainException("Failed to create broker branch - no rows affected");
             }
 
-            // here genereated new Broker branch obj [cause unauthorized data not show by get by sp]
-            MstCoBrchDto newBrokerBranch  = new MstCoBrchDto
+
+
+            //var createdBranch = await GetMstCoBrchByIdAsync(request.CoCode, request.CoBrchCode, cancellationToken);
+            //return createdBranch ?? throw new DomainException("Failed to retrieve created MstCoBrch");
+
+            // Return manually constructed DTO since unauthorized records aren't returned by GetById SP
+            MstCoBrchDto newBrokerBranch = new MstCoBrchDto
             {
                 CoCode = defaultCoCode,
                 CoBrchCode = generatedBranchCode,
@@ -250,7 +253,7 @@ public class BrokerBranchService : IBrokerBranchService
     {
         _logger.LogInformation("Updating MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
 
-        // FIXED: Use your existing validation method
+        // Use existing validation method
         await ValidateUpdateRequestAsync(request, cancellationToken);
 
         await ValidateBusinessRulesForUpdateAsync(coCode, coBrchCode, request, cancellationToken);
@@ -327,7 +330,7 @@ public class BrokerBranchService : IBrokerBranchService
     {
         _logger.LogInformation("Deleting MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
 
-        // FIXED: Use your existing validation method
+        // Use existing validation method
         await ValidateDeleteRequestAsync(request, cancellationToken);
 
         try
@@ -481,13 +484,7 @@ public class BrokerBranchService : IBrokerBranchService
         _logger.LogInformation("Authorizing MstCoBrch in workflow: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
 
         // Validate request
-        var validationResult = await _authorizeValidator.ValidateAsync(request, cancellationToken);
-        if (!validationResult.IsValid)
-        {
-            var errors = string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
-            _logger.LogWarning("Validation failed for authorization request: {Errors}", errors);
-            throw new ValidationException($"Validation failed: {errors}");
-        }
+        await ValidateAuthorizeRequestAsync(request, cancellationToken);
 
         try
         {

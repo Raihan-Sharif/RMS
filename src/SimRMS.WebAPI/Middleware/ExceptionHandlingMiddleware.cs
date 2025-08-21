@@ -102,7 +102,7 @@ namespace SimRMS.WebAPI.Middleware
                 ValidationException validationEx => new ApiResponse<object>
                 {
                     Success = false,
-                    Message = "Validation failed",
+                    Message = "Validation failed: "+ validationEx.Message,
                     Data = null,
                     Errors = validationEx.ValidationErrors.Select(e => $"{e.PropertyName}: {e.ErrorMessage}").ToList(),
                     TraceId = context.TraceIdentifier
@@ -119,7 +119,7 @@ namespace SimRMS.WebAPI.Middleware
                                                             invalidOpEx.Message.Contains("DefaultChallengeScheme") => new ApiResponse<object>
                 {
                     Success = false,
-                    Message = "Authentication required. Please provide a valid authorization token.",
+                    Message = "Authentication required. Please provide a valid authorization token. " +invalidOpEx.Message,
                     Data = null,
                     TraceId = context.TraceIdentifier
                 },
@@ -147,14 +147,14 @@ namespace SimRMS.WebAPI.Middleware
                 SqlException sqlEx => new ApiResponse<object>
                 {
                     Success = false,
-                    Message = "Database operation failed",
+                    Message = "Database operation failed:"+ sqlEx.Message,
                     Data = null,
                     TraceId = context.TraceIdentifier
                 },
                 ArgumentException argEx => new ApiResponse<object>
                 {
                     Success = false,
-                    Message = "Invalid request parameter",
+                    Message = "Invalid request parameter:"+argEx.Message,
                     Data = null,
                     Errors = new List<string> { argEx.ParamName ?? "Unknown parameter" },
                     TraceId = context.TraceIdentifier

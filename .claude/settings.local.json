@@ -14,7 +14,8 @@
       "Bash(del \"C:\\Users\\raihan.sharif\\Desktop\\RMS\\ValidationTest.cs\")",
       "Bash(mv:*)",
       "Bash(del \"C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Application\\Validators\\CreateMstCoBrchRequestValidator.cs\")",
-      "Bash(del \"C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Application\\Interfaces\\Services\\ICurrentUserService.cs\")"
+      "Bash(del \"C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Application\\Interfaces\\Services\\ICurrentUserService.cs\")",
+      "Bash(del \"C:\\Users\\raihan.sharif\\Desktop\\RMS\\WorkFlow_Implementation_Summary.md\")"
     ],
     "deny": []
   }

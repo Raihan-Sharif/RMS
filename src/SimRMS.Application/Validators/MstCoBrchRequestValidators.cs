@@ -158,7 +158,7 @@ namespace SimRMS.Application.Validators
                 .Equal((byte)2).WithMessage("Action type must be 2 for authorization");
             
             RuleFor(x => x.IsAuth)
-                .Must(x => x == 0 || x == 1).WithMessage("IsAuth must be 0 (unauthorized) or 1 (authorized)");
+                .Must(x => x == 1 || x == 2).WithMessage("IsAuth must be 1 (authorized) or 2 (denied)");
             
             RuleFor(x => x.IPAddress)
                 .MaximumLength(39).WithMessage("IP Address cannot exceed 39 characters")

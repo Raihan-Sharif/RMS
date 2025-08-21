@@ -23,7 +23,7 @@ using SimRMS.Shared.Models;
 /// Modification History
 /// Author             Date         Description of Change
 /// -------------------------------------------------------------------
-/// [Missing]
+/// Raihan Sharif    21/Aug/2025    Added IWorkFlowService registration for workflow management
 /// 
 /// ===================================================================
 /// </para>
@@ -57,6 +57,7 @@ namespace SimRMS.Infrastructure
             services.AddScoped<ICompanyExposureService, CompanyExposureService>();
             services.AddScoped<IMstCoService, MstCoService>();
             services.AddScoped<IBrokerBranchService, BrokerBranchService>();
+            services.AddScoped<IWorkFlowService, WorkFlowService>();
 
             // Application Infrastructure Services
             services.AddScoped<IConfigurationService, ConfigurationService>();
