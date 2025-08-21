@@ -36,12 +36,14 @@ namespace SimRMS.Application.Models.DTOs
         public byte AuthLevel { get; set; }
         public byte IsDel { get; set; }
         public string? Remarks { get; set; }
+        public string? MakeBy { get; set; }
+        public string? AuthBy { get; set; }
     }
 
     public class MstCoBrchUpdateDto
     {
-        public string CoCode { get; set; } = null!;
-        public string CoBrchCode { get; set; } = null!;
+        //public string CoCode { get; set; } = null!;
+        //public string CoBrchCode { get; set; } = null!;
         public string CoBrchDesc { get; set; } = null!;
         public string? CoBrchAddr { get; set; }
         public string? CoBrchPhone { get; set; }

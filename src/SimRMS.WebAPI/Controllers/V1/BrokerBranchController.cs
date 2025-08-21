@@ -124,7 +124,7 @@ public class BrokerBranchController : BaseController
         [FromBody, Required] CreateMstCoBrchRequest request,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Creating MstCoBrch: {CoCode}-{CoBrchCode}", request.CoCode, request.CoBrchCode);
+        _logger.LogInformation("Creating MstCoBrch: {CoDesc}-{CoAdd}", request.CoBrchDesc, request.CoBrchAddr);
 
         var createdBranch = await _brokerBranchService.CreateMstCoBrchAsync(request, cancellationToken);
 

@@ -9,6 +9,8 @@ using System.Reflection;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
+namespace SimRMS.Infrastructure.Common;
+
 
 /// <summary>
 /// <para>
@@ -29,11 +31,6 @@ using Microsoft.Extensions.Configuration;
 /// </summary>
 /// 
 
-
-namespace SimRMS.Infrastructure.Common;
-/// <summary>
-/// Enhanced Generic Repository with SP support and bulk operations
-/// </summary>
 public class GenericRepository : IGenericRepository
 {
     private readonly ILB_DAL _dal;
@@ -49,6 +46,8 @@ public class GenericRepository : IGenericRepository
         _connectionString = configuration.GetConnectionString("DefaultConnection")
             ?? throw new InvalidOperationException("DefaultConnection string is required");
     }
+
+    #region Query Operations (SELECT)
 
     public async Task<T?> QuerySingleAsync<T>(string sqlOrSp, object? parameters = null, bool isStoredProcedure = false, CancellationToken cancellationToken = default) where T : class
     {
@@ -90,7 +89,7 @@ public class GenericRepository : IGenericRepository
     }
 
     /// <summary>
-    /// Enhanced pagination supporting both inline SQL and Stored Procedures
+    /// FULLY CORRECTED: Enhanced pagination supporting both inline SQL and Stored Procedures with OUTPUT parameters
     /// </summary>
     public async Task<PagedResult<T>> QueryPagedAsync<T>(string sqlOrSp, int pageNumber, int pageSize, object? parameters = null, string? orderBy = null, bool isStoredProcedure = false, CancellationToken cancellationToken = default) where T : class
     {
@@ -111,6 +110,10 @@ public class GenericRepository : IGenericRepository
             return await QueryPagedFromInlineSqlAsync<T>(sqlOrSp, pageNumber, pageSize, parameters, orderBy, cancellationToken);
         }
     }
+
+    #endregion
+
+    #region Command Operations (INSERT/UPDATE/DELETE)
 
     public async Task<int> ExecuteAsync(string sqlOrSp, object? parameters = null, bool isStoredProcedure = false, CancellationToken cancellationToken = default)
     {
@@ -143,6 +146,476 @@ public class GenericRepository : IGenericRepository
         var result = await _dal.LB_ExecuteScalarAsync(sqlOrSp, dalParams, commandType);
         return (T)Convert.ChangeType(result, typeof(T));
     }
+
+    /// <summary>
+    /// FULLY CORRECTED: Enhanced ExecuteWithOutputAsync that properly handles multiple OUTPUT parameters
+    /// Uses LB_ExecuteNonQueryAsync which automatically populates OUTPUT parameters in LB_DAL framework
+    /// </summary>
+    public async Task<ExecuteResult> ExecuteWithOutputAsync(string storedProcedure, object? parameters = null, CancellationToken cancellationToken = default)
+    {
+        _logger.LogDebug("ExecuteWithOutput: {StoredProcedure}", storedProcedure);
+
+        await _unitOfWork.EnsureConnectionAsync(cancellationToken);
+
+        var result = new ExecuteResult();
+        var dalParams = ConvertToDalParamsWithDirection(parameters);
+
+        try
+        {
+            // CRITICAL: Use LB_ExecuteNonQueryAsync which automatically handles OUTPUT parameters
+            // The LB_DAL framework populates OUTPUT parameter values after execution
+            var affectedRows = await _dal.LB_ExecuteNonQueryAsync(storedProcedure, dalParams, CommandType.StoredProcedure);
+
+            // CRITICAL: After LB_ExecuteNonQueryAsync, OUTPUT parameters are automatically populated by LB_DAL
+            if (dalParams != null)
+            {
+                foreach (var param in dalParams.Where(p => p.Direction == ParameterDirection.Output || p.Direction == ParameterDirection.InputOutput))
+                {
+                    var outputParam = new OutputParameter
+                    {
+                        Name = param.ParameterName.TrimStart('@'),
+                        Value = param.Value == DBNull.Value ? null : param.Value
+                    };
+
+                    result.OutputValues.Add(outputParam);
+
+                    _logger.LogDebug("OUTPUT Parameter {Name}: {Value}", param.ParameterName, param.Value);
+                }
+            }
+
+            // FIXED: Get RowsAffected from OUTPUT parameter, not from DataReader count
+            var rowsAffectedParam = result.OutputValues.FirstOrDefault(p =>
+                p.Name.Equals("RowsAffected", StringComparison.OrdinalIgnoreCase));
+
+            if (rowsAffectedParam?.Value != null)
+            {
+                result.RowsAffected = Convert.ToInt32(rowsAffectedParam.Value);
+            }
+            else
+            {
+                // Fallback to the return value from ExecuteNonQuery (though it may not be accurate for SPs)
+                result.RowsAffected = affectedRows;
+            }
+
+            _logger.LogDebug("Stored procedure executed successfully. RowsAffected: {RowsAffected}, OutputParams: {OutputCount}",
+                result.RowsAffected, result.OutputValues.Count);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error executing stored procedure with OUTPUT parameters: {StoredProcedure}", storedProcedure);
+            throw;
+        }
+
+        return result;
+    }
+
+    #endregion
+
+    #region Private Helper Methods - Pagination
+
+    /// <summary>
+    /// FULLY CORRECTED: Handle pagination for Stored Procedures with proper OUTPUT parameter support
+    /// Uses a hybrid approach: Execute to get OUTPUT params, then DataReader for result sets
+    /// </summary>
+    private async Task<PagedResult<T>> QueryPagedFromStoredProcedureAsync<T>(string storedProcedureName, int pageNumber, int pageSize, object? parameters, CancellationToken cancellationToken) where T : class
+    {
+        // Add pagination parameters to SP parameters
+        var spParameters = MergeParameters(parameters, new
+        {
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+            TotalCount = 0 // Will be set as output parameter
+        });
+
+        var results = new List<T>();
+        int totalCount = 0;
+
+        // Convert parameters with proper direction settings for OUTPUT parameters
+        var dalParams = ConvertToDalParamsWithDirection(spParameters);
+
+        _logger.LogDebug("Executing SP {StoredProcedure} with {ParamCount} parameters",
+            storedProcedureName, dalParams?.Count ?? 0);
+
+        try
+        {
+            // CRITICAL SOLUTION: For pagination SPs that return data AND have OUTPUT params,
+            // we need to execute TWICE because LB_DAL has limitations:
+            // 1. First execution with LB_ExecuteNonQueryAsync to get OUTPUT parameters
+            // 2. Second execution with LB_GetDbDataReaderAsync to get result set data
+
+            // STEP 1: Execute to populate OUTPUT parameters
+            await _dal.LB_ExecuteNonQueryAsync(storedProcedureName, dalParams, CommandType.StoredProcedure);
+
+            // Extract OUTPUT parameter values (now populated by LB_DAL)
+            if (dalParams != null)
+            {
+                var totalCountParam = dalParams.FirstOrDefault(p =>
+                    p.ParameterName.Equals("TotalCount", StringComparison.OrdinalIgnoreCase) &&
+                    (p.Direction == ParameterDirection.Output || p.Direction == ParameterDirection.InputOutput));
+
+                if (totalCountParam?.Value != null && totalCountParam.Value != DBNull.Value)
+                {
+                    totalCount = Convert.ToInt32(totalCountParam.Value);
+                    _logger.LogDebug("Retrieved TotalCount from OUTPUT parameter: {TotalCount}", totalCount);
+                }
+            }
+
+            // STEP 2: Execute again to get result set data
+            // Reset parameters to INPUT only (exclude OUTPUT params for DataReader call)
+            var inputParams = ConvertToDalParams(parameters);
+            var readerParams = MergeParameters(parameters, new { PageNumber = pageNumber, PageSize = pageSize });
+            var readerDalParams = ConvertToDalParams(readerParams);
+
+            using var reader = await _dal.LB_GetDbDataReaderAsync(storedProcedureName, readerDalParams, CommandType.StoredProcedure);
+
+            // Read data from result set
+            while (await reader.ReadAsync())
+            {
+                results.Add(MapFromReader<T>(reader));
+            }
+
+            // FALLBACK: If OUTPUT parameter didn't work, try getting TotalCount from second result set
+            if (totalCount == 0 && await reader.NextResultAsync())
+            {
+                if (await reader.ReadAsync())
+                {
+                    // Try to get total count from column (SP includes it in 2nd result set)
+                    if (HasColumn(reader, "TotalCount"))
+                    {
+                        totalCount = reader.GetInt32("TotalCount");
+                    }
+                    else
+                    {
+                        totalCount = reader.GetInt32(0); // First column should be count
+                    }
+
+                    _logger.LogDebug("Retrieved TotalCount from second result set: {TotalCount}", totalCount);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error executing paginated stored procedure: {StoredProcedure}", storedProcedureName);
+            throw;
+        }
+
+        _logger.LogDebug("SP {StoredProcedure} returned {DataCount} records, TotalCount: {TotalCount}",
+            storedProcedureName, results.Count, totalCount);
+
+        return new PagedResult<T>
+        {
+            Data = results,
+            TotalCount = totalCount,
+            PageNumber = pageNumber,
+            PageSize = pageSize
+        };
+    }
+
+    /// <summary>
+    /// Handle pagination for inline SQL queries
+    /// </summary>
+    private async Task<PagedResult<T>> QueryPagedFromInlineSqlAsync<T>(string baseQuery, int pageNumber, int pageSize, object? parameters, string? orderBy, CancellationToken cancellationToken) where T : class
+    {
+        // Default ordering if not specified
+        if (string.IsNullOrEmpty(orderBy))
+        {
+            orderBy = "ORDER BY (SELECT NULL)"; // SQL Server requires ORDER BY for OFFSET
+        }
+        else if (!orderBy.ToUpper().StartsWith("ORDER BY"))
+        {
+            orderBy = $"ORDER BY {orderBy}";
+        }
+
+        var offset = (pageNumber - 1) * pageSize;
+
+        // Build single query with window function for total count
+        var pagedQuery = $@"
+                WITH PagedData AS (
+                    SELECT *, COUNT(*) OVER() AS TotalCount
+                    FROM ({baseQuery}) AS BaseQuery
+                    {orderBy}
+                    OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY
+                )
+                SELECT * FROM PagedData";
+
+        // Add pagination parameters
+        var allParameters = MergeParameters(parameters, new { Offset = offset, PageSize = pageSize });
+        var dalParams = ConvertToDalParams(allParameters);
+
+        var results = new List<T>();
+        int totalCount = 0;
+
+        using var reader = await _dal.LB_GetDbDataReaderAsync(pagedQuery, dalParams, CommandType.Text);
+
+        while (await reader.ReadAsync())
+        {
+            // Get total count from first row (window function result)
+            if (totalCount == 0 && HasColumn(reader, "TotalCount"))
+            {
+                totalCount = reader.GetInt32("TotalCount");
+            }
+
+            // Map the entity (excluding TotalCount column)
+            results.Add(MapFromReader<T>(reader));
+        }
+
+        return new PagedResult<T>
+        {
+            Data = results,
+            TotalCount = totalCount,
+            PageNumber = pageNumber,
+            PageSize = pageSize
+        };
+    }
+
+    #endregion
+
+    #region Private Helper Methods - Parameter Handling
+
+    /// <summary>
+    /// FULLY CORRECTED: Enhanced parameter detection that includes your specific OUTPUT parameter names
+    /// </summary>
+    private bool IsOutputParameter(string parameterName)
+    {
+        // Enhanced OUTPUT parameter naming patterns including your specific ones
+        var outputPatterns = new[] {
+            "RowsAffected", "StatusCode", "StatusMsg", "TotalCount", "RecordCount",
+            "Result", "ReturnValue", "Count", "Total", "InsertedCode", "InsertedId",
+            "GeneratedCode", "OutputCode", "NewId", "NewCode", "ErrorCode", "ErrorMsg"
+        };
+
+        return outputPatterns.Any(pattern =>
+            parameterName.Equals(pattern, StringComparison.OrdinalIgnoreCase) ||
+            parameterName.EndsWith(pattern, StringComparison.OrdinalIgnoreCase));
+    }
+
+    /// <summary>
+    /// FULLY CORRECTED: Enhanced parameter conversion with proper size allocation for string OUTPUT parameters
+    /// </summary>
+    private List<LB_DALParam>? ConvertToDalParamsWithDirection(object? parameters)
+    {
+        if (parameters == null) return null;
+
+        var dalParams = new List<LB_DALParam>();
+
+        // Handle Dictionary<string, object>
+        if (parameters is Dictionary<string, object> dict)
+        {
+            foreach (var kvp in dict)
+            {
+                var value = kvp.Value ?? DBNull.Value;
+                var direction = IsOutputParameter(kvp.Key) ? ParameterDirection.Output : ParameterDirection.Input;
+
+                // FIXED: Proper size allocation for OUTPUT parameters
+                if (direction == ParameterDirection.Output)
+                {
+                    if (kvp.Key.Contains("Count", StringComparison.OrdinalIgnoreCase) ||
+                        kvp.Key.Contains("Id", StringComparison.OrdinalIgnoreCase))
+                    {
+                        value = 0; // For integer OUTPUT parameters
+                    }
+                    else if (kvp.Key.Contains("Code", StringComparison.OrdinalIgnoreCase))
+                    {
+                        value = new string(' ', 10); // Reserve space for code fields (usually 6-10 chars)
+                    }
+                    else if (kvp.Key.Contains("Msg", StringComparison.OrdinalIgnoreCase))
+                    {
+                        value = new string(' ', 500); // Reserve space for message fields
+                    }
+                    else
+                    {
+                        value = new string(' ', 255); // Default string OUTPUT parameter size
+                    }
+                }
+
+                dalParams.Add(new LB_DALParam(kvp.Key, value, direction));
+            }
+            return dalParams;
+        }
+
+        // Handle anonymous objects and POCOs
+        var properties = parameters.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        foreach (var prop in properties)
+        {
+            var value = prop.GetValue(parameters) ?? DBNull.Value;
+            var direction = IsOutputParameter(prop.Name) ? ParameterDirection.Output : ParameterDirection.Input;
+
+            // FIXED: Proper size allocation for OUTPUT parameters based on property type
+            if (direction == ParameterDirection.Output)
+            {
+                if (prop.PropertyType == typeof(int) || prop.PropertyType == typeof(int?))
+                {
+                    value = 0;
+                }
+                else if (prop.PropertyType == typeof(string))
+                {
+                    if (prop.Name.Contains("Code", StringComparison.OrdinalIgnoreCase))
+                    {
+                        value = new string(' ', 10); // Code fields
+                    }
+                    else if (prop.Name.Contains("Msg", StringComparison.OrdinalIgnoreCase))
+                    {
+                        value = new string(' ', 500); // Message fields
+                    }
+                    else
+                    {
+                        value = new string(' ', 255); // Default string size
+                    }
+                }
+            }
+
+            dalParams.Add(new LB_DALParam(prop.Name, value, direction));
+        }
+
+        return dalParams;
+    }
+
+    private List<LB_DALParam>? ConvertToDalParams(object? parameters)
+    {
+        if (parameters == null) return null;
+
+        var dalParams = new List<LB_DALParam>();
+
+        // Handle Dictionary<string, object>
+        if (parameters is Dictionary<string, object> dict)
+        {
+            foreach (var kvp in dict)
+            {
+                dalParams.Add(new LB_DALParam(kvp.Key, kvp.Value ?? DBNull.Value));
+            }
+            return dalParams;
+        }
+
+        // Handle anonymous objects and POCOs
+        var properties = parameters.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        foreach (var prop in properties)
+        {
+            dalParams.Add(new LB_DALParam(prop.Name, prop.GetValue(parameters) ?? DBNull.Value));
+        }
+
+        return dalParams;
+    }
+
+    private bool HasOutputParameters(object? parameters)
+    {
+        if (parameters == null) return false;
+
+        var properties = parameters.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        return properties.Any(p => IsOutputParameter(p.Name));
+    }
+
+    private object MergeParameters(object? original, object additional)
+    {
+        if (original == null) return additional;
+
+        var dict = new Dictionary<string, object>();
+
+        // Add original parameters
+        if (original is Dictionary<string, object> originalDict)
+        {
+            foreach (var kvp in originalDict)
+            {
+                dict[kvp.Key] = kvp.Value;
+            }
+        }
+        else
+        {
+            var originalProps = original.GetType().GetProperties();
+            foreach (var prop in originalProps)
+            {
+                dict[prop.Name] = prop.GetValue(original) ?? DBNull.Value;
+            }
+        }
+
+        // Add additional parameters
+        var additionalProps = additional.GetType().GetProperties();
+        foreach (var prop in additionalProps)
+        {
+            dict[prop.Name] = prop.GetValue(additional) ?? DBNull.Value;
+        }
+
+        return dict;
+    }
+
+    private bool HasColumn(DbDataReader reader, string columnName)
+    {
+        for (int i = 0; i < reader.FieldCount; i++)
+        {
+            if (reader.GetName(i).Equals(columnName, StringComparison.OrdinalIgnoreCase))
+                return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Convert entities to DataTable for bulk operations
+    /// </summary>
+    private DataTable ConvertToDataTable<T>(IEnumerable<T> entities) where T : class
+    {
+        var dataTable = new DataTable();
+        var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+        // Create columns
+        foreach (var prop in properties)
+        {
+            var columnType = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
+            dataTable.Columns.Add(prop.Name, columnType);
+        }
+
+        // Add rows
+        foreach (var entity in entities)
+        {
+            var row = dataTable.NewRow();
+            foreach (var prop in properties)
+            {
+                var value = prop.GetValue(entity);
+                row[prop.Name] = value ?? DBNull.Value;
+            }
+            dataTable.Rows.Add(row);
+        }
+
+        return dataTable;
+    }
+
+    private T MapFromReader<T>(DbDataReader reader) where T : class
+    {
+        var type = typeof(T);
+        var instance = Activator.CreateInstance<T>();
+        var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+        foreach (var property in properties)
+        {
+            if (!property.CanWrite) continue;
+
+            try
+            {
+                var columnName = property.Name;
+                if (HasColumn(reader, columnName))
+                {
+                    var value = reader[columnName];
+                    if (value != DBNull.Value)
+                    {
+                        if (property.PropertyType == typeof(string))
+                        {
+                            property.SetValue(instance, value.ToString()?.Trim());
+                        }
+                        else
+                        {
+                            property.SetValue(instance, Convert.ChangeType(value, property.PropertyType));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning("Failed to map property {PropertyName}: {Error}", property.Name, ex.Message);
+            }
+        }
+
+        return instance;
+    }
+
+    #endregion
 
     public async Task<int> ExecuteBatchAsync(IEnumerable<(string sql, object? parameters)> commands, CancellationToken cancellationToken = default)
     {
@@ -229,449 +702,6 @@ public class GenericRepository : IGenericRepository
         return await BulkInsertAsync(entities, tableName, cancellationToken);
     }
 
-    #region Private Helper Methods
-
-    /// <summary>
-    /// Handle pagination for inline SQL queries
-    /// </summary>
-    private async Task<PagedResult<T>> QueryPagedFromInlineSqlAsync<T>(string baseQuery, int pageNumber, int pageSize, object? parameters, string? orderBy, CancellationToken cancellationToken) where T : class
-    {
-        // Default ordering if not specified
-        if (string.IsNullOrEmpty(orderBy))
-        {
-            orderBy = "ORDER BY (SELECT NULL)"; // SQL Server requires ORDER BY for OFFSET
-        }
-        else if (!orderBy.ToUpper().StartsWith("ORDER BY"))
-        {
-            orderBy = $"ORDER BY {orderBy}";
-        }
-
-        var offset = (pageNumber - 1) * pageSize;
-
-        // Build single query with window function for total count
-        var pagedQuery = $@"
-                WITH PagedData AS (
-                    SELECT *, COUNT(*) OVER() AS TotalCount
-                    FROM ({baseQuery}) AS BaseQuery
-                    {orderBy}
-                    OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY
-                )
-                SELECT * FROM PagedData";
-
-        // Add pagination parameters
-        var allParameters = MergeParameters(parameters, new { Offset = offset, PageSize = pageSize });
-        var dalParams = ConvertToDalParams(allParameters);
-
-        var results = new List<T>();
-        int totalCount = 0;
-
-        using var reader = await _dal.LB_GetDbDataReaderAsync(pagedQuery, dalParams, CommandType.Text);
-
-        while (await reader.ReadAsync())
-        {
-            // Get total count from first row (window function result)
-            if (totalCount == 0 && HasColumn(reader, "TotalCount"))
-            {
-                totalCount = reader.GetInt32("TotalCount");
-            }
-
-            // Map the entity (excluding TotalCount column)
-            results.Add(MapFromReader<T>(reader));
-        }
-
-        return new PagedResult<T>
-        {
-            Data = results,
-            TotalCount = totalCount,
-            PageNumber = pageNumber,
-            PageSize = pageSize
-        };
-    }
-
-
-    /// <summary>
-    /// Handle pagination for Stored Procedures with proper OUTPUT parameter support
-    /// SP should return data with TotalCount column OR use output parameter
-    /// </summary>
-    private async Task<PagedResult<T>> QueryPagedFromStoredProcedureAsync<T>(string storedProcedureName, int pageNumber, int pageSize, object? parameters, CancellationToken cancellationToken) where T : class
-    {
-        // Add pagination parameters to SP parameters
-        var spParameters = MergeParameters(parameters, new
-        {
-            PageNumber = pageNumber,
-            PageSize = pageSize,
-            TotalCount = 0 // Will be set as output parameter
-        });
-
-        var results = new List<T>();
-        int totalCount = 0;
-
-        // Convert parameters with proper direction settings for OUTPUT parameters
-        var dalParams = ConvertToDalParamsWithDirection(spParameters);
-
-        _logger.LogDebug("Executing SP {StoredProcedure} with {ParamCount} parameters",
-            storedProcedureName, dalParams?.Count ?? 0);
-
-        // FIXED: Single execution that handles both data AND output parameters
-        using var reader = await _dal.LB_GetDbDataReaderAsync(storedProcedureName, dalParams, CommandType.StoredProcedure);
-
-        // Read data from result set
-        while (await reader.ReadAsync())
-        {
-            // Try to get total count from column (if SP includes it in result set)
-            if (totalCount == 0 && HasColumn(reader, "TotalCount"))
-            {
-                totalCount = reader.GetInt32("TotalCount");
-            }
-
-            results.Add(MapFromReader<T>(reader));
-        }
-
-        // FIXED: After DataReader is consumed, OUTPUT parameters are now available
-        // Extract OUTPUT parameter values from dalParams (they are populated by LB_DAL after execution)
-        if (totalCount == 0 && dalParams != null)
-        {
-            var totalCountParam = dalParams.FirstOrDefault(p =>
-                p.ParameterName.Equals("TotalCount", StringComparison.OrdinalIgnoreCase) &&
-                (p.Direction == ParameterDirection.Output || p.Direction == ParameterDirection.InputOutput));
-
-            if (totalCountParam?.Value != null && totalCountParam.Value != DBNull.Value)
-            {
-                totalCount = Convert.ToInt32(totalCountParam.Value);
-                _logger.LogDebug("Retrieved TotalCount from OUTPUT parameter: {TotalCount}", totalCount);
-            }
-        }
-
-        // Fallback: If SP has second result set with just total count 
-        // Important: now we returnt 2 restults set for show the total count (cause lb db reader not handle output param). so total count now get here.
-        if (totalCount == 0 && await reader.NextResultAsync())
-        {
-            if (await reader.ReadAsync())
-            {
-                // Try to get total count from column ,SP includes it in 2nd result set
-                if (totalCount == 0 && HasColumn(reader, "TotalCount"))
-                {
-                    totalCount = reader.GetInt32("TotalCount");
-                }
-                else
-                    totalCount = reader.GetInt32(0); // First column should be count
-
-                _logger.LogDebug("Retrieved TotalCount from second result set: {TotalCount}", totalCount);
-            }
-        }
-
-        _logger.LogDebug("SP {StoredProcedure} returned {DataCount} records, TotalCount: {TotalCount}",
-            storedProcedureName, results.Count, totalCount);
-
-        return new PagedResult<T>
-        {
-            Data = results,
-            TotalCount = totalCount,
-            PageNumber = pageNumber,
-            PageSize = pageSize
-        };
-    }
-
-    /// <summary>
-    /// FIXED: Improved OUTPUT parameter detection
-    /// </summary>
-    private bool HasOutputParameters(object? parameters)
-    {
-        if (parameters == null) return false;
-
-        var properties = parameters.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-        return properties.Any(p => IsOutputParameter(p.Name));
-    }
-
-    /// <summary>
-    /// FIXED: Better OUTPUT parameter naming pattern detection
-    /// </summary>
-    private bool IsOutputParameter(string parameterName)
-    {
-        // Common OUTPUT parameter naming patterns
-        var outputPatterns = new[] {
-        "RowsAffected", "StatusCode", "StatusMsg", "TotalCount",
-        "Result", "ReturnValue", "Count", "Total", "RecordCount"
-    };
-
-        return outputPatterns.Any(pattern =>
-            parameterName.Equals(pattern, StringComparison.OrdinalIgnoreCase) ||
-            parameterName.EndsWith(pattern, StringComparison.OrdinalIgnoreCase));
-    }
-
-    /// <summary>
-    /// FIXED: Enhanced parameter conversion with proper direction setting
-    /// </summary>
-    private List<LB_DALParam>? ConvertToDalParamsWithDirection(object? parameters)
-    {
-        if (parameters == null) return null;
-
-        var dalParams = new List<LB_DALParam>();
-
-        // Handle Dictionary<string, object>
-        if (parameters is Dictionary<string, object> dict)
-        {
-            foreach (var kvp in dict)
-            {
-                var value = kvp.Value ?? DBNull.Value;
-                var direction = IsOutputParameter(kvp.Key) ? ParameterDirection.Output : ParameterDirection.Input;
-
-                // For OUTPUT parameters, ensure we have a proper initial value for size allocation
-                if (direction == ParameterDirection.Output && kvp.Key.Contains("Count", StringComparison.OrdinalIgnoreCase))
-                {
-                    value = 0; // For integer OUTPUT parameters
-                }
-
-                dalParams.Add(new LB_DALParam(kvp.Key, value, direction));
-            }
-            return dalParams;
-        }
-
-        // Handle anonymous objects and POCOs
-        var properties = parameters.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-        foreach (var prop in properties)
-        {
-            var value = prop.GetValue(parameters) ?? DBNull.Value;
-            var direction = IsOutputParameter(prop.Name) ? ParameterDirection.Output : ParameterDirection.Input;
-
-            // For OUTPUT parameters, ensure we have a proper initial value for size allocation
-            if (direction == ParameterDirection.Output)
-            {
-                if (prop.Name.Contains("Count", StringComparison.OrdinalIgnoreCase))
-                {
-                    value = 0; // For integer OUTPUT parameters
-                }
-                else if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(string))
-                {
-                    value = new string(' ', 255); // Reserve space for string OUTPUT parameters
-                }
-            }
-
-            var param = new LB_DALParam(prop.Name, value, direction);
-            dalParams.Add(param);
-        }
-
-        return dalParams;
-    }
-
-    /// <summary>
-    /// Enhanced ExecuteWithOutputAsync that properly handles OUTPUT parameters
-    /// </summary>
-    public async Task<ExecuteResult> ExecuteWithOutputAsync(string storedProcedure, object? parameters = null, CancellationToken cancellationToken = default)
-    {
-        _logger.LogDebug("ExecuteWithOutput: {StoredProcedure}", storedProcedure);
-
-        await _unitOfWork.EnsureConnectionAsync(cancellationToken);
-
-        var result = new ExecuteResult();
-        var dalParams = ConvertToDalParamsWithDirection(parameters);
-
-        try
-        {
-            // Execute the stored procedure
-            result.RowsAffected = await _dal.LB_ExecuteNonQueryAsync(storedProcedure, dalParams, CommandType.StoredProcedure);
-
-            // FIXED: After execution, OUTPUT parameter values are automatically populated by LB_DAL
-            // Extract OUTPUT parameter values
-            if (dalParams != null)
-            {
-                foreach (var param in dalParams.Where(p => p.Direction == ParameterDirection.Output || p.Direction == ParameterDirection.InputOutput))
-                {
-                    result.OutputValues.Add(new OutputParameter
-                    {
-                        Name = param.ParameterName.TrimStart('@'),
-                        Value = param.Value == DBNull.Value ? null : param.Value
-                    });
-
-                    _logger.LogDebug("OUTPUT Parameter {Name}: {Value}", param.ParameterName, param.Value);
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error executing stored procedure with OUTPUT parameters: {StoredProcedure}", storedProcedure);
-            throw;
-        }
-
-        return result;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-    private List<LB_DALParam>? ConvertToDalParams(object? parameters)
-    {
-        if (parameters == null) return null;
-
-        var dalParams = new List<LB_DALParam>();
-
-        // Handle Dictionary<string, object>
-        if (parameters is Dictionary<string, object> dict)
-        {
-            foreach (var kvp in dict)
-            {
-                var value = kvp.Value ?? DBNull.Value;
-                dalParams.Add(new LB_DALParam(kvp.Key, value));
-            }
-            return dalParams;
-        }
-
-        // Handle anonymous objects and POCOs
-        var properties = parameters.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-        foreach (var prop in properties)
-        {
-            var value = prop.GetValue(parameters) ?? DBNull.Value;
-            dalParams.Add(new LB_DALParam(prop.Name, value));
-        }
-
-        return dalParams;
-    }
-
-    private T MapFromReader<T>(DbDataReader reader) where T : class
-    {
-        var type = typeof(T);
-        var instance = Activator.CreateInstance<T>();
-
-        // Simple property mapping using reflection
-        var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-            .Where(p => p.CanWrite)
-            .ToDictionary(p => p.Name, StringComparer.OrdinalIgnoreCase);
-
-        for (int i = 0; i < reader.FieldCount; i++)
-        {
-            var fieldName = reader.GetName(i);
-
-            // Skip TotalCount column used for pagination
-            if (fieldName.Equals("TotalCount", StringComparison.OrdinalIgnoreCase))
-                continue;
-
-            if (properties.TryGetValue(fieldName, out var property))
-            {
-                var value = reader.IsDBNull(i) ? null : reader.GetValue(i);
-                if (value != null)
-                {
-                    // Handle type conversion
-                    var convertedValue = ConvertToPropertyType(value, property.PropertyType);
-                    property.SetValue(instance, convertedValue);
-                }
-            }
-        }
-
-        return instance;
-    }
-
-    private object? ConvertToPropertyType(object value, Type targetType)
-    {
-        if (value == null || value == DBNull.Value) return null;
-
-        // Handle nullable types
-        if (targetType.IsGenericType && targetType.GetGenericTypeDefinition() == typeof(Nullable<>))
-        {
-            targetType = Nullable.GetUnderlyingType(targetType)!;
-        }
-
-        // Direct assignment if types match
-        if (targetType.IsAssignableFrom(value.GetType()))
-            return value;
-
-        // Convert using Convert.ChangeType
-        return Convert.ChangeType(value, targetType);
-    }
-
-    private object MergeParameters(object? existingParams, object newParams)
-    {
-        if (existingParams == null) return newParams;
-
-        var merged = new Dictionary<string, object>();
-
-        // Handle existing parameters
-        if (existingParams is Dictionary<string, object> existingDict)
-        {
-            foreach (var kvp in existingDict)
-            {
-                merged[kvp.Key] = kvp.Value ?? DBNull.Value;
-            }
-        }
-        else
-        {
-            var existingProps = existingParams.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            foreach (var prop in existingProps)
-            {
-                merged[prop.Name] = prop.GetValue(existingParams) ?? DBNull.Value;
-            }
-        }
-
-        // Handle new parameters
-        if (newParams is Dictionary<string, object> newDict)
-        {
-            foreach (var kvp in newDict)
-            {
-                merged[kvp.Key] = kvp.Value ?? DBNull.Value;
-            }
-        }
-        else
-        {
-            var newProps = newParams.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            foreach (var prop in newProps)
-            {
-                merged[prop.Name] = prop.GetValue(newParams) ?? DBNull.Value;
-            }
-        }
-
-        return merged;
-    }
-
-    private bool HasColumn(DbDataReader reader, string columnName)
-    {
-        try
-        {
-            return reader.GetOrdinal(columnName) >= 0;
-        }
-        catch (IndexOutOfRangeException)
-        {
-            return false;
-        }
-    }
-
-    /// <summary>
-    /// Convert entities to DataTable for bulk operations
-    /// </summary>
-    private DataTable ConvertToDataTable<T>(IEnumerable<T> entities) where T : class
-    {
-        var dataTable = new DataTable();
-        var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
-        // Create columns
-        foreach (var prop in properties)
-        {
-            var columnType = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
-            dataTable.Columns.Add(prop.Name, columnType);
-        }
-
-        // Add rows
-        foreach (var entity in entities)
-        {
-            var row = dataTable.NewRow();
-            foreach (var prop in properties)
-            {
-                var value = prop.GetValue(entity);
-                row[prop.Name] = value ?? DBNull.Value;
-            }
-            dataTable.Rows.Add(row);
-        }
-
-        return dataTable;
-    }
-
-    #endregion
 
     #region Table Value Parameter Methods
 
@@ -813,4 +843,3 @@ public class GenericRepository : IGenericRepository
 
     #endregion
 }
-

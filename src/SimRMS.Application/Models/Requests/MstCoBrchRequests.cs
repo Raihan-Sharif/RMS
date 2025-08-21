@@ -33,8 +33,8 @@ namespace SimRMS.Application.Models.Requests
 
     public class CreateMstCoBrchRequest
     {
-        public string CoCode { get; set; } = null!;
-        public string CoBrchCode { get; set; } = null!;
+        //public string CoCode { get; set; } = null!;
+        //public string CoBrchCode { get; set; } = null!;
         public string CoBrchDesc { get; set; } = null!;
         public string? CoBrchAddr { get; set; }
         public string? CoBrchPhone { get; set; }

@@ -1,14 +1,15 @@
-using FluentValidation;
+﻿using FluentValidation;
 using Microsoft.Extensions.Logging;
-using SimRMS.Application.Interfaces;
 using SimRMS.Application.Interfaces.Services;
 using SimRMS.Application.Models.DTOs;
 using SimRMS.Application.Models.Requests;
-using SimRMS.Domain.Common;
-using SimRMS.Domain.Exceptions;
 using SimRMS.Domain.Interfaces.Common;
 using SimRMS.Shared.Models;
+using SimRMS.Domain.Exceptions;
+using System.ComponentModel.DataAnnotations;
+using SimRMS.Application.Interfaces;
 using SimRMS.Shared.Constants;
+using SimRMS.Domain.Common; // FIXED: Added missing import for ValidationErrorDetail
 using ValidationException = SimRMS.Domain.Exceptions.ValidationException;
 
 /// <summary>
@@ -30,9 +31,7 @@ using ValidationException = SimRMS.Domain.Exceptions.ValidationException;
 
 namespace SimRMS.Infrastructure.Services;
 
-/// <summary>
-/// Broker Branch service with business logic and validation
-/// </summary>
+
 public class BrokerBranchService : IBrokerBranchService
 {
     private readonly IGenericRepository _repository;
@@ -64,29 +63,34 @@ public class BrokerBranchService : IBrokerBranchService
         _logger = logger;
     }
 
-    public async Task<PagedResult<MstCoBrchDto>> GetMstCoBrchListAsync(int pageNumber = 1, int pageSize = 10, string? searchTerm = null, string? coCode = null, CancellationToken cancellationToken = default)
+    #region Main CRUD Operations
+
+    public async Task<PagedResult<MstCoBrchDto>> GetMstCoBrchListAsync(int pageNumber = 1, int pageSize = 10,
+        string? searchTerm = null, string? coCode = null, CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Getting paged MstCoBrch list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
+        // Validate and sanitize inputs
         if (pageNumber < 1) pageNumber = 1;
         if (pageSize < 1 || pageSize > 100) pageSize = 10;
 
         try
         {
-            // Call stored procedure directly with OUTPUT parameter
             var parameters = new
             {
                 PageNumber = pageNumber,
                 PageSize = pageSize,
-                SortColumn = "CoCode",
+                SortColumn = "CoBrchDesc",
                 SortDirection = "ASC",
                 CoCode = coCode,
                 SearchTerm = searchTerm,
-                IsAuth = 1, // Approved: 1 , Denied: 2
-                TotalCount = 0 // OUTPUT parameter
+                isAuth = (byte)1,
+                TotalCount = 0
             };
 
-            // Get the data from SP using QueryPagedAsync which should handle the OUTPUT parameter
+            _logger.LogDebug("Calling LB_SP_GetBrokerBranchList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, CoCode={CoCode}, SearchTerm={SearchTerm}, isAuth={IsAuth}",
+                pageNumber, pageSize, coCode, searchTerm, 1);
+
             var result = await _repository.QueryPagedAsync<MstCoBrchDto>(
                 sqlOrSp: "LB_SP_GetBrokerBranchList",
                 pageNumber: pageNumber,
@@ -94,6 +98,9 @@ public class BrokerBranchService : IBrokerBranchService
                 parameters: parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
+
+            _logger.LogDebug("SP returned TotalCount: {TotalCount}, Data count: {DataCount}",
+                result.TotalCount, result.Data.Count());
 
             return result;
         }
@@ -116,29 +123,26 @@ public class BrokerBranchService : IBrokerBranchService
 
     public async Task<MstCoBrchDto?> GetMstCoBrchByIdAsync(string coCode, string coBrchCode, CancellationToken cancellationToken = default)
     {
-        if (string.IsNullOrWhiteSpace(coCode))
-            throw new ArgumentException("Company code cannot be null or empty", nameof(coCode));
-
-        if (string.IsNullOrWhiteSpace(coBrchCode))
-            throw new ArgumentException("Branch code cannot be null or empty", nameof(coBrchCode));
-
         _logger.LogInformation("Getting MstCoBrch by ID: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
 
-        var parameters = new 
-        { 
-            CoCode = coCode, 
-            CoBrchCode = coBrchCode,
-            StatusCode = 0, // OUTPUT parameter
-            StatusMsg = "" // OUTPUT parameter
-        };
-        
         try
         {
-            return await _repository.QuerySingleAsync<MstCoBrchDto>(
-                sqlOrSp: "LB_SP_GetMstCoBrch_ByBranchCode", 
+            var parameters = new
+            {
+                CoCode = coCode,
+                CoBrchCode = coBrchCode,
+                statusCode = 0, // output param
+                statusMsg = "" // output param
+            };
+
+            var result = await _repository.QuerySingleAsync<MstCoBrchDto>(
+                sqlOrSp: "LB_SP_GetMstCoBrch_ByBranchCode",
                 parameters: parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
+
+            _logger.LogDebug("Retrieved branch: {Found}", result != null ? "Found" : "Not Found");
+            return result;
         }
         catch (ArgumentException ex)
         {
@@ -159,309 +163,265 @@ public class BrokerBranchService : IBrokerBranchService
 
     public async Task<MstCoBrchDto> CreateMstCoBrchAsync(CreateMstCoBrchRequest request, CancellationToken cancellationToken = default)
     {
-        if (request == null)
-            throw new ArgumentNullException(nameof(request));
+        string defaultCoCode = "073";
+        _logger.LogInformation("Creating new MstCoBrch for company: {CoCode}", defaultCoCode);
 
-        _logger.LogInformation("Creating MstCoBrch: {CoCode}-{CoBrchCode}", request.CoCode, request.CoBrchCode);
-
+        // Validate the request
         await ValidateCreateRequestAsync(request, cancellationToken);
 
-        return await _unitOfWork.ExecuteInTransactionAsync(async () =>
+        // ✅ Generate and capture the branch code
+        var generatedBranchCode = await GenerateBranchCodeAsync(defaultCoCode, cancellationToken);
+
+        try
         {
-            if (await MstCoBrchExistsAsync(request.CoCode, request.CoBrchCode, cancellationToken))
-                throw new DomainException($"Branch with code '{request.CoCode}-{request.CoBrchCode}' already exists");
-
-            await ValidateBusinessRulesAsync(request, cancellationToken);
-
             var parameters = new
             {
-                Action = 1,
-                CoCode = request.CoCode,
-                CoBrchCode = request.CoBrchCode,
+                Action = (byte)ActionTypeEnum.INSERT,
+                CoCode = defaultCoCode,
+                CoBrchCode = generatedBranchCode, // ✅ Use the generated code
                 CoBrchDesc = request.CoBrchDesc,
                 CoBrchAddr = request.CoBrchAddr,
                 CoBrchPhone = request.CoBrchPhone,
                 IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.GetCurrentUserId(),
+                MakerId = _currentUserService.UserId,
                 ActionDt = DateTime.Now,
-                TransDt = DateTime.Today,
+                TransDt = DateTime.Now.Date,
                 ActionType = (byte)ActionTypeEnum.INSERT,
-                IsDel = (byte)0,
+                IsDel = 0,
                 Remarks = request.Remarks,
-                RowsAffected = 0 // OUTPUT parameter
+                RowsAffected = 0,
+                InsertedCode = ""
             };
 
-            var rowsAffected = await _repository.ExecuteAsync(
-                sqlOrSp: "LB_SP_CrudMstCoBrch",
-                parameters: parameters,
-                isStoredProcedure: true,
-                cancellationToken: cancellationToken);
+            _logger.LogDebug("Calling LB_SP_CrudMstCoBrch with Action=1 (INSERT) for branch code: {BranchCode}", generatedBranchCode);
 
-            if (rowsAffected == 0)
-                throw new DomainException($"Failed to create MstCoBrch with code '{request.CoCode}-{request.CoBrchCode}'");
+            var result = await _repository.ExecuteWithOutputAsync(
+                "LB_SP_CrudMstCoBrch",
+                parameters,
+                cancellationToken);
 
-            var createdBranch = await GetMstCoBrchByIdAsync(request.CoCode, request.CoBrchCode, cancellationToken);
-            return createdBranch ?? throw new DomainException("Failed to retrieve created MstCoBrch");
-        }, cancellationToken);
+            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
+            //var insertedCode = result.GetOutputValue<string>("InsertedCode");
+
+            _logger.LogDebug("Create operation completed. RowsAffected: {RowsAffected}",
+                rowsAffected);
+
+            if (rowsAffected <= 0)
+            {
+                throw new DomainException("Failed to create broker branch - no rows affected");
+            }
+
+            // here genereated new Broker branch obj [cause unauthorized data not show by get by sp]
+            MstCoBrchDto newBrokerBranch  = new MstCoBrchDto
+            {
+                CoCode = defaultCoCode,
+                CoBrchCode = generatedBranchCode,
+                CoBrchDesc = request.CoBrchDesc,
+                CoBrchAddr = request.CoBrchAddr,
+                CoBrchPhone = request.CoBrchPhone,
+                IPAddress = _currentUserService.GetClientIPAddress(),
+                MakerId = _currentUserService.UserId,
+                ActionDt = DateTime.Now,
+                TransDt = DateTime.Now.Date,
+                ActionType = (byte)ActionTypeEnum.INSERT,
+                IsAuth = 0, // Initially unauthorized
+                AuthLevel = 1,
+                IsDel = 0,
+                Remarks = request.Remarks
+            };
+
+            return newBrokerBranch;
+        }
+        catch (ValidationException)
+        {
+            throw;
+        }
+        catch (DomainException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Unexpected error creating MstCoBrch for branch code: {BranchCode}", generatedBranchCode);
+            throw new DomainException($"Failed to create broker branch: {ex.Message}");
+        }
     }
-
     public async Task<MstCoBrchDto> UpdateMstCoBrchAsync(string coCode, string coBrchCode, UpdateMstCoBrchRequest request, CancellationToken cancellationToken = default)
     {
-        if (string.IsNullOrWhiteSpace(coCode))
-            throw new ArgumentException("Company code cannot be null or empty", nameof(coCode));
-
-        if (string.IsNullOrWhiteSpace(coBrchCode))
-            throw new ArgumentException("Branch code cannot be null or empty", nameof(coBrchCode));
-
-        if (request == null)
-            throw new ArgumentNullException(nameof(request));
-
         _logger.LogInformation("Updating MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
 
+        // FIXED: Use your existing validation method
         await ValidateUpdateRequestAsync(request, cancellationToken);
 
-        return await _unitOfWork.ExecuteInTransactionAsync(async () =>
+        await ValidateBusinessRulesForUpdateAsync(coCode, coBrchCode, request, cancellationToken);
+
+        try
         {
             var existingBranch = await GetMstCoBrchByIdAsync(coCode, coBrchCode, cancellationToken);
             if (existingBranch == null)
-                throw new NotFoundException("MstCoBrch", $"{coCode}-{coBrchCode}");
-
-            await ValidateBusinessRulesForUpdateAsync(coCode, coBrchCode, request, cancellationToken);
+            {
+                throw new DomainException($"Broker branch not found: {coCode}-{coBrchCode}");
+            }
 
             var parameters = new
             {
-                Action = 2,
+                Action = (byte)ActionTypeEnum.UPDATE,
                 CoCode = coCode,
                 CoBrchCode = coBrchCode,
                 CoBrchDesc = request.CoBrchDesc,
                 CoBrchAddr = request.CoBrchAddr,
                 CoBrchPhone = request.CoBrchPhone,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.GetCurrentUserId(),
+                IPAddress =  _currentUserService.GetClientIPAddress(),
+                MakerId = _currentUserService.UserId,
                 ActionDt = DateTime.Now,
-                TransDt = DateTime.Today,
+                TransDt = DateTime.Now.Date,
                 ActionType = (byte)ActionTypeEnum.UPDATE,
-                IsDel = (byte)0,
+                IsDel = 0,
                 Remarks = request.Remarks,
-                RowsAffected = 0 // OUTPUT parameter
-
+                RowsAffected = 0,
+                InsertedCode = ""
             };
 
-            var rowsAffected = await _repository.ExecuteAsync(
-                sqlOrSp: "LB_SP_CrudMstCoBrch",
-                parameters: parameters,
-                isStoredProcedure: true,
-                cancellationToken: cancellationToken);
+            _logger.LogDebug("Calling LB_SP_CrudMstCoBrch with Action=2 (UPDATE)");
 
-            if (rowsAffected == 0)
-                throw new DomainException($"Failed to update MstCoBrch with code '{coCode}-{coBrchCode}'");
+            var result = await _repository.ExecuteWithOutputAsync(
+                "LB_SP_CrudMstCoBrch",
+                parameters,
+                cancellationToken);
+
+            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
+
+            _logger.LogDebug("Update operation completed. RowsAffected: {RowsAffected}", rowsAffected);
+
+            if (rowsAffected <= 0)
+            {
+                throw new DomainException("Failed to update broker branch - no rows affected");
+            }
 
             var updatedBranch = await GetMstCoBrchByIdAsync(coCode, coBrchCode, cancellationToken);
-            return updatedBranch ?? throw new DomainException("Failed to retrieve updated MstCoBrch");
-        }, cancellationToken);
+
+            if (updatedBranch == null)
+            {
+                throw new DomainException($"Updated branch not found: {coCode}-{coBrchCode}");
+            }
+
+            _logger.LogInformation("Successfully updated MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+            return updatedBranch;
+        }
+        catch (ValidationException)
+        {
+            throw;
+        }
+        catch (DomainException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Unexpected error updating MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+            throw new DomainException($"Failed to update broker branch: {ex.Message}");
+        }
     }
 
     public async Task<bool> DeleteMstCoBrchAsync(string coCode, string coBrchCode, DeleteMstCoBrchRequest request, CancellationToken cancellationToken = default)
     {
-        if (string.IsNullOrWhiteSpace(coCode))
-            throw new ArgumentException("Company code cannot be null or empty", nameof(coCode));
-
-        if (string.IsNullOrWhiteSpace(coBrchCode))
-            throw new ArgumentException("Branch code cannot be null or empty", nameof(coBrchCode));
-
-        if (request == null)
-            throw new ArgumentNullException(nameof(request));
-
         _logger.LogInformation("Deleting MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
 
+        // FIXED: Use your existing validation method
         await ValidateDeleteRequestAsync(request, cancellationToken);
 
-        return await _unitOfWork.ExecuteInTransactionAsync(async () =>
+        try
         {
             var existingBranch = await GetMstCoBrchByIdAsync(coCode, coBrchCode, cancellationToken);
             if (existingBranch == null)
-                throw new NotFoundException("MstCoBrch", $"{coCode}-{coBrchCode}");
+            {
+                throw new DomainException($"Broker branch not found: {coCode}-{coBrchCode}");
+            }
 
             var parameters = new
             {
-                Action = 3,
+                Action = (byte)ActionTypeEnum.DELETE,
                 CoCode = coCode,
                 CoBrchCode = coBrchCode,
                 CoBrchDesc = (string?)null,
                 CoBrchAddr = (string?)null,
                 CoBrchPhone = (string?)null,
                 IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.GetCurrentUserId(),
+                MakerId = _currentUserService.UserId,
                 ActionDt = DateTime.Now,
-                TransDt = DateTime.Today,
+                TransDt = DateTime.Now.Date,
                 ActionType = (byte)ActionTypeEnum.DELETE,
-                IsDel = (byte)1,
+                IsDel = 1,
                 Remarks = request.Remarks,
-                RowsAffected = 0 // OUTPUT parameter
-
+                RowsAffected = 0,
+                InsertedCode = ""
             };
 
-            var rowsAffected = await _repository.ExecuteAsync(
-                sqlOrSp: "LB_SP_CrudMstCoBrch",
-                parameters: parameters,
-                isStoredProcedure: true,
-                cancellationToken: cancellationToken);
+            _logger.LogDebug("Calling LB_SP_CrudMstCoBrch with Action=3 (DELETE)");
 
-            return rowsAffected > 0;
-        }, cancellationToken);
+            var result = await _repository.ExecuteWithOutputAsync(
+                "LB_SP_CrudMstCoBrch",
+                parameters,
+                cancellationToken);
+
+            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
+
+            _logger.LogDebug("Delete operation completed. RowsAffected: {RowsAffected}", rowsAffected);
+
+            var success = rowsAffected > 0;
+
+            if (success)
+            {
+                _logger.LogInformation("Successfully deleted MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+            }
+            else
+            {
+                _logger.LogWarning("Delete operation failed - no rows affected: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+            }
+
+            return success;
+        }
+        catch (ValidationException)
+        {
+            throw;
+        }
+        catch (DomainException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Unexpected error deleting MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+            throw new DomainException($"Failed to delete broker branch: {ex.Message}");
+        }
     }
 
     public async Task<bool> MstCoBrchExistsAsync(string coCode, string coBrchCode, CancellationToken cancellationToken = default)
     {
-        if (string.IsNullOrWhiteSpace(coCode) || string.IsNullOrWhiteSpace(coBrchCode))
-            return false;
+        _logger.LogDebug("Checking if MstCoBrch exists: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
 
         try
         {
-            var sql = "SELECT COUNT(1) FROM MstCoBrch WHERE CoCode = @CoCode AND CoBrchCode = @CoBrchCode AND IsDel = 0";
-            var count = await _repository.ExecuteScalarAsync<int>(sql, new { CoCode = coCode, CoBrchCode = coBrchCode }, cancellationToken: cancellationToken);
-            return count > 0;
+            var branch = await GetMstCoBrchByIdAsync(coCode, coBrchCode, cancellationToken);
+            return branch != null;
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error checking MstCoBrch existence: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
-            throw new DomainException($"Failed to check broker branch existence: {ex.Message}");
-        }
-    }
-
-    #region Private Helper Methods
-
-    private async Task ValidateCreateRequestAsync(CreateMstCoBrchRequest request, CancellationToken cancellationToken)
-    {
-        var validationResult = await _createValidator.ValidateAsync(request, cancellationToken);
-
-        if (!validationResult.IsValid)
-        {
-            var errors = validationResult.Errors.Select(e => new ValidationErrorDetail
-            {
-                PropertyName = e.PropertyName,
-                ErrorMessage = e.ErrorMessage,
-                AttemptedValue = e.AttemptedValue?.ToString()
-            }).ToList();
-            
-            throw new ValidationException("Create validation failed") { ValidationErrors = errors };
-        }
-    }
-
-    private async Task ValidateUpdateRequestAsync(UpdateMstCoBrchRequest request, CancellationToken cancellationToken)
-    {
-        var validationResult = await _updateValidator.ValidateAsync(request, cancellationToken);
-
-        if (!validationResult.IsValid)
-        {
-            var errors = validationResult.Errors.Select(e => new ValidationErrorDetail
-            {
-                PropertyName = e.PropertyName,
-                ErrorMessage = e.ErrorMessage,
-                AttemptedValue = e.AttemptedValue?.ToString()
-            }).ToList();
-            
-            throw new ValidationException("Update validation failed") { ValidationErrors = errors };
-        }
-    }
-
-    private async Task ValidateDeleteRequestAsync(DeleteMstCoBrchRequest request, CancellationToken cancellationToken)
-    {
-        var validationResult = await _deleteValidator.ValidateAsync(request, cancellationToken);
-
-        if (!validationResult.IsValid)
-        {
-            var errors = validationResult.Errors.Select(e => new ValidationErrorDetail
-            {
-                PropertyName = e.PropertyName,
-                ErrorMessage = e.ErrorMessage,
-                AttemptedValue = e.AttemptedValue?.ToString()
-            }).ToList();
-            
-            throw new ValidationException("Delete validation failed") { ValidationErrors = errors };
-        }
-    }
-
-    private async Task ValidateBusinessRulesAsync(CreateMstCoBrchRequest request, CancellationToken cancellationToken)
-    {
-        try
-        {
-            var sql = @"SELECT COUNT(1) FROM MstCo WHERE CoCode = @CoCode AND IsDel = 0";
-            var companyExists = await _repository.ExecuteScalarAsync<int>(
-                sql, 
-                new { CoCode = request.CoCode }, 
-                cancellationToken: cancellationToken);
-            
-            if (companyExists == 0)
-                throw new DomainException($"Company with code '{request.CoCode}' does not exist");
-
-            if (!string.IsNullOrEmpty(request.CoBrchDesc))
-            {
-                var sql2 = @"SELECT COUNT(1) FROM MstCoBrch 
-                            WHERE CoBrchDesc = @CoBrchDesc 
-                            AND CoCode = @CoCode 
-                            AND IsDel = 0";
-                var count = await _repository.ExecuteScalarAsync<int>(
-                    sql2, 
-                    new { CoBrchDesc = request.CoBrchDesc, CoCode = request.CoCode }, 
-                    cancellationToken: cancellationToken);
-                
-                if (count > 0)
-                    throw new DomainException($"Branch with description '{request.CoBrchDesc}' already exists for company '{request.CoCode}'");
-            }
-        }
-        catch (DomainException)
-        {
-            throw; // Re-throw domain exceptions as-is
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error validating business rules for branch creation: {CoCode}", request.CoCode);
-            throw new DomainException($"Failed to validate business rules: {ex.Message}");
-        }
-    }
-
-    private async Task ValidateBusinessRulesForUpdateAsync(string coCode, string coBrchCode, UpdateMstCoBrchRequest request, CancellationToken cancellationToken)
-    {
-        try
-        {
-            if (!string.IsNullOrEmpty(request.CoBrchDesc))
-            {
-                var sql = @"SELECT COUNT(1) FROM MstCoBrch 
-                           WHERE CoBrchDesc = @CoBrchDesc 
-                           AND CoCode = @CoCode 
-                           AND CoBrchCode != @CoBrchCode 
-                           AND IsDel = 0";
-                var count = await _repository.ExecuteScalarAsync<int>(
-                    sql, 
-                    new { CoBrchDesc = request.CoBrchDesc, CoCode = coCode, CoBrchCode = coBrchCode }, 
-                    cancellationToken: cancellationToken);
-                
-                if (count > 0)
-                    throw new DomainException($"Branch with description '{request.CoBrchDesc}' already exists for company '{coCode}'");
-            }
-        }
-        catch (DomainException)
-        {
-            throw; // Re-throw domain exceptions as-is
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error validating business rules for branch update: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
-            throw new DomainException($"Failed to validate business rules: {ex.Message}");
+            return false;
         }
     }
 
     #endregion
 
-    #region WF / Work Flow
+    #region Workflow Operations
 
     public async Task<PagedResult<MstCoBrchDto>> GetUnauthorizedListAsync(
-    int pageNumber = 1,
-    int pageSize = 10,
-    string? searchTerm = null,
-    string? coCode = null,
-    CancellationToken cancellationToken = default)
+   int pageNumber = 1,
+   int pageSize = 10,
+   string? searchTerm = null,
+   string? coCode = null,
+   CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Getting unauthorized MstCoBrch list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
@@ -516,10 +476,6 @@ public class BrokerBranchService : IBrokerBranchService
     }
 
 
-
-
-
-
     public async Task<bool> AuthorizeBranchAsync(string coCode, string coBrchCode, AuthorizeMstCoBrchRequest request, CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Authorizing MstCoBrch in workflow: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
@@ -536,9 +492,9 @@ public class BrokerBranchService : IBrokerBranchService
         try
         {
             await _unitOfWork.BeginTransactionAsync(cancellationToken);
-            
+
             var ipAddress = _currentUserService.GetClientIPAddress();
-            
+
             var parameters = new
             {
                 Action = request.ActionType, // Default is 2 for authorization
@@ -561,7 +517,7 @@ public class BrokerBranchService : IBrokerBranchService
             if (rowsAffected > 0)
             {
                 await _unitOfWork.CommitTransactionAsync(cancellationToken);
-                _logger.LogInformation("Successfully authorized MstCoBrch: {CoCode}-{CoBrchCode}, RowsAffected: {RowsAffected}", 
+                _logger.LogInformation("Successfully authorized MstCoBrch: {CoCode}-{CoBrchCode}, RowsAffected: {RowsAffected}",
                     coCode, coBrchCode, rowsAffected);
                 return true;
             }
@@ -571,6 +527,10 @@ public class BrokerBranchService : IBrokerBranchService
                 _logger.LogWarning("No rows affected during authorization of MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
                 throw new DomainException($"Failed to authorize branch: No records were updated");
             }
+        }
+        catch (ValidationException)
+        {
+            throw;
         }
         catch (DomainException)
         {
@@ -582,6 +542,153 @@ public class BrokerBranchService : IBrokerBranchService
             throw new DomainException($"Failed to authorize branch: {ex.Message}");
         }
     }
+    #endregion
 
+    #region Private Validation Methods
+
+    // FIXED: Using your existing ValidationErrorDetail from Domain.Common
+    private async Task ValidateCreateRequestAsync(CreateMstCoBrchRequest request, CancellationToken cancellationToken)
+    {
+        var validationResult = await _createValidator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+        {
+            var errors = validationResult.Errors.Select(e => new ValidationErrorDetail
+            {
+                PropertyName = e.PropertyName,
+                ErrorMessage = e.ErrorMessage,
+                AttemptedValue = e.AttemptedValue?.ToString()
+            }).ToList();
+
+            throw new ValidationException("Create validation failed") { ValidationErrors = errors };
+        }
+    }
+
+    private async Task ValidateUpdateRequestAsync(UpdateMstCoBrchRequest request, CancellationToken cancellationToken)
+    {
+        var validationResult = await _updateValidator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+        {
+            var errors = validationResult.Errors.Select(e => new ValidationErrorDetail
+            {
+                PropertyName = e.PropertyName,
+                ErrorMessage = e.ErrorMessage,
+                AttemptedValue = e.AttemptedValue?.ToString()
+            }).ToList();
+
+            throw new ValidationException("Update validation failed") { ValidationErrors = errors };
+        }
+    }
+
+    private async Task ValidateDeleteRequestAsync(DeleteMstCoBrchRequest request, CancellationToken cancellationToken)
+    {
+        var validationResult = await _deleteValidator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+        {
+            var errors = validationResult.Errors.Select(e => new ValidationErrorDetail
+            {
+                PropertyName = e.PropertyName,
+                ErrorMessage = e.ErrorMessage,
+                AttemptedValue = e.AttemptedValue?.ToString()
+            }).ToList();
+
+            throw new ValidationException("Delete validation failed") { ValidationErrors = errors };
+        }
+    }
+
+    private async Task ValidateAuthorizeRequestAsync(AuthorizeMstCoBrchRequest request, CancellationToken cancellationToken)
+    {
+        var validationResult = await _authorizeValidator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+        {
+            var errors = validationResult.Errors.Select(e => new ValidationErrorDetail
+            {
+                PropertyName = e.PropertyName,
+                ErrorMessage = e.ErrorMessage,
+                AttemptedValue = e.AttemptedValue?.ToString()
+            }).ToList();
+
+            throw new ValidationException("Authorization validation failed") { ValidationErrors = errors };
+        }
+    }
+
+    #endregion
+
+    #region Helper Method
+    private async Task ValidateBusinessRulesForUpdateAsync(string coCode, string coBrchCode, UpdateMstCoBrchRequest request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            if (!string.IsNullOrEmpty(request.CoBrchDesc))
+            {
+                var sql = @"SELECT COUNT(1) FROM MstCoBrch 
+                           WHERE CoBrchDesc = @CoBrchDesc 
+                           AND CoCode = @CoCode 
+                           AND CoBrchCode != @CoBrchCode 
+                           AND IsDel = 0";
+                var count = await _repository.ExecuteScalarAsync<int>(
+                    sql,
+                    new { CoBrchDesc = request.CoBrchDesc, CoCode = coCode, CoBrchCode = coBrchCode },
+                    cancellationToken: cancellationToken);
+
+                if (count > 0)
+                    throw new DomainException($"Branch with description '{request.CoBrchDesc}' already exists for company '{coCode}'");
+            }
+        }
+        catch (DomainException)
+        {
+            throw; // Re-throw domain exceptions as-is
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error validating business rules for branch update: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+            throw new DomainException($"Failed to validate business rules: {ex.Message}");
+        }
+    }
+
+    private async Task<string> GenerateBranchCodeAsync(string coCode, CancellationToken cancellationToken)
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(coCode))
+            {
+                throw new DomainException("Company code cannot be null or empty");
+            }
+
+            var sql = @"DECLARE @CoCode varchar(10) = @InpCoCode
+                    DECLARE @NextCode INT
+                    ,@GENERATEDCODE VARCHAR(6)
+                    SELECT @NextCode = ISNULL(MAX(CAST([CoBrchCode] AS INT)), 0) + 1
+                    FROM [dbo].[MstCoBrch] WITH (TABLOCKX)
+                    WHERE [CoCode] = @CoCode
+                    SET @GENERATEDCODE=RIGHT('000' + CAST(@NextCode AS VARCHAR(3)), 3);
+                    SELECT @GENERATEDCODE as NewBranchCode";
+
+            var branchCode = await _repository.ExecuteScalarAsync<string>(
+                sql,
+                new { InpCoCode = coCode },
+                cancellationToken: cancellationToken);
+
+            if (string.IsNullOrEmpty(branchCode))
+            {
+                throw new DomainException($"Branch code generation failed for company code: '{coCode}'");
+            }
+
+            _logger.LogDebug("Generated branch code: {BranchCode} for company: {CoCode}", branchCode, coCode);
+            return branchCode; // ✅ RETURN the generated code
+        }
+        catch (DomainException)
+        {
+            throw; // Re-throw domain exceptions as-is
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to generate branch code for company: {CoCode}", coCode);
+            throw new DomainException($"Failed to generate branch code: {ex.Message}");
+        }
+    }
     #endregion
 }

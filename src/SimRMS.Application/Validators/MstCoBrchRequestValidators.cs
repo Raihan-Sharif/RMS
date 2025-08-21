@@ -79,12 +79,12 @@ namespace SimRMS.Application.Validators
     {
         public CreateMstCoBrchRequestValidator()
         {
-            RuleFor(x => x.CoCode).ValidCoCode();
-            RuleFor(x => x.CoBrchCode).ValidCoBrchCode();
+            //RuleFor(x => x.CoCode).ValidCoCode();
+            //RuleFor(x => x.CoBrchCode).ValidCoBrchCode();
             
-            RuleFor(x => x.CoBrchDesc)
-                .NotEmpty().WithMessage("Branch description is required")
-                .MaximumLength(80).WithMessage("Branch description cannot exceed 80 characters");
+            //RuleFor(x => x.CoBrchDesc)
+            //    .NotEmpty().WithMessage("Branch description is required")
+            //    .MaximumLength(80).WithMessage("Branch description cannot exceed 80 characters");
             
             RuleFor(x => x.CoBrchAddr).ValidCoBrchAddr()
                 .When(x => !string.IsNullOrEmpty(x.CoBrchAddr));
