@@ -256,7 +256,7 @@ public class BrokerBranchService : IBrokerBranchService
         // Use existing validation method
         await ValidateUpdateRequestAsync(request, cancellationToken);
 
-        await ValidateBusinessRulesForUpdateAsync(coCode, coBrchCode, request, cancellationToken);
+       // await ValidateBusinessRulesForUpdateAsync(coCode, coBrchCode, request, cancellationToken);
 
         try
         {
@@ -281,8 +281,7 @@ public class BrokerBranchService : IBrokerBranchService
                 ActionType = (byte)ActionTypeEnum.UPDATE,
                 IsDel = 0,
                 Remarks = request.Remarks,
-                RowsAffected = 0,
-                InsertedCode = ""
+                RowsAffected = 0
             };
 
             _logger.LogDebug("Calling LB_SP_CrudMstCoBrch with Action=2 (UPDATE)");
