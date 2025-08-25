@@ -17,7 +17,7 @@
 
 namespace SimRMS.Application.Models.DTOs
 {
-    public class MstCoDto
+    public class MstCoDto : BaseEntityDto
     {
         public string CoCode { get; set; } = null!;
         public string? CoDesc { get; set; }
@@ -28,18 +28,6 @@ namespace SimRMS.Application.Models.DTOs
         public DateTime? UsrAccessLimitDefEndTime { get; set; }
         public int? UsrAccessLimitDefDays { get; set; }
         public bool EnableExchangeWideSellProceed { get; set; }
-        public string IPAddress { get; set; } = string.Empty;
-        public int MakerId { get; set; }
-        public DateTime ActionDt { get; set; }
-        public DateTime TransDt { get; set; }
-        public byte ActionType { get; set; }
-        public int? AuthId { get; set; }
-        public DateTime? AuthDt { get; set; }
-        public DateTime? AuthTransDt { get; set; }
-        public byte IsAuth { get; set; }
-        public byte AuthLevel { get; set; }
-        public byte IsDel { get; set; }
-        public string? Remarks { get; set; }
     }
 
     public class MstCoUpdateDto

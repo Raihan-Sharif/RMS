@@ -17,27 +17,13 @@
 
 namespace SimRMS.Application.Models.DTOs
 {
-    public class MstCoBrchDto
+    public class MstCoBrchDto : BaseEntityDto
     {
         public string CoCode { get; set; } = null!;
         public string CoBrchCode { get; set; } = null!;
         public string CoBrchDesc { get; set; } = null!;
         public string? CoBrchAddr { get; set; }
         public string? CoBrchPhone { get; set; }
-        public string IPAddress { get; set; } = string.Empty;
-        public int MakerId { get; set; }
-        public DateTime ActionDt { get; set; }
-        public DateTime TransDt { get; set; }
-        public byte ActionType { get; set; }
-        public int? AuthId { get; set; }
-        public DateTime? AuthDt { get; set; }
-        public DateTime? AuthTransDt { get; set; }
-        public byte IsAuth { get; set; }
-        public byte AuthLevel { get; set; }
-        public byte IsDel { get; set; }
-        public string? Remarks { get; set; }
-        public string? MakeBy { get; set; }
-        public string? AuthBy { get; set; }
     }
 
     public class MstCoBrchUpdateDto
