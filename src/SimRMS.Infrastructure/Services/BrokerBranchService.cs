@@ -418,14 +418,21 @@ public class BrokerBranchService : IBrokerBranchService
 
     #region Workflow Operations
 
-    public async Task<PagedResult<MstCoBrchDto>> GetUnauthorizedListAsync(
+    public async Task<PagedResult<MstCoBrchDto>> GetBranchUnAuthDeniedListAsync(
    int pageNumber = 1,
    int pageSize = 10,
    string? searchTerm = null,
    string? coCode = null,
+   int isAuth = 0,
    CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting unauthorized MstCoBrch list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+        string authAction = string.Empty;
+        if (isAuth ==  (byte)AuthTypeEnum.UnAuthorize)
+            authAction = AuthTypeEnum.UnAuthorize.ToString();
+        else if (isAuth == (byte)AuthTypeEnum.Deny)
+            authAction = AuthTypeEnum.Deny.ToString();
+
+        _logger.LogInformation("Getting {authAction} Branch list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize, authAction);
 
         if (pageNumber < 1) pageNumber = 1;
         if (pageSize < 1 || pageSize > 100) pageSize = 10;
@@ -441,7 +448,7 @@ public class BrokerBranchService : IBrokerBranchService
                 ["SortDirection"] = "ASC",
                 ["CoCode"] = coCode ?? (object)DBNull.Value,
                 ["SearchTerm"] = searchTerm ?? (object)DBNull.Value,
-                ["isAuth"] = (byte)0, // Unauthorized records
+                ["isAuth"] = (byte)isAuth, // 0: Unauthorized or 2: Denied records
                 ["MakerId"] = _currentUserService.UserId,
                 ["TotalCount"] = 0 // OUTPUT parameter - will be populated by SP
             };
@@ -471,7 +478,7 @@ public class BrokerBranchService : IBrokerBranchService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting unauthorized broker branch list with parameters: PageNumber={PageNumber}, PageSize={PageSize}, CoCode={CoCode}, SearchTerm={SearchTerm}",
+            _logger.LogError(ex, "Error getting "+authAction+" broker branch list with parameters: PageNumber={PageNumber}, PageSize={PageSize}, CoCode={CoCode}, SearchTerm={SearchTerm}",
                 pageNumber, pageSize, coCode, searchTerm);
             throw;
         }
@@ -480,7 +487,13 @@ public class BrokerBranchService : IBrokerBranchService
 
     public async Task<bool> AuthorizeBranchAsync(string coCode, string coBrchCode, AuthorizeMstCoBrchRequest request, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Authorizing MstCoBrch in workflow: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+        string authAction = string.Empty;
+        if (request.IsAuth == (byte)AuthTypeEnum.Approve)
+            authAction = AuthTypeEnum.Approve.ToString();
+        else if (request.IsAuth == (byte)AuthTypeEnum.Deny)
+            authAction = AuthTypeEnum.Deny.ToString();
+
+        _logger.LogInformation("Authorizing {authAction} MstCoBrch in workflow: {CoCode}-{CoBrchCode}", coCode, coBrchCode, authAction);
 
         // Validate request
         await ValidateAuthorizeRequestAsync(request, cancellationToken);
@@ -520,8 +533,8 @@ public class BrokerBranchService : IBrokerBranchService
             else
             {
                 await _unitOfWork.RollbackTransactionAsync(cancellationToken);
-                _logger.LogWarning("No rows affected during authorization of MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
-                throw new DomainException($"Failed to authorize branch: No records were updated");
+                _logger.LogWarning("No rows affected during {authAction} authorization of MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode, authAction);
+                throw new DomainException($"Failed to authorize:{authAction} branch: No records were updated");
             }
         }
         catch (ValidationException)
@@ -534,8 +547,8 @@ public class BrokerBranchService : IBrokerBranchService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error authorizing MstCoBrch in workflow: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
-            throw new DomainException($"Failed to authorize branch: {ex.Message}");
+            _logger.LogError(ex, "Error {authAction} authorizing MstCoBrch in workflow: {CoCode}-{CoBrchCode}", coCode, coBrchCode, authAction);
+            throw new DomainException($"Failed to authorize:{authAction} branch: {ex.Message}");
         }
     }
     #endregion

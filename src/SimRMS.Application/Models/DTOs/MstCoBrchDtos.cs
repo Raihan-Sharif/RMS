@@ -20,6 +20,7 @@ namespace SimRMS.Application.Models.DTOs
     public class MstCoBrchDto : BaseEntityDto
     {
         public string CoCode { get; set; } = null!;
+        public string CoDesc { get; set; } = null!;
         public string CoBrchCode { get; set; } = null!;
         public string CoBrchDesc { get; set; } = null!;
         public string? CoBrchAddr { get; set; }

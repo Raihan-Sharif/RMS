@@ -4,6 +4,7 @@ using SimRMS.Application.Interfaces;
 using SimRMS.Application.Interfaces.Services;
 using SimRMS.Application.Models.DTOs;
 using SimRMS.Application.Models.Requests;
+using SimRMS.Shared.Constants;
 using SimRMS.Shared.Models;
 using System.ComponentModel.DataAnnotations;
 
@@ -235,27 +236,35 @@ public class BrokerBranchController : BaseController
     /// <param name="coCode">Filter by specific company code</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Paginated list of unauthorized branches</returns>
-    [HttpGet("wf/unauthorized")]
+    [HttpGet("wf/unauth-denied-list")]
     [ProducesResponseType(typeof(ApiResponse<IEnumerable<MstCoBrchDto>>), 200)]
     [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 401)]
-    public async Task<ActionResult<ApiResponse<IEnumerable<MstCoBrchDto>>>> GetUnauthorizedBranchListWF(
+    public async Task<ActionResult<ApiResponse<IEnumerable<MstCoBrchDto>>>> GetBranchUnAuthDeniedListWF(
         [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1,
         [FromQuery, Range(1, 100)] int pageSize = 10,
         [FromQuery] string? searchTerm = null,
         [FromQuery] string? coCode = null,
+        [FromQuery, Range(0, 2)] int isAuth = 0,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting unauthorized MstCoBrch list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+        string authAction = string.Empty;
+        if (isAuth == (byte)AuthTypeEnum.UnAuthorize)
+            authAction = AuthTypeEnum.UnAuthorize.ToString();
+        else if (isAuth == (byte)AuthTypeEnum.Deny)
+            authAction = AuthTypeEnum.Deny.ToString();
 
-        var result = await _brokerBranchService.GetUnauthorizedListAsync(
+        _logger.LogInformation("Getting {authAction} Branch list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize, authAction);
+
+        var result = await _brokerBranchService.GetBranchUnAuthDeniedListAsync(
             pageNumber: pageNumber,
             pageSize: pageSize,
             searchTerm: searchTerm,
             coCode: coCode,
+            isAuth: isAuth,
             cancellationToken: cancellationToken);
 
-        return Ok(result, "Unauthorized Market Stock Company Branches retrieved successfully");
+        return Ok(result, $"Market Stock Company Branches {authAction} data retrieved successfully");
     }
 
     /// <summary>
@@ -277,7 +286,13 @@ public class BrokerBranchController : BaseController
         [FromBody, Required] AuthorizeMstCoBrchRequest request,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Authorizing MstCoBrch in workflow: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+        string authAction = string.Empty;
+        if (request.IsAuth == (byte)AuthTypeEnum.Approve)
+            authAction = AuthTypeEnum.Approve.ToString();
+        else if (request.IsAuth == (byte)AuthTypeEnum.Deny)
+            authAction = AuthTypeEnum.Deny.ToString();
+
+        _logger.LogInformation("Authorizing MstCoBrch in workflow: {CoCode}-{CoBrchCode} Auth Action: {authAction}", coCode, coBrchCode, authAction);
 
         request.CoCode = coCode;
         request.CoBrchCode = coBrchCode;
@@ -286,10 +301,10 @@ public class BrokerBranchController : BaseController
 
         if (!result)
         {
-            return BadRequest<object>("Failed to authorize Market Stock Company Branch");
+            return BadRequest<object>($"Failed to {authAction} Market Company Branch");
         }
 
-        return Ok(new object(), "Market Stock Company Branch authorized successfully");
+        return Ok(new object(), $"Market Stock Company Branch {authAction} successfully");
     }
 
     #endregion
