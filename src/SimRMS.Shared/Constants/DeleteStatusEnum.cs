@@ -1,10 +1,10 @@
-﻿/// <summary>
+/// <summary>
 /// <para>
 /// ===================================================================
-/// Title:       Auth Type Enumeration
+/// Title:       Delete Status Enumeration
 /// Author:      Md. Raihan Sharif
-/// Purpose:     Defines Authentication types for DML operations
-/// Creation:    26/Aug/2025
+/// Purpose:     Defines delete status for soft delete operations
+/// Creation:    27/Aug/2025
 /// ===================================================================
 /// Modification History
 /// Author             Date         Description of Change
@@ -17,22 +17,18 @@
 
 namespace SimRMS.Shared.Constants;
 
-public enum AuthTypeEnum : byte
+/// <summary>
+/// Represents delete status for soft delete operations
+/// </summary>
+public enum DeleteStatusEnum : byte
 {
     /// <summary>
-    /// UnAuthorized record
+    /// Record is active (not deleted)
     /// </summary>
-    UnAuthorize = 0,
+    Active = 0,
 
     /// <summary>
-    /// Approved record
+    /// Record is deleted (soft delete)
     /// </summary>
-    Approve = 1,
-
-    /// <summary>
-    /// Denied record
-    /// </summary>
-    Deny = 2,
-
+    Deleted = 1
 }
-

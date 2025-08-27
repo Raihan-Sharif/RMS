@@ -1,5 +1,6 @@
 using FluentValidation;
 using SimRMS.Application.Models.Requests;
+using SimRMS.Shared.Constants;
 
 /// <summary>
 /// <para>
@@ -21,18 +22,10 @@ using SimRMS.Application.Models.Requests;
 namespace SimRMS.Application.Validators
 {
     /// <summary>
-    /// Common validation rules for MstCoBrch fields
+    /// MstCoBrch specific validation rules
     /// </summary>
     public static class MstCoBrchValidationRules
     {
-        public static IRuleBuilderOptions<T, string> ValidCoCode<T>(this IRuleBuilder<T, string> ruleBuilder)
-        {
-            return ruleBuilder
-                .NotEmpty().WithMessage("Company code is required")
-                .MaximumLength(5).WithMessage("Company code cannot exceed 5 characters")
-                .Matches("^[A-Z0-9]+$").WithMessage("Company code can only contain uppercase letters and numbers");
-        }
-
         public static IRuleBuilderOptions<T, string> ValidCoBrchCode<T>(this IRuleBuilder<T, string> ruleBuilder)
         {
             return ruleBuilder
@@ -63,12 +56,6 @@ namespace SimRMS.Application.Validators
         {
             return ruleBuilder
                 .MaximumLength(60).WithMessage("Branch phone cannot exceed 60 characters");
-        }
-
-        public static IRuleBuilderOptions<T, string?> ValidRemarks<T>(this IRuleBuilder<T, string?> ruleBuilder)
-        {
-            return ruleBuilder
-                .MaximumLength(200).WithMessage("Remarks cannot exceed 200 characters");
         }
     }
 
@@ -138,7 +125,7 @@ namespace SimRMS.Application.Validators
     {
         public DeleteMstCoBrchRequestValidator()
         {
-            RuleFor(x => x.CoCode).ValidCoCode();
+            RuleFor(x => x.CoCode).ValidCompanyCode();
             RuleFor(x => x.CoBrchCode).ValidCoBrchCode();
             RuleFor(x => x.Remarks).ValidRemarks().When(x => !string.IsNullOrEmpty(x.Remarks));
         }
@@ -151,18 +138,36 @@ namespace SimRMS.Application.Validators
     {
         public AuthorizeMstCoBrchRequestValidator()
         {
-            RuleFor(x => x.CoCode).ValidCoCode();
+            RuleFor(x => x.CoCode).ValidCompanyCode();
             RuleFor(x => x.CoBrchCode).ValidCoBrchCode();
             
-            RuleFor(x => x.ActionType)
-                .Equal((byte)2).WithMessage("Action type must be 2 for authorization");
-            
-            RuleFor(x => x.IsAuth)
-                .Must(x => x == 1 || x == 2).WithMessage("IsAuth must be 1 (authorized) or 2 (denied)");
-            
-            RuleFor(x => x.IPAddress)
-                .MaximumLength(39).WithMessage("IP Address cannot exceed 39 characters")
+            RuleFor(x => x.ActionType).ValidActionTypeUpdate();
+
+            RuleFor(x => x.IsAuth).ValidIsApproveDeny();
+
+            RuleFor(x => x.IPAddress).ValidIPAddress()
                 .When(x => !string.IsNullOrEmpty(x.IPAddress));
+        }
+    }
+
+    /// <summary>
+    /// Validator for getting workflow list with IsAuth parameter
+    /// </summary>
+    public class GetBranchWorkflowListRequestValidator : AbstractValidator<GetBranchWorkflowListRequest>
+    {
+        public GetBranchWorkflowListRequestValidator()
+        {
+            RuleFor(x => x.PageNumber).ValidPageNumber();
+            
+            RuleFor(x => x.PageSize).ValidPageSize(100);
+            
+            RuleFor(x => x.IsAuth).ValidIsUnAuthDeny();
+            
+            RuleFor(x => x.CoCode).ValidCompanyCode(false)
+                .When(x => !string.IsNullOrEmpty(x.CoCode));
+            
+            RuleFor(x => x.SearchTerm).ValidSearchTerm(100)
+                .When(x => !string.IsNullOrEmpty(x.SearchTerm));
         }
     }
 }

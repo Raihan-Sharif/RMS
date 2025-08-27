@@ -1,3 +1,6 @@
+
+using SimRMS.Shared.Constants;
+
 /// <summary>
 /// <para>
 /// ===================================================================
@@ -14,7 +17,6 @@
 /// ===================================================================
 /// </para>
 /// </summary>
-
 namespace SimRMS.Application.Models.Requests
 {
     public class GetMstCoBrchByIdRequest
@@ -62,8 +64,17 @@ namespace SimRMS.Application.Models.Requests
     {
         public string CoCode { get; set; } = null!;
         public string CoBrchCode { get; set; } = null!;
-        public byte ActionType { get; set; } = 2;
-        public byte IsAuth { get; set; } = 1;
+        public byte ActionType { get; set; } = (byte)ActionTypeEnum.UPDATE;
+        public byte IsAuth { get; set; } = (byte)AuthTypeEnum.Approve;
         public string? IPAddress { get; set; }
+    }
+
+    public class GetBranchWorkflowListRequest
+    {
+        public int PageNumber { get; set; } = 1;
+        public int PageSize { get; set; } = 10;
+        public string? SearchTerm { get; set; }
+        public string? CoCode { get; set; }
+        public int IsAuth { get; set; } = (byte)AuthTypeEnum.UnAuthorize;
     }
 }

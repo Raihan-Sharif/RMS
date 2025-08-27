@@ -8,7 +8,7 @@ using SimRMS.Shared.Models;
 using SimRMS.Domain.Exceptions;
 using SimRMS.Application.Interfaces;
 using SimRMS.Shared.Constants;
-using SimRMS.Domain.Common; // FIXED: Added missing import for ValidationErrorDetail
+using SimRMS.Domain.Common;
 using ValidationException = SimRMS.Domain.Exceptions.ValidationException;
 
 /// <summary>
@@ -39,6 +39,7 @@ public class BrokerBranchService : IBrokerBranchService
     private readonly IValidator<UpdateMstCoBrchRequest> _updateValidator;
     private readonly IValidator<DeleteMstCoBrchRequest> _deleteValidator;
     private readonly IValidator<AuthorizeMstCoBrchRequest> _authorizeValidator;
+    private readonly IValidator<GetBranchWorkflowListRequest> _workflowListValidator;
     private readonly ICurrentUserService _currentUserService;
     private readonly ILogger<BrokerBranchService> _logger;
 
@@ -49,6 +50,7 @@ public class BrokerBranchService : IBrokerBranchService
         IValidator<UpdateMstCoBrchRequest> updateValidator,
         IValidator<DeleteMstCoBrchRequest> deleteValidator,
         IValidator<AuthorizeMstCoBrchRequest> authorizeValidator,
+        IValidator<GetBranchWorkflowListRequest> workflowListValidator,
         ICurrentUserService currentUserService,
         ILogger<BrokerBranchService> logger)
     {
@@ -58,6 +60,7 @@ public class BrokerBranchService : IBrokerBranchService
         _updateValidator = updateValidator;
         _deleteValidator = deleteValidator;
         _authorizeValidator = authorizeValidator;
+        _workflowListValidator = workflowListValidator;
         _currentUserService = currentUserService;
         _logger = logger;
     }
@@ -83,7 +86,7 @@ public class BrokerBranchService : IBrokerBranchService
                 SortDirection = "ASC",
                 CoCode = coCode,
                 SearchTerm = searchTerm,
-                isAuth = (byte)1,
+                isAuth = (byte)AuthTypeEnum.Approve,
                 TotalCount = 0
             };
 
@@ -186,7 +189,7 @@ public class BrokerBranchService : IBrokerBranchService
                 ActionDt = DateTime.Now,
                 TransDt = DateTime.Now.Date,
                 ActionType = (byte)ActionTypeEnum.INSERT,
-                IsDel = 0,
+                IsDel = (byte)DeleteStatusEnum.Active,
                 Remarks = request.Remarks,
                 RowsAffected = 0
             };
@@ -227,9 +230,9 @@ public class BrokerBranchService : IBrokerBranchService
                 ActionDt = DateTime.Now,
                 TransDt = DateTime.Now.Date,
                 ActionType = (byte)ActionTypeEnum.INSERT,
-                IsAuth = 0, // Initially unauthorized
-                AuthLevel = 1,
-                IsDel = 0,
+                IsAuth = (byte)AuthTypeEnum.UnAuthorize, // Initially unauthorized
+                AuthLevel = (byte)AuthLevelEnum.Level1,
+                IsDel = (byte)DeleteStatusEnum.Active,
                 Remarks = request.Remarks
             };
 
@@ -279,7 +282,7 @@ public class BrokerBranchService : IBrokerBranchService
                 ActionDt = DateTime.Now,
                 TransDt = DateTime.Now.Date,
                 ActionType = (byte)ActionTypeEnum.UPDATE,
-                IsDel = 0,
+                IsDel = (byte)DeleteStatusEnum.Active,
                 Remarks = request.Remarks,
                 RowsAffected = 0
             };
@@ -353,10 +356,10 @@ public class BrokerBranchService : IBrokerBranchService
                 ActionDt = DateTime.Now,
                 TransDt = DateTime.Now.Date,
                 ActionType = (byte)ActionTypeEnum.DELETE,
-                IsDel = 1,
+                IsDel = (byte)DeleteStatusEnum.Deleted,
                 Remarks = request.Remarks,
                 RowsAffected = 0,
-                InsertedCode = ""
+                InsertedCode = string.Empty
             };
 
             _logger.LogDebug("Calling LB_SP_CrudMstCoBrch with Action=3 (DELETE)");
@@ -419,23 +422,33 @@ public class BrokerBranchService : IBrokerBranchService
     #region Workflow Operations
 
     public async Task<PagedResult<MstCoBrchDto>> GetBranchUnAuthDeniedListAsync(
-   int pageNumber = 1,
-   int pageSize = 10,
-   string? searchTerm = null,
-   string? coCode = null,
-   int isAuth = 0,
-   CancellationToken cancellationToken = default)
+       int pageNumber = 1,
+       int pageSize = 10,
+       string? searchTerm = null,
+       string? coCode = null,
+       int isAuth = (byte)AuthTypeEnum.UnAuthorize,
+       CancellationToken cancellationToken = default)
     {
+        // Create request model for validation
+        var request = new GetBranchWorkflowListRequest
+        {
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+            SearchTerm = searchTerm,
+            CoCode = coCode,
+            IsAuth = isAuth
+        };
+
+        // Validate the request using FluentValidation
+        await ValidateWorkflowListRequestAsync(request, cancellationToken);
+
         string authAction = string.Empty;
-        if (isAuth ==  (byte)AuthTypeEnum.UnAuthorize)
+        if (isAuth == (byte)AuthTypeEnum.UnAuthorize)
             authAction = AuthTypeEnum.UnAuthorize.ToString();
         else if (isAuth == (byte)AuthTypeEnum.Deny)
             authAction = AuthTypeEnum.Deny.ToString();
 
         _logger.LogInformation("Getting {authAction} Branch list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize, authAction);
-
-        if (pageNumber < 1) pageNumber = 1;
-        if (pageSize < 1 || pageSize > 100) pageSize = 10;
 
         try
         {
@@ -621,6 +634,23 @@ public class BrokerBranchService : IBrokerBranchService
             }).ToList();
 
             throw new ValidationException("Authorization validation failed") { ValidationErrors = errors };
+        }
+    }
+
+    private async Task ValidateWorkflowListRequestAsync(GetBranchWorkflowListRequest request, CancellationToken cancellationToken)
+    {
+        var validationResult = await _workflowListValidator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+        {
+            var errors = validationResult.Errors.Select(e => new ValidationErrorDetail
+            {
+                PropertyName = e.PropertyName,
+                ErrorMessage = e.ErrorMessage,
+                AttemptedValue = e.AttemptedValue?.ToString()
+            }).ToList();
+
+            throw new ValidationException("Workflow list validation failed") { ValidationErrors = errors };
         }
     }
 

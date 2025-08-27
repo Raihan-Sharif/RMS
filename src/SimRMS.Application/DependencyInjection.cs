@@ -38,6 +38,7 @@ public static class DependencyInjection
         services.AddScoped<IValidator<UpdateMstCoBrchRequest>, UpdateMstCoBrchRequestValidator>();
         services.AddScoped<IValidator<DeleteMstCoBrchRequest>, DeleteMstCoBrchRequestValidator>();
         services.AddScoped<IValidator<AuthorizeMstCoBrchRequest>, AuthorizeMstCoBrchRequestValidator>();
+        services.AddScoped<IValidator<GetBranchWorkflowListRequest>, GetBranchWorkflowListRequestValidator>();
         #endregion
 
         services.AddValidatorsFromAssembly(assembly, includeInternalTypes: false);
