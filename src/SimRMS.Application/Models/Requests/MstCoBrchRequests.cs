@@ -66,7 +66,7 @@ namespace SimRMS.Application.Models.Requests
         public string CoBrchCode { get; set; } = null!;
         public byte ActionType { get; set; } = (byte)ActionTypeEnum.UPDATE;
         public byte IsAuth { get; set; } = (byte)AuthTypeEnum.Approve;
-        public string? IPAddress { get; set; }
+        public string? Remarks { get; set; }
     }
 
     public class GetBranchWorkflowListRequest

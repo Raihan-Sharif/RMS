@@ -144,9 +144,8 @@ namespace SimRMS.Application.Validators
             RuleFor(x => x.ActionType).ValidActionTypeUpdate();
 
             RuleFor(x => x.IsAuth).ValidIsApproveDeny();
+            RuleFor(x => x.Remarks).ValidRemarks().When(x => !string.IsNullOrEmpty(x.Remarks));
 
-            RuleFor(x => x.IPAddress).ValidIPAddress()
-                .When(x => !string.IsNullOrEmpty(x.IPAddress));
         }
     }
 

@@ -32,7 +32,13 @@ public static class DependencyInjection
 
         // FluentValidation
         services.AddScoped<IValidator<UsrInfoRequest>, UsrInfoRequestValidator>();
-        services.AddScoped<IValidator<UpdateMstCoRequest>, UpdateMstCoRequestValidator>();
+
+        #region Company Validators
+        services.AddScoped<IValidator<UpdateCompanyRequest>, UpdateCompanyRequestValidator>();
+        services.AddScoped<IValidator<AuthorizeCompanyRequest>, AuthorizeCompanyRequestValidator>();
+        services.AddScoped<IValidator<GetCompanyWorkflowListRequest>, GetCompanyWorkflowListRequestValidator>();
+        #endregion
+
         #region Broker Branch Validators
         services.AddScoped<IValidator<CreateMstCoBrchRequest>, CreateMstCoBrchRequestValidator>();
         services.AddScoped<IValidator<UpdateMstCoBrchRequest>, UpdateMstCoBrchRequestValidator>();

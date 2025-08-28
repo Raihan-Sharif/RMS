@@ -526,6 +526,7 @@ public class BrokerBranchService : IBrokerBranchService
                 AuthID = _currentUserService.UserId,
                 IsAuth = request.IsAuth,
                 ActionType = request.ActionType,
+                Remarks = request.Remarks,
                 RowsAffected = 0 // OUTPUT parameter
             };
 
