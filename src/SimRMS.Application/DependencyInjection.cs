@@ -47,6 +47,14 @@ public static class DependencyInjection
         services.AddScoped<IValidator<GetBranchWorkflowListRequest>, GetBranchWorkflowListRequestValidator>();
         #endregion
 
+        #region Trader Validators
+        services.AddScoped<IValidator<CreateMstTraderRequest>, CreateMstTraderRequestValidator>();
+        services.AddScoped<IValidator<UpdateMstTraderRequest>, UpdateMstTraderRequestValidator>();
+        services.AddScoped<IValidator<DeleteMstTraderRequest>, DeleteMstTraderRequestValidator>();
+        services.AddScoped<IValidator<AuthorizeMstTraderRequest>, AuthorizeMstTraderRequestValidator>();
+        services.AddScoped<IValidator<GetTraderWorkflowListRequest>, GetTraderWorkflowListRequestValidator>();
+        #endregion
+
         services.AddValidatorsFromAssembly(assembly, includeInternalTypes: false);
 
         return services;

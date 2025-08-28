@@ -59,6 +59,9 @@ namespace SimRMS.Infrastructure
             services.AddScoped<IBrokerBranchService, BrokerBranchService>();
             services.AddScoped<IWorkFlowService, WorkFlowService>();
 
+            // trader service
+            services.AddScoped<ITraderService, TraderService>();
+
             // Application Infrastructure Services
             services.AddScoped<IConfigurationService, ConfigurationService>();
             services.AddScoped<ICacheService, CacheService>();

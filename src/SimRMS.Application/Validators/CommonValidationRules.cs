@@ -222,6 +222,28 @@ namespace SimRMS.Application.Validators
             return rule;
         }
 
+        /// <summary>
+        /// Validates Exchange Code format and length
+        /// </summary>
+        public static IRuleBuilderOptions<T, string> ValidXchgCode<T>(this IRuleBuilder<T, string> ruleBuilder)
+        {
+            return ruleBuilder
+                .NotEmpty().WithMessage("Exchange code is required")
+                .MaximumLength(10).WithMessage("Exchange code cannot exceed 10 characters")
+                .Matches("^[A-Z0-9]+$").WithMessage("Exchange code can only contain uppercase letters and numbers");
+        }
+
+        /// <summary>
+        /// Validates Dealer Code format and length
+        /// </summary>
+        public static IRuleBuilderOptions<T, string> ValidDlrCode<T>(this IRuleBuilder<T, string> ruleBuilder)
+        {
+            return ruleBuilder
+                .NotEmpty().WithMessage("Dealer code is required")
+                .MaximumLength(15).WithMessage("Dealer code cannot exceed 15 characters")
+                .Matches("^[A-Z0-9]+$").WithMessage("Dealer code can only contain uppercase letters and numbers");
+        }
+
         #endregion
     }
 }
