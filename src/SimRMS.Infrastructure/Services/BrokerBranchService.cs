@@ -358,8 +358,7 @@ public class BrokerBranchService : IBrokerBranchService
                 ActionType = (byte)ActionTypeEnum.DELETE,
                 IsDel = (byte)DeleteStatusEnum.Deleted,
                 Remarks = request.Remarks,
-                RowsAffected = 0,
-                InsertedCode = string.Empty
+                RowsAffected = 0
             };
 
             _logger.LogDebug("Calling LB_SP_CrudMstCoBrch with Action=3 (DELETE)");
