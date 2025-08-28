@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using SimRMS.Application.Interfaces;
 using SimRMS.Shared.Constants;
+using SimRMS.Shared.Configuration;
 using SimRMS.WebAPI.Security;
 using SimRMS.WebAPI.Services;
 using SimRMS.WebAPI.Filters;
@@ -35,6 +36,9 @@ namespace SimRMS.WebAPI.Extensions
     {
         public static IServiceCollection AddWebApiServices(this IServiceCollection services, IConfiguration configuration)
         {
+            // Cache Configuration
+            services.Configure<CacheConfiguration>(configuration.GetSection(CacheConfiguration.SectionName));
+            
             // Current User Service
             services.AddHttpContextAccessor();
             services.AddScoped<ICurrentUserService, CurrentUserService>();

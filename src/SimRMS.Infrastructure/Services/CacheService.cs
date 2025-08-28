@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using SimRMS.Application.Interfaces;
+using SimRMS.Shared.Configuration;
 using System.Collections.Concurrent;
 using System.Text.Json;
 
@@ -29,13 +31,15 @@ namespace SimRMS.Infrastructure.Services
     {
         private readonly IMemoryCache _cache;
         private readonly ILogger<CacheService> _logger;
+        private readonly CacheConfiguration _cacheConfig;
         private readonly ConcurrentDictionary<string, SemaphoreSlim> _locks = new();
         private readonly ConcurrentHashSet<string> _cacheKeys = new();
 
-        public CacheService(IMemoryCache cache, ILogger<CacheService> logger)
+        public CacheService(IMemoryCache cache, ILogger<CacheService> logger, IOptions<CacheConfiguration> cacheConfig)
         {
             _cache = cache;
             _logger = logger;
+            _cacheConfig = cacheConfig.Value;
         }
 
         public async Task<T?> GetAsync<T>(string key)
@@ -66,8 +70,8 @@ namespace SimRMS.Infrastructure.Services
             {
                 var options = new MemoryCacheEntryOptions
                 {
-                    AbsoluteExpirationRelativeToNow = expiration ?? TimeSpan.FromHours(1),
-                    SlidingExpiration = TimeSpan.FromMinutes(20),
+                    AbsoluteExpirationRelativeToNow = expiration ?? _cacheConfig.AbsoluteExpiration,
+                    SlidingExpiration = _cacheConfig.SlidingExpiration,
                     Priority = CacheItemPriority.High
                     // REMOVED: Size property to avoid conflicts
                 };
