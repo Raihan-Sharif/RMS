@@ -1,0 +1,2293 @@
+{
+	"info": {
+		"_postman_id": "4c866688-266f-4682-acac-6677afbdef1a",
+		"name": "SimRMS",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29700469"
+	},
+	"item": [
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "Work Flow",
+					"item": [
+						{
+							"name": "Pending Authorizations",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/WorkFlow/pending-authorizations",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"WorkFlow",
+										"pending-authorizations"
+									],
+									"query": [
+										{
+											"key": "coCode",
+											"value": "073",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "denied-items",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/WorkFlow/denied-items",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"WorkFlow",
+										"denied-items"
+									],
+									"query": [
+										{
+											"key": "coCode",
+											"value": "073",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "summary",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/WorkFlow/summary",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"WorkFlow",
+										"summary"
+									],
+									"query": [
+										{
+											"key": "coCode",
+											"value": "073",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Company/Broker",
+			"item": [
+				{
+					"name": "Main CRUD",
+					"item": [
+						{
+							"name": "Get All Company/Broker List",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/Company?pageNumber=1&pageSize=20&searchTerm&coCode&coDesc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Company"
+									],
+									"query": [
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "20"
+										},
+										{
+											"key": "searchTerm",
+											"value": null
+										},
+										{
+											"key": "coCode",
+											"value": null
+										},
+										{
+											"key": "coDesc",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Company/Broker By ID",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/MstCo",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"MstCo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Company/Broker",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"coCode\": \"073\",\n // \"coDesc\": \"LankaBangla Securities PLC\",\n  \"enableExchangeWideSellProceed\": false,\n    \"remarks\": \"Testing by Raihan\"\n}\n//\"enableExchangeWideSellProceed\": false,"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/Company/:coCode",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Company",
+										":coCode"
+									],
+									"variable": [
+										{
+											"key": "coCode",
+											"value": "073"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "WF",
+					"item": [
+						{
+							"name": "Get UnAuthorized Broker Branch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var template = `\r",
+											"<style type=\"text/css\">\r",
+											"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+											"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+											"    .tftable tr {background-color:#ffffff;}\r",
+											"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+											"    .tftable tr:hover {background-color:#e0ffff;}\r",
+											"</style>\r",
+											"\r",
+											"<table class=\"tftable\" border=\"1\">\r",
+											"    <tr>\r",
+											"        <th>Co Code</th>\r",
+											"        <th>Co Branch Code</th>\r",
+											"        <th>Co Branch Description</th>\r",
+											"        <th>Co Branch Address</th>\r",
+											"        <th>Co Branch Phone</th>\r",
+											"        <th>IP Address</th>\r",
+											"        <th>Maker ID</th>\r",
+											"        <th>Action Date</th>\r",
+											"        <th>Transaction Date</th>\r",
+											"        <th>Action Type</th>\r",
+											"        <th>Authorization ID</th>\r",
+											"        <th>Authorization Date</th>\r",
+											"        <th>Authorization Transaction Date</th>\r",
+											"        <th>Is Authorized</th>\r",
+											"        <th>Authorization Level</th>\r",
+											"        <th>Is Deleted</th>\r",
+											"        <th>Remarks</th>\r",
+											"        <th>Made By</th>\r",
+											"        <th>Authorized By</th>\r",
+											"    </tr>\r",
+											"    \r",
+											"    {{#each response.data}}\r",
+											"        <tr>\r",
+											"            <td>{{coCode}}</td>\r",
+											"            <td>{{coBrchCode}}</td>\r",
+											"            <td>{{coBrchDesc}}</td>\r",
+											"            <td>{{coBrchAddr}}</td>\r",
+											"            <td>{{coBrchPhone}}</td>\r",
+											"            <td>{{ipAddress}}</td>\r",
+											"            <td>{{makerId}}</td>\r",
+											"            <td>{{actionDt}}</td>\r",
+											"            <td>{{transDt}}</td>\r",
+											"            <td>{{actionType}}</td>\r",
+											"            <td>{{authId}}</td>\r",
+											"            <td>{{authDt}}</td>\r",
+											"            <td>{{authTransDt}}</td>\r",
+											"            <td>{{isAuth}}</td>\r",
+											"            <td>{{authLevel}}</td>\r",
+											"            <td>{{isDel}}</td>\r",
+											"            <td>{{remarks}}</td>\r",
+											"            <td>{{makeBy}}</td>\r",
+											"            <td>{{authBy}}</td>\r",
+											"        </tr>\r",
+											"    {{/each}}\r",
+											"</table>\r",
+											"`;\r",
+											"\r",
+											"function constructVisualizerPayload() {\r",
+											"    return { response: pm.response.json() };\r",
+											"}\r",
+											"\r",
+											"pm.visualizer.set(template, constructVisualizerPayload());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/Company/wf/unauth-denied-list?isAuth=0&pageNumber=1&pageSize=10",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Company",
+										"wf",
+										"unauth-denied-list"
+									],
+									"query": [
+										{
+											"key": "isAuth",
+											"value": "0"
+										},
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "searchTerm",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "coCode",
+											"value": "073",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Denied Broker Branch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var template = `\r",
+											"<style type=\"text/css\">\r",
+											"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+											"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+											"    .tftable tr {background-color:#ffffff;}\r",
+											"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+											"    .tftable tr:hover {background-color:#e0ffff;}\r",
+											"</style>\r",
+											"\r",
+											"<table class=\"tftable\" border=\"1\">\r",
+											"    <tr>\r",
+											"        <th>Co Code</th>\r",
+											"        <th>Co Branch Code</th>\r",
+											"        <th>Co Branch Description</th>\r",
+											"        <th>Co Branch Address</th>\r",
+											"        <th>Co Branch Phone</th>\r",
+											"        <th>IP Address</th>\r",
+											"        <th>Maker ID</th>\r",
+											"        <th>Action Date</th>\r",
+											"        <th>Transaction Date</th>\r",
+											"        <th>Action Type</th>\r",
+											"        <th>Authorization ID</th>\r",
+											"        <th>Authorization Date</th>\r",
+											"        <th>Authorization Transaction Date</th>\r",
+											"        <th>Is Authorized</th>\r",
+											"        <th>Authorization Level</th>\r",
+											"        <th>Is Deleted</th>\r",
+											"        <th>Remarks</th>\r",
+											"        <th>Made By</th>\r",
+											"        <th>Authorized By</th>\r",
+											"    </tr>\r",
+											"    \r",
+											"    {{#each response.data}}\r",
+											"        <tr>\r",
+											"            <td>{{coCode}}</td>\r",
+											"            <td>{{coBrchCode}}</td>\r",
+											"            <td>{{coBrchDesc}}</td>\r",
+											"            <td>{{coBrchAddr}}</td>\r",
+											"            <td>{{coBrchPhone}}</td>\r",
+											"            <td>{{ipAddress}}</td>\r",
+											"            <td>{{makerId}}</td>\r",
+											"            <td>{{actionDt}}</td>\r",
+											"            <td>{{transDt}}</td>\r",
+											"            <td>{{actionType}}</td>\r",
+											"            <td>{{authId}}</td>\r",
+											"            <td>{{authDt}}</td>\r",
+											"            <td>{{authTransDt}}</td>\r",
+											"            <td>{{isAuth}}</td>\r",
+											"            <td>{{authLevel}}</td>\r",
+											"            <td>{{isDel}}</td>\r",
+											"            <td>{{remarks}}</td>\r",
+											"            <td>{{makeBy}}</td>\r",
+											"            <td>{{authBy}}</td>\r",
+											"        </tr>\r",
+											"    {{/each}}\r",
+											"</table>\r",
+											"`;\r",
+											"\r",
+											"function constructVisualizerPayload() {\r",
+											"    return { response: pm.response.json() };\r",
+											"}\r",
+											"\r",
+											"pm.visualizer.set(template, constructVisualizerPayload());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/Company/wf/unauth-denied-list?isAuth=2&pageNumber=1&pageSize=10&searchTerm",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Company",
+										"wf",
+										"unauth-denied-list"
+									],
+									"query": [
+										{
+											"key": "isAuth",
+											"value": "2"
+										},
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "searchTerm",
+											"value": null
+										},
+										{
+											"key": "coCode",
+											"value": "073",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Authorize Broker Branch",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "LB-Client-IP",
+										"value": "159.132.10.94",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"coCode\": \"073\",\n  \"coBrchCode\": \"011\",\n  \"isAuth\": 1\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/Company/wf/authorize/:coCode",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Company",
+										"wf",
+										"authorize",
+										":coCode"
+									],
+									"variable": [
+										{
+											"key": "coCode",
+											"value": "073"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Broker Branch",
+			"item": [
+				{
+					"name": "Main CRUD",
+					"item": [
+						{
+							"name": "Get All Broker Branch",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/BrokerBranch?pageNumber=1&pageSize=10&searchTerm&coCode=073",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"BrokerBranch"
+									],
+									"query": [
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "searchTerm",
+											"value": null
+										},
+										{
+											"key": "coCode",
+											"value": "073"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Broker Branch By ID",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/BrokerBranch/:coCode/:coBranchCode",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"BrokerBranch",
+										":coCode",
+										":coBranchCode"
+									],
+									"variable": [
+										{
+											"key": "coCode",
+											"value": "073"
+										},
+										{
+											"key": "coBranchCode",
+											"value": "002"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Broker Branch",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "LB-Client-IP",
+										"value": "159.132.10.94",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"coBrchDesc\": \"Uttara\",\n  \"coBrchAddr\": \"Dhaka\",\n  \"coBrchPhone\": \"03956851221\",\n  \"remarks\": \"testing\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/BrokerBranch",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"BrokerBranch"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Broker Branch",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"coCode\": \"073\",\r\n  \"coBrchCode\": \"000\",\r\n  //\"coBrchDesc\": \"Cumilla\",\r\n  \"coBrchAddr\": \"Sadar\",\r\n  \"coBrchPhone\": \"56985522525\",\r\n  \"remarks\": \"Update Testing\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/BrokerBranch/:coCode/:coBranchCode",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"BrokerBranch",
+										":coCode",
+										":coBranchCode"
+									],
+									"variable": [
+										{
+											"key": "coCode",
+											"value": "073"
+										},
+										{
+											"key": "coBranchCode",
+											"value": "010"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Broker Branch by ID",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/BrokerBranch/:coCode/:coBranchCode",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"BrokerBranch",
+										":coCode",
+										":coBranchCode"
+									],
+									"variable": [
+										{
+											"key": "coCode",
+											"value": "073"
+										},
+										{
+											"key": "coBranchCode",
+											"value": "010"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "WF",
+					"item": [
+						{
+							"name": "Get UnAuthorized Broker Branch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var template = `\r",
+											"<style type=\"text/css\">\r",
+											"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+											"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+											"    .tftable tr {background-color:#ffffff;}\r",
+											"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+											"    .tftable tr:hover {background-color:#e0ffff;}\r",
+											"</style>\r",
+											"\r",
+											"<table class=\"tftable\" border=\"1\">\r",
+											"    <tr>\r",
+											"        <th>Co Code</th>\r",
+											"        <th>Co Branch Code</th>\r",
+											"        <th>Co Branch Description</th>\r",
+											"        <th>Co Branch Address</th>\r",
+											"        <th>Co Branch Phone</th>\r",
+											"        <th>IP Address</th>\r",
+											"        <th>Maker ID</th>\r",
+											"        <th>Action Date</th>\r",
+											"        <th>Transaction Date</th>\r",
+											"        <th>Action Type</th>\r",
+											"        <th>Authorization ID</th>\r",
+											"        <th>Authorization Date</th>\r",
+											"        <th>Authorization Transaction Date</th>\r",
+											"        <th>Is Authorized</th>\r",
+											"        <th>Authorization Level</th>\r",
+											"        <th>Is Deleted</th>\r",
+											"        <th>Remarks</th>\r",
+											"        <th>Made By</th>\r",
+											"        <th>Authorized By</th>\r",
+											"    </tr>\r",
+											"    \r",
+											"    {{#each response.data}}\r",
+											"        <tr>\r",
+											"            <td>{{coCode}}</td>\r",
+											"            <td>{{coBrchCode}}</td>\r",
+											"            <td>{{coBrchDesc}}</td>\r",
+											"            <td>{{coBrchAddr}}</td>\r",
+											"            <td>{{coBrchPhone}}</td>\r",
+											"            <td>{{ipAddress}}</td>\r",
+											"            <td>{{makerId}}</td>\r",
+											"            <td>{{actionDt}}</td>\r",
+											"            <td>{{transDt}}</td>\r",
+											"            <td>{{actionType}}</td>\r",
+											"            <td>{{authId}}</td>\r",
+											"            <td>{{authDt}}</td>\r",
+											"            <td>{{authTransDt}}</td>\r",
+											"            <td>{{isAuth}}</td>\r",
+											"            <td>{{authLevel}}</td>\r",
+											"            <td>{{isDel}}</td>\r",
+											"            <td>{{remarks}}</td>\r",
+											"            <td>{{makeBy}}</td>\r",
+											"            <td>{{authBy}}</td>\r",
+											"        </tr>\r",
+											"    {{/each}}\r",
+											"</table>\r",
+											"`;\r",
+											"\r",
+											"function constructVisualizerPayload() {\r",
+											"    return { response: pm.response.json() };\r",
+											"}\r",
+											"\r",
+											"pm.visualizer.set(template, constructVisualizerPayload());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/BrokerBranch/wf/unauth-denied-list?isAuth=0&pageNumber=1&pageSize=10",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"BrokerBranch",
+										"wf",
+										"unauth-denied-list"
+									],
+									"query": [
+										{
+											"key": "isAuth",
+											"value": "0"
+										},
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "searchTerm",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "coCode",
+											"value": "073",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Denied Broker Branch",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var template = `\r",
+											"<style type=\"text/css\">\r",
+											"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+											"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+											"    .tftable tr {background-color:#ffffff;}\r",
+											"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+											"    .tftable tr:hover {background-color:#e0ffff;}\r",
+											"</style>\r",
+											"\r",
+											"<table class=\"tftable\" border=\"1\">\r",
+											"    <tr>\r",
+											"        <th>Co Code</th>\r",
+											"        <th>Co Branch Code</th>\r",
+											"        <th>Co Branch Description</th>\r",
+											"        <th>Co Branch Address</th>\r",
+											"        <th>Co Branch Phone</th>\r",
+											"        <th>IP Address</th>\r",
+											"        <th>Maker ID</th>\r",
+											"        <th>Action Date</th>\r",
+											"        <th>Transaction Date</th>\r",
+											"        <th>Action Type</th>\r",
+											"        <th>Authorization ID</th>\r",
+											"        <th>Authorization Date</th>\r",
+											"        <th>Authorization Transaction Date</th>\r",
+											"        <th>Is Authorized</th>\r",
+											"        <th>Authorization Level</th>\r",
+											"        <th>Is Deleted</th>\r",
+											"        <th>Remarks</th>\r",
+											"        <th>Made By</th>\r",
+											"        <th>Authorized By</th>\r",
+											"    </tr>\r",
+											"    \r",
+											"    {{#each response.data}}\r",
+											"        <tr>\r",
+											"            <td>{{coCode}}</td>\r",
+											"            <td>{{coBrchCode}}</td>\r",
+											"            <td>{{coBrchDesc}}</td>\r",
+											"            <td>{{coBrchAddr}}</td>\r",
+											"            <td>{{coBrchPhone}}</td>\r",
+											"            <td>{{ipAddress}}</td>\r",
+											"            <td>{{makerId}}</td>\r",
+											"            <td>{{actionDt}}</td>\r",
+											"            <td>{{transDt}}</td>\r",
+											"            <td>{{actionType}}</td>\r",
+											"            <td>{{authId}}</td>\r",
+											"            <td>{{authDt}}</td>\r",
+											"            <td>{{authTransDt}}</td>\r",
+											"            <td>{{isAuth}}</td>\r",
+											"            <td>{{authLevel}}</td>\r",
+											"            <td>{{isDel}}</td>\r",
+											"            <td>{{remarks}}</td>\r",
+											"            <td>{{makeBy}}</td>\r",
+											"            <td>{{authBy}}</td>\r",
+											"        </tr>\r",
+											"    {{/each}}\r",
+											"</table>\r",
+											"`;\r",
+											"\r",
+											"function constructVisualizerPayload() {\r",
+											"    return { response: pm.response.json() };\r",
+											"}\r",
+											"\r",
+											"pm.visualizer.set(template, constructVisualizerPayload());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/BrokerBranch/wf/unauth-denied-list?isAuth=2&pageNumber=1&pageSize=10&searchTerm",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"BrokerBranch",
+										"wf",
+										"unauth-denied-list"
+									],
+									"query": [
+										{
+											"key": "isAuth",
+											"value": "2"
+										},
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "searchTerm",
+											"value": null
+										},
+										{
+											"key": "coCode",
+											"value": "073",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Authorize Broker Branch",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "LB-Client-IP",
+										"value": "159.132.10.94",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"coCode\": \"073\",\n  \"coBrchCode\": \"003\",\n  \"isAuth\": 1,\n  \"remarks\": \"Approved by Raihan\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/BrokerBranch/wf/authorize/:coCode/:coBranchCode",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"BrokerBranch",
+										"wf",
+										"authorize",
+										":coCode",
+										":coBranchCode"
+									],
+									"variable": [
+										{
+											"key": "coCode",
+											"value": "073"
+										},
+										{
+											"key": "coBranchCode",
+											"value": "003"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Traders",
+			"item": [
+				{
+					"name": "Main CRUD",
+					"item": [
+						{
+							"name": "Get All Trader",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}} /api/v1/trader?pageNumber=1&pageSize=10",
+									"host": [
+										"{{base_url}} "
+									],
+									"path": [
+										"api",
+										"v1",
+										"trader"
+									],
+									"query": [
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "searchTerm",
+											"value": "TRD",
+											"description": "search traders using any terms",
+											"disabled": true
+										},
+										{
+											"key": "xchgCode",
+											"value": "DSE",
+											"description": "search traders with the exchange code",
+											"disabled": true
+										},
+										{
+											"key": "sortDirection",
+											"value": "ASC",
+											"description": "filter using sorting order",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Trader By ID",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}} /api/v1/trader/:xchgCode/:dlrCode",
+									"host": [
+										"{{base_url}} "
+									],
+									"path": [
+										"api",
+										"v1",
+										"trader",
+										":xchgCode",
+										":dlrCode"
+									],
+									"variable": [
+										{
+											"key": "xchgCode",
+											"value": "CSE"
+										},
+										{
+											"key": "dlrCode",
+											"value": "CTG006"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Trader",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"xchgCode\": \"CSE\",\n \"dlrCode\": \"CTG009\",\n \"remarks\": \"Created dealer in CSE to test\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}} /api/v1/trader/",
+									"host": [
+										"{{base_url}} "
+									],
+									"path": [
+										"api",
+										"v1",
+										"trader",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Trader",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"remarks\":\"updated test\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}} /api/v1/trader/:xchgCode/:dlrCode",
+									"host": [
+										"{{base_url}} "
+									],
+									"path": [
+										"api",
+										"v1",
+										"trader",
+										":xchgCode",
+										":dlrCode"
+									],
+									"variable": [
+										{
+											"key": "xchgCode",
+											"value": "CSE"
+										},
+										{
+											"key": "dlrCode",
+											"value": "CTG009"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Trader",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}} /api/v1/trader/:xchgCode/:dlrCode",
+									"host": [
+										"{{base_url}} "
+									],
+									"path": [
+										"api",
+										"v1",
+										"trader",
+										":xchgCode",
+										":dlrCode"
+									],
+									"variable": [
+										{
+											"key": "xchgCode",
+											"value": "CSE"
+										},
+										{
+											"key": "dlrCode",
+											"value": "CTG007"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "WF",
+					"item": [
+						{
+							"name": "Get Unauthorized Trader",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}} /api/v1/trader/wf/unauth-denied-list?pageNumber=1&pageSize=10&isAuth=0",
+									"host": [
+										"{{base_url}} "
+									],
+									"path": [
+										"api",
+										"v1",
+										"trader",
+										"wf",
+										"unauth-denied-list"
+									],
+									"query": [
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "isAuth",
+											"value": "0"
+										},
+										{
+											"key": "searchTerm",
+											"value": "TRD",
+											"description": "search traders using any terms",
+											"disabled": true
+										},
+										{
+											"key": "xchgCode",
+											"value": "CSE",
+											"description": "search traders with the exchange code",
+											"disabled": true
+										},
+										{
+											"key": "sortDirection",
+											"value": "ASC",
+											"description": "filter using sorting order",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Denied Trader",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}} /api/v1/trader/wf/unauth-denied-list?pageNumber=1&pageSize=10&isAuth=2",
+									"host": [
+										"{{base_url}} "
+									],
+									"path": [
+										"api",
+										"v1",
+										"trader",
+										"wf",
+										"unauth-denied-list"
+									],
+									"query": [
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "searchTerm",
+											"value": "TRD",
+											"description": "search traders using any terms",
+											"disabled": true
+										},
+										{
+											"key": "xchgCode",
+											"value": "CSE",
+											"description": "search traders with the exchange code",
+											"disabled": true
+										},
+										{
+											"key": "sortDirection",
+											"value": "ASC",
+											"description": "filter using sorting order",
+											"disabled": true
+										},
+										{
+											"key": "isAuth",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Authorize Trader",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"xchgCode\": \"CSE\",\n \"dlrCode\": \"CTG009\",\n \"isAuth\": 2\n}"
+								},
+								"url": {
+									"raw": "{{base_url}} /api/v1/trader/wf/authorize/:xchgCode/:dlrCode",
+									"host": [
+										"{{base_url}} "
+									],
+									"path": [
+										"api",
+										"v1",
+										"trader",
+										"wf",
+										"authorize",
+										":xchgCode",
+										":dlrCode"
+									],
+									"variable": [
+										{
+											"key": "xchgCode",
+											"value": "DSE"
+										},
+										{
+											"key": "dlrCode",
+											"value": "LANTRDR003"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User Info",
+			"item": [
+				{
+					"name": "Get All UsrInfo",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Handshake-Token",
+								"value": "{{handshake_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/UsrInfo/simple",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"UsrInfo",
+								"simple"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:7026/api/UsrInfo?pageNumber=1&pageSize=10&version=1",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Version",
+								"value": "MO0BRNjmyI7NKcDTR9A_nP-mAUcPiI8bWA2xUScekMc",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:7026/api/UsrInfo?pageNumber=1&pageSize=10&version=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7026",
+							"path": [
+								"api",
+								"UsrInfo"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "version",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Token & Login",
+			"item": [
+				{
+					"name": "Validation",
+					"item": [
+						{
+							"name": "Handshake token validate",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"HEADER\": {\r\n    \"Content-Type\": \"application/json\",\r\n    \"LBSL_REQ_TYPE\": \"2\"\r\n  },\r\n  \"DATA\": {\r\n    \"PID\": \"EFTEST01\",\r\n    \"TOKEN\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJQSUQiOiJFRlRFU1QwMSIsIm5iZiI6MTc1Mjc0NzA1OCwiZXhwIjoxNzUyNzQ3MDg4LCJpYXQiOjE3NTI3NDcwNTgsImlzcyI6Imh0dHA6Ly9sYnNjb3IwMDgubGJhZC5jb20iLCJhdWQiOiJodHRwOi8vMTkyLjE2OC4xMDAuNzUifQ.lkW8XNI3p_zvKTkcdEGC6SikHr-K0fP6u8imgDRS-rc\"\r\n  }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.100.48:9092/validate",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"100",
+										"48"
+									],
+									"port": "9092",
+									"path": [
+										"validate"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Handshake Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// pm.test(\"Status code is 200\", function () {",
+									"//     pm.response.to.have.status(200);",
+									"// });",
+									"",
+									"const responseData = pm.response.json();",
+									"",
+									"// Check if the handshakeToken exists in the response",
+									"if (responseData.data && responseData.data.handshakeToken) {",
+									"    // Set the environment variable with the new token",
+									"    pm.environment.set(\"handshake_token\", responseData.data.handshakeToken);",
+									"",
+									"    // Optional: Log a message to the Postman Console to confirm",
+									"    console.log(\"Handshake token updated successfully:\", pm.environment.get(\"handshake_token\"));",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Api-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"appId\": \"RMS_APP_2025\",\r\n  \"appSecret\": \"RMS_SECRET_2025_SECURE_KEY\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/Handshake",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Handshake"
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": []
+				},
+				{
+					"name": "Login And Auth Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseData = pm.response.json();",
+									"",
+									"// Check if the handshakeToken exists in the response",
+									"if (responseData.data && responseData.data.userToken) {",
+									"    // Set the environment variable with the new token",
+									"    pm.environment.set(\"auth_token\", responseData.data.userToken);",
+									"",
+									"    // Optional: Log a message to the Postman Console to confirm",
+									"    console.log(\"auth token updated successfully:\", pm.environment.get(\"auth_token\"));",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Api-Version",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "X-Handshake-Token",
+								"value": "{{handshake_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"EFTEST03\",\n  \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/Auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Auth",
+								"login"
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "http://192.168.100.48:8082   https://localhost:7026"
+		}
+	]
+}

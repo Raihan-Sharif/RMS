@@ -76,10 +76,9 @@ namespace SimRMS.Application.Models.Requests
     {
         public string XchgCode { get; set; } = null!;
         public string DlrCode { get; set; } = null!;
-        public int Action { get; set; } = (byte) ActionTypeEnum.UPDATE; // Must be 2 for authorization
-        public byte IsAuth { get; set; } = (byte) AuthTypeEnum.Approve; // default to 1 (authorized), can be set to 2 (denied)
-        public byte ActionType { get; set; } = (byte) ActionTypeEnum.UPDATE; // Must be 2 for authorization
-        public string? IPAddress { get; set; }
+        public byte ActionType { get; set; } = (byte)ActionTypeEnum.UPDATE;
+        public byte IsAuth { get; set; } = (byte)AuthTypeEnum.Approve;
+        public string? Remarks { get; set; }
     }
 
 

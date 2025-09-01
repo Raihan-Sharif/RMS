@@ -448,16 +448,17 @@ public class TraderService : ITraderService
 
         try
         {
-            var parameters = new
+            var parameters = new Dictionary<string, object>
             {
-                Action = request.Action,
-                XchgCode = xchgCode,
-                DlrCode = dlrCode,
-                IPAddress = request.IPAddress ?? _currentUserService.GetClientIPAddress(),
-                AuthID = _currentUserService.GetCurrentUserId(),
-                IsAuth = request.IsAuth,
-                ActionType = request.ActionType,
-                RowsAffected = 0 // OUTPUT parameter
+                ["Action"] = request.ActionType,
+                ["XchgCode"] = xchgCode,
+                ["DlrCode"] = dlrCode,
+                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
+                ["AuthID"] = _currentUserService.GetCurrentUserId(),
+                ["IsAuth"] = request.IsAuth,
+                ["ActionType"] = request.ActionType,
+                ["Remarks"] = !string.IsNullOrEmpty(request.Remarks) ? request.Remarks : DBNull.Value,
+                ["RowsAffected"] = 0 // OUTPUT parameter
             };
 
             _logger.LogDebug("Calling LB_SP_AuthTrader with parameters: {@Parameters}", parameters);

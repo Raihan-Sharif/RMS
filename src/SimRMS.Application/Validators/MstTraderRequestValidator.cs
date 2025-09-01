@@ -72,16 +72,11 @@ namespace SimRMS.Application.Validators
             RuleFor(x => x.XchgCode).ValidXchgCode();
             RuleFor(x => x.DlrCode).ValidDlrCode();
 
-            RuleFor(x => x.Action)
-                .Equal(2).WithMessage("Action must be 2 for authorization");
-
             RuleFor(x => x.IsAuth).ValidIsApproveDeny();
 
             RuleFor(x => x.ActionType)
                 .Equal((byte)2).WithMessage("Action type must be 2 for authorization");
 
-            RuleFor(x => x.IPAddress).ValidIPAddress()
-                .When(x => !string.IsNullOrEmpty(x.IPAddress));
         }
     }
 

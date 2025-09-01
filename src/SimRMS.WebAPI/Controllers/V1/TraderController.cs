@@ -273,7 +273,7 @@ public class TraderController : BaseController
         [FromBody, Required] AuthorizeMstTraderRequest request,
         CancellationToken cancellationToken = default)
     {
-        string actionName = ((ActionTypeEnum)request.Action).ToString();
+        string actionName = ((ActionTypeEnum)request.ActionType).ToString();
        
         _logger.LogInformation("Authorizing MstTrader in workflow: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
 

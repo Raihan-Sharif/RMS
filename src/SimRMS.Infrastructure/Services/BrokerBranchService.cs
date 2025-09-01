@@ -516,19 +516,19 @@ public class BrokerBranchService : IBrokerBranchService
 
             var ipAddress = _currentUserService.GetClientIPAddress();
 
-            var parameters = new
+            var parameters = new Dictionary<string, object>
             {
-                Action = request.ActionType, // Default is 2 for authorization
-                CoCode = coCode,
-                CoBrchCode = coBrchCode,
-                IPAddress = ipAddress,
-                AuthID = _currentUserService.UserId,
-                IsAuth = request.IsAuth,
-                ActionType = request.ActionType,
-                Remarks = request.Remarks,
-                RowsAffected = 0 // OUTPUT parameter
+                ["Action"] = request.ActionType,
+                ["CoCode"] = coCode,
+                ["CoBrchCode"] = coBrchCode,
+                ["IPAddress"] = ipAddress,
+                ["AuthID"] = _currentUserService.UserId,
+                ["IsAuth"] = request.IsAuth,
+                ["ActionType"] = request.ActionType,
+                ["Remarks"] = !string.IsNullOrEmpty(request.Remarks) ? request.Remarks : DBNull.Value,
+                ["RowsAffected"] = 0 //Output parameter
             };
-
+            
             var result = await _repository.ExecuteWithOutputAsync(
                 "LB_SP_AuthMstCoBrch",
                 parameters,
