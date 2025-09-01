@@ -30,7 +30,7 @@ namespace SimRMS.WebAPI.Controllers.V1;
 /// <summary> 
 /// Trader controller for managing trader information
 /// </summary>
-[Route("api/v{version:apiVersion}/[controller]")]
+[Route("api/v{version:apiVersion}/trader")]
 [ApiController]
 [ApiVersion("1.0")]
 [Authorize]
@@ -60,7 +60,7 @@ public class TraderController : BaseController
     /// <param name="sortDirection">Sort direction (optional, e.g. "asc" or "desc")</param>"
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Paginated list of traders</returns>
-    [HttpGet]
+    [HttpGet("trader-list")]
     [ProducesResponseType(typeof(ApiResponse<IEnumerable<MstTraderDto>>), 200)]
     [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 401)]
@@ -92,7 +92,7 @@ public class TraderController : BaseController
     /// <param name="dlrCode">Dealer code</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Trader information</returns>
-    [HttpGet("{xchgCode}/{dlrCode}")]
+    [HttpGet("trader-by-id/{xchgCode}/{dlrCode}")]
     [ProducesResponseType(typeof(ApiResponse<MstTraderDto>), 200)]
     [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 404)]
@@ -122,7 +122,7 @@ public class TraderController : BaseController
     /// <param name="request">Create request</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Created trader information</returns>
-    [HttpPost]
+    [HttpPost("create-trader")]
     [ProducesResponseType(typeof(ApiResponse<MstTraderDto>), 201)]
     [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 401)]
@@ -154,7 +154,7 @@ public class TraderController : BaseController
     /// <param name="request">Update request</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Updated trader information</returns>
-    [HttpPut("{xchgCode}/{dlrCode}")]
+    [HttpPut("update-trader/{xchgCode}/{dlrCode}")]
     [ProducesResponseType(typeof(ApiResponse<MstTraderDto>), 200)]
     [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 404)]
@@ -184,7 +184,7 @@ public class TraderController : BaseController
     /// <param name="request">Delete request</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Success status</returns>
-    [HttpDelete("{xchgCode}/{dlrCode}")]
+    [HttpDelete("delete-trader/{xchgCode}/{dlrCode}")]
     [ProducesResponseType(typeof(ApiResponse<object>), 200)]
     [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 404)]

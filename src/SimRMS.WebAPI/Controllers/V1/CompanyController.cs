@@ -30,7 +30,7 @@ namespace SimRMS.WebAPI.Controllers.V1;
 /// <summary>
 /// Company controller for managing company information
 /// </summary>
-[Route("api/v{version:apiVersion}/[controller]")]
+[Route("api/v{version:apiVersion}/company")]
 [ApiController]
 [ApiVersion("1.0")]
 [Authorize]
@@ -59,7 +59,7 @@ public class CompanyController : BaseController
     /// <param name="coDesc">Filter by company description</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Paginated list of companies</returns>
-    [HttpGet]
+    [HttpGet("company-list")]
     [ProducesResponseType(typeof(ApiResponse<IEnumerable<CompanyDto>>), 200)]
     [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 401)]
@@ -88,7 +88,7 @@ public class CompanyController : BaseController
     /// <param name="coCode">Company code</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Company information</returns>
-    [HttpGet("{coCode}")]
+    [HttpGet("company-by-id/{coCode}")]
     [ProducesResponseType(typeof(ApiResponse<CompanyDto>), 200)]
     [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 404)]
@@ -117,7 +117,7 @@ public class CompanyController : BaseController
     /// <param name="request">Update request with optional WFName for workflow authorization</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Updated company information</returns>
-    [HttpPut("{coCode}")]
+    [HttpPut("update-company/{coCode}")]
     [ProducesResponseType(typeof(ApiResponse<CompanyDto>), 200)]
     [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 404)]

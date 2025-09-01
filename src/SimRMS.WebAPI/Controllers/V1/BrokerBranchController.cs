@@ -30,7 +30,7 @@ namespace SimRMS.WebAPI.Controllers.V1;
 /// <summary>
 /// Broker Branch controller for managing branch information
 /// </summary>
-[Route("api/v{version:apiVersion}/[controller]")]
+[Route("api/v{version:apiVersion}/broker-branch")]
 [ApiController]
 [ApiVersion("1.0")]
 [Authorize]
@@ -58,7 +58,7 @@ public class BrokerBranchController : BaseController
     /// <param name="coCode">Filter by specific company code</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Paginated list of branches</returns>
-    [HttpGet]
+    [HttpGet("branch-list")]
     [ProducesResponseType(typeof(ApiResponse<IEnumerable<MstCoBrchDto>>), 200)]
     [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 401)]
@@ -88,7 +88,7 @@ public class BrokerBranchController : BaseController
     /// <param name="coBrchCode">Branch code</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Branch information</returns>
-    [HttpGet("{coCode}/{coBrchCode}")]
+    [HttpGet("branch-by-id/{coCode}/{coBrchCode}")]
     [ProducesResponseType(typeof(ApiResponse<MstCoBrchDto>), 200)]
     [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 404)]
@@ -116,7 +116,7 @@ public class BrokerBranchController : BaseController
     /// <param name="request">Create request</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Created branch information</returns>
-    [HttpPost]
+    [HttpPost("create-branch")]
     [ProducesResponseType(typeof(ApiResponse<MstCoBrchDto>), 201)]
     [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 401)]
@@ -148,7 +148,7 @@ public class BrokerBranchController : BaseController
     /// <param name="request">Update request</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Updated branch information</returns>
-    [HttpPut("{coCode}/{coBrchCode}")]
+    [HttpPut("update-branch/{coCode}/{coBrchCode}")]
     [ProducesResponseType(typeof(ApiResponse<MstCoBrchDto>), 200)]
     [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 404)]
@@ -177,7 +177,7 @@ public class BrokerBranchController : BaseController
     /// <param name="request">Delete request</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Success status</returns>
-    [HttpDelete("{coCode}/{coBrchCode}")]
+    [HttpDelete("delete-branch/{coCode}/{coBrchCode}")]
     [ProducesResponseType(typeof(ApiResponse<object>), 200)]
     [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 404)]
@@ -211,7 +211,7 @@ public class BrokerBranchController : BaseController
     /// <param name="coBrchCode">Branch code</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Boolean indicating existence</returns>
-    [HttpHead("{coCode}/{coBrchCode}")]
+    [HttpHead("branch-exists/{coCode}/{coBrchCode}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
     [ProducesResponseType(typeof(ApiResponse<object>), 401)]

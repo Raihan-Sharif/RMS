@@ -28,7 +28,7 @@ using System.Net.Mime;
 namespace SimRMS.WebAPI.Controllers.V1;
 
 [ApiController]
-[Route("api/V{version:apiVersion}/[controller]")]
+[Route("api/v{version:apiVersion}/file")]
 [ApiVersion("1.0")]
 public class FileController : BaseController
 {

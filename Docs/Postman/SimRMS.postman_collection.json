@@ -50,14 +50,14 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/WorkFlow/pending-authorizations",
+									"raw": "{{base_url}}/api/v1/workflow/pending-authorizations",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"WorkFlow",
+										"workflow",
 										"pending-authorizations"
 									],
 									"query": [
@@ -108,14 +108,14 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/WorkFlow/denied-items",
+									"raw": "{{base_url}}/api/v1/workflow/denied-items",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"WorkFlow",
+										"workflow",
 										"denied-items"
 									],
 									"query": [
@@ -166,14 +166,14 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/WorkFlow/summary",
+									"raw": "{{base_url}}/api/v1/workflow/summary",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"WorkFlow",
+										"workflow",
 										"summary"
 									],
 									"query": [
@@ -234,14 +234,15 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/Company?pageNumber=1&pageSize=20&searchTerm&coCode&coDesc",
+									"raw": "{{base_url}}/api/v1/company/company-list?pageNumber=1&pageSize=20&searchTerm&coCode",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"Company"
+										"company",
+										"company-list"
 									],
 									"query": [
 										{
@@ -262,7 +263,8 @@
 										},
 										{
 											"key": "coDesc",
-											"value": null
+											"value": null,
+											"disabled": true
 										}
 									]
 								}
@@ -306,14 +308,22 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/MstCo",
+									"raw": "{{base_url}}/api/v1/company/company-by-id/:coCode",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"MstCo"
+										"company",
+										"company-by-id",
+										":coCode"
+									],
+									"variable": [
+										{
+											"key": "coCode",
+											"value": "073"
+										}
 									]
 								}
 							},
@@ -355,14 +365,15 @@
 									"raw": "{\n  \"coCode\": \"073\",\n // \"coDesc\": \"LankaBangla Securities PLC\",\n  \"enableExchangeWideSellProceed\": false,\n    \"remarks\": \"Testing by Raihan\"\n}\n//\"enableExchangeWideSellProceed\": false,"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/Company/:coCode",
+									"raw": "{{base_url}}/api/v1/company/update-company/:coCode",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"Company",
+										"company",
+										"update-company",
 										":coCode"
 									],
 									"variable": [
@@ -491,14 +502,14 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/Company/wf/unauth-denied-list?isAuth=0&pageNumber=1&pageSize=10",
+									"raw": "{{base_url}}/api/v1/company/wf/unauth-denied-list?isAuth=0&pageNumber=1&pageSize=10",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"Company",
+										"company",
 										"wf",
 										"unauth-denied-list"
 									],
@@ -641,14 +652,14 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/Company/wf/unauth-denied-list?isAuth=2&pageNumber=1&pageSize=10&searchTerm",
+									"raw": "{{base_url}}/api/v1/company/wf/unauth-denied-list?isAuth=2&pageNumber=1&pageSize=10&searchTerm",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"Company",
+										"company",
 										"wf",
 										"unauth-denied-list"
 									],
@@ -718,17 +729,17 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"coCode\": \"073\",\n  \"coBrchCode\": \"011\",\n  \"isAuth\": 1\n}"
+									"raw": "{\n  \"coCode\": \"073\",\n  \"coBrchCode\": \"011\",\n  \"isAuth\": 1,\n  \"remarks\": \"Approved by Raihan\"\n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/Company/wf/authorize/:coCode",
+									"raw": "{{base_url}}/api/v1/company/wf/authorize/:coCode",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"Company",
+										"company",
 										"wf",
 										"authorize",
 										":coCode"
@@ -790,14 +801,15 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/BrokerBranch?pageNumber=1&pageSize=10&searchTerm&coCode=073",
+									"raw": "{{base_url}}/api/v1/broker-branch/branch-list?pageNumber=1&pageSize=10&searchTerm&coCode=073",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"BrokerBranch"
+										"broker-branch",
+										"branch-list"
 									],
 									"query": [
 										{
@@ -858,14 +870,15 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/BrokerBranch/:coCode/:coBranchCode",
+									"raw": "{{base_url}}/api/v1/broker-branch/branch-by-id/:coCode/:coBranchCode",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"BrokerBranch",
+										"broker-branch",
+										"branch-by-id",
 										":coCode",
 										":coBranchCode"
 									],
@@ -924,14 +937,15 @@
 									"raw": "{\n  \"coBrchDesc\": \"Uttara\",\n  \"coBrchAddr\": \"Dhaka\",\n  \"coBrchPhone\": \"03956851221\",\n  \"remarks\": \"testing\"\n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/BrokerBranch",
+									"raw": "{{base_url}}/api/v1/broker-branch/create-branch",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"BrokerBranch"
+										"broker-branch",
+										"create-branch"
 									]
 								}
 							},
@@ -978,14 +992,15 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/BrokerBranch/:coCode/:coBranchCode",
+									"raw": "{{base_url}}/api/v1/broker-branch/update-branch/:coCode/:coBranchCode",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"BrokerBranch",
+										"broker-branch",
+										"update-branch",
 										":coCode",
 										":coBranchCode"
 									],
@@ -1039,14 +1054,15 @@
 									"formdata": []
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/BrokerBranch/:coCode/:coBranchCode",
+									"raw": "{{base_url}}/api/v1/broker-branch/delete-branch/:coCode/:coBranchCode",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"BrokerBranch",
+										"broker-branch",
+										"delete-branch",
 										":coCode",
 										":coBranchCode"
 									],
@@ -1180,14 +1196,14 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/BrokerBranch/wf/unauth-denied-list?isAuth=0&pageNumber=1&pageSize=10",
+									"raw": "{{base_url}}/api/v1/broker-branch/wf/unauth-denied-list?isAuth=0&pageNumber=1&pageSize=10",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"BrokerBranch",
+										"broker-branch",
 										"wf",
 										"unauth-denied-list"
 									],
@@ -1330,14 +1346,14 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/BrokerBranch/wf/unauth-denied-list?isAuth=2&pageNumber=1&pageSize=10&searchTerm",
+									"raw": "{{base_url}}/api/v1/broker-branch/wf/unauth-denied-list?isAuth=2&pageNumber=1&pageSize=10&searchTerm",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"BrokerBranch",
+										"broker-branch",
 										"wf",
 										"unauth-denied-list"
 									],
@@ -1410,14 +1426,14 @@
 									"raw": "{\n  \"coCode\": \"073\",\n  \"coBrchCode\": \"003\",\n  \"isAuth\": 1,\n  \"remarks\": \"Approved by Raihan\"\n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/BrokerBranch/wf/authorize/:coCode/:coBranchCode",
+									"raw": "{{base_url}}/api/v1/broker-branch/wf/authorize/:coCode/:coBranchCode",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"BrokerBranch",
+										"broker-branch",
 										"wf",
 										"authorize",
 										":coCode",
@@ -1484,14 +1500,15 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}} /api/v1/trader?pageNumber=1&pageSize=10",
+									"raw": "{{base_url}}/api/v1/trader/trader-list?pageNumber=1&pageSize=10",
 									"host": [
-										"{{base_url}} "
+										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"trader"
+										"trader",
+										"trader-list"
 									],
 									"query": [
 										{
@@ -1562,14 +1579,15 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}} /api/v1/trader/:xchgCode/:dlrCode",
+									"raw": "{{base_url}}/api/v1/trader/trader-by-id/:xchgCode/:dlrCode",
 									"host": [
-										"{{base_url}} "
+										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
 										"trader",
+										"trader-by-id",
 										":xchgCode",
 										":dlrCode"
 									],
@@ -1623,15 +1641,15 @@
 									"raw": "{\n \"xchgCode\": \"CSE\",\n \"dlrCode\": \"CTG009\",\n \"remarks\": \"Created dealer in CSE to test\"\n}"
 								},
 								"url": {
-									"raw": "{{base_url}} /api/v1/trader/",
+									"raw": "{{base_url}}/api/v1/trader/create-trader",
 									"host": [
-										"{{base_url}} "
+										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
 										"trader",
-										""
+										"create-trader"
 									]
 								}
 							},
@@ -1673,14 +1691,15 @@
 									"raw": "{\n \"remarks\":\"updated test\"\n}"
 								},
 								"url": {
-									"raw": "{{base_url}} /api/v1/trader/:xchgCode/:dlrCode",
+									"raw": "{{base_url}}/api/v1/trader/update-trader/:xchgCode/:dlrCode",
 									"host": [
-										"{{base_url}} "
+										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
 										"trader",
+										"update-trader",
 										":xchgCode",
 										":dlrCode"
 									],
@@ -1734,14 +1753,15 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{base_url}} /api/v1/trader/:xchgCode/:dlrCode",
+									"raw": "{{base_url}}/api/v1/trader/delete-trader/:xchgCode/:dlrCode",
 									"host": [
-										"{{base_url}} "
+										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"v1",
 										"trader",
+										"delete-trader",
 										":xchgCode",
 										":dlrCode"
 									],
@@ -1801,9 +1821,9 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}} /api/v1/trader/wf/unauth-denied-list?pageNumber=1&pageSize=10&isAuth=0",
+									"raw": "{{base_url}}/api/v1/trader/wf/unauth-denied-list?pageNumber=1&pageSize=10&isAuth=0",
 									"host": [
-										"{{base_url}} "
+										"{{base_url}}"
 									],
 									"path": [
 										"api",
@@ -1885,9 +1905,9 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}} /api/v1/trader/wf/unauth-denied-list?pageNumber=1&pageSize=10&isAuth=2",
+									"raw": "{{base_url}}/api/v1/trader/wf/unauth-denied-list?pageNumber=1&pageSize=10&isAuth=2",
 									"host": [
-										"{{base_url}} "
+										"{{base_url}}"
 									],
 									"path": [
 										"api",
@@ -1968,9 +1988,9 @@
 									"raw": "{\n \"xchgCode\": \"CSE\",\n \"dlrCode\": \"CTG009\",\n \"isAuth\": 2\n}"
 								},
 								"url": {
-									"raw": "{{base_url}} /api/v1/trader/wf/authorize/:xchgCode/:dlrCode",
+									"raw": "{{base_url}}/api/v1/trader/wf/authorize/:xchgCode/:dlrCode",
 									"host": [
-										"{{base_url}} "
+										"{{base_url}}"
 									],
 									"path": [
 										"api",
@@ -2022,14 +2042,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/api/v1/UsrInfo/simple",
+							"raw": "{{base_url}}/api/v1/user-info/user-list",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"UsrInfo",
+								"user-info",
 								"simple"
 							]
 						}
@@ -2059,7 +2079,7 @@
 							"port": "7026",
 							"path": [
 								"api",
-								"UsrInfo"
+								"user-info"
 							],
 							"query": [
 								{
@@ -2166,7 +2186,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/Handshake",
+							"raw": "{{base_url}}/api/v1/handshake",
 							"host": [
 								"{{base_url}}"
 							],
@@ -2242,7 +2262,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/Auth/login",
+							"raw": "{{base_url}}/api/v1/auth/login",
 							"host": [
 								"{{base_url}}"
 							],

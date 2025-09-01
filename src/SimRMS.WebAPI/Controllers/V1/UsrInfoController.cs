@@ -31,7 +31,7 @@ namespace SimRMS.WebAPI.Controllers.V1;
     /// <summary>
     /// Simplified UsrInfo controller - much cleaner and easier to maintain
     /// </summary>
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/v{version:apiVersion}/user-info")]
     [ApiController]
     [ApiVersion("1.0")]
     [Authorize]
@@ -55,7 +55,7 @@ namespace SimRMS.WebAPI.Controllers.V1;
         /// Get paginated list of users with basic query parameters
         /// Validation done directly in controller
         /// </summary>
-        [HttpGet("simple")]
+        [HttpGet("user-list")]
         [MapToApiVersion("1.0")]
         [Authorize(Policy = "ViewUsers")]
         [ProducesResponseType(typeof(ApiResponse<IEnumerable<UsrInfoDto>>), 200)]
@@ -77,7 +77,7 @@ namespace SimRMS.WebAPI.Controllers.V1;
         /// <summary>
         /// Get user information by ID
         /// </summary>
-        [HttpGet("{usrId}")]
+        [HttpGet("user-by-id/{usrId}")]
         [MapToApiVersion("1.0")]
         [Authorize(Policy = "ViewUsers")]
         [ProducesResponseType(typeof(ApiResponse<UsrInfoDto>), 200)]
@@ -98,7 +98,7 @@ namespace SimRMS.WebAPI.Controllers.V1;
         /// Create new user information
         /// Uses single request model with validation
         /// </summary>
-        [HttpPost]
+        [HttpPost("create")]
         [MapToApiVersion("1.0")]
         [Authorize(Policy = "ManageUsers")]
         [ProducesResponseType(typeof(ApiResponse<UsrInfoDto>), 200)]
@@ -115,7 +115,7 @@ namespace SimRMS.WebAPI.Controllers.V1;
         /// Update existing user information
         /// Uses single request model with validation
         /// </summary>
-        [HttpPut("{usrId}")]
+        [HttpPut("update/{usrId}")]
         [MapToApiVersion("1.0")]
         [Authorize(Policy = "ManageUsers")]
         [ProducesResponseType(typeof(ApiResponse<UsrInfoDto>), 200)]
@@ -133,7 +133,7 @@ namespace SimRMS.WebAPI.Controllers.V1;
         /// <summary>
         /// Delete user information
         /// </summary>
-        [HttpDelete("{usrId}")]
+        [HttpDelete("delete/{usrId}")]
         [MapToApiVersion("1.0")]
         [Authorize(Policy = "ManageUsers")]
         [ProducesResponseType(typeof(ApiResponse<bool>), 200)]

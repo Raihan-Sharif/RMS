@@ -33,7 +33,7 @@ namespace SimRMS.WebAPI.Controllers.V1
     /// Controller for Company with Exposure operations
     /// Demonstrates Table Value Parameter usage with bulk operations
     /// </summary>
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/v{version:apiVersion}/company-exposure")]
     [ApiController]
     [ApiVersion("1.0")]
     [Authorize]
@@ -50,7 +50,7 @@ namespace SimRMS.WebAPI.Controllers.V1
         /// <summary>
         /// Get paginated list of companies with exposure
         /// </summary>
-        [HttpGet]
+        [HttpGet("company-list")]
         [ProducesResponseType(typeof(ApiResponse<IEnumerable<MstCompanyWithExposureDto>>), 200)]
         public async Task<ActionResult<ApiResponse<IEnumerable<MstCompanyWithExposureDto>>>> GetCompaniesWithExposure(
             [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1,
@@ -74,7 +74,7 @@ namespace SimRMS.WebAPI.Controllers.V1
         /// <summary>
         /// Get company with exposure by code
         /// </summary>
-        [HttpGet("{coCode}")]
+        [HttpGet("company-by-id/{coCode}")]
         [ProducesResponseType(typeof(ApiResponse<MstCompanyWithExposureDto>), 200)]
         public async Task<ActionResult<ApiResponse<MstCompanyWithExposureDto>>> GetCompanyWithExposure(
             [Required] string coCode,
@@ -101,7 +101,7 @@ namespace SimRMS.WebAPI.Controllers.V1
         /// Bulk create companies with exposure using Table Value Parameters
         /// Demonstrates high-performance bulk operations with your custom LB DAL
         /// </summary>
-        [HttpPost("bulk")]
+        [HttpPost("bulk-create")]
         [ProducesResponseType(typeof(ApiResponse<BulkOperationResult>), 200)]
         public async Task<ActionResult<ApiResponse<BulkOperationResult>>> BulkCreateCompaniesWithExposure(
             [FromBody, Required] IEnumerable<CreateCompanyExposureRequest> requests,
@@ -135,7 +135,7 @@ namespace SimRMS.WebAPI.Controllers.V1
         /// <summary>
         /// Bulk update companies with exposure using Table Value Parameters
         /// </summary>
-        [HttpPut("bulk")]
+        [HttpPut("bulk-update")]
         [ProducesResponseType(typeof(ApiResponse<BulkOperationResult>), 200)]
         public async Task<ActionResult<ApiResponse<BulkOperationResult>>> BulkUpdateCompaniesWithExposure(
             [FromBody, Required] IEnumerable<UpdateCompanyExposureRequest> requests,
@@ -170,7 +170,7 @@ namespace SimRMS.WebAPI.Controllers.V1
         /// Bulk upsert (insert or update) companies with exposure using Table Value Parameters
         /// This operation will insert new companies and update existing ones in a single call
         /// </summary>
-        [HttpPost("bulk/upsert")]
+        [HttpPost("bulk-upsert")]
         [ProducesResponseType(typeof(ApiResponse<BulkOperationResult>), 200)]
         public async Task<ActionResult<ApiResponse<BulkOperationResult>>> BulkUpsertCompaniesWithExposure(
             [FromBody, Required] IEnumerable<UpsertCompanyExposureRequest> requests,

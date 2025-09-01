@@ -28,7 +28,7 @@ using System.Security.Claims;
 
 namespace SimRMS.WebAPI.Controllers.V1
 {
-    [Route("api/v{version:apiVersion}/[controller]")] // ONLY versioned route
+    [Route("api/v{version:apiVersion}/auth")]
     [ApiController]
     [ApiVersion("1.0")]
     public class AuthController : BaseController

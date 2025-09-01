@@ -27,7 +27,7 @@ namespace SimRMS.WebAPI.Controllers.V1;
 /// <summary>
 /// WorkFlow controller for managing pending authorizations and denied items
 /// </summary>
-[Route("api/v{version:apiVersion}/[controller]")]
+[Route("api/v{version:apiVersion}/workflow")]
 [ApiController]
 [ApiVersion("1.0")]
 [Authorize]
