@@ -203,6 +203,20 @@ namespace SimRMS.Application.Validators
 
         #endregion
 
+        #region Sorting Validations
+
+        /// <summary>
+        /// Validates Sorting direction to be either 'ASC' or 'DESC'
+        /// </summary>
+        public static IRuleBuilderOptions<T, string> ValidSorting<T>(this IRuleBuilder<T, string> ruleBuilder)
+        {
+            return ruleBuilder
+                .Must(x => string.IsNullOrEmpty(x) || x.ToUpper() == "ASC" || x.ToUpper() == "DESC")
+                .WithMessage("Sort direction must be 'ASC' or 'DESC'");
+        }
+
+        #endregion
+
         #region Code Validations
 
         /// <summary>

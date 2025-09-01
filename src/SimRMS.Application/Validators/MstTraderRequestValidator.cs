@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using SimRMS.Application.Models.Requests;
+using SimRMS.Shared.Constants;
 
 /// <summary>
 /// <para>
@@ -72,10 +73,10 @@ namespace SimRMS.Application.Validators
             RuleFor(x => x.XchgCode).ValidXchgCode();
             RuleFor(x => x.DlrCode).ValidDlrCode();
 
+            RuleFor(x => x.ActionType).ValidActionTypeUpdate();
             RuleFor(x => x.IsAuth).ValidIsApproveDeny();
-
-            RuleFor(x => x.ActionType)
-                .Equal((byte)2).WithMessage("Action type must be 2 for authorization");
+            RuleFor(x => x.Remarks).ValidRemarks().When(x => !string.IsNullOrEmpty(x.Remarks));
+            RuleFor(x => x.Remarks).NotEmpty().WithMessage("Remarks are required for denial").When(x => x.IsAuth == (byte)AuthTypeEnum.Deny);
 
         }
     }
@@ -101,9 +102,7 @@ namespace SimRMS.Application.Validators
             RuleFor(x => x.SearchTerm).ValidSearchTerm(100)
                 .When(x => !string.IsNullOrEmpty(x.SearchTerm));
 
-            RuleFor(x => x.SortDirection)
-                .Must(x => string.IsNullOrEmpty(x) || x.ToUpper() == "ASC" || x.ToUpper() == "DESC")
-                .WithMessage("Sort direction must be 'ASC' or 'DESC'")
+            RuleFor(x => x.SortDirection).ValidSorting()
                 .When(x => !string.IsNullOrEmpty(x.SortDirection));
         }
     }

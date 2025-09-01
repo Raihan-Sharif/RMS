@@ -145,6 +145,7 @@ namespace SimRMS.Application.Validators
 
             RuleFor(x => x.IsAuth).ValidIsApproveDeny();
             RuleFor(x => x.Remarks).ValidRemarks().When(x => !string.IsNullOrEmpty(x.Remarks));
+            RuleFor(x => x.Remarks).NotEmpty().WithMessage("Remarks are required for denial").When(x => x.IsAuth == (byte)AuthTypeEnum.Deny);
 
         }
     }
