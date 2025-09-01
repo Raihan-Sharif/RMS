@@ -2020,6 +2020,178 @@
 			]
 		},
 		{
+			"name": "Common Data",
+			"item": [
+				{
+					"name": "Get Branch List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Api-Version",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "X-Handshake-Token",
+								"value": "{{handshake_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/common-data/branch-list?companyCode=073",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"common-data",
+								"branch-list"
+							],
+							"query": [
+								{
+									"key": "companyCode",
+									"value": "073",
+									"description": "Filter by company code (optional)"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Company List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Api-Version",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "X-Handshake-Token",
+								"value": "{{handshake_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/common-data/company-list",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"common-data",
+								"company-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Trader List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Api-Version",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "X-Handshake-Token",
+								"value": "{{handshake_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/common-data/trader-list?exchangeCode=DSE",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"common-data",
+								"trader-list"
+							],
+							"query": [
+								{
+									"key": "exchangeCode",
+									"value": "DSE",
+									"description": "Filter by exchange code (optional)"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "User Info",
 			"item": [
 				{
