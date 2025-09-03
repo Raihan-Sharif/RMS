@@ -39,6 +39,9 @@ namespace SimRMS.WebAPI.Extensions
             // Cache Configuration
             services.Configure<CacheConfiguration>(configuration.GetSection(CacheConfiguration.SectionName));
             
+            // Logging Configuration
+            services.Configure<LoggingConfiguration>(configuration.GetSection(LoggingConfiguration.SectionName));
+            
             // Current User Service
             services.AddHttpContextAccessor();
             services.AddScoped<ICurrentUserService, CurrentUserService>();

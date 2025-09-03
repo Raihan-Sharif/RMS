@@ -1,9 +1,14 @@
 ﻿using System.Net;
 using System.Text.Json;
+using System.Security.Claims;
 using Microsoft.Data.SqlClient;
 using SimRMS.Domain.Exceptions;
 using SimRMS.Shared.Models;
+using SimRMS.Shared.Logging;
+using SimRMS.Shared.Configuration;
 using Microsoft.AspNetCore.Authentication;
+using SimRMS.Application.Interfaces;
+using Microsoft.Extensions.Options;
 
 /// <summary>
 /// <para>
@@ -29,11 +34,14 @@ namespace SimRMS.WebAPI.Middleware
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<ExceptionHandlingMiddleware> _logger;
+        private readonly LoggingConfiguration _loggingConfig;
 
-        public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
+        public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger, 
+            IOptions<LoggingConfiguration> loggingOptions)
         {
             _next = next;
             _logger = logger;
+            _loggingConfig = loggingOptions.Value;
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -44,17 +52,101 @@ namespace SimRMS.WebAPI.Middleware
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Unhandled exception occurred");
+                // Professional exception logging with full context
+                await LogExceptionWithContextAsync(context, ex);
                 
                 // Don't handle the exception if the response has already started
                 if (context.Response.HasStarted)
                 {
-                    _logger.LogWarning("Response has already started, cannot modify response");
+                    _logger.LogWarning("Response has already started, cannot modify response for {RequestId}. Exception: {ExceptionType}", 
+                        context.TraceIdentifier, ex.GetType().Name);
                     throw;
                 }
                 
                 await HandleExceptionAsync(context, ex);
             }
+        }
+
+        private Task LogExceptionWithContextAsync(HttpContext context, Exception exception)
+        {
+            var requestId = context.TraceIdentifier;
+            
+            // Get current user information directly from claims (set by TokenAuthenticationMiddleware)
+            var userId = context.User?.FindFirstValue(ClaimTypes.Sid) ?? "Anonymous";
+            var userName = context.User?.FindFirstValue(ClaimTypes.Name) ?? "Unknown";
+            
+            var clientIP = GetClientIPAddress(context);
+            var endpoint = $"{context.Request.Method} {context.Request.Path}";
+
+            // Log based on exception severity and type with configuration control
+            switch (exception)
+            {
+                // File operation exceptions
+                case FileSizeExceededException fileSizeEx:
+                case InvalidFileTypeException fileTypeEx:
+                case FileOperationException fileOpEx:
+                    _logger.LogWarning("📁 FILE ERROR: {ExceptionType} in {Endpoint} | User: {UserId}", 
+                        exception.GetType().Name, endpoint, userId);
+                    break;
+
+                case NotFoundException notFoundEx:
+                    _logger.LogWarning("🔍 NOT FOUND: {Resource} in {Endpoint} | User: {UserId}", 
+                        notFoundEx.Message, endpoint, userId);
+                    break;
+
+                // Authentication/Authorization - Always log security events
+                case UnauthorizedAccessException:
+                case InvalidOperationException invalidOpEx when invalidOpEx.Message.Contains("authenticationScheme"):
+                    if (_loggingConfig.Security.LogAuthenticationEvents)
+                    {
+                        _logger.LogSecurityEvent("Unauthorized Access", userId, clientIP, null, false, endpoint);
+                    }
+                    break;
+
+                // Business/Domain exceptions
+                case ValidationException validationEx:
+                    if (_loggingConfig.Security.LogValidationErrors)
+                    {
+                        _logger.LogWarning("🔧 VALIDATION ERROR: {Message} in {Endpoint} | User: {UserId}", 
+                            validationEx.Message, endpoint, userId);
+                    }
+                    break;
+
+                case DomainException domainEx:
+                    _logger.LogWarning("🔧 DOMAIN ERROR: {Message} in {Endpoint} | User: {UserId}", 
+                        domainEx.Message, endpoint, userId);
+                    break;
+
+                // Database exceptions - Always log
+                case SqlException sqlEx:
+                    _logger.LogError("🗄️ DATABASE ERROR: SQL {ErrorNumber} in {Endpoint} | User: {UserId} | Message: {Message}", 
+                        sqlEx.Number, endpoint, userId, sqlEx.Message);
+                    break;
+
+                // External service failures
+                case HttpRequestException:
+                case TimeoutException:
+                    _logger.LogError("🌐 EXTERNAL SERVICE ERROR: {ExceptionType} in {Endpoint} | User: {UserId}", 
+                        exception.GetType().Name, endpoint, userId);
+                    break;
+
+                // System/Critical errors - Always log with full details
+                default:
+                    _logger.LogError(exception, "🚨 SYSTEM ERROR: {ExceptionType} in {Endpoint} | User: {UserId} | Message: {Message}", 
+                        exception.GetType().Name, endpoint, userId, exception.Message);
+                    break;
+            }
+
+            // Log performance context if available and configured
+            if (_loggingConfig.Performance.Enabled && 
+                context.Items.TryGetValue("RequestStartTime", out var startTimeObj) && 
+                startTimeObj is DateTime startTime)
+            {
+                var duration = DateTime.UtcNow - startTime;
+                _logger.LogWarning("⏱️ Exception after {Duration:F1}ms in {Endpoint}", duration.TotalMilliseconds, endpoint);
+            }
+            
+            return Task.CompletedTask;
         }
 
         private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
@@ -159,6 +251,13 @@ namespace SimRMS.WebAPI.Middleware
                     Errors = new List<string> { argEx.ParamName ?? "Unknown parameter" },
                     TraceId = context.TraceIdentifier
                 },
+                InvalidOperationException invalidOpEx2 when !invalidOpEx2.Message.Contains("authenticationScheme") && !invalidOpEx2.Message.Contains("DefaultChallengeScheme") => new ApiResponse<object>
+                {
+                    Success = false,
+                    Message = "An operation error occurred: " + invalidOpEx2.Message,
+                    Data = null,
+                    TraceId = context.TraceIdentifier
+                },
                 _ => new ApiResponse<object>
                 {
                     Success = false,
@@ -183,6 +282,7 @@ namespace SimRMS.WebAPI.Middleware
                 TimeoutException => (int)HttpStatusCode.RequestTimeout,
                 HttpRequestException => (int)HttpStatusCode.ServiceUnavailable,
                 SqlException => (int)HttpStatusCode.InternalServerError,
+                InvalidOperationException => (int)HttpStatusCode.InternalServerError, // Handle other InvalidOperationException cases
                 _ => (int)HttpStatusCode.InternalServerError
             };
 
@@ -203,5 +303,24 @@ namespace SimRMS.WebAPI.Middleware
                 _ => false
             };
         }
+
+        private static string GetClientIPAddress(HttpContext context)
+        {
+            // Check for forwarded IP addresses (common in load balancer/proxy scenarios)
+            var forwardedFor = context.Request.Headers["X-Forwarded-For"].FirstOrDefault();
+            if (!string.IsNullOrEmpty(forwardedFor))
+            {
+                var ips = forwardedFor.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                if (ips.Length > 0)
+                    return ips[0].Trim();
+            }
+
+            var realIp = context.Request.Headers["X-Real-IP"].FirstOrDefault();
+            if (!string.IsNullOrEmpty(realIp))
+                return realIp;
+
+            return context.Connection.RemoteIpAddress?.ToString() ?? "Unknown";
+        }
+
     }
 }

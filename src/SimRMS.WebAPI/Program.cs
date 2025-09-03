@@ -30,13 +30,82 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure Serilog
-Log.Logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(builder.Configuration)
-    .Enrich.FromLogContext()
-    .WriteTo.Console()
-    .WriteTo.File("logs/rms-log-.txt", rollingInterval: RollingInterval.Day)
-    .CreateLogger();
+// Configure Serilog with robust directory creation and error handling
+try
+{
+    // Determine log paths based on environment
+    var isDevEnvironment = builder.Environment.IsDevelopment();
+    var logPaths = isDevEnvironment 
+        ? new[] { "logs/dev" }  // Relative path for development
+        : new[]  // Absolute paths for production/IIS
+        {
+            @"C:\Logs\SimRMS\Application",
+            @"C:\Logs\SimRMS\Errors", 
+            @"C:\Logs\SimRMS\Performance"
+        };
+
+    foreach (var logPath in logPaths)
+    {
+        if (!Directory.Exists(logPath))
+        {
+            Directory.CreateDirectory(logPath);
+            
+            // Set permissions for IIS application pool identity
+            try
+            {
+                var directoryInfo = new DirectoryInfo(logPath);
+                var directorySecurity = directoryInfo.GetAccessControl();
+                
+                // Add permissions for IIS_IUSRS and application pool identity
+                var iisUsersIdentity = new System.Security.Principal.SecurityIdentifier("S-1-5-32-568"); // IIS_IUSRS
+                directorySecurity.AddAccessRule(new System.Security.AccessControl.FileSystemAccessRule(
+                    iisUsersIdentity, 
+                    System.Security.AccessControl.FileSystemRights.FullControl, 
+                    System.Security.AccessControl.InheritanceFlags.ContainerInherit | System.Security.AccessControl.InheritanceFlags.ObjectInherit,
+                    System.Security.AccessControl.PropagationFlags.None, 
+                    System.Security.AccessControl.AccessControlType.Allow));
+                    
+                directoryInfo.SetAccessControl(directorySecurity);
+            }
+            catch (Exception ex)
+            {
+                // Log to Windows Event Log if directory permissions fail
+                Console.WriteLine($"Warning: Could not set directory permissions for {logPath}: {ex.Message}");
+            }
+        }
+    }
+
+    // Create Serilog logger with configuration + fallback
+    Log.Logger = new LoggerConfiguration()
+        .ReadFrom.Configuration(builder.Configuration)
+        .Enrich.FromLogContext()
+        .Enrich.WithProperty("Application", "SimRMS")
+        .Enrich.WithProperty("Version", typeof(Program).Assembly.GetName().Version?.ToString() ?? "Unknown")
+        .Enrich.WithMachineName()
+        .Enrich.WithEnvironmentUserName()
+        .Enrich.WithProcessId()
+        .Enrich.WithThreadId()
+        // Fallback console sink in case file sinks fail
+        .WriteTo.Console(outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}] [{Level:u3}] [{SourceContext}] {Message:lj} {NewLine}{Exception}")
+        .CreateLogger();
+        
+    Log.Information("=== SimRMS Application Starting ===");
+    Log.Information("Log directories created and configured successfully");
+    Log.Information("Machine: {MachineName}, User: {UserName}, Process: {ProcessId}", 
+        Environment.MachineName, 
+        Environment.UserName, 
+        Environment.ProcessId);
+}
+catch (Exception ex)
+{
+    // Fallback to basic console logging if advanced configuration fails
+    Log.Logger = new LoggerConfiguration()
+        .WriteTo.Console()
+        .WriteTo.File("rms-fallback-.log", rollingInterval: RollingInterval.Day)
+        .CreateLogger();
+        
+    Log.Error(ex, "Failed to configure advanced logging, using fallback configuration");
+}
 
 builder.Host.UseSerilog();
 
@@ -178,11 +247,11 @@ app.UseHttpsRedirection();
 app.UseCors("DefaultPolicy");
 
 // middleware pipeline
+app.UseMiddleware<SecurityHeadersMiddleware>();
+app.UseMiddleware<TokenAuthenticationMiddleware>();
 app.UseMiddleware<RequestLoggingMiddleware>();
 app.UseMiddleware<PerformanceMiddleware>();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-app.UseMiddleware<SecurityHeadersMiddleware>();
-app.UseMiddleware<TokenAuthenticationMiddleware>();
 
 app.UseIpRateLimiting();
 
