@@ -63,6 +63,14 @@ public static class DependencyInjection
         services.AddScoped<IValidator<AuthorizeUserRequest>, AuthorizeUserRequestValidator>();
         #endregion
 
+        #region UserExposure Validators
+        services.AddScoped<IValidator<CreateUserExposureRequest>, CreateUserExposureRequestValidator>();
+        services.AddScoped<IValidator<UpdateUserExposureRequest>, UpdateUserExposureRequestValidator>();
+        services.AddScoped<IValidator<DeleteUserExposureRequest>, DeleteUserExposureRequestValidator>();
+        services.AddScoped<IValidator<AuthorizeUserExposureRequest>, AuthorizeUserExposureRequestValidator>();
+        services.AddScoped<IValidator<GetUserExposureWorkflowListRequest>, GetUserExposureWorkflowListRequestValidator>();
+        #endregion
+
         services.AddValidatorsFromAssembly(assembly, includeInternalTypes: false);
 
         return services;

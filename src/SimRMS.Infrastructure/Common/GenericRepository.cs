@@ -380,7 +380,7 @@ public class GenericRepository : IGenericRepository
         // Enhanced OUTPUT parameter naming patterns including your specific ones
         var outputPatterns = new[] {
             "RowsAffected", "StatusCode", "StatusMsg", "TotalCount", "RecordCount",
-            "Result", "ReturnValue", "Count", "Total", "InsertedCode", "InsertedId",
+            "Result", "ReturnValue", "Count", "InsertedCode", "InsertedId",
             "GeneratedCode", "OutputCode", "NewId", "NewCode", "ErrorCode", "ErrorMsg"
         };
 

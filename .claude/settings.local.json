@@ -16,7 +16,26 @@
       "Bash(del \"C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Application\\Validators\\CreateMstCoBrchRequestValidator.cs\")",
       "Bash(del \"C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Application\\Interfaces\\Services\\ICurrentUserService.cs\")",
       "Bash(del \"C:\\Users\\raihan.sharif\\Desktop\\RMS\\WorkFlow_Implementation_Summary.md\")",
-      "Read(d:\\Projects\\LBSL Projects\\simTrade\\SimTrade\\SimRMS\\src\\SimRMS.WebAPI/**)"
+      "Read(d:\\Projects\\LBSL Projects\\simTrade\\SimTrade\\SimRMS\\src\\SimRMS.WebAPI/**)",
+      "Read(/d:\\SP,FN and Query\\RMS\\UserExposure/**)",
+      "Read(/d:\\SP,FN and Query\\RMS\\UserExposure/**)",
+      "Read(/d:\\SP,FN and Query\\RMS\\UserExposure/**)",
+      "Read(/d:\\SP,FN and Query\\RMS\\UserExposure/**)",
+      "Read(/d:\\SP,FN and Query\\RMS\\UserExposure/**)",
+      "Read(/C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.WebAPI\\Controllers\\V1/**)",
+      "Read(/C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Infrastructure\\Services/**)",
+      "Read(/C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Application\\Interfaces\\Services/**)",
+      "Read(/C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Application\\Models\\DTOs/**)",
+      "Read(/C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Application\\Validators/**)",
+      "Read(/C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Application\\Models\\Requests/**)",
+      "Read(/C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Application\\Models\\DTOs/**)",
+      "Read(/C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Domain\\Entities/**)",
+      "Read(/C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Application\\Validators/**)",
+      "Read(/C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Infrastructure/**)",
+      "Read(/C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Application/**)",
+      "Read(/C:\\Users\\raihan.sharif\\Desktop\\RMS\\Docs\\Postman/**)",
+      "Read(/d:\\SP,FN and Query\\RMS\\UserExposure/**)",
+      "Read(/d:\\SP,FN and Query\\RMS\\UserExposure/**)"
     ],
     "deny": []
   }
