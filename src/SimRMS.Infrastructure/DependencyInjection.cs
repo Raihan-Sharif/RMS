@@ -62,6 +62,9 @@ namespace SimRMS.Infrastructure
             // trader service
             services.AddScoped<ITraderService, TraderService>();
 
+            // user service
+            services.AddScoped<IUserService, UserService>();
+
             // Common data service for read-only operations
             services.AddScoped<ICommonDataService, CommonDataService>();
 

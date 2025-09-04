@@ -259,5 +259,37 @@ namespace SimRMS.Application.Validators
         }
 
         #endregion
+
+        #region User Validations
+        /// <summary>
+        /// Validates User ID format and length
+        /// </summary>
+        public static IRuleBuilderOptions<T, string> ValidUsrID<T>(this IRuleBuilder<T, string> ruleBuilder)
+        {
+            return ruleBuilder
+                .NotEmpty().WithMessage("User ID is required")
+                .MaximumLength(25).WithMessage("User ID cannot exceed 25 characters")
+                .Matches("^[A-Za-z0-9_]+$").WithMessage("User ID can only contain letters, numbers, and underscores");
+        }
+
+        /// <summary>
+        /// Validates User Email format and length
+        /// </summary>
+        public static IRuleBuilderOptions<T, string?> ValidUsrEmail<T>(this IRuleBuilder<T, string?> ruleBuilder)
+        {
+            return ruleBuilder
+                .MaximumLength(510).WithMessage("User email cannot exceed 510 characters")
+                .EmailAddress().WithMessage("Invalid email format");
+        }
+        /// <summary>
+        /// Validates User Mobile format and length
+        /// </summary>
+        public static IRuleBuilderOptions<T, string?> ValidUsrMobile<T>(this IRuleBuilder<T, string?> ruleBuilder)
+        {
+            return ruleBuilder
+                .MaximumLength(30).WithMessage("User mobile cannot exceed 30 characters")
+                .Matches("^[0-9+()-]+$").WithMessage("User mobile can only contain numbers and special characters like +, -, (, )");
+        }
+        #endregion
     }
 }
