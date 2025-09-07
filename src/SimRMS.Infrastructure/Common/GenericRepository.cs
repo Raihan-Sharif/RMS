@@ -601,7 +601,10 @@ public class GenericRepository : IGenericRepository
                         }
                         else
                         {
-                            property.SetValue(instance, Convert.ChangeType(value, property.PropertyType));
+                            // Handle nullable types properly
+                            var targetType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
+                            var convertedValue = Convert.ChangeType(value, targetType);
+                            property.SetValue(instance, convertedValue);
                         }
                     }
                 }
