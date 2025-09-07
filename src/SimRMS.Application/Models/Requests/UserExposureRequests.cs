@@ -4,7 +4,7 @@ using SimRMS.Shared.Constants;
 /// <para>
 /// ===================================================================
 /// Title:       User Exposure Request Models
-/// Author:      Claude Code Assistant
+/// Author:      Raihan Sharif
 /// Purpose:     Request models for User Exposure operations
 /// Creation:    04/Sep/2025
 /// ===================================================================

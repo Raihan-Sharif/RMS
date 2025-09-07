@@ -6,7 +6,7 @@ using SimRMS.Shared.Constants;
 /// <para>
 /// ===================================================================
 /// Title:       UserExposure Request Validators (Consolidated)
-/// Author:      Claude Code Assistant
+/// Author:      Raihan Sharif
 /// Purpose:     All validation rules for User Exposure operations
 /// Creation:    04/Sep/2025
 /// ===================================================================

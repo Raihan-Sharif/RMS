@@ -12,7 +12,7 @@ using System.ComponentModel.DataAnnotations;
 /// <para>
 /// ===================================================================
 /// Title:       User Exposure Controller
-/// Author:      Claude Code Assistant
+/// Author:      Raihan Sharif
 /// Purpose:     Manage User Exposure Operations
 /// Creation:    04/Sep/2025
 /// ===================================================================

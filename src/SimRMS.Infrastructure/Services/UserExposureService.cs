@@ -15,7 +15,7 @@ using ValidationException = SimRMS.Domain.Exceptions.ValidationException;
 /// <para>
 /// ===================================================================
 /// Title:       User Exposure Service
-/// Author:      Claude Code Assistant
+/// Author:      Raihan Sharif
 /// Purpose:     This service provides methods for managing User Exposure information
 /// Creation:    04/Sep/2025
 /// ===================================================================

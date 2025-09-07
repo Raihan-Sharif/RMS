@@ -2,7 +2,7 @@
 /// <para>
 /// ===================================================================
 /// Title:       User Exposure DTOs
-/// Author:      Claude Code Assistant  
+/// Author:      Raihan Sharif 
 /// Purpose:     Data Transfer Objects for User Exposure operations
 /// Creation:    04/Sep/2025
 /// ===================================================================
