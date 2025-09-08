@@ -675,21 +675,32 @@ public class UserExposureService : IUserExposureService
     /// </summary>
     private static void ApplyBusinessLogicRules(CreateUserExposureRequest request)
     {
-        // If both buy and sell are checked
-        if (request.UsrExpsCheckBuy && request.UsrExpsCheckSell)
+        // If total is checked or has value but buy/sell are also enabled, throw exception
+        if (request.UsrExpsCheckTotal || request.UsrExpsTotalAmt > 0)
         {
-            // Force total to be unchecked and amount to 0
-            request.UsrExpsCheckTotal = false;
-            request.UsrExpsTotalAmt = 0.00m;
+            if (request.UsrExpsCheckBuy || request.UsrExpsBuyAmt > 0 || request.UsrExpsCheckSell || request.UsrExpsSellAmt > 0)
+            {
+                throw new DomainException("To enable Total exposure (check or set amount), please first disable Buy and Sell exposure options (uncheck and set amounts to 0).");
+            }
+            
+            // Previously this was setting values automatically - now commented out
+            // request.UsrExpsCheckBuy = false;
+            // request.UsrExpsBuyAmt = 0.00m;
+            // request.UsrExpsCheckSell = false;
+            // request.UsrExpsSellAmt = 0.00m;
         }
-        // If total is checked
-        else if (request.UsrExpsCheckTotal)
+        
+        // If buy or sell are checked or have values but total is also enabled, throw exception
+        if (request.UsrExpsCheckBuy || request.UsrExpsBuyAmt > 0 || request.UsrExpsCheckSell || request.UsrExpsSellAmt > 0)
         {
-            // Force buy and sell to be unchecked and amounts to 0
-            request.UsrExpsCheckBuy = false;
-            request.UsrExpsBuyAmt = 0.00m;
-            request.UsrExpsCheckSell = false;
-            request.UsrExpsSellAmt = 0.00m;
+            if (request.UsrExpsCheckTotal || request.UsrExpsTotalAmt > 0)
+            {
+                throw new DomainException("To enable Buy/Sell exposure (check or set amounts), please first disable Total exposure option (uncheck and set amount to 0).");
+            }
+            
+            // Previously this was setting values automatically - now commented out
+            // request.UsrExpsCheckTotal = false;
+            // request.UsrExpsTotalAmt = 0.00m;
         }
     }
 
@@ -700,20 +711,40 @@ public class UserExposureService : IUserExposureService
     /// </summary>
     private static void ApplyBusinessLogicRules(UpdateUserExposureRequest request)
     {
-        // If total is being checked, reset buy/sell
-        if (request.UsrExpsCheckTotal.HasValue && request.UsrExpsCheckTotal.Value)
+        // If total is being checked or amount set but buy/sell are still enabled, throw exception
+        if ((request.UsrExpsCheckTotal.HasValue && request.UsrExpsCheckTotal.Value) || 
+            (request.UsrExpsTotalAmt.HasValue && request.UsrExpsTotalAmt.Value > 0))
         {
-            request.UsrExpsCheckBuy = false;
-            request.UsrExpsBuyAmt = 0.00m;
-            request.UsrExpsCheckSell = false;
-            request.UsrExpsSellAmt = 0.00m;
+            if ((request.UsrExpsCheckBuy.HasValue && request.UsrExpsCheckBuy.Value) || 
+                (request.UsrExpsBuyAmt.HasValue && request.UsrExpsBuyAmt.Value > 0) ||
+                (request.UsrExpsCheckSell.HasValue && request.UsrExpsCheckSell.Value) || 
+                (request.UsrExpsSellAmt.HasValue && request.UsrExpsSellAmt.Value > 0))
+            {
+                throw new DomainException("To enable Total exposure (check or set amount), please first disable Buy and Sell exposure options (uncheck and set amounts to 0).");
+            }
+            
+            // Previously this was setting values automatically - now commented out
+            // request.UsrExpsCheckBuy = false;
+            // request.UsrExpsBuyAmt = 0.00m;
+            // request.UsrExpsCheckSell = false;
+            // request.UsrExpsSellAmt = 0.00m;
         }
-        // If both buy and sell are being set to true, reset total
-        else if ((request.UsrExpsCheckBuy.HasValue && request.UsrExpsCheckBuy.Value) && 
-                 (request.UsrExpsCheckSell.HasValue && request.UsrExpsCheckSell.Value))
+        
+        // If buy or sell are being checked or amounts set but total is still enabled, throw exception
+        if ((request.UsrExpsCheckBuy.HasValue && request.UsrExpsCheckBuy.Value) || 
+            (request.UsrExpsBuyAmt.HasValue && request.UsrExpsBuyAmt.Value > 0) ||
+            (request.UsrExpsCheckSell.HasValue && request.UsrExpsCheckSell.Value) || 
+            (request.UsrExpsSellAmt.HasValue && request.UsrExpsSellAmt.Value > 0))
         {
-            request.UsrExpsCheckTotal = false;
-            request.UsrExpsTotalAmt = 0.00m;
+            if ((request.UsrExpsCheckTotal.HasValue && request.UsrExpsCheckTotal.Value) || 
+                (request.UsrExpsTotalAmt.HasValue && request.UsrExpsTotalAmt.Value > 0))
+            {
+                throw new DomainException("To enable Buy/Sell exposure (check or set amounts), please first disable Total exposure option (uncheck and set amount to 0).");
+            }
+            
+            // Previously this was setting values automatically - now commented out
+            // request.UsrExpsCheckTotal = false;
+            // request.UsrExpsTotalAmt = 0.00m;
         }
     }
 

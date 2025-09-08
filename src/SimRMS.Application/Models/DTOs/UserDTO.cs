@@ -19,7 +19,7 @@
 
 namespace SimRMS.Application.Models.DTOs
 {
-    public class UserDto
+    public class UserDto : BaseEntityDto
     {
         public string UsrID { get; set; } = string.Empty;
         public string? DlrCode { get; set; }
@@ -36,20 +36,8 @@ namespace SimRMS.Application.Models.DTOs
         public DateTime? UsrRegisterDate { get; set; }
         public DateTime? UsrExpiryDate { get; set; }
         public string? CSEDlrCode { get; set; }
-        public string? IPAddress { get; set; }
-        public int MakerId { get; set; }
-        public DateTime? ActionDt { get; set; }
-        public DateTime? TransDt { get; set; }
-        public byte ActionType { get; set; }
-        public int? AuthId { get; set; }
-        public DateTime? AuthDt { get; set; }
-        public DateTime? AuthTransDt { get; set; }
-        public byte IsAuth { get; set; }
-        public byte AuthLevel { get; set; }
-        public byte IsDel { get; set; }
-        public string? Remarks { get; set; }
-        public string? MakeBy { get; set; }
-        public string? AuthBy { get; set; }
+        public string? CompanyName { get; set; }
+        public string? BranchName { get; set; }
 
     }
 
