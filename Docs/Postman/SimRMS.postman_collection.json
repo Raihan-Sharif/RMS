@@ -3457,6 +3457,595 @@
 			]
 		},
 		{
+			"name": "Order Group",
+			"item": [
+				{
+					"name": "Main CRUD",
+					"item": [
+						{
+							"name": "Get All Order Groups",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/order-group/group-list?pageNumber=1&pageSize=10&searchTerm",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order-group",
+										"group-list"
+									],
+									"query": [
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "searchTerm",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Order Group By Code",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/order-group/group-by-code/:groupCode",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order-group",
+										"group-by-code",
+										":groupCode"
+									],
+									"variable": [
+										{
+											"key": "groupCode",
+											"value": "1001",
+											"description": "Group Code"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Order Group",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"groupDesc\": \"Test Order Group\",\n  \"groupType\": \"Admin\",\n  \"groupValue\": \"TEST_VALUE\",\n  \"dateFrom\": \"2025-09-08\",\n  \"dateTo\": \"2025-12-31\",\n  \"usrID\": \"USER001\",\n  \"viewOrder\": true,\n  \"placeOrder\": true,\n  \"viewClient\": false,\n  \"modifyOrder\": true,\n  \"remarks\": \"Test order group creation\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/order-group/create-group",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order-group",
+										"create-group"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Order Group",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"groupDesc\": \"Updated Order Group\",\n  \"groupType\": \"Manager\",\n  \"groupValue\": \"UPDATED_VALUE\",\n  \"dateFrom\": \"2025-09-10\",\n  \"dateTo\": \"2026-01-31\",\n  \"usrID\": \"USER002\",\n  \"viewOrder\": true,\n  \"placeOrder\": false,\n  \"viewClient\": true,\n  \"modifyOrder\": true,\n  \"remarks\": \"Updated order group settings\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/order-group/update-group/:groupCode",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order-group",
+										"update-group",
+										":groupCode"
+									],
+									"variable": [
+										{
+											"key": "groupCode",
+											"value": "1001",
+											"description": "Group Code to Update"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Order Group",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"remarks\": \"Order group no longer needed\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/order-group/delete-group/:groupCode",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order-group",
+										"delete-group",
+										":groupCode"
+									],
+									"variable": [
+										{
+											"key": "groupCode",
+											"value": "1001",
+											"description": "Group Code to Delete"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "WorkFlow",
+					"item": [
+						{
+							"name": "Get Unauthorized Order Groups",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/order-group/wf/unauth-denied-list?isAuth=0&pageNumber=1&pageSize=10&searchTerm",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order-group",
+										"wf",
+										"unauth-denied-list"
+									],
+									"query": [
+										{
+											"key": "isAuth",
+											"value": "0",
+											"description": "0 = UnAuthorized"
+										},
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "searchTerm",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Denied Order Groups",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/order-group/wf/unauth-denied-list?isAuth=2&pageNumber=1&pageSize=10&searchTerm",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order-group",
+										"wf",
+										"unauth-denied-list"
+									],
+									"query": [
+										{
+											"key": "isAuth",
+											"value": "2",
+											"description": "2 = Denied"
+										},
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "searchTerm",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Authorize Order Group",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"groupCode\": 1001,\n  \"actionType\": 2,\n  \"isAuth\": 1,\n  \"remarks\": \"Order group approved after review\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/order-group/wf/authorize/:groupCode",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order-group",
+										"wf",
+										"authorize",
+										":groupCode"
+									],
+									"variable": [
+										{
+											"key": "groupCode",
+											"value": "1001",
+											"description": "Group Code to Authorize"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deny Order Group",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"groupCode\": 1002,\n  \"actionType\": 2,\n  \"isAuth\": 2,\n  \"remarks\": \"Order group denied - permissions too broad for user level\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/order-group/wf/authorize/:groupCode",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order-group",
+										"wf",
+										"authorize",
+										":groupCode"
+									],
+									"variable": [
+										{
+											"key": "groupCode",
+											"value": "1002",
+											"description": "Group Code to Deny"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "Token & Login",
 			"item": [
 				{

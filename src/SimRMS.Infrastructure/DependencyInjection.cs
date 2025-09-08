@@ -68,6 +68,9 @@ namespace SimRMS.Infrastructure
             // user exposure service
             services.AddScoped<IUserExposureService, UserExposureService>();
 
+            // order group service
+            services.AddScoped<IOrderGroupService, OrderGroupService>();
+
             // Common data service for read-only operations
             services.AddScoped<ICommonDataService, CommonDataService>();
 

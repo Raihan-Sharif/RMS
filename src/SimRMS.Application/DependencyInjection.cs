@@ -71,6 +71,14 @@ public static class DependencyInjection
         services.AddScoped<IValidator<GetUserExposureWorkflowListRequest>, GetUserExposureWorkflowListRequestValidator>();
         #endregion
 
+        #region OrderGroup Validators
+        services.AddScoped<IValidator<CreateOrderGroupRequest>, CreateOrderGroupRequestValidator>();
+        services.AddScoped<IValidator<UpdateOrderGroupRequest>, UpdateOrderGroupRequestValidator>();
+        services.AddScoped<IValidator<DeleteOrderGroupRequest>, DeleteOrderGroupRequestValidator>();
+        services.AddScoped<IValidator<AuthorizeOrderGroupRequest>, AuthorizeOrderGroupRequestValidator>();
+        services.AddScoped<IValidator<GetOrderGroupWorkflowListRequest>, GetOrderGroupWorkflowListRequestValidator>();
+        #endregion
+
         services.AddValidatorsFromAssembly(assembly, includeInternalTypes: false);
 
         return services;
