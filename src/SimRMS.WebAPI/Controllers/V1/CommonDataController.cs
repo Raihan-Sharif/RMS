@@ -103,4 +103,22 @@ public class CommonDataController : BaseController
         var traders = await _commonDataService.GetTraderListAsync(exchangeCode, cancellationToken);
         return Ok(traders, "Trader list retrieved successfully");
     }
+
+    /// <summary>
+    /// Get list of users for dropdown/selection
+    /// </summary>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>List of users</returns>
+    [HttpGet("user-list")]
+    [ProducesResponseType(typeof(ApiResponse<IEnumerable<UserListDto>>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 400)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 401)]
+    public async Task<ActionResult<ApiResponse<IEnumerable<UserListDto>>>> GetUserList(
+        CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting user list");
+
+        var users = await _commonDataService.GetUserListAsync(cancellationToken);
+        return Ok(users, "User list retrieved successfully");
+    }
 }

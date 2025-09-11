@@ -381,7 +381,7 @@ public class GenericRepository : IGenericRepository
         var outputPatterns = new[] {
             "RowsAffected", "StatusCode", "StatusMsg", "TotalCount", "RecordCount",
             "Result", "ReturnValue", "Count", "InsertedCode", "InsertedId",
-            "GeneratedCode", "OutputCode", "NewId", "NewCode", "ErrorCode", "ErrorMsg"
+            "GeneratedCode", "OutputCode", "NewId", "NewCode", "ErrorCode", "ErrorMsg", "NewGroupCode"
         };
 
         return outputPatterns.Any(pattern =>

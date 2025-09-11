@@ -72,11 +72,31 @@ public static class DependencyInjection
         #endregion
 
         #region OrderGroup Validators
+        // Common validators
+        services.AddScoped<IValidator<GetOrderGroupByCodeRequest>, GetOrderGroupByCodeRequestValidator>();
+        services.AddScoped<IValidator<GetOrderGroupListRequest>, GetOrderGroupListRequestValidator>();
+        
+        // Master validators
+        services.AddScoped<IValidator<CreateOrderGroupMasterRequest>, CreateOrderGroupMasterRequestValidator>();
+        services.AddScoped<IValidator<UpdateOrderGroupMasterRequest>, UpdateOrderGroupMasterRequestValidator>();
+        services.AddScoped<IValidator<DeleteOrderGroupMasterRequest>, DeleteOrderGroupMasterRequestValidator>();
+        services.AddScoped<IValidator<AuthorizeOrderGroupMasterRequest>, AuthorizeOrderGroupMasterRequestValidator>();
+        
+        // Detail/User validators
+        services.AddScoped<IValidator<AddUserToOrderGroupRequest>, AddUserToOrderGroupRequestValidator>();
+        services.AddScoped<IValidator<UpdateOrderGroupUserRequest>, UpdateOrderGroupUserRequestValidator>();
+        services.AddScoped<IValidator<RemoveUserFromGroupRequest>, RemoveUserFromGroupRequestValidator>();
+        services.AddScoped<IValidator<AuthorizeOrderGroupDetailRequest>, AuthorizeOrderGroupDetailRequestValidator>();
+        
+        // Workflow validators
+        services.AddScoped<IValidator<GetMasterGroupWorkflowListRequest>, GetMasterGroupWorkflowListRequestValidator>();
+        services.AddScoped<IValidator<GetDetailGroupWorkflowListRequest>, GetDetailGroupWorkflowListRequestValidator>();
+        
+        // Legacy validators (required for service)
         services.AddScoped<IValidator<CreateOrderGroupRequest>, CreateOrderGroupRequestValidator>();
         services.AddScoped<IValidator<UpdateOrderGroupRequest>, UpdateOrderGroupRequestValidator>();
         services.AddScoped<IValidator<DeleteOrderGroupRequest>, DeleteOrderGroupRequestValidator>();
         services.AddScoped<IValidator<AuthorizeOrderGroupRequest>, AuthorizeOrderGroupRequestValidator>();
-        services.AddScoped<IValidator<GetOrderGroupWorkflowListRequest>, GetOrderGroupWorkflowListRequestValidator>();
         #endregion
 
         services.AddValidatorsFromAssembly(assembly, includeInternalTypes: false);
