@@ -3826,7 +3826,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"groupDesc\": \"Trading Team Alpha\",\n    \"groupType\": \"G\",\n    \"groupValue\": \"TT_ALPHA\",\n    \"dateFrom\": \"2025-01-01T00:00:00\",\n  //  \"dateTo\": ,\n    \"users\": [\n        {\n            \"usrID\": \"EFTEST\",\n            \"viewOrder\": true,\n            \"placeOrder\": true,\n            \"viewClient\": true,\n            \"modifyOrder\": false\n        },\n        {\n            \"usrID\": \"USR004\",\n            \"viewOrder\": true,\n            \"placeOrder\": false,\n            \"viewClient\": true,\n            \"modifyOrder\": true\n        },\n        {\n            \"usrID\": \"USR017\",\n            \"viewOrder\": true,\n            \"placeOrder\": false,\n            \"viewClient\": true,\n            \"modifyOrder\": false\n        }\n    ],\n    \"remarks\": \"New trading team with mixed permissions. DateTo is null (no expiration)\"\n}"
+									"raw": "{\n    \"groupDesc\": \"Principle Branch\",\n    \"groupType\": \"G\",\n    \"groupValue\": \"Principle\",\n    \"dateFrom\": \"2025-01-01T00:00:00\",\n  //  \"dateTo\": ,\n    \"users\": [\n        {\n            \"usrID\": \"EFTEST\",\n            \"viewOrder\": true,\n            \"placeOrder\": true,\n            \"viewClient\": true,\n            \"modifyOrder\": false\n        },\n        {\n            \"usrID\": \"USR004\",\n            \"viewOrder\": true,\n            \"placeOrder\": false,\n            \"viewClient\": true,\n            \"modifyOrder\": true\n        },\n        {\n            \"usrID\": \"USR017\",\n            \"viewOrder\": true,\n            \"placeOrder\": false,\n            \"viewClient\": true,\n            \"modifyOrder\": false\n        }\n    ],\n    \"remarks\": \"New trading team with mixed permissions. DateTo is null (no expiration)\"\n}"
 								},
 								"url": {
 									"raw": "{{base_url}}/api/v1/order-group/create-group",
@@ -3950,10 +3950,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"groupDesc\": \"Trading Team Alpha - Updated\",\n    \"groupType\": \"SENIOR_TRADING\",\n    \"groupValue\": \"TT_ALPHA_SR\",\n    \"dateFrom\": \"2025-01-01T00:00:00\",\n    \"dateTo\": \"2025-12-31T23:59:59\",\n    \"users\": [\n        {\n            \"usrID\": \"TRADER001\",\n            \"viewOrder\": true,\n            \"placeOrder\": true,\n            \"viewClient\": true,\n            \"modifyOrder\": true\n        },\n        {\n            \"usrID\": \"TRADER003\",\n            \"viewOrder\": true,\n            \"placeOrder\": true,\n            \"viewClient\": true,\n            \"modifyOrder\": false\n        },\n        {\n            \"usrID\": \"MANAGER001\",\n            \"viewOrder\": true,\n            \"placeOrder\": true,\n            \"viewClient\": true,\n            \"modifyOrder\": true\n        }\n    ],\n    \"remarks\": \"Updated to senior trading team with expiration date. DateTo set means group expires on 2025-12-31\"\n}"
+									"raw": "{\n    \"groupCode\": 1,\n    \"groupDesc\": \"Team - test 1\",\n    \"groupType\": \"G\",\n    \"groupValue\": \"Test by Raihan\",\n    \"dateFrom\": \"2025-01-01T00:00:00\",\n    \"dateTo\": null,\n    \"users\": [\n        {\n            \"usrID\": \"EFTEST\",\n            \"viewOrder\": true,\n            \"placeOrder\": true,\n            \"viewClient\": true,\n            \"modifyOrder\": true\n        },\n        {\n            \"usrID\": \"EFTEST03\",\n            \"viewOrder\": true,\n            \"placeOrder\": true,\n            \"viewClient\": true,\n            \"modifyOrder\": false\n        },\n        {\n            \"usrID\": \"EFTEST02\",\n            \"viewOrder\": true,\n            \"placeOrder\": true,\n            \"viewClient\": true,\n            \"modifyOrder\": true\n        }\n    ],\n    \"remarks\": \"Updated to senior trading team with expiration date. DateTo set means group expires on 2025-12-31\"\n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/order-group/group-by-code/:groupCode",
+									"raw": "{{base_url}}/api/v1/order-group/update-group/:groupCode",
 									"host": [
 										"{{base_url}}"
 									],
@@ -3961,7 +3961,7 @@
 										"api",
 										"v1",
 										"order-group",
-										"group-by-code",
+										"update-group",
 										":groupCode"
 									],
 									"variable": [
@@ -4198,853 +4198,532 @@
 					]
 				},
 				{
-					"name": "Group Master Management",
-					"item": [
-						{
-							"name": "Create Group Master",
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true
-								}
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-Api-Version",
-										"value": "1",
-										"type": "text"
-									},
-									{
-										"key": "X-Handshake-Token",
-										"value": "{{handshake_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{auth_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"groupDesc\": \"FT Trading Group\",\n  \"groupType\": \"Trading\",\n  \"groupValue\": \"FT_GROUP\",\n  \"dateFrom\": \"2025-09-10\",\n  \"dateTo\": \"2025-12-31\",\n  \"remarks\": \"New FT trading group for senior traders\"\n}"
-								},
-								"url": {
-									"raw": "{{base_url}}/api/v1/order-group/master/create",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"order-group",
-										"master",
-										"create"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Update Group Master",
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true
-								}
-							},
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-Api-Version",
-										"value": "1",
-										"type": "text"
-									},
-									{
-										"key": "X-Handshake-Token",
-										"value": "{{handshake_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{auth_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"groupDesc\": \"Updated FT Trading Group\",\n  \"groupType\": \"Senior Trading\",\n  \"groupValue\": \"FT_SENIOR_GROUP\",\n  \"dateFrom\": \"2025-09-11\",\n  \"dateTo\": \"2026-01-31\",\n  \"remarks\": \"Updated group definition with extended validity\"\n}"
-								},
-								"url": {
-									"raw": "{{base_url}}/api/v1/order-group/master/update/1",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"order-group",
-										"master",
-										"update",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Delete Group Master",
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true
-								}
-							},
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-Api-Version",
-										"value": "1",
-										"type": "text"
-									},
-									{
-										"key": "X-Handshake-Token",
-										"value": "{{handshake_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{auth_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"remarks\": \"Group master no longer needed - removing entire group\"\n}"
-								},
-								"url": {
-									"raw": "{{base_url}}/api/v1/order-group/master/delete/1",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"order-group",
-										"master",
-										"delete",
-										"1"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "User Management (Details)",
-					"item": [
-						{
-							"name": "Add User to Group",
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true
-								}
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-Api-Version",
-										"value": "1",
-										"type": "text"
-									},
-									{
-										"key": "X-Handshake-Token",
-										"value": "{{handshake_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{auth_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"groupCode\": 1,\n  \"usrID\": \"EFTEST03\",\n  \"viewOrder\": true,\n  \"placeOrder\": true,\n  \"viewClient\": false,\n  \"modifyOrder\": true,\n  \"remarks\": \"Adding trader to FT group with order permissions\"\n}"
-								},
-								"url": {
-									"raw": "{{base_url}}/api/v1/order-group/users/add",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"order-group",
-										"users",
-										"add"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Update User Permissions",
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true
-								}
-							},
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-Api-Version",
-										"value": "1",
-										"type": "text"
-									},
-									{
-										"key": "X-Handshake-Token",
-										"value": "{{handshake_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{auth_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"groupCode\": 1,\n  \"usrID\": \"EFTEST03\",\n  \"viewOrder\": true,\n  \"placeOrder\": true,\n  \"viewClient\": true,\n  \"modifyOrder\": true,\n  \"remarks\": \"Upgrading user permissions to include client view\"\n}"
-								},
-								"url": {
-									"raw": "{{base_url}}/api/v1/order-group/users/update/1/EFTEST03",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"order-group",
-										"users",
-										"update",
-										"1",
-										"EFTEST03"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Remove User from Group",
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true
-								}
-							},
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-Api-Version",
-										"value": "1",
-										"type": "text"
-									},
-									{
-										"key": "X-Handshake-Token",
-										"value": "{{handshake_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{auth_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"groupCode\": 1,\n  \"usrID\": \"EFTEST03\",\n  \"remarks\": \"User transferred to different trading group\"\n}"
-								},
-								"url": {
-									"raw": "{{base_url}}/api/v1/order-group/users/remove/1/EFTEST03",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"order-group",
-										"users",
-										"remove",
-										"1",
-										"EFTEST03"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Workflow Operations",
-					"item": [
-						{
-							"name": "Get Order Groups Workflow (Unauthorized/Denied)",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true,
-								"disabledSystemHeaders": {
-									"content-type": true
-								}
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-Api-Version",
-										"value": "1",
-										"type": "text"
-									},
-									{
-										"key": "X-Handshake-Token",
-										"value": "{{handshake_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{auth_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n \n}"
-								},
-								"url": {
-									"raw": "{{base_url}}/api/v1/order-group/wf/unauth-denied-list?isAuth=0&pageNumber=1&pageSize=10&makerId=123",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"order-group",
-										"wf",
-										"unauth-denied-list"
-									],
-									"query": [
-										{
-											"key": "isAuth",
-											"value": "0",
-											"description": "0=Pending, 1=Approved, 2=Denied"
-										},
-										{
-											"key": "pageNumber",
-											"value": "1"
-										},
-										{
-											"key": "pageSize",
-											"value": "10"
-										},
-										{
-											"key": "searchTerm",
-											"value": "",
-											"disabled": true
-										},
-										{
-											"key": "makerId",
-											"value": "123",
-											"description": "Maker ID for filtering"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get Denied Master Groups",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true,
-								"disabledSystemHeaders": {
-									"content-type": true
-								}
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-Api-Version",
-										"value": "1",
-										"type": "text"
-									},
-									{
-										"key": "X-Handshake-Token",
-										"value": "{{handshake_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{auth_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n \n}"
-								},
-								"url": {
-									"raw": "{{base_url}}/api/v1/order-group/wf/unauth-denied-list?isAuth=2&pageNumber=1&pageSize=10&makerId=123",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"order-group",
-										"wf",
-										"unauth-denied-list"
-									],
-									"query": [
-										{
-											"key": "isAuth",
-											"value": "2",
-											"description": "2 = Denied"
-										},
-										{
-											"key": "pageNumber",
-											"value": "1"
-										},
-										{
-											"key": "pageSize",
-											"value": "10"
-										},
-										{
-											"key": "makerId",
-											"value": "123"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Approve Order Group",
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true
-								}
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-Api-Version",
-										"value": "1",
-										"type": "text"
-									},
-									{
-										"key": "X-Handshake-Token",
-										"value": "{{handshake_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{auth_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"actionType\": 2,\n  \"isAuth\": 1,\n  \"remarks\": \"Order group approved - all user permissions validated and authorized\"\n}"
-								},
-								"url": {
-									"raw": "{{base_url}}/api/v1/order-group/1/authorize",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"order-group",
-										"1",
-										"authorize"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Deny Order Group",
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true
-								}
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-Api-Version",
-										"value": "1",
-										"type": "text"
-									},
-									{
-										"key": "X-Handshake-Token",
-										"value": "{{handshake_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{auth_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"actionType\": 2,\n  \"isAuth\": 2,\n  \"remarks\": \"Order group denied - user permissions do not meet compliance requirements\"\n}"
-								},
-								"url": {
-									"raw": "{{base_url}}/api/v1/order-group/1/authorize",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"order-group",
-										"1",
-										"authorize"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Detial/Order Group User",
-					"item": [
-						{
-							"name": "Get User Changes Pending Authorization",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true,
-								"disabledSystemHeaders": {
-									"content-type": true
-								}
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-Api-Version",
-										"value": "1",
-										"type": "text"
-									},
-									{
-										"key": "X-Handshake-Token",
-										"value": "{{handshake_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{auth_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n \n}"
-								},
-								"url": {
-									"raw": "{{base_url}}/api/v1/order-group/users/workflow?groupCode=1&isAuth=0&pageNumber=1&pageSize=10&makerId=123",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"order-group",
-										"users",
-										"workflow"
-									],
-									"query": [
-										{
-											"key": "groupCode",
-											"value": "1",
-											"description": "Required: Group to check user changes for"
-										},
-										{
-											"key": "isAuth",
-											"value": "0",
-											"description": "0=Pending, 1=Approved, 2=Denied"
-										},
-										{
-											"key": "pageNumber",
-											"value": "1"
-										},
-										{
-											"key": "pageSize",
-											"value": "10"
-										},
-										{
-											"key": "usrID",
-											"value": "",
-											"description": "Optional: Filter by specific user",
-											"disabled": true
-										},
-										{
-											"key": "makerId",
-											"value": "123"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get Denied User Changes",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true,
-								"disabledSystemHeaders": {
-									"content-type": true
-								}
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-Api-Version",
-										"value": "1",
-										"type": "text"
-									},
-									{
-										"key": "X-Handshake-Token",
-										"value": "{{handshake_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{auth_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n \n}"
-								},
-								"url": {
-									"raw": "{{base_url}}/api/v1/order-group/users/workflow?groupCode=1&isAuth=2&pageNumber=1&pageSize=10&makerId=123",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"order-group",
-										"users",
-										"workflow"
-									],
-									"query": [
-										{
-											"key": "groupCode",
-											"value": "1"
-										},
-										{
-											"key": "isAuth",
-											"value": "2",
-											"description": "2 = Denied"
-										},
-										{
-											"key": "pageNumber",
-											"value": "1"
-										},
-										{
-											"key": "pageSize",
-											"value": "10"
-										},
-										{
-											"key": "makerId",
-											"value": "123"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Approve User Change",
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true
-								}
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-Api-Version",
-										"value": "1",
-										"type": "text"
-									},
-									{
-										"key": "X-Handshake-Token",
-										"value": "{{handshake_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{auth_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"usrID\": \"EFTEST03\",\n  \"actionType\": 2,\n  \"isAuth\": 1,\n  \"remarks\": \"User permissions approved - trader can proceed\"\n}"
-								},
-								"url": {
-									"raw": "{{base_url}}/api/v1/order-group/users/authorize/1/EFTEST03",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"order-group",
-										"users",
-										"authorize",
-										"1",
-										"EFTEST03"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Deny User Change",
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true
-								}
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-Api-Version",
-										"value": "1",
-										"type": "text"
-									},
-									{
-										"key": "X-Handshake-Token",
-										"value": "{{handshake_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{auth_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"usrID\": \"EFTEST03\",\n  \"actionType\": 2,\n  \"isAuth\": 2,\n  \"remarks\": \"User permissions denied - insufficient trading experience\"\n}"
-								},
-								"url": {
-									"raw": "{{base_url}}/api/v1/order-group/users/authorize/1/EFTEST03",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"order-group",
-										"users",
-										"authorize",
-										"1",
-										"EFTEST03"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
 					"name": "Work Flow",
-					"item": []
+					"item": [
+						{
+							"name": "Workflow Operations",
+							"item": [
+								{
+									"name": "Get Order Groups Workflow (Unauthorized/Denied)",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true,
+										"disabledSystemHeaders": {
+											"content-type": true
+										}
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-Api-Version",
+												"value": "1",
+												"type": "text"
+											},
+											{
+												"key": "X-Handshake-Token",
+												"value": "{{handshake_token}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{auth_token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n \n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/order-group/wf/unauth-denied-list?isAuth=0&pageNumber=1&pageSize=10&makerId=123",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"order-group",
+												"wf",
+												"unauth-denied-list"
+											],
+											"query": [
+												{
+													"key": "isAuth",
+													"value": "0",
+													"description": "0=Pending, 1=Approved, 2=Denied"
+												},
+												{
+													"key": "pageNumber",
+													"value": "1"
+												},
+												{
+													"key": "pageSize",
+													"value": "10"
+												},
+												{
+													"key": "searchTerm",
+													"value": "",
+													"disabled": true
+												},
+												{
+													"key": "makerId",
+													"value": "123",
+													"description": "Maker ID for filtering"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Denied Master Groups",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true,
+										"disabledSystemHeaders": {
+											"content-type": true
+										}
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-Api-Version",
+												"value": "1",
+												"type": "text"
+											},
+											{
+												"key": "X-Handshake-Token",
+												"value": "{{handshake_token}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{auth_token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n \n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/order-group/wf/unauth-denied-list?isAuth=2&pageNumber=1&pageSize=10&makerId=123",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"order-group",
+												"wf",
+												"unauth-denied-list"
+											],
+											"query": [
+												{
+													"key": "isAuth",
+													"value": "2",
+													"description": "2 = Denied"
+												},
+												{
+													"key": "pageNumber",
+													"value": "1"
+												},
+												{
+													"key": "pageSize",
+													"value": "10"
+												},
+												{
+													"key": "makerId",
+													"value": "123"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Approve Order Group",
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {
+											"content-type": true
+										}
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-Api-Version",
+												"value": "1",
+												"type": "text"
+											},
+											{
+												"key": "X-Handshake-Token",
+												"value": "{{handshake_token}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{auth_token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"actionType\": 2,\n  \"isAuth\": 1,\n  \"remarks\": \"Order group approved - all user permissions validated and authorized\"\n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/order-group/1/authorize",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"order-group",
+												"1",
+												"authorize"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Deny Order Group",
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {
+											"content-type": true
+										}
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-Api-Version",
+												"value": "1",
+												"type": "text"
+											},
+											{
+												"key": "X-Handshake-Token",
+												"value": "{{handshake_token}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{auth_token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"actionType\": 2,\n  \"isAuth\": 2,\n  \"remarks\": \"Order group denied - user permissions do not meet compliance requirements\"\n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/order-group/1/authorize",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"order-group",
+												"1",
+												"authorize"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Detial/Order Group User",
+							"item": [
+								{
+									"name": "Get User Changes Pending Authorization",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true,
+										"disabledSystemHeaders": {
+											"content-type": true
+										}
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-Api-Version",
+												"value": "1",
+												"type": "text"
+											},
+											{
+												"key": "X-Handshake-Token",
+												"value": "{{handshake_token}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{auth_token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n \n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/order-group/users/workflow?groupCode=1&isAuth=0&pageNumber=1&pageSize=10&makerId=123",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"order-group",
+												"users",
+												"workflow"
+											],
+											"query": [
+												{
+													"key": "groupCode",
+													"value": "1",
+													"description": "Required: Group to check user changes for"
+												},
+												{
+													"key": "isAuth",
+													"value": "0",
+													"description": "0=Pending, 1=Approved, 2=Denied"
+												},
+												{
+													"key": "pageNumber",
+													"value": "1"
+												},
+												{
+													"key": "pageSize",
+													"value": "10"
+												},
+												{
+													"key": "usrID",
+													"value": "",
+													"description": "Optional: Filter by specific user",
+													"disabled": true
+												},
+												{
+													"key": "makerId",
+													"value": "123"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Denied User Changes",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true,
+										"disabledSystemHeaders": {
+											"content-type": true
+										}
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-Api-Version",
+												"value": "1",
+												"type": "text"
+											},
+											{
+												"key": "X-Handshake-Token",
+												"value": "{{handshake_token}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{auth_token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n \n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/order-group/users/workflow?groupCode=1&isAuth=2&pageNumber=1&pageSize=10&makerId=123",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"order-group",
+												"users",
+												"workflow"
+											],
+											"query": [
+												{
+													"key": "groupCode",
+													"value": "1"
+												},
+												{
+													"key": "isAuth",
+													"value": "2",
+													"description": "2 = Denied"
+												},
+												{
+													"key": "pageNumber",
+													"value": "1"
+												},
+												{
+													"key": "pageSize",
+													"value": "10"
+												},
+												{
+													"key": "makerId",
+													"value": "123"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Approve User Change",
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {
+											"content-type": true
+										}
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-Api-Version",
+												"value": "1",
+												"type": "text"
+											},
+											{
+												"key": "X-Handshake-Token",
+												"value": "{{handshake_token}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{auth_token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"usrID\": \"EFTEST03\",\n  \"actionType\": 2,\n  \"isAuth\": 1,\n  \"remarks\": \"User permissions approved - trader can proceed\"\n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/order-group/users/authorize/1/EFTEST03",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"order-group",
+												"users",
+												"authorize",
+												"1",
+												"EFTEST03"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Deny User Change",
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {
+											"content-type": true
+										}
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-Api-Version",
+												"value": "1",
+												"type": "text"
+											},
+											{
+												"key": "X-Handshake-Token",
+												"value": "{{handshake_token}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{auth_token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"usrID\": \"EFTEST03\",\n  \"actionType\": 2,\n  \"isAuth\": 2,\n  \"remarks\": \"User permissions denied - insufficient trading experience\"\n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/order-group/users/authorize/1/EFTEST03",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"order-group",
+												"users",
+												"authorize",
+												"1",
+												"EFTEST03"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
 				}
 			]
 		},
