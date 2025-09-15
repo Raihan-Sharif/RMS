@@ -19,7 +19,7 @@ using System.Text.Json;
 /// Title:       Order Group Service (Master-Detail Architecture)
 /// Author:      Raihan Sharif
 /// Purpose:     This service provides methods for managing Order Group master-detail operations
-/// Creation:    10/Sep/2025
+/// Creation:    15/Sep/2025
 /// ===================================================================
 /// Modification History
 /// Author             Date         Description of Change
@@ -115,11 +115,12 @@ public class OrderGroupService : IOrderGroupService
                         Users = group.Where(x => !string.IsNullOrEmpty(x.UsrID))
                             .Select(user => new OrderGroupUserDto
                             {
+                                GroupCode = first.GroupCode,
                                 UsrID = user.UsrID ?? string.Empty,
-                                ViewOrder = user.ViewOrder,
-                                PlaceOrder = user.PlaceOrder,
-                                ViewClient = user.ViewClient,
-                                ModifyOrder = user.ModifyOrder,
+                                ViewOrder = user.ViewOrder ?? false,
+                                PlaceOrder = user.PlaceOrder ?? false,
+                                ViewClient = user.ViewClient ?? false,
+                                ModifyOrder = user.ModifyOrder ?? false,
                                 MakeBy = user.MakeBy,
                                 AuthBy = user.AuthBy
                             }).ToList()
@@ -141,7 +142,7 @@ public class OrderGroupService : IOrderGroupService
         }
     }
 
-    public async Task<OrderGroupDto?> GetOrderGroupUserByCodeAsync(int groupCode, string usrId, CancellationToken cancellationToken = default)
+    public async Task<OrderGroupUserDto?> GetOrderGroupUserByCodeAsync(int groupCode, string usrId, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -155,7 +156,7 @@ public class OrderGroupService : IOrderGroupService
                 statusMsg = string.Empty // output param
             };
 
-            var orderGroups = await _repository.QueryAsync<OrderGroupDto>(
+            var orderGroups = await _repository.QueryAsync<OrderGroupUserDto>(
                 "LB_SP_GetOrderGroupByCode",
                 parameters,
                 isStoredProcedure: true,
@@ -170,7 +171,7 @@ public class OrderGroupService : IOrderGroupService
         }
     }
 
-    public async Task<IEnumerable<OrderGroupDto>> GetOrderGroupByCodeAsync(int groupCode, CancellationToken cancellationToken = default)
+    public async Task<OrderGroupDto> GetOrderGroupByCodeAsync(int groupCode, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -214,18 +215,19 @@ public class OrderGroupService : IOrderGroupService
                         Users = group.Where(x => !string.IsNullOrEmpty(x.UsrID))
                             .Select(user => new OrderGroupUserDto
                             {
+                                GroupCode = first.GroupCode,
                                 UsrID = user.UsrID ?? string.Empty,
-                                ViewOrder = user.ViewOrder,
-                                PlaceOrder = user.PlaceOrder,
-                                ViewClient = user.ViewClient,
-                                ModifyOrder = user.ModifyOrder,
+                                ViewOrder = user.ViewOrder ?? false,
+                                PlaceOrder = user.PlaceOrder ?? false,
+                                ViewClient = user.ViewClient ?? false,
+                                ModifyOrder = user.ModifyOrder ?? false,
                                 MakeBy = user.MakeBy,
                                 AuthBy = user.AuthBy
                             }).ToList()
                     };
                 }).ToList();
 
-            return groupedResults;
+            return groupedResults.FirstOrDefault();
         }
         catch (Exception ex)
         {
@@ -239,7 +241,7 @@ public class OrderGroupService : IOrderGroupService
         try
         {
             var result = await GetOrderGroupByCodeAsync(groupCode, cancellationToken);
-            return result != null && result.Any();
+            return result != null;
         }
         catch (Exception ex)
         {
@@ -248,7 +250,7 @@ public class OrderGroupService : IOrderGroupService
         }
     }
 
-    public async Task<OrderGroupDeleteResultDto> CheckGroupDeleteValidationAsync(int groupCode, CancellationToken cancellationToken = default)
+    public async Task<OrderGroupDeleteResultDto> CheckGroupDeleteValidationAsync(int groupCode, string? usrId = null, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -256,9 +258,8 @@ public class OrderGroupService : IOrderGroupService
 
             // Get order group with all users to count them
             var orderGroups = await GetOrderGroupByCodeAsync(groupCode, cancellationToken);
-            var groupList = orderGroups?.ToList();
-
-            if (groupList == null || !groupList.Any())
+          
+            if (orderGroups == null)
             {
                 return new OrderGroupDeleteResultDto
                 {
@@ -270,13 +271,13 @@ public class OrderGroupService : IOrderGroupService
             }
 
             // Count users in nested structure
-            var userCount = groupList.SelectMany(g => g.Users).Count();
+            var userCount = orderGroups.Users.Count();
 
             return new OrderGroupDeleteResultDto
             {
                 GroupCode = groupCode,
                 UserCount = userCount,
-                CanDelete = userCount == 0,
+                CanDelete = userCount == 0 || !string.IsNullOrEmpty(usrId),
                 ValidationMessage = userCount > 0 
                     ? $"Cannot delete group. Please remove all {userCount} user(s) first."
                     : "Group can be deleted safely"
@@ -297,662 +298,7 @@ public class OrderGroupService : IOrderGroupService
 
     #endregion
 
-    #region Master Group Operations
-
-    public async Task<OrderGroupDto> CreateOrderGroupMasterAsync(CreateOrderGroupMasterRequest request, CancellationToken cancellationToken = default)
-    {
-        // Note: Individual master/detail methods are deprecated in favor of unified CRUD operations
-        throw new NotImplementedException("Use unified CreateOrderGroupAsync method instead");
-
-        _logger.LogInformation("Creating Order Group Master: {GroupDesc}", request.GroupDesc);
-
-        await _unitOfWork.BeginTransactionAsync(cancellationToken);
-        
-        try
-        {
-            var currentUser = _currentUserService.GetCurrentUserSession();
-            
-            var parameters = new
-            {
-                Action = (int)ActionTypeEnum.INSERT,
-                GroupCode = (object)DBNull.Value,
-                GroupDesc = request.GroupDesc,
-                GroupType = request.GroupType,
-                GroupValue = request.GroupValue,
-                DateFrom = request.DateFrom ?? (object)DBNull.Value,
-                DateTo = request.DateTo ?? (object)DBNull.Value,
-                UsrID = (object)DBNull.Value, // No user for master-only creation
-                ViewOrder = (object)DBNull.Value,
-                PlaceOrder = (object)DBNull.Value,
-                ViewClient = (object)DBNull.Value,
-                ModifyOrder = (object)DBNull.Value,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = currentUser?.UserId ?? 0,
-                TransDt = DateTime.Now,
-                Remarks = request.Remarks,
-                RowsAffected = 0,
-                StatusCode = 0,
-                StatusMsg = "",
-                NewGroupCode = 0
-            };
-
-            var result = await _repository.ExecuteWithOutputAsync(
-                "LB_SP_CrudOrderGroup",
-                parameters,
-                cancellationToken);
-
-            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
-            var statusCode = result.GetOutputValue<int>("StatusCode");
-            var statusMsg = result.GetOutputValue<string>("StatusMsg");
-            var newGroupCode = result.GetOutputValue<int>("NewGroupCode");
-
-            if (statusCode != 1 || rowsAffected == 0)
-            {
-                _logger.LogWarning("Failed to create Order Group Master: {StatusMsg}", statusMsg);
-                throw new DomainException($"Failed to create Order Group Master: {statusMsg}");
-            }
-
-            await _unitOfWork.CommitTransactionAsync(cancellationToken);
-
-            // Return the created master
-            var createdMaster = await GetCreatedMasterAsync(newGroupCode, cancellationToken);
-            return createdMaster ?? throw new DomainException("Failed to retrieve created Order Group Master");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error creating Order Group Master");
-            await _unitOfWork.RollbackTransactionAsync(cancellationToken);
-            
-            if (ex is DomainException)
-                throw;
-            
-            throw new DomainException($"Failed to create Order Group Master: {ex.Message}");
-        }
-    }
-
-    private async Task<OrderGroupDto?> GetCreatedMasterAsync(int groupCode, CancellationToken cancellationToken)
-    {
-        try
-        {
-            var parameters = new
-            {
-                PageNumber = 1,
-                PageSize = 1,
-                SearchTerm = (object)DBNull.Value,
-                UsrID = (object)DBNull.Value,
-                DateFromStart = (object)DBNull.Value,
-                DateFromEnd = (object)DBNull.Value,
-                SortColumn = "GroupCode",
-                SortDirection = "ASC",
-                IsAuth = 0, // Get unauthorized records
-                MakerId = _currentUserService.UserId
-            };
-
-            var masters = await _repository.QueryAsync<OrderGroupDto>(
-                "LB_SP_GetMasterGroupListWF",
-                parameters,
-                isStoredProcedure: true,
-                cancellationToken);
-
-            return masters.FirstOrDefault(m => m.GroupCode == groupCode);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error retrieving created master group: {GroupCode}", groupCode);
-            return null;
-        }
-    }
-
-    public async Task<OrderGroupDto> UpdateOrderGroupMasterAsync(int groupCode, UpdateOrderGroupMasterRequest request, CancellationToken cancellationToken = default)
-    {
-        // Note: Individual master/detail methods are deprecated in favor of unified CRUD operations
-        throw new NotImplementedException("Use unified UpdateOrderGroupAsync method instead");
-
-        _logger.LogInformation("Updating Order Group Master: {GroupCode}", groupCode);
-
-        await _unitOfWork.BeginTransactionAsync(cancellationToken);
-        
-        try
-        {
-            var parameters = new
-            {
-                Action = (int)ActionTypeEnum.UPDATE,
-                GroupCode = groupCode,
-                GroupDesc = request.GroupDesc,
-                GroupType = request.GroupType,
-                GroupValue = request.GroupValue,
-                DateFrom = request.DateFrom ?? (object)DBNull.Value,
-                DateTo = request.DateTo ?? (object)DBNull.Value,
-                UsrID = (object)DBNull.Value, // No user for master-only update
-                ViewOrder = (object)DBNull.Value,
-                PlaceOrder = (object)DBNull.Value,
-                ViewClient = (object)DBNull.Value,
-                ModifyOrder = (object)DBNull.Value,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                TransDt = DateTime.Now,
-                Remarks = request.Remarks,
-                RowsAffected = 0,
-                StatusCode = 0,
-                StatusMsg = "",
-                NewGroupCode = 0
-            };
-
-            var result = await _repository.ExecuteWithOutputAsync(
-                "LB_SP_CrudOrderGroup",
-                parameters,
-                cancellationToken);
-
-            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
-            var statusCode = result.GetOutputValue<int>("StatusCode");
-            var statusMsg = result.GetOutputValue<string>("StatusMsg");
-
-            if (statusCode != 1 || rowsAffected == 0)
-            {
-                _logger.LogWarning("Failed to update Order Group Master: {StatusMsg}", statusMsg);
-                throw new DomainException($"Failed to update Order Group Master: {statusMsg}");
-            }
-
-            await _unitOfWork.CommitTransactionAsync(cancellationToken);
-
-            // Return the updated master
-            var updatedMaster = await GetCreatedMasterAsync(groupCode, cancellationToken);
-            return updatedMaster ?? throw new DomainException("Failed to retrieve updated Order Group Master");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error updating Order Group Master");
-            await _unitOfWork.RollbackTransactionAsync(cancellationToken);
-            
-            if (ex is DomainException)
-                throw;
-            
-            throw new DomainException($"Failed to update Order Group Master: {ex.Message}");
-        }
-    }
-
-    public async Task<bool> DeleteOrderGroupMasterAsync(int groupCode, DeleteOrderGroupMasterRequest request, CancellationToken cancellationToken = default)
-    {
-        // Note: Individual master/detail methods are deprecated in favor of unified CRUD operations
-        throw new NotImplementedException("Use unified DeleteOrderGroupAsync method instead");
-
-        _logger.LogInformation("Deleting Order Group Master: {GroupCode}", groupCode);
-
-        await _unitOfWork.BeginTransactionAsync(cancellationToken);
-        
-        try
-        {
-            // First, validate if group can be deleted (check for existing users)
-            var validationResult = await CheckGroupDeleteValidationAsync(groupCode, cancellationToken);
-            
-            if (!validationResult.CanDelete)
-            {
-                if (validationResult.UserCount == 0)
-                {
-                    throw new NotFoundException(validationResult.ValidationMessage!, groupCode);
-                }
-                else
-                {
-                    throw new DomainException(validationResult.ValidationMessage!);
-                }
-            }
-
-            // For master deletion, we need to delete the group itself
-            // The SP should handle cascading deletion of details if needed
-            var parameters = new
-            {
-                Action = (int)ActionTypeEnum.DELETE,
-                GroupCode = groupCode,
-                GroupDesc = (object)DBNull.Value,
-                GroupType = (object)DBNull.Value,
-                GroupValue = (object)DBNull.Value,
-                DateFrom = (object)DBNull.Value,
-                DateTo = (object)DBNull.Value,
-                UsrID = (object)DBNull.Value, // No specific user for master deletion
-                ViewOrder = (object)DBNull.Value,
-                PlaceOrder = (object)DBNull.Value,
-                ViewClient = (object)DBNull.Value,
-                ModifyOrder = (object)DBNull.Value,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                TransDt = DateTime.Now,
-                Remarks = request.Remarks,
-                RowsAffected = 0,
-                StatusCode = 0,
-                StatusMsg = "",
-                NewGroupCode = 0
-            };
-
-            var result = await _repository.ExecuteWithOutputAsync(
-                "LB_SP_CrudOrderGroup",
-                parameters,
-                cancellationToken);
-
-            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
-            var statusCode = result.GetOutputValue<int>("StatusCode");
-            var statusMsg = result.GetOutputValue<string>("StatusMsg");
-
-            if (statusCode != 1 || rowsAffected == 0)
-            {
-                _logger.LogWarning("Failed to delete Order Group Master: {StatusMsg}", statusMsg);
-                throw new DomainException($"Failed to delete Order Group Master: {statusMsg}");
-            }
-
-            await _unitOfWork.CommitTransactionAsync(cancellationToken);
-            return true;
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error deleting Order Group Master");
-            await _unitOfWork.RollbackTransactionAsync(cancellationToken);
-            
-            if (ex is DomainException or NotFoundException)
-                throw;
-            
-            throw new DomainException($"Failed to delete Order Group Master: {ex.Message}");
-        }
-    }
-
-    public async Task<PagedResult<OrderGroupDto>> GetMasterGroupWorkflowListAsync(GetMasterGroupWorkflowListRequest request, CancellationToken cancellationToken = default)
-    {
-        try
-        {
-            _logger.LogInformation("Getting Master Group Workflow List - Page: {PageNumber}, IsAuth: {IsAuth}", request.PageNumber, request.IsAuth);
-
-            var parameters = new
-            {
-                PageNumber = request.PageNumber,
-                PageSize = request.PageSize,
-                SearchTerm = request.SearchTerm,
-                UsrID = request.UsrID,
-                DateFromStart = request.DateFromStart ?? (object)DBNull.Value,
-                DateFromEnd = request.DateFromEnd ?? (object)DBNull.Value,
-                SortColumn = request.SortColumn,
-                SortDirection = request.SortDirection,
-                IsAuth = request.IsAuth,
-                MakerId = _currentUserService.UserId
-            };
-
-            var pagedResult = await _repository.QueryPagedAsync<OrderGroupDto>(
-                "LB_SP_GetMasterGroupListWF",
-                request.PageNumber,
-                request.PageSize,
-                parameters,
-                isStoredProcedure: true,
-                cancellationToken: cancellationToken);
-
-            return pagedResult;
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error getting Master Group Workflow List");
-            throw new DomainException($"Failed to retrieve Master Group Workflow List: {ex.Message}");
-        }
-    }
-
-    public async Task<bool> AuthorizeMasterGroupAsync(int groupCode, AuthorizeOrderGroupMasterRequest request, CancellationToken cancellationToken = default)
-    {
-        _logger.LogInformation("Authorizing OrderGroup master: {GroupCode}", groupCode);
-
-        try
-        {
-            var parameters = new Dictionary<string, object>
-            {
-                ["GroupCode"] = groupCode,
-                ["ActionType"] = request.ActionType,
-                ["IsAuth"] = request.IsAuth,
-                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
-                ["AuthID"] = _currentUserService.UserId,
-                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["RowsAffected"] = 0
-            };
-
-            var result = await _repository.ExecuteWithOutputAsync(
-                "LB_SP_AuthOrderGroup", // Correct SP name for master authorization
-                parameters,
-                cancellationToken);
-
-            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
-
-            if (rowsAffected > 0)
-            {
-                _logger.LogInformation("Successfully authorized OrderGroup master: {GroupCode}", groupCode);
-                return true;
-            }
-            else
-            {
-                throw new DomainException("Failed to authorize order group master - no rows affected");
-            }
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error authorizing OrderGroup master: {GroupCode}", groupCode);
-            throw new DomainException($"Failed to authorize order group master: {ex.Message}");
-        }
-    }
-
-    #endregion
-
-    #region Detail/User Operations
-
-    public async Task<OrderGroupDetailDto> AddUserToOrderGroupAsync(AddUserToOrderGroupRequest request, CancellationToken cancellationToken = default)
-    {
-        // Note: Individual master/detail methods are deprecated in favor of unified CRUD operations
-        throw new NotImplementedException("Use unified CreateOrderGroupAsync or UpdateOrderGroupAsync methods instead");
-
-        _logger.LogInformation("Adding User to Order Group: {GroupCode}, User: {UsrID}", request.GroupCode, request.UsrID);
-
-        await _unitOfWork.BeginTransactionAsync(cancellationToken);
-        
-        try
-        {
-            var parameters = new
-            {
-                Action = (int)ActionTypeEnum.INSERT,
-                GroupCode = request.GroupCode,
-                GroupDesc = (object)DBNull.Value, // Not needed for user operations
-                GroupType = (object)DBNull.Value,
-                GroupValue = (object)DBNull.Value,
-                DateFrom = (object)DBNull.Value,
-                DateTo = (object)DBNull.Value,
-                UsrID = request.UsrID,
-                ViewOrder = request.ViewOrder ?? false,
-                PlaceOrder = request.PlaceOrder ?? false,
-                ViewClient = request.ViewClient ?? false,
-                ModifyOrder = request.ModifyOrder ?? false,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                TransDt = DateTime.Now,
-                Remarks = request.Remarks,
-                RowsAffected = 0,
-                StatusCode = 0,
-                StatusMsg = "",
-                NewGroupCode = 0
-            };
-
-            var result = await _repository.ExecuteWithOutputAsync(
-                "LB_SP_CrudOrderGroup",
-                parameters,
-                cancellationToken);
-
-            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
-            var statusCode = result.GetOutputValue<int>("StatusCode");
-            var statusMsg = result.GetOutputValue<string>("StatusMsg");
-
-            if (statusCode != 1 || rowsAffected == 0)
-            {
-                _logger.LogWarning("Failed to add user to Order Group: {StatusMsg}", statusMsg);
-                throw new DomainException($"Failed to add user to Order Group: {statusMsg}");
-            }
-
-            await _unitOfWork.CommitTransactionAsync(cancellationToken);
-
-            // Return the created detail
-            var createdDetail = await GetCreatedDetailAsync(request.GroupCode, request.UsrID, cancellationToken);
-            return createdDetail ?? throw new DomainException("Failed to retrieve added user details");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error adding user to Order Group");
-            await _unitOfWork.RollbackTransactionAsync(cancellationToken);
-            
-            if (ex is DomainException)
-                throw;
-            
-            throw new DomainException($"Failed to add user to Order Group: {ex.Message}");
-        }
-    }
-
-    private async Task<OrderGroupDetailDto?> GetCreatedDetailAsync(int groupCode, string usrId, CancellationToken cancellationToken)
-    {
-        try
-        {
-            var parameters = new
-            {
-                PageNumber = 1,
-                PageSize = 1,
-                SearchTerm = usrId,
-                GroupCode = groupCode,
-                UsrID = usrId,
-                DateFromStart = (object)DBNull.Value,
-                DateFromEnd = (object)DBNull.Value,
-                SortColumn = "UsrID",
-                SortDirection = "ASC",
-                IsAuth = 0, // Get unauthorized records
-                MakerId = _currentUserService.UserId
-            };
-
-            var details = await _repository.QueryAsync<OrderGroupDetailDto>(
-                "LB_SP_GetOrderGroupDtlListWF",
-                parameters,
-                isStoredProcedure: true,
-                cancellationToken);
-
-            return details.FirstOrDefault();
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error retrieving created detail: {GroupCode}, {UsrId}", groupCode, usrId);
-            return null;
-        }
-    }
-
-    public async Task<OrderGroupDetailDto> UpdateOrderGroupUserAsync(int groupCode, string usrId, UpdateOrderGroupUserRequest request, CancellationToken cancellationToken = default)
-    {
-        // Note: Individual master/detail methods are deprecated in favor of unified CRUD operations
-        throw new NotImplementedException("Use unified UpdateOrderGroupAsync method instead");
-
-        _logger.LogInformation("Updating Order Group User: {GroupCode}, User: {UsrID}", groupCode, usrId);
-
-        await _unitOfWork.BeginTransactionAsync(cancellationToken);
-        
-        try
-        {
-            var parameters = new
-            {
-                Action = (int)ActionTypeEnum.UPDATE,
-                GroupCode = groupCode,
-                GroupDesc = (object)DBNull.Value, // Not needed for user operations
-                GroupType = (object)DBNull.Value,
-                GroupValue = (object)DBNull.Value,
-                DateFrom = (object)DBNull.Value,
-                DateTo = (object)DBNull.Value,
-                UsrID = usrId,
-                ViewOrder = request.ViewOrder ?? false,
-                PlaceOrder = request.PlaceOrder ?? false,
-                ViewClient = request.ViewClient ?? false,
-                ModifyOrder = request.ModifyOrder ?? false,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                TransDt = DateTime.Now,
-                Remarks = request.Remarks,
-                RowsAffected = 0,
-                StatusCode = 0,
-                StatusMsg = "",
-                NewGroupCode = 0
-            };
-
-            var result = await _repository.ExecuteWithOutputAsync(
-                "LB_SP_CrudOrderGroup",
-                parameters,
-                cancellationToken);
-
-            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
-            var statusCode = result.GetOutputValue<int>("StatusCode");
-            var statusMsg = result.GetOutputValue<string>("StatusMsg");
-
-            if (statusCode != 1 || rowsAffected == 0)
-            {
-                _logger.LogWarning("Failed to update Order Group user: {StatusMsg}", statusMsg);
-                throw new DomainException($"Failed to update Order Group user: {statusMsg}");
-            }
-
-            await _unitOfWork.CommitTransactionAsync(cancellationToken);
-
-            // Return the updated detail
-            var updatedDetail = await GetCreatedDetailAsync(groupCode, usrId, cancellationToken);
-            return updatedDetail ?? throw new DomainException("Failed to retrieve updated user details");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error updating Order Group user");
-            await _unitOfWork.RollbackTransactionAsync(cancellationToken);
-            
-            if (ex is DomainException)
-                throw;
-            
-            throw new DomainException($"Failed to update Order Group user: {ex.Message}");
-        }
-    }
-
-    public async Task<bool> RemoveUserFromGroupAsync(int groupCode, string usrId, RemoveUserFromGroupRequest request, CancellationToken cancellationToken = default)
-    {
-        // Note: Individual master/detail methods are deprecated in favor of unified CRUD operations
-        throw new NotImplementedException("Use unified DeleteOrderGroupAsync method instead");
-
-        _logger.LogInformation("Removing User from Order Group: {GroupCode}, User: {UsrId}", groupCode, usrId);
-
-        await _unitOfWork.BeginTransactionAsync(cancellationToken);
-        
-        try
-        {
-            var parameters = new
-            {
-                Action = (int)ActionTypeEnum.DELETE,
-                GroupCode = groupCode,
-                GroupDesc = (object)DBNull.Value,
-                GroupType = (object)DBNull.Value,
-                GroupValue = (object)DBNull.Value,
-                DateFrom = (object)DBNull.Value,
-                DateTo = (object)DBNull.Value,
-                UsrID = usrId,
-                ViewOrder = (object)DBNull.Value,
-                PlaceOrder = (object)DBNull.Value,
-                ViewClient = (object)DBNull.Value,
-                ModifyOrder = (object)DBNull.Value,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                TransDt = DateTime.Now,
-                Remarks = request.Remarks,
-                RowsAffected = 0,
-                StatusCode = 0,
-                StatusMsg = "",
-                NewGroupCode = 0
-            };
-
-            var result = await _repository.ExecuteWithOutputAsync(
-                "LB_SP_CrudOrderGroup",
-                parameters,
-                cancellationToken);
-
-            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
-            var statusCode = result.GetOutputValue<int>("StatusCode");
-            var statusMsg = result.GetOutputValue<string>("StatusMsg");
-
-            if (statusCode != 1 || rowsAffected == 0)
-            {
-                _logger.LogWarning("Failed to remove user from Order Group: {StatusMsg}", statusMsg);
-                throw new DomainException($"Failed to remove user from Order Group: {statusMsg}");
-            }
-
-            await _unitOfWork.CommitTransactionAsync(cancellationToken);
-            return true;
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error removing user from Order Group");
-            await _unitOfWork.RollbackTransactionAsync(cancellationToken);
-            
-            if (ex is DomainException)
-                throw;
-            
-            throw new DomainException($"Failed to remove user from Order Group: {ex.Message}");
-        }
-    }
-
-    public async Task<PagedResult<OrderGroupDetailDto>> GetDetailGroupWorkflowListAsync(GetDetailGroupWorkflowListRequest request, CancellationToken cancellationToken = default)
-    {
-        try
-        {
-            _logger.LogInformation("Getting Detail Group Workflow List - GroupCode: {GroupCode}, Page: {PageNumber}, IsAuth: {IsAuth}", request.GroupCode, request.PageNumber, request.IsAuth);
-
-            var parameters = new
-            {
-                PageNumber = request.PageNumber,
-                PageSize = request.PageSize,
-                SearchTerm = request.SearchTerm,
-                GroupCode = request.GroupCode,
-                UsrID = request.UsrID,
-                DateFromStart = request.DateFromStart ?? (object)DBNull.Value,
-                DateFromEnd = request.DateFromEnd ?? (object)DBNull.Value,
-                SortColumn = request.SortColumn,
-                SortDirection = request.SortDirection,
-                IsAuth = request.IsAuth,
-                MakerId = _currentUserService.UserId
-            };
-
-            var pagedResult = await _repository.QueryPagedAsync<OrderGroupDetailDto>(
-                "LB_SP_GetOrderGroupDtlListWF",
-                request.PageNumber,
-                request.PageSize,
-                parameters,
-                isStoredProcedure: true,
-                cancellationToken: cancellationToken);
-
-            return pagedResult;
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error getting Detail Group Workflow List");
-            throw new DomainException($"Failed to retrieve Detail Group Workflow List: {ex.Message}");
-        }
-    }
-
-    public async Task<bool> AuthorizeDetailGroupAsync(int groupCode, string usrId, AuthorizeOrderGroupDetailRequest request, CancellationToken cancellationToken = default)
-    {
-        _logger.LogInformation("Authorizing OrderGroup detail: {GroupCode}, {UsrID}", groupCode, usrId);
-
-        try
-        {
-            var parameters = new Dictionary<string, object>
-            {
-                ["GroupCode"] = groupCode,
-                ["UsrID"] = usrId,
-                ["ActionType"] = request.ActionType,
-                ["IsAuth"] = request.IsAuth,
-                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
-                ["AuthID"] = _currentUserService.UserId,
-                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["RowsAffected"] = 0
-            };
-
-            var result = await _repository.ExecuteWithOutputAsync(
-                "LB_SP_AuthOrderGroupDtl", // Correct SP name for detail authorization
-                parameters,
-                cancellationToken);
-
-            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
-
-            if (rowsAffected > 0)
-            {
-                _logger.LogInformation("Successfully authorized OrderGroup detail: {GroupCode}, {UsrID}", groupCode, usrId);
-                return true;
-            }
-            else
-            {
-                throw new DomainException("Failed to authorize order group detail - no rows affected");
-            }
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error authorizing OrderGroup detail: {GroupCode}, {UsrID}", groupCode, usrId);
-            throw new DomainException($"Failed to authorize order group detail: {ex.Message}");
-        }
-    }
-
-    #endregion
-
-    #region Legacy Support (for backward compatibility)
+    #region DML Operations (Unified CRUD Master and child table)
 
     public async Task<OrderGroupDto> CreateOrderGroupAsync(CreateOrderGroupRequest request, CancellationToken cancellationToken = default)
     {
@@ -1022,8 +368,7 @@ public class OrderGroupService : IOrderGroupService
             await _unitOfWork.CommitTransactionAsync(cancellationToken);
 
             // Return the created order group with nested structure
-            var createdGroups = await GetOrderGroupByCodeAsync(newGroupCode, cancellationToken);
-            var createdGroup = createdGroups?.FirstOrDefault();
+            var createdGroup = await GetOrderGroupByCodeAsync(newGroupCode, cancellationToken);
             return createdGroup ?? throw new DomainException("Failed to retrieve created Order Group");
         }
         catch (Exception ex)
@@ -1085,10 +430,8 @@ public class OrderGroupService : IOrderGroupService
                 MakerId = _currentUserService.UserId,
                 TransDt = DateTime.Now,
                 Remarks = request.Remarks,
-                RowsAffected = 0,
-                StatusCode = 0,
-                StatusMsg = "",
-                NewGroupCode = 0
+                RowsAffected = 0, // output param
+                NewGroupCode = 0  // output param
             };
 
             var result = await _repository.ExecuteWithOutputAsync(
@@ -1097,20 +440,17 @@ public class OrderGroupService : IOrderGroupService
                 cancellationToken);
 
             var rowsAffected = result.GetOutputValue<int>("RowsAffected");
-            var statusCode = result.GetOutputValue<int>("StatusCode");
-            var statusMsg = result.GetOutputValue<string>("StatusMsg");
 
-            if (statusCode != 1 || rowsAffected == 0)
+            if (rowsAffected < 0)
             {
-                _logger.LogWarning("Failed to update Order Group: {StatusMsg}", statusMsg);
-                throw new DomainException($"Failed to update Order Group: {statusMsg}");
+                _logger.LogWarning("Failed to update Order Group rowsAffected: {rowsAffected}", rowsAffected);
+                throw new DomainException($"Failed to update Order Group rows Affected: {rowsAffected}");
             }
 
             await _unitOfWork.CommitTransactionAsync(cancellationToken);
 
             // Return the updated order group with nested structure
-            var updatedGroups = await GetOrderGroupByCodeAsync(groupCode, cancellationToken);
-            var updatedGroup = updatedGroups?.FirstOrDefault();
+            var updatedGroup = await GetOrderGroupByCodeAsync(groupCode, cancellationToken);
             return updatedGroup ?? throw new DomainException("Failed to retrieve updated Order Group");
         }
         catch (Exception ex)
@@ -1132,7 +472,7 @@ public class OrderGroupService : IOrderGroupService
         _logger.LogInformation("Deleting Order Group: {GroupCode}", groupCode);
 
         // First check if group can be deleted (validation check)
-        var validationResult = await CheckGroupDeleteValidationAsync(groupCode, cancellationToken);
+        var validationResult = await CheckGroupDeleteValidationAsync(groupCode, request?.UsrID, cancellationToken);
         
         if (!validationResult.CanDelete)
         {
@@ -1160,7 +500,7 @@ public class OrderGroupService : IOrderGroupService
                 GroupValue = (object)DBNull.Value,
                 DateFrom = (object)DBNull.Value,
                 DateTo = (object)DBNull.Value,
-                UsrID = (object)DBNull.Value, // No specific user = delete entire group
+                UsrID = request.UsrID, // No specific user = delete entire group
                 ViewOrder = (object)DBNull.Value,
                 PlaceOrder = (object)DBNull.Value,
                 ViewClient = (object)DBNull.Value,
@@ -1170,8 +510,6 @@ public class OrderGroupService : IOrderGroupService
                 TransDt = DateTime.Now,
                 Remarks = request.Remarks,
                 RowsAffected = 0,
-                StatusCode = 0,
-                StatusMsg = "",
                 NewGroupCode = 0
             };
 
@@ -1181,13 +519,11 @@ public class OrderGroupService : IOrderGroupService
                 cancellationToken);
 
             var rowsAffected = result.GetOutputValue<int>("RowsAffected");
-            var statusCode = result.GetOutputValue<int>("StatusCode");
-            var statusMsg = result.GetOutputValue<string>("StatusMsg");
 
-            if (statusCode != 1 || rowsAffected == 0)
+            if ( rowsAffected < 1)
             {
-                _logger.LogWarning("Failed to delete Order Group: {StatusMsg}", statusMsg);
-                throw new DomainException($"Failed to delete Order Group: {statusMsg}");
+                _logger.LogWarning("Failed to delete Order Group rowsAffected: {rowsAffected}", rowsAffected);
+                throw new DomainException($"Failed to delete Order Group rowsAffected: {rowsAffected}");
             }
 
             await _unitOfWork.CommitTransactionAsync(cancellationToken);
@@ -1205,51 +541,43 @@ public class OrderGroupService : IOrderGroupService
         }
     }
 
-    public async Task<PagedResult<OrderGroupDto>> GetOrderGroupUnAuthDeniedListAsync(int pageNumber = 1, int pageSize = 10, string? searchTerm = null, int isAuth = 0, CancellationToken cancellationToken = default)
+    #endregion
+
+    #region Work Flow Order Group 
+    public async Task<PagedResult<OrderGroupDto>> GetOrderGroupWorkflowListAsync(GetOrderGroupWorkflowListRequest request, CancellationToken cancellationToken = default)
     {
         try
         {
-            _logger.LogInformation("Getting Order Group Workflow List (Legacy) - Page: {PageNumber}, IsAuth: {IsAuth}", pageNumber, isAuth);
+            _logger.LogInformation("Getting Order Group Workflow List - Page: {PageNumber}, IsAuth: {IsAuth}, GroupCode: {GroupCode}", request.PageNumber, request.IsAuth, request.UsrID);
 
-            // Use master workflow list for legacy support
-            var masterRequest = new GetMasterGroupWorkflowListRequest
+            var parameters = new
             {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                SearchTerm = searchTerm,
-                IsAuth = isAuth,
-                MakerId = _currentUserService.UserId
+                PageNumber = request.PageNumber,
+                PageSize = request.PageSize,
+                SearchText = request.SearchTerm,
+                UsrID = request.UsrID ?? (object)DBNull.Value,
+                DateFromStart = request.DateFromStart ?? (object)DBNull.Value,
+                DateFromEnd = request.DateFromEnd ?? (object)DBNull.Value,
+                SortColumn = request.SortColumn,
+                SortDirection = request.SortDirection,
+                IsAuth = request.IsAuth,
+                MakerId = _currentUserService.UserId,
+                TotalCount = 0
             };
 
-            var masterResult = await GetMasterGroupWorkflowListAsync(masterRequest, cancellationToken);
+            var pagedResult = await _repository.QueryPagedAsync<OrderGroupDto>(
+                "LB_SP_GetOrderGroupListWF",
+                request.PageNumber,
+                request.PageSize,
+                parameters,
+                isStoredProcedure: true,
+                cancellationToken: cancellationToken);
 
-            // Convert master results to legacy DTO format
-            var legacyItems = masterResult.Data.Select(m => new OrderGroupDto
-            {
-                GroupCode = m.GroupCode,
-                GroupDesc = m.GroupDesc,
-                GroupType = m.GroupType,
-                GroupValue = m.GroupValue,
-                DateFrom = m.DateFrom,
-                DateTo = m.DateTo,
-                GroupStatus = m.GroupStatus,
-                AuthorizationStatus = m.AuthorizationStatus,
-                RecordStatus = m.RecordStatus,
-                MakeBy = m.MakeBy,
-                AuthBy = m.AuthBy
-            }).ToList();
-
-            return new PagedResult<OrderGroupDto>
-            {
-                Data = legacyItems,
-                TotalCount = masterResult.TotalCount,
-                PageNumber = masterResult.PageNumber,
-                PageSize = masterResult.PageSize
-            };
+            return pagedResult;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting Order Group Workflow List (Legacy)");
+            _logger.LogError(ex, "Error getting Master Group Workflow List");
             throw new DomainException($"Failed to retrieve Order Group Workflow List: {ex.Message}");
         }
     }
@@ -1258,19 +586,134 @@ public class OrderGroupService : IOrderGroupService
     {
         await ValidateAuthorizeRequestAsync(request, cancellationToken);
 
-        // For legacy support, delegate to master authorization
-        var masterRequest = new AuthorizeOrderGroupMasterRequest
-        {
-            GroupCode = groupCode,
-            ActionType = request.ActionType,
-            IsAuth = request.IsAuth,
-            Remarks = request.Remarks
-        };
+        _logger.LogInformation("Authorizing Order Group: {GroupCode}", groupCode);
 
-        return await AuthorizeMasterGroupAsync(groupCode, masterRequest, cancellationToken);
+        try
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                ["GroupCode"] = groupCode,
+                ["ActionType"] = request.ActionType,
+                ["IsAuth"] = request.IsAuth,
+                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
+                ["AuthID"] = _currentUserService.UserId,
+                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
+                ["RowsAffected"] = 0
+            };
+
+            var result = await _repository.ExecuteWithOutputAsync(
+                "LB_SP_AuthOrderGroup", // Correct SP name for master authorization
+                parameters,
+                cancellationToken);
+
+            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
+
+            if (rowsAffected > 0)
+            {
+                _logger.LogInformation("Successfully authorized OrderGroup master: {GroupCode}", groupCode);
+                return true;
+            }
+            else
+            {
+                throw new DomainException("Failed to authorize order group master - no rows affected");
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error authorizing OrderGroup master: {GroupCode}", groupCode);
+            throw new DomainException($"Failed to authorize order group master: {ex.Message}");
+        }
     }
 
     #endregion
+
+    #region Work Flow Order Group User
+
+    public async Task<PagedResult<OrderGroupUserDto>> GetOrderGroupUserWorkflowListAsync(GetOrderGroupUserWorkflowListRequest request, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            _logger.LogInformation("Getting Order Group User Workflow List - GroupCode: {GroupCode}, Page: {PageNumber}, IsAuth: {IsAuth}", request.GroupCode, request.PageNumber, request.IsAuth);
+
+            var parameters = new
+            {
+                PageNumber = request.PageNumber,
+                PageSize = request.PageSize,
+                SearchText = request.SearchTerm,
+                GroupCode = request.GroupCode,
+                UsrID = request.UsrID ?? (object)DBNull.Value,
+                DateFromStart = request.DateFromStart ?? (object)DBNull.Value,
+                DateFromEnd = request.DateFromEnd ?? (object)DBNull.Value,
+                SortColumn = request.SortColumn,
+                SortDirection = request.SortDirection,
+                IsAuth = request.IsAuth,
+                MakerId = _currentUserService.UserId,
+                TotalCount = 0
+            };
+
+            var pagedResult = await _repository.QueryPagedAsync<OrderGroupUserDto>(
+                "LB_SP_GetOrderGroupDtlListWF",
+                request.PageNumber,
+                request.PageSize,
+                parameters,
+                isStoredProcedure: true,
+                cancellationToken: cancellationToken);
+
+            return pagedResult;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting Detail Group Workflow List");
+            throw new DomainException($"Failed to retrieve Order Group User Workflow List: {ex.Message}");
+        }
+    }
+
+    public async Task<bool> AuthorizeOrderGroupUserAsync(int groupCode, string usrId, AuthorizeOrderGroupUserRequest request, CancellationToken cancellationToken = default)
+    {
+        await ValidateAuthorizeUserRequestAsync(request, cancellationToken);
+
+        _logger.LogInformation("Authorizing OrderGroup User: {GroupCode}, {UsrID}", groupCode, usrId);
+
+        try
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                ["GroupCode"] = groupCode,
+                ["UsrID"] = usrId,
+                ["ActionType"] = request.ActionType,
+                ["IsAuth"] = request.IsAuth,
+                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
+                ["AuthID"] = _currentUserService.UserId,
+                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
+                ["RowsAffected"] = 0
+            };
+
+            var result = await _repository.ExecuteWithOutputAsync(
+                "LB_SP_AuthOrderGroupDtl", // Correct SP name for detail authorization
+                parameters,
+                cancellationToken);
+
+            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
+
+            if (rowsAffected > 0)
+            {
+                _logger.LogInformation("Successfully authorized OrderGroup detail: {GroupCode}, {UsrID}", groupCode, usrId);
+                return true;
+            }
+            else
+            {
+                throw new DomainException("Failed to authorize order group detail - no rows affected");
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error authorizing OrderGroup detail: {GroupCode}, {UsrID}", groupCode, usrId);
+            throw new DomainException($"Failed to authorize order group detail: {ex.Message}");
+        }
+    }
+
+    #endregion
+
 
     #region Private Validation Methods
 
@@ -1339,6 +782,25 @@ public class OrderGroupService : IOrderGroupService
             }).ToList();
 
             throw new ValidationException("Authorize Order Group validation failed") { ValidationErrors = errors };
+        }
+    }
+
+    private async Task ValidateAuthorizeUserRequestAsync(AuthorizeOrderGroupUserRequest request, CancellationToken cancellationToken)
+    {
+        // Basic validation for authorize user request
+        if (string.IsNullOrEmpty(request.UsrID))
+        {
+            throw new ValidationException("User ID is required for authorization");
+        }
+
+        if (request.IsAuth < 0 || request.IsAuth > 2)
+        {
+            throw new ValidationException("Invalid authorization type");
+        }
+
+        if (request.IsAuth == (byte)AuthTypeEnum.Deny && string.IsNullOrEmpty(request.Remarks))
+        {
+            throw new ValidationException("Remarks are required when denying authorization");
         }
     }
 

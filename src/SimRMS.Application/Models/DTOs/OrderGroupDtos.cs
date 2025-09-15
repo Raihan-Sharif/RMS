@@ -21,29 +21,17 @@ namespace SimRMS.Application.Models.DTOs
     /// </summary>
     public class OrderGroupUserDto : BaseEntityDto
     {
-        public string UsrID { get; set; } = string.Empty;
-        public bool? ViewOrder { get; set; }
-        public bool? PlaceOrder { get; set; }
-        public bool? ViewClient { get; set; }
-        public bool? ModifyOrder { get; set; }
-    }
-
-    /// <summary>
-    /// Order Group Detail DTO - represents users/traders in a group with full audit info
-    /// </summary>
-    public class OrderGroupDetailDto : BaseEntityDto
-    {
         public int GroupCode { get; set; }
         public string UsrID { get; set; } = string.Empty;
-        public bool? ViewOrder { get; set; }
-        public bool? PlaceOrder { get; set; }
-        public bool? ViewClient { get; set; }
-        public bool? ModifyOrder { get; set; }
-        
-        // Computed properties from SP
-        public int? UserCount { get; set; }
-        public int? TotalCount { get; set; }
+        public bool ViewOrder { get; set; }
+        public bool PlaceOrder { get; set; }
+        public bool ViewClient { get; set; }
+        public bool ModifyOrder { get; set; }
+        public string? GroupDesc { get; set; }
+        public DateTime? DateFrom { get; set; }
+        public DateTime? DateTo { get; set; }
     }
+
 
     /// <summary>
     /// Main Order Group DTO with nested users - API Response Structure
@@ -60,12 +48,12 @@ namespace SimRMS.Application.Models.DTOs
         
         // Nested user list
         public List<OrderGroupUserDto> Users { get; set; } = new List<OrderGroupUserDto>();
-        
+
         // Computed properties from SP
         public string? GroupStatus { get; set; }
         public string? AuthorizationStatus { get; set; }
         public string? RecordStatus { get; set; }
-        public int? UserCount { get; set; }
+        public int UserCount { get; set; }
     }
 
     /// <summary>
@@ -93,7 +81,7 @@ namespace SimRMS.Application.Models.DTOs
         public string? GroupStatus { get; set; }
         public string? AuthorizationStatus { get; set; }
         public string? RecordStatus { get; set; }
-        public int? UserCount { get; set; }
+        public int UserCount { get; set; }
         public int? TotalCount { get; set; }
     }
 

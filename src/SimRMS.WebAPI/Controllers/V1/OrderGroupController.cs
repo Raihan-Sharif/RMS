@@ -14,7 +14,7 @@ using System.ComponentModel.DataAnnotations;
 /// Title:       Order Group Controller
 /// Author:      Md. Raihan Sharif
 /// Purpose:     Manage Order Group
-/// Creation:    11/Sep/2025
+/// Creation:    15/Sep/2025
 /// ===================================================================
 /// Modification History
 /// Author             Date         Description of Change
@@ -84,7 +84,7 @@ namespace SimRMS.WebAPI.Controllers.V1
         [ProducesResponseType(typeof(ApiResponse<object>), 400)]
         [ProducesResponseType(typeof(ApiResponse<object>), 404)]
         [ProducesResponseType(typeof(ApiResponse<object>), 401)]
-        public async Task<ActionResult<ApiResponse<IEnumerable<OrderGroupDto>>>> GetOrderGroupByCode(
+        public async Task<ActionResult<ApiResponse<OrderGroupDto>>> GetOrderGroupByCode(
             [FromRoute, Required] int groupCode,
             CancellationToken cancellationToken = default)
         {
@@ -92,8 +92,8 @@ namespace SimRMS.WebAPI.Controllers.V1
 
             var orderGroup = await _orderGroupService.GetOrderGroupByCodeAsync(groupCode, cancellationToken);
 
-            if (orderGroup == null || !orderGroup.Any())
-                return NotFound<IEnumerable<OrderGroupDto>>($"OrderGroup with code '{groupCode}' not found.");
+            if (orderGroup == null)
+                return NotFound<OrderGroupDto>($"OrderGroup with code '{groupCode}' not found.");
 
             return Ok(orderGroup, "Order Group retrieved successfully");
         }
@@ -106,17 +106,17 @@ namespace SimRMS.WebAPI.Controllers.V1
         [ProducesResponseType(typeof(ApiResponse<object>), 400)]
         [ProducesResponseType(typeof(ApiResponse<object>), 404)]
         [ProducesResponseType(typeof(ApiResponse<object>), 401)]
-        public async Task<ActionResult<ApiResponse<OrderGroupDto>>> GetOrderGroupUserByCode(
+        public async Task<ActionResult<ApiResponse<OrderGroupUserDto>>> GetOrderGroupUserByCode(
             [FromRoute, Required] int groupCode,
             [FromRoute, Required] string userId,
             CancellationToken cancellationToken = default)
         {
-            _logger.LogInformation("Getting OrderGroup user by code: {GroupCode}, UsrId: {UsrId}", groupCode, userId);
+            _logger.LogInformation("Getting Order Group user by group code: {GroupCode}, UsrId: {UsrId}", groupCode, userId);
 
             var orderGroup = await _orderGroupService.GetOrderGroupUserByCodeAsync(groupCode, userId, cancellationToken);
 
             if (orderGroup == null)
-                return NotFound<OrderGroupDto>($"User '{userId}' not found in OrderGroup '{groupCode}'.");
+                return NotFound<OrderGroupUserDto>($"User '{userId}' not found in OrderGroup '{groupCode}'.");
 
             return Ok(orderGroup, "Order Group user retrieved successfully");
         }
@@ -131,7 +131,7 @@ namespace SimRMS.WebAPI.Controllers.V1
             [FromRoute, Required] int groupCode,
             CancellationToken cancellationToken = default)
         {
-            var validation = await _orderGroupService.CheckGroupDeleteValidationAsync(groupCode, cancellationToken);
+            var validation = await _orderGroupService.CheckGroupDeleteValidationAsync(groupCode, null, cancellationToken);
             return Ok(validation, "Delete validation completed");
         }
 
@@ -196,7 +196,7 @@ namespace SimRMS.WebAPI.Controllers.V1
             [FromBody] DeleteOrderGroupRequest request,
             CancellationToken cancellationToken = default)
         {
-            _logger.LogInformation("Deleting OrderGroup: {GroupCode}", groupCode);
+            _logger.LogInformation("Deleting OrderGroup: {GroupCode} UserId: ", groupCode, request.UsrID??"-");
 
             var success = await _orderGroupService.DeleteOrderGroupAsync(groupCode, request, cancellationToken);
             return Ok((object)new { GroupCode = groupCode }, "Order Group deleted successfully");
@@ -204,7 +204,7 @@ namespace SimRMS.WebAPI.Controllers.V1
 
         #endregion
 
-        #region Workflow Operations
+        #region Order Group Workflow Operations
 
         /// <summary>
         /// Get Order Group workflow list - unified endpoint for unauthorized/denied records
@@ -225,12 +225,16 @@ namespace SimRMS.WebAPI.Controllers.V1
             _logger.LogInformation("Getting Order Group workflow list - IsAuth: {IsAuth}, Type: {WorkflowType}, Page: {PageNumber}", 
                 isAuth, workflowType, pageNumber);
 
-            // For now, return the regular list but filtered - can be enhanced later with specific workflow SPs
-            var result = await _orderGroupService.GetOrderGroupListAsync(
-                pageNumber: pageNumber,
-                pageSize: pageSize,
-                searchText: searchTerm,
-                cancellationToken: cancellationToken);
+            var request = new GetOrderGroupWorkflowListRequest
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                SearchTerm = searchTerm,
+                IsAuth = isAuth,
+                MakerId = 0 // Will be set by service from current user
+            };
+
+            var result = await _orderGroupService.GetOrderGroupWorkflowListAsync(request, cancellationToken);
 
             return Ok(result, "Order Group workflow list retrieved successfully");
         }
@@ -238,7 +242,7 @@ namespace SimRMS.WebAPI.Controllers.V1
         /// <summary>
         /// Authorize Order Group changes (master or detail)
         /// </summary>
-        [HttpPost("{groupCode:int}/authorize")]
+        [HttpPost("wf/authorize/{groupCode:int}")]
         [ProducesResponseType(typeof(ApiResponse<object>), 200)]
         [ProducesResponseType(typeof(ApiResponse<object>), 400)]
         [ProducesResponseType(typeof(ApiResponse<object>), 404)]
@@ -253,6 +257,68 @@ namespace SimRMS.WebAPI.Controllers.V1
 
             // Use the unified authorize method from service
             var success = await _orderGroupService.AuthorizeOrderGroupAsync(groupCode, request, cancellationToken);
+            var action = request.IsAuth == (byte)AuthTypeEnum.Approve ? "approved" : "denied";
+            return Ok((object)new { GroupCode = groupCode }, $"Order Group {action} successfully");
+        }
+
+        #endregion
+
+
+        #region Order Group User Workflow Operations
+
+        /// <summary>
+        /// Get Order Group workflow list - unified endpoint for unauthorized/denied records
+        /// Similar to user-exposure workflow pattern: /api/v1/order-group/wf/unauth-denied-list?isAuth=0&pageNumber=1&pageSize=10&searchTerm
+        /// </summary>
+        [HttpGet("wf/User/unauth-denied-list")]
+        [ProducesResponseType(typeof(ApiResponse<IEnumerable<OrderGroupUserDto>>), 200)]
+        [ProducesResponseType(typeof(ApiResponse<object>), 400)]
+        [ProducesResponseType(typeof(ApiResponse<object>), 401)]
+        public async Task<ActionResult<ApiResponse<IEnumerable<OrderGroupUserDto>>>> GetGroupUserWorkflowList(
+            [FromQuery, Range(0, 2)] int isAuth = 0,
+            [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1,
+            [FromQuery, Range(1, 100)] int pageSize = 10,
+            [FromQuery] string? searchTerm = null,
+            [FromQuery] string workflowType = "all", // "master", "detail", "all"
+            CancellationToken cancellationToken = default)
+        {
+            _logger.LogInformation("Getting Order Group User workflow list - IsAuth: {IsAuth}, Type: {WorkflowType}, Page: {PageNumber}",
+                isAuth, workflowType, pageNumber);
+
+            var request = new GetOrderGroupUserWorkflowListRequest
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                SearchTerm = searchTerm,
+                GroupCode = 0, // Can be filtered by specific group if needed
+                IsAuth = isAuth,
+                MakerId = 0 // Will be set by service from current user
+            };
+
+            var result = await _orderGroupService.GetOrderGroupUserWorkflowListAsync(request, cancellationToken);
+
+            return Ok(result, "Order Group User workflow list retrieved successfully");
+        }
+
+        /// <summary>
+        /// Authorize Order Group changes (master or detail)
+        /// </summary>
+        [HttpPost("wf/user/authorize/{groupCode:int}")]
+        [ProducesResponseType(typeof(ApiResponse<object>), 200)]
+        [ProducesResponseType(typeof(ApiResponse<object>), 400)]
+        [ProducesResponseType(typeof(ApiResponse<object>), 404)]
+        [ProducesResponseType(typeof(ApiResponse<object>), 401)]
+        public async Task<ActionResult<ApiResponse<object>>> AuthorizeOrderGroupUser(
+            [FromRoute, Required] int groupCode,
+            [FromRoute, Required] string usrID,
+            [FromBody] AuthorizeOrderGroupUserRequest request,
+            CancellationToken cancellationToken = default)
+        {
+            _logger.LogInformation("Authorizing OrderGroup: {GroupCode}, IsAuth: {IsAuth}",
+                groupCode, request.IsAuth);
+
+            // Use the authorize method from service
+            var success = await _orderGroupService.AuthorizeOrderGroupUserAsync(groupCode, usrID, request, cancellationToken);
             var action = request.IsAuth == (byte)AuthTypeEnum.Approve ? "approved" : "denied";
             return Ok((object)new { GroupCode = groupCode }, $"Order Group {action} successfully");
         }

@@ -37,137 +37,6 @@ namespace SimRMS.Application.Models.Requests
 
     #endregion
 
-    #region Master Group Requests
-
-    public class CreateOrderGroupMasterRequest
-    {
-        public string GroupDesc { get; set; } = string.Empty;
-        public string? GroupType { get; set; }
-        public string? GroupValue { get; set; }
-        public DateTime? DateFrom { get; set; }
-        /// <summary>
-        /// Optional expiration date. If null, group never expires.
-        /// If set, group/user expires after this date.
-        /// </summary>
-        public DateTime? DateTo { get; set; }
-        public string? Remarks { get; set; }
-    }
-
-    public class UpdateOrderGroupMasterRequest
-    {
-        public int GroupCode { get; set; }
-        public string? GroupDesc { get; set; }
-        public string? GroupType { get; set; }
-        public string? GroupValue { get; set; }
-        public DateTime? DateFrom { get; set; }
-        /// <summary>
-        /// Optional expiration date. If null, group never expires.
-        /// If set, group/user expires after this date.
-        /// </summary>
-        public DateTime? DateTo { get; set; }
-        public string? Remarks { get; set; }
-    }
-
-    public class DeleteOrderGroupMasterRequest
-    {
-        public int GroupCode { get; set; }
-        public string? Remarks { get; set; }
-    }
-
-    public class AuthorizeOrderGroupMasterRequest
-    {
-        public int GroupCode { get; set; }
-        public byte ActionType { get; set; } = (byte)ActionTypeEnum.UPDATE;
-        public byte IsAuth { get; set; } = (byte)AuthTypeEnum.Approve;
-        public string? Remarks { get; set; }
-    }
-
-    #endregion
-
-    #region Detail/User Requests
-
-    public class AddUserToOrderGroupRequest
-    {
-        public int GroupCode { get; set; }
-        public string UsrID { get; set; } = string.Empty;
-        public bool? ViewOrder { get; set; }
-        public bool? PlaceOrder { get; set; }
-        public bool? ViewClient { get; set; }
-        public bool? ModifyOrder { get; set; }
-        public string? Remarks { get; set; }
-    }
-
-    public class UpdateOrderGroupUserRequest
-    {
-        public int GroupCode { get; set; }
-        public string UsrID { get; set; } = string.Empty;
-        public bool? ViewOrder { get; set; }
-        public bool? PlaceOrder { get; set; }
-        public bool? ViewClient { get; set; }
-        public bool? ModifyOrder { get; set; }
-        public string? Remarks { get; set; }
-    }
-
-    public class RemoveUserFromGroupRequest
-    {
-        public int GroupCode { get; set; }
-        public string UsrID { get; set; } = string.Empty;
-        public string? Remarks { get; set; }
-    }
-
-    public class AuthorizeOrderGroupDetailRequest
-    {
-        public int GroupCode { get; set; }
-        public string UsrID { get; set; } = string.Empty;
-        public byte ActionType { get; set; } = (byte)ActionTypeEnum.UPDATE;
-        public byte IsAuth { get; set; } = (byte)AuthTypeEnum.Approve;
-        public string? Remarks { get; set; }
-    }
-
-    #endregion
-
-    #region Workflow Requests
-
-    public class GetOrderGroupWorkflowListRequest
-    {
-        public int PageNumber { get; set; } = 1;
-        public int PageSize { get; set; } = 10;
-        public string? SearchTerm { get; set; }
-        public int IsAuth { get; set; } = (byte)AuthTypeEnum.UnAuthorize;
-        public string? SortDirection { get; set; } = "ASC";
-    }
-
-    public class GetMasterGroupWorkflowListRequest
-    {
-        public int PageNumber { get; set; } = 1;
-        public int PageSize { get; set; } = 10;
-        public string? SearchTerm { get; set; }
-        public string? UsrID { get; set; }
-        public DateTime? DateFromStart { get; set; }
-        public DateTime? DateFromEnd { get; set; }
-        public string SortColumn { get; set; } = "GroupCode";
-        public string SortDirection { get; set; } = "ASC";
-        public int IsAuth { get; set; } = 0;
-        public int MakerId { get; set; }
-    }
-
-    public class GetDetailGroupWorkflowListRequest
-    {
-        public int PageNumber { get; set; } = 1;
-        public int PageSize { get; set; } = 10;
-        public string? SearchTerm { get; set; }
-        public int GroupCode { get; set; }
-        public string? UsrID { get; set; }
-        public DateTime? DateFromStart { get; set; }
-        public DateTime? DateFromEnd { get; set; }
-        public string SortColumn { get; set; } = "GroupCode";
-        public string SortDirection { get; set; } = "ASC";
-        public int IsAuth { get; set; } = 0;
-        public int MakerId { get; set; }
-    }
-
-
-    #endregion
 
     #region Unified CRUD Requests
 
@@ -221,12 +90,54 @@ namespace SimRMS.Application.Models.Requests
     public class DeleteOrderGroupRequest
     {
         public int GroupCode { get; set; }
+        public string? UsrID { get; set; }
         public string? Remarks { get; set; }
+    }
+
+    public class GetOrderGroupWorkflowListRequest
+    {
+        public int PageNumber { get; set; } = 1;
+        public int PageSize { get; set; } = 10;
+        public string? SearchTerm { get; set; }
+        public string? UsrID { get; set; }
+        public DateTime? DateFromStart { get; set; }
+        public DateTime? DateFromEnd { get; set; }
+        public int IsAuth { get; set; } = (byte)AuthTypeEnum.UnAuthorize;
+        public int MakerId { get; set; }
+        public string? SortDirection { get; set; } = "ASC";
+        public string SortColumn { get; set; } = "GroupCode";
+
+    }
+
+    public class GetOrderGroupUserWorkflowListRequest
+    {
+        
+        public int PageNumber { get; set; } = 1;
+        public int PageSize { get; set; } = 10;
+        public string? SearchTerm { get; set; }
+        public int GroupCode { get; set; }
+        public string? UsrID { get; set; }
+        public DateTime? DateFromStart { get; set; }
+        public DateTime? DateFromEnd { get; set; }
+        public int IsAuth { get; set; } = (byte)AuthTypeEnum.UnAuthorize;
+        public int MakerId { get; set; }
+        public string? SortDirection { get; set; } = "ASC";
+        public string SortColumn { get; set; } = "GroupCode";
+
     }
 
     public class AuthorizeOrderGroupRequest
     {
         public int GroupCode { get; set; }
+        public byte ActionType { get; set; } = (byte)ActionTypeEnum.UPDATE;
+        public byte IsAuth { get; set; } = (byte)AuthTypeEnum.Approve;
+        public string? Remarks { get; set; }
+    }
+
+    public class AuthorizeOrderGroupUserRequest
+    {
+        public int GroupCode { get; set; }
+        public string UsrID { get; set; } = string.Empty;
         public byte ActionType { get; set; } = (byte)ActionTypeEnum.UPDATE;
         public byte IsAuth { get; set; } = (byte)AuthTypeEnum.Approve;
         public string? Remarks { get; set; }

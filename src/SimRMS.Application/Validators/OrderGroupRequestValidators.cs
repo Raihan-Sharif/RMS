@@ -1,6 +1,7 @@
 using FluentValidation;
 using SimRMS.Application.Models.Requests;
 using SimRMS.Shared.Constants;
+using System.Globalization;
 
 /// <summary>
 /// <para>
@@ -105,18 +106,18 @@ namespace SimRMS.Application.Validators
     }
 
     /// <summary>
-    /// Validator for getting master group workflow list
+    /// Validator for getting Order Group workflow list
     /// </summary>
-    public class GetMasterGroupWorkflowListRequestValidator : AbstractValidator<GetMasterGroupWorkflowListRequest>
+    public class GetOrderGroupWorkflowListRequestValidator : AbstractValidator<GetOrderGroupWorkflowListRequest>
     {
-        public GetMasterGroupWorkflowListRequestValidator()
+        public GetOrderGroupWorkflowListRequestValidator()
         {
             RuleFor(x => x.PageNumber).ValidPageNumber();
             RuleFor(x => x.PageSize).ValidPageSize(1000);
             RuleFor(x => x.SearchTerm).ValidSearchTerm(100)
                 .When(x => !string.IsNullOrEmpty(x.SearchTerm));
             RuleFor(x => x.SortDirection).ValidSorting();
-            RuleFor(x => x.IsAuth).Must(x => x >= 0 && x <= 2).WithMessage("IsAuth must be 0 (Unauthorized), 1 (Authorized), or 2 (All)");
+            RuleFor(x => x.IsAuth).Must(x => x >= 0 && x <= 2).WithMessage("IsAuth must be 0 (Unauthorized), 1 (Authorized), or 2 (Denied)");
             RuleFor(x => x.MakerId).GreaterThan(0).WithMessage("MakerId must be greater than 0");
         }
     }
@@ -171,56 +172,6 @@ namespace SimRMS.Application.Validators
         }
     }
 
-    /// <summary>
-    /// Validator for updating OrderGroup master information
-    /// </summary>
-    public class UpdateOrderGroupMasterRequestValidator : AbstractValidator<UpdateOrderGroupMasterRequest>
-    {
-        public UpdateOrderGroupMasterRequestValidator()
-        {
-            RuleFor(x => x.GroupCode).ValidGroupCode();
-            
-            RuleFor(x => x.GroupDesc).ValidGroupDesc()
-                .When(x => !string.IsNullOrEmpty(x.GroupDesc));
-            
-            RuleFor(x => x.GroupType).ValidGroupType()
-                .When(x => !string.IsNullOrEmpty(x.GroupType));
-            
-            RuleFor(x => x.GroupValue).ValidGroupValue()
-                .When(x => !string.IsNullOrEmpty(x.GroupValue));
-            
-            // Business rule: DateTo must be after DateFrom if both are provided
-            RuleFor(x => x)
-                .Must(DateToAfterDateFrom)
-                .WithMessage("DateTo must be after DateFrom, or leave DateTo null for no expiration")
-                .When(x => x.DateFrom.HasValue && x.DateTo.HasValue);
-            
-            RuleFor(x => x.Remarks).ValidRemarks()
-                .When(x => !string.IsNullOrEmpty(x.Remarks));
-
-            RuleFor(x => x)
-                .Must(HaveAtLeastOneFieldToUpdate)
-                .WithMessage("At least one field must be provided for update");
-        }
-
-        private static bool DateToAfterDateFrom(UpdateOrderGroupMasterRequest request)
-        {
-            if (!request.DateFrom.HasValue || !request.DateTo.HasValue)
-                return true;
-            
-            return request.DateTo.Value > request.DateFrom.Value;
-        }
-
-        private static bool HaveAtLeastOneFieldToUpdate(UpdateOrderGroupMasterRequest request)
-        {
-            return !string.IsNullOrEmpty(request.GroupDesc) ||
-                   !string.IsNullOrEmpty(request.GroupType) ||
-                   !string.IsNullOrEmpty(request.GroupValue) ||
-                   request.DateFrom.HasValue ||
-                   request.DateTo.HasValue ||
-                   !string.IsNullOrEmpty(request.Remarks);
-        }
-    }
 
     /// <summary>
     /// Validator for deleting OrderGroup
@@ -230,91 +181,43 @@ namespace SimRMS.Application.Validators
         public DeleteOrderGroupRequestValidator()
         {
             RuleFor(x => x.GroupCode).ValidGroupCode();
+            RuleFor(x => x.UsrID).ValidUsrID().When(x => !string.IsNullOrEmpty(x.UsrID));
             RuleFor(x => x.Remarks).ValidRemarks().When(x => !string.IsNullOrEmpty(x.Remarks));
         }
     }
 
-    /// <summary>
-    /// Validator for authorizing OrderGroup master
-    /// </summary>
-    public class AuthorizeOrderGroupMasterRequestValidator : AbstractValidator<AuthorizeOrderGroupMasterRequest>
-    {
-        public AuthorizeOrderGroupMasterRequestValidator()
-        {
-            RuleFor(x => x.GroupCode).ValidGroupCode();
-            RuleFor(x => x.ActionType).ValidActionTypeUpdate();
-            RuleFor(x => x.IsAuth).ValidIsApproveDeny();
-            RuleFor(x => x.Remarks).ValidRemarks().When(x => !string.IsNullOrEmpty(x.Remarks));
-            RuleFor(x => x.Remarks).NotEmpty().WithMessage("Remarks are required for denial").When(x => x.IsAuth == (byte)AuthTypeEnum.Deny);
-        }
-    }
 
     #endregion
 
-    #region Detail/User Validators
+    #region Order group User Validators
 
     /// <summary>
-    /// Validator for getting detail group workflow list
+    /// Validator for getting Order Group User workflow list
     /// </summary>
-    public class GetDetailGroupWorkflowListRequestValidator : AbstractValidator<GetDetailGroupWorkflowListRequest>
+    public class GetOrderGroupUserWorkflowListRequestValidator : AbstractValidator<GetOrderGroupUserWorkflowListRequest>
     {
-        public GetDetailGroupWorkflowListRequestValidator()
+        public GetOrderGroupUserWorkflowListRequestValidator()
         {
             RuleFor(x => x.GroupCode).ValidGroupCode();
+            RuleFor(x => x.UsrID).ValidUsrID().When(x => !string.IsNullOrEmpty(x.UsrID));
             RuleFor(x => x.PageNumber).ValidPageNumber();
             RuleFor(x => x.PageSize).ValidPageSize(1000);
             RuleFor(x => x.SearchTerm).ValidSearchTerm(100)
                 .When(x => !string.IsNullOrEmpty(x.SearchTerm));
             RuleFor(x => x.SortDirection).ValidSorting();
-            RuleFor(x => x.IsAuth).Must(x => x >= 0 && x <= 2).WithMessage("IsAuth must be 0 (Unauthorized), 1 (Authorized), or 2 (All)");
+            RuleFor(x => x.IsAuth).Must(x => x >= 0 && x <= 2).WithMessage("IsAuth must be 0 (Unauthorized), 1 (Authorized), or 2 (Denied)");
             RuleFor(x => x.MakerId).GreaterThan(0).WithMessage("MakerId must be greater than 0");
         }
     }
 
-    /// <summary>
-    /// Validator for updating OrderGroup user
-    /// </summary>
-    public class UpdateOrderGroupUserRequestValidator : AbstractValidator<UpdateOrderGroupUserRequest>
-    {
-        public UpdateOrderGroupUserRequestValidator()
-        {
-            RuleFor(x => x.GroupCode).ValidGroupCode();
-            RuleFor(x => x.UsrID).ValidUsrID();
-            RuleFor(x => x.Remarks).ValidRemarks()
-                .When(x => !string.IsNullOrEmpty(x.Remarks));
-            
-            // Business rule: At least one permission must be granted
-            RuleFor(x => x)
-                .Must(HaveAtLeastOnePermission)
-                .WithMessage("At least one permission (ViewOrder, PlaceOrder, ViewClient, or ModifyOrder) must be granted");
-        }
 
-        private static bool HaveAtLeastOnePermission(UpdateOrderGroupUserRequest request)
-        {
-            return request.ViewOrder == true || request.PlaceOrder == true || 
-                   request.ViewClient == true || request.ModifyOrder == true;
-        }
-    }
 
     /// <summary>
-    /// Validator for removing user from OrderGroup
+    /// Validator for authorizing OrderGroup User
     /// </summary>
-    public class RemoveUserFromGroupRequestValidator : AbstractValidator<RemoveUserFromGroupRequest>
+    public class AuthorizeOrderGroupUserRequestValidator : AbstractValidator<AuthorizeOrderGroupUserRequest>
     {
-        public RemoveUserFromGroupRequestValidator()
-        {
-            RuleFor(x => x.GroupCode).ValidGroupCode();
-            RuleFor(x => x.UsrID).ValidUsrID();
-            RuleFor(x => x.Remarks).ValidRemarks().When(x => !string.IsNullOrEmpty(x.Remarks));
-        }
-    }
-
-    /// <summary>
-    /// Validator for authorizing OrderGroup detail/user
-    /// </summary>
-    public class AuthorizeOrderGroupDetailRequestValidator : AbstractValidator<AuthorizeOrderGroupDetailRequest>
-    {
-        public AuthorizeOrderGroupDetailRequestValidator()
+        public AuthorizeOrderGroupUserRequestValidator()
         {
             RuleFor(x => x.GroupCode).ValidGroupCode();
             RuleFor(x => x.UsrID).ValidUsrID();
@@ -327,82 +230,6 @@ namespace SimRMS.Application.Validators
 
     #endregion
 
-    #region Master Group Specific Validators
-
-    /// <summary>
-    /// Validator for creating OrderGroup master only
-    /// </summary>
-    public class CreateOrderGroupMasterRequestValidator : AbstractValidator<CreateOrderGroupMasterRequest>
-    {
-        public CreateOrderGroupMasterRequestValidator()
-        {
-            RuleFor(x => x.GroupDesc).ValidGroupDesc();
-            RuleFor(x => x.GroupType).ValidGroupType()
-                .When(x => !string.IsNullOrEmpty(x.GroupType));
-            RuleFor(x => x.GroupValue).ValidGroupValue()
-                .When(x => !string.IsNullOrEmpty(x.GroupValue));
-            
-            // Business rule: DateTo must be after DateFrom if both are provided
-            RuleFor(x => x)
-                .Must(DateToAfterDateFromMaster)
-                .WithMessage("DateTo must be after DateFrom, or leave DateTo null for no expiration")
-                .When(x => x.DateFrom.HasValue && x.DateTo.HasValue);
-            
-            RuleFor(x => x.Remarks).ValidRemarks()
-                .When(x => !string.IsNullOrEmpty(x.Remarks));
-        }
-
-        private static bool DateToAfterDateFromMaster(CreateOrderGroupMasterRequest request)
-        {
-            if (!request.DateFrom.HasValue || !request.DateTo.HasValue)
-                return true;
-            
-            return request.DateTo.Value > request.DateFrom.Value;
-        }
-    }
-
-    /// <summary>
-    /// Validator for deleting OrderGroup master
-    /// </summary>
-    public class DeleteOrderGroupMasterRequestValidator : AbstractValidator<DeleteOrderGroupMasterRequest>
-    {
-        public DeleteOrderGroupMasterRequestValidator()
-        {
-            RuleFor(x => x.GroupCode).ValidGroupCode();
-            RuleFor(x => x.Remarks).ValidRemarks().When(x => !string.IsNullOrEmpty(x.Remarks));
-        }
-    }
-
-    #endregion
-
-    #region Detail/User Specific Validators
-
-    /// <summary>
-    /// Validator for adding user to OrderGroup
-    /// </summary>
-    public class AddUserToOrderGroupRequestValidator : AbstractValidator<AddUserToOrderGroupRequest>
-    {
-        public AddUserToOrderGroupRequestValidator()
-        {
-            RuleFor(x => x.GroupCode).ValidGroupCode();
-            RuleFor(x => x.UsrID).ValidUsrID();
-            RuleFor(x => x.Remarks).ValidRemarks()
-                .When(x => !string.IsNullOrEmpty(x.Remarks));
-            
-            // Business rule: At least one permission must be granted
-            RuleFor(x => x)
-                .Must(HaveAtLeastOnePermissionAdd)
-                .WithMessage("At least one permission (ViewOrder, PlaceOrder, ViewClient, or ModifyOrder) must be granted");
-        }
-
-        private static bool HaveAtLeastOnePermissionAdd(AddUserToOrderGroupRequest request)
-        {
-            return request.ViewOrder == true || request.PlaceOrder == true || 
-                   request.ViewClient == true || request.ModifyOrder == true;
-        }
-    }
-
-    #endregion
 
     #region Legacy Support Validators (Required for Service)
 

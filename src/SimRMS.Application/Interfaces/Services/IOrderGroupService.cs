@@ -1,6 +1,24 @@
 using SimRMS.Application.Models.DTOs;
 using SimRMS.Application.Models.Requests;
+using SimRMS.Shared.Constants;
 using SimRMS.Shared.Models;
+
+/// <summary>
+/// <para>
+/// ===================================================================
+/// Title:       Order Group Service Interface (Master-Detail Architecture)
+/// Author:      Raihan Sharif
+/// Purpose:     This Interface provides methods definitions for managing Order Group master-detail operations
+/// Creation:    11/Sep/2025
+/// ===================================================================
+/// Modification History
+/// Author             Date         Description of Change
+/// -------------------------------------------------------------------
+/// 
+/// ===================================================================
+/// </para>
+/// </summary>
+
 
 namespace SimRMS.Application.Interfaces.Services
 {
@@ -23,18 +41,18 @@ namespace SimRMS.Application.Interfaces.Services
         /// Get Order Group by code - returns all users in the group (list format)
         /// Uses LB_SP_GetOrderGroupByCode with @usrId = NULL
         /// </summary>
-        Task<IEnumerable<OrderGroupDto>> GetOrderGroupByCodeAsync(int groupCode, CancellationToken cancellationToken = default);
+        Task<OrderGroupDto> GetOrderGroupByCodeAsync(int groupCode, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Order Group by code and specific user - returns single record
         /// Uses LB_SP_GetOrderGroupByCode with specific @usrId
         /// </summary>
-        Task<OrderGroupDto?> GetOrderGroupUserByCodeAsync(int groupCode, string usrId, CancellationToken cancellationToken = default);
+        Task<OrderGroupUserDto?> GetOrderGroupUserByCodeAsync(int groupCode, string usrId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Check if users exist in group - used for delete validation
         /// </summary>
-        Task<OrderGroupDeleteResultDto> CheckGroupDeleteValidationAsync(int groupCode, CancellationToken cancellationToken = default);
+        Task<OrderGroupDeleteResultDto> CheckGroupDeleteValidationAsync(int groupCode, string? usrId = null, CancellationToken cancellationToken = default);
 
         #endregion
 
@@ -58,44 +76,41 @@ namespace SimRMS.Application.Interfaces.Services
         /// </summary>
         Task<bool> DeleteOrderGroupAsync(int groupCode, DeleteOrderGroupRequest request, CancellationToken cancellationToken = default);
 
-        /// <summary>
-        /// Authorize Order Group (unified authorization for master and detail)
-        /// Uses LB_SP_AuthOrderGroup with Action type detection
-        /// </summary>
-        Task<bool> AuthorizeOrderGroupAsync(int groupCode, AuthorizeOrderGroupRequest request, CancellationToken cancellationToken = default);
 
         #endregion
 
-        #region Master Group Workflow Operations
+        #region Order Group Workflow Operations
 
         /// <summary>
-        /// Get master groups workflow list for authorization
-        /// Uses LB_SP_GetMasterGroupListWF
+        /// Get Order groups workflow list for authorization
+        /// Uses LB_SP_GetOrderGroupListWF
         /// </summary>
-        Task<PagedResult<OrderGroupDto>> GetMasterGroupWorkflowListAsync(GetMasterGroupWorkflowListRequest request, CancellationToken cancellationToken = default);
+        Task<PagedResult<OrderGroupDto>> GetOrderGroupWorkflowListAsync(GetOrderGroupWorkflowListRequest request, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Authorize master group changes
+        /// Authorize Order group changes
         /// Uses LB_SP_AuthOrderGroup
         /// </summary>
-        Task<bool> AuthorizeMasterGroupAsync(int groupCode, AuthorizeOrderGroupMasterRequest request, CancellationToken cancellationToken = default);
+        Task<bool> AuthorizeOrderGroupAsync(int groupCode, AuthorizeOrderGroupRequest request, CancellationToken cancellationToken = default);
 
         #endregion
 
         #region Detail Group Workflow Operations
 
         /// <summary>
-        /// Get detail/user workflow list for authorization
+        /// Get Order Group User workflow list for authorization
         /// Uses LB_SP_GetOrderGroupDtlListWF
         /// </summary>
-        Task<PagedResult<OrderGroupDetailDto>> GetDetailGroupWorkflowListAsync(GetDetailGroupWorkflowListRequest request, CancellationToken cancellationToken = default);
+        Task<PagedResult<OrderGroupUserDto>> GetOrderGroupUserWorkflowListAsync(GetOrderGroupUserWorkflowListRequest request, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Authorize detail/user changes
+        /// Authorize Order Group User changes
         /// Uses LB_SP_AuthOrderGroupDtl
         /// </summary>
-        Task<bool> AuthorizeDetailGroupAsync(int groupCode, string usrId, AuthorizeOrderGroupDetailRequest request, CancellationToken cancellationToken = default);
+        Task<bool> AuthorizeOrderGroupUserAsync(int groupCode, string usrId, AuthorizeOrderGroupUserRequest request, CancellationToken cancellationToken = default);
 
         #endregion
+
+      
     }
 }

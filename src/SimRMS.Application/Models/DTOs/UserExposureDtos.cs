@@ -20,6 +20,9 @@ namespace SimRMS.Application.Models.DTOs
     public class UserExposureDto : BaseEntityDto
     {
         public string UsrId { get; set; } = null!;
+        public string UsrName { get; set; } = null!;
+        public string DlrCode { get; set; } = null!;
+        public string CSEDlrCode { get; set; } = null!;
         public bool UsrExpsCheckBuy { get; set; }
         public decimal UsrExpsBuyAmt { get; set; }
         public bool UsrExpsCheckSell { get; set; }
