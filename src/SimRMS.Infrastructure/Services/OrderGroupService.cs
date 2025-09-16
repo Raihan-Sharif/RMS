@@ -117,6 +117,7 @@ public class OrderGroupService : IOrderGroupService
                             {
                                 GroupCode = first.GroupCode,
                                 UsrID = user.UsrID ?? string.Empty,
+                                UsrName = user.UsrName ?? string.Empty,
                                 ViewOrder = user.ViewOrder ?? false,
                                 PlaceOrder = user.PlaceOrder ?? false,
                                 ViewClient = user.ViewClient ?? false,
@@ -217,6 +218,7 @@ public class OrderGroupService : IOrderGroupService
                             {
                                 GroupCode = first.GroupCode,
                                 UsrID = user.UsrID ?? string.Empty,
+                                UsrName = user.UsrName ?? string.Empty,
                                 ViewOrder = user.ViewOrder ?? false,
                                 PlaceOrder = user.PlaceOrder ?? false,
                                 ViewClient = user.ViewClient ?? false,
@@ -555,7 +557,6 @@ public class OrderGroupService : IOrderGroupService
                 PageNumber = request.PageNumber,
                 PageSize = request.PageSize,
                 SearchText = request.SearchTerm,
-                UsrID = request.UsrID ?? (object)DBNull.Value,
                 DateFromStart = request.DateFromStart ?? (object)DBNull.Value,
                 DateFromEnd = request.DateFromEnd ?? (object)DBNull.Value,
                 SortColumn = request.SortColumn,
@@ -566,7 +567,7 @@ public class OrderGroupService : IOrderGroupService
             };
 
             var pagedResult = await _repository.QueryPagedAsync<OrderGroupDto>(
-                "LB_SP_GetOrderGroupListWF",
+                "LB_SP_GetMasterGroupListWF",
                 request.PageNumber,
                 request.PageSize,
                 parameters,
@@ -592,6 +593,7 @@ public class OrderGroupService : IOrderGroupService
         {
             var parameters = new Dictionary<string, object>
             {
+                ["Action"] = request.ActionType,
                 ["GroupCode"] = groupCode,
                 ["ActionType"] = request.ActionType,
                 ["IsAuth"] = request.IsAuth,
@@ -633,14 +635,13 @@ public class OrderGroupService : IOrderGroupService
     {
         try
         {
-            _logger.LogInformation("Getting Order Group User Workflow List - GroupCode: {GroupCode}, Page: {PageNumber}, IsAuth: {IsAuth}", request.GroupCode, request.PageNumber, request.IsAuth);
+            _logger.LogInformation("Getting Order Group User Workflow List - GroupCode: {GroupCode}, Page: {PageNumber}, IsAuth: {IsAuth}", request.PageNumber, request.IsAuth);
 
             var parameters = new
             {
                 PageNumber = request.PageNumber,
                 PageSize = request.PageSize,
                 SearchText = request.SearchTerm,
-                GroupCode = request.GroupCode,
                 UsrID = request.UsrID ?? (object)DBNull.Value,
                 DateFromStart = request.DateFromStart ?? (object)DBNull.Value,
                 DateFromEnd = request.DateFromEnd ?? (object)DBNull.Value,
@@ -678,6 +679,7 @@ public class OrderGroupService : IOrderGroupService
         {
             var parameters = new Dictionary<string, object>
             {
+                ["Action"] = request.ActionType,
                 ["GroupCode"] = groupCode,
                 ["UsrID"] = usrId,
                 ["ActionType"] = request.ActionType,

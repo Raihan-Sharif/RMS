@@ -290,7 +290,6 @@ namespace SimRMS.WebAPI.Controllers.V1
                 PageNumber = pageNumber,
                 PageSize = pageSize,
                 SearchTerm = searchTerm,
-                GroupCode = 0, // Can be filtered by specific group if needed
                 IsAuth = isAuth,
                 MakerId = 0 // Will be set by service from current user
             };
@@ -303,7 +302,7 @@ namespace SimRMS.WebAPI.Controllers.V1
         /// <summary>
         /// Authorize Order Group changes (master or detail)
         /// </summary>
-        [HttpPost("wf/user/authorize/{groupCode:int}")]
+        [HttpPost("wf/user/authorize/{groupCode:int}/{usrId?}")]
         [ProducesResponseType(typeof(ApiResponse<object>), 200)]
         [ProducesResponseType(typeof(ApiResponse<object>), 400)]
         [ProducesResponseType(typeof(ApiResponse<object>), 404)]

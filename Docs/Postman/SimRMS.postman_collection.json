@@ -3508,7 +3508,7 @@
 			]
 		},
 		{
-			"name": "Order Group",
+			"name": "Order Group Users",
 			"item": [
 				{
 					"name": "Main CRUD",
@@ -3610,7 +3610,7 @@
 							]
 						},
 						{
-							"name": "Get Order Group By Code (All Users)",
+							"name": "Get Order Group By Code (All Users of Group)",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true,
 								"disabledSystemHeaders": {
@@ -3668,7 +3668,7 @@
 									"variable": [
 										{
 											"key": "groupCode",
-											"value": "1"
+											"value": "14"
 										}
 									]
 								}
@@ -3826,7 +3826,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"groupDesc\": \"Principle Branch\",\n    \"groupType\": \"G\",\n    \"groupValue\": \"Principle\",\n    \"dateFrom\": \"2025-01-01T00:00:00\",\n  //  \"dateTo\": ,\n    \"users\": [\n        {\n            \"usrID\": \"EFTEST\",\n            \"viewOrder\": true,\n            \"placeOrder\": true,\n            \"viewClient\": true,\n            \"modifyOrder\": false\n        },\n        {\n            \"usrID\": \"USR004\",\n            \"viewOrder\": true,\n            \"placeOrder\": false,\n            \"viewClient\": true,\n            \"modifyOrder\": true\n        },\n        {\n            \"usrID\": \"USR017\",\n            \"viewOrder\": true,\n            \"placeOrder\": false,\n            \"viewClient\": true,\n            \"modifyOrder\": false\n        }\n    ],\n    \"remarks\": \"New trading team with mixed permissions. DateTo is null (no expiration)\"\n}"
+									"raw": "{\n    \"groupDesc\": \"Corporate Branch\",\n    \"groupType\": \"G\", // Always Group Type will be 'G'\n    \"groupValue\": \"Corporate\",\n    \"dateFrom\": \"2025-01-01T00:00:00\",\n    \"dateTo\": null,\n    \"users\": [\n        {\n            \"usrID\": \"EFTEST\",\n            \"viewOrder\": true,\n            \"placeOrder\": true,\n            \"viewClient\": true,\n            \"modifyOrder\": false\n        },\n        {\n            \"usrID\": \"USR004\",\n            \"viewOrder\": true,\n            \"placeOrder\": false,\n            \"viewClient\": true,\n            \"modifyOrder\": true\n        },\n        {\n            \"usrID\": \"USR017\",\n            \"viewOrder\": true,\n            \"placeOrder\": false,\n            \"viewClient\": true,\n            \"modifyOrder\": false\n        }\n    ],\n    \"remarks\": \"New trading team with mixed permissions. DateTo is null (no expiration)\"\n}"
 								},
 								"url": {
 									"raw": "{{base_url}}/api/v1/order-group/create-group",
@@ -3950,7 +3950,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"groupCode\": 1,\n    \"groupDesc\": \"Team - test 1\",\n    \"groupType\": \"G\",\n    \"groupValue\": \"Test by Raihan\",\n    \"dateFrom\": \"2025-01-01T00:00:00\",\n    \"dateTo\": null,\n    \"users\": [\n        {\n            \"usrID\": \"EFTEST\",\n            \"viewOrder\": true,\n            \"placeOrder\": true,\n            \"viewClient\": true,\n            \"modifyOrder\": true\n        },\n        {\n            \"usrID\": \"EFTEST03\",\n            \"viewOrder\": true,\n            \"placeOrder\": true,\n            \"viewClient\": true,\n            \"modifyOrder\": false\n        },\n        {\n            \"usrID\": \"EFTEST02\",\n            \"viewOrder\": true,\n            \"placeOrder\": true,\n            \"viewClient\": true,\n            \"modifyOrder\": true\n        }\n    ],\n    \"remarks\": \"Updated to senior trading team with expiration date. DateTo set means group expires on 2025-12-31\"\n}"
+									"raw": "{\n    \"groupCode\": 14,\n    \"groupDesc\": \"Principle Branch\",\n    \"groupType\": \"G\", // Always here Group Type goes 'G'\n    \"groupValue\": \"Test by Raihan\",\n    \"dateFrom\": \"2025-01-01T00:00:00\",\n    \"dateTo\": null,\n    \"users\": [\n        {\n            \"usrID\": \"EFTEST\",\n            \"viewOrder\": true,\n            \"placeOrder\": true,\n            \"viewClient\": true,\n            \"modifyOrder\": false\n        },\n        {\n            \"usrID\": \"USR004\",\n            \"viewOrder\": true,\n            \"placeOrder\": false,\n            \"viewClient\": true,\n            \"modifyOrder\": true\n        },\n        {\n            \"usrID\": \"USR017\",\n            \"viewOrder\": true,\n            \"placeOrder\": false,\n            \"viewClient\": false,\n            \"modifyOrder\": false\n        }\n    ],\n    \"remarks\": \"Updated to senior trading team with expiration date. DateTo set means group expires on 2025-12-31\"\n}"
 								},
 								"url": {
 									"raw": "{{base_url}}/api/v1/order-group/update-group/:groupCode",
@@ -3967,7 +3967,7 @@
 									"variable": [
 										{
 											"key": "groupCode",
-											"value": "1"
+											"value": "14"
 										}
 									]
 								}
@@ -4002,10 +4002,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"remarks\": \"Deleting empty group\"\n}"
+									"raw": "{\n    \"groupCode\": 14,\n    //\"UsrID\": \"USR017\",\n    \"remarks\": \"Deleting group  by Raihan\"\n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/order-group/:groupCode",
+									"raw": "{{base_url}}/api/v1/order-group/delete-group/:groupCode",
 									"host": [
 										"{{base_url}}"
 									],
@@ -4013,12 +4013,13 @@
 										"api",
 										"v1",
 										"order-group",
+										"delete-group",
 										":groupCode"
 									],
 									"variable": [
 										{
 											"key": "groupCode",
-											"value": "1"
+											"value": "14"
 										}
 									]
 								}
@@ -4144,15 +4145,9 @@
 							]
 						},
 						{
-							"name": "Check Order Group Exists",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true,
-								"disabledSystemHeaders": {
-									"content-type": true
-								}
-							},
+							"name": "Delete Order Group User",
 							"request": {
-								"method": "HEAD",
+								"method": "DELETE",
 								"header": [
 									{
 										"key": "Content-Type",
@@ -4177,10 +4172,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n \n}"
+									"raw": "{\n    \"groupCode\": 14,\n    \"UsrID\": \"USR017\",\n    \"remarks\": \"Deleting group user by Raihan\"\n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/order-group/exists/1",
+									"raw": "{{base_url}}/api/v1/order-group/delete-group/:groupCode",
 									"host": [
 										"{{base_url}}"
 									],
@@ -4188,12 +4183,136 @@
 										"api",
 										"v1",
 										"order-group",
-										"exists",
-										"1"
+										"delete-group",
+										":groupCode"
+									],
+									"variable": [
+										{
+											"key": "groupCode",
+											"value": "14"
+										}
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "Success - Group Deleted",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"remarks\": \"Deleting empty group\"\n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/order-group/5",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"order-group",
+												"5"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"success\": true,\n  \"message\": \"Order Group deleted successfully\",\n  \"data\": true\n}"
+								},
+								{
+									"name": "Delete Validation Error - Group Has Users",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"remarks\": \"Trying to delete group with users\"\n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/order-group/1",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"order-group",
+												"1"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"success\": false,\n  \"message\": \"Cannot delete Order Group 1. It has 3 active users. Remove all users first.\",\n  \"data\": null\n}"
+								},
+								{
+									"name": "Validation Error - Missing Remarks",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"remarks\": \"\"\n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/order-group/1",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"order-group",
+												"1"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"success\": false,\n  \"message\": \"Delete Order Group validation failed\",\n  \"errors\": [\n    {\n      \"propertyName\": \"GroupCode\",\n      \"errorMessage\": \"Group Code must be greater than 0\",\n      \"attemptedValue\": \"1\"\n    }\n  ]\n}"
+								}
+							]
 						}
 					]
 				},
@@ -4204,7 +4323,7 @@
 							"name": "Workflow Operations",
 							"item": [
 								{
-									"name": "Get Order Groups Workflow (Unauthorized/Denied)",
+									"name": "Get Unauthorized Order Groups",
 									"protocolProfileBehavior": {
 										"disableBodyPruning": true,
 										"disabledSystemHeaders": {
@@ -4240,7 +4359,7 @@
 											"raw": "{\n \n}"
 										},
 										"url": {
-											"raw": "{{base_url}}/api/v1/order-group/wf/unauth-denied-list?isAuth=0&pageNumber=1&pageSize=10&makerId=123",
+											"raw": "{{base_url}}/api/v1/order-group/wf/unauth-denied-list?isAuth=0&pageNumber=1&pageSize=10",
 											"host": [
 												"{{base_url}}"
 											],
@@ -4273,7 +4392,8 @@
 												{
 													"key": "makerId",
 													"value": "123",
-													"description": "Maker ID for filtering"
+													"description": "Maker ID for filtering",
+													"disabled": true
 												}
 											]
 										}
@@ -4281,7 +4401,7 @@
 									"response": []
 								},
 								{
-									"name": "Get Denied Master Groups",
+									"name": "Get Denied Order Groups",
 									"protocolProfileBehavior": {
 										"disableBodyPruning": true,
 										"disabledSystemHeaders": {
@@ -4317,7 +4437,7 @@
 											"raw": "{\n \n}"
 										},
 										"url": {
-											"raw": "{{base_url}}/api/v1/order-group/wf/unauth-denied-list?isAuth=2&pageNumber=1&pageSize=10&makerId=123",
+											"raw": "{{base_url}}/api/v1/order-group/wf/unauth-denied-list?isAuth=2&pageNumber=1&pageSize=10",
 											"host": [
 												"{{base_url}}"
 											],
@@ -4344,7 +4464,8 @@
 												},
 												{
 													"key": "makerId",
-													"value": "123"
+													"value": "123",
+													"disabled": true
 												}
 											]
 										}
@@ -4384,10 +4505,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"actionType\": 2,\n  \"isAuth\": 1,\n  \"remarks\": \"Order group approved - all user permissions validated and authorized\"\n}"
+											"raw": "{\n  \"groupCode\": 15,\n  \"actionType\": 2,\n  \"isAuth\": 1,\n  \"remarks\": \"Order group approved - all user permissions validated and authorized\"\n}"
 										},
 										"url": {
-											"raw": "{{base_url}}/api/v1/order-group/1/authorize",
+											"raw": "{{base_url}}/api/v1/order-group/wf/authorize/:groupCode",
 											"host": [
 												"{{base_url}}"
 											],
@@ -4395,8 +4516,15 @@
 												"api",
 												"v1",
 												"order-group",
-												"1",
-												"authorize"
+												"wf",
+												"authorize",
+												":groupCode"
+											],
+											"variable": [
+												{
+													"key": "groupCode",
+													"value": "15"
+												}
 											]
 										}
 									},
@@ -4435,10 +4563,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"actionType\": 2,\n  \"isAuth\": 2,\n  \"remarks\": \"Order group denied - user permissions do not meet compliance requirements\"\n}"
+											"raw": "{\n  \"groupCode\": 14,\n  \"actionType\": 2,\n  \"isAuth\": 2,\n  \"remarks\": \"Order group approved - all user permissions validated and authorized\"\n}"
 										},
 										"url": {
-											"raw": "{{base_url}}/api/v1/order-group/1/authorize",
+											"raw": "{{base_url}}/api/v1/order-group/wf/authorize/:groupCode",
 											"host": [
 												"{{base_url}}"
 											],
@@ -4446,8 +4574,15 @@
 												"api",
 												"v1",
 												"order-group",
-												"1",
-												"authorize"
+												"wf",
+												"authorize",
+												":groupCode"
+											],
+											"variable": [
+												{
+													"key": "groupCode",
+													"value": "14"
+												}
 											]
 										}
 									},
@@ -4459,7 +4594,7 @@
 							"name": "Detial/Order Group User",
 							"item": [
 								{
-									"name": "Get User Changes Pending Authorization",
+									"name": "Get Unauthorized Order Group User",
 									"protocolProfileBehavior": {
 										"disableBodyPruning": true,
 										"disabledSystemHeaders": {
@@ -4495,7 +4630,7 @@
 											"raw": "{\n \n}"
 										},
 										"url": {
-											"raw": "{{base_url}}/api/v1/order-group/users/workflow?groupCode=1&isAuth=0&pageNumber=1&pageSize=10&makerId=123",
+											"raw": "{{base_url}}/api/v1/order-group/wf/User/unauth-denied-list?isAuth=0&pageNumber=1&pageSize=10",
 											"host": [
 												"{{base_url}}"
 											],
@@ -4503,15 +4638,11 @@
 												"api",
 												"v1",
 												"order-group",
-												"users",
-												"workflow"
+												"wf",
+												"User",
+												"unauth-denied-list"
 											],
 											"query": [
-												{
-													"key": "groupCode",
-													"value": "1",
-													"description": "Required: Group to check user changes for"
-												},
 												{
 													"key": "isAuth",
 													"value": "0",
@@ -4530,10 +4661,6 @@
 													"value": "",
 													"description": "Optional: Filter by specific user",
 													"disabled": true
-												},
-												{
-													"key": "makerId",
-													"value": "123"
 												}
 											]
 										}
@@ -4541,7 +4668,7 @@
 									"response": []
 								},
 								{
-									"name": "Get Denied User Changes",
+									"name": "Get Denied Order Group User",
 									"protocolProfileBehavior": {
 										"disableBodyPruning": true,
 										"disabledSystemHeaders": {
@@ -4577,7 +4704,7 @@
 											"raw": "{\n \n}"
 										},
 										"url": {
-											"raw": "{{base_url}}/api/v1/order-group/users/workflow?groupCode=1&isAuth=2&pageNumber=1&pageSize=10&makerId=123",
+											"raw": "{{base_url}}/api/v1/order-group/wf/User/unauth-denied-list?pageNumber=1&pageSize=10&isAuth=2",
 											"host": [
 												"{{base_url}}"
 											],
@@ -4585,19 +4712,11 @@
 												"api",
 												"v1",
 												"order-group",
-												"users",
-												"workflow"
+												"wf",
+												"User",
+												"unauth-denied-list"
 											],
 											"query": [
-												{
-													"key": "groupCode",
-													"value": "1"
-												},
-												{
-													"key": "isAuth",
-													"value": "2",
-													"description": "2 = Denied"
-												},
 												{
 													"key": "pageNumber",
 													"value": "1"
@@ -4607,8 +4726,8 @@
 													"value": "10"
 												},
 												{
-													"key": "makerId",
-													"value": "123"
+													"key": "isAuth",
+													"value": "2"
 												}
 											]
 										}
@@ -4648,10 +4767,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"usrID\": \"EFTEST03\",\n  \"actionType\": 2,\n  \"isAuth\": 1,\n  \"remarks\": \"User permissions approved - trader can proceed\"\n}"
+											"raw": "{\n \"groupCode\":14,\n  \"usrID\": \"EFTEST\",\n  \"actionType\": 2,\n  \"isAuth\": 1,\n  \"remarks\": \"User permissions approved - trader can proceed\"\n}"
 										},
 										"url": {
-											"raw": "{{base_url}}/api/v1/order-group/users/authorize/1/EFTEST03",
+											"raw": "{{base_url}}/api/v1/order-group/wf/user/authorize/:groupCode/:usrId",
 											"host": [
 												"{{base_url}}"
 											],
@@ -4659,10 +4778,21 @@
 												"api",
 												"v1",
 												"order-group",
-												"users",
+												"wf",
+												"user",
 												"authorize",
-												"1",
-												"EFTEST03"
+												":groupCode",
+												":usrId"
+											],
+											"variable": [
+												{
+													"key": "groupCode",
+													"value": "14"
+												},
+												{
+													"key": "usrId",
+													"value": "EFTEST"
+												}
 											]
 										}
 									},
@@ -4701,10 +4831,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"usrID\": \"EFTEST03\",\n  \"actionType\": 2,\n  \"isAuth\": 2,\n  \"remarks\": \"User permissions denied - insufficient trading experience\"\n}"
+											"raw": "{\n \"groupCode\":14,\n  \"usrID\": \"USR004\",\n  \"actionType\": 2,\n  \"isAuth\": 2,\n  \"remarks\": \"User permissions Denied by Raihan\"\n}"
 										},
 										"url": {
-											"raw": "{{base_url}}/api/v1/order-group/users/authorize/1/EFTEST03",
+											"raw": "{{base_url}}/api/v1/order-group/wf/user/authorize/:groupCode/:usrId",
 											"host": [
 												"{{base_url}}"
 											],
@@ -4712,10 +4842,21 @@
 												"api",
 												"v1",
 												"order-group",
-												"users",
+												"wf",
+												"user",
 												"authorize",
-												"1",
-												"EFTEST03"
+												":groupCode",
+												":usrId"
+											],
+											"variable": [
+												{
+													"key": "groupCode",
+													"value": "14"
+												},
+												{
+													"key": "usrId",
+													"value": "USR004"
+												}
 											]
 										}
 									},
@@ -4880,7 +5021,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"username\": \"EFTEST03\",\n  \"password\": \"password\"\n}",
+							"raw": "{\n  \"username\": \"EFTEST02\",\n  \"password\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

@@ -23,6 +23,7 @@ namespace SimRMS.Application.Models.DTOs
     {
         public int GroupCode { get; set; }
         public string UsrID { get; set; } = string.Empty;
+        public string UsrName { get; set; } = string.Empty;
         public bool ViewOrder { get; set; }
         public bool PlaceOrder { get; set; }
         public bool ViewClient { get; set; }
@@ -72,6 +73,7 @@ namespace SimRMS.Application.Models.DTOs
         
         // Detail properties (can be null if group has no users)
         public string? UsrID { get; set; }
+        public string? UsrName { get; set; }
         public bool? ViewOrder { get; set; }
         public bool? PlaceOrder { get; set; }
         public bool? ViewClient { get; set; }

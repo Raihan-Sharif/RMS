@@ -115,7 +115,6 @@ namespace SimRMS.Application.Models.Requests
         public int PageNumber { get; set; } = 1;
         public int PageSize { get; set; } = 10;
         public string? SearchTerm { get; set; }
-        public int GroupCode { get; set; }
         public string? UsrID { get; set; }
         public DateTime? DateFromStart { get; set; }
         public DateTime? DateFromEnd { get; set; }

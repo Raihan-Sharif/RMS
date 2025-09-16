@@ -198,7 +198,6 @@ namespace SimRMS.Application.Validators
     {
         public GetOrderGroupUserWorkflowListRequestValidator()
         {
-            RuleFor(x => x.GroupCode).ValidGroupCode();
             RuleFor(x => x.UsrID).ValidUsrID().When(x => !string.IsNullOrEmpty(x.UsrID));
             RuleFor(x => x.PageNumber).ValidPageNumber();
             RuleFor(x => x.PageSize).ValidPageSize(1000);
