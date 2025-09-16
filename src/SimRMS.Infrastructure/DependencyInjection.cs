@@ -68,6 +68,9 @@ namespace SimRMS.Infrastructure
             // order group service
             services.AddScoped<IOrderGroupService, OrderGroupService>();
 
+            // client service
+            services.AddScoped<IClientService, ClientService>();
+
             // Common data service for read-only operations
             services.AddScoped<ICommonDataService, CommonDataService>();
 

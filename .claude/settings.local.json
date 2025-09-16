@@ -37,7 +37,11 @@
       "Read(/d:\\SP,FN and Query\\RMS\\UserExposure/**)",
       "Read(/d:\\SP,FN and Query\\RMS\\UserExposure/**)",
       "Read(//d/SP,FN and Query/RMS/OrderGroup/**)",
-      "Read(//d/SP,FN and Query/RMS/UserExposure/**)"
+      "Read(//d/SP,FN and Query/RMS/UserExposure/**)",
+      "Read(//d/SP,FN and Query/RMS/Client/**)",
+      "Bash(del \"C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Domain\\Entities\\ClntMaster.cs\")",
+      "Bash(awk:*)",
+      "Bash(grep:*)"
     ],
     "deny": []
   }
