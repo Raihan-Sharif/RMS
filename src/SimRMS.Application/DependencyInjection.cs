@@ -31,7 +31,6 @@ public static class DependencyInjection
         var assembly = Assembly.GetExecutingAssembly();
 
         // FluentValidation
-        services.AddScoped<IValidator<UsrInfoRequest>, UsrInfoRequestValidator>();
 
         #region Company Validators
         services.AddScoped<IValidator<UpdateCompanyRequest>, UpdateCompanyRequestValidator>();

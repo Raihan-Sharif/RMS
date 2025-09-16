@@ -51,9 +51,6 @@ namespace SimRMS.Infrastructure
             // ✅ NEW: Single Generic Repository instead of individual repositories
             services.AddScoped<IGenericRepository, GenericRepository>();
 
-            // ✅ SIMPLIFIED: Business Services (much fewer lines of code)
-            services.AddScoped<IUsrInfoService, UsrInfoService>();
-
             services.AddScoped<ICompanyExposureService, CompanyExposureService>();
             services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<IBrokerBranchService, BrokerBranchService>();
