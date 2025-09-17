@@ -110,6 +110,14 @@ public class OrderGroupService : IOrderGroupService
                         AuthBy = first.AuthBy,
                         GroupStatus = first.GroupStatus,
                         AuthorizationStatus = first.AuthorizationStatus,
+                        Remarks = first.Remarks,
+                        MakerId = first.MakerId,
+                        TransDt = first.TransDt,
+                        IsAuth = first.IsAuth,
+                        IsDel =first.IsDel,
+                        AuthLevel = first.AuthLevel,
+                        AuthDt = first.AuthDt,
+                        AuthTransDt = first.AuthTransDt,
                         RecordStatus = first.RecordStatus,
                         UserCount = first.UserCount,
                         Users = group.Where(x => !string.IsNullOrEmpty(x.UsrID))
@@ -121,9 +129,9 @@ public class OrderGroupService : IOrderGroupService
                                 ViewOrder = user.ViewOrder ?? false,
                                 PlaceOrder = user.PlaceOrder ?? false,
                                 ViewClient = user.ViewClient ?? false,
-                                ModifyOrder = user.ModifyOrder ?? false,
-                                MakeBy = user.MakeBy,
-                                AuthBy = user.AuthBy
+                                ModifyOrder = user.ModifyOrder ?? false
+                                //MakeBy = user.MakeBy,
+                                //AuthBy = user.AuthBy
                             }).ToList()
                     };
                 }).ToList();
@@ -212,6 +220,14 @@ public class OrderGroupService : IOrderGroupService
                         RecordStatus = first.RecordStatus,
                         MakeBy = first.MakeBy,
                         AuthBy = first.AuthBy,
+                        Remarks = first.Remarks,
+                        MakerId = first.MakerId,
+                        TransDt = first.TransDt,
+                        IsAuth = first.IsAuth,
+                        IsDel = first.IsDel,
+                        AuthLevel = first.AuthLevel,
+                        AuthDt = first.AuthDt,
+                        AuthTransDt = first.AuthTransDt,
                         UserCount = first.UserCount,
                         Users = group.Where(x => !string.IsNullOrEmpty(x.UsrID))
                             .Select(user => new OrderGroupUserDto
@@ -222,9 +238,9 @@ public class OrderGroupService : IOrderGroupService
                                 ViewOrder = user.ViewOrder ?? false,
                                 PlaceOrder = user.PlaceOrder ?? false,
                                 ViewClient = user.ViewClient ?? false,
-                                ModifyOrder = user.ModifyOrder ?? false,
-                                MakeBy = user.MakeBy,
-                                AuthBy = user.AuthBy
+                                ModifyOrder = user.ModifyOrder ?? false
+                                //MakeBy = user.MakeBy,
+                                //AuthBy = user.AuthBy
                             }).ToList()
                     };
                 }).ToList();

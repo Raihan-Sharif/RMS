@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9118497e-b56e-4b43-bde6-effee0363e3f",
+		"_postman_id": "0f6b0df4-1540-4a30-8714-7546238455c5",
 		"name": "SimRMS",
 		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -2235,6 +2235,159 @@
 								"v1",
 								"common-data",
 								"user-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Country List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Api-Version",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "X-Handshake-Token",
+								"value": "{{handshake_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/common-data/country-list",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"common-data",
+								"country-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Client Type List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Api-Version",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "X-Handshake-Token",
+								"value": "{{handshake_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/common-data/client-type-list",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"common-data",
+								"client-type-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Client List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Api-Version",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "X-Handshake-Token",
+								"value": "{{handshake_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/common-data/client-list",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"common-data",
+								"client-list"
 							]
 						}
 					},
@@ -5076,7 +5229,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"gcif\": \"24268000001431\",\n  \"clntName\": \"Hasin\",\n  \"clntNICNo\": \"24268000001431\",\n  \"clntAddr\": \"Dhaka, Bangladesh\",\n  \"clntPhone\": \"0112345678\",\n  \"clntMobile\": \"0771234567\",\n  \"gender\": \"M\", //Gender must be F or M\n  \"nationality\": 1,\n  \"clntOffice\": \"Head Office\",\n  \"clntFax\": \"0112345679\",\n  \"clntEmail\": \"john.doe@example.com\",\n  \"countryCode\": \"BD\",  // country code must be BD\n  \"coBrchCode\": \"001\",\n  \"clntStat\": \"A\", // must be 'C' OR 'S' OR 'A'\n  \"clntTrdgStat\": \"Y\", // must be 'S' OR 'B' OR 'N' OR 'Y')\n  \"clntAcctType\": \"01\", // 01\tCash 02\tMargin\n  \"clntCDSNo\": \"CDS123456\",\n  \"clntDlrCode\": \"USR001\", // user id\n  \"clntAllowAssociate\": false,\n  \"clntDlrReassign\": false,\n  \"clntReassignDlrCode\": null,\n  \"clientCommission\": 0.5,\n  \"allowSME\": true,\n  \"remarks\": \"New client onboarding\"\n}"
+									"raw": "{\n  \"gcif\": \"A11455\",   // Investor Code\n  \"clntName\": \"MD. MAMUN UR-RASHID\",\n  \"clntNICNo\": \"A11455\", // National ID\n  \"clntAddr\": \"345, NORTH GORAN, DHAKA\",\n  \"clntPhone\": \"0112345678\",\n  \"clntMobile\": \"8801819412271\",\n  \"gender\": \"M\", //Gender must be F or M\n  \"nationality\": 1,\n  \"clntOffice\": null,\n  \"clntFax\": null,\n  \"clntEmail\": \"mamunr70@gmail.com\",\n  \"countryCode\": \"BD\",  // country code must be BD\n  \"coBrchCode\": \"001\",\n  \"clntStat\": \"A\", // must be 'C' OR 'S' OR 'A'\n  \"clntTrdgStat\": \"Y\", // must be 'S' OR 'B' OR 'N' OR 'Y')\n  \"clntAcctType\": \"01\", // 01\tCash 02\tMargin\n  \"clntCDSNo\": \"CDS123456\", // BO Code\n  \"clntDlrCode\": \"USR001\", // user id\n  \"clntAllowAssociate\": false,\n  \"clntDlrReassign\": false,\n  \"clntReassignDlrCode\": null,\n  \"clientCommission\": 0.5,\n  \"allowSME\": true,\n  \"remarks\": \"New client onboarding\"\n}"
 								},
 								"url": {
 									"raw": "{{base_url}}/api/v1/client/create-client",
@@ -5131,7 +5284,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"gcif\": \"24268000001431\",\n  \"clntName\": \"Hasin Jama;\",\n  \"clntNICNo\": \"24268000001431\",\n  \"clntAddr\": \"Dhaka, Bangladesh\",\n  \"clntPhone\": \"0112345678\",\n  \"clntMobile\": \"0771234567\",\n  \"gender\": \"M\", //Gender must be F or M\n  \"nationality\": 1,\n  \"clntOffice\": \"Head Office\",\n  \"clntFax\": \"0112345679\",\n  \"clntEmail\": \"john.doe@example.com\",\n  \"countryCode\": \"BD\",  // country code must be BD\n  \"coBrchCode\": \"001\",\n  \"clntStat\": \"A\", // must be 'C' OR 'S' OR 'A'\n  \"clntTrdgStat\": \"Y\", // must be 'S' OR 'B' OR 'N' OR 'Y')\n  \"clntAcctType\": \"01\", // 01\tCash 02\tMargin\n  \"clntCDSNo\": \"CD9686\",\n  \"clntDlrCode\": \"USR001\", // user id\n  \"clntAllowAssociate\": false,\n  \"clntDlrReassign\": false,\n  \"clntReassignDlrCode\": null,\n  \"clientCommission\": 0.5,\n  \"allowSME\": false,\n  \"remarks\": \"Update client Info\"\n}"
+									"raw": "{\n  \"gcif\": \"24268000001431\",  // Investor Code\n  \"clntName\": \"Hasin Jama;\",\n  \"clntNICNo\": \"24268000001431\", // National ID\n  \"clntAddr\": \"Dhaka, Bangladesh\",\n  \"clntPhone\": \"0112345678\",\n  \"clntMobile\": \"0771234567\",\n  \"gender\": \"M\", //Gender must be F or M\n  \"nationality\": 1,\n  \"clntOffice\": \"Head Office\",\n  \"clntFax\": \"0112345679\",\n  \"clntEmail\": \"john.doe@example.com\",\n  \"countryCode\": \"BD\",  // country code must be BD\n  \"coBrchCode\": \"001\",\n  \"clntStat\": \"A\", // must be 'C' OR 'S' OR 'A'\n  \"clntTrdgStat\": \"Y\", // must be 'S' OR 'B' OR 'N' OR 'Y')\n  \"clntAcctType\": \"01\", // 01\tCash 02\tMargin\n  \"clntCDSNo\": \"CD9686\",  // BO Code\n  \"clntDlrCode\": \"USR001\", // user id\n  \"clntAllowAssociate\": false,\n  \"clntDlrReassign\": false,\n  \"clntReassignDlrCode\": null,\n  \"clientCommission\": 0.5,\n  \"allowSME\": false,\n  \"remarks\": \"Update client Info\"\n}"
 								},
 								"url": {
 									"raw": "{{base_url}}/api/v1/client/update-client/:gcif",
@@ -5445,7 +5598,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"gcif\":\"24268000001430\",\n  \"CoBrchCode\": \"001\",\n  \"actionType\": 2,\n  \"isAuth\": 1,\n  \"remarks\": \"Client information verified and approved\"\n}"
+									"raw": "{\n  \"gcif\":\"A11455\",\n  \"CoBrchCode\": \"001\",\n  \"actionType\": 2,\n  \"isAuth\": 1,\n  \"remarks\": \"Client information verified and approved\"\n}"
 								},
 								"url": {
 									"raw": "{{base_url}}/api/v1/client/authorize-client/:gcif",
@@ -5462,7 +5615,7 @@
 									"variable": [
 										{
 											"key": "gcif",
-											"value": "24268000001430"
+											"value": "A11455"
 										}
 									]
 								}
@@ -5683,7 +5836,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"username\": \"EFTEST03\",\n  \"password\": \"password\"\n}",
+							"raw": "{\n  \"username\": \"EFTEST02\",\n  \"password\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

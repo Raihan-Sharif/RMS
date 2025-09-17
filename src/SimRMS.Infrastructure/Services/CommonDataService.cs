@@ -156,4 +156,91 @@ public class CommonDataService : ICommonDataService
             throw;
         }
     }
+
+    public async Task<IEnumerable<CountryListDto>> GetCountryListAsync(CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting country list");
+
+        var sql = @"
+            SELECT CountryCode,
+                   CountryName
+            FROM MstCountry
+            ORDER BY CountryName";
+
+        try
+        {
+            var result = await _repository.QueryAsync<CountryListDto>(sql, null, false, cancellationToken);
+            _logger.LogInformation("Retrieved {Count} countries", result.Count());
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting country list");
+            throw;
+        }
+    }
+
+    public async Task<IEnumerable<ClientTypeListDto>> GetClientTypeListAsync(CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting client type list");
+
+        var sql = @"
+            SELECT ClntType as ClientType,
+                   clntTypeDesc as ClientTypeName
+            FROM MstClntType
+            ORDER BY ClientTypeName";
+
+        try
+        {
+            var result = await _repository.QueryAsync<ClientTypeListDto>(sql, null, false, cancellationToken);
+            _logger.LogInformation("Retrieved {Count} client types", result.Count());
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting client type list");
+            throw;
+        }
+    }
+
+    public async Task<IEnumerable<ClientListDto>> GetClientListAsync(CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting client list");
+
+        var sql = @"
+            SELECT
+                cm.GCIF,
+                cm.ClntName,
+                cm.ClntNICNo,
+                cm.ClntAddr,
+                cm.ClntPhone,
+                cm.ClntMobile,
+                cm.Gender,
+                cm.Nationality,
+                cm.ClntEmail,
+                cm.CountryCode,
+                mc.CountryName,
+                ca.ClntCode,
+                ca.CoBrchCode,
+                mcb.CoBrchDesc as BranchName,
+                ca.ClntCDSNo
+            FROM dbo.ClntMaster cm
+            INNER JOIN MstCountry mc ON cm.CountryCode = mc.CountryCode
+            LEFT JOIN dbo.ClntAcct ca ON cm.GCIF = ca.GCIF AND ca.IsDel = 0 AND ca.IsAuth = 1
+            LEFT JOIN MstCoBrch mcb ON ca.CoBrchCode = mcb.CoBrchCode
+            WHERE cm.IsDel = 0 AND cm.IsAuth = 1
+            ORDER BY cm.ClntName";
+
+        try
+        {
+            var result = await _repository.QueryAsync<ClientListDto>(sql, null, false, cancellationToken);
+            _logger.LogInformation("Retrieved {Count} clients", result.Count());
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting client list");
+            throw;
+        }
+    }
 }

@@ -121,4 +121,58 @@ public class CommonDataController : BaseController
         var users = await _commonDataService.GetUserListAsync(cancellationToken);
         return Ok(users, "User list retrieved successfully");
     }
+
+    /// <summary>
+    /// Get list of countries for dropdown/selection
+    /// </summary>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>List of countries</returns>
+    [HttpGet("country-list")]
+    [ProducesResponseType(typeof(ApiResponse<IEnumerable<CountryListDto>>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 400)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 401)]
+    public async Task<ActionResult<ApiResponse<IEnumerable<CountryListDto>>>> GetCountryList(
+        CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting country list");
+
+        var countries = await _commonDataService.GetCountryListAsync(cancellationToken);
+        return Ok(countries, "Country list retrieved successfully");
+    }
+
+    /// <summary>
+    /// Get list of client types for dropdown/selection
+    /// </summary>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>List of client types</returns>
+    [HttpGet("client-type-list")]
+    [ProducesResponseType(typeof(ApiResponse<IEnumerable<ClientTypeListDto>>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 400)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 401)]
+    public async Task<ActionResult<ApiResponse<IEnumerable<ClientTypeListDto>>>> GetClientTypeList(
+        CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting client type list");
+
+        var clientTypes = await _commonDataService.GetClientTypeListAsync(cancellationToken);
+        return Ok(clientTypes, "Client type list retrieved successfully");
+    }
+
+    /// <summary>
+    /// Get list of clients for dropdown/selection
+    /// </summary>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>List of clients with their details</returns>
+    [HttpGet("client-list")]
+    [ProducesResponseType(typeof(ApiResponse<IEnumerable<ClientListDto>>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 400)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 401)]
+    public async Task<ActionResult<ApiResponse<IEnumerable<ClientListDto>>>> GetClientList(
+        CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting client list");
+
+        var clients = await _commonDataService.GetClientListAsync(cancellationToken);
+        return Ok(clients, "Client list retrieved successfully");
+    }
 }

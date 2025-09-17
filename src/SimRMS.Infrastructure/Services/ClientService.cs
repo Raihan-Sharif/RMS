@@ -497,17 +497,18 @@ public class ClientService : IClientService
                 GCIF = gcif,
                 ClntName = clntName,
                 ClntCode = clntCode,
+                MakerId = _currentUserService.UserId,
                 isAuth = (byte)isAuth,
                 SortBy = "GCIF",
                 SortOrder = "ASC",
                 TotalCount = 0
             };
 
-            _logger.LogDebug("Calling LB_SP_ClientMstAccListWF with parameters: PageNumber={PageNumber}, PageSize={PageSize}, IsAuth={IsAuth}",
+            _logger.LogDebug("Calling LB_SP_GetClientMstAccListWF with parameters: PageNumber={PageNumber}, PageSize={PageSize}, IsAuth={IsAuth}",
                 pageNumber, pageSize, isAuth);
 
             var result = await _repository.QueryPagedAsync<ClientDto>(
-                sqlOrSp: "LB_SP_ClientMstAccListWF",
+                sqlOrSp: "LB_SP_GetClientMstAccListWF",
                 pageNumber: pageNumber,
                 pageSize: pageSize,
                 parameters: parameters,
