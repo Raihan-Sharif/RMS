@@ -260,6 +260,62 @@ namespace SimRMS.Application.Validators
 
         #endregion
 
+        #region Client Validations
+
+        /// <summary>
+        /// Validates Client Code format and length
+        /// </summary>
+        public static IRuleBuilderOptions<T, string> ValidClientCode<T>(this IRuleBuilder<T, string> ruleBuilder)
+        {
+            return ruleBuilder
+                .NotEmpty().WithMessage("Client code is required")
+                .MaximumLength(50).WithMessage("Client code cannot exceed 50 characters")
+                .Matches("^[A-Za-z0-9]+$").WithMessage("Client code can only contain alphanumeric characters");
+        }
+
+        /// <summary>
+        /// Validates Company Branch Code format and length (shared with MstCoBrch)
+        /// </summary>
+        public static IRuleBuilderOptions<T, string> ValidCoBrchCode<T>(this IRuleBuilder<T, string> ruleBuilder)
+        {
+            return ruleBuilder
+                .NotEmpty().WithMessage("Company branch code is required")
+                .MaximumLength(6).WithMessage("Company branch code cannot exceed 6 characters")
+                .Matches("^[A-Za-z0-9]+$").WithMessage("Company branch code can only contain alphanumeric characters");
+        }
+
+        /// <summary>
+        /// Validates exposure amounts for >= 0 and proper decimal format
+        /// </summary>
+        public static IRuleBuilderOptions<T, decimal> ValidExposureAmount<T>(this IRuleBuilder<T, decimal> ruleBuilder)
+        {
+            return ruleBuilder
+                .GreaterThanOrEqualTo(0).WithMessage("Exposure amount must be greater than or equal to 0")
+                .PrecisionScale(20, 2, true).WithMessage("Exposure amount can have maximum 20 digits with 2 decimal places");
+        }
+
+        /// <summary>
+        /// Validates nullable exposure amounts for >= 0 and proper decimal format
+        /// </summary>
+        public static IRuleBuilderOptions<T, decimal?> ValidExposureAmountNullable<T>(this IRuleBuilder<T, decimal?> ruleBuilder)
+        {
+            return ruleBuilder
+                .GreaterThanOrEqualTo(0).WithMessage("Exposure amount must be greater than or equal to 0")
+                .PrecisionScale(20, 2, true).WithMessage("Exposure amount can have maximum 20 digits with 2 decimal places");
+        }
+
+        /// <summary>
+        /// Validates top-up expiry dates must be in the future
+        /// </summary>
+        public static IRuleBuilderOptions<T, DateTime?> ValidTopUpExpiry<T>(this IRuleBuilder<T, DateTime?> ruleBuilder)
+        {
+            return ruleBuilder
+                .Must(date => !date.HasValue || date.Value > DateTime.Now)
+                .WithMessage("Top-up expiry date must be in the future");
+        }
+
+        #endregion
+
         #region User Validations
         /// <summary>
         /// Validates User ID format and length

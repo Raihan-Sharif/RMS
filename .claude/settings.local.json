@@ -41,7 +41,10 @@
       "Read(//d/SP,FN and Query/RMS/Client/**)",
       "Bash(del \"C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Domain\\Entities\\ClntMaster.cs\")",
       "Bash(awk:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Read(//d/SP,FN and Query/RMS/Client Exposure/**)",
+      "Bash(rg:*)",
+      "Bash(del client-exposure-postman-section.json)"
     ],
     "deny": []
   }

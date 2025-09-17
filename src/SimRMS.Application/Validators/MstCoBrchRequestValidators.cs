@@ -26,13 +26,6 @@ namespace SimRMS.Application.Validators
     /// </summary>
     public static class MstCoBrchValidationRules
     {
-        public static IRuleBuilderOptions<T, string> ValidCoBrchCode<T>(this IRuleBuilder<T, string> ruleBuilder)
-        {
-            return ruleBuilder
-                .NotEmpty().WithMessage("Branch code is required")
-                .MaximumLength(6).WithMessage("Branch code cannot exceed 6 characters")
-                .Matches("^[A-Z0-9]+$").WithMessage("Branch code can only contain uppercase letters and numbers");
-        }
 
         public static IRuleBuilderOptions<T, string?> ValidCoBrchDesc<T>(this IRuleBuilder<T, string?> ruleBuilder, bool isRequired = false)
         {

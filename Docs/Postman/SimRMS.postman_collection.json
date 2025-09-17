@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0f6b0df4-1540-4a30-8714-7546238455c5",
+		"_postman_id": "56234e4e-98a2-4fdc-8fd4-b8b6cfce340a",
 		"name": "SimRMS",
 		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -5673,6 +5673,663 @@
 										{
 											"key": "gcif",
 											"value": "24268000001431"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Client Exposure",
+			"item": [
+				{
+					"name": "Main CRUD",
+					"item": [
+						{
+							"name": "Get All Client Exposures",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/client-exposure/exposure-list?pageNumber=1&pageSize=10&clntCode=&coBrchCode=&searchTerm=",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"client-exposure",
+										"exposure-list"
+									],
+									"query": [
+										{
+											"key": "pageNumber",
+											"value": "1",
+											"description": "Page number (minimum: 1)"
+										},
+										{
+											"key": "pageSize",
+											"value": "10",
+											"description": "Page size (1-100)"
+										},
+										{
+											"key": "clntCode",
+											"value": "",
+											"description": "Optional: Filter by client code (max 50 chars, alphanumeric)"
+										},
+										{
+											"key": "coBrchCode",
+											"value": "",
+											"description": "Optional: Filter by company branch code (max 6 chars, alphanumeric)"
+										},
+										{
+											"key": "searchTerm",
+											"value": "",
+											"description": "Optional: Search term (max 100 characters)"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success Response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/api/v1/client-exposure/exposure-list?pageNumber=1&pageSize=10",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"client-exposure",
+												"exposure-list"
+											],
+											"query": [
+												{
+													"key": "pageNumber",
+													"value": "1"
+												},
+												{
+													"key": "pageSize",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"success\": true,\n  \"message\": \"Client Exposures retrieved successfully\",\n  \"data\": [\n    {\n      \"clntCode\": \"CLI001\",\n      \"clntName\": \"ABC Corporation\",\n      \"coBrchCode\": \"001\",\n      \"clntExpsBuyAmt\": 1000000.00,\n      \"clntExpsBuyAmtTopUp\": 50000.00,\n      \"clntExpsWithLimit\": true,\n      \"clntExpsWithShrLimit\": false,\n      \"portfolioMargin\": 25000.00,\n      \"clntExpsBuyAmtTopUpExpiry\": \"2025-12-31T23:59:59\",\n      \"totalBuyLimit\": 1050000.00,\n      \"topUpStatus\": \"Active\",\n      \"hasLimit\": \"Yes\",\n      \"hasShareLimit\": \"No\",\n      \"daysUntilExpiry\": 108\n    }\n  ],\n  \"pagination\": {\n    \"totalCount\": 1,\n    \"pageNumber\": 1,\n    \"pageSize\": 10,\n    \"totalPages\": 1\n  }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Client Exposure By ID",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/client-exposure/exposure-by-id/:clntCode/:coBrchCode",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"client-exposure",
+										"exposure-by-id",
+										":clntCode",
+										":coBrchCode"
+									],
+									"variable": [
+										{
+											"key": "clntCode",
+											"value": "CLI001",
+											"description": "Client Code (max 50 chars, alphanumeric)"
+										},
+										{
+											"key": "coBrchCode",
+											"value": "001",
+											"description": "Company Branch Code (max 6 chars, alphanumeric)"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Client Exposure",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "LB-Client-IP",
+										"value": "159.132.10.94",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"clntCode\": \"A11455\",                     // REQUIRED: Client Code (max 50 chars, alphanumeric only)\n  \"coBrchCode\": \"001\",                     // REQUIRED: Company Branch Code (max 6 chars, alphanumeric only)\n  \"clntExpsBuyAmt\": 1000000.50,            // REQUIRED: Client Buy Exposure Amount (>= 0, max 20 digits with 2 decimals)\n  \"clntExpsBuyAmtTopUp\": 50000.00,         // REQUIRED: Top-up Amount (>= 0, max 20 digits with 2 decimals)\n  \"clntExpsWithLimit\": true,               // REQUIRED: Enable exposure limit (boolean)\n  \"clntExpsWithShrLimit\": false,           // REQUIRED: Enable Sharia compliant limit (boolean)\n  \"portfolioMargin\": 25000.75,             // REQUIRED: Portfolio Margin (>= 0, max 20 digits with 2 decimals)\n  \"clntExpsBuyAmtTopUpExpiry\": \"2025-12-31T23:59:59\",  // OPTIONAL: Top-up expiry date (required if topUp > 0, must be future date)\n  \"remarks\": \"Initial client exposure setup\"  // OPTIONAL: Remarks (max 200 characters)\n}\n\n// VALIDATION RULES:\n// - clntCode: Required, max 50 chars, alphanumeric only\n// - coBrchCode: Required, max 6 chars, alphanumeric only  \n// - All amount fields: Required, >= 0, max precision 20,2\n// - Boolean fields: Required\n// - Top-up expiry: Required if clntExpsBuyAmtTopUp > 0, must be future date\n// - Remarks: Optional, max 200 characters"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/client-exposure/create-exposure",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"client-exposure",
+										"create-exposure"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Client Exposure",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "LB-Client-IP",
+										"value": "159.132.10.94",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  // NOTE: All fields are OPTIONAL for updates, provide only fields to update\n  // At least one field must be provided for update\n  \n  \"clntExpsBuyAmt\": 1200000.00,            // OPTIONAL: New buy exposure amount (>= 0, max 20 digits with 2 decimals)\n  \"clntExpsBuyAmtTopUp\": 75000.00,         // OPTIONAL: New top-up amount (>= 0, max 20 digits with 2 decimals)\n  \"clntExpsWithLimit\": true,               // OPTIONAL: Enable/disable exposure limit\n  \"clntExpsWithShrLimit\": true,            // OPTIONAL: Enable/disable Sharia compliant limit\n  \"portfolioMargin\": 30000.00,             // OPTIONAL: New portfolio margin (>= 0, max 20 digits with 2 decimals)\n  \"clntExpsBuyAmtTopUpExpiry\": \"2026-06-30T23:59:59\",  // OPTIONAL: New expiry date (must be future date)\n  \"remarks\": \"Updated exposure limits\"     // OPTIONAL: Update remarks (max 200 characters)\n}\n\n// VALIDATION RULES:\n// - At least one field must be provided for update\n// - All amount fields: >= 0, max precision 20,2 (if provided)\n// - Top-up expiry: Must be future date (if provided)\n// - Remarks: Max 200 characters (if provided)\n// - Route parameters (clntCode, coBrchCode) cannot be updated"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/client-exposure/update-exposure/:clntCode/:coBrchCode",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"client-exposure",
+										"update-exposure",
+										":clntCode",
+										":coBrchCode"
+									],
+									"variable": [
+										{
+											"key": "clntCode",
+											"value": "CLI001",
+											"description": "Client Code (max 50 chars, alphanumeric)"
+										},
+										{
+											"key": "coBrchCode",
+											"value": "001",
+											"description": "Company Branch Code (max 6 chars, alphanumeric)"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Client Exposure",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "LB-Client-IP",
+										"value": "159.132.10.94",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"remarks\": \"Deleting client exposure as per compliance requirements\"  // OPTIONAL: Deletion reason (max 200 characters)\n}\n\n// VALIDATION RULES:\n// - Body is optional - can send empty body or just remarks\n// - Remarks: Optional, max 200 characters\n// - This performs soft delete, not permanent deletion"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/client-exposure/delete-exposure/:clntCode/:coBrchCode",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"client-exposure",
+										"delete-exposure",
+										":clntCode",
+										":coBrchCode"
+									],
+									"variable": [
+										{
+											"key": "clntCode",
+											"value": "CLI001",
+											"description": "Client Code (max 50 chars, alphanumeric)"
+										},
+										{
+											"key": "coBrchCode",
+											"value": "001",
+											"description": "Company Branch Code (max 6 chars, alphanumeric)"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Check Client Exposure Exists",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/client-exposure/exposure-exists/:clntCode/:coBrchCode",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"client-exposure",
+										"exposure-exists",
+										":clntCode",
+										":coBrchCode"
+									],
+									"variable": [
+										{
+											"key": "clntCode",
+											"value": "CLI001",
+											"description": "Client Code (max 50 chars, alphanumeric)"
+										},
+										{
+											"key": "coBrchCode",
+											"value": "001",
+											"description": "Company Branch Code (max 6 chars, alphanumeric)"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Work Flow",
+					"item": [
+						{
+							"name": "Get Unauthorized/Denied Client Exposures",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/client-exposure/wf/unauth-denied-list?pageNumber=1&pageSize=10&clntCode=&coBrchCode=&searchTerm=&isAuth=0",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"client-exposure",
+										"wf",
+										"unauth-denied-list"
+									],
+									"query": [
+										{
+											"key": "pageNumber",
+											"value": "1",
+											"description": "Page number (minimum: 1)"
+										},
+										{
+											"key": "pageSize",
+											"value": "10",
+											"description": "Page size (1-100)"
+										},
+										{
+											"key": "clntCode",
+											"value": "",
+											"description": "Optional: Filter by client code"
+										},
+										{
+											"key": "coBrchCode",
+											"value": "",
+											"description": "Optional: Filter by company branch code"
+										},
+										{
+											"key": "searchTerm",
+											"value": "",
+											"description": "Optional: Search term"
+										},
+										{
+											"key": "isAuth",
+											"value": "0",
+											"description": "Authorization status: 0=Unauthorized, 2=Denied"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success Response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/api/v1/client-exposure/wf/unauth-denied-list?pageNumber=1&pageSize=10&isAuth=0",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"client-exposure",
+												"wf",
+												"unauth-denied-list"
+											],
+											"query": [
+												{
+													"key": "pageNumber",
+													"value": "1"
+												},
+												{
+													"key": "pageSize",
+													"value": "10"
+												},
+												{
+													"key": "isAuth",
+													"value": "0"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"success\": true,\n  \"message\": \"Client Exposures UnAuthorize data retrieved successfully\",\n  \"data\": [\n    {\n      \"clntCode\": \"CLI002\",\n      \"clntName\": \"XYZ Limited\",\n      \"coBrchCode\": \"002\",\n      \"clntExpsBuyAmt\": 750000.00,\n      \"clntExpsBuyAmtTopUp\": 25000.00,\n      \"clntExpsWithLimit\": true,\n      \"clntExpsWithShrLimit\": true,\n      \"portfolioMargin\": 15000.00,\n      \"clntExpsBuyAmtTopUpExpiry\": \"2025-10-15T23:59:59\",\n      \"actionType\": 1,\n      \"actionDescription\": \"CREATE\",\n      \"isAuth\": 0,\n      \"authStatus\": \"Pending Authorization\",\n      \"makeBy\": \"TRADER001\",\n      \"actionDt\": \"2025-09-15T10:30:00\"\n    }\n  ],\n  \"pagination\": {\n    \"totalCount\": 1,\n    \"pageNumber\": 1,\n    \"pageSize\": 10,\n    \"totalPages\": 1\n  }\n}"
+								}
+							]
+						},
+						{
+							"name": "Authorize/Deny Client Exposure",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "LB-Client-IP",
+										"value": "159.132.10.94",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"actionType\": 2,                         // REQUIRED: Must be 2 (UPDATE) for authorization\n  \"isAuth\": 1,                            // REQUIRED: 1=Approve, 2=Deny\n  \"remarks\": \"Approved by risk manager\"   // CONDITIONAL: Required for denial (isAuth=2), optional for approval\n}\n\n// VALIDATION RULES:\n// - actionType: Required, must be 2 (UPDATE)\n// - isAuth: Required, must be 1 (Approve) or 2 (Deny)\n// - remarks: Required when isAuth=2 (Deny), optional when isAuth=1 (Approve)\n// - remarks: Max 200 characters if provided\n\n// AUTHORIZATION VALUES:\n// isAuth = 1: Approve the client exposure\n// isAuth = 2: Deny the client exposure"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/client-exposure/wf/authorize/:clntCode/:coBrchCode",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"client-exposure",
+										"wf",
+										"authorize",
+										":clntCode",
+										":coBrchCode"
+									],
+									"variable": [
+										{
+											"key": "clntCode",
+											"value": "CLI002",
+											"description": "Client Code (max 50 chars, alphanumeric)"
+										},
+										{
+											"key": "coBrchCode",
+											"value": "002",
+											"description": "Company Branch Code (max 6 chars, alphanumeric)"
 										}
 									]
 								}

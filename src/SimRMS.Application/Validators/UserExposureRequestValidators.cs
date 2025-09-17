@@ -21,25 +21,6 @@ using SimRMS.Shared.Constants;
 
 namespace SimRMS.Application.Validators
 {
-    /// <summary>
-    /// UserExposure specific validation rules
-    /// </summary>
-    public static class UserExposureValidationRules
-    {
-        public static IRuleBuilderOptions<T, decimal> ValidExposureAmount<T>(this IRuleBuilder<T, decimal> ruleBuilder)
-        {
-            return ruleBuilder
-                .GreaterThanOrEqualTo(0).WithMessage("Exposure amount must be greater than or equal to 0")
-                .PrecisionScale(20, 2, true).WithMessage("Exposure amount can have maximum 20 digits with 2 decimal places");
-        }
-
-        public static IRuleBuilderOptions<T, decimal?> ValidExposureAmountNullable<T>(this IRuleBuilder<T, decimal?> ruleBuilder)
-        {
-            return ruleBuilder
-                .GreaterThanOrEqualTo(0).WithMessage("Exposure amount must be greater than or equal to 0")
-                .PrecisionScale(20, 2, true).WithMessage("Exposure amount can have maximum 20 digits with 2 decimal places");
-        }
-    }
 
     /// <summary>
     /// Validator for creating UserExposure
