@@ -34,7 +34,6 @@ public class ClientExposureService : IClientExposureService
 {
     private readonly IGenericRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IValidator<CreateClientExposureRequest> _createValidator;
     private readonly IValidator<UpdateClientExposureRequest> _updateValidator;
     private readonly IValidator<DeleteClientExposureRequest> _deleteValidator;
     private readonly IValidator<AuthorizeClientExposureRequest> _authorizeValidator;
@@ -45,7 +44,6 @@ public class ClientExposureService : IClientExposureService
     public ClientExposureService(
         IGenericRepository repository,
         IUnitOfWork unitOfWork,
-        IValidator<CreateClientExposureRequest> createValidator,
         IValidator<UpdateClientExposureRequest> updateValidator,
         IValidator<DeleteClientExposureRequest> deleteValidator,
         IValidator<AuthorizeClientExposureRequest> authorizeValidator,
@@ -55,7 +53,6 @@ public class ClientExposureService : IClientExposureService
     {
         _repository = repository;
         _unitOfWork = unitOfWork;
-        _createValidator = createValidator;
         _updateValidator = updateValidator;
         _deleteValidator = deleteValidator;
         _authorizeValidator = authorizeValidator;
@@ -162,99 +159,6 @@ public class ClientExposureService : IClientExposureService
         }
     }
 
-    public async Task<ClientExposureDto> CreateClientExposureAsync(CreateClientExposureRequest request, CancellationToken cancellationToken = default)
-    {
-        _logger.LogInformation("Creating new ClientExposure for client: {ClntCode}, branch: {CoBrchCode}", request.ClntCode, request.CoBrchCode);
-
-        // Validate the request
-        await ValidateCreateRequestAsync(request, cancellationToken);
-
-        // Apply business logic: validate amounts and dates
-        ApplyBusinessLogicRules(request);
-
-        try
-        {
-            var parameters = new Dictionary<string, object>
-            {
-                ["Action"] = (byte)ActionTypeEnum.INSERT,
-                ["ClntCode"] = request.ClntCode,
-                ["CoBrchCode"] = request.CoBrchCode,
-                ["ClntExpsBuyAmt"] = request.ClntExpsBuyAmt,
-                ["ClntExpsBuyAmtTopUp"] = request.ClntExpsBuyAmtTopUp,
-                ["ClntExpsWithLimit"] = request.ClntExpsWithLimit,
-                ["ClntExpsWithShrLimit"] = request.ClntExpsWithShrLimit,
-                ["PortfolioMargin"] = request.PortfolioMargin,
-                ["ClntExpsBuyAmtTopUpExpiry"] = request.ClntExpsBuyAmtTopUpExpiry ?? (object)DBNull.Value,
-                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
-                ["MakerId"] = _currentUserService.UserId,
-                ["ActionDt"] = DateTime.Now,
-                ["TransDt"] = DateTime.Now.Date,
-                ["ActionType"] = (byte)ActionTypeEnum.INSERT,
-                ["AuthId"] = (object)DBNull.Value, // NULL for workflow
-                ["AuthDt"] = (object)DBNull.Value, // NULL for workflow
-                ["AuthTransDt"] = (object)DBNull.Value, // NULL for workflow
-                ["IsAuth"] = (byte)AuthTypeEnum.UnAuthorize, // Always start unauthorized
-                ["AuthLevel"] = (byte)AuthLevelEnum.Level1,
-                ["IsDel"] = (byte)DeleteStatusEnum.Active,
-                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["RowsAffected"] = 0 // OUTPUT parameter
-            };
-
-            _logger.LogDebug("Calling LB_SP_CrudMstClntExps with Action=1 (INSERT) for client: {ClntCode}", request.ClntCode);
-
-            var result = await _repository.ExecuteWithOutputAsync(
-                "LB_SP_CrudMstClntExps",
-                parameters,
-                cancellationToken);
-
-            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
-
-            _logger.LogDebug("Create operation completed. RowsAffected: {RowsAffected}", rowsAffected);
-
-            if (rowsAffected <= 0)
-            {
-                throw new DomainException("Failed to create client exposure - no rows affected");
-            }
-
-            // Return manually constructed DTO since unauthorized records aren't returned by GetById SP
-            ClientExposureDto newClientExposure = new ClientExposureDto
-            {
-                ClntCode = request.ClntCode,
-                CoBrchCode = request.CoBrchCode,
-                ClntExpsBuyAmt = request.ClntExpsBuyAmt,
-                ClntExpsBuyAmtTopUp = request.ClntExpsBuyAmtTopUp,
-                ClntExpsWithLimit = request.ClntExpsWithLimit,
-                ClntExpsWithShrLimit = request.ClntExpsWithShrLimit,
-                PortfolioMargin = request.PortfolioMargin,
-                ClntExpsBuyAmtTopUpExpiry = request.ClntExpsBuyAmtTopUpExpiry,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                ActionDt = DateTime.Now,
-                TransDt = DateTime.Now.Date,
-                ActionType = (byte)ActionTypeEnum.INSERT,
-                IsAuth = (byte)AuthTypeEnum.UnAuthorize, // Initially unauthorized based on workflow
-                AuthLevel = (byte)AuthLevelEnum.Level1,
-                IsDel = (byte)DeleteStatusEnum.Active,
-                Remarks = request.Remarks,
-            };
-
-            return newClientExposure;
-        }
-        catch (ValidationException)
-        {
-            throw;
-        }
-        catch (DomainException)
-        {
-            throw;
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Unexpected error creating ClientExposure for client: {ClntCode}", request.ClntCode);
-            throw new DomainException($"Failed to create client exposure: {ex.Message}");
-        }
-    }
-
     public async Task<ClientExposureDto> UpdateClientExposureAsync(string clntCode, string coBrchCode, UpdateClientExposureRequest request, CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Updating ClientExposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
@@ -278,12 +182,8 @@ public class ClientExposureService : IClientExposureService
                 ["Action"] = (byte)ActionTypeEnum.UPDATE,
                 ["ClntCode"] = clntCode,
                 ["CoBrchCode"] = coBrchCode,
-                ["ClntExpsBuyAmt"] = request.ClntExpsBuyAmt ?? (object)DBNull.Value,
-                ["ClntExpsBuyAmtTopUp"] = request.ClntExpsBuyAmtTopUp ?? (object)DBNull.Value,
-                ["ClntExpsWithLimit"] = request.ClntExpsWithLimit ?? (object)DBNull.Value,
-                ["ClntExpsWithShrLimit"] = request.ClntExpsWithShrLimit ?? (object)DBNull.Value,
-                ["PortfolioMargin"] = request.PortfolioMargin ?? (object)DBNull.Value,
-                ["ClntExpsBuyAmtTopUpExpiry"] = request.ClntExpsBuyAmtTopUpExpiry ?? (object)DBNull.Value,
+                ["PendingClntExpsBuyAmtTopUp"] = request.ClntExpsBuyAmtTopUp ?? (object)DBNull.Value,
+                //["ClntExpsBuyAmtTopUpExpiry"] = request.ClntExpsBuyAmtTopUpExpiry ?? (object)DBNull.Value,
                 ["IPAddress"] = _currentUserService.GetClientIPAddress(),
                 ["MakerId"] = _currentUserService.UserId,
                 ["ActionDt"] = DateTime.Now,
@@ -295,7 +195,7 @@ public class ClientExposureService : IClientExposureService
                 ["IsAuth"] = (byte)AuthTypeEnum.UnAuthorize, // Reset to unauthorized for workflow
                 ["AuthLevel"] = (byte)AuthLevelEnum.Level1,
                 ["IsDel"] = (byte)DeleteStatusEnum.Active,
-                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
+                //["Remarks"] = request.Remarks ?? (object)DBNull.Value,
                 ["RowsAffected"] = 0 // OUTPUT parameter
             };
 
@@ -588,23 +488,6 @@ public class ClientExposureService : IClientExposureService
 
     #region Private Validation Methods
 
-    private async Task ValidateCreateRequestAsync(CreateClientExposureRequest request, CancellationToken cancellationToken)
-    {
-        var validationResult = await _createValidator.ValidateAsync(request, cancellationToken);
-
-        if (!validationResult.IsValid)
-        {
-            var errors = validationResult.Errors.Select(e => new ValidationErrorDetail
-            {
-                PropertyName = e.PropertyName,
-                ErrorMessage = e.ErrorMessage,
-                AttemptedValue = e.AttemptedValue?.ToString()
-            }).ToList();
-
-            throw new ValidationException("Create validation failed") { ValidationErrors = errors };
-        }
-    }
-
     private async Task ValidateUpdateRequestAsync(UpdateClientExposureRequest request, CancellationToken cancellationToken)
     {
         var validationResult = await _updateValidator.ValidateAsync(request, cancellationToken);
@@ -678,41 +561,14 @@ public class ClientExposureService : IClientExposureService
     #region Private Business Logic Methods
 
     /// <summary>
-    /// Applies business logic rules for client exposure validation
-    /// </summary>
-    private static void ApplyBusinessLogicRules(CreateClientExposureRequest request)
-    {
-        // Business rule: If top-up amount > 0, expiry date must be set and in the future
-        if (request.ClntExpsBuyAmtTopUp > 0 && (!request.ClntExpsBuyAmtTopUpExpiry.HasValue || request.ClntExpsBuyAmtTopUpExpiry.Value <= DateTime.Now))
-        {
-            throw new DomainException("Top-up expiry date is required and must be in the future when top-up amount is greater than 0");
-        }
-
-        // Business rule: All amounts must be >= 0 (already validated in FluentValidation but double-check)
-        if (request.ClntExpsBuyAmt < 0 || request.ClntExpsBuyAmtTopUp < 0 || request.PortfolioMargin < 0)
-        {
-            throw new DomainException("All exposure amounts must be greater than or equal to 0");
-        }
-    }
-
-    /// <summary>
     /// Applies business logic rules for client exposure updates
     /// </summary>
     private static void ApplyBusinessLogicRules(UpdateClientExposureRequest request)
     {
-        // Business rule: If top-up amount > 0, expiry date must be set and in the future
-        if (request.ClntExpsBuyAmtTopUp.HasValue && request.ClntExpsBuyAmtTopUp.Value > 0 &&
-            (!request.ClntExpsBuyAmtTopUpExpiry.HasValue || request.ClntExpsBuyAmtTopUpExpiry.Value <= DateTime.Now))
-        {
-            throw new DomainException("Top-up expiry date is required and must be in the future when top-up amount is greater than 0");
-        }
-
         // Business rule: All amounts must be >= 0 (already validated in FluentValidation but double-check)
-        if ((request.ClntExpsBuyAmt.HasValue && request.ClntExpsBuyAmt.Value < 0) ||
-            (request.ClntExpsBuyAmtTopUp.HasValue && request.ClntExpsBuyAmtTopUp.Value < 0) ||
-            (request.PortfolioMargin.HasValue && request.PortfolioMargin.Value < 0))
+        if ((request.ClntExpsBuyAmtTopUp.HasValue && request.ClntExpsBuyAmtTopUp.Value < 1))
         {
-            throw new DomainException("All exposure amounts must be greater than or equal to 0");
+            throw new DomainException("All exposure Top Up amounts must be greater than 0");
         }
     }
 

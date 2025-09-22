@@ -96,7 +96,6 @@ public static class DependencyInjection
         #endregion
 
         #region ClientExposure Validators
-        services.AddScoped<IValidator<CreateClientExposureRequest>, CreateClientExposureRequestValidator>();
         services.AddScoped<IValidator<UpdateClientExposureRequest>, UpdateClientExposureRequestValidator>();
         services.AddScoped<IValidator<DeleteClientExposureRequest>, DeleteClientExposureRequestValidator>();
         services.AddScoped<IValidator<AuthorizeClientExposureRequest>, AuthorizeClientExposureRequestValidator>();

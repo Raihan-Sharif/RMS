@@ -22,43 +22,6 @@ using SimRMS.Shared.Constants;
 namespace SimRMS.Application.Validators
 {
     /// <summary>
-    /// Validator for creating ClientExposure
-    /// </summary>
-    public class CreateClientExposureRequestValidator : AbstractValidator<CreateClientExposureRequest>
-    {
-        public CreateClientExposureRequestValidator()
-        {
-            RuleFor(x => x.ClntCode).ValidClientCode();
-            RuleFor(x => x.CoBrchCode).ValidCoBrchCode();
-
-            // Exposure amounts are required and must be >= 0
-            RuleFor(x => x.ClntExpsBuyAmt).ValidExposureAmount();
-            RuleFor(x => x.ClntExpsBuyAmtTopUp).ValidExposureAmount();
-            RuleFor(x => x.PortfolioMargin).ValidExposureAmount();
-
-            // Top-up expiry validation
-            RuleFor(x => x.ClntExpsBuyAmtTopUpExpiry).ValidTopUpExpiry();
-
-            // Business rule: If top-up amount > 0, expiry should be set
-            RuleFor(x => x)
-                .Must(HaveExpiryWhenTopUpSet)
-                .WithMessage("Top-up expiry date is required when top-up amount is greater than 0");
-
-            RuleFor(x => x.Remarks).ValidRemarks()
-                .When(x => !string.IsNullOrEmpty(x.Remarks));
-        }
-
-        private static bool HaveExpiryWhenTopUpSet(CreateClientExposureRequest request)
-        {
-            if (request.ClntExpsBuyAmtTopUp > 0)
-            {
-                return request.ClntExpsBuyAmtTopUpExpiry.HasValue;
-            }
-            return true;
-        }
-    }
-
-    /// <summary>
     /// Validator for updating ClientExposure
     /// </summary>
     public class UpdateClientExposureRequestValidator : AbstractValidator<UpdateClientExposureRequest>
@@ -68,20 +31,15 @@ namespace SimRMS.Application.Validators
             RuleFor(x => x.ClntCode).ValidClientCode();
             RuleFor(x => x.CoBrchCode).ValidCoBrchCode();
 
-            RuleFor(x => x.ClntExpsBuyAmt).ValidExposureAmountNullable()
-                .When(x => x.ClntExpsBuyAmt.HasValue);
 
             RuleFor(x => x.ClntExpsBuyAmtTopUp).ValidExposureAmountNullable()
                 .When(x => x.ClntExpsBuyAmtTopUp.HasValue);
 
-            RuleFor(x => x.PortfolioMargin).ValidExposureAmountNullable()
-                .When(x => x.PortfolioMargin.HasValue);
-
             // Top-up expiry validation
-            RuleFor(x => x.ClntExpsBuyAmtTopUpExpiry).ValidTopUpExpiry();
+            //RuleFor(x => x.ClntExpsBuyAmtTopUpExpiry).ValidTopUpExpiry();
 
-            RuleFor(x => x.Remarks).ValidRemarks()
-                .When(x => !string.IsNullOrEmpty(x.Remarks));
+            //RuleFor(x => x.Remarks).ValidRemarks()
+            //    .When(x => !string.IsNullOrEmpty(x.Remarks));
 
             RuleFor(x => x)
                 .Must(HaveAtLeastOneFieldToUpdate)
@@ -90,13 +48,8 @@ namespace SimRMS.Application.Validators
 
         private static bool HaveAtLeastOneFieldToUpdate(UpdateClientExposureRequest request)
         {
-            return request.ClntExpsBuyAmt.HasValue ||
-                   request.ClntExpsBuyAmtTopUp.HasValue ||
-                   request.ClntExpsWithLimit.HasValue ||
-                   request.ClntExpsWithShrLimit.HasValue ||
-                   request.PortfolioMargin.HasValue ||
-                   request.ClntExpsBuyAmtTopUpExpiry.HasValue ||
-                   !string.IsNullOrEmpty(request.Remarks);
+            return
+                   request.ClntExpsBuyAmtTopUp.HasValue;
         }
     }
 

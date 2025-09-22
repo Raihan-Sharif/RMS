@@ -12,7 +12,6 @@ namespace SimRMS.Application.Interfaces.Services
     {
         Task<PagedResult<ClientExposureDto>> GetClientExposureListAsync(int pageNumber = 1, int pageSize = 10, string? clntCode = null, string? coBrchCode = null, string? searchTerm = null, CancellationToken cancellationToken = default);
         Task<ClientExposureDto?> GetClientExposureByIdAsync(string clntCode, string coBrchCode, CancellationToken cancellationToken = default);
-        Task<ClientExposureDto> CreateClientExposureAsync(CreateClientExposureRequest request, CancellationToken cancellationToken = default);
         Task<ClientExposureDto> UpdateClientExposureAsync(string clntCode, string coBrchCode, UpdateClientExposureRequest request, CancellationToken cancellationToken = default);
         Task<bool> DeleteClientExposureAsync(string clntCode, string coBrchCode, DeleteClientExposureRequest request, CancellationToken cancellationToken = default);
         Task<bool> ClientExposureExistsAsync(string clntCode, string coBrchCode, CancellationToken cancellationToken = default);

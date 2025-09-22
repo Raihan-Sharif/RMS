@@ -33,30 +33,13 @@ namespace SimRMS.Application.Models.Requests
         public int PageSize { get; set; } = 10;
     }
 
-    public class CreateClientExposureRequest
-    {
-        public string ClntCode { get; set; } = null!;
-        public string CoBrchCode { get; set; } = null!;
-        public decimal ClntExpsBuyAmt { get; set; }
-        public decimal ClntExpsBuyAmtTopUp { get; set; }
-        public bool ClntExpsWithLimit { get; set; }
-        public bool ClntExpsWithShrLimit { get; set; }
-        public decimal PortfolioMargin { get; set; }
-        public DateTime? ClntExpsBuyAmtTopUpExpiry { get; set; }
-        public string? Remarks { get; set; }
-    }
-
     public class UpdateClientExposureRequest
     {
         public string ClntCode { get; set; } = null!;
         public string CoBrchCode { get; set; } = null!;
-        public decimal? ClntExpsBuyAmt { get; set; }
         public decimal? ClntExpsBuyAmtTopUp { get; set; }
-        public bool? ClntExpsWithLimit { get; set; }
-        public bool? ClntExpsWithShrLimit { get; set; }
-        public decimal? PortfolioMargin { get; set; }
-        public DateTime? ClntExpsBuyAmtTopUpExpiry { get; set; }
-        public string? Remarks { get; set; }
+        //public DateTime? ClntExpsBuyAmtTopUpExpiry { get; set; }
+        //public string? Remarks { get; set; }
     }
 
     public class DeleteClientExposureRequest

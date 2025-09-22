@@ -53,17 +53,15 @@ namespace SimRMS.Application.Models.DTOs
     }
 
     public class ClientExposureUpdateDto
-    {
-        public decimal? ClntExpsBuyAmt { get; set; }
+    {   public string ClntCode { get; set; } = null!;
+        public string CoBrchCode { get; set; } = null!;
+
         public decimal? ClntExpsBuyAmtTopUp { get; set; }
-        public bool? ClntExpsWithLimit { get; set; }
-        public bool? ClntExpsWithShrLimit { get; set; }
-        public decimal? PortfolioMargin { get; set; }
-        public DateTime? ClntExpsBuyAmtTopUpExpiry { get; set; }
+      //  public DateTime? ClntExpsBuyAmtTopUpExpiry { get; set; }
         public string IPAddress { get; set; } = string.Empty;
         public int MakerId { get; set; }
         public DateTime TransDt { get; set; }
-        public string? Remarks { get; set; }
+       // public string? Remarks { get; set; }
     }
 
     public class ClientExposureSearchDto

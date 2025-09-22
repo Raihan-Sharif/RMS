@@ -4103,7 +4103,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"groupCode\": 14,\n    \"groupDesc\": \"Principle Branch\",\n    \"groupType\": \"G\", // Always here Group Type goes 'G'\n    \"groupValue\": \"Test by Raihan\",\n    \"dateFrom\": \"2025-01-01T00:00:00\",\n    \"dateTo\": null,\n    \"users\": [\n        {\n            \"usrID\": \"EFTEST\",\n            \"viewOrder\": true,\n            \"placeOrder\": true,\n            \"viewClient\": true,\n            \"modifyOrder\": false\n        },\n        {\n            \"usrID\": \"USR004\",\n            \"viewOrder\": true,\n            \"placeOrder\": false,\n            \"viewClient\": true,\n            \"modifyOrder\": true\n        },\n        {\n            \"usrID\": \"USR017\",\n            \"viewOrder\": true,\n            \"placeOrder\": false,\n            \"viewClient\": false,\n            \"modifyOrder\": false\n        }\n    ],\n    \"remarks\": \"Updated to senior trading team with expiration date. DateTo set means group expires on 2025-12-31\"\n}"
+									"raw": "{\n    \"groupCode\": 14,\n    \"groupDesc\": \"Principle Branch\",\n    \"groupType\": \"G\", // Always here Group Type goes 'G'\n    \"groupValue\": \"Test by Raihan\",\n    \"dateFrom\": \"2025-01-01T00:00:00\",\n    \"dateTo\": null,\n    \"users\": [\n            {\n                \"groupCode\": 14,\n                \"usrID\": \"EFTEST\",\n                \"usrName\": \"EFTEST01\",\n                \"viewOrder\": true,\n                \"placeOrder\": true,\n                \"viewClient\": true\n            },\n            {\n                \"groupCode\": 14,\n                \"usrID\": \"USR004\",\n                \"usrName\": \"Aminul Haque\",\n                \"viewOrder\": true,\n                \"placeOrder\": false,\n                \"viewClient\": true,\n                \"modifyOrder\": true\n            },\n            {\n                \"groupCode\": 14,\n                \"usrID\": \"USR017\",\n                \"usrName\": \"adnan vai\",\n                \"viewOrder\": true,\n                \"placeOrder\": false,\n                \"viewClient\": false,\n                \"modifyOrder\": false\n\n            }\n        ],\n    \"remarks\": \"Testing to find the bug\"\n}"
 								},
 								"url": {
 									"raw": "{{base_url}}/api/v1/order-group/update-group/:groupCode",
@@ -4658,7 +4658,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"groupCode\": 15,\n  \"actionType\": 2,\n  \"isAuth\": 1,\n  \"remarks\": \"Order group approved - all user permissions validated and authorized\"\n}"
+											"raw": "{\n  \"groupCode\": 14,\n  \"actionType\": 2,\n  \"isAuth\": 1,\n  \"remarks\": \"Order group approved by Raihan\"\n}"
 										},
 										"url": {
 											"raw": "{{base_url}}/api/v1/order-group/wf/authorize/:groupCode",
@@ -4676,7 +4676,7 @@
 											"variable": [
 												{
 													"key": "groupCode",
-													"value": "15"
+													"value": "14"
 												}
 											]
 										}
@@ -5874,61 +5874,6 @@
 							"response": []
 						},
 						{
-							"name": "Create Client Exposure",
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true
-								}
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-Api-Version",
-										"value": "1",
-										"type": "text"
-									},
-									{
-										"key": "X-Handshake-Token",
-										"value": "{{handshake_token}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{auth_token}}",
-										"type": "text"
-									},
-									{
-										"key": "LB-Client-IP",
-										"value": "159.132.10.94",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"clntCode\": \"A11455\",                     // REQUIRED: Client Code (max 50 chars, alphanumeric only)\n  \"coBrchCode\": \"001\",                     // REQUIRED: Company Branch Code (max 6 chars, alphanumeric only)\n  \"clntExpsBuyAmt\": 1000000.50,            // REQUIRED: Client Buy Exposure Amount (>= 0, max 20 digits with 2 decimals)\n  \"clntExpsBuyAmtTopUp\": 50000.00,         // REQUIRED: Top-up Amount (>= 0, max 20 digits with 2 decimals)\n  \"clntExpsWithLimit\": true,               // REQUIRED: Enable exposure limit (boolean)\n  \"clntExpsWithShrLimit\": false,           // REQUIRED: Enable Sharia compliant limit (boolean)\n  \"portfolioMargin\": 25000.75,             // REQUIRED: Portfolio Margin (>= 0, max 20 digits with 2 decimals)\n  \"clntExpsBuyAmtTopUpExpiry\": \"2025-12-31T23:59:59\",  // OPTIONAL: Top-up expiry date (required if topUp > 0, must be future date)\n  \"remarks\": \"Initial client exposure setup\"  // OPTIONAL: Remarks (max 200 characters)\n}\n\n// VALIDATION RULES:\n// - clntCode: Required, max 50 chars, alphanumeric only\n// - coBrchCode: Required, max 6 chars, alphanumeric only  \n// - All amount fields: Required, >= 0, max precision 20,2\n// - Boolean fields: Required\n// - Top-up expiry: Required if clntExpsBuyAmtTopUp > 0, must be future date\n// - Remarks: Optional, max 200 characters"
-								},
-								"url": {
-									"raw": "{{base_url}}/api/v1/client-exposure/create-exposure",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"client-exposure",
-										"create-exposure"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Update Client Exposure",
 							"protocolProfileBehavior": {
 								"disabledSystemHeaders": {
@@ -5966,7 +5911,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  // NOTE: All fields are OPTIONAL for updates, provide only fields to update\n  // At least one field must be provided for update\n  \n  \"clntExpsBuyAmt\": 1200000.00,            // OPTIONAL: New buy exposure amount (>= 0, max 20 digits with 2 decimals)\n  \"clntExpsBuyAmtTopUp\": 75000.00,         // OPTIONAL: New top-up amount (>= 0, max 20 digits with 2 decimals)\n  \"clntExpsWithLimit\": true,               // OPTIONAL: Enable/disable exposure limit\n  \"clntExpsWithShrLimit\": true,            // OPTIONAL: Enable/disable Sharia compliant limit\n  \"portfolioMargin\": 30000.00,             // OPTIONAL: New portfolio margin (>= 0, max 20 digits with 2 decimals)\n  \"clntExpsBuyAmtTopUpExpiry\": \"2026-06-30T23:59:59\",  // OPTIONAL: New expiry date (must be future date)\n  \"remarks\": \"Updated exposure limits\"     // OPTIONAL: Update remarks (max 200 characters)\n}\n\n// VALIDATION RULES:\n// - At least one field must be provided for update\n// - All amount fields: >= 0, max precision 20,2 (if provided)\n// - Top-up expiry: Must be future date (if provided)\n// - Remarks: Max 200 characters (if provided)\n// - Route parameters (clntCode, coBrchCode) cannot be updated"
+									"raw": "{\n  \"clntCode\": \"A11455\",\n  \"coBrchCode\": \"001\",\n  \"pendingClntExpsBuyAmtTopUp\": 75000.00        // OPTIONAL: New top-up amount (>= 0, max 20 digits with 2 decimals)\n\n}\n\n// VALIDATION RULES:\n// - At least one field must be provided for update\n// - All amount fields: >= 0, max precision 20,2 (if provided)\n// - Route parameters (clntCode, coBrchCode) cannot be updated"
 								},
 								"url": {
 									"raw": "{{base_url}}/api/v1/client-exposure/update-exposure/:clntCode/:coBrchCode",
@@ -5984,7 +5929,7 @@
 									"variable": [
 										{
 											"key": "clntCode",
-											"value": "CLI001",
+											"value": "A11455",
 											"description": "Client Code (max 50 chars, alphanumeric)"
 										},
 										{
@@ -6274,7 +6219,7 @@
 								}
 							},
 							"request": {
-								"method": "POST",
+								"method": "PUT",
 								"header": [
 									{
 										"key": "Content-Type",
@@ -6493,7 +6438,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"username\": \"EFTEST02\",\n  \"password\": \"password\"\n}",
+							"raw": "{\n  \"username\": \"EFTEST03\",\n  \"password\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

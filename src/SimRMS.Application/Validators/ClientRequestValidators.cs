@@ -131,8 +131,8 @@ namespace SimRMS.Application.Validators
         {
             return ruleBuilder
                 .MaximumLength(1).WithMessage("Client status must be a single character")
-                .Must(x => string.IsNullOrEmpty(x) || x == "A" || x == "C" || x == "S")
-                .WithMessage("Client status must be A (Active), C (Cancel), or S (Suspended)");
+                .Must(x => string.IsNullOrEmpty(x) || x == "1" || x == "2" || x == "3")
+                .WithMessage("Client status must be 1 (Active), 2 (Cancel), or 3 (Suspended)");
         }
 
         public static IRuleBuilderOptions<T, string?> ValidTradingStatus<T>(this IRuleBuilder<T, string?> ruleBuilder)

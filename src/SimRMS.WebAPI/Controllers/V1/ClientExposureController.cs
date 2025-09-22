@@ -19,7 +19,7 @@ using System.ComponentModel.DataAnnotations;
 /// Modification History
 /// Author             Date         Description of Change
 /// -------------------------------------------------------------------
-/// [Missing]
+/// Raihan Sharif      18/Sep/2025   Exclude Create Operation that's handl from client create section in SP.
 ///
 /// ===================================================================
 /// </para>
@@ -111,36 +111,6 @@ public class ClientExposureController : BaseController
         }
 
         return Ok(exposure, "Client Exposure retrieved successfully");
-    }
-
-    /// <summary>
-    /// Create new Client Exposure
-    /// </summary>
-    /// <param name="request">Create request</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>Created client exposure information</returns>
-    [HttpPost("create-exposure")]
-    [ProducesResponseType(typeof(ApiResponse<ClientExposureDto>), 201)]
-    [ProducesResponseType(typeof(ApiResponse<object>), 400)]
-    [ProducesResponseType(typeof(ApiResponse<object>), 401)]
-    [ProducesResponseType(typeof(ApiResponse<object>), 409)]
-    public async Task<ActionResult<ApiResponse<ClientExposureDto>>> CreateClientExposure(
-        [FromBody, Required] CreateClientExposureRequest request,
-        CancellationToken cancellationToken = default)
-    {
-        _logger.LogInformation("Creating ClientExposure: {ClntCode}, {CoBrchCode}", request.ClntCode, request.CoBrchCode);
-
-        var createdExposure = await _clientExposureService.CreateClientExposureAsync(request, cancellationToken);
-
-        return CreatedAtAction(
-            nameof(GetClientExposureById),
-            new { clntCode = createdExposure.ClntCode, coBrchCode = createdExposure.CoBrchCode },
-            new ApiResponse<ClientExposureDto>
-            {
-                Success = true,
-                Data = createdExposure,
-                Message = "Client Exposure created successfully"
-            });
     }
 
     /// <summary>
