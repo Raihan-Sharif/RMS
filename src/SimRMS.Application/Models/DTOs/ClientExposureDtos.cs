@@ -24,6 +24,7 @@ namespace SimRMS.Application.Models.DTOs
         public string ClntCode { get; set; } = null!;
         public string ClntName { get; set; } = null!;
         public string CoBrchCode { get; set; } = null!;
+        public string? CoBrchDesc { get; set; }
         public decimal ClntExpsBuyAmt { get; set; }
         public decimal ClntExpsBuyAmtTopUp { get; set; }
         public bool ClntExpsWithLimit { get; set; }

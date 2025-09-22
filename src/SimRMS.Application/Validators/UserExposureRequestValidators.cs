@@ -30,39 +30,84 @@ namespace SimRMS.Application.Validators
         public CreateUserExposureRequestValidator()
         {
             RuleFor(x => x.UsrId).ValidUsrID();
-            
-            // Exposure amounts are required and must be >= 0
-            RuleFor(x => x.UsrExpsBuyAmt).ValidExposureAmount();
-            RuleFor(x => x.UsrExpsSellAmt).ValidExposureAmount();
-            RuleFor(x => x.UsrExpsTotalAmt).ValidExposureAmount();
-            
-            // Business rule: If buy and sell are both true, total must be false
+
+            // Business rule: Cannot have both Buy/Sell and Total enabled at the same time
             RuleFor(x => x)
                 .Must(NotHaveBothBuySellAndTotal)
                 .WithMessage("Cannot have both Buy/Sell exposure and Total exposure enabled at the same time");
-            
+
             // Business rule: At least one exposure type must be enabled
             RuleFor(x => x)
                 .Must(HaveAtLeastOneExposureType)
-                .WithMessage("At least one exposure type (Buy, Sell, or Total) must be enabled");
-            
+                .WithMessage("At least one exposure type (Buy/Sell, or Total) must be enabled");
+
+            // Business rule: When Buy/Sell are enabled, amounts must be > 0 and Total must be 0
+            RuleFor(x => x)
+                .Must(ValidateBuySellExposureAmounts)
+                .WithMessage("When Buy/Sell exposure is enabled, Buy and Sell amounts must be greater than 0 and Total amount must be 0");
+
+            // Business rule: When Total is enabled, amount must be > 0 and Buy/Sell must be 0
+            RuleFor(x => x)
+                .Must(ValidateTotalExposureAmount)
+                .WithMessage("When Total exposure is enabled, Total amount must be greater than 0 and Buy/Sell amounts must be 0");
+
+            // Basic exposure amount validations (>= 0)
+            RuleFor(x => x.UsrExpsBuyAmt).ValidExposureAmount();
+            RuleFor(x => x.UsrExpsSellAmt).ValidExposureAmount();
+            RuleFor(x => x.UsrExpsTotalAmt).ValidExposureAmount();
+
             RuleFor(x => x.Remarks).ValidRemarks()
                 .When(x => !string.IsNullOrEmpty(x.Remarks));
         }
 
         private static bool NotHaveBothBuySellAndTotal(CreateUserExposureRequest request)
         {
-            // If both buy and sell are checked, total should not be checked
-            if (request.UsrExpsCheckBuy && request.UsrExpsCheckSell)
-            {
-                return !request.UsrExpsCheckTotal;
-            }
-            return true;
+            // Cannot have both Buy/Sell exposure and Total exposure enabled
+            var buySellEnabled = request.UsrExpsCheckBuy || request.UsrExpsCheckSell;
+            var totalEnabled = request.UsrExpsCheckTotal;
+
+            return !(buySellEnabled && totalEnabled);
         }
 
         private static bool HaveAtLeastOneExposureType(CreateUserExposureRequest request)
         {
             return request.UsrExpsCheckBuy || request.UsrExpsCheckSell || request.UsrExpsCheckTotal;
+        }
+
+        private static bool ValidateBuySellExposureAmounts(CreateUserExposureRequest request)
+        {
+            // If any Buy/Sell exposure is enabled
+            if (request.UsrExpsCheckBuy || request.UsrExpsCheckSell)
+            {
+                // When Buy is enabled, amount must be > 0
+                if (request.UsrExpsCheckBuy && request.UsrExpsBuyAmt <= 0)
+                    return false;
+
+                // When Sell is enabled, amount must be > 0
+                if (request.UsrExpsCheckSell && request.UsrExpsSellAmt <= 0)
+                    return false;
+
+                // Total amount must be 0 when Buy/Sell is enabled
+                if (request.UsrExpsTotalAmt != 0)
+                    return false;
+            }
+            return true;
+        }
+
+        private static bool ValidateTotalExposureAmount(CreateUserExposureRequest request)
+        {
+            // If Total exposure is enabled
+            if (request.UsrExpsCheckTotal)
+            {
+                // Total amount must be > 0
+                if (request.UsrExpsTotalAmt <= 0)
+                    return false;
+
+                // Buy and Sell amounts must be 0 when Total is enabled
+                if (request.UsrExpsBuyAmt != 0 || request.UsrExpsSellAmt != 0)
+                    return false;
+            }
+            return true;
         }
     }
 
@@ -74,22 +119,47 @@ namespace SimRMS.Application.Validators
         public UpdateUserExposureRequestValidator()
         {
             RuleFor(x => x.UsrId).ValidUsrID();
-            
-            RuleFor(x => x.UsrExpsBuyAmt).ValidExposureAmountNullable()
-                .When(x => x.UsrExpsBuyAmt.HasValue);
-            
-            RuleFor(x => x.UsrExpsSellAmt).ValidExposureAmountNullable()
-                .When(x => x.UsrExpsSellAmt.HasValue);
-            
-            RuleFor(x => x.UsrExpsTotalAmt).ValidExposureAmountNullable()
-                .When(x => x.UsrExpsTotalAmt.HasValue);
-            
-            RuleFor(x => x.Remarks).ValidRemarks()
-                .When(x => !string.IsNullOrEmpty(x.Remarks));
 
             RuleFor(x => x)
                 .Must(HaveAtLeastOneFieldToUpdate)
                 .WithMessage("At least one field must be provided for update");
+
+            // Business rule: Cannot have both Buy/Sell and Total enabled at the same time
+            RuleFor(x => x)
+                .Must(NotHaveBothBuySellAndTotalUpdate)
+                .WithMessage("Cannot have both Buy/Sell exposure and Total exposure enabled at the same time")
+                .When(x => HasExposureCheckboxUpdates(x));
+
+            // Business rule: At least one exposure type must be enabled when updating checkboxes
+            RuleFor(x => x)
+                .Must(HaveAtLeastOneExposureTypeUpdate)
+                .WithMessage("At least one exposure type (Buy/Sell, or Total) must be enabled")
+                .When(x => HasExposureCheckboxUpdates(x));
+
+            // Business rule: When Buy/Sell are enabled, amounts must be > 0 and Total must be 0
+            RuleFor(x => x)
+                .Must(ValidateBuySellExposureAmountsUpdate)
+                .WithMessage("When Buy/Sell exposure is enabled, Buy and Sell amounts must be greater than 0 and Total amount must be 0")
+                .When(x => HasExposureUpdates(x));
+
+            // Business rule: When Total is enabled, amount must be > 0 and Buy/Sell must be 0
+            RuleFor(x => x)
+                .Must(ValidateTotalExposureAmountUpdate)
+                .WithMessage("When Total exposure is enabled, Total amount must be greater than 0 and Buy/Sell amounts must be 0")
+                .When(x => HasExposureUpdates(x));
+
+            // Basic exposure amount validations (>= 0)
+            RuleFor(x => x.UsrExpsBuyAmt).ValidExposureAmountNullable()
+                .When(x => x.UsrExpsBuyAmt.HasValue);
+
+            RuleFor(x => x.UsrExpsSellAmt).ValidExposureAmountNullable()
+                .When(x => x.UsrExpsSellAmt.HasValue);
+
+            RuleFor(x => x.UsrExpsTotalAmt).ValidExposureAmountNullable()
+                .When(x => x.UsrExpsTotalAmt.HasValue);
+
+            RuleFor(x => x.Remarks).ValidRemarks()
+                .When(x => !string.IsNullOrEmpty(x.Remarks));
         }
 
         private static bool HaveAtLeastOneFieldToUpdate(UpdateUserExposureRequest request)
@@ -102,6 +172,79 @@ namespace SimRMS.Application.Validators
                    request.UsrExpsTotalAmt.HasValue ||
                    request.UsrExpsWithShrLimit.HasValue ||
                    !string.IsNullOrEmpty(request.Remarks);
+        }
+
+        private static bool HasExposureCheckboxUpdates(UpdateUserExposureRequest request)
+        {
+            return request.UsrExpsCheckBuy.HasValue ||
+                   request.UsrExpsCheckSell.HasValue ||
+                   request.UsrExpsCheckTotal.HasValue;
+        }
+
+        private static bool HasExposureUpdates(UpdateUserExposureRequest request)
+        {
+            return request.UsrExpsCheckBuy.HasValue ||
+                   request.UsrExpsBuyAmt.HasValue ||
+                   request.UsrExpsCheckSell.HasValue ||
+                   request.UsrExpsSellAmt.HasValue ||
+                   request.UsrExpsCheckTotal.HasValue ||
+                   request.UsrExpsTotalAmt.HasValue;
+        }
+
+        private static bool NotHaveBothBuySellAndTotalUpdate(UpdateUserExposureRequest request)
+        {
+            // For updates, we only check if checkbox values are being updated
+            var buyEnabled = request.UsrExpsCheckBuy == true;
+            var sellEnabled = request.UsrExpsCheckSell == true;
+            var totalEnabled = request.UsrExpsCheckTotal == true;
+
+            var buySellEnabled = buyEnabled || sellEnabled;
+            return !(buySellEnabled && totalEnabled);
+        }
+
+        private static bool HaveAtLeastOneExposureTypeUpdate(UpdateUserExposureRequest request)
+        {
+            // For updates, check if at least one checkbox is being set to true
+            return (request.UsrExpsCheckBuy == true) ||
+                   (request.UsrExpsCheckSell == true) ||
+                   (request.UsrExpsCheckTotal == true);
+        }
+
+        private static bool ValidateBuySellExposureAmountsUpdate(UpdateUserExposureRequest request)
+        {
+            // If any Buy/Sell exposure is being enabled
+            if ((request.UsrExpsCheckBuy == true) || (request.UsrExpsCheckSell == true))
+            {
+                // When Buy is enabled, amount must be > 0 (if amount is being updated)
+                if (request.UsrExpsCheckBuy == true && request.UsrExpsBuyAmt.HasValue && request.UsrExpsBuyAmt <= 0)
+                    return false;
+
+                // When Sell is enabled, amount must be > 0 (if amount is being updated)
+                if (request.UsrExpsCheckSell == true && request.UsrExpsSellAmt.HasValue && request.UsrExpsSellAmt <= 0)
+                    return false;
+
+                // Total amount must be 0 when Buy/Sell is enabled (if total amount is being updated)
+                if (request.UsrExpsTotalAmt.HasValue && request.UsrExpsTotalAmt != 0)
+                    return false;
+            }
+            return true;
+        }
+
+        private static bool ValidateTotalExposureAmountUpdate(UpdateUserExposureRequest request)
+        {
+            // If Total exposure is being enabled
+            if (request.UsrExpsCheckTotal == true)
+            {
+                // Total amount must be > 0 (if amount is being updated)
+                if (request.UsrExpsTotalAmt.HasValue && request.UsrExpsTotalAmt <= 0)
+                    return false;
+
+                // Buy and Sell amounts must be 0 when Total is enabled (if amounts are being updated)
+                if ((request.UsrExpsBuyAmt.HasValue && request.UsrExpsBuyAmt != 0) ||
+                    (request.UsrExpsSellAmt.HasValue && request.UsrExpsSellAmt != 0))
+                    return false;
+            }
+            return true;
         }
     }
 
