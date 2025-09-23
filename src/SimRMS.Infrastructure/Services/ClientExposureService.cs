@@ -260,12 +260,8 @@ public class ClientExposureService : IClientExposureService
                 ["Action"] = (byte)ActionTypeEnum.DELETE,
                 ["ClntCode"] = clntCode,
                 ["CoBrchCode"] = coBrchCode,
-                ["ClntExpsBuyAmt"] = (object)DBNull.Value,
-                ["ClntExpsBuyAmtTopUp"] = (object)DBNull.Value,
-                ["ClntExpsWithLimit"] = (object)DBNull.Value,
-                ["ClntExpsWithShrLimit"] = (object)DBNull.Value,
-                ["PortfolioMargin"] = (object)DBNull.Value,
-                ["ClntExpsBuyAmtTopUpExpiry"] = (object)DBNull.Value,
+                ["PendingClntExpsBuyAmtTopUp"] = (object)DBNull.Value,
+
                 ["IPAddress"] = _currentUserService.GetClientIPAddress(),
                 ["MakerId"] = _currentUserService.UserId,
                 ["ActionDt"] = DateTime.Now,
@@ -277,7 +273,6 @@ public class ClientExposureService : IClientExposureService
                 ["IsAuth"] = (object)DBNull.Value, // SP handles deletion logic
                 ["AuthLevel"] = (object)DBNull.Value,
                 ["IsDel"] = (object)DBNull.Value, // SP sets this to 1
-                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
                 ["RowsAffected"] = 0 // OUTPUT parameter
             };
 
