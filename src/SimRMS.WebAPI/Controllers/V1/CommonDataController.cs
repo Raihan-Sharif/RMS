@@ -175,4 +175,64 @@ public class CommonDataController : BaseController
         var clients = await _commonDataService.GetClientListAsync(cancellationToken);
         return Ok(clients, "Client list retrieved successfully");
     }
+
+    /// <summary>
+    /// Get list of stock exchanges for dropdown/selection
+    /// </summary>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>List of stock exchanges</returns>
+    [HttpGet("stock-exchange-list")]
+    [ProducesResponseType(typeof(ApiResponse<IEnumerable<StockExchangeListDto>>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 400)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 401)]
+    public async Task<ActionResult<ApiResponse<IEnumerable<StockExchangeListDto>>>> GetStockExchangeList(
+        CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting stock exchange list");
+
+        var stockExchanges = await _commonDataService.GetStockExchangeListAsync(cancellationToken);
+        return Ok(stockExchanges, "Stock exchange list retrieved successfully");
+    }
+
+    /// <summary>
+    /// Get list of stock boards for dropdown/selection
+    /// </summary>
+    /// <param name="exchangeCode">Optional filter by exchange code</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>List of stock boards</returns>
+    [HttpGet("stock-board-list")]
+    [ProducesResponseType(typeof(ApiResponse<IEnumerable<StockBoardListDto>>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 400)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 401)]
+    public async Task<ActionResult<ApiResponse<IEnumerable<StockBoardListDto>>>> GetStockBoardList(
+        [FromQuery] string? exchangeCode = null,
+        CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting stock board list with exchangeCode filter: {ExchangeCode}", exchangeCode);
+
+        var stockBoards = await _commonDataService.GetStockBoardListAsync(exchangeCode, cancellationToken);
+        return Ok(stockBoards, "Stock board list retrieved successfully");
+    }
+
+    /// <summary>
+    /// Get list of stock board markets for dropdown/selection
+    /// </summary>
+    /// <param name="exchangeCode">Optional filter by exchange code</param>
+    /// <param name="boardCode">Optional filter by board code</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>List of stock board markets</returns>
+    [HttpGet("stock-board-market-list")]
+    [ProducesResponseType(typeof(ApiResponse<IEnumerable<StockBoardMarketListDto>>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 400)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 401)]
+    public async Task<ActionResult<ApiResponse<IEnumerable<StockBoardMarketListDto>>>> GetStockBoardMarketList(
+        [FromQuery] string? exchangeCode = null,
+        [FromQuery] string? boardCode = null,
+        CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting stock board market list with exchangeCode: {ExchangeCode}, boardCode: {BoardCode}", exchangeCode, boardCode);
+
+        var stockBoardMarkets = await _commonDataService.GetStockBoardMarketListAsync(exchangeCode, boardCode, cancellationToken);
+        return Ok(stockBoardMarkets, "Stock board market list retrieved successfully");
+    }
 }

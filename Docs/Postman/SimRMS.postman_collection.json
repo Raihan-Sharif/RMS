@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "56234e4e-98a2-4fdc-8fd4-b8b6cfce340a",
+		"_postman_id": "4a8f2f51-2564-4bd5-b231-6d958cc4c320",
 		"name": "SimRMS",
 		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -2388,6 +2388,127 @@
 								"v1",
 								"common-data",
 								"client-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Stock Exchange List",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Handshake-Token",
+								"value": "{{handshake_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/common-data/stock-exchange-list",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"common-data",
+								"stock-exchange-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Stock Board List",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Handshake-Token",
+								"value": "{{handshake_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/common-data/stock-board-list?exchangeCode=DSE",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"common-data",
+								"stock-board-list"
+							],
+							"query": [
+								{
+									"key": "exchangeCode",
+									"value": "DSE",
+									"description": "Optional filter by exchange code"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Stock Board Market List",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Handshake-Token",
+								"value": "{{handshake_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/common-data/stock-board-market-list?exchangeCode=DSE&boardCode=100",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"common-data",
+								"stock-board-market-list"
+							],
+							"query": [
+								{
+									"key": "exchangeCode",
+									"value": "DSE",
+									"description": "Optional filter by exchange code"
+								},
+								{
+									"key": "boardCode",
+									"value": "100",
+									"description": "Optional filter by board code"
+								}
 							]
 						}
 					},
@@ -5980,7 +6101,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"remarks\": \"Deleting client exposure as per compliance requirements\"  // OPTIONAL: Deletion reason (max 200 characters)\n}\n\n// VALIDATION RULES:\n// - Body is optional - can send empty body or just remarks\n// - Remarks: Optional, max 200 characters\n// - This performs soft delete, not permanent deletion"
+									"raw": ""
 								},
 								"url": {
 									"raw": "{{base_url}}/api/v1/client-exposure/delete-exposure/:clntCode/:coBrchCode",
@@ -5998,12 +6119,12 @@
 									"variable": [
 										{
 											"key": "clntCode",
-											"value": "CLI001",
+											"value": "Y4440",
 											"description": "Client Code (max 50 chars, alphanumeric)"
 										},
 										{
 											"key": "coBrchCode",
-											"value": "001",
+											"value": "011",
 											"description": "Company Branch Code (max 6 chars, alphanumeric)"
 										}
 									]

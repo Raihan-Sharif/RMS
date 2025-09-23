@@ -49,3 +49,24 @@ public class ClientListDto
     public string BranchName { get; set; } = string.Empty;
     public string ClntCDSNo { get; set; } = string.Empty;
 }
+
+public class StockExchangeListDto
+{
+    public string XchgCode { get; set; } = string.Empty;
+    public string XchgName { get; set; } = string.Empty;
+}
+
+public class StockBoardListDto
+{
+    public string XchgCode { get; set; } = string.Empty;
+    public string BrdCode { get; set; } = string.Empty;
+    public string BrdDesc { get; set; } = string.Empty;
+}
+
+public class StockBoardMarketListDto
+{
+    public string XchgCode { get; set; } = string.Empty;
+    public string BrdCode { get; set; } = string.Empty;
+    public string SectCode { get; set; } = string.Empty;
+    public string SectDesc { get; set; } = string.Empty;
+}

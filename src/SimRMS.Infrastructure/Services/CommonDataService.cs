@@ -243,4 +243,78 @@ public class CommonDataService : ICommonDataService
             throw;
         }
     }
+
+    public async Task<IEnumerable<StockExchangeListDto>> GetStockExchangeListAsync(CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting stock exchange list");
+
+        var sql = @"
+            SELECT XchgCode, XchgName
+            FROM MstStkXchg
+            WHERE Currency = 'BDT'
+            ORDER BY XchgCode";
+
+        try
+        {
+            var result = await _repository.QueryAsync<StockExchangeListDto>(sql, null, false, cancellationToken);
+            _logger.LogInformation("Retrieved {Count} stock exchanges", result.Count());
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting stock exchange list");
+            throw;
+        }
+    }
+
+    public async Task<IEnumerable<StockBoardListDto>> GetStockBoardListAsync(string? exchangeCode = null, CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting stock board list with exchangeCode filter: {ExchangeCode}", exchangeCode);
+
+        var sql = @"
+            SELECT XchgCode, BrdCode, BrdDesc
+            FROM MstStkBrd
+            WHERE (XchgCode = @ExchangeCode OR @ExchangeCode IS NULL)
+            ORDER BY XchgCode, BrdCode";
+
+        var parameters = new { ExchangeCode = exchangeCode };
+
+        try
+        {
+            var result = await _repository.QueryAsync<StockBoardListDto>(sql, parameters, false, cancellationToken);
+            _logger.LogInformation("Retrieved {Count} stock boards", result.Count());
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting stock board list");
+            throw;
+        }
+    }
+
+    public async Task<IEnumerable<StockBoardMarketListDto>> GetStockBoardMarketListAsync(string? exchangeCode = null, string? boardCode = null, CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting stock board market list with exchangeCode: {ExchangeCode}, boardCode: {BoardCode}", exchangeCode, boardCode);
+
+        var sql = @"
+            SELECT XchgCode, BrdCode, SectCode, SectDesc
+            FROM MstStkSect
+            WHERE (XchgCode = @ExchangeCode OR @ExchangeCode IS NULL)
+                AND (BrdCode = @BoardCode OR @BoardCode IS NULL)
+            ORDER BY XchgCode, BrdCode, SectCode";
+
+        var parameters = new { ExchangeCode = exchangeCode, BoardCode = boardCode };
+
+        try
+        {
+            var result = await _repository.QueryAsync<StockBoardMarketListDto>(sql, parameters, false, cancellationToken);
+            _logger.LogInformation("Retrieved {Count} stock board markets", result.Count());
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting stock board market list");
+            throw;
+        }
+    }
 }
