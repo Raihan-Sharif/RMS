@@ -74,6 +74,9 @@ namespace SimRMS.Infrastructure
             // client exposure service
             services.AddScoped<IClientExposureService, ClientExposureService>();
 
+            // stock service
+            services.AddScoped<IStockService, StockService>();
+
             // Common data service for read-only operations
             services.AddScoped<ICommonDataService, CommonDataService>();
 

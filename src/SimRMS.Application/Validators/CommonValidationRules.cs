@@ -347,5 +347,136 @@ namespace SimRMS.Application.Validators
                 .Matches("^[0-9+()-]+$").WithMessage("User mobile can only contain numbers and special characters like +, -, (, )");
         }
         #endregion
+
+        #region Stock Validations
+
+        /// <summary>
+        /// Validates Stock Code format and length
+        /// </summary>
+        public static IRuleBuilderOptions<T, string> ValidStkCode<T>(this IRuleBuilder<T, string> ruleBuilder)
+        {
+            return ruleBuilder
+                .NotEmpty().WithMessage("Stock code is required")
+                .MaximumLength(20).WithMessage("Stock code cannot exceed 20 characters")
+                .Matches("^[A-Za-z0-9._-]+$").WithMessage("Stock code can only contain alphanumeric characters, dots, hyphens, and underscores");
+        }
+
+        /// <summary>
+        /// Validates Stock Board Code format and length
+        /// </summary>
+        public static IRuleBuilderOptions<T, string> ValidStkBrdCode<T>(this IRuleBuilder<T, string> ruleBuilder)
+        {
+            return ruleBuilder
+                .NotEmpty().WithMessage("Stock board code is required")
+                .MaximumLength(3).WithMessage("Stock board code cannot exceed 3 characters")
+                .Matches("^[A-Z0-9]+$").WithMessage("Stock board code can only contain uppercase letters and numbers");
+        }
+
+        /// <summary>
+        /// Validates Stock Sector Code format and length
+        /// </summary>
+        public static IRuleBuilderOptions<T, string> ValidStkSectCode<T>(this IRuleBuilder<T, string> ruleBuilder)
+        {
+            return ruleBuilder
+                .NotEmpty().WithMessage("Stock sector code is required")
+                .MaximumLength(3).WithMessage("Stock sector code cannot exceed 3 characters")
+                .Matches("^[A-Z0-9]+$").WithMessage("Stock sector code can only contain uppercase letters and numbers");
+        }
+
+        /// <summary>
+        /// Validates Stock Long Name format and length
+        /// </summary>
+        public static IRuleBuilderOptions<T, string> ValidStkLName<T>(this IRuleBuilder<T, string> ruleBuilder)
+        {
+            return ruleBuilder
+                .NotEmpty().WithMessage("Stock long name is required")
+                .MaximumLength(100).WithMessage("Stock long name cannot exceed 100 characters");
+        }
+
+        /// <summary>
+        /// Validates Stock Short Name format and length
+        /// </summary>
+        public static IRuleBuilderOptions<T, string> ValidStkSName<T>(this IRuleBuilder<T, string> ruleBuilder)
+        {
+            return ruleBuilder
+                .NotEmpty().WithMessage("Stock short name is required")
+                .MaximumLength(100).WithMessage("Stock short name cannot exceed 100 characters");
+        }
+
+        /// <summary>
+        /// Validates ISIN format and length
+        /// </summary>
+        public static IRuleBuilderOptions<T, string?> ValidISIN<T>(this IRuleBuilder<T, string?> ruleBuilder)
+        {
+            return ruleBuilder
+                .MaximumLength(12).WithMessage("ISIN cannot exceed 12 characters")
+                .Matches("^[A-Z]{2}[A-Z0-9]{9}[0-9]$").WithMessage("ISIN must be in valid format (2 letters + 9 alphanumeric + 1 digit)")
+                .When(x => !string.IsNullOrEmpty(x?.ToString()));
+        }
+
+        /// <summary>
+        /// Validates Currency Code format and length
+        /// </summary>
+        public static IRuleBuilderOptions<T, string?> ValidCurrency<T>(this IRuleBuilder<T, string?> ruleBuilder)
+        {
+            return ruleBuilder
+                .MaximumLength(5).WithMessage("Currency cannot exceed 5 characters")
+                .Matches("^[A-Z]{3}$").WithMessage("Currency must be a valid 3-letter ISO code")
+                .When(x => !string.IsNullOrEmpty(x?.ToString()));
+        }
+
+        /// <summary>
+        /// Validates Security Type format and length
+        /// </summary>
+        public static IRuleBuilderOptions<T, string?> ValidSecurityType<T>(this IRuleBuilder<T, string?> ruleBuilder)
+        {
+            return ruleBuilder
+                .MaximumLength(1).WithMessage("Security type cannot exceed 1 character")
+                .Must(x => string.IsNullOrEmpty(x) || "EBFWD".Contains(x))
+                .WithMessage("Security type must be E (Equity), B (Bond), F (Fund), W (Warrant), or D (Derivative)")
+                .When(x => !string.IsNullOrEmpty(x?.ToString()));
+        }
+
+        /// <summary>
+        /// Validates Syariah compliance flag
+        /// </summary>
+        public static IRuleBuilderOptions<T, string?> ValidSyariahFlag<T>(this IRuleBuilder<T, string?> ruleBuilder)
+        {
+            return ruleBuilder
+                .MaximumLength(1).WithMessage("Syariah flag cannot exceed 1 character")
+                .Must(x => string.IsNullOrEmpty(x) || x == "Y" || x == "N")
+                .WithMessage("Syariah flag must be Y (Yes) or N (No)")
+                .When(x => !string.IsNullOrEmpty(x?.ToString()));
+        }
+
+        /// <summary>
+        /// Validates Stock Lot size
+        /// </summary>
+        public static IRuleBuilderOptions<T, int?> ValidStkLot<T>(this IRuleBuilder<T, int?> ruleBuilder)
+        {
+            return ruleBuilder
+                .GreaterThan(0).WithMessage("Stock lot must be greater than 0");
+        }
+
+        /// <summary>
+        /// Validates Stock price amounts for >= 0 and proper decimal format
+        /// </summary>
+        public static IRuleBuilderOptions<T, decimal?> ValidStockPrice<T>(this IRuleBuilder<T, decimal?> ruleBuilder)
+        {
+            return ruleBuilder
+                .GreaterThanOrEqualTo(0).WithMessage("Stock price must be greater than or equal to 0")
+                .PrecisionScale(18, 6, true).WithMessage("Stock price can have maximum 18 digits with 6 decimal places");
+        }
+
+        /// <summary>
+        /// Validates Stock volume for >= 0
+        /// </summary>
+        public static IRuleBuilderOptions<T, long?> ValidStockVolume<T>(this IRuleBuilder<T, long?> ruleBuilder)
+        {
+            return ruleBuilder
+                .GreaterThanOrEqualTo(0).WithMessage("Stock volume must be greater than or equal to 0");
+        }
+
+        #endregion
     }
 }

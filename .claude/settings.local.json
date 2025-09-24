@@ -44,7 +44,9 @@
       "Bash(grep:*)",
       "Read(//d/SP,FN and Query/RMS/Client Exposure/**)",
       "Bash(rg:*)",
-      "Bash(del client-exposure-postman-section.json)"
+      "Bash(del client-exposure-postman-section.json)",
+      "Read(//d/SP,FN and Query/RMS/Stock Info/**)",
+      "Bash(del \"C:\\Users\\raihan.sharif\\Desktop\\RMS\\stock-postman-section.json\")"
     ],
     "deny": []
   }

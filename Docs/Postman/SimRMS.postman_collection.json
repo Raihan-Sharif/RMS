@@ -6407,6 +6407,556 @@
 			]
 		},
 		{
+			"name": "Stock",
+			"item": [
+				{
+					"name": "CRUD Operations",
+					"item": [
+						{
+							"name": "Get All Stocks",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock/stock-list?pageNumber=1&pageSize=10&xchgCode=&stkCode=&searchTerm=&sortColumn=StkCode&sortDirection=ASC",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock",
+										"stock-list"
+									],
+									"query": [
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "xchgCode",
+											"value": ""
+										},
+										{
+											"key": "stkCode",
+											"value": ""
+										},
+										{
+											"key": "searchTerm",
+											"value": ""
+										},
+										{
+											"key": "sortColumn",
+											"value": "StkCode"
+										},
+										{
+											"key": "sortDirection",
+											"value": "ASC"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success Response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-Api-Version",
+												"value": "1",
+												"type": "text"
+											},
+											{
+												"key": "X-Handshake-Token",
+												"value": "{{handshake_token}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{auth_token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/api/v1/stock/stock-list?pageNumber=1&pageSize=10",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"stock",
+												"stock-list"
+											],
+											"query": [
+												{
+													"key": "pageNumber",
+													"value": "1"
+												},
+												{
+													"key": "pageSize",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"success\": true,\n  \"message\": \"Stocks retrieved successfully\",\n  \"data\": [\n    {\n      \"xchgCode\": \"DSE\",\n      \"stkBrdCode\": \"MB\",\n      \"brdDesc\": \"Main Board\",\n      \"stkSectCode\": \"A\",\n      \"sectDesc\": \"Banking\",\n      \"stkCode\": \"EBL\",\n      \"stkLName\": \"Eastern Bank Limited\",\n      \"stkSName\": \"EBL\",\n      \"isin\": \"BD0001234567\",\n      \"currency\": \"BDT\",\n      \"securityType\": \"E\",\n      \"stkIsSyariah\": \"Y\",\n      \"stkLot\": 100,\n      \"stkParValue\": 10.00,\n      \"stkLastDonePrice\": 85.50,\n      \"stkClosePrice\": 84.75,\n      \"stkRefPrc\": 85.00,\n      \"stkUpperLmtPrice\": 93.50,\n      \"stkLowerLmtPrice\": 76.50,\n      \"yearHigh\": 95.00,\n      \"yearLow\": 65.00,\n      \"stkVolumeTraded\": 150000,\n      \"lastUpdateDate\": \"2025-09-23T10:30:00\",\n      \"listingDate\": \"2010-01-15T00:00:00\",\n      \"isSyariahDescription\": \"Yes\",\n      \"securityTypeDescription\": \"Equity\",\n      \"recordStatus\": \"Active\",\n      \"actionDescription\": \"No Action\",\n      \"priceChangePercent\": 0.88,\n      \"daysSinceListing\": 5729,\n      \"marketValue\": 12825000000.00\n    }\n  ],\n  \"pagination\": {\n    \"totalCount\": 1,\n    \"pageNumber\": 1,\n    \"pageSize\": 10,\n    \"totalPages\": 1\n  }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Stock By Key",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock/stock-by-key/DSE/EBL",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock",
+										"stock-by-key",
+										"DSE",
+										"EBL"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Stock",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"xchgCode\": \"DSE\",\n  \"stkBrdCode\": \"MB\",\n  \"stkSectCode\": \"A\",\n  \"stkCode\": \"NEWSTK\",\n  \"stkLName\": \"New Stock Limited\",\n  \"stkSName\": \"NEWSTK\",\n  \"isin\": \"BD0009876543\",\n  \"currency\": \"BDT\",\n  \"securityType\": \"E\",\n  \"stkIsSyariah\": \"N\",\n  \"stkLot\": 100,\n  \"stkParValue\": 10.00,\n  \"stkLastDonePrice\": 25.50,\n  \"stkClosePrice\": 25.00,\n  \"stkRefPrc\": 25.25,\n  \"stkUpperLmtPrice\": 27.75,\n  \"stkLowerLmtPrice\": 22.75,\n  \"yearHigh\": 30.00,\n  \"yearLow\": 18.00,\n  \"stkVolumeTraded\": 50000,\n  \"listingDate\": \"2023-06-15T00:00:00\",\n  \"remarks\": \"New stock listing\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock/create-stock",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock",
+										"create-stock"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Stock",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"stkLName\": \"Updated Stock Name Limited\",\n  \"stkSName\": \"UPDATED\",\n  \"stkLastDonePrice\": 26.75,\n  \"stkClosePrice\": 26.50,\n  \"stkRefPrc\": 26.60,\n  \"stkVolumeTraded\": 75000,\n  \"remarks\": \"Stock information updated\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock/update-stock/DSE/NEWSTK",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock",
+										"update-stock",
+										"DSE",
+										"NEWSTK"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Stock",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"remarks\": \"Stock deletion requested\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock/delete-stock/DSE/NEWSTK",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock",
+										"delete-stock",
+										"DSE",
+										"NEWSTK"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Check Stock Exists",
+							"request": {
+								"method": "HEAD",
+								"header": [
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock/stock-exists/DSE/EBL",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock",
+										"stock-exists",
+										"DSE",
+										"EBL"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Workflow",
+					"item": [
+						{
+							"name": "Get Unauthorized/Denied Stocks",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock/wf/unauth-denied-list?pageNumber=1&pageSize=10&searchTerm=&isAuth=0&sortColumn=StkCode&sortDirection=ASC",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock",
+										"wf",
+										"unauth-denied-list"
+									],
+									"query": [
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "searchTerm",
+											"value": ""
+										},
+										{
+											"key": "isAuth",
+											"value": "0",
+											"description": "0=Unauthorized, 2=Denied"
+										},
+										{
+											"key": "sortColumn",
+											"value": "StkCode"
+										},
+										{
+											"key": "sortDirection",
+											"value": "ASC"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Authorize/Deny Stock",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"actionType\": 2,\n  \"isAuth\": 1,\n  \"remarks\": \"Stock approved for trading\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock/wf/authorize/DSE/NEWSTK",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock",
+										"wf",
+										"authorize",
+										"DSE",
+										"NEWSTK"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "Token & Login",
 			"item": [
 				{
