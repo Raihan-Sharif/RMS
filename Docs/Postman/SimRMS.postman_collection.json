@@ -1,10 +1,11 @@
 {
 	"info": {
-		"_postman_id": "4a8f2f51-2564-4bd5-b231-6d958cc4c320",
+		"_postman_id": "2820846c-9d8c-4dd0-9930-22dd8d30b967",
 		"name": "SimRMS",
 		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29700469"
+		"_exporter_id": "29700469",
+		"_collection_link": "https://dd5555-8190.postman.co/workspace/RMS~e831403f-5c1c-492b-b213-42fb5f089c5d/collection/29700469-2820846c-9d8c-4dd0-9930-22dd8d30b967?action=share&source=collection_link&creator=29700469"
 	},
 	"item": [
 		{
@@ -2379,7 +2380,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/common-data/client-list",
+							"raw": "{{base_url}}/api/v1/common-data/client-list?branchCode=",
 							"host": [
 								"{{base_url}}"
 							],
@@ -2388,6 +2389,13 @@
 								"v1",
 								"common-data",
 								"client-list"
+							],
+							"query": [
+								{
+									"key": "branchCode",
+									"value": "",
+									"description": "Optional branch code filter - if provided, returns only clients for that branch; otherwise returns all clients"
+								}
 							]
 						}
 					},
@@ -6602,7 +6610,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/stock/stock-by-key/DSE/EBL",
+									"raw": "{{base_url}}/api/v1/stock/stock-by-key/:xchgCode/:stkCode",
 									"host": [
 										"{{base_url}}"
 									],
@@ -6611,8 +6619,18 @@
 										"v1",
 										"stock",
 										"stock-by-key",
-										"DSE",
-										"EBL"
+										":xchgCode",
+										":stkCode"
+									],
+									"variable": [
+										{
+											"key": "xchgCode",
+											"value": "DSE"
+										},
+										{
+											"key": "stkCode",
+											"value": "AAMRANET`PB"
+										}
 									]
 								}
 							},
@@ -6646,7 +6664,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"xchgCode\": \"DSE\",\n  \"stkBrdCode\": \"MB\",\n  \"stkSectCode\": \"A\",\n  \"stkCode\": \"NEWSTK\",\n  \"stkLName\": \"New Stock Limited\",\n  \"stkSName\": \"NEWSTK\",\n  \"isin\": \"BD0009876543\",\n  \"currency\": \"BDT\",\n  \"securityType\": \"E\",\n  \"stkIsSyariah\": \"N\",\n  \"stkLot\": 100,\n  \"stkParValue\": 10.00,\n  \"stkLastDonePrice\": 25.50,\n  \"stkClosePrice\": 25.00,\n  \"stkRefPrc\": 25.25,\n  \"stkUpperLmtPrice\": 27.75,\n  \"stkLowerLmtPrice\": 22.75,\n  \"yearHigh\": 30.00,\n  \"yearLow\": 18.00,\n  \"stkVolumeTraded\": 50000,\n  \"listingDate\": \"2023-06-15T00:00:00\",\n  \"remarks\": \"New stock listing\"\n}",
+									"raw": "{\n  \"xchgCode\": \"DSE\",\n  \"stkCode\": \"NEWSTK\",\n  \"stkLName\": \"New Stock Limited\",\n  \"stkSName\": \"NEWSTK\",\n  \"stkLot\": 1,\n  \"isin\": \"BD0009876543\",\n  \"stkBrdCode\": \"100\",\n  \"stkSectCode\": \"1\",\n  \"currency\": \"BDT\",\n  \"securityType\": \"E\",\n  \"stkIsSyariah\": \"N\",\n  \"stkParValue\": 10.00,\n  \"stkLastDonePrice\": 25.50,\n  \"stkClosePrice\": 25.00,\n  \"stkRefPrc\": 25.25,\n  \"stkUpperLmtPrice\": 27.75,\n  \"stkLowerLmtPrice\": 22.75,\n  \"yearHigh\": 30.00,\n  \"yearLow\": 18.00,\n  \"stkVolumeTraded\": 50000,\n  \"listingDate\": \"2023-06-15T00:00:00\",\n  \"remarks\": \"New stock listing\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -6696,7 +6714,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"stkLName\": \"Updated Stock Name Limited\",\n  \"stkSName\": \"UPDATED\",\n  \"stkLastDonePrice\": 26.75,\n  \"stkClosePrice\": 26.50,\n  \"stkRefPrc\": 26.60,\n  \"stkVolumeTraded\": 75000,\n  \"remarks\": \"Stock information updated\"\n}",
+									"raw": "{\n  \"xchgCode\": \"DSE\",\n  \"stkCode\": \"NEWSTK\",\n  \"stkLName\": \"Updated Stock Name\",\n  \"stkSName\": \"UPDATED\",\n\n\n  \"stkLot\": 1,\n  \"isin\": \"BD0009876543\",\n  \"stkBrdCode\": \"100\",\n  \"stkSectCode\": \"1\",\n  \"currency\": \"BDT\",\n  \"securityType\": \"E\",\n  \"stkIsSyariah\": \"N\",\n\n\n  \"stkLastDonePrice\": 26.75,\n  \"stkClosePrice\": 26.50,\n  \"stkRefPrc\": 26.60,\n  \"stkVolumeTraded\": 75000,\n\n\n  \"stkParValue\": 10.00,\n\n  \"stkUpperLmtPrice\": 27.75,\n  \"stkLowerLmtPrice\": 22.75,\n  \"yearHigh\": 30.00,\n  \"yearLow\": 18.00,\n  \"remarks\": \"Stock information updated\"\n\n\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -6704,7 +6722,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/stock/update-stock/DSE/NEWSTK",
+									"raw": "{{base_url}}/api/v1/stock/update-stock/:xchgCode/:stkCode",
 									"host": [
 										"{{base_url}}"
 									],
@@ -6713,8 +6731,18 @@
 										"v1",
 										"stock",
 										"update-stock",
-										"DSE",
-										"NEWSTK"
+										":xchgCode",
+										":stkCode"
+									],
+									"variable": [
+										{
+											"key": "xchgCode",
+											"value": "DSE"
+										},
+										{
+											"key": "stkCode",
+											"value": "NEWSTK"
+										}
 									]
 								}
 							},
@@ -6756,7 +6784,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/stock/delete-stock/DSE/NEWSTK",
+									"raw": "{{base_url}}/api/v1/stock/delete-stock/:xchgCode/:stkCode",
 									"host": [
 										"{{base_url}}"
 									],
@@ -6765,8 +6793,18 @@
 										"v1",
 										"stock",
 										"delete-stock",
-										"DSE",
-										"NEWSTK"
+										":xchgCode",
+										":stkCode"
+									],
+									"variable": [
+										{
+											"key": "xchgCode",
+											"value": "DSE"
+										},
+										{
+											"key": "stkCode",
+											"value": "NEWSTK"
+										}
 									]
 								}
 							},
@@ -6794,7 +6832,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/api/v1/stock/stock-exists/DSE/EBL",
+									"raw": "{{base_url}}/api/v1/stock/stock-exists/:xchgCode/:stkCode",
 									"host": [
 										"{{base_url}}"
 									],
@@ -6803,8 +6841,18 @@
 										"v1",
 										"stock",
 										"stock-exists",
-										"DSE",
-										"EBL"
+										":xchgCode",
+										":stkCode"
+									],
+									"variable": [
+										{
+											"key": "xchgCode",
+											"value": "DSE"
+										},
+										{
+											"key": "stkCode",
+											"value": "AAMRANET`PB"
+										}
 									]
 								}
 							},
@@ -6813,10 +6861,10 @@
 					]
 				},
 				{
-					"name": "Workflow",
+					"name": "WF",
 					"item": [
 						{
-							"name": "Get Unauthorized/Denied Stocks",
+							"name": "Get Unauthorized Stocks",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true,
 								"disabledSystemHeaders": {
@@ -6857,7 +6905,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/stock/wf/unauth-denied-list?pageNumber=1&pageSize=10&searchTerm=&isAuth=0&sortColumn=StkCode&sortDirection=ASC",
+									"raw": "{{base_url}}/api/v1/stock/wf/unauth-denied-list?isAuth=0&pageNumber=1&pageSize=10&searchTerm=&sortColumn=StkCode&sortDirection=ASC",
 									"host": [
 										"{{base_url}}"
 									],
@@ -6870,29 +6918,34 @@
 									],
 									"query": [
 										{
+											"key": "isAuth",
+											"value": "0",
+											"description": "0 = Unauthorized, 2 = Denied"
+										},
+										{
 											"key": "pageNumber",
-											"value": "1"
+											"value": "1",
+											"description": "Page number (default: 1)"
 										},
 										{
 											"key": "pageSize",
-											"value": "10"
+											"value": "10",
+											"description": "Page size (default: 10, max: 100)"
 										},
 										{
 											"key": "searchTerm",
-											"value": ""
-										},
-										{
-											"key": "isAuth",
-											"value": "0",
-											"description": "0=Unauthorized, 2=Denied"
+											"value": "",
+											"description": "Search term for stock code or name"
 										},
 										{
 											"key": "sortColumn",
-											"value": "StkCode"
+											"value": "StkCode",
+											"description": "Column to sort by"
 										},
 										{
 											"key": "sortDirection",
-											"value": "ASC"
+											"value": "ASC",
+											"description": "Sort direction (ASC/DESC)"
 										}
 									]
 								}
@@ -6900,7 +6953,96 @@
 							"response": []
 						},
 						{
-							"name": "Authorize/Deny Stock",
+							"name": "Get Denied Stocks",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock/wf/unauth-denied-list?isAuth=2&pageNumber=1&pageSize=10&searchTerm=&sortColumn=StkCode&sortDirection=ASC",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock",
+										"wf",
+										"unauth-denied-list"
+									],
+									"query": [
+										{
+											"key": "isAuth",
+											"value": "2",
+											"description": "0 = Unauthorized, 2 = Denied"
+										},
+										{
+											"key": "pageNumber",
+											"value": "1",
+											"description": "Page number (default: 1)"
+										},
+										{
+											"key": "pageSize",
+											"value": "10",
+											"description": "Page size (default: 10, max: 100)"
+										},
+										{
+											"key": "searchTerm",
+											"value": "",
+											"description": "Search term for stock code or name"
+										},
+										{
+											"key": "sortColumn",
+											"value": "StkCode",
+											"description": "Column to sort by"
+										},
+										{
+											"key": "sortDirection",
+											"value": "ASC",
+											"description": "Sort direction (ASC/DESC)"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Authorize Stock",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -6927,7 +7069,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"actionType\": 2,\n  \"isAuth\": 1,\n  \"remarks\": \"Stock approved for trading\"\n}",
+									"raw": "{\n  \"xchgCode\":\"DSE\",\n  \"stkCode\":\"NEWSTK\",\n  \"actionType\": 2,\n  \"isAuth\": 1,\n  \"remarks\": \"Stock authorized for trading\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -6935,7 +7077,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/stock/wf/authorize/DSE/NEWSTK",
+									"raw": "{{base_url}}/api/v1/stock/wf/authorize/:xchgCode/:stkCode",
 									"host": [
 										"{{base_url}}"
 									],
@@ -6945,8 +7087,85 @@
 										"stock",
 										"wf",
 										"authorize",
-										"DSE",
-										"NEWSTK"
+										":xchgCode",
+										":stkCode"
+									],
+									"variable": [
+										{
+											"key": "xchgCode",
+											"value": "DSE",
+											"description": "Exchange Code"
+										},
+										{
+											"key": "stkCode",
+											"value": "NEWSTK",
+											"description": "Stock Code to authorize"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deny Stock",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"actionType\": 2,\n  \"isAuth\": 2,\n  \"remarks\": \"Stock denied - requires review\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock/wf/authorize/:xchgCode/:stkCode",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock",
+										"wf",
+										"authorize",
+										":xchgCode",
+										":stkCode"
+									],
+									"variable": [
+										{
+											"key": "xchgCode",
+											"value": "DSE",
+											"description": "Exchange Code"
+										},
+										{
+											"key": "stkCode",
+											"value": "NEWSTK",
+											"description": "Stock Code to deny"
+										}
 									]
 								}
 							},
@@ -7074,7 +7293,8 @@
 									"}"
 								],
 								"type": "text/javascript",
-								"packages": {}
+								"packages": {},
+								"requests": {}
 							}
 						},
 						{
@@ -7084,7 +7304,8 @@
 									""
 								],
 								"type": "text/javascript",
-								"packages": {}
+								"packages": {},
+								"requests": {}
 							}
 						}
 					],
@@ -7109,7 +7330,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"username\": \"EFTEST03\",\n  \"password\": \"password\"\n}",
+							"raw": "{\n  \"username\": \"EFTEST02\",\n  \"password\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

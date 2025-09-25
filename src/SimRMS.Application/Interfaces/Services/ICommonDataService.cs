@@ -10,7 +10,7 @@ public interface ICommonDataService
     Task<IEnumerable<UserListDto>> GetUserListAsync(CancellationToken cancellationToken = default);
     Task<IEnumerable<CountryListDto>> GetCountryListAsync(CancellationToken cancellationToken = default);
     Task<IEnumerable<ClientTypeListDto>> GetClientTypeListAsync(CancellationToken cancellationToken = default);
-    Task<IEnumerable<ClientListDto>> GetClientListAsync(CancellationToken cancellationToken = default);
+    Task<IEnumerable<ClientListDto>> GetClientListAsync(string? branchCode = null, CancellationToken cancellationToken = default);
     Task<IEnumerable<StockExchangeListDto>> GetStockExchangeListAsync(CancellationToken cancellationToken = default);
     Task<IEnumerable<StockBoardListDto>> GetStockBoardListAsync(string? exchangeCode = null, CancellationToken cancellationToken = default);
     Task<IEnumerable<StockBoardMarketListDto>> GetStockBoardMarketListAsync(string? exchangeCode = null, string? boardCode = null, CancellationToken cancellationToken = default);

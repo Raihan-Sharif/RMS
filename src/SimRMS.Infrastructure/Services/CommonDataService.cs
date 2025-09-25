@@ -203,9 +203,10 @@ public class CommonDataService : ICommonDataService
         }
     }
 
-    public async Task<IEnumerable<ClientListDto>> GetClientListAsync(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<ClientListDto>> GetClientListAsync(string? branchCode = null, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting client list");
+        _logger.LogInformation("Getting client list {BranchFilter}",
+            string.IsNullOrEmpty(branchCode) ? "for all branches" : $"for branch: {branchCode}");
 
         var sql = @"
             SELECT
@@ -228,18 +229,28 @@ public class CommonDataService : ICommonDataService
             INNER JOIN MstCountry mc ON cm.CountryCode = mc.CountryCode
             LEFT JOIN dbo.ClntAcct ca ON cm.GCIF = ca.GCIF AND ca.IsDel = 0 AND ca.IsAuth = 1
             LEFT JOIN MstCoBrch mcb ON ca.CoBrchCode = mcb.CoBrchCode
-            WHERE cm.IsDel = 0 AND cm.IsAuth = 1
-            ORDER BY cm.ClntName";
+            WHERE cm.IsDel = 0 AND cm.IsAuth = 1";
+
+        // Add branch filter if branchCode is provided
+        var parameters = new Dictionary<string, object>();
+        if (!string.IsNullOrEmpty(branchCode))
+        {
+            sql += " AND ca.CoBrchCode = @BranchCode";
+            parameters.Add("BranchCode", branchCode);
+        }
+
+        sql += " ORDER BY cm.ClntName";
 
         try
         {
-            var result = await _repository.QueryAsync<ClientListDto>(sql, null, false, cancellationToken);
-            _logger.LogInformation("Retrieved {Count} clients", result.Count());
+            var result = await _repository.QueryAsync<ClientListDto>(sql, parameters.Count > 0 ? parameters : null, false, cancellationToken);
+            _logger.LogInformation("Retrieved {Count} clients {BranchFilter}", result.Count(),
+                string.IsNullOrEmpty(branchCode) ? "for all branches" : $"for branch: {branchCode}");
             return result;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting client list");
+            _logger.LogError(ex, "Error getting client list for branch: {BranchCode}", branchCode ?? "all");
             throw;
         }
     }

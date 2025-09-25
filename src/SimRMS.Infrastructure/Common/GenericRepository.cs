@@ -381,7 +381,7 @@ public class GenericRepository : IGenericRepository
         var outputPatterns = new[] {
             "RowsAffected", "StatusCode", "StatusMsg", "TotalCount", "RecordCount",
             "Result", "ReturnValue", "Count", "InsertedCode", "InsertedId",
-            "GeneratedCode", "OutputCode", "NewId", "NewCode", "ErrorCode", "ErrorMsg", "NewGroupCode"
+            "GeneratedCode", "OutputCode", "NewId", "NewCode", "ErrorCode", "ErrorMsg","ErrorMessage", "NewGroupCode"
         };
 
         return outputPatterns.Any(pattern =>
@@ -418,9 +418,10 @@ public class GenericRepository : IGenericRepository
                     {
                         value = new string(' ', 10); // Reserve space for code fields (usually 6-10 chars)
                     }
-                    else if (kvp.Key.Contains("Msg", StringComparison.OrdinalIgnoreCase))
+                    else if (kvp.Key.Contains("Msg", StringComparison.OrdinalIgnoreCase) ||
+                            kvp.Key.Contains("Message", StringComparison.OrdinalIgnoreCase))
                     {
-                        value = new string(' ', 500); // Reserve space for message fields
+                        value = new string(' ', 4000); // Reserve space for message fields (match SP declaration)
                     }
                     else
                     {
@@ -453,9 +454,10 @@ public class GenericRepository : IGenericRepository
                     {
                         value = new string(' ', 10); // Code fields
                     }
-                    else if (prop.Name.Contains("Msg", StringComparison.OrdinalIgnoreCase))
+                    else if (prop.Name.Contains("Msg", StringComparison.OrdinalIgnoreCase) ||
+                            prop.Name.Contains("Message", StringComparison.OrdinalIgnoreCase))
                     {
-                        value = new string(' ', 500); // Message fields
+                        value = new string(' ', 4000); // Message fields (match SP declaration)
                     }
                     else
                     {

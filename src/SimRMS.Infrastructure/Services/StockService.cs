@@ -85,7 +85,7 @@ public class StockService : IStockService
             PageSize = pageSize,
             XchgCode = xchgCode,
             StkCode = stkCode,
-            SearchTerm = searchTerm,
+            SearchText = searchTerm,
             SortColumn = sortColumn,
             SortDirection = sortDirection
         };
@@ -107,7 +107,7 @@ public class StockService : IStockService
                 TotalCount = 0
             };
 
-            _logger.LogDebug("Calling LB_SP_GetMstStkList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, SearchTerm={SearchTerm}",
+            _logger.LogDebug("Calling LB_SP_GetMstStkList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, SearchText={SearchText}",
                 pageNumber, pageSize, searchTerm);
 
             var result = await _repository.QueryPagedAsync<StockDto>(
@@ -199,49 +199,49 @@ public class StockService : IStockService
 
         try
         {
-            // TODO: Implement when LB_SP_CrudMstStk stored procedure is available
-            throw new NotImplementedException("Create Stock operation requires LB_SP_CrudMstStk stored procedure to be implemented");
-
-            // Implementation placeholder for when SP is available:
-            /*
             var parameters = new Dictionary<string, object>
             {
-                ["Action"] = (byte)ActionTypeEnum.INSERT,
+                ["Action"] = (int)ActionTypeEnum.INSERT,
                 ["XchgCode"] = request.XchgCode,
-                ["StkBrdCode"] = request.StkBrdCode,
-                ["StkSectCode"] = request.StkSectCode,
                 ["StkCode"] = request.StkCode,
+                ["StkBrdCode"] = request.StkBrdCode ?? (object)DBNull.Value,
+                ["StkSectCode"] = request.StkSectCode ?? (object)DBNull.Value,
                 ["StkLName"] = request.StkLName,
                 ["StkSName"] = request.StkSName,
-                ["ISIN"] = request.ISIN ?? (object)DBNull.Value,
-                ["Currency"] = request.Currency ?? (object)DBNull.Value,
-                ["SecurityType"] = request.SecurityType ?? (object)DBNull.Value,
-                ["StkIsSyariah"] = request.StkIsSyariah ?? (object)DBNull.Value,
-                ["StkLot"] = request.StkLot ?? (object)DBNull.Value,
-                ["StkParValue"] = request.StkParValue ?? (object)DBNull.Value,
                 ["StkLastDonePrice"] = request.StkLastDonePrice ?? (object)DBNull.Value,
                 ["StkClosePrice"] = request.StkClosePrice ?? (object)DBNull.Value,
                 ["StkRefPrc"] = request.StkRefPrc ?? (object)DBNull.Value,
                 ["StkUpperLmtPrice"] = request.StkUpperLmtPrice ?? (object)DBNull.Value,
                 ["StkLowerLmtPrice"] = request.StkLowerLmtPrice ?? (object)DBNull.Value,
+                ["StkIsSyariah"] = request.StkIsSyariah ?? (object)DBNull.Value,
+                ["StkLot"] = request.StkLot,
+                ["LastUpdateDate"] = request.LastUpdateDate ?? (object)DBNull.Value,
+                ["ISIN"] = request.ISIN,
+                ["Currency"] = request.Currency ?? (object)DBNull.Value,
+                ["StkParValue"] = request.StkParValue ?? (object)DBNull.Value,
+                ["StkVolumeTraded"] = request.StkVolumeTraded ?? (object)DBNull.Value,
                 ["YearHigh"] = request.YearHigh ?? (object)DBNull.Value,
                 ["YearLow"] = request.YearLow ?? (object)DBNull.Value,
-                ["StkVolumeTraded"] = request.StkVolumeTraded ?? (object)DBNull.Value,
+                ["SecurityType"] = request.SecurityType ?? (object)DBNull.Value,
                 ["ListingDate"] = request.ListingDate ?? (object)DBNull.Value,
                 ["IPAddress"] = _currentUserService.GetClientIPAddress(),
                 ["MakerId"] = _currentUserService.UserId,
-                ["ActionDt"] = DateTime.Now,
-                ["TransDt"] = DateTime.Now.Date,
+                ["ActionDt"] = (object)DBNull.Value,
+                ["TransDt"] = (object)DBNull.Value,
                 ["ActionType"] = (byte)ActionTypeEnum.INSERT,
                 ["AuthId"] = (object)DBNull.Value,
                 ["AuthDt"] = (object)DBNull.Value,
                 ["AuthTransDt"] = (object)DBNull.Value,
-                ["IsAuth"] = (byte)AuthTypeEnum.UnAuthorize,
+                ["IsAuth"] = (object)DBNull.Value,
                 ["AuthLevel"] = (byte)AuthLevelEnum.Level1,
-                ["IsDel"] = (byte)DeleteStatusEnum.Active,
+                ["IsDel"] = (object)DBNull.Value,
                 ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["RowsAffected"] = 0
+                ["RowsAffected"] = 0,
+                ["ErrorMessage"] = (object)DBNull.Value
             };
+
+            _logger.LogDebug("Calling LB_SP_CrudMstStk for INSERT with XchgCode={XchgCode}, StkCode={StkCode}",
+                request.XchgCode, request.StkCode);
 
             var result = await _repository.ExecuteWithOutputAsync(
                 "LB_SP_CrudMstStk",
@@ -249,11 +249,15 @@ public class StockService : IStockService
                 cancellationToken);
 
             var rowsAffected = result.GetOutputValue<int>("RowsAffected");
+            var errorMessage = result.GetOutputValue<string>("ErrorMessage");
 
             if (rowsAffected <= 0)
             {
-                throw new DomainException("Failed to create stock - no rows affected");
+                throw new DomainException($"Failed to create stock - no rows affected. Error Message: {errorMessage}");
             }
+
+            _logger.LogDebug("Stock created successfully: {XchgCode}-{StkCode}, RowsAffected={RowsAffected}, Error Message: {errorMessage}",
+                request.XchgCode, request.StkCode, rowsAffected, errorMessage);
 
             var createdStock = await GetStockByKeyAsync(request.XchgCode, request.StkCode, cancellationToken);
             if (createdStock == null)
@@ -262,7 +266,6 @@ public class StockService : IStockService
             }
 
             return createdStock;
-            */
         }
         catch (ValidationException)
         {
@@ -290,8 +293,74 @@ public class StockService : IStockService
 
         try
         {
-            // TODO: Implement when LB_SP_CrudMstStk stored procedure is available
-            throw new NotImplementedException("Update Stock operation requires LB_SP_CrudMstStk stored procedure to be implemented");
+            var parameters = new Dictionary<string, object>
+            {
+                ["Action"] = (int)ActionTypeEnum.UPDATE,
+                ["XchgCode"] = xchgCode,
+                ["StkCode"] = stkCode,
+                ["StkBrdCode"] = request.StkBrdCode ?? (object)DBNull.Value,
+                ["StkSectCode"] = request.StkSectCode ?? (object)DBNull.Value,
+                ["StkLName"] = request.StkLName ?? (object)DBNull.Value,
+                ["StkSName"] = request.StkSName ?? (object)DBNull.Value,
+                ["StkLastDonePrice"] = request.StkLastDonePrice ?? (object)DBNull.Value,
+                ["StkClosePrice"] = request.StkClosePrice ?? (object)DBNull.Value,
+                ["StkRefPrc"] = request.StkRefPrc ?? (object)DBNull.Value,
+                ["StkUpperLmtPrice"] = request.StkUpperLmtPrice ?? (object)DBNull.Value,
+                ["StkLowerLmtPrice"] = request.StkLowerLmtPrice ?? (object)DBNull.Value,
+                ["StkIsSyariah"] = request.StkIsSyariah ?? (object)DBNull.Value,
+                ["StkLot"] = request.StkLot ?? (object)DBNull.Value,
+                ["LastUpdateDate"] = (object)DBNull.Value,
+                ["ISIN"] = request.ISIN ?? (object)DBNull.Value,
+                ["Currency"] = request.Currency ?? (object)DBNull.Value,
+                ["StkParValue"] = request.StkParValue ?? (object)DBNull.Value,
+                ["StkVolumeTraded"] = request.StkVolumeTraded ?? (object)DBNull.Value,
+                ["YearHigh"] = request.YearHigh ?? (object)DBNull.Value,
+                ["YearLow"] = request.YearLow ?? (object)DBNull.Value,
+                ["SecurityType"] = request.SecurityType ?? (object)DBNull.Value,
+                ["ListingDate"] = request.ListingDate ?? (object)DBNull.Value,
+                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
+                ["MakerId"] = _currentUserService.UserId,
+                ["ActionDt"] = (object)DBNull.Value,
+                ["TransDt"] = (object)DBNull.Value,
+                ["ActionType"] = (byte)ActionTypeEnum.UPDATE,
+                ["AuthId"] = (object)DBNull.Value,
+                ["AuthDt"] = (object)DBNull.Value,
+                ["AuthTransDt"] = (object)DBNull.Value,
+                ["IsAuth"] = (object)DBNull.Value,
+                ["AuthLevel"] = (byte)AuthLevelEnum.Level1,
+                ["IsDel"] = (object)DBNull.Value,
+                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
+                ["RowsAffected"] = 0,
+                ["ErrorMessage"] = (object)DBNull.Value
+            };
+
+            _logger.LogDebug("Calling LB_SP_CrudMstStk for UPDATE with XchgCode={XchgCode}, StkCode={StkCode}",
+                xchgCode, stkCode);
+
+            var result = await _repository.ExecuteWithOutputAsync(
+                "LB_SP_CrudMstStk",
+                parameters,
+                cancellationToken);
+
+            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
+            var errorMessage = result.GetOutputValue<string>("ErrorMessage");
+
+
+            if (rowsAffected <= 0)
+            {
+                throw new DomainException($"Failed to update stock - no rows affected or record not found. Error Message: {errorMessage}");
+            }
+
+            _logger.LogDebug("Stock updated successfully: {XchgCode}-{StkCode}, RowsAffected={RowsAffected}, Error Message: {errorMessage}",
+                request.XchgCode, request.StkCode, rowsAffected, errorMessage);
+
+            var updatedStock = await GetStockByKeyAsync(xchgCode, stkCode, cancellationToken);
+            if (updatedStock == null)
+            {
+                throw new DomainException($"Updated stock not found: {xchgCode}-{stkCode}");
+            }
+
+            return updatedStock;
         }
         catch (ValidationException)
         {
@@ -319,8 +388,67 @@ public class StockService : IStockService
 
         try
         {
-            // TODO: Implement when LB_SP_CrudMstStk stored procedure is available
-            throw new NotImplementedException("Delete Stock operation requires LB_SP_CrudMstStk stored procedure to be implemented");
+            var parameters = new Dictionary<string, object>
+            {
+                ["Action"] = (int)ActionTypeEnum.DELETE,
+                ["XchgCode"] = xchgCode,
+                ["StkCode"] = stkCode,
+                ["StkBrdCode"] = (object)DBNull.Value,
+                ["StkSectCode"] = (object)DBNull.Value,
+                ["StkLName"] = (object)DBNull.Value,
+                ["StkSName"] = (object)DBNull.Value,
+                ["StkLastDonePrice"] = (object)DBNull.Value,
+                ["StkClosePrice"] = (object)DBNull.Value,
+                ["StkRefPrc"] = (object)DBNull.Value,
+                ["StkUpperLmtPrice"] = (object)DBNull.Value,
+                ["StkLowerLmtPrice"] = (object)DBNull.Value,
+                ["StkIsSyariah"] = (object)DBNull.Value,
+                ["StkLot"] = (object)DBNull.Value,
+                ["LastUpdateDate"] = (object)DBNull.Value,
+                ["ISIN"] = (object)DBNull.Value,
+                ["Currency"] = (object)DBNull.Value,
+                ["StkParValue"] = (object)DBNull.Value,
+                ["StkVolumeTraded"] = (object)DBNull.Value,
+                ["YearHigh"] = (object)DBNull.Value,
+                ["YearLow"] = (object)DBNull.Value,
+                ["SecurityType"] = (object)DBNull.Value,
+                ["ListingDate"] = (object)DBNull.Value,
+                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
+                ["MakerId"] = _currentUserService.UserId,
+                ["ActionDt"] = (object)DBNull.Value,
+                ["TransDt"] = (object)DBNull.Value,
+                ["ActionType"] = (byte)ActionTypeEnum.DELETE,
+                ["AuthId"] = (object)DBNull.Value,
+                ["AuthDt"] = (object)DBNull.Value,
+                ["AuthTransDt"] = (object)DBNull.Value,
+                ["IsAuth"] = (object)DBNull.Value,
+                ["AuthLevel"] = (byte)AuthLevelEnum.Level1,
+                ["IsDel"] = (object)DBNull.Value,
+                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
+                ["RowsAffected"] = 0,
+                ["ErrorMessage"] = (object)DBNull.Value
+            };
+
+            _logger.LogDebug("Calling LB_SP_CrudMstStk for DELETE with XchgCode={XchgCode}, StkCode={StkCode}",
+                xchgCode, stkCode);
+
+            var result = await _repository.ExecuteWithOutputAsync(
+                "LB_SP_CrudMstStk",
+                parameters,
+                cancellationToken);
+
+            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
+            var errorMessage = result.GetOutputValue<string>("ErrorMessage");
+
+            if (rowsAffected <= 0)
+            {
+                throw new DomainException($"Failed to delete stock - no rows affected or record not found. Error Message: {errorMessage}");
+            }
+
+            _logger.LogDebug("Stock deleted successfully: {XchgCode}-{StkCode}, RowsAffected={RowsAffected}, Error Message: {errorMessage}",
+                request.XchgCode, request.StkCode, rowsAffected, errorMessage);
+
+            return true;
         }
         catch (ValidationException)
         {
@@ -371,8 +499,9 @@ public class StockService : IStockService
         {
             PageNumber = pageNumber,
             PageSize = pageSize,
-            SearchTerm = searchTerm,
-            IsAuth = isAuth,
+            SearchText = searchTerm,
+            IsAuth = (byte)isAuth,
+            MakerId = _currentUserService.UserId,
             SortColumn = sortColumn,
             SortDirection = sortDirection
         };
@@ -386,18 +515,55 @@ public class StockService : IStockService
         else if (isAuth == (byte)AuthTypeEnum.Deny)
             authAction = AuthTypeEnum.Deny.ToString();
 
-        _logger.LogInformation("Getting {authAction} Stock list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize, authAction);
+        _logger.LogInformation("Getting {authAction} Stock list for workflow - Page: {PageNumber}, Size: {PageSize}", authAction, pageNumber, pageSize);
 
         try
         {
-            // TODO: Implement when LB_SP_GetMstStkListWF stored procedure is available
-            throw new NotImplementedException("Workflow Stock list operation requires LB_SP_GetMstStkListWF stored procedure to be implemented");
+            var parameters = new
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                XchgCode = (object)DBNull.Value,
+                StkCode = (object)DBNull.Value,
+                isAuth = (byte)isAuth,
+                MakerId = _currentUserService.UserId,
+                SearchText = searchTerm,
+                SortColumn = sortColumn,
+                SortDirection = sortDirection,
+                TotalCount = 0
+            };
+
+            _logger.LogDebug("Calling LB_SP_GetMstStkListWF with parameters: PageNumber={PageNumber}, PageSize={PageSize}, isAuth={IsAuth}, MakerId={MakerId}",
+                pageNumber, pageSize, isAuth, _currentUserService.UserId);
+
+            var result = await _repository.QueryPagedAsync<StockDto>(
+                sqlOrSp: "LB_SP_GetMstStkListWF",
+                pageNumber: pageNumber,
+                pageSize: pageSize,
+                parameters: parameters,
+                isStoredProcedure: true,
+                cancellationToken: cancellationToken);
+
+            _logger.LogDebug("SP returned TotalCount: {TotalCount}, Data count: {DataCount}",
+                result.TotalCount, result.Data.Count());
+
+            return result;
+        }
+        catch (ArgumentException ex)
+        {
+            _logger.LogError(ex, "Invalid arguments for workflow Stock list retrieval");
+            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+        }
+        catch (InvalidOperationException ex)
+        {
+            _logger.LogError(ex, "Database operation error getting workflow Stock list");
+            throw new DomainException($"Database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting " + authAction + " stock list with parameters: PageNumber={PageNumber}, PageSize={PageSize}, SearchTerm={SearchTerm}",
-                pageNumber, pageSize, searchTerm);
-            throw;
+            _logger.LogError(ex, "Error getting {authAction} stock list with parameters: PageNumber={PageNumber}, PageSize={PageSize}, SearchText={SearchText}",
+                authAction, pageNumber, pageSize, searchTerm);
+            throw new DomainException($"Failed to retrieve workflow stock list: {ex.Message}");
         }
     }
 
@@ -409,7 +575,7 @@ public class StockService : IStockService
         else if (request.IsAuth == (byte)AuthTypeEnum.Deny)
             authAction = AuthTypeEnum.Deny.ToString();
 
-        _logger.LogInformation("Authorizing {authAction} Stock in workflow: {XchgCode}-{StkCode}", xchgCode, stkCode, authAction);
+        _logger.LogInformation("Authorizing {authAction} Stock in workflow: {XchgCode}-{StkCode}", authAction, xchgCode, stkCode);
 
         // Validate request
         request.XchgCode = xchgCode;
@@ -418,8 +584,39 @@ public class StockService : IStockService
 
         try
         {
-            // TODO: Implement when LB_SP_AuthMstStk stored procedure is available
-            throw new NotImplementedException("Authorize Stock operation requires LB_SP_AuthMstStk stored procedure to be implemented");
+            var parameters = new Dictionary<string, object>
+            {
+                ["Action"] = (int)ActionTypeEnum.UPDATE, // Always 2 for AUTH operation as per SP
+                ["XchgCode"] = xchgCode,
+                ["StkCode"] = stkCode,
+                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
+                ["AuthId"] = _currentUserService.UserId,
+                ["AuthDt"] = (object)DBNull.Value,
+                ["IsAuth"] = request.IsAuth,
+                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
+                ["ActionType"] = (int)ActionTypeEnum.UPDATE,
+                ["RowsAffected"] = 0
+            };
+
+            _logger.LogDebug("Calling LB_SP_AuthMstStk for {authAction} with XchgCode={XchgCode}, StkCode={StkCode}, IsAuth={IsAuth}",
+                authAction, xchgCode, stkCode, request.IsAuth);
+
+            var result = await _repository.ExecuteWithOutputAsync(
+                "LB_SP_AuthMstStk",
+                parameters,
+                cancellationToken);
+
+            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
+
+            if (rowsAffected <= 0)
+            {
+                throw new DomainException($"Failed to {authAction.ToLower()} stock - no rows affected or record not found");
+            }
+
+            _logger.LogDebug("Stock {authAction} successfully: {XchgCode}-{StkCode}, RowsAffected={RowsAffected}",
+                authAction, xchgCode, stkCode, rowsAffected);
+
+            return true;
         }
         catch (ValidationException)
         {
@@ -431,8 +628,8 @@ public class StockService : IStockService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error {authAction} authorizing Stock in workflow: {XchgCode}-{StkCode}", xchgCode, stkCode, authAction);
-            throw new DomainException($"Failed to authorize: {authAction} stock: {ex.Message}");
+            _logger.LogError(ex, "Error {authAction} authorizing Stock in workflow: {XchgCode}-{StkCode}", authAction, xchgCode, stkCode);
+            throw new DomainException($"Failed to {authAction.ToLower()} stock: {ex.Message}");
         }
     }
     #endregion

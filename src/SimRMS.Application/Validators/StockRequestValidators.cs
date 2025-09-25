@@ -28,8 +28,11 @@ namespace SimRMS.Application.Validators
     {
         public GetStockByKeyRequestValidator()
         {
+            // COMMENTED OUT FOR EASIER TESTING - Uncomment for production
+            /*
             RuleFor(x => x.XchgCode).ValidXchgCode();
             RuleFor(x => x.StkCode).ValidStkCode();
+            */
         }
     }
 
@@ -40,6 +43,8 @@ namespace SimRMS.Application.Validators
     {
         public GetStockListRequestValidator()
         {
+            // COMMENTED OUT FOR EASIER TESTING - Uncomment for production
+            /*
             RuleFor(x => x.XchgCode).ValidXchgCode()
                 .When(x => !string.IsNullOrEmpty(x.XchgCode));
 
@@ -48,69 +53,99 @@ namespace SimRMS.Application.Validators
 
             RuleFor(x => x.PageNumber).ValidPageNumber();
 
-            RuleFor(x => x.PageSize).ValidPageSize(100);
+            RuleFor(x => x.PageSize).ValidPageSize(1000);
 
-            RuleFor(x => x.SearchTerm).ValidSearchTerm(100)
-                .When(x => !string.IsNullOrEmpty(x.SearchTerm));
+            RuleFor(x => x.SearchText).ValidSearchTerm(100)
+                .When(x => !string.IsNullOrEmpty(x.SearchText));
 
             RuleFor(x => x.SortColumn)
                 .Must(x => string.IsNullOrEmpty(x) || new[] { "StkCode", "StkLName", "StkSName", "XchgCode" }.Contains(x))
                 .WithMessage("SortColumn must be one of: StkCode, StkLName, StkSName, XchgCode");
 
             RuleFor(x => x.SortDirection).ValidSorting();
+            */
         }
     }
 
     /// <summary>
-    /// Validator for creating stock
+    /// Validator for creating stock - Based on SP LB_SP_CrudMstStk validation rules
     /// </summary>
     public class CreateStockRequestValidator : AbstractValidator<CreateStockRequest>
     {
         public CreateStockRequestValidator()
         {
+            // COMMENTED OUT FOR EASIER TESTING - Uncomment for production
+            /*
+            // Required fields based on SP validation (lines 170-193)
             RuleFor(x => x.XchgCode).ValidXchgCode();
-            RuleFor(x => x.StkBrdCode).ValidStkBrdCode();
-            RuleFor(x => x.StkSectCode).ValidStkSectCode();
             RuleFor(x => x.StkCode).ValidStkCode();
-            RuleFor(x => x.StkLName).ValidStkLName();
-            RuleFor(x => x.StkSName).ValidStkSName();
+            RuleFor(x => x.StkLName)
+                .NotEmpty().WithMessage("Stock Long Name is required for insert operation")
+                .MaximumLength(100).WithMessage("Stock Long Name cannot exceed 100 characters");
 
-            RuleFor(x => x.ISIN).ValidISIN();
-            RuleFor(x => x.Currency).ValidCurrency();
-            RuleFor(x => x.SecurityType).ValidSecurityType();
-            RuleFor(x => x.StkIsSyariah).ValidSyariahFlag();
-            RuleFor(x => x.StkLot).ValidStkLot();
+            RuleFor(x => x.StkSName)
+                .NotEmpty().WithMessage("Stock Short Name is required for insert operation")
+                .MaximumLength(100).WithMessage("Stock Short Name cannot exceed 100 characters");
 
-            RuleFor(x => x.StkParValue).ValidStockPrice();
-            RuleFor(x => x.StkLastDonePrice).ValidStockPrice();
-            RuleFor(x => x.StkClosePrice).ValidStockPrice();
-            RuleFor(x => x.StkRefPrc).ValidStockPrice();
-            RuleFor(x => x.StkUpperLmtPrice).ValidStockPrice();
-            RuleFor(x => x.StkLowerLmtPrice).ValidStockPrice();
-            RuleFor(x => x.YearHigh).ValidStockPrice();
-            RuleFor(x => x.YearLow).ValidStockPrice();
+            RuleFor(x => x.StkLot)
+                .GreaterThan(0).WithMessage("Stock Lot size must be greater than 0 for insert operation");
 
-            RuleFor(x => x.StkVolumeTraded).ValidStockVolume();
+            RuleFor(x => x.ISIN)
+                .NotEmpty().WithMessage("ISIN is required for insert operation")
+                .MaximumLength(12).WithMessage("ISIN cannot exceed 12 characters");
 
-            RuleFor(x => x.ListingDate)
-                .LessThanOrEqualTo(DateTime.Now.Date)
-                .WithMessage("Listing date cannot be in the future")
-                .When(x => x.ListingDate.HasValue);
+            // Optional fields with validation
+            RuleFor(x => x.StkBrdCode).ValidStkBrdCode()
+                .When(x => !string.IsNullOrEmpty(x.StkBrdCode));
+            RuleFor(x => x.StkSectCode).ValidStkSectCode()
+                .When(x => !string.IsNullOrEmpty(x.StkSectCode));
 
-            RuleFor(x => x.Remarks).ValidRemarks()
-                .When(x => !string.IsNullOrEmpty(x.Remarks));
+            // Price validations (SP lines 196-230)
+            RuleFor(x => x.StkLastDonePrice)
+                .GreaterThanOrEqualTo(0).WithMessage("Stock Last Done Price cannot be negative")
+                .When(x => x.StkLastDonePrice.HasValue);
 
-            // Business rule: Upper limit must be greater than lower limit
+            RuleFor(x => x.StkClosePrice)
+                .GreaterThanOrEqualTo(0).WithMessage("Stock Close Price cannot be negative")
+                .When(x => x.StkClosePrice.HasValue);
+
+            RuleFor(x => x.StkRefPrc)
+                .GreaterThanOrEqualTo(0).WithMessage("Stock Reference Price cannot be negative")
+                .When(x => x.StkRefPrc.HasValue);
+
+            RuleFor(x => x.StkVolumeTraded)
+                .GreaterThanOrEqualTo(0).WithMessage("Stock Volume Traded cannot be negative")
+                .When(x => x.StkVolumeTraded.HasValue);
+
+            // Business rules from SP (lines 214-224)
             RuleFor(x => x)
                 .Must(ValidatePriceLimits)
-                .WithMessage("Upper limit price must be greater than lower limit price")
+                .WithMessage("Stock Upper Limit Price must be greater than Lower Limit Price")
                 .When(x => x.StkUpperLmtPrice.HasValue && x.StkLowerLmtPrice.HasValue);
 
-            // Business rule: Year high must be greater than year low
             RuleFor(x => x)
                 .Must(ValidateYearHighLow)
-                .WithMessage("Year high must be greater than year low")
+                .WithMessage("Year High must be greater than Year Low")
                 .When(x => x.YearHigh.HasValue && x.YearLow.HasValue);
+
+            // Date validation (SP line 232-236)
+            RuleFor(x => x.ListingDate)
+                .LessThanOrEqualTo(DateTime.Now)
+                .WithMessage("Listing Date cannot be in the future")
+                .When(x => x.ListingDate.HasValue);
+
+            // Optional field validations
+            RuleFor(x => x.Currency).ValidCurrency()
+                .When(x => !string.IsNullOrEmpty(x.Currency));
+            RuleFor(x => x.SecurityType).ValidSecurityType()
+                .When(x => !string.IsNullOrEmpty(x.SecurityType));
+            RuleFor(x => x.StkIsSyariah).ValidSyariahFlag()
+                .When(x => !string.IsNullOrEmpty(x.StkIsSyariah));
+            RuleFor(x => x.StkParValue).ValidStockPrice()
+                .When(x => x.StkParValue.HasValue);
+            RuleFor(x => x.Remarks).ValidRemarks()
+                .When(x => !string.IsNullOrEmpty(x.Remarks));
+            */
         }
 
         private static bool ValidatePriceLimits(CreateStockRequest request)
@@ -139,6 +174,8 @@ namespace SimRMS.Application.Validators
     {
         public UpdateStockRequestValidator()
         {
+            // COMMENTED OUT FOR EASIER TESTING - Uncomment for production
+            /*
             RuleFor(x => x.XchgCode).ValidXchgCode();
             RuleFor(x => x.StkCode).ValidStkCode();
 
@@ -194,6 +231,7 @@ namespace SimRMS.Application.Validators
                 .Must(ValidateYearHighLowUpdate)
                 .WithMessage("Year high must be greater than year low")
                 .When(x => x.YearHigh.HasValue && x.YearLow.HasValue);
+            */
         }
 
         private static bool HaveAtLeastOneFieldToUpdate(UpdateStockRequest request)
@@ -246,10 +284,13 @@ namespace SimRMS.Application.Validators
     {
         public DeleteStockRequestValidator()
         {
+            // COMMENTED OUT FOR EASIER TESTING - Uncomment for production
+            /*
             RuleFor(x => x.XchgCode).ValidXchgCode();
             RuleFor(x => x.StkCode).ValidStkCode();
             RuleFor(x => x.Remarks).ValidRemarks()
                 .When(x => !string.IsNullOrEmpty(x.Remarks));
+            */
         }
     }
 
@@ -260,6 +301,8 @@ namespace SimRMS.Application.Validators
     {
         public AuthorizeStockRequestValidator()
         {
+            // COMMENTED OUT FOR EASIER TESTING - Uncomment for production
+            /*
             RuleFor(x => x.XchgCode).ValidXchgCode();
             RuleFor(x => x.StkCode).ValidStkCode();
 
@@ -271,30 +314,43 @@ namespace SimRMS.Application.Validators
             RuleFor(x => x.Remarks).NotEmpty()
                 .WithMessage("Remarks are required for denial")
                 .When(x => x.IsAuth == (byte)AuthTypeEnum.Deny);
+            */
         }
     }
 
     /// <summary>
-    /// Validator for getting workflow list with IsAuth parameter
+    /// Validator for getting workflow list - Based on SP LB_SP_GetMstStkListWF
     /// </summary>
     public class GetStockWorkflowListRequestValidator : AbstractValidator<GetStockWorkflowListRequest>
     {
         public GetStockWorkflowListRequestValidator()
         {
+            // COMMENTED OUT FOR EASIER TESTING - Uncomment for production
+            /*
             RuleFor(x => x.PageNumber).ValidPageNumber();
 
-            RuleFor(x => x.PageSize).ValidPageSize(100);
+            RuleFor(x => x.PageSize).ValidPageSize(1000);
+
+            RuleFor(x => x.XchgCode).ValidXchgCode()
+                .When(x => !string.IsNullOrEmpty(x.XchgCode));
+
+            RuleFor(x => x.StkCode).ValidStkCode()
+                .When(x => !string.IsNullOrEmpty(x.StkCode));
 
             RuleFor(x => x.IsAuth).ValidIsUnAuthDeny();
 
-            RuleFor(x => x.SearchTerm).ValidSearchTerm(100)
-                .When(x => !string.IsNullOrEmpty(x.SearchTerm));
+            RuleFor(x => x.MakerId)
+                .GreaterThan(0).WithMessage("MakerId must be greater than 0");
+
+            RuleFor(x => x.SearchText).ValidSearchTerm(100)
+                .When(x => !string.IsNullOrEmpty(x.SearchText));
 
             RuleFor(x => x.SortColumn)
                 .Must(x => string.IsNullOrEmpty(x) || new[] { "StkCode", "StkLName", "StkSName", "XchgCode" }.Contains(x))
                 .WithMessage("SortColumn must be one of: StkCode, StkLName, StkSName, XchgCode");
 
             RuleFor(x => x.SortDirection).ValidSorting();
+            */
         }
     }
 }

@@ -161,6 +161,7 @@ public class CommonDataController : BaseController
     /// <summary>
     /// Get list of clients for dropdown/selection
     /// </summary>
+    /// <param name="branchCode">Optional branch code filter - if provided, returns only clients for that branch; otherwise returns all clients</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>List of clients with their details</returns>
     [HttpGet("client-list")]
@@ -168,12 +169,16 @@ public class CommonDataController : BaseController
     [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 401)]
     public async Task<ActionResult<ApiResponse<IEnumerable<ClientListDto>>>> GetClientList(
+        [FromQuery] string? branchCode = null,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting client list");
+        _logger.LogInformation("Getting client list {BranchFilter}",
+            string.IsNullOrEmpty(branchCode) ? "for all branches" : $"for branch: {branchCode}");
 
-        var clients = await _commonDataService.GetClientListAsync(cancellationToken);
-        return Ok(clients, "Client list retrieved successfully");
+        var clients = await _commonDataService.GetClientListAsync(branchCode, cancellationToken);
+        return Ok(clients, string.IsNullOrEmpty(branchCode)
+            ? "Client list retrieved successfully"
+            : $"Client list retrieved successfully for branch: {branchCode}");
     }
 
     /// <summary>
