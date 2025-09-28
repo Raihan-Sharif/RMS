@@ -232,12 +232,12 @@ public class StockService : IStockService
                 ["AuthId"] = (object)DBNull.Value,
                 ["AuthDt"] = (object)DBNull.Value,
                 ["AuthTransDt"] = (object)DBNull.Value,
-                ["IsAuth"] = (object)DBNull.Value,
+                ["IsAuth"] = (byte)AuthTypeEnum.UnAuthorize, // Always start unauthorized
                 ["AuthLevel"] = (byte)AuthLevelEnum.Level1,
-                ["IsDel"] = (object)DBNull.Value,
+                ["IsDel"] = (byte)DeleteStatusEnum.Active,
                 ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["RowsAffected"] = 0,
-                ["ErrorMessage"] = (object)DBNull.Value
+                ["RowsAffected"] = 0
+                
             };
 
             _logger.LogDebug("Calling LB_SP_CrudMstStk for INSERT with XchgCode={XchgCode}, StkCode={StkCode}",
@@ -326,12 +326,11 @@ public class StockService : IStockService
                 ["AuthId"] = (object)DBNull.Value,
                 ["AuthDt"] = (object)DBNull.Value,
                 ["AuthTransDt"] = (object)DBNull.Value,
-                ["IsAuth"] = (object)DBNull.Value,
+                ["IsAuth"] = (byte)AuthTypeEnum.UnAuthorize, // Reset to unauthorized for workflow
                 ["AuthLevel"] = (byte)AuthLevelEnum.Level1,
-                ["IsDel"] = (object)DBNull.Value,
+                ["IsDel"] = (byte)DeleteStatusEnum.Active,
                 ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["RowsAffected"] = 0,
-                ["ErrorMessage"] = (object)DBNull.Value
+                ["RowsAffected"] = 0
             };
 
             _logger.LogDebug("Calling LB_SP_CrudMstStk for UPDATE with XchgCode={XchgCode}, StkCode={StkCode}",
@@ -421,12 +420,11 @@ public class StockService : IStockService
                 ["AuthId"] = (object)DBNull.Value,
                 ["AuthDt"] = (object)DBNull.Value,
                 ["AuthTransDt"] = (object)DBNull.Value,
-                ["IsAuth"] = (object)DBNull.Value,
-                ["AuthLevel"] = (byte)AuthLevelEnum.Level1,
-                ["IsDel"] = (object)DBNull.Value,
+                ["IsAuth"] = (object)DBNull.Value, // SP handles deletion logic
+                ["AuthLevel"] = (object)DBNull.Value,
+                ["IsDel"] = (object)DBNull.Value, // SP sets this to 1
                 ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["RowsAffected"] = 0,
-                ["ErrorMessage"] = (object)DBNull.Value
+                ["RowsAffected"] = 0
             };
 
             _logger.LogDebug("Calling LB_SP_CrudMstStk for DELETE with XchgCode={XchgCode}, StkCode={StkCode}",
