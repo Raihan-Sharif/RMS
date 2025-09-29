@@ -77,6 +77,9 @@ namespace SimRMS.Infrastructure
             // stock service
             services.AddScoped<IStockService, StockService>();
 
+            // client stock service
+            services.AddScoped<IClientStockService, ClientStockService>();
+
             // Common data service for read-only operations
             services.AddScoped<ICommonDataService, CommonDataService>();
 
