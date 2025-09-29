@@ -70,3 +70,15 @@ public class StockBoardMarketListDto
     public string SectCode { get; set; } = string.Empty;
     public string SectDesc { get; set; } = string.Empty;
 }
+
+public class StockListDto
+{
+    public string XchgCode { get; set; } = string.Empty;
+    public string StkBrdCode { get; set; } = string.Empty;
+    public string BrdDesc { get; set; } = string.Empty;
+    public string StkSectCode { get; set; } = string.Empty;
+    public string SectDesc { get; set; } = string.Empty;
+    public string StkCode { get; set; } = string.Empty;
+    public string StkLName { get; set; } = string.Empty;
+    public string StkSName { get; set; } = string.Empty;
+}

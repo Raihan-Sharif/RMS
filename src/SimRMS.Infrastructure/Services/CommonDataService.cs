@@ -328,4 +328,57 @@ public class CommonDataService : ICommonDataService
             throw;
         }
     }
+
+    public async Task<IEnumerable<StockListDto>> GetStockListAsync(string? exchangeCode = null, string? boardCode = null, string? sectorCode = null, CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting stock list with exchangeCode: {ExchangeCode}, boardCode: {BoardCode}, sectorCode: {SectorCode}", exchangeCode, boardCode, sectorCode);
+
+        var sql = @"
+            SELECT ms.XchgCode,
+                   ms.StkBrdCode,
+                   msb.BrdDesc,
+                   ms.StkSectCode,
+                   mss.SectDesc,
+                   ms.StkCode,
+                   ms.StkLName,
+                   ms.StkSName
+            FROM MstStk ms
+            INNER JOIN MstStkBrd msb ON ms.StkBrdCode = msb.BrdCode
+            INNER JOIN MstStkSect mss ON ms.StkBrdCode = mss.BrdCode AND ms.StkSectCode = mss.SectCode
+            WHERE ms.IsAuth = 1 AND ms.IsDel = 0";
+
+        var parameters = new Dictionary<string, object>();
+
+        if (!string.IsNullOrWhiteSpace(exchangeCode))
+        {
+            sql += " AND ms.XchgCode = @ExchangeCode";
+            parameters.Add("ExchangeCode", exchangeCode);
+        }
+
+        if (!string.IsNullOrWhiteSpace(boardCode))
+        {
+            sql += " AND ms.StkBrdCode = @BoardCode";
+            parameters.Add("BoardCode", boardCode);
+        }
+
+        if (!string.IsNullOrWhiteSpace(sectorCode))
+        {
+            sql += " AND ms.StkSectCode = @SectorCode";
+            parameters.Add("SectorCode", sectorCode);
+        }
+
+        sql += " ORDER BY ms.StkCode";
+
+        try
+        {
+            var result = await _repository.QueryAsync<StockListDto>(sql, parameters.Count > 0 ? parameters : null, false, cancellationToken);
+            _logger.LogInformation("Retrieved {Count} stocks", result.Count());
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting stock list");
+            throw;
+        }
+    }
 }
