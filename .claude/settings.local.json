@@ -49,7 +49,8 @@
       "Bash(del \"C:\\Users\\raihan.sharif\\Desktop\\RMS\\stock-postman-section.json\")",
       "Read(//d/SP,FN and Query/RMS/Client Stock/**)",
       "Bash(node -e \"JSON.parse(require(''fs'').readFileSync(''C:\\Users\\raihan.sharif\\Desktop\\RMS\\Docs\\Postman\\SimRMS.postman_collection.json'', ''utf8'')); console.log(''JSON is valid!'');\")",
-      "Bash(powershell:*)"
+      "Bash(powershell:*)",
+      "Bash(gh pr:*)"
     ],
     "deny": []
   }
