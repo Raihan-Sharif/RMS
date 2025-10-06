@@ -11,7 +11,7 @@ using SimRMS.Shared.Constants;
 /// Modification History
 /// Author             Date         Description of Change
 /// -------------------------------------------------------------------
-/// [Missing]
+/// Asif Zaman         30-09-25     Aligned the request models props as per SP
 ///
 /// ===================================================================
 /// </para>
@@ -84,6 +84,9 @@ namespace SimRMS.Application.Models.Requests
         public string BranchCode { get; set; } = null!;
         public string ClientCode { get; set; } = null!;
         public string StockCode { get; set; } = null!;
+        public int PendingFreeBalance { get; set; }
+        public AuthTypeEnum IsAuth { get; set; } = AuthTypeEnum.Approve;
+        public byte ActionType { get; set; } = (byte)ActionTypeEnum.UPDATE;
         public AuthTypeEnum AuthAction { get; set; } = AuthTypeEnum.Approve;
         public string? Remarks { get; set; }
     }

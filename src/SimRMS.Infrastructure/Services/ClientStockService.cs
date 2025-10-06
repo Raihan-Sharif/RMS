@@ -22,7 +22,7 @@ using ValidationException = SimRMS.Domain.Exceptions.ValidationException;
 /// Modification History
 /// Author             Date         Description of Change
 /// -------------------------------------------------------------------
-/// [Missing]
+/// Asif Zaman         30-09-25     Aligned the parameters of workflow methods as per SP
 ///
 /// ===================================================================
 /// </para>
@@ -464,7 +464,7 @@ public class ClientStockService : IClientStockService
             };
 
             var result = await _repository.QueryPagedAsync<ClientStockDto>(
-                sqlOrSp: "LB_SP_GetShareInfoWorkflowList",
+                sqlOrSp: "LB_SP_GetShareInfoListWF",
                 pageNumber: request.PageNumber,
                 pageSize: request.PageSize,
                 parameters: parameters,
@@ -486,7 +486,7 @@ public class ClientStockService : IClientStockService
     public async Task<bool> AuthorizeClientStockAsync(AuthorizeClientStockRequest request, CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Authorizing Client Stock for Branch: {BranchCode}, Client: {ClientCode}, Stock: {StockCode}, Action: {AuthAction}",
-            request.BranchCode, request.ClientCode, request.StockCode, request.AuthAction);
+            request.BranchCode, request.ClientCode, request.StockCode,request.AuthAction);
 
         // Validate request
         var validationResult = await _authorizeValidator.ValidateAsync(request, cancellationToken);
@@ -508,16 +508,21 @@ public class ClientStockService : IClientStockService
 
             var parameters = new
             {
+                Action = (int)ActionTypeEnum.UPDATE,
                 BranchCode = request.BranchCode,
                 ClientCode = request.ClientCode,
                 StockCode = request.StockCode,
-                AuthAction = (int)request.AuthAction,
+                PendingFreeBal = request.PendingFreeBalance,
+                ActionType = (int)ActionTypeEnum.UPDATE,
+                //AuthAction = (int)request.AuthAction, // not passed in the AuthShareInfo SP
+                IsAuth = request.IsAuth,
                 AuthId = _currentUserService.UserId,
+                IPAddress = _currentUserService.GetClientIPAddress(),
                 Remarks = request.Remarks,
                 RowsAffected = 0
             };
 
-            var result = await _repository.ExecuteAsync("LB_SP_AuthorizeShareInfo", parameters, true, cancellationToken);
+            var result = await _repository.ExecuteAsync("LB_SP_AuthShareInfo", parameters, true, cancellationToken);
 
             if (result <= 0)
             {
