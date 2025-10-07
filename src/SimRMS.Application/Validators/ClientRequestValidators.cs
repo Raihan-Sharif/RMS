@@ -184,7 +184,7 @@ namespace SimRMS.Application.Validators
     {
         public CreateClientRequestValidator()
         {
-            RuleFor(x => x.GCIF).ValidGCIF();
+            RuleFor(x => x.ClntCode).ValidClientCode();
             RuleFor(x => x.ClntName).ValidClientName();
             RuleFor(x => x.CoBrchCode).ValidClientCoBrchCode();
 
@@ -343,6 +343,7 @@ namespace SimRMS.Application.Validators
         public DeleteClientRequestValidator()
         {
             RuleFor(x => x.GCIF).ValidGCIF();
+            RuleFor(x => x.ClntCode).ValidClientCode();
             RuleFor(x => x.CoBrchCode).ValidClientCoBrchCode();
             RuleFor(x => x.Remarks).ValidRemarks().When(x => !string.IsNullOrEmpty(x.Remarks));
         }

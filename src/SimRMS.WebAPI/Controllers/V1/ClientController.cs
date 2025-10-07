@@ -130,7 +130,7 @@ public class ClientController : BaseController
         [FromBody] CreateClientRequest request,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Creating new Client with GCIF: {GCIF}", request.GCIF);
+        _logger.LogInformation("Creating new Client with ClntCode: {ClntCode}", request.ClntCode);
 
         var result = await _clientService.CreateClientAsync(request, cancellationToken);
 
