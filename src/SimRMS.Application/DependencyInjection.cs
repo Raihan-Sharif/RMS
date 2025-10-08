@@ -122,6 +122,14 @@ public static class DependencyInjection
         services.AddScoped<IValidator<GetClientStockWorkflowListRequest>, GetClientStockWorkflowListRequestValidator>();
         #endregion
 
+        #region Stock Exposure Validators
+        services.AddScoped<IValidator<CreateStockExposureRequest>, CreateStockExposureRequestValidator>();
+        services.AddScoped<IValidator<UpdateStockExposureRequest>, UpdateStockExposureRequestValidator>();
+        services.AddScoped<IValidator<DeleteStockExposureRequest>, DeleteStockExposureRequestValidator>();
+        services.AddScoped<IValidator<AuthorizeStockExposureRequest>, AuthorizeStockExposureRequestValidator>();
+        services.AddScoped<IValidator<GetStockExposureWorkflowListRequest>, GetStockExposureWorkflowListRequestValidator>();
+        #endregion
+
         services.AddValidatorsFromAssembly(assembly, includeInternalTypes: false);
 
         return services;

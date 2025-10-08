@@ -50,7 +50,10 @@
       "Read(//d/SP,FN and Query/RMS/Client Stock/**)",
       "Bash(node -e \"JSON.parse(require(''fs'').readFileSync(''C:\\Users\\raihan.sharif\\Desktop\\RMS\\Docs\\Postman\\SimRMS.postman_collection.json'', ''utf8'')); console.log(''JSON is valid!'');\")",
       "Bash(powershell:*)",
-      "Bash(gh pr:*)"
+      "Bash(gh pr:*)",
+      "Read(//d/SP,FN and Query/RMS/Stock Control Stock Exposure/**)",
+      "Bash(del \"C:\\Users\\raihan.sharif\\Desktop\\RMS\\src\\SimRMS.Domain\\Entities\\StkCtrl.cs\")",
+      "Bash(python:*)"
     ],
     "deny": []
   }

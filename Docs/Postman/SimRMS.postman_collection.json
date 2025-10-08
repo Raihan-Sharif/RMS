@@ -1,11 +1,11 @@
 {
 	"info": {
-		"_postman_id": "485d34b9-6ec1-4d31-987c-a58ebdfee5f5",
+		"_postman_id": "9f685e55-7551-4342-8b0c-1e21d1de7042",
 		"name": "SimRMS",
 		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29700469",
-		"_collection_link": "https://dd5555-8190.postman.co/workspace/RMS~e831403f-5c1c-492b-b213-42fb5f089c5d/collection/29700469-485d34b9-6ec1-4d31-987c-a58ebdfee5f5?action=share&source=collection_link&creator=29700469"
+		"_collection_link": "https://dd5555-8190.postman.co/workspace/RMS~e831403f-5c1c-492b-b213-42fb5f089c5d/collection/29700469-9f685e55-7551-4342-8b0c-1e21d1de7042?action=share&source=collection_link&creator=29700469"
 	},
 	"item": [
 		{
@@ -8031,6 +8031,593 @@
 											"value": "EBL",
 											"description": "Stock Code to deny"
 										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Stock Exposure",
+			"item": [
+				{
+					"name": "CRUD Operations",
+					"item": [
+						{
+							"name": "Get All Stock Exposures",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock-exposure/list?pageNumber=1&pageSize=10",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock-exposure",
+										"list"
+									],
+									"query": [
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "usrID",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "clntCode",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "stkCode",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "searchTerm",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Stock Exposure By Key",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    // REQUIRED: DataType - Stock control scope (1 char)\n    // Valid values: 'R'=Broker, 'B'=Branch, 'C'=Client, 'T'=ClientType, 'U'=User\n    \"dataType\": \"B\",\n    // REQUIRED: CtrlType - Control type (1 char, must be 'T')\n    \"ctrlType\": \"T\",\n    // REQUIRED: Stock code (max 20 chars, alphanumeric with dots/hyphens)\n    \"stkCode\": \"BSC`PB\",\n    // CONDITIONAL: Provide EXACTLY ONE of the following based on DataType:\n    // For DataType='R': Company Code (max 5 chars)\n    \"coCode\": null,\n    // For DataType='B': Branch Code (max 6 chars)\n    \"coBrchCode\": \"001\",\n    // For DataType='U': User/Dealer ID (max 25 chars)\n    \"usrID\": null,\n    // For DataType='C': Client Code (max 50 chars)\n    \"clntCode\": null,\n    // For DataType='T': Client Type (max 5 chars)\n    \"clntType\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock-exposure/by-key",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock-exposure",
+										"by-key"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Stock Exposure",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  // REQUIRED: DataType - Stock control scope (1 char)\n  // Valid values: 'R'=Broker, 'B'=Branch, 'C'=Client, 'T'=ClientType, 'U'=User\n  \"dataType\": \"C\",\n  \n  // REQUIRED: CtrlType - Control type (1 char, must be 'T' for Stock Control)\n  \"ctrlType\": \"T\",\n  \n  // REQUIRED: Stock code (max 20 chars, alphanumeric with dots/hyphens/underscores)\n  \"stkCode\": \"ACI\",\n  \n  // CONDITIONAL: Provide EXACTLY ONE of the following based on DataType:\n  \n  // For DataType='R': Company Code (max 5 chars, uppercase alphanumeric)\n  \"coCode\": null,\n  \n  // For DataType='B': Branch Code (max 6 chars, alphanumeric)\n  \"coBrchCode\": null,\n  \n  // For DataType='U': User/Dealer ID (max 25 chars, alphanumeric with underscores)\n  \"usrID\": null,\n  \n  // For DataType='C': Client Code (max 50 chars, alphanumeric)\n  \"clntCode\": \"A11455\",\n  \n  // For DataType='T': Client Type (max 5 chars)\n  \"clntType\": null,\n  \n  // OPTIONAL: Exchange Code (max 10 chars, uppercase alphanumeric)\n  \"xchgCode\": \"DSE\",\n  \n  // REQUIRED: Control Status (1 char)\n  // Valid values: 'B'=Buy Suspend, 'S'=Sell Suspend, 'N'=Both Suspended, 'Y'=Both Allowed\n  \"ctrlStatus\": \"B\",\n  \n  // OPTIONAL: Remarks (max 200 chars)\n  \"remarks\": \"Client suspended from buying ACI stock\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock-exposure/create",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock-exposure",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Stock Exposure",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  // REQUIRED: DataType - Stock control scope (1 char)\n  // Valid values: 'R'=Broker, 'B'=Branch, 'C'=Client, 'T'=ClientType, 'U'=User\n  \"dataType\": \"C\",\n  \n  // REQUIRED: CtrlType - Control type (1 char, must be 'T')\n  \"ctrlType\": \"T\",\n  \n  // REQUIRED: Stock code (max 20 chars)\n  \"stkCode\": \"ACI\",\n  \n  // CONDITIONAL: Provide EXACTLY ONE of the following based on DataType (for identification):\n  \"coCode\": null,\n  \"coBrchCode\": null,\n  \"usrID\": null,\n  \"clntCode\": \"A11455\",\n  \"clntType\": null,\n  \n  // UPDATABLE FIELDS (provide at least one):\n  \n  // OPTIONAL: Control Status (1 char)\n  // Valid values: 'B'=Buy Suspend, 'S'=Sell Suspend, 'N'=Both Suspended, 'Y'=Both Allowed\n  \"ctrlStatus\": \"Y\",\n  \n  // OPTIONAL: Remarks (max 200 chars)\n  \"remarks\": \"Control status updated - both buy and sell allowed\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock-exposure/update",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock-exposure",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Stock Exposure",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  // REQUIRED: DataType - Stock control scope (1 char)\n  // Valid values: 'R'=Broker, 'B'=Branch, 'C'=Client, 'T'=ClientType, 'U'=User\n  \"dataType\": \"C\",\n  \n  // REQUIRED: CtrlType - Control type (1 char, must be 'T')\n  \"ctrlType\": \"T\",\n  \n  // REQUIRED: Stock code (max 20 chars)\n  \"stkCode\": \"ACI\",\n  \n  // CONDITIONAL: Provide EXACTLY ONE of the following based on DataType:\n  \"coCode\": null,\n  \"coBrchCode\": null,\n  \"usrID\": null,\n  \"clntCode\": \"A11455\",\n  \"clntType\": null,\n  \n  // OPTIONAL: Remarks (max 200 chars)\n  \"remarks\": \"Stock exposure control no longer needed\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock-exposure/delete",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock-exposure",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Workflow Operations",
+					"item": [
+						{
+							"name": "Get Unauthorized Stock Exposure List",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock-exposure/wf/unauth-denied-list?isAuth=0&pageNumber=1&pageSize=10",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock-exposure",
+										"wf",
+										"unauth-denied-list"
+									],
+									"query": [
+										{
+											"key": "isAuth",
+											"value": "0",
+											"description": "0=UnAuthorized, 2=Denied"
+										},
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "usrID",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "clntCode",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "stkCode",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "searchTerm",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Denied Stock Exposure List",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock-exposure/wf/unauth-denied-list?isAuth=2&pageNumber=1&pageSize=10",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock-exposure",
+										"wf",
+										"unauth-denied-list"
+									],
+									"query": [
+										{
+											"key": "isAuth",
+											"value": "2",
+											"description": "0=UnAuthorized, 2=Denied"
+										},
+										{
+											"key": "pageNumber",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "usrID",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "clntCode",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "stkCode",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "searchTerm",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Approve Stock Exposure",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  // REQUIRED: DataType - Stock control scope (1 char)\n  \"dataType\": \"C\",\n  \n  // REQUIRED: CtrlType - Control type (1 char, must be 'T')\n  \"ctrlType\": \"T\",\n  \n  // REQUIRED: Stock code\n  \"stkCode\": \"ACI\",\n  \n  // CONDITIONAL: Provide EXACTLY ONE scope identifier:\n  \"coCode\": null,\n  \"coBrchCode\": null,\n  \"usrID\": null,\n  \"clntCode\": \"A11455\",\n  \"clntType\": null,\n  \n  // REQUIRED: ActionType (byte, must be 2 for UPDATE)\n  \"actionType\": 2,\n  \n  // REQUIRED: IsAuth - Authorization action (byte)\n  // Valid values: 1=Approve, 2=Deny\n  \"isAuth\": 1,\n  \n  // OPTIONAL: Remarks (max 200 chars)\n  // REQUIRED when IsAuth=2 (Deny)\n  \"remarks\": \"Approved stock control\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock-exposure/wf/authorize",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock-exposure",
+										"wf",
+										"authorize"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deny Stock Exposure",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Api-Version",
+										"value": "1",
+										"type": "text"
+									},
+									{
+										"key": "X-Handshake-Token",
+										"value": "{{handshake_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  // REQUIRED: DataType - Stock control scope (1 char)\n  \"dataType\": \"C\",\n  \n  // REQUIRED: CtrlType - Control type (1 char, must be 'T')\n  \"ctrlType\": \"T\",\n  \n  // REQUIRED: Stock code\n  \"stkCode\": \"ACI\",\n  \n  // CONDITIONAL: Provide EXACTLY ONE scope identifier:\n  \"coCode\": null,\n  \"coBrchCode\": null,\n  \"usrID\": null,\n  \"clntCode\": \"A11455\",\n  \"clntType\": null,\n  \n  // REQUIRED: ActionType (byte, must be 2 for UPDATE)\n  \"actionType\": 2,\n  \n  // REQUIRED: IsAuth - Authorization action (byte, must be 2 for Deny)\n  \"isAuth\": 2,\n  \n  // REQUIRED: Remarks - Reason for denial (max 200 chars)\n  \"remarks\": \"Stock control not approved - invalid business reason\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/stock-exposure/wf/authorize",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stock-exposure",
+										"wf",
+										"authorize"
 									]
 								}
 							},
