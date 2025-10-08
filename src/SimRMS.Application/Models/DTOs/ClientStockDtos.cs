@@ -26,6 +26,8 @@ namespace SimRMS.Application.Models.DTOs
         public string StockCode { get; set; } = null!;
         public string XchgCode { get; set; } = null!;
         public int OpenFreeBalance { get; set; }
+        public int PendingClntFreeBalance { get; set; }
+
         public int? OpenPurchaseQty { get; set; }
         public int? OpenSalesQty { get; set; }
         public int? TodayEarmarkedQty { get; set; }
