@@ -141,7 +141,7 @@ public class CommonDataService : ICommonDataService
             INNER JOIN MstCoBrch mcb ON ui.CoBrchCode = mcb.CoBrchCode
             WHERE ui.IsAuth = 1
                 AND ui.IsDel = 0
-                AND ui.UsrExpiryDate IS NOT NULL
+                AND ui.UsrExpiryDate IS NULL
             ORDER BY ui.UsrID ASC";
 
         try

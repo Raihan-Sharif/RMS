@@ -242,9 +242,9 @@ public class ClientService : IClientService
 
             _logger.LogInformation("Successfully created Client with ClntCode: {ClntCode}", request.ClntCode);
 
-            // Get the list to find the newly created client by ClntCode and CoBrchCode
-            var clientList = await GetClientListAsync(1, 1, null, null, null, request.ClntCode, cancellationToken);
-            var createdClient = clientList.Data.FirstOrDefault(c => c.ClntCode == request.ClntCode && c.CoBrchCode == request.CoBrchCode);
+            string gcifId = await GetGCIFByClientCodeAsync(request.CoBrchCode,request.ClntCode);
+
+            var createdClient = await GetClientByIdAsync(gcifId);
 
             return createdClient ?? throw new DomainException("Failed to retrieve created client");
         }
@@ -562,6 +562,7 @@ public class ClientService : IClientService
             {
                 Action = (int)ActionTypeEnum.UPDATE,
                 GCIF = gcif,
+                ClntCode = request.ClntCode,
                 CoBrchCode = request.CoBrchCode,
                 IPAddress = _currentUserService.GetClientIPAddress(),
                 AuthID = _currentUserService.UserId,
@@ -609,5 +610,42 @@ public class ClientService : IClientService
         }
     }
 
+    #endregion
+
+    #region Private Method
+    public async Task<string> GetGCIFByClientCodeAsync(string branchCode, string clientCode, CancellationToken cancellationToken = default)
+    {
+        var sql = @"
+        SELECT CM.GCIF
+        FROM CLNTMASTER CM
+        INNER JOIN CLNTACCT CA ON CM.GCIF = CA.GCIF
+        WHERE 1=1";
+
+        var parameters = new Dictionary<string, object>();
+
+        if (!string.IsNullOrWhiteSpace(branchCode))
+        {
+            sql += " AND CA.COBRCHCODE = @BranchCode";
+            parameters.Add("BranchCode", branchCode);
+        }
+
+        if (!string.IsNullOrWhiteSpace(clientCode))
+        {
+            sql += " AND CA.CLNTCODE = @ClientCode";
+            parameters.Add("ClientCode", clientCode);
+        }
+
+        try
+        {
+            var gcifResult = await _repository.QuerySingleAsync<string>(sql, parameters, false, cancellationToken);
+
+            return gcifResult ?? string.Empty;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting GCIF by client code. BranchCode: {BranchCode}, ClientCode: {ClientCode}", branchCode, clientCode);
+            throw;
+        }
+    }
     #endregion
 }

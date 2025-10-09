@@ -284,10 +284,10 @@ public class GenericRepository : IGenericRepository
                     {
                         totalCount = reader.GetInt32("TotalCount");
                     }
-                    else
-                    {
-                        totalCount = reader.GetInt32(0); // First column should be count
-                    }
+                    //else
+                    //{
+                    //    totalCount = reader.GetInt32(0); // First column should be count
+                    //}
 
                     _logger.LogDebug("Retrieved TotalCount from second result set: {TotalCount}", totalCount);
                 }

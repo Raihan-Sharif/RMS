@@ -155,12 +155,12 @@ namespace SimRMS.Application.Validators
                 .MaximumLength(20).WithMessage("CDS number cannot exceed 20 characters");
         }
 
-        public static IRuleBuilderOptions<T, string?> ValidClientDealerCode<T>(this IRuleBuilder<T, string?> ruleBuilder)
-        {
-            return ruleBuilder
-                .MaximumLength(25).WithMessage("Dealer code cannot exceed 25 characters")
-                .Matches("^[A-Z0-9]*$").WithMessage("Dealer code can only contain uppercase letters and numbers");
-        }
+        //public static IRuleBuilderOptions<T, string?> ValidClientDealerCode<T>(this IRuleBuilder<T, string?> ruleBuilder)
+        //{
+        //    return ruleBuilder
+        //        .MaximumLength(25).WithMessage("Dealer code cannot exceed 25 characters")
+        //        .Matches("^[A-Z0-9]*$").WithMessage("Dealer code can only contain uppercase letters and numbers");
+        //}
 
         public static IRuleBuilderOptions<T, decimal> ValidCommission<T>(this IRuleBuilder<T, decimal> ruleBuilder)
         {
@@ -227,10 +227,10 @@ namespace SimRMS.Application.Validators
             RuleFor(x => x.ClntCDSNo).ValidCDSNo()
                 .When(x => !string.IsNullOrEmpty(x.ClntCDSNo));
 
-            RuleFor(x => x.ClntDlrCode).ValidClientDealerCode()
+            RuleFor(x => x.ClntDlrCode).ValidUsrID()
                 .When(x => !string.IsNullOrEmpty(x.ClntDlrCode));
 
-            RuleFor(x => x.ClntReassignDlrCode).ValidClientDealerCode()
+            RuleFor(x => x.ClntReassignDlrCode).ValidUsrID()
                 .When(x => !string.IsNullOrEmpty(x.ClntReassignDlrCode));
 
             RuleFor(x => x.ClientCommission).ValidCommission();
@@ -291,10 +291,10 @@ namespace SimRMS.Application.Validators
             RuleFor(x => x.ClntCDSNo).ValidCDSNo()
                 .When(x => !string.IsNullOrEmpty(x.ClntCDSNo));
 
-            RuleFor(x => x.ClntDlrCode).ValidClientDealerCode()
+            RuleFor(x => x.ClntDlrCode).ValidUsrID()
                 .When(x => !string.IsNullOrEmpty(x.ClntDlrCode));
 
-            RuleFor(x => x.ClntReassignDlrCode).ValidClientDealerCode()
+            RuleFor(x => x.ClntReassignDlrCode).ValidUsrID()
                 .When(x => !string.IsNullOrEmpty(x.ClntReassignDlrCode));
 
             RuleFor(x => x.ClientCommission).ValidCommissionNullable()
@@ -357,6 +357,7 @@ namespace SimRMS.Application.Validators
         public AuthorizeClientRequestValidator()
         {
             RuleFor(x => x.GCIF).ValidGCIF();
+            RuleFor(x => x.ClntCode).ValidClientCode();
 
             RuleFor(x => x.ActionType).ValidActionTypeUpdate();
 

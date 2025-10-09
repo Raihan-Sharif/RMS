@@ -110,6 +110,7 @@ namespace SimRMS.Application.Models.Requests
     public class AuthorizeClientRequest
     {
         public string GCIF { get; set; } = null!;
+        public string ClntCode { get; set; } = null!;
         public string? CoBrchCode { get; set; }
         public byte ActionType { get; set; } = (byte)ActionTypeEnum.UPDATE;
         public byte IsAuth { get; set; } = (byte)AuthTypeEnum.Approve;
