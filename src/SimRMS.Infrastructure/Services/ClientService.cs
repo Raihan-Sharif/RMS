@@ -637,7 +637,8 @@ public class ClientService : IClientService
 
         try
         {
-            var gcifResult = await _repository.QuerySingleAsync<string>(sql, parameters, false, cancellationToken);
+            // Use ExecuteScalarAsync for primitive/scalar types like string
+            var gcifResult = await _repository.ExecuteScalarAsync<string>(sql, parameters, false, cancellationToken);
 
             return gcifResult ?? string.Empty;
         }
