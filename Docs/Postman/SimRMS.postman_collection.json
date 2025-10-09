@@ -6768,7 +6768,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"xchgCode\": \"DSE\",\n  \"stkCode\": \"NEWSTK\",\n  \"stkLName\": \"New Stock Limited\",\n  \"stkSName\": \"NEWSTK\",\n  \"stkLot\": 1,\n  \"isin\": \"BD0009876543\",\n  \"stkBrdCode\": \"100\",\n  \"stkSectCode\": \"1\",\n  \"currency\": \"BDT\",\n  \"securityType\": \"E\",\n  \"stkIsSyariah\": \"N\",\n  \"stkParValue\": 10.00,\n  \"stkLastDonePrice\": 25.50,\n  \"stkClosePrice\": 25.00,\n  \"stkRefPrc\": 25.25,\n  \"stkUpperLmtPrice\": 27.75,\n  \"stkLowerLmtPrice\": 22.75,\n  \"yearHigh\": 30.00,\n  \"yearLow\": 18.00,\n  \"stkVolumeTraded\": 50000,\n  \"listingDate\": \"2023-06-15T00:00:00\",\n  \"remarks\": \"New stock listing\"\n}",
+									"raw": "{\n  \"xchgCode\": \"DSE\",\n  \"stkCode\": \"Fintech'PB\",\n  \"stkLName\": \"Fintech Limited\",\n  \"stkSName\": \"Fintech\",\n  \"stkLot\": 1,\n  \"isin\": \"BD0009004565\",\n  \"stkBrdCode\": \"100\",\n  \"stkSectCode\": \"1\",\n  \"currency\": \"BDT\",\n  \"securityType\": \"E\",\n  \"stkIsSyariah\": \"N\",\n  \"stkParValue\": 10.00,\n  \"stkLastDonePrice\": 25.50,\n  \"stkClosePrice\": 25.00,\n  \"stkRefPrc\": 25.25,\n  \"stkUpperLmtPrice\": 27.75,\n  \"stkLowerLmtPrice\": 22.75,\n  \"yearHigh\": 30.00,\n  \"yearLow\": 18.00,\n  \"stkVolumeTraded\": 50000,\n  \"listingDate\": \"2023-06-15T00:00:00\",\n  \"remarks\": \"New stock listing\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -6818,7 +6818,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"xchgCode\": \"DSE\",\n  \"stkCode\": \"NEWSTK\",\n  \"stkLName\": \"Updated Stock Name\",\n  \"stkSName\": \"UPDATED\",\n\n\n  \"stkLot\": 1,\n  \"isin\": \"BD0009876543\",\n  \"stkBrdCode\": \"100\",\n  \"stkSectCode\": \"1\",\n  \"currency\": \"BDT\",\n  \"securityType\": \"E\",\n  \"stkIsSyariah\": \"N\",\n\n\n  \"stkLastDonePrice\": 26.75,\n  \"stkClosePrice\": 26.50,\n  \"stkRefPrc\": 26.60,\n  \"stkVolumeTraded\": 75000,\n\n\n  \"stkParValue\": 10.00,\n\n  \"stkUpperLmtPrice\": 27.75,\n  \"stkLowerLmtPrice\": 22.75,\n  \"yearHigh\": 30.00,\n  \"yearLow\": 18.00,\n  \"remarks\": \"Stock information updated\"\n\n\n}",
+									"raw": "{\n  \"xchgCode\": \"DSE\",\n  \"stkCode\": \"Fintech'PB\",\n  \"stkLName\": \"Updated Stock Name\",\n  \"stkSName\": \"UPDATED\",\n\n\n  \"stkLot\": 1,\n  \"isin\": \"BD0009004566\",\n  \"stkBrdCode\": \"100\",\n  \"stkSectCode\": \"1\",\n  \"currency\": \"BDT\",\n  \"securityType\": \"E\",\n  \"stkIsSyariah\": \"N\",\n\n\n  \"stkLastDonePrice\": 26.75,\n  \"stkClosePrice\": 26.50,\n  \"stkRefPrc\": 26.60,\n  \"stkVolumeTraded\": 75000,\n\n\n  \"stkParValue\": 10.00,\n\n  \"stkUpperLmtPrice\": 27.75,\n  \"stkLowerLmtPrice\": 22.75,\n  \"yearHigh\": 30.00,\n  \"yearLow\": 18.00,\n  \"remarks\": \"Stock information updated\"\n\n\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -6845,7 +6845,7 @@
 										},
 										{
 											"key": "stkCode",
-											"value": "NEWSTK"
+											"value": "Fintech'PB"
 										}
 									]
 								}
@@ -6880,7 +6880,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"remarks\": \"Stock deletion requested\"\n}",
+									"raw": "{\n  \"xchgCode\": \"DSE\",\n  \"stkCode\": \"Fintech'PB\",\n  \"remarks\": \"Stock deletion requested\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -6907,7 +6907,7 @@
 										},
 										{
 											"key": "stkCode",
-											"value": "NEWSTK"
+											"value": "Fintech'PB"
 										}
 									]
 								}
@@ -7173,7 +7173,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"xchgCode\":\"DSE\",\n  \"stkCode\":\"NEWSTK\",\n  \"actionType\": 2,\n  \"isAuth\": 1,\n  \"remarks\": \"Stock authorized for trading\"\n}",
+									"raw": "{\n  \"xchgCode\":\"DSE\",\n  \"stkCode\":\"Fintech'PB\",\n  \"actionType\": 2,\n  \"isAuth\": 1,\n  \"remarks\": \"Stock authorized for trading\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -7202,7 +7202,7 @@
 										},
 										{
 											"key": "stkCode",
-											"value": "NEWSTK",
+											"value": "Fintech'PB",
 											"description": "Stock Code to authorize"
 										}
 									]
@@ -8782,7 +8782,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"username\": \"EFTEST03\",\n  \"password\": \"password\"\n}",
+							"raw": "{\n  \"username\": \"EFTEST01\",\n  \"password\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
