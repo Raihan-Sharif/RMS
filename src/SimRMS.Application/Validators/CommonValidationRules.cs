@@ -325,7 +325,7 @@ namespace SimRMS.Application.Validators
             return ruleBuilder
                 .NotEmpty().WithMessage("User ID is required")
                 .MaximumLength(25).WithMessage("User ID cannot exceed 25 characters")
-                .Matches("^[A-Za-z0-9_]+$").WithMessage("User ID can only contain letters, numbers, and underscores");
+                .Matches("^[A-Za-z0-9_.]+$").WithMessage("User ID can only contain letters, numbers, underscores, and dots");
         }
 
         /// <summary>
