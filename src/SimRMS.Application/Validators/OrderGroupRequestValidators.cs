@@ -67,11 +67,13 @@ namespace SimRMS.Application.Validators
         public OrderGroupUserRequestValidator()
         {
             RuleFor(x => x.UsrID).ValidUsrID();
-            
+
             // Business rule: At least one permission must be granted
-            RuleFor(x => x)
-                .Must(OrderGroupValidationRules.HaveAtLeastOnePermission)
-                .WithMessage("At least one permission (ViewOrder, PlaceOrder, ViewClient, or ModifyOrder) must be granted for user {PropertyValue.UsrID}");
+            //RuleFor(x => x)
+            //    .Must(OrderGroupValidationRules.HaveAtLeastOnePermission)
+            //    .WithMessage("At least one permission (ViewOrder, PlaceOrder, ViewClient, or ModifyOrder) must be granted for user {PropertyValue.UsrID}");
+
+            // now omit this business rule to allow users with no permissions (for delete operations)
         }
     }
 

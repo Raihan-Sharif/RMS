@@ -52,8 +52,45 @@ namespace SimRMS.Application.Models.DTOs
         public string? HasAccount { get; set; }
         public string? AuthorizationStatus { get; set; }
         public string? RecordStatus { get; set; }
-        public new string? MakeBy { get; set; }
-        public new string? AuthBy { get; set; }
+
+
+        public int CM_MakerId { get; set; } // int, not nullable
+
+        public DateTime CM_ActionDt { get; set; } // datetime, not nullable
+
+        public DateTime CM_TransDt { get; set; } // date, not nullable
+
+        public byte CM_ActionType { get; set; } // tinyint, not nullable (1: insert, 2: update, 3: delete)
+
+        public int? CM_AuthId { get; set; } // int, nullable
+
+        public DateTime? CM_AuthDt { get; set; } // datetime, nullable
+
+        public DateTime? AuthTransDt { get; set; } // date, nullable
+
+        public byte CM_IsAuth { get; set; } // tinyint, not nullable (0: Unauth, 1: Auth, 2: Denied)
+
+        public byte CM_AuthLevel { get; set; } // tinyint, not nullable (1: First, 2: Second, 3: Third)
+        public string? CM_Remarks { get; set; } // varchar(200), nullable
+
+
+        public int CA_MakerId { get; set; } // int, not nullable
+
+        public DateTime CA_ActionDt { get; set; } // datetime, not nullable
+
+        public DateTime CA_TransDt { get; set; } // date, not nullable
+
+        public byte CA_ActionType { get; set; } // tinyint, not nullable (1: insert, 2: update, 3: delete)
+
+        public int? CA_AuthId { get; set; } // int, nullable
+
+        public DateTime? CA_AuthDt { get; set; } // datetime, nullable
+
+        public byte CA_IsAuth { get; set; } // tinyint, not nullable (0: Unauth, 1: Auth, 2: Denied)
+
+        public byte CA_AuthLevel { get; set; } // tinyint, not nullable (1: First, 2: Second, 3: Third)
+        public string? CA_Remarks { get; set; } // varchar(200), nullable
+
     }
 
     public class ClientUpdateDto
