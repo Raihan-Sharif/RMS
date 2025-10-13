@@ -71,7 +71,7 @@ public class ClientExposureController : BaseController
         [FromQuery] string? searchTerm = null,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting ClientExposure list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+        _logger.LogInformation("Getting Client Exposure list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
         var result = await _clientExposureService.GetClientExposureListAsync(
             pageNumber: pageNumber,
@@ -101,7 +101,7 @@ public class ClientExposureController : BaseController
         [FromRoute, Required, MaxLength(6)] string coBrchCode,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting ClientExposure by ID: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+        _logger.LogInformation("Getting Client Exposure by ID: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
 
         var exposure = await _clientExposureService.GetClientExposureByIdAsync(clntCode, coBrchCode, cancellationToken);
 
@@ -132,7 +132,7 @@ public class ClientExposureController : BaseController
         [FromBody, Required] UpdateClientExposureRequest request,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Updating ClientExposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+        _logger.LogInformation("Updating Client Exposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
 
         request.ClntCode = clntCode;
         request.CoBrchCode = coBrchCode;
@@ -230,7 +230,7 @@ public class ClientExposureController : BaseController
         else if (isAuth == (byte)AuthTypeEnum.Deny)
             authAction = AuthTypeEnum.Deny.ToString();
 
-        _logger.LogInformation("Getting {authAction} ClientExposure list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize, authAction);
+        _logger.LogInformation("Getting {authAction} Client Exposure list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize, authAction);
 
         var result = await _clientExposureService.GetClientExposureUnAuthDeniedListAsync(
             pageNumber: pageNumber,
@@ -269,7 +269,7 @@ public class ClientExposureController : BaseController
         else if (request.IsAuth == (byte)AuthTypeEnum.Deny)
             authAction = AuthTypeEnum.Deny.ToString();
 
-        _logger.LogInformation("Authorizing ClientExposure in workflow: {ClntCode}, {CoBrchCode} Auth Action: {authAction}", clntCode, coBrchCode, authAction);
+        _logger.LogInformation("Authorizing Client Exposure in workflow: {ClntCode}, {CoBrchCode} Auth Action: {authAction}", clntCode, coBrchCode, authAction);
 
         request.ClntCode = clntCode;
         request.CoBrchCode = coBrchCode;

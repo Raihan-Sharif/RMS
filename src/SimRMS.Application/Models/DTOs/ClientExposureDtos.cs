@@ -27,6 +27,8 @@ namespace SimRMS.Application.Models.DTOs
         public string? CoBrchDesc { get; set; }
         public decimal ClntExpsBuyAmt { get; set; }
         public decimal ClntExpsBuyAmtTopUp { get; set; }
+        public decimal PendingClntExpsBuyAmtTopUp { get; set; }
+        
         public bool ClntExpsWithLimit { get; set; }
         public bool ClntExpsWithShrLimit { get; set; }
         public decimal PortfolioMargin { get; set; }

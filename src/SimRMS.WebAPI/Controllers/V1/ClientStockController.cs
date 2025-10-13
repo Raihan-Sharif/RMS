@@ -131,7 +131,7 @@ public class ClientStockController : BaseController
 
         if (clientStock == null)
         {
-            return NotFound($"Client Stock not found for Branch: {branchCode}, Client: {clientCode}, Stock: {stockCode}");
+            return NotFound($"Client Stock not found for Client: {clientCode}, Stock: {stockCode}");
         }
 
         return Ok(clientStock, "Client Stock retrieved successfully");

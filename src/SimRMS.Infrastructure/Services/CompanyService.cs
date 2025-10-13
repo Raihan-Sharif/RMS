@@ -390,7 +390,7 @@ public class CompanyService : ICompanyService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Update validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Update Company validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -407,7 +407,7 @@ public class CompanyService : ICompanyService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Authorization validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Authorization Company validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -424,7 +424,7 @@ public class CompanyService : ICompanyService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Workflow list validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Workflow Company list validation failed") { ValidationErrors = errors };
         }
     }
 

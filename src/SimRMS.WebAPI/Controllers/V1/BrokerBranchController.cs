@@ -69,7 +69,7 @@ public class BrokerBranchController : BaseController
         [FromQuery] string? coCode = null,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting MstCoBrch list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+        _logger.LogInformation("Getting Branches list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
         var result = await _brokerBranchService.GetMstCoBrchListAsync(
             pageNumber: pageNumber,
@@ -78,7 +78,7 @@ public class BrokerBranchController : BaseController
             coCode: coCode,
             cancellationToken: cancellationToken);
 
-        return Ok(result, "Market Stock Company Branches retrieved successfully");
+        return Ok(result, "Branches retrieved successfully");
     }
 
     /// <summary>
@@ -98,16 +98,16 @@ public class BrokerBranchController : BaseController
         [FromRoute, Required, MaxLength(6)] string coBrchCode,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting MstCoBrch by ID: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+        _logger.LogInformation("Getting Branches by ID: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
 
         var branch = await _brokerBranchService.GetMstCoBrchByIdAsync(coCode, coBrchCode, cancellationToken);
 
         if (branch == null)
         {
-            return NotFound<MstCoBrchDto>($"Market Stock Company Branch with code '{coCode}-{coBrchCode}' not found");
+            return NotFound<MstCoBrchDto>($"Branch with code '{coCode}-{coBrchCode}' not found");
         }
 
-        return Ok(branch, "Market Stock Company Branch retrieved successfully");
+        return Ok(branch, "Branch retrieved successfully");
     }
 
     /// <summary>
@@ -136,7 +136,7 @@ public class BrokerBranchController : BaseController
             {
                 Success = true,
                 Data = createdBranch,
-                Message = "Market Stock Company Branch created successfully"
+                Message = "Branch created successfully"
             });
     }
 
@@ -159,14 +159,14 @@ public class BrokerBranchController : BaseController
         [FromBody, Required] UpdateMstCoBrchRequest request,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Updating MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+        _logger.LogInformation("Updating Branch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
 
         request.CoCode = coCode;
         request.CoBrchCode = coBrchCode;
 
         var updatedBranch = await _brokerBranchService.UpdateMstCoBrchAsync(coCode, coBrchCode, request, cancellationToken);
 
-        return Ok(updatedBranch, "Market Stock Company Branch updated successfully");
+        return Ok(updatedBranch, "Branch updated successfully");
     }
 
     /// <summary>
@@ -188,7 +188,7 @@ public class BrokerBranchController : BaseController
         [FromBody] DeleteMstCoBrchRequest? request = null,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Deleting MstCoBrch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+        _logger.LogInformation("Deleting Branch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
 
         request ??= new DeleteMstCoBrchRequest { CoCode = coCode, CoBrchCode = coBrchCode };
         request.CoCode = coCode;
@@ -198,10 +198,10 @@ public class BrokerBranchController : BaseController
 
         if (!result)
         {
-            return BadRequest<object>("Failed to delete Market Stock Company Branch");
+            return BadRequest<object>("Failed to delete Branch");
         }
 
-        return Ok(new object(), "Market Stock Company Branch deleted successfully");
+        return Ok(new object(), "Branch deleted successfully");
     }
 
     /// <summary>
@@ -264,7 +264,7 @@ public class BrokerBranchController : BaseController
             isAuth: isAuth,
             cancellationToken: cancellationToken);
 
-        return Ok(result, $"Market Stock Company Branches {authAction} data retrieved successfully");
+        return Ok(result, $"Branches {authAction} data retrieved successfully");
     }
 
     /// <summary>
@@ -292,7 +292,7 @@ public class BrokerBranchController : BaseController
         else if (request.IsAuth == (byte)AuthTypeEnum.Deny)
             authAction = AuthTypeEnum.Deny.ToString();
 
-        _logger.LogInformation("Authorizing MstCoBrch in workflow: {CoCode}-{CoBrchCode} Auth Action: {authAction}", coCode, coBrchCode, authAction);
+        _logger.LogInformation("Authorizing Branch in workflow: {CoCode}-{CoBrchCode} Auth Action: {authAction}", coCode, coBrchCode, authAction);
 
         request.CoCode = coCode;
         request.CoBrchCode = coBrchCode;
@@ -301,10 +301,10 @@ public class BrokerBranchController : BaseController
 
         if (!result)
         {
-            return BadRequest<object>($"Failed to {authAction} Market Company Branch");
+            return BadRequest<object>($"Failed to {authAction} Branch");
         }
 
-        return Ok(new object(), $"Market Stock Company Branch {authAction} successfully");
+        return Ok(new object(), $"Branch {authAction} successfully");
     }
 
     #endregion

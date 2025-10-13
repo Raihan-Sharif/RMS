@@ -93,7 +93,7 @@ public class UserExposureController : BaseController
         [FromRoute, Required, MaxLength(25)] string usrId,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting UserExposure by ID: {UsrId}", usrId);
+        _logger.LogInformation("Getting User Exposure by ID: {UsrId}", usrId);
 
         var exposure = await _userExposureService.GetUserExposureByIdAsync(usrId, cancellationToken);
 
@@ -120,7 +120,7 @@ public class UserExposureController : BaseController
         [FromBody, Required] CreateUserExposureRequest request,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Creating UserExposure: {UsrId}", request.UsrId);
+        _logger.LogInformation("Creating User Exposure: {UsrId}", request.UsrId);
 
         var createdExposure = await _userExposureService.CreateUserExposureAsync(request, cancellationToken);
 
@@ -152,7 +152,7 @@ public class UserExposureController : BaseController
         [FromBody, Required] UpdateUserExposureRequest request,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Updating UserExposure: {UsrId}", usrId);
+        _logger.LogInformation("Updating User Exposure: {UsrId}", usrId);
 
         request.UsrId = usrId;
 
@@ -178,7 +178,7 @@ public class UserExposureController : BaseController
         [FromBody] DeleteUserExposureRequest? request = null,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Deleting UserExposure: {UsrId}", usrId);
+        _logger.LogInformation("Deleting User Exposure: {UsrId}", usrId);
 
         request ??= new DeleteUserExposureRequest { UsrId = usrId };
         request.UsrId = usrId;
@@ -240,7 +240,7 @@ public class UserExposureController : BaseController
         else if (isAuth == (byte)AuthTypeEnum.Deny)
             authAction = AuthTypeEnum.Deny.ToString();
 
-        _logger.LogInformation("Getting {authAction} UserExposure list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize, authAction);
+        _logger.LogInformation("Getting {authAction} User Exposure list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize, authAction);
 
         var result = await _userExposureService.GetUserExposureUnAuthDeniedListAsync(
             pageNumber: pageNumber,
@@ -275,7 +275,7 @@ public class UserExposureController : BaseController
         else if (request.IsAuth == (byte)AuthTypeEnum.Deny)
             authAction = AuthTypeEnum.Deny.ToString();
 
-        _logger.LogInformation("Authorizing UserExposure in workflow: {UsrId} Auth Action: {authAction}", usrId, authAction);
+        _logger.LogInformation("Authorizing User Exposure in workflow: {UsrId} Auth Action: {authAction}", usrId, authAction);
 
         request.UsrId = usrId;
 

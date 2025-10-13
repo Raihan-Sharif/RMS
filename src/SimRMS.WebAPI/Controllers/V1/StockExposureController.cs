@@ -73,7 +73,7 @@ public class StockExposureController : BaseController
         [FromQuery] string? searchTerm = null,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting StockExposure list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+        _logger.LogInformation("Getting Stock Exposure list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
         var result = await _stockExposureService.GetStockExposureListAsync(
             pageNumber: pageNumber,
@@ -102,7 +102,7 @@ public class StockExposureController : BaseController
         [FromBody, Required] GetStockExposureByKeyRequest request,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting StockExposure by key: DataType={DataType}, StkCode={StkCode}",
+        _logger.LogInformation("Getting Stock Exposure by key: DataType={DataType}, StkCode={StkCode}",
             request.DataType, request.StkCode);
 
         var exposure = await _stockExposureService.GetStockExposureByKeyAsync(request, cancellationToken);
@@ -129,7 +129,7 @@ public class StockExposureController : BaseController
         [FromBody, Required] CreateStockExposureRequest request,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Creating StockExposure: DataType={DataType}, StkCode={StkCode}",
+        _logger.LogInformation("Creating Stock Exposure: DataType={DataType}, StkCode={StkCode}",
             request.DataType, request.StkCode);
 
         var createdExposure = await _stockExposureService.CreateStockExposureAsync(request, cancellationToken);
@@ -153,7 +153,7 @@ public class StockExposureController : BaseController
         [FromBody, Required] UpdateStockExposureRequest request,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Updating StockExposure: DataType={DataType}, StkCode={StkCode}",
+        _logger.LogInformation("Updating Stock Exposure: DataType={DataType}, StkCode={StkCode}",
             request.DataType, request.StkCode);
 
         var updatedExposure = await _stockExposureService.UpdateStockExposureAsync(request, cancellationToken);
@@ -176,7 +176,7 @@ public class StockExposureController : BaseController
         [FromBody, Required] DeleteStockExposureRequest request,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Deleting StockExposure: DataType={DataType}, StkCode={StkCode}",
+        _logger.LogInformation("Deleting Stock Exposure: DataType={DataType}, StkCode={StkCode}",
             request.DataType, request.StkCode);
 
         var result = await _stockExposureService.DeleteStockExposureAsync(request, cancellationToken);
@@ -223,7 +223,7 @@ public class StockExposureController : BaseController
         else if (isAuth == (byte)AuthTypeEnum.Deny)
             authAction = AuthTypeEnum.Deny.ToString();
 
-        _logger.LogInformation("Getting {authAction} StockExposure list for workflow - Page: {PageNumber}, Size: {PageSize}",
+        _logger.LogInformation("Getting {authAction} Stock Exposure list for workflow - Page: {PageNumber}, Size: {PageSize}",
             pageNumber, pageSize, authAction);
 
         var result = await _stockExposureService.GetStockExposureUnAuthDeniedListAsync(
@@ -260,7 +260,7 @@ public class StockExposureController : BaseController
         else if (request.IsAuth == (byte)AuthTypeEnum.Deny)
             authAction = AuthTypeEnum.Deny.ToString();
 
-        _logger.LogInformation("Authorizing StockExposure in workflow: DataType={DataType}, StkCode={StkCode} Auth Action: {authAction}",
+        _logger.LogInformation("Authorizing Stock Exposure in workflow: DataType={DataType}, StkCode={StkCode} Auth Action: {authAction}",
             request.DataType, request.StkCode, authAction);
 
         var result = await _stockExposureService.AuthorizeStockExposureAsync(request, cancellationToken);

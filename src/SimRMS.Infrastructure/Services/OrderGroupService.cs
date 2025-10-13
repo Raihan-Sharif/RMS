@@ -70,7 +70,7 @@ public class OrderGroupService : IOrderGroupService
     {
         try
         {
-            _logger.LogInformation("Getting Order Group list - Page: {PageNumber}, Size: {PageSize}, Search: {SearchText}", pageNumber, pageSize, SearchText);
+            _logger.LogInformation("Getting Order Group(User Group) list - Page: {PageNumber}, Size: {PageSize}, Search: {SearchText}", pageNumber, pageSize, SearchText);
 
             var parameters = new
             {
@@ -146,8 +146,8 @@ public class OrderGroupService : IOrderGroupService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting Order Group list");
-            throw new DomainException($"Failed to retrieve Order Group list: {ex.Message}");
+            _logger.LogError(ex, "Error getting Order Group(User Group) list");
+            throw new DomainException($"Failed to retrieve Order Group(User Group) list: {ex.Message}");
         }
     }
 
@@ -155,7 +155,7 @@ public class OrderGroupService : IOrderGroupService
     {
         try
         {
-            _logger.LogInformation("Getting Order Group user by code: {GroupCode}, User: {UsrId}", groupCode, usrId);
+            _logger.LogInformation("Getting Order Group(User Group) user by code: {GroupCode}, User: {UsrId}", groupCode, usrId);
 
             var parameters = new
             {
@@ -175,8 +175,8 @@ public class OrderGroupService : IOrderGroupService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting OrderGroup by code: {GroupCode}", groupCode);
-            throw new DomainException($"Failed to retrieve OrderGroup: {ex.Message}");
+            _logger.LogError(ex, "Error getting Order Group(User Group) by code: {GroupCode}", groupCode);
+            throw new DomainException($"Failed to retrieve Order Group(User Group): {ex.Message}");
         }
     }
 
@@ -184,7 +184,7 @@ public class OrderGroupService : IOrderGroupService
     {
         try
         {
-            _logger.LogInformation("Getting Order Group by code: {GroupCode}", groupCode);
+            _logger.LogInformation("Getting Order Group(User Group) by code: {GroupCode}", groupCode);
 
             var parameters = new
             {
@@ -249,8 +249,8 @@ public class OrderGroupService : IOrderGroupService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting OrderGroup by code: {GroupCode}", groupCode);
-            throw new DomainException($"Failed to retrieve OrderGroup: {ex.Message}");
+            _logger.LogError(ex, "Error getting Order Group(User Group) by code: {GroupCode}", groupCode);
+            throw new DomainException($"Failed to retrieve Order Group(User Group): {ex.Message}");
         }
     }
 
@@ -263,7 +263,7 @@ public class OrderGroupService : IOrderGroupService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error checking OrderGroup existence: {GroupCode}", groupCode);
+            _logger.LogError(ex, "Error checking Order Group(User Group) existence: {GroupCode}", groupCode);
             return false;
         }
     }
@@ -272,7 +272,7 @@ public class OrderGroupService : IOrderGroupService
     {
         try
         {
-            _logger.LogInformation("Checking delete validation for Order Group: {GroupCode}", groupCode);
+            _logger.LogInformation("Checking delete validation for Order Group(User Group): {GroupCode}", groupCode);
 
             // Get order group with all users to count them
             var orderGroups = await GetOrderGroupByCodeAsync(groupCode, cancellationToken);
@@ -284,7 +284,7 @@ public class OrderGroupService : IOrderGroupService
                     GroupCode = groupCode,
                     UserCount = 0,
                     CanDelete = false,
-                    ValidationMessage = $"Order Group with code '{groupCode}' not found"
+                    ValidationMessage = $"Order Group(User Group) with code '{groupCode}' not found"
                 };
             }
 
@@ -297,19 +297,19 @@ public class OrderGroupService : IOrderGroupService
                 UserCount = userCount,
                 CanDelete = userCount == 0 || !string.IsNullOrEmpty(usrId),
                 ValidationMessage = userCount > 0 
-                    ? $"Cannot delete group. Please remove all {userCount} user(s) first."
-                    : "Group can be deleted safely"
+                    ? $"Cannot delete Order Group(User Group). Please remove all {userCount} user(s) first."
+                    : "Order Group(User Group) can be deleted safely"
             };
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error checking delete validation for Order Group: {GroupCode}", groupCode);
+            _logger.LogError(ex, "Error checking delete validation for Order Group(User Group): {GroupCode}", groupCode);
             return new OrderGroupDeleteResultDto
             {
                 GroupCode = groupCode,
                 UserCount = -1,
                 CanDelete = false,
-                ValidationMessage = $"Error validating group deletion: {ex.Message}"
+                ValidationMessage = $"Error validating Order Group(User Group) deletion: {ex.Message}"
             };
         }
     }
@@ -322,7 +322,7 @@ public class OrderGroupService : IOrderGroupService
     {
         await ValidateCreateRequestAsync(request, cancellationToken);
 
-        _logger.LogInformation("Creating Order Group with nested users: {GroupDesc}", request.GroupDesc);
+        _logger.LogInformation("Creating Order Group(User Group) with nested users: {GroupDesc}", request.GroupDesc);
 
         await _unitOfWork.BeginTransactionAsync(cancellationToken);
         
@@ -342,7 +342,7 @@ public class OrderGroupService : IOrderGroupService
                 }).ToList();
                 
                 orderGroupDtlData = JsonSerializer.Serialize(userDataForJson);
-                _logger.LogInformation("Serialized user data for Order Group: {UserData}", orderGroupDtlData);
+                _logger.LogInformation("Serialized user data for Order Group(User Group): {UserData}", orderGroupDtlData);
             }
 
             var parameters = new
@@ -379,25 +379,25 @@ public class OrderGroupService : IOrderGroupService
 
             if (rowsAffected < 1)
             {
-                _logger.LogWarning("Failed to create Order Group: {rowsAffected}", rowsAffected);
-                throw new DomainException($"Failed to create Order Group rows Affected: {rowsAffected}");
+                _logger.LogWarning("Failed to create Order Group(User Group): {rowsAffected}", rowsAffected);
+                throw new DomainException($"Failed to create Order Group(User Group) rows Affected: {rowsAffected}");
             }
 
             await _unitOfWork.CommitTransactionAsync(cancellationToken);
 
             // Return the created order group with nested structure
             var createdGroup = await GetOrderGroupByCodeAsync(newGroupCode, cancellationToken);
-            return createdGroup ?? throw new DomainException("Failed to retrieve created Order Group");
+            return createdGroup ?? throw new DomainException("Failed to retrieve created Order Group(User Group)");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error creating Order Group");
+            _logger.LogError(ex, "Error creating Order Group(User Group)");
             await _unitOfWork.RollbackTransactionAsync(cancellationToken);
             
             if (ex is DomainException)
                 throw;
             
-            throw new DomainException($"Failed to create Order Group: {ex.Message}");
+            throw new DomainException($"Failed to create Order Group(User Group): {ex.Message}");
         }
     }
 
@@ -405,7 +405,7 @@ public class OrderGroupService : IOrderGroupService
     {
         await ValidateUpdateRequestAsync(request, cancellationToken);
 
-        _logger.LogInformation("Updating Order Group with nested users: {GroupCode}", groupCode);
+        _logger.LogInformation("Updating Order Group(User Group) with nested users: {GroupCode}", groupCode);
 
         await _unitOfWork.BeginTransactionAsync(cancellationToken);
         
@@ -425,7 +425,7 @@ public class OrderGroupService : IOrderGroupService
                 }).ToList();
                 
                 orderGroupDtlData = JsonSerializer.Serialize(userDataForJson);
-                _logger.LogInformation("Serialized user data for Order Group update: {UserData}", orderGroupDtlData);
+                _logger.LogInformation("Serialized user data for Order Group(User Group) update: {UserData}", orderGroupDtlData);
             }
 
             var parameters = new
@@ -461,25 +461,25 @@ public class OrderGroupService : IOrderGroupService
 
             if (rowsAffected < 0)
             {
-                _logger.LogWarning("Failed to update Order Group rowsAffected: {rowsAffected}", rowsAffected);
-                throw new DomainException($"Failed to update Order Group rows Affected: {rowsAffected}");
+                _logger.LogWarning("Failed to update Order Group(User Group) rowsAffected: {rowsAffected}", rowsAffected);
+                throw new DomainException($"Failed to update Order Group(User Group) rows Affected: {rowsAffected}");
             }
 
             await _unitOfWork.CommitTransactionAsync(cancellationToken);
 
             // Return the updated order group with nested structure
             var updatedGroup = await GetOrderGroupByCodeAsync(groupCode, cancellationToken);
-            return updatedGroup ?? throw new DomainException("Failed to retrieve updated Order Group");
+            return updatedGroup ?? throw new DomainException("Failed to retrieve updated Order Group(User Group)");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error updating Order Group");
+            _logger.LogError(ex, "Error updating Order Group(User Group)");
             await _unitOfWork.RollbackTransactionAsync(cancellationToken);
             
             if (ex is DomainException)
                 throw;
             
-            throw new DomainException($"Failed to update Order Group: {ex.Message}");
+            throw new DomainException($"Failed to update Order Group(User Group): {ex.Message}");
         }
     }
 
@@ -540,8 +540,8 @@ public class OrderGroupService : IOrderGroupService
 
             if ( rowsAffected < 1)
             {
-                _logger.LogWarning("Failed to delete Order Group rowsAffected: {rowsAffected}", rowsAffected);
-                throw new DomainException($"Failed to delete Order Group rowsAffected: {rowsAffected}");
+                _logger.LogWarning("Failed to delete Order Group(User Group) rowsAffected: {rowsAffected}", rowsAffected);
+                throw new DomainException($"Failed to delete Order Group(User Group) rowsAffected: {rowsAffected}");
             }
 
             await _unitOfWork.CommitTransactionAsync(cancellationToken);
@@ -549,13 +549,13 @@ public class OrderGroupService : IOrderGroupService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error deleting Order Group (Legacy)");
+            _logger.LogError(ex, "Error deleting Order Group(User Group) (Legacy)");
             await _unitOfWork.RollbackTransactionAsync(cancellationToken);
             
             if (ex is DomainException)
                 throw;
             
-            throw new DomainException($"Failed to delete Order Group: {ex.Message}");
+            throw new DomainException($"Failed to delete Order Group(User Group): {ex.Message}");
         }
     }
 
@@ -566,7 +566,7 @@ public class OrderGroupService : IOrderGroupService
     {
         try
         {
-            _logger.LogInformation("Getting Order Group Workflow List - Page: {PageNumber}, IsAuth: {IsAuth}, GroupCode: {GroupCode}", request.PageNumber, request.IsAuth, request.UsrID);
+            _logger.LogInformation("Getting Order Group(User Group) Workflow List - Page: {PageNumber}, IsAuth: {IsAuth}, GroupCode: {GroupCode}", request.PageNumber, request.IsAuth, request.UsrID);
 
             var parameters = new
             {
@@ -594,7 +594,7 @@ public class OrderGroupService : IOrderGroupService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting Master Group Workflow List");
+            _logger.LogError(ex, "Error getting Order Group(User Group) Group Workflow List");
             throw new DomainException($"Failed to retrieve Order Group Workflow List: {ex.Message}");
         }
     }
@@ -603,7 +603,7 @@ public class OrderGroupService : IOrderGroupService
     {
         await ValidateAuthorizeRequestAsync(request, cancellationToken);
 
-        _logger.LogInformation("Authorizing Order Group: {GroupCode}", groupCode);
+        _logger.LogInformation("Authorizing Order Group(User Group): {GroupCode}", groupCode);
 
         try
         {
@@ -628,18 +628,18 @@ public class OrderGroupService : IOrderGroupService
 
             if (rowsAffected > 0)
             {
-                _logger.LogInformation("Successfully authorized OrderGroup master: {GroupCode}", groupCode);
+                _logger.LogInformation("Successfully authorized Order Group(User Group) Group: {GroupCode}", groupCode);
                 return true;
             }
             else
             {
-                throw new DomainException("Failed to authorize order group master - no rows affected");
+                throw new DomainException("Failed to authorize Order Group(User Group) Group - no rows affected");
             }
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error authorizing OrderGroup master: {GroupCode}", groupCode);
-            throw new DomainException($"Failed to authorize order group master: {ex.Message}");
+            _logger.LogError(ex, "Error authorizing Order Group(User Group) Group: {GroupCode}", groupCode);
+            throw new DomainException($"Failed to authorize Order Group(User Group) Group: {ex.Message}");
         }
     }
 
@@ -651,7 +651,7 @@ public class OrderGroupService : IOrderGroupService
     {
         try
         {
-            _logger.LogInformation("Getting Order Group User Workflow List - GroupCode: {GroupCode}, Page: {PageNumber}, IsAuth: {IsAuth}", request.PageNumber, request.IsAuth);
+            _logger.LogInformation("Getting Order Group(User Group)User Workflow List - GroupCode: {GroupCode}, Page: {PageNumber}, IsAuth: {IsAuth}", request.PageNumber, request.IsAuth);
 
             var parameters = new
             {
@@ -680,8 +680,8 @@ public class OrderGroupService : IOrderGroupService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting Detail Group Workflow List");
-            throw new DomainException($"Failed to retrieve Order Group User Workflow List: {ex.Message}");
+            _logger.LogError(ex, "Error getting Detail Order Group(User Group) User Workflow List");
+            throw new DomainException($"Failed to retrieve Order Group(User Group) User Workflow List: {ex.Message}");
         }
     }
 
@@ -689,7 +689,7 @@ public class OrderGroupService : IOrderGroupService
     {
         await ValidateAuthorizeUserRequestAsync(request, cancellationToken);
 
-        _logger.LogInformation("Authorizing OrderGroup User: {GroupCode}, {UsrID}", groupCode, usrId);
+        _logger.LogInformation("Authorizing Order Group(User Group) User: {GroupCode}, {UsrID}", groupCode, usrId);
 
         try
         {
@@ -715,18 +715,18 @@ public class OrderGroupService : IOrderGroupService
 
             if (rowsAffected > 0)
             {
-                _logger.LogInformation("Successfully authorized OrderGroup detail: {GroupCode}, {UsrID}", groupCode, usrId);
+                _logger.LogInformation("Successfully authorized Order Group(User Group) User: {GroupCode}, {UsrID}", groupCode, usrId);
                 return true;
             }
             else
             {
-                throw new DomainException("Failed to authorize order group detail - no rows affected");
+                throw new DomainException("Failed to authorize Order Group(User Group) User - no rows affected");
             }
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error authorizing OrderGroup detail: {GroupCode}, {UsrID}", groupCode, usrId);
-            throw new DomainException($"Failed to authorize order group detail: {ex.Message}");
+            throw new DomainException($"Failed to authorize Order Group(User Group) User: {ex.Message}");
         }
     }
 
@@ -748,7 +748,7 @@ public class OrderGroupService : IOrderGroupService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Create Order Group validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Create Order Group(User Group) validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -765,7 +765,7 @@ public class OrderGroupService : IOrderGroupService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Update Order Group validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Update Order Group(User Group) validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -782,7 +782,7 @@ public class OrderGroupService : IOrderGroupService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Delete Order Group validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Delete Order Group(User Group) validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -799,7 +799,7 @@ public class OrderGroupService : IOrderGroupService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Authorize Order Group validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Authorize Order Group(User Group) validation failed") { ValidationErrors = errors };
         }
     }
 

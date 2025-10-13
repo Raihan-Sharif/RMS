@@ -69,7 +69,7 @@ public class StockExposureService : IStockExposureService
     public async Task<PagedResult<StockExposureDto>> GetStockExposureListAsync(int pageNumber = 1, int pageSize = 10,
         string? usrID = null, string? clntCode = null, string? stkCode = null, string? searchTerm = null, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting paged StockExposure list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+        _logger.LogInformation("Getting paged Stock Exposure list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
         // Validate and sanitize inputs
         if (pageNumber < 1) pageNumber = 1;
@@ -108,24 +108,24 @@ public class StockExposureService : IStockExposureService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for StockExposure list retrieval");
+            _logger.LogError(ex, "Invalid arguments for Stock Exposure list retrieval");
             throw new ValidationException($"Invalid parameters provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting StockExposure list");
+            _logger.LogError(ex, "Database operation error getting Stock Exposure list");
             throw new DomainException($"Database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting StockExposure list");
+            _logger.LogError(ex, "Unexpected error getting Stock Exposure list");
             throw new DomainException($"Failed to retrieve stock exposure list: {ex.Message}");
         }
     }
 
     public async Task<StockExposureDto?> GetStockExposureByKeyAsync(GetStockExposureByKeyRequest request, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting StockExposure by key: DataType={DataType}, CtrlType={CtrlType}, StkCode={StkCode}",
+        _logger.LogInformation("Getting Stock Exposure by key: DataType={DataType}, CtrlType={CtrlType}, StkCode={StkCode}",
             request.DataType, request.CtrlType, request.StkCode);
 
         try
@@ -157,24 +157,24 @@ public class StockExposureService : IStockExposureService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for StockExposure retrieval");
+            _logger.LogError(ex, "Invalid arguments for Stock Exposure retrieval");
             throw new ValidationException($"Invalid parameters provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting StockExposure by key");
+            _logger.LogError(ex, "Database operation error getting Stock Exposure by key");
             throw new DomainException($"Database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting StockExposure by key");
+            _logger.LogError(ex, "Unexpected error getting Stock Exposure by key");
             throw new DomainException($"Failed to retrieve stock exposure: {ex.Message}");
         }
     }
 
     public async Task<StockExposureDto> CreateStockExposureAsync(CreateStockExposureRequest request, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Creating StockExposure: DataType={DataType}, StkCode={StkCode}", request.DataType, request.StkCode);
+        _logger.LogInformation("Creating Stock Exposure: DataType={DataType}, StkCode={StkCode}", request.DataType, request.StkCode);
 
         await ValidateCreateRequestAsync(request, cancellationToken);
 
@@ -241,7 +241,7 @@ public class StockExposureService : IStockExposureService
                 throw new DomainException("Created stock exposure not found");
             }
 
-            _logger.LogInformation("Successfully created StockExposure: DataType={DataType}, StkCode={StkCode}", request.DataType, request.StkCode);
+            _logger.LogInformation("Successfully created Stock Exposure: DataType={DataType}, StkCode={StkCode}", request.DataType, request.StkCode);
             return createdExposure;
         }
         catch (ValidationException)
@@ -254,14 +254,14 @@ public class StockExposureService : IStockExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error creating StockExposure");
+            _logger.LogError(ex, "Unexpected error creating Stock Exposure");
             throw new DomainException($"Failed to create stock exposure: {ex.Message}");
         }
     }
 
     public async Task<StockExposureDto> UpdateStockExposureAsync(UpdateStockExposureRequest request, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Updating StockExposure: DataType={DataType}, StkCode={StkCode}", request.DataType, request.StkCode);
+        _logger.LogInformation("Updating Stock Exposure: DataType={DataType}, StkCode={StkCode}", request.DataType, request.StkCode);
 
         await ValidateUpdateRequestAsync(request, cancellationToken);
 
@@ -345,7 +345,7 @@ public class StockExposureService : IStockExposureService
                 throw new DomainException("Updated stock exposure not found");
             }
 
-            _logger.LogInformation("Successfully updated StockExposure: DataType={DataType}, StkCode={StkCode}", request.DataType, request.StkCode);
+            _logger.LogInformation("Successfully updated Stock Exposure: DataType={DataType}, StkCode={StkCode}", request.DataType, request.StkCode);
             return updatedExposure;
         }
         catch (ValidationException)
@@ -358,14 +358,14 @@ public class StockExposureService : IStockExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error updating StockExposure");
+            _logger.LogError(ex, "Unexpected error updating Stock Exposure");
             throw new DomainException($"Failed to update stock exposure: {ex.Message}");
         }
     }
 
     public async Task<bool> DeleteStockExposureAsync(DeleteStockExposureRequest request, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Deleting StockExposure: DataType={DataType}, StkCode={StkCode}", request.DataType, request.StkCode);
+        _logger.LogInformation("Deleting Stock Exposure: DataType={DataType}, StkCode={StkCode}", request.DataType, request.StkCode);
 
         await ValidateDeleteRequestAsync(request, cancellationToken);
 
@@ -431,7 +431,7 @@ public class StockExposureService : IStockExposureService
 
             if (success)
             {
-                _logger.LogInformation("Successfully deleted StockExposure: DataType={DataType}, StkCode={StkCode}", request.DataType, request.StkCode);
+                _logger.LogInformation("Successfully deleted Stock Exposure: DataType={DataType}, StkCode={StkCode}", request.DataType, request.StkCode);
             }
             else
             {
@@ -450,7 +450,7 @@ public class StockExposureService : IStockExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error deleting StockExposure");
+            _logger.LogError(ex, "Unexpected error deleting Stock Exposure");
             throw new DomainException($"Failed to delete stock exposure: {ex.Message}");
         }
     }
@@ -488,7 +488,7 @@ public class StockExposureService : IStockExposureService
         else if (isAuth == (byte)AuthTypeEnum.Deny)
             authAction = AuthTypeEnum.Deny.ToString();
 
-        _logger.LogInformation("Getting {authAction} StockExposure list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize, authAction);
+        _logger.LogInformation("Getting {authAction} Stock Exposure list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize, authAction);
 
         try
         {
@@ -539,7 +539,7 @@ public class StockExposureService : IStockExposureService
         else if (request.IsAuth == (byte)AuthTypeEnum.Deny)
             authAction = AuthTypeEnum.Deny.ToString();
 
-        _logger.LogInformation("Authorizing {authAction} StockExposure in workflow: DataType={DataType}, StkCode={StkCode}",
+        _logger.LogInformation("Authorizing {authAction} Stock Exposure in workflow: DataType={DataType}, StkCode={StkCode}",
             request.DataType, request.StkCode, authAction);
 
         await ValidateAuthorizeRequestAsync(request, cancellationToken);
@@ -581,14 +581,14 @@ public class StockExposureService : IStockExposureService
             if (rowsAffected > 0)
             {
                 await _unitOfWork.CommitTransactionAsync(cancellationToken);
-                _logger.LogInformation("Successfully authorized StockExposure: DataType={DataType}, StkCode={StkCode}, RowsAffected: {RowsAffected}",
+                _logger.LogInformation("Successfully authorized Stock Exposure: DataType={DataType}, StkCode={StkCode}, RowsAffected: {RowsAffected}",
                     request.DataType, request.StkCode, rowsAffected);
                 return true;
             }
             else
             {
                 await _unitOfWork.RollbackTransactionAsync(cancellationToken);
-                _logger.LogWarning("No rows affected during {authAction} authorization of StockExposure", authAction);
+                _logger.LogWarning("No rows affected during {authAction} authorization of Stock Exposure", authAction);
                 throw new DomainException($"Failed to authorize: {authAction} stock exposure: No records were updated");
             }
         }
@@ -602,7 +602,7 @@ public class StockExposureService : IStockExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error {authAction} authorizing StockExposure in workflow", authAction);
+            _logger.LogError(ex, "Error {authAction} authorizing Stock Exposure in workflow", authAction);
             throw new DomainException($"Failed to authorize: {authAction} stock exposure: {ex.Message}");
         }
     }
@@ -623,7 +623,7 @@ public class StockExposureService : IStockExposureService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Create validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Create Stock Exposure validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -640,7 +640,7 @@ public class StockExposureService : IStockExposureService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Update validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Update Stock Exposure validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -657,7 +657,7 @@ public class StockExposureService : IStockExposureService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Delete validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Delete Stock Exposure validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -674,7 +674,7 @@ public class StockExposureService : IStockExposureService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Authorization validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Authorization Stock Exposure validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -691,7 +691,7 @@ public class StockExposureService : IStockExposureService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Workflow list validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Workflow Stock Exposure list validation failed") { ValidationErrors = errors };
         }
     }
 

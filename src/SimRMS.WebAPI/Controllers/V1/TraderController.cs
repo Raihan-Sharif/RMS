@@ -72,7 +72,7 @@ public class TraderController : BaseController
         [FromQuery] string? sortDirection = "ASC",
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting MstTrader list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+        _logger.LogInformation("Getting Trader list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
         var result = await _traderService.GetMstTraderListAsync(
             pageNumber: pageNumber,
@@ -82,7 +82,7 @@ public class TraderController : BaseController
             sortDirection: sortDirection,
             cancellationToken: cancellationToken);
 
-        return Ok(result, "Market Stock Traders retrieved successfully");
+        return Ok(result, "Traders retrieved successfully");
     }
 
     /// <summary>
@@ -102,16 +102,16 @@ public class TraderController : BaseController
         [FromRoute, Required, MaxLength(15)] string dlrCode,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting MstTrader by ID: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+        _logger.LogInformation("Getting Trader by ID: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
 
         var trader = await _traderService.GetMstTraderByIdAsync(xchgCode, dlrCode, cancellationToken);
 
         if (trader == null)
         {
-            return NotFound<MstTraderDto>($"Market Stock Trader with code '{xchgCode}-{dlrCode}' not found");
+            return NotFound<MstTraderDto>($"Trader with code '{xchgCode}-{dlrCode}' not found");
         }
 
-        return Ok(trader, "Market Stock Trader retrieved successfully");
+        return Ok(trader, "Trader retrieved successfully");
     }
     #endregion
 
@@ -131,7 +131,7 @@ public class TraderController : BaseController
         [FromBody, Required] CreateMstTraderRequest request,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Creating MstTrader: {XchgCode}-{DlrCode}", request.XchgCode, request.DlrCode);
+        _logger.LogInformation("Creating Trader: {XchgCode}-{DlrCode}", request.XchgCode, request.DlrCode);
 
         var createdTrader = await _traderService.CreateMstTraderAsync(request, cancellationToken);
 
@@ -142,7 +142,7 @@ public class TraderController : BaseController
             {
                 Success = true,
                 Data = createdTrader,
-                Message = "Market Stock Trader created successfully"
+                Message = "Trader created successfully"
             });
     }
 
@@ -165,14 +165,14 @@ public class TraderController : BaseController
         [FromBody, Required] UpdateMstTraderRequest request,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Updating MstTrader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+        _logger.LogInformation("Updating Trader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
 
         request.XchgCode = xchgCode;
         request.DlrCode = dlrCode;
 
         var updatedTrader = await _traderService.UpdateMstTraderAsync(xchgCode, dlrCode, request, cancellationToken);
 
-        return Ok(updatedTrader, "Market Stock Trader updated successfully");
+        return Ok(updatedTrader, "Trader updated successfully");
     }
 
 
@@ -195,7 +195,7 @@ public class TraderController : BaseController
         [FromBody] DeleteMstTraderRequest? request = null,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Deleting MstTrader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+        _logger.LogInformation("Deleting Trader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
 
         request ??= new DeleteMstTraderRequest { XchgCode = xchgCode, DlrCode = dlrCode };
         request.XchgCode = xchgCode;
@@ -205,10 +205,10 @@ public class TraderController : BaseController
 
         if (!result)
         {
-            return BadRequest<object>("Failed to delete Market Stock Trader");
+            return BadRequest<object>("Failed to Trader");
         }
 
-        return Ok(new object(), "Market Stock Trader deleted successfully");
+        return Ok(new object(), "Trader deleted successfully");
     }
     #endregion
 
@@ -240,7 +240,7 @@ public class TraderController : BaseController
     {
         string authAction = isAuth == (byte) AuthTypeEnum.UnAuthorize ? AuthTypeEnum.UnAuthorize.ToString() : AuthTypeEnum.Deny.ToString();
 
-        _logger.LogInformation("Getting unauthorized MstTrader list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+        _logger.LogInformation("Getting unauthorized Trader list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
         var result = await _traderService.GetTraderUnAuthDeniedListAsync(
             pageNumber: pageNumber,
@@ -251,7 +251,7 @@ public class TraderController : BaseController
             isAuth: isAuth,
             cancellationToken: cancellationToken);
 
-        return Ok(result, $"Market Stock Traders ({authAction}) data retrieved successfully");
+        return Ok(result, $"Traders ({authAction}) data retrieved successfully");
     }
 
     /// <summary>
@@ -275,7 +275,7 @@ public class TraderController : BaseController
     {
         string actionName = ((ActionTypeEnum)request.ActionType).ToString();
        
-        _logger.LogInformation("Authorizing MstTrader in workflow: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+        _logger.LogInformation("Authorizing Trader in workflow: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
 
         request.XchgCode = xchgCode;
         request.DlrCode = dlrCode;
@@ -284,10 +284,10 @@ public class TraderController : BaseController
 
         if (!result)
         {
-            return BadRequest<object>($"Failed to {actionName} Market Stock Trader");
+            return BadRequest<object>($"Failed to {actionName} Trader");
         }
         
-        return Ok(new object(), $"Market Stock Trader {actionName} successfully");
+        return Ok(new object(), $"Trader {actionName} successfully");
 
     }
 

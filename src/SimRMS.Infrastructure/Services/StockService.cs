@@ -1,14 +1,14 @@
 using FluentValidation;
 using Microsoft.Extensions.Logging;
+using SimRMS.Application.Interfaces;
 using SimRMS.Application.Interfaces.Services;
 using SimRMS.Application.Models.DTOs;
 using SimRMS.Application.Models.Requests;
-using SimRMS.Domain.Interfaces.Common;
-using SimRMS.Shared.Models;
-using SimRMS.Domain.Exceptions;
-using SimRMS.Application.Interfaces;
-using SimRMS.Shared.Constants;
 using SimRMS.Domain.Common;
+using SimRMS.Domain.Exceptions;
+using SimRMS.Domain.Interfaces.Common;
+using SimRMS.Shared.Constants;
+using SimRMS.Shared.Models;
 using ValidationException = SimRMS.Domain.Exceptions.ValidationException;
 
 /// <summary>
@@ -647,7 +647,7 @@ public class StockService : IStockService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Get by key validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Get Stock by key validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -664,7 +664,7 @@ public class StockService : IStockService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Get list validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Get Stock list validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -681,7 +681,7 @@ public class StockService : IStockService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Create validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Create Stock validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -698,7 +698,7 @@ public class StockService : IStockService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Update validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Update Stock validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -715,7 +715,7 @@ public class StockService : IStockService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Delete validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Delete Stock validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -732,7 +732,7 @@ public class StockService : IStockService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Authorization validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Authorization Stock validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -749,7 +749,7 @@ public class StockService : IStockService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Workflow list validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Workflow Stock list validation failed") { ValidationErrors = errors };
         }
     }
 

@@ -72,7 +72,7 @@ public class TraderService : ITraderService
     #region Traders List Operations
     public async Task<PagedResult<MstTraderDto>> GetMstTraderListAsync(int pageNumber = 1, int pageSize = 10, string? searchTerm = null, string? xchgCode = null, string? sortDirection = null, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting paged MstTrader list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+        _logger.LogInformation("Getting paged Trader list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
         if (pageNumber < 1) pageNumber = 1;
         if (pageSize < 1 || pageSize > 100) pageSize = 10;
@@ -103,17 +103,17 @@ public class TraderService : ITraderService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for MstTrader list retrieval");
+            _logger.LogError(ex, "Invalid arguments for Trader list retrieval");
             throw new ValidationException($"Invalid parameters provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting MstTrader list");
+            _logger.LogError(ex, "Database operation error getting Trader list");
             throw new DomainException($"Database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting MstTrader list");
+            _logger.LogError(ex, "Unexpected error getting Trader list");
             throw new DomainException($"Failed to retrieve trader list: {ex.Message}");
         }
     }
@@ -125,7 +125,7 @@ public class TraderService : ITraderService
         if (string.IsNullOrWhiteSpace(dlrCode))
             throw new ArgumentException("Dealer code cannot be null or empty", nameof(dlrCode));
 
-        _logger.LogInformation("Getting MstTrader by ID: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+        _logger.LogInformation("Getting Trader by ID: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
 
         try
         {
@@ -158,17 +158,17 @@ public class TraderService : ITraderService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for MstTrader retrieval: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+            _logger.LogError(ex, "Invalid arguments for Trader retrieval: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
             throw new ValidationException($"Invalid parameters provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting MstTrader by ID: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+            _logger.LogError(ex, "Database operation error getting Trader by ID: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
             throw new DomainException($"Database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting MstTrader by ID: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+            _logger.LogError(ex, "Unexpected error getting Trader by ID: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
             throw new DomainException($"Failed to retrieve trader: {ex.Message}");
         }
     }
@@ -184,7 +184,7 @@ public class TraderService : ITraderService
             throw new ArgumentNullException(nameof(request), "CreateMstTraderRequest cannot be null");
         }
 
-        _logger.LogInformation("Creating new MstTrader: {XchgCode}-{DlrCode}", request.XchgCode, request.DlrCode);
+        _logger.LogInformation("Creating new Trader: {XchgCode}-{DlrCode}", request.XchgCode, request.DlrCode);
 
         // Validate the request using FluentValidation
         await ValidateCreateRequestAsync(request, cancellationToken);
@@ -206,7 +206,7 @@ public class TraderService : ITraderService
                 RowsAffected = 0 // OUTPUT parameter
             };
 
-            _logger.LogDebug("Parameters for creating MstTrader: {@Parameters}", parameters);
+            _logger.LogDebug("Parameters for creating Trader: {@Parameters}", parameters);
 
             var rowsAffected = await _repository.ExecuteAsync(
                sqlOrSp: "LB_SP_CrudTrader",
@@ -215,28 +215,28 @@ public class TraderService : ITraderService
                cancellationToken: cancellationToken);
             if (rowsAffected > 0)
             {
-                _logger.LogInformation("Successfully created MstTrader: {XchgCode}-{DlrCode}", request.XchgCode, request.DlrCode);
+                _logger.LogInformation("Successfully created Trader: {XchgCode}-{DlrCode}", request.XchgCode, request.DlrCode);
                 return await GetMstTraderByIdAsync(request.XchgCode, request.DlrCode, cancellationToken);
             }
             else
             {
-                _logger.LogWarning("No rows affected when creating MstTrader: {XchgCode}-{DlrCode}", request.XchgCode, request.DlrCode);
+                _logger.LogWarning("No rows affected when creating Trader: {XchgCode}-{DlrCode}", request.XchgCode, request.DlrCode);
                 throw new DomainException("Failed to create trader. No rows affected.");
             }
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for creating MstTrader: {XchgCode}-{DlrCode}", request.XchgCode, request.DlrCode);
+            _logger.LogError(ex, "Invalid arguments for creating Trader: {XchgCode}-{DlrCode}", request.XchgCode, request.DlrCode);
             throw new ValidationException($"Invalid parameters provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error creating MstTrader: {XchgCode}-{DlrCode}", request.XchgCode, request.DlrCode);
+            _logger.LogError(ex, "Database operation error creating Trader: {XchgCode}-{DlrCode}", request.XchgCode, request.DlrCode);
             throw new DomainException($"Database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error creating MstTrader: {XchgCode}-{DlrCode}", request.XchgCode, request.DlrCode);
+            _logger.LogError(ex, "Unexpected error creating Trader: {XchgCode}-{DlrCode}", request.XchgCode, request.DlrCode);
             throw new DomainException($"Failed to create trader: {ex.Message}");
 
         }
@@ -245,7 +245,7 @@ public class TraderService : ITraderService
     //update trader
     public async Task<MstTraderDto> UpdateMstTraderAsync(string xchgCode, string dlrCode, UpdateMstTraderRequest request, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Updating MstTrader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+        _logger.LogInformation("Updating Trader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
 
         //validate update request
         await ValidateUpdateRequestAsync(request, cancellationToken);
@@ -267,7 +267,7 @@ public class TraderService : ITraderService
                 RowsAffected = 0 // OUTPUT parameter
                 };
 
-            _logger.LogDebug("Parameters for updating MstTrader: {@Parameters}", parameters);
+            _logger.LogDebug("Parameters for updating Trader: {@Parameters}", parameters);
             var rowsAffected = await _repository.ExecuteAsync(
                sqlOrSp: "LB_SP_CrudTrader",
                parameters: parameters,
@@ -275,28 +275,28 @@ public class TraderService : ITraderService
                cancellationToken: cancellationToken);
             if (rowsAffected > 0)
                 {
-                _logger.LogInformation("Successfully updated MstTrader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+                _logger.LogInformation("Successfully updated Trader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
                 return await GetMstTraderByIdAsync(xchgCode, dlrCode, cancellationToken);
             }
             else
             {
-                _logger.LogWarning("No rows affected when updating MstTrader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+                _logger.LogWarning("No rows affected when updating Trader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
                 throw new DomainException("Failed to update trader. No rows affected.");
             }
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for updating MstTrader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+            _logger.LogError(ex, "Invalid arguments for updating Trader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
             throw new ValidationException($"Invalid parameters provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error updating MstTrader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+            _logger.LogError(ex, "Database operation error updating Trader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
             throw new DomainException($"Database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error updating MstTrader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+            _logger.LogError(ex, "Unexpected error updating Trader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
             throw new DomainException($"Failed to update trader: {ex.Message}");
         }
     }
@@ -304,7 +304,7 @@ public class TraderService : ITraderService
     //delete trader
     public async Task<bool> DeleteMstTraderAsync(string xchgCode, string dlrCode, DeleteMstTraderRequest request, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Deleting MstTrader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+        _logger.LogInformation("Deleting Trader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
 
         //validate delete request
         await ValidateDeleteRequestAsync(request, cancellationToken);
@@ -325,7 +325,7 @@ public class TraderService : ITraderService
                 Remarks = request.Remarks,
                 RowsAffected = 0 // OUTPUT parameter
                 };
-            _logger.LogDebug("Parameters for deleting MstTrader: {@Parameters}", parameters);
+            _logger.LogDebug("Parameters for deleting Trader: {@Parameters}", parameters);
             var rowsAffected = await _repository.ExecuteAsync(
                sqlOrSp: "LB_SP_CrudTrader",
                parameters: parameters,
@@ -333,28 +333,28 @@ public class TraderService : ITraderService
                cancellationToken: cancellationToken);
             if (rowsAffected > 0)
                 {
-                _logger.LogInformation("Successfully deleted MstTrader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+                _logger.LogInformation("Successfully deleted Trader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
                 return true;
             }
             else
             {
-                _logger.LogWarning("No rows affected when deleting MstTrader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+                _logger.LogWarning("No rows affected when deleting Trader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
                 throw new DomainException("Failed to delete trader. No rows affected.");
             }
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for deleting MstTrader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+            _logger.LogError(ex, "Invalid arguments for deleting Trader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
             throw new ValidationException($"Invalid parameters provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error deleting MstTrader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+            _logger.LogError(ex, "Database operation error deleting Trader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
             throw new DomainException($"Database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error deleting MstTrader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+            _logger.LogError(ex, "Unexpected error deleting Trader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
             throw new DomainException($"Failed to delete trader: {ex.Message}");
         }
     }
@@ -441,7 +441,7 @@ public class TraderService : ITraderService
     /// <returns>Authorization result</returns>
     public async Task<bool> AuthorizeTraderAsync(string xchgCode, string dlrCode, AuthorizeMstTraderRequest request, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Authorizing MstTrader in workflow: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+        _logger.LogInformation("Authorizing Trader in workflow: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
 
         // Validate request
         await ValidateAuthorizeRequestAsync(request, cancellationToken);
@@ -472,13 +472,13 @@ public class TraderService : ITraderService
 
             if (rowsAffected > 0)
             {
-                _logger.LogInformation("Successfully authorized MstTrader: {XchgCode}-{DlrCode}, RowsAffected: {RowsAffected}",
+                _logger.LogInformation("Successfully authorized Trader: {XchgCode}-{DlrCode}, RowsAffected: {RowsAffected}",
                     xchgCode, dlrCode, rowsAffected);
                 return true;
             }
             else
             {
-                _logger.LogWarning("No rows affected during authorization of MstTrader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+                _logger.LogWarning("No rows affected during authorization of Trader: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
                 throw new DomainException($"Failed to authorize trader: No records were updated");
             }
         }
@@ -492,7 +492,7 @@ public class TraderService : ITraderService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error authorizing MstTrader in workflow: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+            _logger.LogError(ex, "Error authorizing Trader in workflow: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
             throw new DomainException($"Failed to authorize trader: {ex.Message}");
         }
     }
@@ -514,7 +514,7 @@ public class TraderService : ITraderService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Create validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Create Trader validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -530,7 +530,7 @@ public class TraderService : ITraderService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Update validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Update Trader validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -546,7 +546,7 @@ public class TraderService : ITraderService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Delete validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Delete Trader validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -562,7 +562,7 @@ public class TraderService : ITraderService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Authorization validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Authorization Trader validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -578,7 +578,7 @@ public class TraderService : ITraderService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Workflow list validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Workflow Trader list validation failed") { ValidationErrors = errors };
         }
     }
 

@@ -65,7 +65,7 @@ namespace SimRMS.WebAPI.Controllers.V1
             [FromQuery] string? searchText = null,
             CancellationToken cancellationToken = default)
         {
-            _logger.LogInformation("Getting OrderGroup list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+            _logger.LogInformation("Getting Order Group(User Group) list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
             var result = await _orderGroupService.GetOrderGroupListAsync(
                 pageNumber: pageNumber,
@@ -73,7 +73,7 @@ namespace SimRMS.WebAPI.Controllers.V1
                 searchText: searchText,
                 cancellationToken: cancellationToken);
 
-            return Ok(result, "Order Groups retrieved successfully");
+            return Ok(result, "Order Groups(User Groups) retrieved successfully");
         }
 
         /// <summary>
@@ -93,9 +93,9 @@ namespace SimRMS.WebAPI.Controllers.V1
             var orderGroup = await _orderGroupService.GetOrderGroupByCodeAsync(groupCode, cancellationToken);
 
             if (orderGroup == null)
-                return NotFound<OrderGroupDto>($"OrderGroup with code '{groupCode}' not found.");
+                return NotFound<OrderGroupDto>($"Order Group(User Group) with code '{groupCode}' not found.");
 
-            return Ok(orderGroup, "Order Group retrieved successfully");
+            return Ok(orderGroup, "Order Group(User Group) retrieved successfully");
         }
 
         /// <summary>
@@ -111,14 +111,14 @@ namespace SimRMS.WebAPI.Controllers.V1
             [FromRoute, Required] string userId,
             CancellationToken cancellationToken = default)
         {
-            _logger.LogInformation("Getting Order Group user by group code: {GroupCode}, UsrId: {UsrId}", groupCode, userId);
+            _logger.LogInformation("Getting Order Group(User Group) user by group code: {GroupCode}, UsrId: {UsrId}", groupCode, userId);
 
             var orderGroup = await _orderGroupService.GetOrderGroupUserByCodeAsync(groupCode, userId, cancellationToken);
 
             if (orderGroup == null)
                 return NotFound<OrderGroupUserDto>($"User '{userId}' not found in OrderGroup '{groupCode}'.");
 
-            return Ok(orderGroup, "Order Group user retrieved successfully");
+            return Ok(orderGroup, "Order Group(User Group) user retrieved successfully");
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace SimRMS.WebAPI.Controllers.V1
             CancellationToken cancellationToken = default)
         {
             var validation = await _orderGroupService.CheckGroupDeleteValidationAsync(groupCode, null, cancellationToken);
-            return Ok(validation, "Delete validation completed");
+            return Ok(validation, "Order Group(User Group) Delete validation completed");
         }
 
         #endregion
@@ -150,7 +150,7 @@ namespace SimRMS.WebAPI.Controllers.V1
             [FromBody] CreateOrderGroupRequest request,
             CancellationToken cancellationToken = default)
         {
-            _logger.LogInformation("Creating OrderGroup: {GroupDesc}", request.GroupDesc);
+            _logger.LogInformation("Creating Order Group(User Group): {GroupDesc}", request.GroupDesc);
 
             var result = await _orderGroupService.CreateOrderGroupAsync(request, cancellationToken);
             return CreatedAtAction(
@@ -160,7 +160,7 @@ namespace SimRMS.WebAPI.Controllers.V1
                 {
                     Success = true,
                     Data = result,
-                    Message = "Order Group created successfully"
+                    Message = "Order Group(User Group) created successfully"
                 });
         }
 
@@ -177,10 +177,10 @@ namespace SimRMS.WebAPI.Controllers.V1
             [FromBody] UpdateOrderGroupRequest request,
             CancellationToken cancellationToken = default)
         {
-            _logger.LogInformation("Updating OrderGroup: {GroupCode}", groupCode);
+            _logger.LogInformation("Updating Order Group(User Group): {GroupCode}", groupCode);
 
             var result = await _orderGroupService.UpdateOrderGroupAsync(groupCode, request, cancellationToken);
-            return Ok(result, "Order Group updated successfully");
+            return Ok(result, "Order Group(User Group) updated successfully");
         }
 
         /// <summary>
@@ -196,10 +196,10 @@ namespace SimRMS.WebAPI.Controllers.V1
             [FromBody] DeleteOrderGroupRequest request,
             CancellationToken cancellationToken = default)
         {
-            _logger.LogInformation("Deleting OrderGroup: {GroupCode} UserId: ", groupCode, request.UsrID??"-");
+            _logger.LogInformation("Deleting Order Group(User Group): {GroupCode} UserId: ", groupCode, request.UsrID??"-");
 
             var success = await _orderGroupService.DeleteOrderGroupAsync(groupCode, request, cancellationToken);
-            return Ok((object)new { GroupCode = groupCode }, "Order Group deleted successfully");
+            return Ok((object)new { GroupCode = groupCode }, "Order Group(User Group) deleted successfully");
         }
 
         #endregion
@@ -222,7 +222,7 @@ namespace SimRMS.WebAPI.Controllers.V1
             [FromQuery] string workflowType = "all", // "master", "detail", "all"
             CancellationToken cancellationToken = default)
         {
-            _logger.LogInformation("Getting Order Group workflow list - IsAuth: {IsAuth}, Type: {WorkflowType}, Page: {PageNumber}", 
+            _logger.LogInformation("Getting Order Group(User Group) workflow list - IsAuth: {IsAuth}, Type: {WorkflowType}, Page: {PageNumber}", 
                 isAuth, workflowType, pageNumber);
 
             var request = new GetOrderGroupWorkflowListRequest
@@ -236,7 +236,7 @@ namespace SimRMS.WebAPI.Controllers.V1
 
             var result = await _orderGroupService.GetOrderGroupWorkflowListAsync(request, cancellationToken);
 
-            return Ok(result, "Order Group workflow list retrieved successfully");
+            return Ok(result, "Order Group(User Group) workflow list retrieved successfully");
         }
 
         /// <summary>
@@ -252,13 +252,13 @@ namespace SimRMS.WebAPI.Controllers.V1
             [FromBody] AuthorizeOrderGroupRequest request,
             CancellationToken cancellationToken = default)
         {
-            _logger.LogInformation("Authorizing OrderGroup: {GroupCode}, IsAuth: {IsAuth}", 
+            _logger.LogInformation("Authorizing Order Group(User Group): {GroupCode}, IsAuth: {IsAuth}", 
                 groupCode, request.IsAuth);
 
             // Use the unified authorize method from service
             var success = await _orderGroupService.AuthorizeOrderGroupAsync(groupCode, request, cancellationToken);
             var action = request.IsAuth == (byte)AuthTypeEnum.Approve ? "approved" : "denied";
-            return Ok((object)new { GroupCode = groupCode }, $"Order Group {action} successfully");
+            return Ok((object)new { GroupCode = groupCode }, $"Order Group(User Group) {action} successfully");
         }
 
         #endregion
@@ -282,7 +282,7 @@ namespace SimRMS.WebAPI.Controllers.V1
             [FromQuery] string workflowType = "all", // "master", "detail", "all"
             CancellationToken cancellationToken = default)
         {
-            _logger.LogInformation("Getting Order Group User workflow list - IsAuth: {IsAuth}, Type: {WorkflowType}, Page: {PageNumber}",
+            _logger.LogInformation("Getting Order Group(User Group) User workflow list - IsAuth: {IsAuth}, Type: {WorkflowType}, Page: {PageNumber}",
                 isAuth, workflowType, pageNumber);
 
             var request = new GetOrderGroupUserWorkflowListRequest
@@ -296,7 +296,7 @@ namespace SimRMS.WebAPI.Controllers.V1
 
             var result = await _orderGroupService.GetOrderGroupUserWorkflowListAsync(request, cancellationToken);
 
-            return Ok(result, "Order Group User workflow list retrieved successfully");
+            return Ok(result, "Order Group(User Group) User workflow list retrieved successfully");
         }
 
         /// <summary>
@@ -313,13 +313,13 @@ namespace SimRMS.WebAPI.Controllers.V1
             [FromBody] AuthorizeOrderGroupUserRequest request,
             CancellationToken cancellationToken = default)
         {
-            _logger.LogInformation("Authorizing OrderGroup: {GroupCode}, IsAuth: {IsAuth}",
+            _logger.LogInformation("Authorizing Order Group(User Group) User: {GroupCode}, IsAuth: {IsAuth}",
                 groupCode, request.IsAuth);
 
             // Use the authorize method from service
             var success = await _orderGroupService.AuthorizeOrderGroupUserAsync(groupCode, usrID, request, cancellationToken);
             var action = request.IsAuth == (byte)AuthTypeEnum.Approve ? "approved" : "denied";
-            return Ok((object)new { GroupCode = groupCode }, $"Order Group {action} successfully");
+            return Ok((object)new { GroupCode = groupCode }, $"Order Group(User Group) User {action} successfully");
         }
 
         #endregion

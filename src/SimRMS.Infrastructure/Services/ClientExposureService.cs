@@ -66,7 +66,7 @@ public class ClientExposureService : IClientExposureService
     public async Task<PagedResult<ClientExposureDto>> GetClientExposureListAsync(int pageNumber = 1, int pageSize = 10,
         string? clntCode = null, string? coBrchCode = null, string? searchTerm = null, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting paged ClientExposure list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+        _logger.LogInformation("Getting paged Client Exposure list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
         // Validate and sanitize inputs
         if (pageNumber < 1) pageNumber = 1;
@@ -104,24 +104,24 @@ public class ClientExposureService : IClientExposureService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for ClientExposure list retrieval");
+            _logger.LogError(ex, "Invalid arguments for Client Exposure list retrieval");
             throw new ValidationException($"Invalid parameters provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting ClientExposure list");
+            _logger.LogError(ex, "Database operation error getting Client Exposure list");
             throw new DomainException($"Database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting ClientExposure list");
+            _logger.LogError(ex, "Unexpected error getting Client Exposure list");
             throw new DomainException($"Failed to retrieve client exposure list: {ex.Message}");
         }
     }
 
     public async Task<ClientExposureDto?> GetClientExposureByIdAsync(string clntCode, string coBrchCode, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting ClientExposure by ID: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+        _logger.LogInformation("Getting Client Exposure by ID: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
 
         try
         {
@@ -144,24 +144,24 @@ public class ClientExposureService : IClientExposureService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for ClientExposure retrieval: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+            _logger.LogError(ex, "Invalid arguments for Client Exposure retrieval: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
             throw new ValidationException($"Invalid parameters provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting ClientExposure by ID: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+            _logger.LogError(ex, "Database operation error getting Client Exposure by ID: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
             throw new DomainException($"Database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting ClientExposure by ID: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+            _logger.LogError(ex, "Unexpected error getting Client Exposure by ID: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
             throw new DomainException($"Failed to retrieve client exposure: {ex.Message}");
         }
     }
 
     public async Task<ClientExposureDto> UpdateClientExposureAsync(string clntCode, string coBrchCode, UpdateClientExposureRequest request, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Updating ClientExposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+        _logger.LogInformation("Updating Client Exposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
 
         // Use existing validation method
         await ValidateUpdateRequestAsync(request, cancellationToken);
@@ -222,7 +222,7 @@ public class ClientExposureService : IClientExposureService
                 throw new DomainException($"Updated client exposure not found: {clntCode}, {coBrchCode}");
             }
 
-            _logger.LogInformation("Successfully updated ClientExposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+            _logger.LogInformation("Successfully updated Client Exposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
             return updatedExposure;
         }
         catch (ValidationException)
@@ -235,14 +235,14 @@ public class ClientExposureService : IClientExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error updating ClientExposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+            _logger.LogError(ex, "Unexpected error updating Client Exposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
             throw new DomainException($"Failed to update client exposure: {ex.Message}");
         }
     }
 
     public async Task<bool> DeleteClientExposureAsync(string clntCode, string coBrchCode, DeleteClientExposureRequest request, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Deleting ClientExposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+        _logger.LogInformation("Deleting Client Exposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
 
         // Use existing validation method
         await ValidateDeleteRequestAsync(request, cancellationToken);
@@ -291,7 +291,7 @@ public class ClientExposureService : IClientExposureService
 
             if (success)
             {
-                _logger.LogInformation("Successfully deleted ClientExposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+                _logger.LogInformation("Successfully deleted Client Exposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
             }
             else
             {
@@ -310,14 +310,14 @@ public class ClientExposureService : IClientExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error deleting ClientExposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+            _logger.LogError(ex, "Unexpected error deleting Client Exposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
             throw new DomainException($"Failed to delete client exposure: {ex.Message}");
         }
     }
 
     public async Task<bool> ClientExposureExistsAsync(string clntCode, string coBrchCode, CancellationToken cancellationToken = default)
     {
-        _logger.LogDebug("Checking if ClientExposure exists: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+        _logger.LogDebug("Checking if Client Exposure exists: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
 
         try
         {
@@ -326,7 +326,7 @@ public class ClientExposureService : IClientExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error checking ClientExposure existence: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+            _logger.LogError(ex, "Error checking Client Exposure existence: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
             return false;
         }
     }
@@ -364,7 +364,7 @@ public class ClientExposureService : IClientExposureService
         else if (isAuth == (byte)AuthTypeEnum.Deny)
             authAction = AuthTypeEnum.Deny.ToString();
 
-        _logger.LogInformation("Getting {authAction} ClientExposure list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize, authAction);
+        _logger.LogInformation("Getting {authAction} Client Exposure list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize, authAction);
 
         try
         {
@@ -420,7 +420,7 @@ public class ClientExposureService : IClientExposureService
         else if (request.IsAuth == (byte)AuthTypeEnum.Deny)
             authAction = AuthTypeEnum.Deny.ToString();
 
-        _logger.LogInformation("Authorizing {authAction} ClientExposure in workflow: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode, authAction);
+        _logger.LogInformation("Authorizing {authAction} Client Exposure in workflow: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode, authAction);
 
         // Validate request
         await ValidateAuthorizeRequestAsync(request, cancellationToken);
@@ -454,14 +454,14 @@ public class ClientExposureService : IClientExposureService
             if (rowsAffected > 0)
             {
                 await _unitOfWork.CommitTransactionAsync(cancellationToken);
-                _logger.LogInformation("Successfully authorized ClientExposure: {ClntCode}, {CoBrchCode}, RowsAffected: {RowsAffected}",
+                _logger.LogInformation("Successfully authorized Client Exposure: {ClntCode}, {CoBrchCode}, RowsAffected: {RowsAffected}",
                     clntCode, coBrchCode, rowsAffected);
                 return true;
             }
             else
             {
                 await _unitOfWork.RollbackTransactionAsync(cancellationToken);
-                _logger.LogWarning("No rows affected during {authAction} authorization of ClientExposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode, authAction);
+                _logger.LogWarning("No rows affected during {authAction} authorization of Client Exposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode, authAction);
                 throw new DomainException($"Failed to authorize: {authAction} client exposure: No records were updated");
             }
         }
@@ -475,7 +475,7 @@ public class ClientExposureService : IClientExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error {authAction} authorizing ClientExposure in workflow: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode, authAction);
+            _logger.LogError(ex, "Error {authAction} authorizing Client Exposure in workflow: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode, authAction);
             throw new DomainException($"Failed to authorize: {authAction} client exposure: {ex.Message}");
         }
     }
@@ -496,7 +496,7 @@ public class ClientExposureService : IClientExposureService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Update validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Update Client Exposure validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -513,7 +513,7 @@ public class ClientExposureService : IClientExposureService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Delete validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Delete Client Exposure validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -530,7 +530,7 @@ public class ClientExposureService : IClientExposureService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Authorization validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Authorization Client Exposure validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -547,7 +547,7 @@ public class ClientExposureService : IClientExposureService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Workflow list validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Workflow Client Exposure list validation failed") { ValidationErrors = errors };
         }
     }
 

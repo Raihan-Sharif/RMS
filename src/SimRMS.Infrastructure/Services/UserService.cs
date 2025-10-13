@@ -568,7 +568,7 @@ public class UserService : IUserService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Create validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Create User validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -584,7 +584,7 @@ public class UserService : IUserService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Update validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Update User validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -600,7 +600,7 @@ public class UserService : IUserService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Delete validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Delete User validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -617,7 +617,7 @@ public class UserService : IUserService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Workflow list validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Workflow User list validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -633,7 +633,7 @@ public class UserService : IUserService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Authorization validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Authorization User validation failed") { ValidationErrors = errors };
         }
     }
     #endregion

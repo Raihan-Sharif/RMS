@@ -105,17 +105,17 @@ public class UserExposureService : IUserExposureService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for UserExposure list retrieval");
+            _logger.LogError(ex, "Invalid arguments for User Exposure list retrieval");
             throw new ValidationException($"Invalid parameters provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting UserExposure list");
+            _logger.LogError(ex, "Database operation error getting User Exposure list");
             throw new DomainException($"Database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting UserExposure list");
+            _logger.LogError(ex, "Unexpected error getting User Exposure list");
             throw new DomainException($"Failed to retrieve user exposure list: {ex.Message}");
         }
     }
@@ -144,24 +144,24 @@ public class UserExposureService : IUserExposureService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for UserExposure retrieval: {UsrId}", usrId);
+            _logger.LogError(ex, "Invalid arguments for User Exposure retrieval: {UsrId}", usrId);
             throw new ValidationException($"Invalid parameters provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting UserExposure by ID: {UsrId}", usrId);
+            _logger.LogError(ex, "Database operation error getting User Exposure by ID: {UsrId}", usrId);
             throw new DomainException($"Database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting UserExposure by ID: {UsrId}", usrId);
+            _logger.LogError(ex, "Unexpected error getting User Exposure by ID: {UsrId}", usrId);
             throw new DomainException($"Failed to retrieve user exposure: {ex.Message}");
         }
     }
 
     public async Task<UserExposureDto> CreateUserExposureAsync(CreateUserExposureRequest request, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Creating new UserExposure for user: {UsrId}", request.UsrId);
+        _logger.LogInformation("Creating new User Exposure for user: {UsrId}", request.UsrId);
 
         // Validate the request
         await ValidateCreateRequestAsync(request, cancellationToken);
@@ -248,14 +248,14 @@ public class UserExposureService : IUserExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error creating UserExposure for user: {UsrId}", request.UsrId);
+            _logger.LogError(ex, "Unexpected error creating User Exposure for user: {UsrId}", request.UsrId);
             throw new DomainException($"Failed to create user exposure: {ex.Message}");
         }
     }
 
     public async Task<UserExposureDto> UpdateUserExposureAsync(string usrId, UpdateUserExposureRequest request, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Updating UserExposure: {UsrId}", usrId);
+        _logger.LogInformation("Updating User Exposure: {UsrId}", usrId);
 
         // Use existing validation method
         await ValidateUpdateRequestAsync(request, cancellationToken);
@@ -320,7 +320,7 @@ public class UserExposureService : IUserExposureService
                 throw new DomainException($"Updated user exposure not found: {usrId}");
             }
 
-            _logger.LogInformation("Successfully updated UserExposure: {UsrId}", usrId);
+            _logger.LogInformation("Successfully updated User Exposure: {UsrId}", usrId);
             return updatedExposure;
         }
         catch (ValidationException)
@@ -333,14 +333,14 @@ public class UserExposureService : IUserExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error updating UserExposure: {UsrId}", usrId);
+            _logger.LogError(ex, "Unexpected error updating User Exposure: {UsrId}", usrId);
             throw new DomainException($"Failed to update user exposure: {ex.Message}");
         }
     }
 
     public async Task<bool> DeleteUserExposureAsync(string usrId, DeleteUserExposureRequest request, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Deleting UserExposure: {UsrId}", usrId);
+        _logger.LogInformation("Deleting User Exposure: {UsrId}", usrId);
 
         // Use existing validation method
         await ValidateDeleteRequestAsync(request, cancellationToken);
@@ -394,7 +394,7 @@ public class UserExposureService : IUserExposureService
 
             if (success)
             {
-                _logger.LogInformation("Successfully deleted UserExposure: {UsrId}", usrId);
+                _logger.LogInformation("Successfully deleted User Exposure: {UsrId}", usrId);
             }
             else
             {
@@ -413,14 +413,14 @@ public class UserExposureService : IUserExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error deleting UserExposure: {UsrId}", usrId);
+            _logger.LogError(ex, "Unexpected error deleting User Exposure: {UsrId}", usrId);
             throw new DomainException($"Failed to delete user exposure: {ex.Message}");
         }
     }
 
     public async Task<bool> UserExposureExistsAsync(string usrId, CancellationToken cancellationToken = default)
     {
-        _logger.LogDebug("Checking if UserExposure exists: {UsrId}", usrId);
+        _logger.LogDebug("Checking if User Exposure exists: {UsrId}", usrId);
 
         try
         {
@@ -429,7 +429,7 @@ public class UserExposureService : IUserExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error checking UserExposure existence: {UsrId}", usrId);
+            _logger.LogError(ex, "Error checking User Exposure existence: {UsrId}", usrId);
             return false;
         }
     }
@@ -463,7 +463,7 @@ public class UserExposureService : IUserExposureService
         else if (isAuth == (byte)AuthTypeEnum.Deny)
             authAction = AuthTypeEnum.Deny.ToString();
 
-        _logger.LogInformation("Getting {authAction} UserExposure list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize, authAction);
+        _logger.LogInformation("Getting {authAction} User Exposure list for workflow - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize, authAction);
 
         try
         {
@@ -517,7 +517,7 @@ public class UserExposureService : IUserExposureService
         else if (request.IsAuth == (byte)AuthTypeEnum.Deny)
             authAction = AuthTypeEnum.Deny.ToString();
 
-        _logger.LogInformation("Authorizing {authAction} UserExposure in workflow: {UsrId}", usrId, authAction);
+        _logger.LogInformation("Authorizing {authAction} User Exposure in workflow: {UsrId}", usrId, authAction);
 
         // Validate request
         await ValidateAuthorizeRequestAsync(request, cancellationToken);
@@ -550,14 +550,14 @@ public class UserExposureService : IUserExposureService
             if (rowsAffected > 0)
             {
                 await _unitOfWork.CommitTransactionAsync(cancellationToken);
-                _logger.LogInformation("Successfully authorized UserExposure: {UsrId}, RowsAffected: {RowsAffected}",
+                _logger.LogInformation("Successfully authorized User Exposure: {UsrId}, RowsAffected: {RowsAffected}",
                     usrId, rowsAffected);
                 return true;
             }
             else
             {
                 await _unitOfWork.RollbackTransactionAsync(cancellationToken);
-                _logger.LogWarning("No rows affected during {authAction} authorization of UserExposure: {UsrId}", usrId, authAction);
+                _logger.LogWarning("No rows affected during {authAction} authorization of User Exposure: {UsrId}", usrId, authAction);
                 throw new DomainException($"Failed to authorize: {authAction} user exposure: No records were updated");
             }
         }
@@ -571,7 +571,7 @@ public class UserExposureService : IUserExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error {authAction} authorizing UserExposure in workflow: {UsrId}", usrId, authAction);
+            _logger.LogError(ex, "Error {authAction} authorizing User Exposure in workflow: {UsrId}", usrId, authAction);
             throw new DomainException($"Failed to authorize: {authAction} user exposure: {ex.Message}");
         }
     }
@@ -592,7 +592,7 @@ public class UserExposureService : IUserExposureService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Create validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Create User Exposure validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -609,7 +609,7 @@ public class UserExposureService : IUserExposureService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Update validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Update User Exposure validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -626,7 +626,7 @@ public class UserExposureService : IUserExposureService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Delete validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Delete User Exposure validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -643,7 +643,7 @@ public class UserExposureService : IUserExposureService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Authorization validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Authorization User Exposure validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -660,7 +660,7 @@ public class UserExposureService : IUserExposureService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Workflow list validation failed") { ValidationErrors = errors };
+            throw new ValidationException("Workflow User Exposure list validation failed") { ValidationErrors = errors };
         }
     }
 
