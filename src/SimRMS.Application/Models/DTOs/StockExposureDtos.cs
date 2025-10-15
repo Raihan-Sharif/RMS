@@ -23,6 +23,7 @@ namespace SimRMS.Application.Models.DTOs
     {
         public string DataType { get; set; } = null!;
         public string? CoCode { get; set; }
+        public string? CoDesc { get; set; }
         public string? CoBrchCode { get; set; }
         public string? CoBrchDesc { get; set; }
         public string? UsrID { get; set; }
@@ -32,6 +33,7 @@ namespace SimRMS.Application.Models.DTOs
         public string StkCode { get; set; } = null!;
         public string CtrlStatus { get; set; } = null!;
         public string? ClntType { get; set; }
+        public string? ClntTypeDesc { get; set; }
 
         // Computed fields from stored procedures
         public string DataTypeDescription { get; set; } = string.Empty;
