@@ -109,17 +109,17 @@ public class StockExposureService : IStockExposureService
         catch (ArgumentException ex)
         {
             _logger.LogError(ex, "Invalid arguments for Stock Exposure list retrieval");
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting Stock Exposure list");
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while retrieving Stock Exposure list");
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting Stock Exposure list");
-            throw new DomainException($"Failed to retrieve stock exposure list: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while retrieving Stock Exposure list");
+            throw new DomainException($"The stock exposure list retrieval failed: {ex.Message}");
         }
     }
 
@@ -158,17 +158,17 @@ public class StockExposureService : IStockExposureService
         catch (ArgumentException ex)
         {
             _logger.LogError(ex, "Invalid arguments for Stock Exposure retrieval");
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting Stock Exposure by key");
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while retrieving Stock Exposure by key");
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting Stock Exposure by key");
-            throw new DomainException($"Failed to retrieve stock exposure: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while retrieving Stock Exposure by key");
+            throw new DomainException($"The stock exposure retrieval failed: {ex.Message}");
         }
     }
 
@@ -254,8 +254,8 @@ public class StockExposureService : IStockExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error creating Stock Exposure");
-            throw new DomainException($"Failed to create stock exposure: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while creating Stock Exposure");
+            throw new DomainException($"The stock exposure creation failed: {ex.Message}");
         }
     }
 
@@ -325,7 +325,7 @@ public class StockExposureService : IStockExposureService
 
             if (rowsAffected <= 0)
             {
-                throw new DomainException("Failed to update stock exposure - no rows affected");
+                throw new DomainException("The stock exposure update failed because no rows were affected");
             }
 
             var updatedExposure = await GetStockExposureByKeyAsync(new GetStockExposureByKeyRequest
@@ -358,8 +358,8 @@ public class StockExposureService : IStockExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error updating Stock Exposure");
-            throw new DomainException($"Failed to update stock exposure: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while updating Stock Exposure");
+            throw new DomainException($"The stock exposure update failed: {ex.Message}");
         }
     }
 
@@ -435,7 +435,7 @@ public class StockExposureService : IStockExposureService
             }
             else
             {
-                _logger.LogWarning("Delete operation failed - no rows affected");
+                _logger.LogWarning("The delete operation failed because no rows were affected");
             }
 
             return success;
@@ -450,8 +450,8 @@ public class StockExposureService : IStockExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error deleting Stock Exposure");
-            throw new DomainException($"Failed to delete stock exposure: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while deleting Stock Exposure");
+            throw new DomainException($"The stock exposure deletion failed: {ex.Message}");
         }
     }
 

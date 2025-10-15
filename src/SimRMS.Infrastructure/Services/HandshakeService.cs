@@ -49,7 +49,7 @@ namespace SimRMS.Infrastructure.Services
         {
             try
             {
-                _logger.LogInformation("Starting handshake process with token service");
+                _logger.LogInformation("The Starting handshake process with token service");
 
                 // Test token generation to verify connection
                 var testResult = await IsTokenServiceAvailableAsync();

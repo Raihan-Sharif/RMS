@@ -113,13 +113,13 @@ public class UserController : BaseController
         [FromRoute, Required, MaxLength(50)] string usrId,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting User by ID: {UsrId}", usrId);
+        _logger.LogInformation("Retrieving User by ID: {UsrId}", usrId);
 
         var user = await _userService.GetUserByIdAsync(usrId, cancellationToken);
 
         if (user == null)
         {
-            return NotFound<UserDetailDto>($"User with ID '{usrId}' not found");
+            return NotFound<UserDetailDto>($"The User with ID '{usrId}' not found");
         }
 
         return Ok(user, "User retrieved successfully");

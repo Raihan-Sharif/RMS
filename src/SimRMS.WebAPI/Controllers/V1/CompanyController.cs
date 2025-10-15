@@ -97,13 +97,13 @@ public class CompanyController : BaseController
         [FromRoute, Required, MaxLength(5)] string coCode,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting Company by ID: {CoCode}", coCode);
+        _logger.LogInformation("Retrieving Company by ID: {CoCode}", coCode);
 
         var company = await _companyService.GetCompanyByIdAsync(coCode, cancellationToken);
 
         if (company == null)
         {
-            return NotFound<CompanyDto>($"Company with code '{coCode}' not found");
+            return NotFound<CompanyDto>($"The Company with code '{coCode}' not found");
         }
 
         return Ok(company, "Company retrieved successfully");

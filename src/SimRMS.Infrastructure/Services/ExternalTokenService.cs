@@ -153,7 +153,7 @@ namespace SimRMS.Infrastructure.Services
         //            return isValid;
         //        }
 
-        //        _logger.LogWarning("Token validation failed with status: {StatusCode}", response.StatusCode);
+        //        _logger.LogWarning("The Token validation failed with status: {StatusCode}", response.StatusCode);
         //        return false;
         //    }
         //    catch (Exception ex)

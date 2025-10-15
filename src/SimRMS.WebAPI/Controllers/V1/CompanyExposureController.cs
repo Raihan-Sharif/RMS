@@ -58,17 +58,10 @@ namespace SimRMS.WebAPI.Controllers.V1
             [FromQuery] string? searchTerm = null,
             CancellationToken cancellationToken = default)
         {
-            try
-            {
-                var result = await _companyExposureService.GetCompaniesWithExposurePagedAsync(
-                    pageNumber, pageSize, searchTerm, cancellationToken);
+            var result = await _companyExposureService.GetCompaniesWithExposurePagedAsync(
+                pageNumber, pageSize, searchTerm, cancellationToken);
 
-                return Ok(result, "Companies with exposure retrieved successfully");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest<IEnumerable<MstCompanyWithExposureDto>>("Error retrieving companies with exposure");
-            }
+            return Ok(result, "The Companies with exposure retrieved successfully");
         }
 
         /// <summary>
@@ -80,21 +73,14 @@ namespace SimRMS.WebAPI.Controllers.V1
             [Required] string coCode,
             CancellationToken cancellationToken = default)
         {
-            try
-            {
-                var result = await _companyExposureService.GetCompanyWithExposureByCodeAsync(coCode, cancellationToken);
-                
-                if (result == null)
-                {
-                    return NotFound<MstCompanyWithExposureDto>($"Company with code {coCode} not found");
-                }
+            var result = await _companyExposureService.GetCompanyWithExposureByCodeAsync(coCode, cancellationToken);
 
-                return Ok(result, "Company with exposure retrieved successfully");
-            }
-            catch (Exception ex)
+            if (result == null)
             {
-                return BadRequest<MstCompanyWithExposureDto>($"Error retrieving company with code {coCode}");
+                return NotFound<MstCompanyWithExposureDto>($"The Company with code {coCode} was not found");
             }
+
+            return Ok(result, "The Company with exposure retrieved successfully");
         }
 
         /// <summary>
@@ -107,29 +93,22 @@ namespace SimRMS.WebAPI.Controllers.V1
             [FromBody, Required] IEnumerable<CreateCompanyExposureRequest> requests,
             CancellationToken cancellationToken = default)
         {
-            try
+            if (!requests.Any())
             {
-                if (!requests.Any())
-                {
-                    return BadRequest<BulkOperationResult>("At least one company is required for bulk creation");
-                }
-
-                if (requests.Count() > 1000)
-                {
-                    return BadRequest<BulkOperationResult>("Maximum 1000 companies allowed per bulk operation");
-                }
-
-                var result = await _companyExposureService.BulkCreateCompaniesWithExposureAsync(requests, cancellationToken);
-
-                if (result.Success)
-                    return Ok(result.Data!, result.Message);
-                else
-                    return BadRequest<BulkOperationResult>(result.Message);
+                return BadRequest<BulkOperationResult>("At least one company is required for bulk creation");
             }
-            catch (Exception ex)
+
+            if (requests.Count() > 1000)
             {
-                return BadRequest<BulkOperationResult>("Error in bulk create companies with exposure");
+                return BadRequest<BulkOperationResult>("Maximum 1000 companies allowed per bulk operation");
             }
+
+            var result = await _companyExposureService.BulkCreateCompaniesWithExposureAsync(requests, cancellationToken);
+
+            if (result.Success)
+                return Ok(result.Data!, result.Message);
+            else
+                return BadRequest<BulkOperationResult>(result.Message);
         }
 
         /// <summary>
@@ -141,29 +120,22 @@ namespace SimRMS.WebAPI.Controllers.V1
             [FromBody, Required] IEnumerable<UpdateCompanyExposureRequest> requests,
             CancellationToken cancellationToken = default)
         {
-            try
+            if (!requests.Any())
             {
-                if (!requests.Any())
-                {
-                    return BadRequest<BulkOperationResult>("At least one company is required for bulk update");
-                }
-
-                if (requests.Count() > 1000)
-                {
-                    return BadRequest<BulkOperationResult>("Maximum 1000 companies allowed per bulk operation");
-                }
-
-                var result = await _companyExposureService.BulkUpdateCompaniesWithExposureAsync(requests, cancellationToken);
-
-                if (result.Success)
-                    return Ok(result.Data!, result.Message);
-                else
-                    return BadRequest<BulkOperationResult>(result.Message);
+                return BadRequest<BulkOperationResult>("At least one company is required for bulk update");
             }
-            catch (Exception ex)
+
+            if (requests.Count() > 1000)
             {
-                return BadRequest<BulkOperationResult>("Error in bulk update companies with exposure");
+                return BadRequest<BulkOperationResult>("Maximum 1000 companies allowed per bulk operation");
             }
+
+            var result = await _companyExposureService.BulkUpdateCompaniesWithExposureAsync(requests, cancellationToken);
+
+            if (result.Success)
+                return Ok(result.Data!, result.Message);
+            else
+                return BadRequest<BulkOperationResult>(result.Message);
         }
 
         /// <summary>
@@ -176,29 +148,22 @@ namespace SimRMS.WebAPI.Controllers.V1
             [FromBody, Required] IEnumerable<UpsertCompanyExposureRequest> requests,
             CancellationToken cancellationToken = default)
         {
-            try
+            if (!requests.Any())
             {
-                if (!requests.Any())
-                {
-                    return BadRequest<BulkOperationResult>("At least one company is required for bulk upsert");
-                }
-
-                if (requests.Count() > 1000)
-                {
-                    return BadRequest<BulkOperationResult>("Maximum 1000 companies allowed per bulk operation");
-                }
-
-                var result = await _companyExposureService.BulkUpsertCompaniesWithExposureAsync(requests, cancellationToken);
-
-                if (result.Success)
-                    return Ok(result.Data!, result.Message);
-                else
-                    return BadRequest<BulkOperationResult>(result.Message);
+                return BadRequest<BulkOperationResult>("At least one company is required for bulk upsert");
             }
-            catch (Exception ex)
+
+            if (requests.Count() > 1000)
             {
-                return BadRequest<BulkOperationResult>("Error in bulk upsert companies with exposure");
+                return BadRequest<BulkOperationResult>("Maximum 1000 companies allowed per bulk operation");
             }
+
+            var result = await _companyExposureService.BulkUpsertCompaniesWithExposureAsync(requests, cancellationToken);
+
+            if (result.Success)
+                return Ok(result.Data!, result.Message);
+            else
+                return BadRequest<BulkOperationResult>(result.Message);
         }
     }
 }

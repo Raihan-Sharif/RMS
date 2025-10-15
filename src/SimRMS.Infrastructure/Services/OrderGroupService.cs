@@ -146,7 +146,7 @@ public class OrderGroupService : IOrderGroupService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting Order Group(User Group) list");
+            _logger.LogError(ex, "An error occurred while retrieving Order Group(User Group) list");
             throw new DomainException($"Failed to retrieve Order Group(User Group) list: {ex.Message}");
         }
     }
@@ -175,7 +175,7 @@ public class OrderGroupService : IOrderGroupService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting Order Group(User Group) by code: {GroupCode}", groupCode);
+            _logger.LogError(ex, "An error occurred while retrieving Order Group(User Group) by code: {GroupCode}", groupCode);
             throw new DomainException($"Failed to retrieve Order Group(User Group): {ex.Message}");
         }
     }
@@ -249,7 +249,7 @@ public class OrderGroupService : IOrderGroupService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting Order Group(User Group) by code: {GroupCode}", groupCode);
+            _logger.LogError(ex, "An error occurred while retrieving Order Group(User Group) by code: {GroupCode}", groupCode);
             throw new DomainException($"Failed to retrieve Order Group(User Group): {ex.Message}");
         }
     }
@@ -391,7 +391,7 @@ public class OrderGroupService : IOrderGroupService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error creating Order Group(User Group)");
+            _logger.LogError(ex, "An error occurred while creating Order Group(User Group)");
             await _unitOfWork.RollbackTransactionAsync(cancellationToken);
             
             if (ex is DomainException)
@@ -473,7 +473,7 @@ public class OrderGroupService : IOrderGroupService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error updating Order Group(User Group)");
+            _logger.LogError(ex, "An error occurred while updating Order Group(User Group)");
             await _unitOfWork.RollbackTransactionAsync(cancellationToken);
             
             if (ex is DomainException)
@@ -549,7 +549,7 @@ public class OrderGroupService : IOrderGroupService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error deleting Order Group(User Group) (Legacy)");
+            _logger.LogError(ex, "An error occurred while deleting Order Group(User Group) (Legacy)");
             await _unitOfWork.RollbackTransactionAsync(cancellationToken);
             
             if (ex is DomainException)
@@ -594,7 +594,7 @@ public class OrderGroupService : IOrderGroupService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting Order Group(User Group) Group Workflow List");
+            _logger.LogError(ex, "An error occurred while retrieving Order Group(User Group) Group Workflow List");
             throw new DomainException($"Failed to retrieve Order Group Workflow List: {ex.Message}");
         }
     }
@@ -638,7 +638,7 @@ public class OrderGroupService : IOrderGroupService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error authorizing Order Group(User Group) Group: {GroupCode}", groupCode);
+            _logger.LogError(ex, "An error occurred while authorizing Order Group(User Group) Group: {GroupCode}", groupCode);
             throw new DomainException($"Failed to authorize Order Group(User Group) Group: {ex.Message}");
         }
     }
@@ -680,7 +680,7 @@ public class OrderGroupService : IOrderGroupService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting Detail Order Group(User Group) User Workflow List");
+            _logger.LogError(ex, "An error occurred while retrieving Detail Order Group(User Group) User Workflow List");
             throw new DomainException($"Failed to retrieve Order Group(User Group) User Workflow List: {ex.Message}");
         }
     }
@@ -725,7 +725,7 @@ public class OrderGroupService : IOrderGroupService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error authorizing OrderGroup detail: {GroupCode}, {UsrID}", groupCode, usrId);
+            _logger.LogError(ex, "An error occurred while authorizing OrderGroup detail: {GroupCode}, {UsrID}", groupCode, usrId);
             throw new DomainException($"Failed to authorize Order Group(User Group) User: {ex.Message}");
         }
     }

@@ -102,14 +102,14 @@ public class ClientController : BaseController
         [FromRoute, Required, MaxLength(20)] string gcif,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting Client by GCIF: {GCIF}", gcif);
+        _logger.LogInformation("Retrieving Client by GCIF: {GCIF}", gcif);
 
         var client = await _clientService.GetClientByIdAsync(gcif, cancellationToken);
 
         if (client == null)
         {
-            _logger.LogWarning("Client not found with GCIF: {GCIF}", gcif);
-            return NotFound($"Client with GCIF '{gcif}' not found");
+            _logger.LogWarning("The Client not found with GCIF: {GCIF}", gcif);
+            return NotFound($"The Client with GCIF '{gcif}' not found");
         }
 
         return Ok(client, "Client retrieved successfully");
@@ -130,7 +130,7 @@ public class ClientController : BaseController
         [FromBody] CreateClientRequest request,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Creating new Client with ClntCode: {ClntCode}", request.ClntCode);
+        _logger.LogInformation("Creating Client with ClntCode: {ClntCode}", request.ClntCode);
 
         var result = await _clientService.CreateClientAsync(request, cancellationToken);
 

@@ -76,7 +76,7 @@ public class StockService : IStockService
         string? xchgCode = null, string? stkCode = null, string? searchTerm = null,
         string sortColumn = "StkCode", string sortDirection = "ASC", CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting paged Stock list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+        _logger.LogInformation("Retrieving paged Stock list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
         // Create request model for validation
         var request = new GetStockListRequest
@@ -125,24 +125,24 @@ public class StockService : IStockService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for Stock list retrieval");
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            _logger.LogError(ex, "Invalid arguments were provided for Stock listretrieval");
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting Stock list");
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while retrieving Stock list");
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting Stock list");
-            throw new DomainException($"Failed to retrieve stock list: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while retrieving Stock list");
+            throw new DomainException($"The stock list retrieval failed: {ex.Message}");
         }
     }
 
     public async Task<StockDto?> GetStockByKeyAsync(string xchgCode, string stkCode, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting Stock by key: {XchgCode}-{StkCode}", xchgCode, stkCode);
+        _logger.LogInformation("Retrieving Stock by key: {XchgCode}-{StkCode}", xchgCode, stkCode);
 
         // Create request model for validation
         var request = new GetStockByKeyRequest
@@ -175,24 +175,24 @@ public class StockService : IStockService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for Stock retrieval: {XchgCode}-{StkCode}", xchgCode, stkCode);
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            _logger.LogError(ex, "Invalid arguments were provided for Stock retrieval: {XchgCode}-{StkCode}", xchgCode, stkCode);
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting Stock by key: {XchgCode}-{StkCode}", xchgCode, stkCode);
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while retrieving Stock by key: {XchgCode}-{StkCode}", xchgCode, stkCode);
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting Stock by key: {XchgCode}-{StkCode}", xchgCode, stkCode);
-            throw new DomainException($"Failed to retrieve stock: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while retrieving Stock by key: {XchgCode}-{StkCode}", xchgCode, stkCode);
+            throw new DomainException($"The stock retrieval failed: {ex.Message}");
         }
     }
 
     public async Task<StockDto> CreateStockAsync(CreateStockRequest request, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Creating new Stock: {XchgCode}-{StkCode}", request.XchgCode, request.StkCode);
+        _logger.LogInformation("Creating Stock: {XchgCode}-{StkCode}", request.XchgCode, request.StkCode);
 
         // Validate the request
         await ValidateCreateRequestAsync(request, cancellationToken);
@@ -262,7 +262,7 @@ public class StockService : IStockService
             var createdStock = await GetStockByKeyAsync(request.XchgCode, request.StkCode, cancellationToken);
             if (createdStock == null)
             {
-                throw new DomainException($"Created stock not found: {request.XchgCode}-{request.StkCode}");
+                throw new DomainException($"The Created stock was not found: {request.XchgCode}-{request.StkCode}");
             }
 
             return createdStock;
@@ -277,8 +277,8 @@ public class StockService : IStockService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error creating Stock: {XchgCode}-{StkCode}", request.XchgCode, request.StkCode);
-            throw new DomainException($"Failed to create stock: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while creating Stock: {XchgCode}-{StkCode}", request.XchgCode, request.StkCode);
+            throw new DomainException($"The stock creation failed: {ex.Message}");
         }
     }
 
@@ -356,7 +356,7 @@ public class StockService : IStockService
             var updatedStock = await GetStockByKeyAsync(xchgCode, stkCode, cancellationToken);
             if (updatedStock == null)
             {
-                throw new DomainException($"Updated stock not found: {xchgCode}-{stkCode}");
+                throw new DomainException($"The Updated stock was not found: {xchgCode}-{stkCode}");
             }
 
             return updatedStock;
@@ -371,8 +371,8 @@ public class StockService : IStockService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error updating Stock: {XchgCode}-{StkCode}", xchgCode, stkCode);
-            throw new DomainException($"Failed to update stock: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while updating Stock: {XchgCode}-{StkCode}", xchgCode, stkCode);
+            throw new DomainException($"The stock update failed: {ex.Message}");
         }
     }
 
@@ -458,8 +458,8 @@ public class StockService : IStockService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error deleting Stock: {XchgCode}-{StkCode}", xchgCode, stkCode);
-            throw new DomainException($"Failed to delete stock: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while deleting Stock: {XchgCode}-{StkCode}", xchgCode, stkCode);
+            throw new DomainException($"The stock deletion failed: {ex.Message}");
         }
     }
 
@@ -474,7 +474,7 @@ public class StockService : IStockService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error checking Stock existence: {XchgCode}-{StkCode}", xchgCode, stkCode);
+            _logger.LogError(ex, "An error occurred while checking Stock existence: {XchgCode}-{StkCode}", xchgCode, stkCode);
             return false;
         }
     }
@@ -550,18 +550,18 @@ public class StockService : IStockService
         catch (ArgumentException ex)
         {
             _logger.LogError(ex, "Invalid arguments for workflow Stock list retrieval");
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
             _logger.LogError(ex, "Database operation error getting workflow Stock list");
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error getting {authAction} stock list with parameters: PageNumber={PageNumber}, PageSize={PageSize}, SearchText={SearchText}",
                 authAction, pageNumber, pageSize, searchTerm);
-            throw new DomainException($"Failed to retrieve workflow stock list: {ex.Message}");
+            throw new DomainException($"The workflow stock list retrieval failed: {ex.Message}");
         }
     }
 
@@ -647,7 +647,7 @@ public class StockService : IStockService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Get Stock by key validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The Stock retrieval by key validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -664,7 +664,7 @@ public class StockService : IStockService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Get Stock list validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The Stock retrieval list validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -681,7 +681,7 @@ public class StockService : IStockService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Create Stock validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The Stock creation validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -698,7 +698,7 @@ public class StockService : IStockService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Update Stock validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The Stock update validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -715,7 +715,7 @@ public class StockService : IStockService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Delete Stock validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The Stock deletion validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -732,7 +732,7 @@ public class StockService : IStockService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Authorization Stock validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The Stock authorization validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -749,7 +749,7 @@ public class StockService : IStockService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Workflow Stock list validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The Stock workflow list validation failed") { ValidationErrors = errors };
         }
     }
 

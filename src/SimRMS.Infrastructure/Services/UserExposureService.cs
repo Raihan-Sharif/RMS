@@ -106,17 +106,17 @@ public class UserExposureService : IUserExposureService
         catch (ArgumentException ex)
         {
             _logger.LogError(ex, "Invalid arguments for User Exposure list retrieval");
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting User Exposure list");
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while retrieving User Exposure list");
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting User Exposure list");
-            throw new DomainException($"Failed to retrieve user exposure list: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while retrieving User Exposure list");
+            throw new DomainException($"The user exposure list retrieval failed: {ex.Message}");
         }
     }
 
@@ -145,23 +145,23 @@ public class UserExposureService : IUserExposureService
         catch (ArgumentException ex)
         {
             _logger.LogError(ex, "Invalid arguments for User Exposure retrieval: {UsrId}", usrId);
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting User Exposure by ID: {UsrId}", usrId);
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while retrieving User Exposure by ID: {UsrId}", usrId);
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting User Exposure by ID: {UsrId}", usrId);
-            throw new DomainException($"Failed to retrieve user exposure: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while retrieving User Exposure by ID: {UsrId}", usrId);
+            throw new DomainException($"The user exposure retrieval failed: {ex.Message}");
         }
     }
 
     public async Task<UserExposureDto> CreateUserExposureAsync(CreateUserExposureRequest request, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Creating new User Exposure for user: {UsrId}", request.UsrId);
+        _logger.LogInformation("Creating User Exposure for user: {UsrId}", request.UsrId);
 
         // Validate the request
         await ValidateCreateRequestAsync(request, cancellationToken);
@@ -248,8 +248,8 @@ public class UserExposureService : IUserExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error creating User Exposure for user: {UsrId}", request.UsrId);
-            throw new DomainException($"Failed to create user exposure: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while creating User Exposure for user: {UsrId}", request.UsrId);
+            throw new DomainException($"The user exposure creation failed: {ex.Message}");
         }
     }
 
@@ -268,7 +268,7 @@ public class UserExposureService : IUserExposureService
             var existingExposure = await GetUserExposureByIdAsync(usrId, cancellationToken);
             if (existingExposure == null)
             {
-                throw new DomainException($"User exposure not found: {usrId}");
+                throw new DomainException($"The User exposure was not found: {usrId}");
             }
 
             var parameters = new Dictionary<string, object>
@@ -310,14 +310,14 @@ public class UserExposureService : IUserExposureService
 
             if (rowsAffected <= 0)
             {
-                throw new DomainException("Failed to update user exposure - no rows affected");
+                throw new DomainException("The user exposure update failed because no rows were affected");
             }
 
             var updatedExposure = await GetUserExposureByIdAsync(usrId, cancellationToken);
 
             if (updatedExposure == null)
             {
-                throw new DomainException($"Updated user exposure not found: {usrId}");
+                throw new DomainException($"The Updated user exposure was not found: {usrId}");
             }
 
             _logger.LogInformation("Successfully updated User Exposure: {UsrId}", usrId);
@@ -333,8 +333,8 @@ public class UserExposureService : IUserExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error updating User Exposure: {UsrId}", usrId);
-            throw new DomainException($"Failed to update user exposure: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while updating User Exposure: {UsrId}", usrId);
+            throw new DomainException($"The user exposure update failed: {ex.Message}");
         }
     }
 
@@ -350,7 +350,7 @@ public class UserExposureService : IUserExposureService
             var existingExposure = await GetUserExposureByIdAsync(usrId, cancellationToken);
             if (existingExposure == null)
             {
-                throw new DomainException($"User exposure not found: {usrId}");
+                throw new DomainException($"The User exposure was not found: {usrId}");
             }
 
             var parameters = new Dictionary<string, object>
@@ -398,7 +398,7 @@ public class UserExposureService : IUserExposureService
             }
             else
             {
-                _logger.LogWarning("Delete operation failed - no rows affected: {UsrId}", usrId);
+                _logger.LogWarning("The delete operation failed because no rows were affected: {UsrId}", usrId);
             }
 
             return success;
@@ -413,8 +413,8 @@ public class UserExposureService : IUserExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error deleting User Exposure: {UsrId}", usrId);
-            throw new DomainException($"Failed to delete user exposure: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while deleting User Exposure: {UsrId}", usrId);
+            throw new DomainException($"The user exposure deletion failed: {ex.Message}");
         }
     }
 

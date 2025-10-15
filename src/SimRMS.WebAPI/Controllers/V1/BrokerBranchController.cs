@@ -98,13 +98,13 @@ public class BrokerBranchController : BaseController
         [FromRoute, Required, MaxLength(6)] string coBrchCode,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting Branches by ID: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+        _logger.LogInformation("Retrieving Branches by ID: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
 
         var branch = await _brokerBranchService.GetMstCoBrchByIdAsync(coCode, coBrchCode, cancellationToken);
 
         if (branch == null)
         {
-            return NotFound<MstCoBrchDto>($"Branch with code '{coCode}-{coBrchCode}' not found");
+            return NotFound<MstCoBrchDto>($"The Branch with code '{coCode}-{coBrchCode}' not found");
         }
 
         return Ok(branch, "Branch retrieved successfully");

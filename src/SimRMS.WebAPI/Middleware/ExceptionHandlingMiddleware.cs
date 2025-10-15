@@ -207,11 +207,11 @@ namespace SimRMS.WebAPI.Middleware
                     TraceId = context.TraceIdentifier
                 },
                 // ADD: Authentication-specific errors
-                InvalidOperationException invalidOpEx when invalidOpEx.Message.Contains("authenticationScheme") || 
+                InvalidOperationException invalidOpEx when invalidOpEx.Message.Contains("authenticationScheme") ||
                                                             invalidOpEx.Message.Contains("DefaultChallengeScheme") => new ApiResponse<object>
                 {
                     Success = false,
-                    Message = "Authentication required. Please provide a valid authorization token. " +invalidOpEx.Message,
+                    Message = "Authentication required. Please provide a valid authorization token.",
                     Data = null,
                     TraceId = context.TraceIdentifier
                 },
@@ -239,22 +239,22 @@ namespace SimRMS.WebAPI.Middleware
                 SqlException sqlEx => new ApiResponse<object>
                 {
                     Success = false,
-                    Message = "Database operation failed:"+ sqlEx.Message,
+                    Message = "A database error occurred. Please contact support if the problem persists.",
                     Data = null,
                     TraceId = context.TraceIdentifier
                 },
                 ArgumentException argEx => new ApiResponse<object>
                 {
                     Success = false,
-                    Message = "Invalid request parameter:"+argEx.Message,
+                    Message = "Invalid request parameter provided.",
                     Data = null,
-                    Errors = new List<string> { argEx.ParamName ?? "Unknown parameter" },
+                    Errors = argEx.ParamName != null ? new List<string> { $"Parameter: {argEx.ParamName}" } : null,
                     TraceId = context.TraceIdentifier
                 },
                 InvalidOperationException invalidOpEx2 when !invalidOpEx2.Message.Contains("authenticationScheme") && !invalidOpEx2.Message.Contains("DefaultChallengeScheme") => new ApiResponse<object>
                 {
                     Success = false,
-                    Message = "An operation error occurred: " + invalidOpEx2.Message,
+                    Message = "An operation error occurred. Please verify your request and try again.",
                     Data = null,
                     TraceId = context.TraceIdentifier
                 },

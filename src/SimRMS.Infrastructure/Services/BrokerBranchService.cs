@@ -70,7 +70,7 @@ public class BrokerBranchService : IBrokerBranchService
     public async Task<PagedResult<MstCoBrchDto>> GetMstCoBrchListAsync(int pageNumber = 1, int pageSize = 10,
         string? searchTerm = null, string? coCode = null, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting paged Branch list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+        _logger.LogInformation("Retrieving paged branch list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
         // Validate and sanitize inputs
         if (pageNumber < 1) pageNumber = 1;
@@ -108,24 +108,24 @@ public class BrokerBranchService : IBrokerBranchService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for Branch list retrieval");
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            _logger.LogError(ex, "Invalid arguments were provided for branch list retrieval");
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting Branch list");
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while retrieving branch list");
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting Branch list");
-            throw new DomainException($"Failed to retrieve broker branch list: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while retrieving branch list");
+            throw new DomainException($"The broker branch list retrieval failed: {ex.Message}");
         }
     }
 
     public async Task<MstCoBrchDto?> GetMstCoBrchByIdAsync(string coCode, string coBrchCode, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting Branch by ID: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+        _logger.LogInformation("Retrieving branch by ID: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
 
         try
         {
@@ -148,25 +148,25 @@ public class BrokerBranchService : IBrokerBranchService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for Branch retrieval: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            _logger.LogError(ex, "Invalid arguments were provided for Branch retrieval: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting Branch by ID: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while retrieving Branch by ID: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting Branch by ID: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
-            throw new DomainException($"Failed to retrieve branch: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while retrieving Branch by ID: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+            throw new DomainException($"The branch retrieval failed: {ex.Message}");
         }
     }
 
     public async Task<MstCoBrchDto> CreateMstCoBrchAsync(CreateMstCoBrchRequest request, CancellationToken cancellationToken = default)
     {
         string defaultCoCode = "073";
-        _logger.LogInformation("Creating new Branch for company: {CoCode}", defaultCoCode);
+        _logger.LogInformation("Creating Branch for company: {CoCode}", defaultCoCode);
 
         // Validate the request
         await ValidateCreateRequestAsync(request, cancellationToken);
@@ -209,7 +209,7 @@ public class BrokerBranchService : IBrokerBranchService
 
             if (rowsAffected <= 0)
             {
-                throw new DomainException("Failed to create Branch - no rows affected");
+                throw new DomainException("The Branch creation failed because no rows were affected");
             }
 
 
@@ -248,7 +248,7 @@ public class BrokerBranchService : IBrokerBranchService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error creating Branch for branch code: {BranchCode}", generatedBranchCode);
+            _logger.LogError(ex, "An unexpected error occurred while creating Branch for branch code: {BranchCode}", generatedBranchCode);
             throw new DomainException($"Failed to create Branch: {ex.Message}");
         }
     }
@@ -266,7 +266,7 @@ public class BrokerBranchService : IBrokerBranchService
             var existingBranch = await GetMstCoBrchByIdAsync(coCode, coBrchCode, cancellationToken);
             if (existingBranch == null)
             {
-                throw new DomainException($"Branch not found: {coCode}-{coBrchCode}");
+                throw new DomainException($"The Branch was not found: {coCode}-{coBrchCode}");
             }
 
             var parameters = new
@@ -323,7 +323,7 @@ public class BrokerBranchService : IBrokerBranchService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error updating Branch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+            _logger.LogError(ex, "An unexpected error occurred while updating Branch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
             throw new DomainException($"Failed to update Branch: {ex.Message}");
         }
     }
@@ -340,7 +340,7 @@ public class BrokerBranchService : IBrokerBranchService
             var existingBranch = await GetMstCoBrchByIdAsync(coCode, coBrchCode, cancellationToken);
             if (existingBranch == null)
             {
-                throw new DomainException($"Branch not found: {coCode}-{coBrchCode}");
+                throw new DomainException($"The Branch was not found: {coCode}-{coBrchCode}");
             }
 
             var parameters = new
@@ -380,7 +380,7 @@ public class BrokerBranchService : IBrokerBranchService
             }
             else
             {
-                _logger.LogWarning("Delete operation failed - no rows affected: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+                _logger.LogWarning("The delete operation failed because no rows were affected: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
             }
 
             return success;
@@ -395,7 +395,7 @@ public class BrokerBranchService : IBrokerBranchService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error deleting Branch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+            _logger.LogError(ex, "An unexpected error occurred while deleting Branch: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
             throw new DomainException($"Failed to delete Branch: {ex.Message}");
         }
     }
@@ -411,7 +411,7 @@ public class BrokerBranchService : IBrokerBranchService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error checking Branch existence: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+            _logger.LogError(ex, "An error occurred while checking Branch existence: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
             return false;
         }
     }
@@ -582,7 +582,7 @@ public class BrokerBranchService : IBrokerBranchService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Create Branch validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The Branch creation validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -599,7 +599,7 @@ public class BrokerBranchService : IBrokerBranchService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Update Branch validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The Branch update validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -616,7 +616,7 @@ public class BrokerBranchService : IBrokerBranchService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Delete Branch validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The Branch deletion validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -633,7 +633,7 @@ public class BrokerBranchService : IBrokerBranchService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Authorization Branch validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The Branch authorization validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -650,7 +650,7 @@ public class BrokerBranchService : IBrokerBranchService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Workflow Branch list validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The Branch workflow list validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -674,7 +674,7 @@ public class BrokerBranchService : IBrokerBranchService
                     cancellationToken: cancellationToken);
 
                 if (count > 0)
-                    throw new DomainException($"Branch with description '{request.CoBrchDesc}' already exists for company '{coCode}'");
+                    throw new DomainException($"The Branch with description '{request.CoBrchDesc}' already exists for company '{coCode}'");
             }
         }
         catch (DomainException)
@@ -683,7 +683,7 @@ public class BrokerBranchService : IBrokerBranchService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error validating business rules for branch update: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
+            _logger.LogError(ex, "An error occurred during business rules for branch update validation: {CoCode}-{CoBrchCode}", coCode, coBrchCode);
             throw new DomainException($"Failed to validate business rules: {ex.Message}");
         }
     }

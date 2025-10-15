@@ -63,7 +63,7 @@ public class CompanyService : ICompanyService
     public async Task<PagedResult<CompanyDto>> GetCompanyListAsync(int pageNumber = 1, int pageSize = 10,
         string? searchTerm = null, string? coCode = null, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting paged Company list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+        _logger.LogInformation("Retrieving paged Company list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
         // Validate and sanitize inputs
         if (pageNumber < 1) pageNumber = 1;
@@ -100,24 +100,24 @@ public class CompanyService : ICompanyService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for Company list retrieval");
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            _logger.LogError(ex, "Invalid arguments were provided for Company listretrieval");
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting Company list");
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while retrieving Company list");
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting Company list");
-            throw new DomainException($"Failed to retrieve company list: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while retrieving Company list");
+            throw new DomainException($"The company list retrieval failed: {ex.Message}");
         }
     }
 
     public async Task<CompanyDto?> GetCompanyByIdAsync(string coCode, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting Company by ID: {CoCode}", coCode);
+        _logger.LogInformation("Retrieving Company by ID: {CoCode}", coCode);
 
         try
         {
@@ -139,18 +139,18 @@ public class CompanyService : ICompanyService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for Company retrieval: {CoCode}", coCode);
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            _logger.LogError(ex, "Invalid arguments were provided for Company retrieval: {CoCode}", coCode);
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting Company by ID: {CoCode}", coCode);
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while retrieving Company by ID: {CoCode}", coCode);
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting Company by ID: {CoCode}", coCode);
-            throw new DomainException($"Failed to retrieve company: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while retrieving Company by ID: {CoCode}", coCode);
+            throw new DomainException($"The company retrieval failed: {ex.Message}");
         }
     }
 
@@ -166,7 +166,7 @@ public class CompanyService : ICompanyService
             var existingCompany = await GetCompanyByIdAsync(coCode, cancellationToken);
             if (existingCompany == null)
             {
-                throw new DomainException($"Company not found: {coCode}");
+                throw new DomainException($"The Company was not found: {coCode}");
             }
 
             var parameters = new
@@ -198,14 +198,14 @@ public class CompanyService : ICompanyService
 
             if (rowsAffected <= 0)
             {
-                throw new DomainException("Failed to update company - no rows affected");
+                throw new DomainException("The company update failed because no rows were affected");
             }
 
             var updatedCompany = await GetCompanyByIdAsync(coCode, cancellationToken);
 
             if (updatedCompany == null)
             {
-                throw new DomainException($"Updated company not found: {coCode}");
+                throw new DomainException($"The Updated company was not found: {coCode}");
             }
 
             _logger.LogInformation("Successfully updated Company: {CoCode}", coCode);
@@ -221,8 +221,8 @@ public class CompanyService : ICompanyService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error updating Company: {CoCode}", coCode);
-            throw new DomainException($"Failed to update company: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while updating Company: {CoCode}", coCode);
+            throw new DomainException($"The company update failed: {ex.Message}");
         }
     }
 
@@ -355,7 +355,7 @@ public class CompanyService : ICompanyService
             {
                 await _unitOfWork.RollbackTransactionAsync(cancellationToken);
                 _logger.LogWarning("Authorization failed for Company: {CoCode}", coCode);
-                throw new DomainException( $"Failed to authorize company: No records were updated");
+                throw new DomainException( $"The company authorization failed: No records were updated");
             }
         }
         catch (ValidationException)
@@ -368,8 +368,8 @@ public class CompanyService : ICompanyService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error authorizing Company: {CoCode}", coCode);
-            throw new DomainException($"Failed to authorize company: {ex.Message}");
+            _logger.LogError(ex, "An error occurred while authorizing Company: {CoCode}", coCode);
+            throw new DomainException($"The company authorization failed: {ex.Message}");
         }
     }
 
@@ -390,7 +390,7 @@ public class CompanyService : ICompanyService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Update Company validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The Company update validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -407,7 +407,7 @@ public class CompanyService : ICompanyService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Authorization Company validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The Company authorization validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -424,7 +424,7 @@ public class CompanyService : ICompanyService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Workflow Company list validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The Company workflow list validation failed") { ValidationErrors = errors };
         }
     }
 

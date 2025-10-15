@@ -87,7 +87,7 @@ public class ClientStockService : IClientStockService
                 ErrorMessage = e.ErrorMessage,
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
-            throw new ValidationException("Invalid request parameters") { ValidationErrors = errors };
+            throw new ValidationException("The request parameters were invalid") { ValidationErrors = errors };
         }
 
         try
@@ -121,7 +121,7 @@ public class ClientStockService : IClientStockService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting Client Stock list");
+            _logger.LogError(ex, "An error occurred while retrieving Client Stock list");
             throw new DomainException($"Failed to retrieve Client Stock list: {ex.Message}", ex);
         }
     }
@@ -142,7 +142,7 @@ public class ClientStockService : IClientStockService
                 ErrorMessage = e.ErrorMessage,
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
-            throw new ValidationException("Invalid request parameters") { ValidationErrors = errors };
+            throw new ValidationException("The request parameters were invalid") { ValidationErrors = errors };
         }
 
         try
@@ -168,16 +168,16 @@ public class ClientStockService : IClientStockService
         catch (ArgumentException ex)
         {
             _logger.LogError(ex, "Invalid arguments for Client Stock retrieval: {BranchCode}-{ClientCode}-{StockCode}", request.BranchCode, request.ClientCode, request.StockCode);
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting Client Stock by key: {BranchCode}-{ClientCode}-{StockCode}", request.BranchCode, request.ClientCode, request.StockCode);
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while retrieving Client Stock by key: {BranchCode}-{ClientCode}-{StockCode}", request.BranchCode, request.ClientCode, request.StockCode);
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting Client Stock by key: {BranchCode}-{ClientCode}-{StockCode}", request.BranchCode, request.ClientCode, request.StockCode);
+            _logger.LogError(ex, "An unexpected error occurred while retrieving Client Stock by key: {BranchCode}-{ClientCode}-{StockCode}", request.BranchCode, request.ClientCode, request.StockCode);
             throw new DomainException($"Failed to retrieve Client Stock: {ex.Message}");
         }
     }
@@ -198,7 +198,7 @@ public class ClientStockService : IClientStockService
                 ErrorMessage = e.ErrorMessage,
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
-            throw new ValidationException("Invalid request parameters") { ValidationErrors = errors };
+            throw new ValidationException("The request parameters were invalid") { ValidationErrors = errors };
         }
 
         try
@@ -257,7 +257,7 @@ public class ClientStockService : IClientStockService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error creating Client Stock");
+            _logger.LogError(ex, "An error occurred while creating Client Stock");
             throw new DomainException($"Failed to create Client Stock: {ex.Message}", ex);
         }
     }
@@ -278,7 +278,7 @@ public class ClientStockService : IClientStockService
                 ErrorMessage = e.ErrorMessage,
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
-            throw new ValidationException("Invalid request parameters") { ValidationErrors = errors };
+            throw new ValidationException("The request parameters were invalid") { ValidationErrors = errors };
         }
 
         try
@@ -337,7 +337,7 @@ public class ClientStockService : IClientStockService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error updating Client Stock");
+            _logger.LogError(ex, "An error occurred while updating Client Stock");
             throw new DomainException($"Failed to update Client Stock: {ex.Message}", ex);
         }
     }
@@ -358,7 +358,7 @@ public class ClientStockService : IClientStockService
                 ErrorMessage = e.ErrorMessage,
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
-            throw new ValidationException("Invalid request parameters") { ValidationErrors = errors };
+            throw new ValidationException("The request parameters were invalid") { ValidationErrors = errors };
         }
 
         try
@@ -397,7 +397,7 @@ public class ClientStockService : IClientStockService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error deleting Client Stock");
+            _logger.LogError(ex, "An error occurred while deleting Client Stock");
             throw new DomainException($"Failed to delete Client Stock: {ex.Message}", ex);
         }
     }
@@ -442,7 +442,7 @@ public class ClientStockService : IClientStockService
                 ErrorMessage = e.ErrorMessage,
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
-            throw new ValidationException("Invalid request parameters") { ValidationErrors = errors };
+            throw new ValidationException("The request parameters were invalid") { ValidationErrors = errors };
         }
 
         try
@@ -478,7 +478,7 @@ public class ClientStockService : IClientStockService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting Client Stock workflow list");
+            _logger.LogError(ex, "An error occurred while retrieving Client Stock workflow list");
             throw new DomainException($"Failed to retrieve Client Stock workflow list: {ex.Message}", ex);
         }
     }
@@ -499,7 +499,7 @@ public class ClientStockService : IClientStockService
                 ErrorMessage = e.ErrorMessage,
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
-            throw new ValidationException("Invalid request parameters") { ValidationErrors = errors };
+            throw new ValidationException("The request parameters were invalid") { ValidationErrors = errors };
         }
 
         try
@@ -542,7 +542,7 @@ public class ClientStockService : IClientStockService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error authorizing Client Stock");
+            _logger.LogError(ex, "An error occurred while authorizing Client Stock");
             throw new DomainException($"Failed to authorize Client Stock: {ex.Message}", ex);
         }
     }

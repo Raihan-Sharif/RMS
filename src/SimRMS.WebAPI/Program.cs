@@ -246,12 +246,12 @@ if (isDevelopment || enableSwagger)
 app.UseHttpsRedirection();
 app.UseCors("DefaultPolicy");
 
-// middleware pipeline
+// middleware pipeline - SecurityHeadersMiddleware FIRST to ensure error responses have security headers
 app.UseMiddleware<SecurityHeadersMiddleware>();
-app.UseMiddleware<TokenAuthenticationMiddleware>();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseMiddleware<RequestLoggingMiddleware>();
 app.UseMiddleware<PerformanceMiddleware>();
-app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseMiddleware<TokenAuthenticationMiddleware>();
 
 app.UseIpRateLimiting();
 

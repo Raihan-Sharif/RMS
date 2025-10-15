@@ -105,17 +105,17 @@ public class ClientExposureService : IClientExposureService
         catch (ArgumentException ex)
         {
             _logger.LogError(ex, "Invalid arguments for Client Exposure list retrieval");
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting Client Exposure list");
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while retrieving Client Exposure list");
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting Client Exposure list");
-            throw new DomainException($"Failed to retrieve client exposure list: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while retrieving Client Exposure list");
+            throw new DomainException($"The client exposure list retrieval failed: {ex.Message}");
         }
     }
 
@@ -145,17 +145,17 @@ public class ClientExposureService : IClientExposureService
         catch (ArgumentException ex)
         {
             _logger.LogError(ex, "Invalid arguments for Client Exposure retrieval: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting Client Exposure by ID: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while retrieving Client Exposure by ID: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting Client Exposure by ID: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
-            throw new DomainException($"Failed to retrieve client exposure: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while retrieving Client Exposure by ID: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+            throw new DomainException($"The client exposure retrieval failed: {ex.Message}");
         }
     }
 
@@ -174,7 +174,7 @@ public class ClientExposureService : IClientExposureService
             var existingExposure = await GetClientExposureByIdAsync(clntCode, coBrchCode, cancellationToken);
             if (existingExposure == null)
             {
-                throw new DomainException($"Client exposure not found: {clntCode}, {coBrchCode}");
+                throw new DomainException($"The Client exposure was not found: {clntCode}, {coBrchCode}");
             }
 
             var parameters = new Dictionary<string, object>
@@ -212,14 +212,14 @@ public class ClientExposureService : IClientExposureService
 
             if (rowsAffected <= 0)
             {
-                throw new DomainException("Failed to update client exposure - no rows affected");
+                throw new DomainException("The client exposure update failed because no rows were affected");
             }
 
             var updatedExposure = await GetClientExposureByIdAsync(clntCode, coBrchCode, cancellationToken);
 
             if (updatedExposure == null)
             {
-                throw new DomainException($"Updated client exposure not found: {clntCode}, {coBrchCode}");
+                throw new DomainException($"The Updated client exposure was not found: {clntCode}, {coBrchCode}");
             }
 
             _logger.LogInformation("Successfully updated Client Exposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
@@ -235,8 +235,8 @@ public class ClientExposureService : IClientExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error updating Client Exposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
-            throw new DomainException($"Failed to update client exposure: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while updating Client Exposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+            throw new DomainException($"The client exposure update failed: {ex.Message}");
         }
     }
 
@@ -252,7 +252,7 @@ public class ClientExposureService : IClientExposureService
             var existingExposure = await GetClientExposureByIdAsync(clntCode, coBrchCode, cancellationToken);
             if (existingExposure == null)
             {
-                throw new DomainException($"Client exposure not found: {clntCode}, {coBrchCode}");
+                throw new DomainException($"The Client exposure was not found: {clntCode}, {coBrchCode}");
             }
 
             var parameters = new Dictionary<string, object>
@@ -295,7 +295,7 @@ public class ClientExposureService : IClientExposureService
             }
             else
             {
-                _logger.LogWarning("Delete operation failed - no rows affected: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+                _logger.LogWarning("The delete operation failed because no rows were affected: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
             }
 
             return success;
@@ -310,8 +310,8 @@ public class ClientExposureService : IClientExposureService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error deleting Client Exposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
-            throw new DomainException($"Failed to delete client exposure: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while deleting Client Exposure: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
+            throw new DomainException($"The client exposure deletion failed: {ex.Message}");
         }
     }
 
@@ -563,7 +563,7 @@ public class ClientExposureService : IClientExposureService
         // Business rule: All amounts must be >= 0 (already validated in FluentValidation but double-check)
         if ((request.ClntExpsBuyAmtTopUp.HasValue && request.ClntExpsBuyAmtTopUp.Value < 1))
         {
-            throw new DomainException("All exposure Top Up amounts must be greater than 0");
+            throw new DomainException("All exposure top-up amounts must be greater than 0");
         }
     }
 

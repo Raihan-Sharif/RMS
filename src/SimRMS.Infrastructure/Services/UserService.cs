@@ -80,7 +80,7 @@ public class UserService : IUserService
         string? sortDirection = "ASC",
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting paged User list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+        _logger.LogInformation("Retrieving paged User list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
         if (pageNumber < 1) pageNumber = 1;
         if (pageSize < 1 || pageSize > 100) pageSize = 10;
@@ -113,27 +113,27 @@ public class UserService : IUserService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for User list retrieval");
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            _logger.LogError(ex, "Invalid arguments were provided for User listretrieval");
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting User list");
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while retrieving User list");
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting User list");
-            throw new DomainException($"Failed to retrieve user list: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while retrieving User list");
+            throw new DomainException($"The user list retrieval failed: {ex.Message}");
         }
     }
 
     public async Task<UserDetailDto?> GetUserByIdAsync(string usrId, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(usrId))
-            throw new ArgumentException("User ID cannot be null or empty", nameof(usrId));
+            throw new ArgumentException("User ID c cannot be null or empty", nameof(usrId));
 
-        _logger.LogInformation("Getting User by ID: {UsrId}", usrId);
+        _logger.LogInformation("Retrieving User by ID: {UsrId}", usrId);
 
         try
         {
@@ -157,24 +157,24 @@ public class UserService : IUserService
             }
             else
             {
-                _logger.LogWarning("User not found: {UsrId}", usrId);
+                _logger.LogWarning("The User was not found: {UsrId}", usrId);
                 return null;
             }
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for User retrieval: {UsrId}", usrId);
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            _logger.LogError(ex, "Invalid arguments were provided for Userretrieval: {UsrId}", usrId);
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting User by ID: {UsrId}", usrId);
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while retrieving User by ID: {UsrId}", usrId);
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting User by ID: {UsrId}", usrId);
-            throw new DomainException($"Failed to retrieve user: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while retrieving User by ID: {UsrId}", usrId);
+            throw new DomainException($"The user retrieval failed: {ex.Message}");
         }
     }
     #endregion
@@ -187,7 +187,7 @@ public class UserService : IUserService
             throw new ArgumentNullException(nameof(request), "CreateUserRequest cannot be null");
         }
 
-        _logger.LogInformation("Creating new User: {UsrID}", request.UsrID);
+        _logger.LogInformation("Creating User: {UsrID}", request.UsrID);
 
         // Validate the request
         await ValidateCreateRequestAsync(request, cancellationToken);
@@ -239,7 +239,7 @@ public class UserService : IUserService
             if (rowsAffected > 0)
             {
                 _logger.LogInformation("Successfully created User: {UsrID}", request.UsrID);
-                return await GetUserByIdAsync(request.UsrID, cancellationToken) ?? throw new DomainException($"Created user not found: {request.UsrID}");
+                return await GetUserByIdAsync(request.UsrID, cancellationToken) ?? throw new DomainException($"The Created user was not found: {request.UsrID}");
             }
             else
             {
@@ -253,8 +253,8 @@ public class UserService : IUserService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error creating User: {UsrID}", request.UsrID);
-            throw new DomainException($"Failed to create user: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while creating User: {UsrID}", request.UsrID);
+            throw new DomainException($"The user creation failed: {ex.Message}");
         }
     }
 
@@ -312,7 +312,7 @@ public class UserService : IUserService
             if (rowsAffected > 0)
             {
                 _logger.LogInformation("Successfully updated User: {UsrID}", usrId);
-                return await GetUserByIdAsync(usrId, cancellationToken) ?? throw new DomainException($"Updated user not found: {usrId}");
+                return await GetUserByIdAsync(usrId, cancellationToken) ?? throw new DomainException($"The Updated user was not found: {usrId}");
             }
             else
             {
@@ -326,8 +326,8 @@ public class UserService : IUserService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error updating User: {UsrID}", usrId);
-            throw new DomainException($"Failed to update user: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while updating User: {UsrID}", usrId);
+            throw new DomainException($"The user update failed: {ex.Message}");
         }
     }
 
@@ -399,8 +399,8 @@ public class UserService : IUserService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error deleting User: {UsrID}", usrId);
-            throw new DomainException($"Failed to delete user: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while deleting User: {UsrID}", usrId);
+            throw new DomainException($"The user deletion failed: {ex.Message}");
         }
     }
     #endregion
@@ -484,7 +484,7 @@ public class UserService : IUserService
         {
             _logger.LogError(ex, "Error getting user workflow list with parameters: PageNumber={PageNumber}, PageSize={PageSize}, UsrStatus={UsrStatus}, SearchText={SearchText}, IsAuth={IsAuth}",
                 pageNumber, pageSize, usrStatus, searchText, isAuth);
-            throw new DomainException($"Failed to retrieve user workflow list: {ex.Message}");
+            throw new DomainException($"The user workflow list retrieval failed: {ex.Message}");
         }
     }
 
@@ -535,7 +535,7 @@ public class UserService : IUserService
             else
             {
                 _logger.LogWarning("No rows affected during authorization of User: {UsrId}", usrId);
-                throw new DomainException($"Failed to authorize user: No records were updated");
+                throw new DomainException($"The user authorization failed: No records were updated");
             }
         }
         catch (ValidationException)
@@ -548,8 +548,8 @@ public class UserService : IUserService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error authorizing User in workflow: {UsrId}", usrId);
-            throw new DomainException($"Failed to authorize user: {ex.Message}");
+            _logger.LogError(ex, "An error occurred while authorizing User in workflow: {UsrId}", usrId);
+            throw new DomainException($"The user authorization failed: {ex.Message}");
         }
     }
 
@@ -568,7 +568,7 @@ public class UserService : IUserService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Create User validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The User creation validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -584,7 +584,7 @@ public class UserService : IUserService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Update User validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The User update validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -600,7 +600,7 @@ public class UserService : IUserService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Delete User validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The User deletion validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -617,7 +617,7 @@ public class UserService : IUserService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Workflow User list validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The User workflow list validation failed") { ValidationErrors = errors };
         }
     }
 
@@ -633,7 +633,7 @@ public class UserService : IUserService
                 AttemptedValue = e.AttemptedValue?.ToString()
             }).ToList();
 
-            throw new ValidationException("Authorization User validation failed") { ValidationErrors = errors };
+            throw new ValidationException("The User authorization validation failed") { ValidationErrors = errors };
         }
     }
     #endregion

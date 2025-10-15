@@ -69,7 +69,7 @@ public class ClientService : IClientService
     public async Task<PagedResult<ClientDto>> GetClientListAsync(int pageNumber = 1, int pageSize = 10,
         string? searchTerm = null, string? gcif = null, string? clntName = null, string? clntCode = null, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting paged Client list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+        _logger.LogInformation("Retrieving paged Client list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
         // Validate and sanitize inputs
         if (pageNumber < 1) pageNumber = 1;
@@ -107,24 +107,24 @@ public class ClientService : IClientService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for Client list retrieval");
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            _logger.LogError(ex, "Invalid arguments were provided for Client listretrieval");
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting Client list");
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while retrieving Client list");
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting Client list");
-            throw new DomainException($"Failed to retrieve client list: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while retrieving Client list");
+            throw new DomainException($"The client list retrieval failed: {ex.Message}");
         }
     }
 
     public async Task<ClientDto?> GetClientByIdAsync(string gcif, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting Client by GCIF: {GCIF}", gcif);
+        _logger.LogInformation("Retrieving Client by GCIF: {GCIF}", gcif);
 
         try
         {
@@ -146,24 +146,24 @@ public class ClientService : IClientService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for Client retrieval: {GCIF}", gcif);
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            _logger.LogError(ex, "Invalid arguments were provided for Client retrieval: {GCIF}", gcif);
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting Client: {GCIF}", gcif);
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while retrieving Client: {GCIF}", gcif);
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting Client by GCIF: {GCIF}", gcif);
-            throw new DomainException($"Failed to retrieve client: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while retrieving Client by GCIF: {GCIF}", gcif);
+            throw new DomainException($"The client retrieval failed: {ex.Message}");
         }
     }
 
     public async Task<ClientDto> CreateClientAsync(CreateClientRequest request, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Creating new Client with ClntCode: {ClntCode}", request.ClntCode);
+        _logger.LogInformation("Creating Client with ClntCode: {ClntCode}", request.ClntCode);
 
         // Validate the request
         var validationResult = await _createValidator.ValidateAsync(request, cancellationToken);
@@ -254,18 +254,18 @@ public class ClientService : IClientService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for Client creation");
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            _logger.LogError(ex, "Invalid arguments were provided for Client creation");
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error creating Client");
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while creating Client");
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error creating Client");
-            throw new DomainException($"Failed to create client: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while creating Client");
+            throw new DomainException($"The client creation failed: {ex.Message}");
         }
     }
 
@@ -285,7 +285,7 @@ public class ClientService : IClientService
         var existingClient = await GetClientByIdAsync(gcif, cancellationToken);
         if (existingClient == null)
         {
-            _logger.LogWarning("Client with GCIF {GCIF} not found for update", gcif);
+            _logger.LogWarning("The Client with GCIF {GCIF} not found for update", gcif);
             throw new NotFoundException("Client", gcif);
         }
 
@@ -351,7 +351,7 @@ public class ClientService : IClientService
             if (rowsAffected <= 0)
             {
                 _logger.LogWarning("Client update failed - No rows affected for GCIF: {GCIF}", gcif);
-                throw new DomainException("Failed to update client - no rows affected");
+                throw new DomainException("The client update failed because no rows were affected");
             }
 
             await _unitOfWork.CommitTransactionAsync(cancellationToken);
@@ -368,18 +368,18 @@ public class ClientService : IClientService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for Client update");
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            _logger.LogError(ex, "Invalid arguments were provided for Client update");
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error updating Client");
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while updating Client");
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error updating Client");
-            throw new DomainException($"Failed to update client: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while updating Client");
+            throw new DomainException($"The client update failed: {ex.Message}");
         }
     }
 
@@ -399,7 +399,7 @@ public class ClientService : IClientService
         var existingClient = await GetClientByIdAsync(gcif, cancellationToken);
         if (existingClient == null)
         {
-            _logger.LogWarning("Client with GCIF {GCIF} not found for deletion", gcif);
+            _logger.LogWarning("The Client with GCIF {GCIF} not found for deletion", gcif);
             throw new NotFoundException("Client", gcif);
         }
 
@@ -435,7 +435,7 @@ public class ClientService : IClientService
             if (rowsAffected <= 0)
             {
                 _logger.LogWarning("Client deletion failed - No rows affected for GCIF: {GCIF}", gcif);
-                throw new DomainException("Failed to delete client - no rows affected");
+                throw new DomainException("The client deletion failed because no rows were affected");
             }
 
             await _unitOfWork.CommitTransactionAsync(cancellationToken);
@@ -449,18 +449,18 @@ public class ClientService : IClientService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for Client deletion");
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            _logger.LogError(ex, "Invalid arguments were provided for Client deletion");
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error deleting Client");
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while deleting Client");
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error deleting Client");
-            throw new DomainException($"Failed to delete client: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while deleting Client");
+            throw new DomainException($"The client deletion failed: {ex.Message}");
         }
     }
 
@@ -479,7 +479,7 @@ public class ClientService : IClientService
     public async Task<PagedResult<ClientDto>> GetClientUnAuthDeniedListAsync(int pageNumber = 1, int pageSize = 10,
         string? searchTerm = null, string? gcif = null, string? clntName = null, string? clntCode = null, int isAuth = 0, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting paged Client workflow list - Page: {PageNumber}, Size: {PageSize}, IsAuth: {IsAuth}", pageNumber, pageSize, isAuth);
+        _logger.LogInformation("Retrieving paged Client workflow list - Page: {PageNumber}, Size: {PageSize}, IsAuth: {IsAuth}", pageNumber, pageSize, isAuth);
 
         // Validate and sanitize inputs
         if (pageNumber < 1) pageNumber = 1;
@@ -519,18 +519,18 @@ public class ClientService : IClientService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for Client workflow list retrieval");
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            _logger.LogError(ex, "Invalid arguments were provided for Client workflow listretrieval");
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error getting Client workflow list");
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while retrieving Client workflow list");
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error getting Client workflow list");
-            throw new DomainException($"Failed to retrieve client workflow list: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while retrieving Client workflow list");
+            throw new DomainException($"The client workflow list retrieval failed: {ex.Message}");
         }
     }
 
@@ -550,7 +550,7 @@ public class ClientService : IClientService
         var existingClient = await GetClientByIdAsync(gcif, cancellationToken);
         if (existingClient == null)
         {
-            _logger.LogWarning("Client with GCIF {GCIF} not found for authorization", gcif);
+            _logger.LogWarning("The Client with GCIF {GCIF} not found for authorization", gcif);
             throw new NotFoundException("Client", gcif);
         }
 
@@ -581,7 +581,7 @@ public class ClientService : IClientService
             if (rowsAffected <= 0)
             {
                 _logger.LogWarning("Client authorization failed - No rows affected for GCIF: {GCIF}", gcif);
-                throw new DomainException("Failed to authorize client - no rows affected");
+                throw new DomainException("The client authorization failed because no rows were affected");
             }
 
             await _unitOfWork.CommitTransactionAsync(cancellationToken);
@@ -595,18 +595,18 @@ public class ClientService : IClientService
         }
         catch (ArgumentException ex)
         {
-            _logger.LogError(ex, "Invalid arguments for Client authorization");
-            throw new ValidationException($"Invalid parameters provided: {ex.Message}");
+            _logger.LogError(ex, "Invalid arguments were provided for Client authorization");
+            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogError(ex, "Database operation error authorizing Client");
-            throw new DomainException($"Database operation failed: {ex.Message}");
+            _logger.LogError(ex, "Database operation encountered an error while authorizing Client");
+            throw new DomainException($"The database operation failed: {ex.Message}");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error authorizing Client");
-            throw new DomainException($"Failed to authorize client: {ex.Message}");
+            _logger.LogError(ex, "An unexpected error occurred while authorizing Client");
+            throw new DomainException($"The client authorization failed: {ex.Message}");
         }
     }
 

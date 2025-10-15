@@ -102,13 +102,13 @@ public class TraderController : BaseController
         [FromRoute, Required, MaxLength(15)] string dlrCode,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting Trader by ID: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
+        _logger.LogInformation("Retrieving Trader by ID: {XchgCode}-{DlrCode}", xchgCode, dlrCode);
 
         var trader = await _traderService.GetMstTraderByIdAsync(xchgCode, dlrCode, cancellationToken);
 
         if (trader == null)
         {
-            return NotFound<MstTraderDto>($"Trader with code '{xchgCode}-{dlrCode}' not found");
+            return NotFound<MstTraderDto>($"The Trader with code '{xchgCode}-{dlrCode}' not found");
         }
 
         return Ok(trader, "Trader retrieved successfully");

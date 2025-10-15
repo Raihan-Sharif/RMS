@@ -65,7 +65,7 @@ public class WorkFlowService : IWorkFlowService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error getting pending authorization workflow items");
-            throw new DomainException($"Failed to retrieve pending authorization items: {ex.Message}");
+            throw new DomainException($"The pending authorization items retrieval failed: {ex.Message}");
         }
     }
 
@@ -93,7 +93,7 @@ public class WorkFlowService : IWorkFlowService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error getting denied workflow items");
-            throw new DomainException($"Failed to retrieve denied items: {ex.Message}");
+            throw new DomainException($"The denied items retrieval failed: {ex.Message}");
         }
     }
 
@@ -123,7 +123,7 @@ public class WorkFlowService : IWorkFlowService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error getting workflow summary");
-            throw new DomainException($"Failed to retrieve workflow summary: {ex.Message}");
+            throw new DomainException($"The workflow summary retrieval failed: {ex.Message}");
         }
     }
 }

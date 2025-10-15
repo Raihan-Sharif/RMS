@@ -107,13 +107,13 @@ public class StockController : BaseController
         [FromRoute, Required, MaxLength(20)] string stkCode,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting Stock by key: {XchgCode}-{StkCode}", xchgCode, stkCode);
+        _logger.LogInformation("Retrieving Stock by key: {XchgCode}-{StkCode}", xchgCode, stkCode);
 
         var stock = await _stockService.GetStockByKeyAsync(xchgCode, stkCode, cancellationToken);
 
         if (stock == null)
         {
-            return NotFound<StockDto>($"Stock with key '{xchgCode}-{stkCode}' not found");
+            return NotFound<StockDto>($"The Stock with key '{xchgCode}-{stkCode}' not found");
         }
 
         return Ok(stock, "Stock retrieved successfully");
