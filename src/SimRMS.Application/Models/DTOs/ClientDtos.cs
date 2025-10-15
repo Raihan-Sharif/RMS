@@ -36,6 +36,7 @@ namespace SimRMS.Application.Models.DTOs
         // ClntAcct fields
         public string? ClntCode { get; set; }
         public string? CoBrchCode { get; set; }
+        public string? CoBrchDesc { get; set; }
         public string? ClntStat { get; set; }
         public string? ClntTrdgStat { get; set; }
         public string? ClntAcctType { get; set; }

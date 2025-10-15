@@ -130,19 +130,19 @@ public class CommonDataService : ICommonDataService
         _logger.LogInformation("Getting user list for dropdown/lookup");
 
         var sql = @"
-            SELECT 
-                ui.UsrID, ui.DlrCode, ui.CoBrchCode, ui.UsrName, ui.UsrType, 
-                ui.UsrEmail, ui.UsrMobile, ui.UsrStatus, ui.UsrExpiryDate, ui.CSEDlrCode,
-                ui.Remarks, ui.CoCode,
-                mc.CoDesc AS CompanyName,
-                mcb.CoBrchDesc AS BranchName
-            FROM dbo.UsrInfo ui
-            INNER JOIN MstCo mc ON ui.CoCode = mc.CoCode
-            INNER JOIN MstCoBrch mcb ON ui.CoBrchCode = mcb.CoBrchCode
-            WHERE ui.IsAuth = 1
-                AND ui.IsDel = 0
-                AND ui.UsrExpiryDate IS NULL
-            ORDER BY ui.UsrID ASC";
+                    SELECT 
+                         ui.UsrID, ui.DlrCode, ui.CoBrchCode, ui.UsrName, ui.UsrType, 
+                         ui.UsrEmail, ui.UsrMobile, ui.UsrStatus, ui.UsrExpiryDate, ui.CSEDlrCode,
+                         ui.Remarks, ui.CoCode,
+                         mc.CoDesc AS CompanyName,
+                         mcb.CoBrchDesc AS BranchName
+                     FROM dbo.UsrInfo ui
+                     INNER JOIN MstCo mc ON ui.CoCode = mc.CoCode
+                     INNER JOIN MstCoBrch mcb ON ui.CoBrchCode = mcb.CoBrchCode
+                     WHERE ui.IsAuth = 1
+                         AND ui.IsDel = 0
+                         AND (ui.UsrExpiryDate IS NULL OR CONVERT(Date,ui.UsrExpiryDate) > CONVERT(Date,GETDATE()))
+                     ORDER BY ui.UsrID ASC";
 
         try
         {
