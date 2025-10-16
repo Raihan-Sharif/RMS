@@ -149,14 +149,14 @@ namespace SimRMS.Application.Validators
                 .When(x => HasExposureUpdates(x));
 
             // Basic exposure amount validations (>= 0)
-            RuleFor(x => x.UsrExpsBuyAmt).ValidExposureAmountNullable()
-                .When(x => x.UsrExpsBuyAmt.HasValue);
+            RuleFor(x => x.PendingUsrExpsBuyAmt).ValidExposureAmountNullable()
+                .When(x => x.PendingUsrExpsBuyAmt.HasValue);
 
-            RuleFor(x => x.UsrExpsSellAmt).ValidExposureAmountNullable()
-                .When(x => x.UsrExpsSellAmt.HasValue);
+            RuleFor(x => x.PendingUsrExpsSellAmt).ValidExposureAmountNullable()
+                .When(x => x.PendingUsrExpsSellAmt.HasValue);
 
-            RuleFor(x => x.UsrExpsTotalAmt).ValidExposureAmountNullable()
-                .When(x => x.UsrExpsTotalAmt.HasValue);
+            RuleFor(x => x.PendingUsrExpsTotalAmt).ValidExposureAmountNullable()
+                .When(x => x.PendingUsrExpsTotalAmt.HasValue);
 
             RuleFor(x => x.Remarks).ValidRemarks()
                 .When(x => !string.IsNullOrEmpty(x.Remarks));
@@ -164,39 +164,38 @@ namespace SimRMS.Application.Validators
 
         private static bool HaveAtLeastOneFieldToUpdate(UpdateUserExposureRequest request)
         {
-            return request.UsrExpsCheckBuy.HasValue ||
-                   request.UsrExpsBuyAmt.HasValue ||
-                   request.UsrExpsCheckSell.HasValue ||
-                   request.UsrExpsSellAmt.HasValue ||
-                   request.UsrExpsCheckTotal.HasValue ||
-                   request.UsrExpsTotalAmt.HasValue ||
-                   request.UsrExpsWithShrLimit.HasValue ||
+            return request.PendingUsrExpsCheckBuy.HasValue ||
+                   request.PendingUsrExpsBuyAmt.HasValue ||
+                   request.PendingUsrExpsCheckSell.HasValue ||
+                   request.PendingUsrExpsSellAmt.HasValue ||
+                   request.PendingUsrExpsCheckTotal.HasValue ||
+                   request.PendingUsrExpsTotalAmt.HasValue ||
                    !string.IsNullOrEmpty(request.Remarks);
         }
 
         private static bool HasExposureCheckboxUpdates(UpdateUserExposureRequest request)
         {
-            return request.UsrExpsCheckBuy.HasValue ||
-                   request.UsrExpsCheckSell.HasValue ||
-                   request.UsrExpsCheckTotal.HasValue;
+            return request.PendingUsrExpsCheckBuy.HasValue ||
+                   request.PendingUsrExpsCheckSell.HasValue ||
+                   request.PendingUsrExpsCheckTotal.HasValue;
         }
 
         private static bool HasExposureUpdates(UpdateUserExposureRequest request)
         {
-            return request.UsrExpsCheckBuy.HasValue ||
-                   request.UsrExpsBuyAmt.HasValue ||
-                   request.UsrExpsCheckSell.HasValue ||
-                   request.UsrExpsSellAmt.HasValue ||
-                   request.UsrExpsCheckTotal.HasValue ||
-                   request.UsrExpsTotalAmt.HasValue;
+            return request.PendingUsrExpsCheckBuy.HasValue ||
+                   request.PendingUsrExpsBuyAmt.HasValue ||
+                   request.PendingUsrExpsCheckSell.HasValue ||
+                   request.PendingUsrExpsSellAmt.HasValue ||
+                   request.PendingUsrExpsCheckTotal.HasValue ||
+                   request.PendingUsrExpsTotalAmt.HasValue;
         }
 
         private static bool NotHaveBothBuySellAndTotalUpdate(UpdateUserExposureRequest request)
         {
             // For updates, we only check if checkbox values are being updated
-            var buyEnabled = request.UsrExpsCheckBuy == true;
-            var sellEnabled = request.UsrExpsCheckSell == true;
-            var totalEnabled = request.UsrExpsCheckTotal == true;
+            var buyEnabled = request.PendingUsrExpsCheckBuy == true;
+            var sellEnabled = request.PendingUsrExpsCheckSell == true;
+            var totalEnabled = request.PendingUsrExpsCheckTotal == true;
 
             var buySellEnabled = buyEnabled || sellEnabled;
             return !(buySellEnabled && totalEnabled);
@@ -205,26 +204,26 @@ namespace SimRMS.Application.Validators
         private static bool HaveAtLeastOneExposureTypeUpdate(UpdateUserExposureRequest request)
         {
             // For updates, check if at least one checkbox is being set to true
-            return (request.UsrExpsCheckBuy == true) ||
-                   (request.UsrExpsCheckSell == true) ||
-                   (request.UsrExpsCheckTotal == true);
+            return (request.PendingUsrExpsCheckBuy == true) ||
+                   (request.PendingUsrExpsCheckSell == true) ||
+                   (request.PendingUsrExpsCheckTotal == true);
         }
 
         private static bool ValidateBuySellExposureAmountsUpdate(UpdateUserExposureRequest request)
         {
             // If any Buy/Sell exposure is being enabled
-            if ((request.UsrExpsCheckBuy == true) || (request.UsrExpsCheckSell == true))
+            if ((request.PendingUsrExpsCheckBuy == true) || (request.PendingUsrExpsCheckSell == true))
             {
                 // When Buy is enabled, amount must be > 0 (if amount is being updated)
-                if (request.UsrExpsCheckBuy == true && request.UsrExpsBuyAmt.HasValue && request.UsrExpsBuyAmt <= 0)
+                if (request.PendingUsrExpsCheckBuy == true && request.PendingUsrExpsBuyAmt.HasValue && request.PendingUsrExpsBuyAmt <= 0)
                     return false;
 
                 // When Sell is enabled, amount must be > 0 (if amount is being updated)
-                if (request.UsrExpsCheckSell == true && request.UsrExpsSellAmt.HasValue && request.UsrExpsSellAmt <= 0)
+                if (request.PendingUsrExpsCheckSell == true && request.PendingUsrExpsSellAmt.HasValue && request.PendingUsrExpsSellAmt <= 0)
                     return false;
 
                 // Total amount must be 0 when Buy/Sell is enabled (if total amount is being updated)
-                if (request.UsrExpsTotalAmt.HasValue && request.UsrExpsTotalAmt != 0)
+                if (request.PendingUsrExpsTotalAmt.HasValue && request.PendingUsrExpsTotalAmt != 0)
                     return false;
             }
             return true;
@@ -233,15 +232,15 @@ namespace SimRMS.Application.Validators
         private static bool ValidateTotalExposureAmountUpdate(UpdateUserExposureRequest request)
         {
             // If Total exposure is being enabled
-            if (request.UsrExpsCheckTotal == true)
+            if (request.PendingUsrExpsCheckTotal == true)
             {
                 // Total amount must be > 0 (if amount is being updated)
-                if (request.UsrExpsTotalAmt.HasValue && request.UsrExpsTotalAmt <= 0)
+                if (request.PendingUsrExpsTotalAmt.HasValue && request.PendingUsrExpsTotalAmt <= 0)
                     return false;
 
                 // Buy and Sell amounts must be 0 when Total is enabled (if amounts are being updated)
-                if ((request.UsrExpsBuyAmt.HasValue && request.UsrExpsBuyAmt != 0) ||
-                    (request.UsrExpsSellAmt.HasValue && request.UsrExpsSellAmt != 0))
+                if ((request.PendingUsrExpsBuyAmt.HasValue && request.PendingUsrExpsBuyAmt != 0) ||
+                    (request.PendingUsrExpsSellAmt.HasValue && request.PendingUsrExpsSellAmt != 0))
                     return false;
             }
             return true;

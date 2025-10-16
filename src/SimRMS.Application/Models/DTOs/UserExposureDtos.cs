@@ -29,23 +29,31 @@ namespace SimRMS.Application.Models.DTOs
         public decimal UsrExpsSellAmt { get; set; }
         public bool UsrExpsCheckTotal { get; set; }
         public decimal UsrExpsTotalAmt { get; set; }
+
+        public bool PendingUsrExpsCheckBuy { get; set; }
+        public decimal PendingUsrExpsBuyAmt { get; set; }
+        public bool PendingUsrExpsCheckSell { get; set; }
+        public decimal PendingUsrExpsSellAmt { get; set; }
+        public bool PendingUsrExpsCheckTotal { get; set; }
+        public decimal PendingUsrExpsTotalAmt { get; set; }
+
         public bool UsrExpsWithShrLimit { get; set; }
     }
 
-    public class UserExposureUpdateDto
-    {
-        public bool? UsrExpsCheckBuy { get; set; }
-        public decimal? UsrExpsBuyAmt { get; set; }
-        public bool? UsrExpsCheckSell { get; set; }
-        public decimal? UsrExpsSellAmt { get; set; }
-        public bool? UsrExpsCheckTotal { get; set; }
-        public decimal? UsrExpsTotalAmt { get; set; }
-        public bool? UsrExpsWithShrLimit { get; set; }
-        public string IPAddress { get; set; } = string.Empty;
-        public int MakerId { get; set; }
-        public DateTime TransDt { get; set; }
-        public string? Remarks { get; set; }
-    }
+    //public class UserExposureUpdateDto
+    //{
+    //    public bool? PendingUsrExpsCheckBuy { get; set; }
+    //    public decimal? PendingUsrExpsBuyAmt { get; set; }
+    //    public bool? PendingUsrExpsCheckSell { get; set; }
+    //    public decimal? PendingUsrExpsSellAmt { get; set; }
+    //    public bool? PendingUsrExpsCheckTotal { get; set; }
+    //    public decimal? PendingUsrExpsTotalAmt { get; set; }
+
+    //    public string IPAddress { get; set; } = string.Empty;
+    //    public int MakerId { get; set; }
+    //    public DateTime TransDt { get; set; }
+    //    public string? Remarks { get; set; }
+    //}
 
     public class UserExposureSearchDto
     {

@@ -181,7 +181,6 @@ public class UserExposureService : IUserExposureService
                 ["UsrExpsSellAmt"] = request.UsrExpsSellAmt,
                 ["UsrExpsCheckTotal"] = request.UsrExpsCheckTotal,
                 ["UsrExpsTotalAmt"] = request.UsrExpsTotalAmt,
-                ["UsrExpsWithShrLimit"] = request.UsrExpsWithShrLimit,
                 ["IPAddress"] = _currentUserService.GetClientIPAddress(),
                 ["MakerId"] = _currentUserService.UserId,
                 ["ActionDt"] = DateTime.Now,
@@ -223,7 +222,6 @@ public class UserExposureService : IUserExposureService
                 UsrExpsSellAmt = request.UsrExpsSellAmt,
                 UsrExpsCheckTotal = request.UsrExpsCheckTotal,
                 UsrExpsTotalAmt = request.UsrExpsTotalAmt,
-                UsrExpsWithShrLimit = request.UsrExpsWithShrLimit,
                 IPAddress = _currentUserService.GetClientIPAddress(),
                 MakerId = _currentUserService.UserId,
                 ActionDt = DateTime.Now,
@@ -275,13 +273,12 @@ public class UserExposureService : IUserExposureService
             {
                 ["Action"] = (byte)ActionTypeEnum.UPDATE,
                 ["UsrID"] = usrId,
-                ["UsrExpsCheckBuy"] = request.UsrExpsCheckBuy ?? (object)DBNull.Value,
-                ["UsrExpsBuyAmt"] = request.UsrExpsBuyAmt ?? (object)DBNull.Value,
-                ["UsrExpsCheckSell"] = request.UsrExpsCheckSell ?? (object)DBNull.Value,
-                ["UsrExpsSellAmt"] = request.UsrExpsSellAmt ?? (object)DBNull.Value,
-                ["UsrExpsCheckTotal"] = request.UsrExpsCheckTotal ?? (object)DBNull.Value,
-                ["UsrExpsTotalAmt"] = request.UsrExpsTotalAmt ?? (object)DBNull.Value,
-                ["UsrExpsWithShrLimit"] = request.UsrExpsWithShrLimit ?? (object)DBNull.Value,
+                ["PendingUsrExpsCheckBuy"] = request.PendingUsrExpsCheckBuy ?? (object)DBNull.Value,
+                ["PendingUsrExpsBuyAmt"] = request.PendingUsrExpsBuyAmt ?? (object)DBNull.Value,
+                ["PendingUsrExpsCheckSell"] = request.PendingUsrExpsCheckSell ?? (object)DBNull.Value,
+                ["PendingUsrExpsSellAmt"] = request.PendingUsrExpsSellAmt ?? (object)DBNull.Value,
+                ["PendingUsrExpsCheckTotal"] = request.PendingUsrExpsCheckTotal ?? (object)DBNull.Value,
+                ["PendingUsrExpsTotalAmt"] = request.PendingUsrExpsTotalAmt ?? (object)DBNull.Value,
                 ["IPAddress"] = _currentUserService.GetClientIPAddress(),
                 ["MakerId"] = _currentUserService.UserId,
                 ["ActionDt"] = DateTime.Now,
@@ -712,13 +709,13 @@ public class UserExposureService : IUserExposureService
     private static void ApplyBusinessLogicRules(UpdateUserExposureRequest request)
     {
         // If total is being checked or amount set but buy/sell are still enabled, throw exception
-        if ((request.UsrExpsCheckTotal.HasValue && request.UsrExpsCheckTotal.Value) || 
-            (request.UsrExpsTotalAmt.HasValue && request.UsrExpsTotalAmt.Value > 0))
+        if ((request.PendingUsrExpsCheckTotal.HasValue && request.PendingUsrExpsCheckTotal.Value) || 
+            (request.PendingUsrExpsTotalAmt.HasValue && request.PendingUsrExpsTotalAmt.Value > 0))
         {
-            if ((request.UsrExpsCheckBuy.HasValue && request.UsrExpsCheckBuy.Value) || 
-                (request.UsrExpsBuyAmt.HasValue && request.UsrExpsBuyAmt.Value > 0) ||
-                (request.UsrExpsCheckSell.HasValue && request.UsrExpsCheckSell.Value) || 
-                (request.UsrExpsSellAmt.HasValue && request.UsrExpsSellAmt.Value > 0))
+            if ((request.PendingUsrExpsCheckBuy.HasValue && request.PendingUsrExpsCheckBuy.Value) || 
+                (request.PendingUsrExpsBuyAmt.HasValue && request.PendingUsrExpsBuyAmt.Value > 0) ||
+                (request.PendingUsrExpsCheckSell.HasValue && request.PendingUsrExpsCheckSell.Value) || 
+                (request.PendingUsrExpsSellAmt.HasValue && request.PendingUsrExpsSellAmt.Value > 0))
             {
                 throw new DomainException("To enable Total exposure (check or set amount), please first disable Buy and Sell exposure options (uncheck and set amounts to 0).");
             }
@@ -731,13 +728,13 @@ public class UserExposureService : IUserExposureService
         }
         
         // If buy or sell are being checked or amounts set but total is still enabled, throw exception
-        if ((request.UsrExpsCheckBuy.HasValue && request.UsrExpsCheckBuy.Value) || 
-            (request.UsrExpsBuyAmt.HasValue && request.UsrExpsBuyAmt.Value > 0) ||
-            (request.UsrExpsCheckSell.HasValue && request.UsrExpsCheckSell.Value) || 
-            (request.UsrExpsSellAmt.HasValue && request.UsrExpsSellAmt.Value > 0))
+        if ((request.PendingUsrExpsCheckBuy.HasValue && request.PendingUsrExpsCheckBuy.Value) || 
+            (request.PendingUsrExpsBuyAmt.HasValue && request.PendingUsrExpsBuyAmt.Value > 0) ||
+            (request.PendingUsrExpsCheckSell.HasValue && request.PendingUsrExpsCheckSell.Value) || 
+            (request.PendingUsrExpsSellAmt.HasValue && request.PendingUsrExpsSellAmt.Value > 0))
         {
-            if ((request.UsrExpsCheckTotal.HasValue && request.UsrExpsCheckTotal.Value) || 
-                (request.UsrExpsTotalAmt.HasValue && request.UsrExpsTotalAmt.Value > 0))
+            if ((request.PendingUsrExpsCheckTotal.HasValue && request.PendingUsrExpsCheckTotal.Value) || 
+                (request.PendingUsrExpsTotalAmt.HasValue && request.PendingUsrExpsTotalAmt.Value > 0))
             {
                 throw new DomainException("To enable Buy/Sell exposure (check or set amounts), please first disable Total exposure option (uncheck and set amount to 0).");
             }
