@@ -2380,7 +2380,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/common-data/client-list?branchCode=",
+							"raw": "{{base_url}}/api/v1/common-data/client-list?branchCode=001",
 							"host": [
 								"{{base_url}}"
 							],
@@ -2393,7 +2393,7 @@
 							"query": [
 								{
 									"key": "branchCode",
-									"value": "",
+									"value": "001",
 									"description": "Optional branch code filter - if provided, returns only clients for that branch; otherwise returns all clients"
 								}
 							]
@@ -5417,7 +5417,7 @@
 									"variable": [
 										{
 											"key": "gcif",
-											"value": "1"
+											"value": "14"
 										}
 									]
 								}
@@ -5640,7 +5640,7 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/client/client-exists/:gcif",
+									"raw": "{{base_url}}/api/v1/client/client-exists/:clntCode",
 									"host": [
 										"{{base_url}}"
 									],
@@ -5649,12 +5649,12 @@
 										"v1",
 										"client",
 										"client-exists",
-										":gcif"
+										":clntCode"
 									],
 									"variable": [
 										{
-											"key": "gcif",
-											"value": "24268000001430"
+											"key": "clntCode",
+											"value": "A11455"
 										}
 									]
 								}

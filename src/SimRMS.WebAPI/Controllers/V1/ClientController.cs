@@ -195,24 +195,24 @@ public class ClientController : BaseController
     }
 
     /// <summary>
-    /// Check if Client exists by GCIF
+    /// Check if Client exists by Client Code
     /// </summary>
-    /// <param name="gcif">Client GCIF</param>
+    /// <param name="clntCode">Client Code</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Existence status</returns>
-    [HttpGet("client-exists/{gcif}")]
+    [HttpGet("client-exists/{clntCode}")]
     [ProducesResponseType(typeof(ApiResponse<bool>), 200)]
     [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 401)]
     public async Task<ActionResult<ApiResponse<bool>>> ClientExists(
-        [FromRoute, Required, MaxLength(20)] string gcif,
+        [FromRoute, Required, MaxLength(50)] string clntCode,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Checking if Client exists with GCIF: {GCIF}", gcif);
+        _logger.LogInformation("Checking if Client exists with ClntCode: {ClntCode}", clntCode);
 
-        var exists = await _clientService.ClientExistsAsync(gcif, cancellationToken);
+        var exists = await _clientService.ClientExistsAsync(clntCode, cancellationToken);
 
-        return Ok(exists, $"Client existence check completed for GCIF: {gcif}");
+        return Ok(exists, $"Client existence check completed for ClntCode: {clntCode}");
     }
 
     #region Workflow Operations

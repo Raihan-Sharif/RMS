@@ -15,7 +15,7 @@ namespace SimRMS.Application.Interfaces.Services
         Task<ClientDto> CreateClientAsync(CreateClientRequest request, CancellationToken cancellationToken = default);
         Task<ClientDto> UpdateClientAsync(string gcif, UpdateClientRequest request, CancellationToken cancellationToken = default);
         Task<bool> DeleteClientAsync(string gcif, DeleteClientRequest request, CancellationToken cancellationToken = default);
-        Task<bool> ClientExistsAsync(string gcif, CancellationToken cancellationToken = default);
+        Task<bool> ClientExistsAsync(string clntCode, CancellationToken cancellationToken = default);
 
         // Work Flow methods
         Task<PagedResult<ClientDto>> GetClientUnAuthDeniedListAsync(int pageNumber = 1, int pageSize = 10, string? searchTerm = null, string? gcif = null, string? clntName = null, string? clntCode = null, int isAuth = 0, CancellationToken cancellationToken = default);

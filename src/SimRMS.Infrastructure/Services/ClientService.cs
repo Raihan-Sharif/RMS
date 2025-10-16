@@ -464,11 +464,11 @@ public class ClientService : IClientService
         }
     }
 
-    public async Task<bool> ClientExistsAsync(string gcif, CancellationToken cancellationToken = default)
+    public async Task<bool> ClientExistsAsync(string clntCode, CancellationToken cancellationToken = default)
     {
-        _logger.LogDebug("Checking if Client exists with GCIF: {GCIF}", gcif);
+        _logger.LogDebug("Checking if Client exists with ClntCode: {ClntCode}", clntCode);
 
-        var client = await GetClientByIdAsync(gcif, cancellationToken);
+        var client = await GetClientByClientCodeAsync(clntCode, cancellationToken);
         return client != null;
     }
 
@@ -612,7 +612,8 @@ public class ClientService : IClientService
 
     #endregion
 
-    #region Private Method
+    #region Private Methods
+
     public async Task<string> GetGCIFByClientCodeAsync(string branchCode, string clientCode, CancellationToken cancellationToken = default)
     {
         var sql = @"
@@ -648,5 +649,37 @@ public class ClientService : IClientService
             throw;
         }
     }
+
+    private async Task<(string? GCIF, string? ClntCode)?> GetClientByClientCodeAsync(string clntCode, CancellationToken cancellationToken = default)
+    {
+        _logger.LogDebug("Checking client by ClntCode: {ClntCode}", clntCode);
+
+        var sql = @"
+            SELECT cm.GCIF,
+                   ca.ClntCode
+            FROM dbo.ClntMaster cm
+            INNER JOIN dbo.ClntAcct ca ON cm.GCIF = ca.GCIF AND ca.IsDel = 0
+            WHERE (@ClntCode IS NULL OR ca.ClntCode = @ClntCode)";
+
+        var parameters = new { ClntCode = clntCode };
+
+        try
+        {
+            var result = await _repository.QuerySingleAsync<dynamic>(sql, parameters, false, cancellationToken);
+
+            if (result != null)
+            {
+                return ((string?)result.GCIF, (string?)result.ClntCode);
+            }
+
+            return null;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting client by client code: {ClntCode}", clntCode);
+            throw;
+        }
+    }
+
     #endregion
 }

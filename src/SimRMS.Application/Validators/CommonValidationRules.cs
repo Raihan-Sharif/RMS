@@ -358,7 +358,7 @@ namespace SimRMS.Application.Validators
             return ruleBuilder
                 .NotEmpty().WithMessage("Stock code is required")
                 .MaximumLength(20).WithMessage("Stock code cannot exceed 20 characters")
-                .Matches("^[A-Za-z]+(`[A-Za-z]+)*$").WithMessage("Stock code can only contain letters with backtick in the middle");
+                .Matches("^[A-Za-z0-9]+(`[A-Za-z0-9]+)*$").WithMessage("Stock code can only contain letters and numbers with backtick in the middle");
         }
 
         /// <summary>
