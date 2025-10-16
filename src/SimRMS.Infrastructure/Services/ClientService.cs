@@ -468,8 +468,8 @@ public class ClientService : IClientService
     {
         _logger.LogDebug("Checking if Client exists with ClntCode: {ClntCode}", clntCode);
 
-        var client = await GetClientByClientCodeAsync(clntCode, cancellationToken);
-        return client != null;
+        var exists = await GetClientByClientCodeAsync(clntCode, cancellationToken);
+        return exists;
     }
 
     #endregion
@@ -650,29 +650,25 @@ public class ClientService : IClientService
         }
     }
 
-    private async Task<(string? GCIF, string? ClntCode)?> GetClientByClientCodeAsync(string clntCode, CancellationToken cancellationToken = default)
+    private async Task<bool> GetClientByClientCodeAsync(string clntCode, CancellationToken cancellationToken = default)
     {
         _logger.LogDebug("Checking client by ClntCode: {ClntCode}", clntCode);
 
         var sql = @"
-            SELECT cm.GCIF,
-                   ca.ClntCode
+            SELECT cm.GCIF
             FROM dbo.ClntMaster cm
             INNER JOIN dbo.ClntAcct ca ON cm.GCIF = ca.GCIF AND ca.IsDel = 0
-            WHERE (@ClntCode IS NULL OR ca.ClntCode = @ClntCode)";
+            WHERE ca.ClntCode = @ClntCode";
 
-        var parameters = new { ClntCode = clntCode };
+        var parameters = new Dictionary<string, object>
+        {
+            { "ClntCode", clntCode }
+        };
 
         try
         {
-            var result = await _repository.QuerySingleAsync<dynamic>(sql, parameters, false, cancellationToken);
-
-            if (result != null)
-            {
-                return ((string?)result.GCIF, (string?)result.ClntCode);
-            }
-
-            return null;
+            var result = await _repository.ExecuteScalarAsync<string>(sql, parameters, false, cancellationToken);
+            return !string.IsNullOrEmpty(result);
         }
         catch (Exception ex)
         {
