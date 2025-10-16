@@ -136,4 +136,10 @@ namespace SimRMS.Application.Models.DTOs
         public int PageNumber { get; set; } = 1;
         public int PageSize { get; set; } = 10;
     }
+
+    public class ClientExistenceDto
+    {
+        public string ClntCode { get; set; } = null!;
+        public bool IsExist { get; set; }
+    }
 }

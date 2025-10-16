@@ -201,10 +201,10 @@ public class ClientController : BaseController
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Existence status</returns>
     [HttpGet("client-exists/{clntCode}")]
-    [ProducesResponseType(typeof(ApiResponse<bool>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<ClientExistenceDto>), 200)]
     [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 401)]
-    public async Task<ActionResult<ApiResponse<bool>>> ClientExists(
+    public async Task<ActionResult<ApiResponse<ClientExistenceDto>>> ClientExists(
         [FromRoute, Required, MaxLength(50)] string clntCode,
         CancellationToken cancellationToken = default)
     {
@@ -212,7 +212,17 @@ public class ClientController : BaseController
 
         var exists = await _clientService.ClientExistsAsync(clntCode, cancellationToken);
 
-        return Ok(exists, $"Client existence check completed for ClntCode: {clntCode}");
+        var result = new ClientExistenceDto
+        {
+            ClntCode = clntCode,
+            IsExist = exists
+        };
+
+        var message = exists
+            ? $"Client with code '{clntCode}' exists"
+            : $"Client with code '{clntCode}' does not exist";
+
+        return Ok(result, message);
     }
 
     #region Workflow Operations
