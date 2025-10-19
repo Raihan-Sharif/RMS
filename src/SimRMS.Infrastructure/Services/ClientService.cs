@@ -657,7 +657,7 @@ public class ClientService : IClientService
         var sql = @"
             SELECT cm.GCIF
             FROM dbo.ClntMaster cm
-            INNER JOIN dbo.ClntAcct ca ON cm.GCIF = ca.GCIF AND ca.IsDel = 0
+            INNER JOIN dbo.ClntAcct ca ON cm.GCIF = ca.GCIF
             WHERE ca.ClntCode = @ClntCode";
 
         var parameters = new Dictionary<string, object>

@@ -152,7 +152,7 @@ namespace SimRMS.Application.Validators
         public static IRuleBuilderOptions<T, string?> ValidCDSNo<T>(this IRuleBuilder<T, string?> ruleBuilder)
         {
             return ruleBuilder
-                .MaximumLength(20).WithMessage("CDS number cannot exceed 20 characters");
+                .Length(16).WithMessage("CDS (BO Code) number must be exactly 16 characters");
         }
 
         //public static IRuleBuilderOptions<T, string?> ValidClientDealerCode<T>(this IRuleBuilder<T, string?> ruleBuilder)
