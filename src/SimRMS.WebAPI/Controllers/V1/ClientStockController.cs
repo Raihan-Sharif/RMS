@@ -233,10 +233,10 @@ public class ClientStockController : BaseController
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Existence result</returns>
     [HttpGet("stock-exists/{branchCode}/{clientCode}/{stockCode}")]
-    [ProducesResponseType(typeof(ApiResponse<bool>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<ClientStockExistenceDto>), 200)]
     [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 401)]
-    public async Task<ActionResult<ApiResponse<bool>>> ClientStockExists(
+    public async Task<ActionResult<ApiResponse<ClientStockExistenceDto>>> ClientStockExists(
         [FromRoute, Required, MaxLength(6)] string branchCode,
         [FromRoute, Required, MaxLength(50)] string clientCode,
         [FromRoute, Required, MaxLength(20)] string stockCode,
@@ -253,7 +253,20 @@ public class ClientStockController : BaseController
         };
 
         var exists = await _clientStockService.ClientStockExistsAsync(request, cancellationToken);
-        return Ok(exists, exists ? "Client Stock exists" : "Client Stock does not exist");
+
+        var result = new ClientStockExistenceDto
+        {
+            BranchCode = branchCode,
+            ClientCode = clientCode,
+            StockCode = stockCode,
+            IsExist = exists
+        };
+
+        var message = exists
+            ? $"Client Stock with Branch '{branchCode}', Client '{clientCode}', Stock '{stockCode}' exists"
+            : $"Client Stock with Branch '{branchCode}', Client '{clientCode}', Stock '{stockCode}' does not exist";
+
+        return Ok(result, message);
     }
 
     #region Work Flow

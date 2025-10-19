@@ -404,20 +404,32 @@ public class ClientStockService : IClientStockService
 
     public async Task<bool> ClientStockExistsAsync(GetClientStockByKeyRequest request, CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Checking if Client Stock exists for Branch: {BranchCode}, Client: {ClientCode}, Stock: {StockCode}",
+        _logger.LogDebug("Checking if Client Stock exists for Branch: {BranchCode}, Client: {ClientCode}, Stock: {StockCode}",
             request.BranchCode, request.ClientCode, request.StockCode);
 
         try
         {
-            var clientStock = await GetClientStockByKeyAsync(request, cancellationToken);
-            var exists = clientStock != null;
+            var sql = @"
+                SELECT si.BranchCode, si.ClientCode, si.StockCode
+                FROM dbo.ShareInfo si
+                WHERE si.BranchCode = @branchCode
+                  AND si.ClientCode = @clientCode
+                  AND si.StockCode = @stockCode";
 
-            _logger.LogInformation("Client Stock exists check result: {Exists}", exists);
-            return exists;
+            var parameters = new Dictionary<string, object>
+            {
+                { "branchCode", request.BranchCode },
+                { "clientCode", request.ClientCode },
+                { "stockCode", request.StockCode }
+            };
+
+            var result = await _repository.ExecuteScalarAsync<string>(sql, parameters, false, cancellationToken);
+            return !string.IsNullOrEmpty(result);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error checking Client Stock existence");
+            _logger.LogError(ex, "Error checking Client Stock existence: Branch: {BranchCode}, Client: {ClientCode}, Stock: {StockCode}",
+                request.BranchCode, request.ClientCode, request.StockCode);
             throw new DomainException($"Failed to check Client Stock existence: {ex.Message}", ex);
         }
     }

@@ -183,19 +183,32 @@ public class ClientExposureController : BaseController
     /// <param name="clntCode">Client Code</param>
     /// <param name="coBrchCode">Company Branch Code</param>
     /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>Boolean indicating existence</returns>
-    [HttpHead("exposure-exists/{clntCode}/{coBrchCode}")]
-    [ProducesResponseType(200)]
-    [ProducesResponseType(404)]
+    /// <returns>Existence status</returns>
+    [HttpGet("exposure-exists/{clntCode}/{coBrchCode}")]
+    [ProducesResponseType(typeof(ApiResponse<ClientExposureExistenceDto>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 400)]
     [ProducesResponseType(typeof(ApiResponse<object>), 401)]
-    public async Task<ActionResult> CheckClientExposureExists(
+    public async Task<ActionResult<ApiResponse<ClientExposureExistenceDto>>> ClientExposureExists(
         [FromRoute, Required, MaxLength(50)] string clntCode,
         [FromRoute, Required, MaxLength(6)] string coBrchCode,
         CancellationToken cancellationToken = default)
     {
+        _logger.LogInformation("Checking if Client Exposure exists with ClntCode: {ClntCode}, CoBrchCode: {CoBrchCode}", clntCode, coBrchCode);
+
         var exists = await _clientExposureService.ClientExposureExistsAsync(clntCode, coBrchCode, cancellationToken);
 
-        return exists ? Ok() : NotFound();
+        var result = new ClientExposureExistenceDto
+        {
+            ClntCode = clntCode,
+            CoBrchCode = coBrchCode,
+            IsExist = exists
+        };
+
+        var message = exists
+            ? $"Client Exposure with Client Code '{clntCode}' and Branch Code '{coBrchCode}' exists"
+            : $"Client Exposure with Client Code '{clntCode}' and Branch Code '{coBrchCode}' does not exist";
+
+        return Ok(result, message);
     }
 
     #region Work Flow

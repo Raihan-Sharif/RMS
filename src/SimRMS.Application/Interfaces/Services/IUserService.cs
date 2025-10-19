@@ -29,6 +29,7 @@ namespace SimRMS.Application.Interfaces.Services
         Task<UserDto> CreateUserAsync(CreateUserRequest request, CancellationToken cancellationToken = default);
         Task<UserDto> UpdateUserAsync(string usrId, UpdateUserRequest request, CancellationToken cancellationToken = default);
         Task<bool> DeleteUserAsync(string usrId, DeleteUserRequest request, CancellationToken cancellationToken = default);
+        Task<bool> UserExistsAsync(string usrId, CancellationToken cancellationToken = default);
         #endregion
 
         #region User WF operations

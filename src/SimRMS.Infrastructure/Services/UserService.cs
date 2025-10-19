@@ -403,6 +403,32 @@ public class UserService : IUserService
             throw new DomainException($"The user deletion failed: {ex.Message}");
         }
     }
+
+    public async Task<bool> UserExistsAsync(string usrId, CancellationToken cancellationToken = default)
+    {
+        _logger.LogDebug("Checking if User exists with UsrID: {UsrID}", usrId);
+
+        try
+        {
+            var sql = @"
+                SELECT ui.UsrID, ui.UsrName
+                FROM UsrInfo ui
+                WHERE ui.UsrID = @usrID";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "usrID", usrId }
+            };
+
+            var result = await _repository.ExecuteScalarAsync<string>(sql, parameters, false, cancellationToken);
+            return !string.IsNullOrEmpty(result);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error checking User existence: {UsrID}", usrId);
+            throw new DomainException($"Failed to check user existence: {ex.Message}");
+        }
+    }
     #endregion
 
     #region Workflow Methods

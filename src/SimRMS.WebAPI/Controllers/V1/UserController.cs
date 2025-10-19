@@ -215,6 +215,37 @@ public class UserController : BaseController
 
         return Ok(new object(), "User deleted successfully");
     }
+
+    /// <summary>
+    /// Check if User exists by User ID
+    /// </summary>
+    /// <param name="usrId">User ID</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>Existence status</returns>
+    [HttpGet("user-exists/{usrId}")]
+    [ProducesResponseType(typeof(ApiResponse<UserExistenceDto>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 400)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 401)]
+    public async Task<ActionResult<ApiResponse<UserExistenceDto>>> UserExists(
+        [FromRoute, Required, MaxLength(50)] string usrId,
+        CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Checking if User exists with UsrID: {UsrID}", usrId);
+
+        var exists = await _userService.UserExistsAsync(usrId, cancellationToken);
+
+        var result = new UserExistenceDto
+        {
+            UsrID = usrId,
+            IsExist = exists
+        };
+
+        var message = exists
+            ? $"User with ID '{usrId}' exists"
+            : $"User with ID '{usrId}' does not exist";
+
+        return Ok(result, message);
+    }
     #endregion
 
     #region User Work Flow 

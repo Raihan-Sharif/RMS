@@ -46,4 +46,10 @@ namespace SimRMS.Application.Models.DTOs
         public string? UsrStatusDesc { get; set; }
         public string? ExpiryStatus { get; set; }
     }
+
+    public class UserExistenceDto
+    {
+        public string UsrID { get; set; } = null!;
+        public bool IsExist { get; set; }
+    }
 }

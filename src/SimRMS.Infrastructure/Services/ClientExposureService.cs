@@ -321,13 +321,25 @@ public class ClientExposureService : IClientExposureService
 
         try
         {
-            var exposure = await GetClientExposureByIdAsync(clntCode, coBrchCode, cancellationToken);
-            return exposure != null;
+            var sql = @"
+                SELECT MCE.CoBrchCode, MCE.ClntCode
+                FROM dbo.MstClntExps MCE
+                WHERE MCE.CoBrchCode = @branchCode
+                  AND MCE.ClntCode = @clientCode";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "branchCode", coBrchCode },
+                { "clientCode", clntCode }
+            };
+
+            var result = await _repository.ExecuteScalarAsync<string>(sql, parameters, false, cancellationToken);
+            return !string.IsNullOrEmpty(result);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error checking Client Exposure existence: {ClntCode}, {CoBrchCode}", clntCode, coBrchCode);
-            return false;
+            throw new DomainException($"Failed to check Client Exposure existence: {ex.Message}", ex);
         }
     }
 

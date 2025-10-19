@@ -102,4 +102,12 @@ namespace SimRMS.Application.Models.DTOs
         public int PageNumber { get; set; } = 1;
         public int PageSize { get; set; } = 10;
     }
+
+    public class ClientStockExistenceDto
+    {
+        public string BranchCode { get; set; } = null!;
+        public string ClientCode { get; set; } = null!;
+        public string StockCode { get; set; } = null!;
+        public bool IsExist { get; set; }
+    }
 }

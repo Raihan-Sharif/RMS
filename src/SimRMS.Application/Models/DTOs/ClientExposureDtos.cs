@@ -75,4 +75,11 @@ namespace SimRMS.Application.Models.DTOs
         public int PageNumber { get; set; } = 1;
         public int PageSize { get; set; } = 10;
     }
+
+    public class ClientExposureExistenceDto
+    {
+        public string ClntCode { get; set; } = null!;
+        public string CoBrchCode { get; set; } = null!;
+        public bool IsExist { get; set; }
+    }
 }
