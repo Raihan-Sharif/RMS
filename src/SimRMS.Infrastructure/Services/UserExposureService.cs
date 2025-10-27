@@ -3,13 +3,15 @@ using Microsoft.Extensions.Logging;
 using SimRMS.Application.Interfaces.Services;
 using SimRMS.Application.Models.DTOs;
 using SimRMS.Application.Models.Requests;
-using SimRMS.Domain.Interfaces.Common;
+using SimRMS.Infrastructure.Interfaces.Common;
 using SimRMS.Shared.Models;
-using SimRMS.Domain.Exceptions;
+using SimRMS.Application.Exceptions;
 using SimRMS.Application.Interfaces;
 using SimRMS.Shared.Constants;
-using SimRMS.Domain.Common;
-using ValidationException = SimRMS.Domain.Exceptions.ValidationException;
+using SimRMS.Application.Common;
+using ValidationException = SimRMS.Application.Exceptions.ValidationException;
+using LB.DAL.Core.Common;
+using System.Data;
 
 /// <summary>
 /// <para>
@@ -77,23 +79,25 @@ public class UserExposureService : IUserExposureService
 
         try
         {
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                SearchText = searchTerm,
-                SortColumn = "UsrID",
-                SortDirection = "ASC",
-                TotalCount = 0
+                // Pagination Parameters
+                new LB_DALParam("PageNumber", pageNumber),
+	            new LB_DALParam("PageSize", pageSize),
+
+                // Filter Parameter (assuming it can be null/optional)
+                new LB_DALParam("SearchText", searchTerm ?? (object)DBNull.Value),
+
+                // Sorting Parameters
+                new LB_DALParam("SortColumn", "UsrID"),
+	            new LB_DALParam("SortDirection", "ASC")
             };
 
-            _logger.LogDebug("Calling LB_SP_GetUserExpsList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, SearchTerm={SearchTerm}",
+			_logger.LogDebug("Calling LB_SP_GetUserExpsList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, SearchTerm={SearchTerm}",
                 pageNumber, pageSize, searchTerm);
 
             var result = await _repository.QueryPagedAsync<UserExposureDto>(
                 sqlOrSp: "LB_SP_GetUserExpsList",
-                pageNumber: pageNumber,
-                pageSize: pageSize,
                 parameters: parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
@@ -126,14 +130,17 @@ public class UserExposureService : IUserExposureService
 
         try
         {
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                UsrID = usrId,
-                StatusCode = 0, // output param
-                StatusMsg = "" // output param
+                // Input Parameter
+                new LB_DALParam("UsrID", usrId ?? (object)DBNull.Value), // Added null check for safety
+
+                // Output Parameters
+                new LB_DALParam("StatusCode", 0, ParameterDirection.Output),
+	            new LB_DALParam("StatusMsg", string.Empty, ParameterDirection.Output)
             };
 
-            var result = await _repository.QuerySingleAsync<UserExposureDto>(
+			var result = await _repository.QuerySingleAsync<UserExposureDto>(
                 sqlOrSp: "LB_SP_GetMstUserExpsByUsrID",
                 parameters: parameters,
                 isStoredProcedure: true,
@@ -171,32 +178,41 @@ public class UserExposureService : IUserExposureService
 
         try
         {
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["Action"] = (byte)ActionTypeEnum.INSERT,
-                ["UsrID"] = request.UsrId,
-                ["UsrExpsCheckBuy"] = request.UsrExpsCheckBuy,
-                ["UsrExpsBuyAmt"] = request.UsrExpsBuyAmt,
-                ["UsrExpsCheckSell"] = request.UsrExpsCheckSell,
-                ["UsrExpsSellAmt"] = request.UsrExpsSellAmt,
-                ["UsrExpsCheckTotal"] = request.UsrExpsCheckTotal,
-                ["UsrExpsTotalAmt"] = request.UsrExpsTotalAmt,
-                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
-                ["MakerId"] = _currentUserService.UserId,
-                ["ActionDt"] = DateTime.Now,
-                ["TransDt"] = DateTime.Now.Date,
-                ["ActionType"] = (byte)ActionTypeEnum.INSERT,
-                ["AuthId"] = (object)DBNull.Value, // NULL for workflow
-                ["AuthDt"] = (object)DBNull.Value, // NULL for workflow
-                ["AuthTransDt"] = (object)DBNull.Value, // NULL for workflow
-                ["IsAuth"] = (byte)AuthTypeEnum.UnAuthorize, // Always start unauthorized
-                ["AuthLevel"] = (byte)AuthLevelEnum.Level1,
-                ["IsDel"] = (byte)DeleteStatusEnum.Active,
-                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["RowsAffected"] = 0 // OUTPUT parameter
+                // Primary Action and Key Parameters
+                new LB_DALParam("Action", (byte)ActionTypeEnum.INSERT),
+	            new LB_DALParam("UsrID", request.UsrId),
+
+                // Data Parameters (Expense Limits)
+                new LB_DALParam("UsrExpsCheckBuy", request.UsrExpsCheckBuy),
+	            new LB_DALParam("UsrExpsBuyAmt", request.UsrExpsBuyAmt),
+                new LB_DALParam("UsrExpsCheckSell", request.UsrExpsCheckSell),
+	            new LB_DALParam("UsrExpsSellAmt", request.UsrExpsSellAmt), 
+                new LB_DALParam("UsrExpsCheckTotal", request.UsrExpsCheckTotal),
+	            new LB_DALParam("UsrExpsTotalAmt", request.UsrExpsTotalAmt),
+
+                // Audit Parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("MakerId", _currentUserService.UserId),
+	            new LB_DALParam("ActionDt", DateTime.Now),
+	            new LB_DALParam("TransDt", DateTime.Now.Date),
+	            new LB_DALParam("ActionType", (byte)ActionTypeEnum.INSERT),
+	            new LB_DALParam("IsDel", (byte)DeleteStatusEnum.Active),
+	            new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Authorization/Workflow Parameters (Initial State)
+                new LB_DALParam("AuthId", (object)DBNull.Value),
+	            new LB_DALParam("AuthDt", (object)DBNull.Value),
+	            new LB_DALParam("AuthTransDt", (object)DBNull.Value),
+	            new LB_DALParam("IsAuth", (byte)AuthTypeEnum.UnAuthorize), // Always start unauthorized
+                new LB_DALParam("AuthLevel", (byte)AuthLevelEnum.Level1),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
-            _logger.LogDebug("Calling LB_SP_CrudMstUsrExpsInfo with Action=1 (INSERT) for user: {UsrId}", request.UsrId);
+			_logger.LogDebug("Calling LB_SP_CrudMstUsrExpsInfo with Action=1 (INSERT) for user: {UsrId}", request.UsrId);
 
             var result = await _repository.ExecuteWithOutputAsync(
                 "LB_SP_CrudMstUsrExpsInfo",
@@ -269,32 +285,41 @@ public class UserExposureService : IUserExposureService
                 throw new DomainException($"The User exposure was not found: {usrId}");
             }
 
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["Action"] = (byte)ActionTypeEnum.UPDATE,
-                ["UsrID"] = usrId,
-                ["PendingUsrExpsCheckBuy"] = request.PendingUsrExpsCheckBuy ?? (object)DBNull.Value,
-                ["PendingUsrExpsBuyAmt"] = request.PendingUsrExpsBuyAmt ?? (object)DBNull.Value,
-                ["PendingUsrExpsCheckSell"] = request.PendingUsrExpsCheckSell ?? (object)DBNull.Value,
-                ["PendingUsrExpsSellAmt"] = request.PendingUsrExpsSellAmt ?? (object)DBNull.Value,
-                ["PendingUsrExpsCheckTotal"] = request.PendingUsrExpsCheckTotal ?? (object)DBNull.Value,
-                ["PendingUsrExpsTotalAmt"] = request.PendingUsrExpsTotalAmt ?? (object)DBNull.Value,
-                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
-                ["MakerId"] = _currentUserService.UserId,
-                ["ActionDt"] = DateTime.Now,
-                ["TransDt"] = DateTime.Now.Date,
-                ["ActionType"] = (byte)ActionTypeEnum.UPDATE,
-                ["AuthId"] = (object)DBNull.Value, // Reset for workflow
-                ["AuthDt"] = (object)DBNull.Value, // Reset for workflow
-                ["AuthTransDt"] = (object)DBNull.Value, // Reset for workflow
-                ["IsAuth"] = (byte)AuthTypeEnum.UnAuthorize, // Reset to unauthorized for workflow
-                ["AuthLevel"] = (byte)AuthLevelEnum.Level1,
-                ["IsDel"] = (byte)DeleteStatusEnum.Active,
-                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["RowsAffected"] = 0 // OUTPUT parameter
+                // Primary Action and Key Parameters
+                new LB_DALParam("Action", (byte)ActionTypeEnum.UPDATE),
+	            new LB_DALParam("UsrID", usrId),
+
+                // Data Parameters (Pending Expense Limits)
+                new LB_DALParam("PendingUsrExpsCheckBuy", request.PendingUsrExpsCheckBuy ?? (object)DBNull.Value),
+	            new LB_DALParam("PendingUsrExpsBuyAmt", request.PendingUsrExpsBuyAmt ?? (object)DBNull.Value),
+	            new LB_DALParam("PendingUsrExpsCheckSell", request.PendingUsrExpsCheckSell ?? (object)DBNull.Value),
+	            new LB_DALParam("PendingUsrExpsSellAmt", request.PendingUsrExpsSellAmt ?? (object)DBNull.Value),
+	            new LB_DALParam("PendingUsrExpsCheckTotal", request.PendingUsrExpsCheckTotal ?? (object)DBNull.Value),
+	            new LB_DALParam("PendingUsrExpsTotalAmt", request.PendingUsrExpsTotalAmt ?? (object)DBNull.Value),
+
+                // Audit Parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("MakerId", _currentUserService.UserId),
+	            new LB_DALParam("ActionDt", DateTime.Now),
+	            new LB_DALParam("TransDt", DateTime.Now.Date),
+	            new LB_DALParam("ActionType", (byte)ActionTypeEnum.UPDATE),
+	            new LB_DALParam("IsDel", (byte)DeleteStatusEnum.Active),
+	            new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Authorization/Workflow Parameters (Resetting for a new workflow)
+                new LB_DALParam("AuthId", (object)DBNull.Value),
+	            new LB_DALParam("AuthDt", (object)DBNull.Value),
+	            new LB_DALParam("AuthTransDt", (object)DBNull.Value),
+	            new LB_DALParam("IsAuth", (byte)AuthTypeEnum.UnAuthorize), // Resetting status
+                new LB_DALParam("AuthLevel", (byte)AuthLevelEnum.Level1),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
-            _logger.LogDebug("Calling LB_SP_CrudMstUsrExpsInfo with Action=2 (UPDATE)");
+			_logger.LogDebug("Calling LB_SP_CrudMstUsrExpsInfo with Action=2 (UPDATE)");
 
             var result = await _repository.ExecuteWithOutputAsync(
                 "LB_SP_CrudMstUsrExpsInfo",
@@ -350,33 +375,41 @@ public class UserExposureService : IUserExposureService
                 throw new DomainException($"The User exposure was not found: {usrId}");
             }
 
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["Action"] = (byte)ActionTypeEnum.DELETE,
-                ["UsrID"] = usrId,
-                ["UsrExpsCheckBuy"] = (object)DBNull.Value,
-                ["UsrExpsBuyAmt"] = (object)DBNull.Value,
-                ["UsrExpsCheckSell"] = (object)DBNull.Value,
-                ["UsrExpsSellAmt"] = (object)DBNull.Value,
-                ["UsrExpsCheckTotal"] = (object)DBNull.Value,
-                ["UsrExpsTotalAmt"] = (object)DBNull.Value,
-                ["UsrExpsWithShrLimit"] = (object)DBNull.Value,
-                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
-                ["MakerId"] = _currentUserService.UserId,
-                ["ActionDt"] = DateTime.Now,
-                ["TransDt"] = DateTime.Now.Date,
-                ["ActionType"] = (byte)ActionTypeEnum.DELETE,
-                ["AuthId"] = (object)DBNull.Value,
-                ["AuthDt"] = (object)DBNull.Value,
-                ["AuthTransDt"] = (object)DBNull.Value,
-                ["IsAuth"] = (object)DBNull.Value, // SP handles deletion logic
-                ["AuthLevel"] = (object)DBNull.Value,
-                ["IsDel"] = (object)DBNull.Value, // SP sets this to 1
-                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["RowsAffected"] = 0 // OUTPUT parameter
-            };
+                // Primary Action and Key Parameters
+                new LB_DALParam("Action", (byte)ActionTypeEnum.DELETE),
+	            new LB_DALParam("UsrID", usrId),
 
-            _logger.LogDebug("Calling LB_SP_CrudMstUsrExpsInfo with Action=3 (DELETE)");
+                // Data Parameters (All explicitly set to DBNull for DELETE)
+                new LB_DALParam("UsrExpsCheckBuy", (object)DBNull.Value),
+	            new LB_DALParam("UsrExpsBuyAmt", (object)DBNull.Value),
+	            new LB_DALParam("UsrExpsCheckSell", (object)DBNull.Value),
+	            new LB_DALParam("UsrExpsSellAmt", (object)DBNull.Value),
+	            new LB_DALParam("UsrExpsCheckTotal", (object)DBNull.Value),
+	            new LB_DALParam("UsrExpsTotalAmt", (object)DBNull.Value),
+	            new LB_DALParam("UsrExpsWithShrLimit", (object)DBNull.Value),
+
+                // Audit Parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("MakerId", _currentUserService.UserId),
+	            new LB_DALParam("ActionDt", DateTime.Now),
+	            new LB_DALParam("TransDt", DateTime.Now.Date),
+	            new LB_DALParam("ActionType", (byte)ActionTypeEnum.DELETE),
+	            new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Authorization/Workflow Parameters (Explicitly DBNull for DELETE)
+                new LB_DALParam("AuthId", (object)DBNull.Value),
+	            new LB_DALParam("AuthDt", (object)DBNull.Value),
+	            new LB_DALParam("AuthTransDt", (object)DBNull.Value),
+	            new LB_DALParam("IsAuth", (object)DBNull.Value),
+	            new LB_DALParam("AuthLevel", (object)DBNull.Value),
+	            new LB_DALParam("IsDel", (object)DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
+            };
+			_logger.LogDebug("Calling LB_SP_CrudMstUsrExpsInfo with Action=3 (DELETE)");
 
             var result = await _repository.ExecuteWithOutputAsync(
                 "LB_SP_CrudMstUsrExpsInfo",
@@ -464,25 +497,27 @@ public class UserExposureService : IUserExposureService
 
         try
         {
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["PageNumber"] = pageNumber,
-                ["PageSize"] = pageSize,
-                ["SearchText"] = searchTerm ?? (object)DBNull.Value,
-                ["SortColumn"] = "UsrID",
-                ["SortDirection"] = "ASC",
-                ["isAuth"] = (byte)isAuth, // 0: Unauthorized or 2: Denied records
-                ["MakerId"] = _currentUserService.UserId,
-                ["TotalCount"] = 0 // OUTPUT parameter - will be populated by SP
+                // Pagination Parameters
+                new LB_DALParam("PageNumber", pageNumber),
+	            new LB_DALParam("PageSize", pageSize),
+
+                // Filter and Sorting Parameters
+                new LB_DALParam("SearchText", searchTerm ?? (object)DBNull.Value),
+	            new LB_DALParam("SortColumn", "UsrID"),
+	            new LB_DALParam("SortDirection", "ASC"),
+
+                // Control and Audit Parameters
+                new LB_DALParam("isAuth", (byte)isAuth),
+	            new LB_DALParam("MakerId", _currentUserService.UserId)
             };
 
-            _logger.LogDebug("Calling SP {StoredProcedure} with parameters: PageNumber={PageNumber}, PageSize={PageSize}, isAuth={IsAuth}, MakerId={MakerId}",
+			_logger.LogDebug("Calling SP {StoredProcedure} with parameters: PageNumber={PageNumber}, PageSize={PageSize}, isAuth={IsAuth}, MakerId={MakerId}",
                 "LB_SP_GetUserExpsListWF", pageNumber, pageSize, isAuth, _currentUserService.UserId);
 
             var result = await _repository.QueryPagedAsync<UserExposureDto>(
                 sqlOrSp: "LB_SP_GetUserExpsListWF",
-                pageNumber: pageNumber,
-                pageSize: pageSize,
                 parameters: parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
@@ -525,19 +560,26 @@ public class UserExposureService : IUserExposureService
 
             var ipAddress = _currentUserService.GetClientIPAddress();
 
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["Action"] = request.ActionType,
-                ["UsrID"] = usrId,
-                ["IPAddress"] = ipAddress,
-                ["AuthID"] = _currentUserService.UserId,
-                ["IsAuth"] = request.IsAuth,
-                ["ActionType"] = request.ActionType,
-                ["Remarks"] = !string.IsNullOrEmpty(request.Remarks) ? request.Remarks : (object)DBNull.Value,
-                ["RowsAffected"] = 0 // OUTPUT parameter
+                // Action and Key Parameters
+                new LB_DALParam("Action", request.ActionType),
+	            new LB_DALParam("UsrID", usrId ?? (object)DBNull.Value), // Added null check for safety
+                new LB_DALParam("ActionType", request.ActionType), 
+
+                // Authorization/Audit Parameters
+                new LB_DALParam("IPAddress", ipAddress ?? (object)DBNull.Value), // Added null check for safety
+                new LB_DALParam("AuthID", _currentUserService.UserId),
+	            new LB_DALParam("IsAuth", request.IsAuth),
+
+                // Remarks (Handling empty string/null logic from source)
+                new LB_DALParam("Remarks", !string.IsNullOrEmpty(request.Remarks) ? (object)request.Remarks : (object)DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
-            
-            var result = await _repository.ExecuteWithOutputAsync(
+
+			var result = await _repository.ExecuteWithOutputAsync(
                 "LB_SP_AuthUsrExpsInfo",
                 parameters,
                 cancellationToken: cancellationToken);

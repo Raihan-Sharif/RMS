@@ -5,14 +5,16 @@ using SimRMS.Application.Interfaces.Services;
 using SimRMS.Application.Models.DTOs;
 using SimRMS.Application.Models.Requests;
 using SimRMS.Application.Validators;
-using SimRMS.Domain.Common;
-using SimRMS.Domain.Exceptions;
-using SimRMS.Domain.Interfaces.Common;
+using SimRMS.Application.Common;
+using SimRMS.Application.Exceptions;
+using SimRMS.Infrastructure.Interfaces.Common;
 using SimRMS.Infrastructure.Common;
 using SimRMS.Shared.Constants;
 using SimRMS.Shared.Models;
 using System.Threading.Tasks;
-using ValidationException = SimRMS.Domain.Exceptions.ValidationException;
+using ValidationException = SimRMS.Application.Exceptions.ValidationException;
+using LB.DAL.Core.Common;
+using System.Data;
 
 /// <summary>
 /// <para>
@@ -79,22 +81,26 @@ public class TraderService : ITraderService
 
         try
         {
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                SortColumn = "XchgCode",
-                SortDirection = sortDirection,
-                XchgCode = xchgCode,
-                SearchTerm = searchTerm,
-                IsAuth = (byte) AuthTypeEnum.Approve, // Authorized records
-                TotalCount = 0 // OUTPUT parameter
+                // Pagination Parameters
+                new LB_DALParam("PageNumber", pageNumber),
+	            new LB_DALParam("PageSize", pageSize),
+
+                // Sorting Parameters
+                new LB_DALParam("SortColumn", "DlrCode"),
+	            new LB_DALParam("SortDirection", sortDirection ?? (object)DBNull.Value), // Added null check for safety
+
+                // Filter Parameters
+                new LB_DALParam("XchgCode", xchgCode ?? (object)DBNull.Value), // Added null check for safety
+                new LB_DALParam("SearchTerm", searchTerm ?? (object)DBNull.Value), // Added null check for safety
+
+                // Control Parameter
+                new LB_DALParam("IsAuth", (byte)AuthTypeEnum.Approve) // Authorized records
             };
 
-            var result = await _repository.QueryPagedAsync<MstTraderDto>(
+			var result = await _repository.QueryPagedAsync<MstTraderDto>(
                 sqlOrSp: "LB_SP_GetTraderList",
-                pageNumber: pageNumber,
-                pageSize: pageSize,
                 parameters: parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
@@ -129,17 +135,20 @@ public class TraderService : ITraderService
 
         try
         {
-            // Create parameters matching the stored procedure signature
-            var parameters = new
+			// Create parameters matching the stored procedure signature
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                XchgCode = xchgCode,
-                DlrCode = dlrCode,
-                StatusCode = 0,     // OUTPUT parameter
-                StatusMsg = ""      // OUTPUT parameter
+                // Input Parameters
+                new LB_DALParam("XchgCode", xchgCode ?? (object)DBNull.Value), // Added null check for safety
+                new LB_DALParam("DlrCode", dlrCode ?? (object)DBNull.Value),   // Added null check for safety
+
+                // Output Parameters
+                new LB_DALParam("StatusCode", 0, ParameterDirection.Output),
+	            new LB_DALParam("StatusMsg", string.Empty, ParameterDirection.Output)
             };
 
-            // Call the stored procedure to get the trader data
-            var trader = await _repository.QuerySingleAsync<MstTraderDto>(
+			// Call the stored procedure to get the trader data
+			var trader = await _repository.QuerySingleAsync<MstTraderDto>(
                 sqlOrSp: "LB_SP_GetTrader_ByTraderCode",
                 parameters: parameters,
                 isStoredProcedure: true,
@@ -191,22 +200,29 @@ public class TraderService : ITraderService
 
         try
         {
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                Action = (byte)ActionTypeEnum.INSERT, // INSERT
-                XchgCode = request.XchgCode,
-                DlrCode = request.DlrCode,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.GetCurrentUserId(),
-                ActionDt = DateTime.Now,
-                TransDt = DateTime.Today,
-                ActionType = (byte)ActionTypeEnum.INSERT,
-                IsDel = (byte)0,
-                Remarks = request.Remarks,
-                RowsAffected = 0 // OUTPUT parameter
+                // Primary Action and Key Parameters
+                new LB_DALParam("Action", (byte)ActionTypeEnum.INSERT),
+	            new LB_DALParam("XchgCode", request.XchgCode ?? (object)DBNull.Value), // Added null check for safety
+                new LB_DALParam("DlrCode", request.DlrCode ?? (object)DBNull.Value),   // Added null check for safety
+
+                // Audit Parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("MakerId", _currentUserService.GetCurrentUserId()),
+	            new LB_DALParam("ActionDt", DateTime.Now),
+	            new LB_DALParam("TransDt", DateTime.Today),
+	            new LB_DALParam("ActionType", (byte)ActionTypeEnum.INSERT),
+	            new LB_DALParam("IsDel", (byte)0), // Assuming 0 is DeleteStatusEnum.Active
+
+                // Remarks
+                new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
-            _logger.LogDebug("Parameters for creating Trader: {@Parameters}", parameters);
+			_logger.LogDebug("Parameters for creating Trader: {@Parameters}", parameters);
 
             var rowsAffected = await _repository.ExecuteAsync(
                sqlOrSp: "LB_SP_CrudTrader",
@@ -252,22 +268,29 @@ public class TraderService : ITraderService
 
         try
         {
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                Action = (byte)ActionTypeEnum.UPDATE, // UPDATE
-                XchgCode = xchgCode,
-                DlrCode = dlrCode,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.GetCurrentUserId(),
-                ActionDt = DateTime.Now,
-                TransDt = DateTime.Today,
-                ActionType = (byte)ActionTypeEnum.UPDATE,
-                IsDel = (byte) DeleteStatusEnum.Active, // default to active 0
-                Remarks = request.Remarks,
-                RowsAffected = 0 // OUTPUT parameter
-                };
+                // Primary Action and Key Parameters
+                new LB_DALParam("Action", (byte)ActionTypeEnum.UPDATE),
+	            new LB_DALParam("XchgCode", xchgCode ?? (object)DBNull.Value), // Added null check for safety
+                new LB_DALParam("DlrCode", dlrCode ?? (object)DBNull.Value),   // Added null check for safety
 
-            _logger.LogDebug("Parameters for updating Trader: {@Parameters}", parameters);
+                // Audit Parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("MakerId", _currentUserService.GetCurrentUserId()),
+	            new LB_DALParam("ActionDt", DateTime.Now),
+	            new LB_DALParam("TransDt", DateTime.Today),
+	            new LB_DALParam("ActionType", (byte)ActionTypeEnum.UPDATE),
+	            new LB_DALParam("IsDel", (byte)DeleteStatusEnum.Active), // Assuming DeleteStatusEnum.Active is 0
+
+                // Remarks
+                new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
+            };
+
+			_logger.LogDebug("Parameters for updating Trader: {@Parameters}", parameters);
             var rowsAffected = await _repository.ExecuteAsync(
                sqlOrSp: "LB_SP_CrudTrader",
                parameters: parameters,
@@ -311,21 +334,29 @@ public class TraderService : ITraderService
 
         try
         {
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                Action = (byte)ActionTypeEnum.DELETE, // DELETE
-                XchgCode = xchgCode,
-                DlrCode = dlrCode,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.GetCurrentUserId(),
-                ActionDt = DateTime.Now,
-                TransDt = DateTime.Today,
-                ActionType = (byte)ActionTypeEnum.DELETE,
-                IsDel = (byte) DeleteStatusEnum.Deleted, // mark as deleted 1
-                Remarks = request.Remarks,
-                RowsAffected = 0 // OUTPUT parameter
-                };
-            _logger.LogDebug("Parameters for deleting Trader: {@Parameters}", parameters);
+                // Primary Action and Key Parameters
+                new LB_DALParam("Action", (byte)ActionTypeEnum.DELETE),
+	            new LB_DALParam("XchgCode", xchgCode ?? (object)DBNull.Value), // Added null check for safety
+                new LB_DALParam("DlrCode", dlrCode ?? (object)DBNull.Value),   // Added null check for safety
+
+                // Audit Parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("MakerId", _currentUserService.GetCurrentUserId()),
+	            new LB_DALParam("ActionDt", DateTime.Now),
+	            new LB_DALParam("TransDt", DateTime.Today),
+	            new LB_DALParam("ActionType", (byte)ActionTypeEnum.DELETE),
+	            new LB_DALParam("IsDel", (byte)DeleteStatusEnum.Deleted), // Marking the record as deleted
+
+                // Remarks
+                new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
+            };
+
+			_logger.LogDebug("Parameters for deleting Trader: {@Parameters}", parameters);
             var rowsAffected = await _repository.ExecuteAsync(
                sqlOrSp: "LB_SP_CrudTrader",
                parameters: parameters,
@@ -393,26 +424,30 @@ public class TraderService : ITraderService
 
         try
         {
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["PageNumber"] = pageNumber,
-                ["PageSize"] = pageSize,
-                ["SortColumn"] = "XchgCode",
-                ["SortDirection"] = sortDirection ?? "ASC",
-                ["XchgCode"] = xchgCode ?? (object)DBNull.Value,
-                ["SearchTerm"] = searchTerm ?? (object)DBNull.Value,
-                ["isAuth"] = isAuth,
-                ["MakerId"] = _currentUserService.GetCurrentUserId(),
-                ["TotalCount"] = 0
+                // Pagination Parameters
+                new LB_DALParam("PageNumber", pageNumber),
+	            new LB_DALParam("PageSize", pageSize),
+
+                // Sorting Parameters
+                new LB_DALParam("SortColumn", "XchgCode"),
+	            new LB_DALParam("SortDirection", sortDirection ?? "ASC"), // Retaining null-coalescing from source
+
+                // Filter Parameters (Already includes DBNull handling from the source Dictionary)
+                new LB_DALParam("XchgCode", xchgCode ?? (object)DBNull.Value),
+	            new LB_DALParam("SearchTerm", searchTerm ?? (object)DBNull.Value),
+
+                // Control and Audit Parameters
+                new LB_DALParam("isAuth", isAuth),
+	            new LB_DALParam("MakerId", _currentUserService.GetCurrentUserId())
             };
 
-            _logger.LogDebug("Calling SP {StoredProcedure} with parameters: PageNumber={PageNumber}, PageSize={PageSize}, isAuth={IsAuth}, MakerId={MakerId}",
+			_logger.LogDebug("Calling SP {StoredProcedure} with parameters: PageNumber={PageNumber}, PageSize={PageSize}, isAuth={IsAuth}, MakerId={MakerId}",
                 "LB_SP_GetTraderListWF", pageNumber, pageSize, isAuth, _currentUserService.GetCurrentUserId());
 
             var result = await _repository.QueryPagedAsync<MstTraderDto>(
                 sqlOrSp: "LB_SP_GetTraderListWF",
-                pageNumber: pageNumber,
-                pageSize: pageSize,
                 parameters: parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
@@ -448,20 +483,27 @@ public class TraderService : ITraderService
 
         try
         {
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["Action"] = request.ActionType,
-                ["XchgCode"] = xchgCode,
-                ["DlrCode"] = dlrCode,
-                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
-                ["AuthID"] = _currentUserService.GetCurrentUserId(),
-                ["IsAuth"] = request.IsAuth,
-                ["ActionType"] = request.ActionType,
-                ["Remarks"] = !string.IsNullOrEmpty(request.Remarks) ? request.Remarks : DBNull.Value,
-                ["RowsAffected"] = 0 // OUTPUT parameter
+                // Action and Key Parameters
+                new LB_DALParam("Action", request.ActionType),
+	            new LB_DALParam("XchgCode", xchgCode ?? (object)DBNull.Value), // Added null check for safety
+                new LB_DALParam("DlrCode", dlrCode ?? (object)DBNull.Value),   // Added null check for safety
+                new LB_DALParam("ActionType", request.ActionType),
+
+                // Authorization/Audit Parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("AuthID", _currentUserService.GetCurrentUserId()),
+	            new LB_DALParam("IsAuth", request.IsAuth),
+
+                // Remarks (Handling empty string/null logic from source)
+                new LB_DALParam("Remarks", !string.IsNullOrEmpty(request.Remarks) ? (object)request.Remarks : DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
-            _logger.LogDebug("Calling LB_SP_AuthTrader with parameters: {@Parameters}", parameters);
+			_logger.LogDebug("Calling LB_SP_AuthTrader with parameters: {@Parameters}", parameters);
 
             var result = await _repository.ExecuteWithOutputAsync(
                 "LB_SP_AuthTrader",

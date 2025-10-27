@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Security.Claims;
 using Microsoft.Data.SqlClient;
-using SimRMS.Domain.Exceptions;
+using SimRMS.Application.Exceptions;
 using SimRMS.Shared.Models;
 using SimRMS.Shared.Logging;
 using SimRMS.Shared.Configuration;

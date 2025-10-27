@@ -1,9 +1,11 @@
 using Microsoft.Extensions.Logging;
 using SimRMS.Application.Interfaces.Services;
 using SimRMS.Application.Models.DTOs;
-using SimRMS.Domain.Interfaces.Common;
-using SimRMS.Domain.Exceptions;
+using SimRMS.Infrastructure.Interfaces.Common;
+using SimRMS.Application.Exceptions;
 using SimRMS.Application.Interfaces;
+using LB.DAL.Core.Common;
+using SimRMS.Shared.Constants;
 
 
 /// <summary>
@@ -47,10 +49,11 @@ public class WorkFlowService : IWorkFlowService
 
         try
         {
-            var parameters = new
+            List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                MakerID = _currentUserService.UserId,
-                IsAuth = (byte)0 // Unauthorized
+                // Filter/Control Parameters
+                new LB_DALParam("MakerID", _currentUserService.UserId),
+                new LB_DALParam("IsAuth", (byte)AuthTypeEnum.UnAuthorize) // 0 typically represents Unauthorized
             };
 
             var result = await _repository.QueryAsync<WorkFlowItemDto>(
@@ -75,10 +78,11 @@ public class WorkFlowService : IWorkFlowService
 
         try
         {
-            var parameters = new
+            List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                MakerID = _currentUserService.UserId,
-                IsAuth = (byte)2 // Denied
+                // Filter/Control Parameters
+                new LB_DALParam("MakerID", _currentUserService.UserId),
+                new LB_DALParam("IsAuth", (byte)AuthTypeEnum.Deny)
             };
 
             var result = await _repository.QueryAsync<WorkFlowItemDto>(

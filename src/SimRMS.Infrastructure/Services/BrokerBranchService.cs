@@ -3,13 +3,20 @@ using Microsoft.Extensions.Logging;
 using SimRMS.Application.Interfaces.Services;
 using SimRMS.Application.Models.DTOs;
 using SimRMS.Application.Models.Requests;
-using SimRMS.Domain.Interfaces.Common;
+using SimRMS.Infrastructure.Interfaces.Common;
 using SimRMS.Shared.Models;
-using SimRMS.Domain.Exceptions;
+using SimRMS.Application.Exceptions;
 using SimRMS.Application.Interfaces;
 using SimRMS.Shared.Constants;
-using SimRMS.Domain.Common;
-using ValidationException = SimRMS.Domain.Exceptions.ValidationException;
+using SimRMS.Application.Common;
+using ValidationException = SimRMS.Application.Exceptions.ValidationException;
+using LB.DAL.Core.Common;
+using Newtonsoft.Json.Linq;
+using LB.DAL.Core.Common.Definition;
+using System.Data;
+using System.Reflection.Emit;
+using System.Net;
+using Azure.Core;
 
 /// <summary>
 /// <para>
@@ -78,16 +85,14 @@ public class BrokerBranchService : IBrokerBranchService
 
         try
         {
-            var parameters = new
-            {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                SortColumn = "CoBrchDesc",
-                SortDirection = "ASC",
-                CoCode = coCode,
-                SearchTerm = searchTerm,
-                isAuth = (byte)AuthTypeEnum.Approve,
-                TotalCount = 0
+            List<LB_DALParam> parameters = new List<LB_DALParam>(){
+                new LB_DALParam("PageNumber", pageNumber),
+                new LB_DALParam("PageSize", pageSize),
+                new LB_DALParam("SortColumn", "CoBrchDesc"),
+                new LB_DALParam("SortDirection", "ASC"),
+                new LB_DALParam("CoCode", !string.IsNullOrEmpty(coCode) ? coCode : DBNull.Value),
+                new LB_DALParam("searchTerm", !string.IsNullOrEmpty(searchTerm) ? searchTerm : DBNull.Value),
+                new LB_DALParam("isAuth", (byte)AuthTypeEnum.Approve)
             };
 
             _logger.LogDebug("Calling LB_SP_GetBrokerBranchList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, CoCode={CoCode}, SearchTerm={SearchTerm}, isAuth={IsAuth}",
@@ -95,8 +100,6 @@ public class BrokerBranchService : IBrokerBranchService
 
             var result = await _repository.QueryPagedAsync<MstCoBrchDto>(
                 sqlOrSp: "LB_SP_GetBrokerBranchList",
-                pageNumber: pageNumber,
-                pageSize: pageSize,
                 parameters: parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
@@ -129,12 +132,11 @@ public class BrokerBranchService : IBrokerBranchService
 
         try
         {
-            var parameters = new
-            {
-                CoCode = coCode,
-                CoBrchCode = coBrchCode,
-                statusCode = 0, // output param
-                statusMsg = "" // output param
+            List<LB_DALParam> parameters = new List<LB_DALParam>(){
+                new LB_DALParam("CoCode", coCode),
+                new LB_DALParam("CoBrchCode", coBrchCode),
+                new LB_DALParam("statusCode", 0, ParameterDirection.Output),
+                new LB_DALParam("statusMsg",string.Empty, ParameterDirection.Output )
             };
 
             var result = await _repository.QuerySingleAsync<MstCoBrchDto>(
@@ -176,22 +178,24 @@ public class BrokerBranchService : IBrokerBranchService
 
         try
         {
-            var parameters = new
+            List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                Action = (byte)ActionTypeEnum.INSERT,
-                CoCode = defaultCoCode,
-                CoBrchCode = generatedBranchCode, // ✅ Use the generated code
-                CoBrchDesc = request.CoBrchDesc,
-                CoBrchAddr = request.CoBrchAddr,
-                CoBrchPhone = request.CoBrchPhone,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                ActionDt = DateTime.Now,
-                TransDt = DateTime.Now.Date,
-                ActionType = (byte)ActionTypeEnum.INSERT,
-                IsDel = (byte)DeleteStatusEnum.Active,
-                Remarks = request.Remarks,
-                RowsAffected = 0
+                new LB_DALParam("Action", (byte)ActionTypeEnum.INSERT),
+                new LB_DALParam("CoCode", defaultCoCode),
+                new LB_DALParam("CoBrchCode", generatedBranchCode), // ✅ Use the generated code
+                new LB_DALParam("CoBrchDesc", request.CoBrchDesc),
+                new LB_DALParam("CoBrchAddr", request.CoBrchAddr),
+                new LB_DALParam("CoBrchPhone", request.CoBrchPhone),
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+                new LB_DALParam("MakerId", _currentUserService.UserId),
+                new LB_DALParam("ActionDt", DateTime.Now),
+                new LB_DALParam("TransDt", DateTime.Now.Date),
+                new LB_DALParam("ActionType", (byte)ActionTypeEnum.INSERT),
+                new LB_DALParam("IsDel", (byte)DeleteStatusEnum.Active),
+                new LB_DALParam("Remarks", request.Remarks),
+
+                // ✅ Output parameters (like your RowsAffected)
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
             _logger.LogDebug("Calling LB_SP_CrudMstCoBrch with Action=1 (INSERT) for branch code: {BranchCode}", generatedBranchCode);
@@ -259,7 +263,7 @@ public class BrokerBranchService : IBrokerBranchService
         // Use existing validation method
         await ValidateUpdateRequestAsync(request, cancellationToken);
 
-       // await ValidateBusinessRulesForUpdateAsync(coCode, coBrchCode, request, cancellationToken);
+        // await ValidateBusinessRulesForUpdateAsync(coCode, coBrchCode, request, cancellationToken);
 
         try
         {
@@ -269,23 +273,26 @@ public class BrokerBranchService : IBrokerBranchService
                 throw new DomainException($"The Branch was not found: {coCode}-{coBrchCode}");
             }
 
-            var parameters = new
+            List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                Action = (byte)ActionTypeEnum.UPDATE,
-                CoCode = coCode,
-                CoBrchCode = coBrchCode,
-                CoBrchDesc = request.CoBrchDesc,
-                CoBrchAddr = request.CoBrchAddr,
-                CoBrchPhone = request.CoBrchPhone,
-                IPAddress =  _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                ActionDt = DateTime.Now,
-                TransDt = DateTime.Now.Date,
-                ActionType = (byte)ActionTypeEnum.UPDATE,
-                IsDel = (byte)DeleteStatusEnum.Active,
-                Remarks = request.Remarks,
-                RowsAffected = 0
+                new LB_DALParam("Action", (byte)ActionTypeEnum.UPDATE),
+                new LB_DALParam("CoCode", coCode),
+                new LB_DALParam("CoBrchCode", coBrchCode),
+                new LB_DALParam("CoBrchDesc", request.CoBrchDesc),
+                new LB_DALParam("CoBrchAddr", request.CoBrchAddr),
+                new LB_DALParam("CoBrchPhone", request.CoBrchPhone),
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+                new LB_DALParam("MakerId", _currentUserService.UserId),
+                new LB_DALParam("ActionDt", DateTime.Now),
+                new LB_DALParam("TransDt", DateTime.Now.Date),
+                new LB_DALParam("ActionType", (byte)ActionTypeEnum.UPDATE),
+                new LB_DALParam("IsDel", (byte)DeleteStatusEnum.Active),
+                new LB_DALParam("Remarks", request.Remarks),
+
+                // ✅ Output parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
+
 
             _logger.LogDebug("Calling LB_SP_CrudMstCoBrch with Action=2 (UPDATE)");
 
@@ -343,23 +350,26 @@ public class BrokerBranchService : IBrokerBranchService
                 throw new DomainException($"The Branch was not found: {coCode}-{coBrchCode}");
             }
 
-            var parameters = new
+            List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                Action = (byte)ActionTypeEnum.DELETE,
-                CoCode = coCode,
-                CoBrchCode = coBrchCode,
-                CoBrchDesc = (string?)null,
-                CoBrchAddr = (string?)null,
-                CoBrchPhone = (string?)null,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                ActionDt = DateTime.Now,
-                TransDt = DateTime.Now.Date,
-                ActionType = (byte)ActionTypeEnum.DELETE,
-                IsDel = (byte)DeleteStatusEnum.Deleted,
-                Remarks = request.Remarks,
-                RowsAffected = 0
+                new LB_DALParam("Action", (byte)ActionTypeEnum.DELETE),
+                new LB_DALParam("CoCode", coCode),
+                new LB_DALParam("CoBrchCode", coBrchCode),
+                new LB_DALParam("CoBrchDesc", DBNull.Value),
+                new LB_DALParam("CoBrchAddr", DBNull.Value),
+                new LB_DALParam("CoBrchPhone", DBNull.Value),
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+                new LB_DALParam("MakerId", _currentUserService.UserId),
+                new LB_DALParam("ActionDt", DateTime.Now),
+                new LB_DALParam("TransDt", DateTime.Now.Date),
+                new LB_DALParam("ActionType", (byte)ActionTypeEnum.DELETE),
+                new LB_DALParam("IsDel", (byte)DeleteStatusEnum.Deleted),
+                new LB_DALParam("Remarks", request.Remarks),
+
+                // ✅ Output parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
+
 
             _logger.LogDebug("Calling LB_SP_CrudMstCoBrch with Action=3 (DELETE)");
 
@@ -451,19 +461,18 @@ public class BrokerBranchService : IBrokerBranchService
 
         try
         {
-            // FIXED: Proper parameter setup for OUTPUT parameter handling
-            var parameters = new Dictionary<string, object>
+            List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["PageNumber"] = pageNumber,
-                ["PageSize"] = pageSize,
-                ["SortColumn"] = "CoCode",
-                ["SortDirection"] = "ASC",
-                ["CoCode"] = coCode ?? (object)DBNull.Value,
-                ["SearchTerm"] = searchTerm ?? (object)DBNull.Value,
-                ["isAuth"] = (byte)isAuth, // 0: Unauthorized or 2: Denied records
-                ["MakerId"] = _currentUserService.UserId,
-                ["TotalCount"] = 0 // OUTPUT parameter - will be populated by SP
+                new LB_DALParam("PageNumber", pageNumber),
+                new LB_DALParam("PageSize", pageSize),
+                new LB_DALParam("SortColumn", "CoBrchDesc"),
+                new LB_DALParam("SortDirection", "ASC"),
+                new LB_DALParam("CoCode", coCode ?? (object)DBNull.Value),
+                new LB_DALParam("SearchTerm", searchTerm ?? (object)DBNull.Value),
+                new LB_DALParam("isAuth", (byte)isAuth), // 0 = Unauthorized, 2 = Denied
+                new LB_DALParam("MakerId", _currentUserService.UserId)
             };
+
 
             _logger.LogDebug("Calling SP {StoredProcedure} with parameters: PageNumber={PageNumber}, PageSize={PageSize}, isAuth={IsAuth}, MakerId={MakerId}",
                 "LB_SP_GetBrokerBranchListWF", pageNumber, pageSize, 0, _currentUserService.UserId);
@@ -471,8 +480,6 @@ public class BrokerBranchService : IBrokerBranchService
             // FIXED: The GenericRepository now properly handles OUTPUT parameters in a single call
             var result = await _repository.QueryPagedAsync<MstCoBrchDto>(
                 sqlOrSp: "LB_SP_GetBrokerBranchListWF",
-                pageNumber: pageNumber,
-                pageSize: pageSize,
                 parameters: parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
@@ -490,7 +497,7 @@ public class BrokerBranchService : IBrokerBranchService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting "+authAction+ " Branch list with parameters: PageNumber={PageNumber}, PageSize={PageSize}, CoCode={CoCode}, SearchTerm={SearchTerm}",
+            _logger.LogError(ex, "Error getting " + authAction + " Branch list with parameters: PageNumber={PageNumber}, PageSize={PageSize}, CoCode={CoCode}, SearchTerm={SearchTerm}",
                 pageNumber, pageSize, coCode, searchTerm);
             throw;
         }
@@ -516,19 +523,23 @@ public class BrokerBranchService : IBrokerBranchService
 
             var ipAddress = _currentUserService.GetClientIPAddress();
 
-            var parameters = new Dictionary<string, object>
+            List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["Action"] = request.ActionType,
-                ["CoCode"] = coCode,
-                ["CoBrchCode"] = coBrchCode,
-                ["IPAddress"] = ipAddress,
-                ["AuthID"] = _currentUserService.UserId,
-                ["IsAuth"] = request.IsAuth,
-                ["ActionType"] = request.ActionType,
-                ["Remarks"] = !string.IsNullOrEmpty(request.Remarks) ? request.Remarks : DBNull.Value,
-                ["RowsAffected"] = 0 //Output parameter
+                new LB_DALParam("Action", request.ActionType),
+                new LB_DALParam("CoCode", coCode),
+                new LB_DALParam("CoBrchCode", coBrchCode),
+                new LB_DALParam("IPAddress", ipAddress),
+                new LB_DALParam("AuthID", _currentUserService.UserId),
+                new LB_DALParam("IsAuth", request.IsAuth),
+                new LB_DALParam("ActionType", request.ActionType),
+                new LB_DALParam("Remarks",
+                    !string.IsNullOrEmpty(request.Remarks) ? request.Remarks : (object)DBNull.Value),
+
+                // ✅ Output parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
-            
+
+
             var result = await _repository.ExecuteWithOutputAsync(
                 "LB_SP_AuthMstCoBrch",
                 parameters,
@@ -668,10 +679,15 @@ public class BrokerBranchService : IBrokerBranchService
                            AND CoCode = @CoCode 
                            AND CoBrchCode != @CoBrchCode 
                            AND IsDel = 0";
-                var count = await _repository.ExecuteScalarAsync<int>(
-                    sql,
-                    new { CoBrchDesc = request.CoBrchDesc, CoCode = coCode, CoBrchCode = coBrchCode },
-                    cancellationToken: cancellationToken);
+
+                List<LB_DALParam> parameters = new List<LB_DALParam>()
+                {
+                    new LB_DALParam("CoCode", coCode),
+                    new LB_DALParam("CoBrchCode", coBrchCode),
+                    new LB_DALParam("CoBrchDesc", request.CoBrchDesc)
+                };
+
+                var count = await _repository.ExecuteScalarAsync<int>(sql, parameters, cancellationToken: cancellationToken);
 
                 if (count > 0)
                     throw new DomainException($"The Branch with description '{request.CoBrchDesc}' already exists for company '{coCode}'");
@@ -706,10 +722,13 @@ public class BrokerBranchService : IBrokerBranchService
                     SET @GENERATEDCODE=RIGHT('000' + CAST(@NextCode AS VARCHAR(3)), 3);
                     SELECT @GENERATEDCODE as NewBranchCode";
 
-            var branchCode = await _repository.ExecuteScalarAsync<string>(
-                sql,
-                new { InpCoCode = coCode },
-                cancellationToken: cancellationToken);
+
+            List<LB_DALParam> parameters = new List<LB_DALParam>()
+                {
+                    new LB_DALParam("CoCode", coCode),
+                };
+
+            var branchCode = await _repository.ExecuteScalarAsync<string>( sql, parameters,cancellationToken: cancellationToken);
 
             if (string.IsNullOrEmpty(branchCode))
             {

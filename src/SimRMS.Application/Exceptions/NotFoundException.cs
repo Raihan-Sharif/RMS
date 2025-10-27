@@ -1,9 +1,9 @@
 ﻿/// <summary>
 /// <para>
 /// ===================================================================
-/// Title:       ValidationErrorDetail
+/// Title:       NotFoundException
 /// Author:      Md. Raihan Sharif
-/// Purpose:     This class represents the details of validation errors that occur during model validation to keep track of specific issues in consistent manner.
+/// Purpose:     This class represents a custom exception for not found errors in the domain.
 /// Creation:    03/Aug/2025
 /// ===================================================================
 /// Modification History
@@ -14,14 +14,11 @@
 /// ===================================================================
 /// </para>
 /// </summary>
-/// 
 
-namespace SimRMS.Domain.Common
+namespace SimRMS.Application.Exceptions
 {
-    public class ValidationErrorDetail
+    public class NotFoundException : DomainException
     {
-        public string PropertyName { get; set; } = null!;
-        public string ErrorMessage { get; set; } = null!;
-        public string? AttemptedValue { get; set; }
+        public NotFoundException(string name, object key) : base($"Entity \"{name}\" ({key}) was not found.") { }
     }
 }

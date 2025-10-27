@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using SimRMS.Application.Interfaces;
 using SimRMS.Application.Interfaces.Services;
-using SimRMS.Domain.Interfaces.Common;
+using SimRMS.Infrastructure.Interfaces.Common;
 using SimRMS.Infrastructure.Common;
 using SimRMS.Infrastructure.Services;
 using SimRMS.Infrastructure.HealthChecks;
@@ -51,7 +51,6 @@ namespace SimRMS.Infrastructure
             // ✅ NEW: Single Generic Repository instead of individual repositories
             services.AddScoped<IGenericRepository, GenericRepository>();
 
-            services.AddScoped<ICompanyExposureService, CompanyExposureService>();
             services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<IBrokerBranchService, BrokerBranchService>();
             services.AddScoped<IWorkFlowService, WorkFlowService>();
@@ -92,7 +91,6 @@ namespace SimRMS.Infrastructure
             services.AddScoped<ISecurityService, SecurityService>();
             services.AddScoped<IHandshakeService, HandshakeService>();
             services.AddScoped<ISecurityRouteService, SecurityRouteService>();
-            services.AddScoped<IFileService, FileService>();
 
             // External Services
             services.AddHttpClient<IExternalTokenService, ExternalTokenService>();

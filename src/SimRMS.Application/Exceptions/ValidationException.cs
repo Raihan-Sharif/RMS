@@ -1,4 +1,4 @@
-﻿using SimRMS.Domain.Common;
+﻿using SimRMS.Application.Common;
 
 /// <summary>
 /// <para>
@@ -17,7 +17,7 @@
 /// </para>
 /// </summary>
 
-namespace SimRMS.Domain.Exceptions
+namespace SimRMS.Application.Exceptions
 {
     public class ValidationException : DomainException
     {

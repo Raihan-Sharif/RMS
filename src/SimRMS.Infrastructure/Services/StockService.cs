@@ -4,12 +4,14 @@ using SimRMS.Application.Interfaces;
 using SimRMS.Application.Interfaces.Services;
 using SimRMS.Application.Models.DTOs;
 using SimRMS.Application.Models.Requests;
-using SimRMS.Domain.Common;
-using SimRMS.Domain.Exceptions;
-using SimRMS.Domain.Interfaces.Common;
+using SimRMS.Application.Common;
+using SimRMS.Application.Exceptions;
+using SimRMS.Infrastructure.Interfaces.Common;
 using SimRMS.Shared.Constants;
 using SimRMS.Shared.Models;
-using ValidationException = SimRMS.Domain.Exceptions.ValidationException;
+using ValidationException = SimRMS.Application.Exceptions.ValidationException;
+using LB.DAL.Core.Common;
+using System.Data;
 
 /// <summary>
 /// <para>
@@ -95,25 +97,27 @@ public class StockService : IStockService
 
         try
         {
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                XchgCode = xchgCode,
-                StkCode = stkCode,
-                SearchText = searchTerm,
-                SortColumn = sortColumn,
-                SortDirection = sortDirection,
-                TotalCount = 0
+                // Pagination Parameters
+                new LB_DALParam("PageNumber", pageNumber),
+	            new LB_DALParam("PageSize", pageSize),
+
+                // Filter Parameters (assuming these can be null/optional)
+                new LB_DALParam("XchgCode", xchgCode ?? (object)DBNull.Value),
+	            new LB_DALParam("StkCode", stkCode ?? (object)DBNull.Value),
+	            new LB_DALParam("SearchText", searchTerm ?? (object)DBNull.Value),
+
+                // Sorting Parameters (assuming these can be null/optional)
+                new LB_DALParam("SortColumn", sortColumn ?? (object)DBNull.Value),
+	            new LB_DALParam("SortDirection", sortDirection ?? (object)DBNull.Value)
             };
 
-            _logger.LogDebug("Calling LB_SP_GetMstStkList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, SearchText={SearchText}",
+			_logger.LogDebug("Calling LB_SP_GetMstStkList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, SearchText={SearchText}",
                 pageNumber, pageSize, searchTerm);
 
             var result = await _repository.QueryPagedAsync<StockDto>(
                 sqlOrSp: "LB_SP_GetMstStkList",
-                pageNumber: pageNumber,
-                pageSize: pageSize,
                 parameters: parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
@@ -156,15 +160,18 @@ public class StockService : IStockService
 
         try
         {
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                XchgCode = xchgCode,
-                StkCode = stkCode,
-                StatusCode = 0, // output param
-                StatusMsg = "" // output param
+                // Input Parameters
+                new LB_DALParam("XchgCode", xchgCode ?? (object)DBNull.Value), // Added null check for safety
+                new LB_DALParam("StkCode", stkCode ?? (object)DBNull.Value),   // Added null check for safety
+
+                // Output Parameters
+                new LB_DALParam("StatusCode", 0, ParameterDirection.Output),
+	            new LB_DALParam("StatusMsg", string.Empty, ParameterDirection.Output)
             };
 
-            var result = await _repository.QuerySingleAsync<StockDto>(
+			var result = await _repository.QuerySingleAsync<StockDto>(
                 sqlOrSp: "LB_SP_GetMstStkByKey",
                 parameters: parameters,
                 isStoredProcedure: true,
@@ -199,48 +206,56 @@ public class StockService : IStockService
 
         try
         {
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["Action"] = (int)ActionTypeEnum.INSERT,
-                ["XchgCode"] = request.XchgCode,
-                ["StkCode"] = request.StkCode,
-                ["StkBrdCode"] = request.StkBrdCode ?? (object)DBNull.Value,
-                ["StkSectCode"] = request.StkSectCode ?? (object)DBNull.Value,
-                ["StkLName"] = request.StkLName,
-                ["StkSName"] = request.StkSName,
-                ["StkLastDonePrice"] = request.StkLastDonePrice ?? (object)DBNull.Value,
-                ["StkClosePrice"] = request.StkClosePrice ?? (object)DBNull.Value,
-                ["StkRefPrc"] = request.StkRefPrc ?? (object)DBNull.Value,
-                ["StkUpperLmtPrice"] = request.StkUpperLmtPrice ?? (object)DBNull.Value,
-                ["StkLowerLmtPrice"] = request.StkLowerLmtPrice ?? (object)DBNull.Value,
-                ["StkIsSyariah"] = request.StkIsSyariah ?? (object)DBNull.Value,
-                ["StkLot"] = request.StkLot,
-                ["LastUpdateDate"] = request.LastUpdateDate ?? (object)DBNull.Value,
-                ["ISIN"] = request.ISIN,
-                ["Currency"] = request.Currency ?? (object)DBNull.Value,
-                ["StkParValue"] = request.StkParValue ?? (object)DBNull.Value,
-                ["StkVolumeTraded"] = request.StkVolumeTraded ?? (object)DBNull.Value,
-                ["YearHigh"] = request.YearHigh ?? (object)DBNull.Value,
-                ["YearLow"] = request.YearLow ?? (object)DBNull.Value,
-                ["SecurityType"] = request.SecurityType ?? (object)DBNull.Value,
-                ["ListingDate"] = request.ListingDate ?? (object)DBNull.Value,
-                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
-                ["MakerId"] = _currentUserService.UserId,
-                ["ActionDt"] = (object)DBNull.Value,
-                ["TransDt"] = (object)DBNull.Value,
-                ["ActionType"] = (byte)ActionTypeEnum.INSERT,
-                ["AuthId"] = (object)DBNull.Value,
-                ["AuthDt"] = (object)DBNull.Value,
-                ["AuthTransDt"] = (object)DBNull.Value,
-                ["IsAuth"] = (byte)AuthTypeEnum.UnAuthorize, // Always start unauthorized
-                ["AuthLevel"] = (byte)AuthLevelEnum.Level1,
-                ["IsDel"] = (byte)DeleteStatusEnum.Active,
-                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["RowsAffected"] = 0
-                
+                // Primary Action and Key Parameters
+                new LB_DALParam("Action", (int)ActionTypeEnum.INSERT),
+	            new LB_DALParam("XchgCode", request.XchgCode),
+	            new LB_DALParam("StkCode", request.StkCode),
+
+                // Data Parameters (includes explicit null checks from source)
+                new LB_DALParam("StkBrdCode", request.StkBrdCode ?? (object)DBNull.Value),
+	            new LB_DALParam("StkSectCode", request.StkSectCode ?? (object)DBNull.Value),
+	            new LB_DALParam("StkLName", request.StkLName),
+	            new LB_DALParam("StkSName", request.StkSName),
+	            new LB_DALParam("StkLastDonePrice", request.StkLastDonePrice ?? (object)DBNull.Value),
+	            new LB_DALParam("StkClosePrice", request.StkClosePrice ?? (object)DBNull.Value),
+	            new LB_DALParam("StkRefPrc", request.StkRefPrc ?? (object)DBNull.Value),
+	            new LB_DALParam("StkUpperLmtPrice", request.StkUpperLmtPrice ?? (object)DBNull.Value),
+	            new LB_DALParam("StkLowerLmtPrice", request.StkLowerLmtPrice ?? (object)DBNull.Value),
+	            new LB_DALParam("StkIsSyariah", request.StkIsSyariah ?? (object)DBNull.Value),
+	            new LB_DALParam("StkLot", request.StkLot),
+	            new LB_DALParam("LastUpdateDate", request.LastUpdateDate ?? (object)DBNull.Value),
+	            new LB_DALParam("ISIN", request.ISIN),
+	            new LB_DALParam("Currency", request.Currency ?? (object)DBNull.Value),
+	            new LB_DALParam("StkParValue", request.StkParValue ?? (object)DBNull.Value),
+	            new LB_DALParam("StkVolumeTraded", request.StkVolumeTraded ?? (object)DBNull.Value),
+	            new LB_DALParam("YearHigh", request.YearHigh ?? (object)DBNull.Value),
+	            new LB_DALParam("YearLow", request.YearLow ?? (object)DBNull.Value),
+	            new LB_DALParam("SecurityType", request.SecurityType ?? (object)DBNull.Value),
+	            new LB_DALParam("ListingDate", request.ListingDate ?? (object)DBNull.Value),
+
+                // Audit Parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("MakerId", _currentUserService.UserId),
+	            new LB_DALParam("ActionDt", (object)DBNull.Value),
+	            new LB_DALParam("TransDt", (object)DBNull.Value),
+	            new LB_DALParam("ActionType", (byte)ActionTypeEnum.INSERT),
+
+                // Authorization/Workflow Parameters
+                new LB_DALParam("AuthId", (object)DBNull.Value),
+	            new LB_DALParam("AuthDt", (object)DBNull.Value),
+	            new LB_DALParam("AuthTransDt", (object)DBNull.Value),
+	            new LB_DALParam("IsAuth", (byte)AuthTypeEnum.UnAuthorize), // Always start unauthorized
+                new LB_DALParam("AuthLevel", (byte)AuthLevelEnum.Level1),
+	            new LB_DALParam("IsDel", (byte)DeleteStatusEnum.Active),
+	            new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
-            _logger.LogDebug("Calling LB_SP_CrudMstStk for INSERT with XchgCode={XchgCode}, StkCode={StkCode}",
+			_logger.LogDebug("Calling LB_SP_CrudMstStk for INSERT with XchgCode={XchgCode}, StkCode={StkCode}",
                 request.XchgCode, request.StkCode);
 
             var result = await _repository.ExecuteWithOutputAsync(
@@ -293,47 +308,55 @@ public class StockService : IStockService
 
         try
         {
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["Action"] = (int)ActionTypeEnum.UPDATE,
-                ["XchgCode"] = xchgCode,
-                ["StkCode"] = stkCode,
-                ["StkBrdCode"] = request.StkBrdCode ?? (object)DBNull.Value,
-                ["StkSectCode"] = request.StkSectCode ?? (object)DBNull.Value,
-                ["StkLName"] = request.StkLName ?? (object)DBNull.Value,
-                ["StkSName"] = request.StkSName ?? (object)DBNull.Value,
-                ["StkLastDonePrice"] = request.StkLastDonePrice ?? (object)DBNull.Value,
-                ["StkClosePrice"] = request.StkClosePrice ?? (object)DBNull.Value,
-                ["StkRefPrc"] = request.StkRefPrc ?? (object)DBNull.Value,
-                ["StkUpperLmtPrice"] = request.StkUpperLmtPrice ?? (object)DBNull.Value,
-                ["StkLowerLmtPrice"] = request.StkLowerLmtPrice ?? (object)DBNull.Value,
-                ["StkIsSyariah"] = request.StkIsSyariah ?? (object)DBNull.Value,
-                ["StkLot"] = request.StkLot ?? (object)DBNull.Value,
-                ["LastUpdateDate"] = (object)DBNull.Value,
-                ["ISIN"] = request.ISIN ?? (object)DBNull.Value,
-                ["Currency"] = request.Currency ?? (object)DBNull.Value,
-                ["StkParValue"] = request.StkParValue ?? (object)DBNull.Value,
-                ["StkVolumeTraded"] = request.StkVolumeTraded ?? (object)DBNull.Value,
-                ["YearHigh"] = request.YearHigh ?? (object)DBNull.Value,
-                ["YearLow"] = request.YearLow ?? (object)DBNull.Value,
-                ["SecurityType"] = request.SecurityType ?? (object)DBNull.Value,
-                ["ListingDate"] = request.ListingDate ?? (object)DBNull.Value,
-                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
-                ["MakerId"] = _currentUserService.UserId,
-                ["ActionDt"] = (object)DBNull.Value,
-                ["TransDt"] = (object)DBNull.Value,
-                ["ActionType"] = (byte)ActionTypeEnum.UPDATE,
-                ["AuthId"] = (object)DBNull.Value,
-                ["AuthDt"] = (object)DBNull.Value,
-                ["AuthTransDt"] = (object)DBNull.Value,
-                ["IsAuth"] = (byte)AuthTypeEnum.UnAuthorize, // Reset to unauthorized for workflow
-                ["AuthLevel"] = (byte)AuthLevelEnum.Level1,
-                ["IsDel"] = (byte)DeleteStatusEnum.Active,
-                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["RowsAffected"] = 0
+                // Primary Action and Key Parameters
+                new LB_DALParam("Action", (int)ActionTypeEnum.UPDATE),
+	            new LB_DALParam("XchgCode", xchgCode),
+	            new LB_DALParam("StkCode", stkCode),
+
+                new LB_DALParam("StkBrdCode", request.StkBrdCode ?? (object)DBNull.Value),
+	            new LB_DALParam("StkSectCode", request.StkSectCode ?? (object)DBNull.Value),
+	            new LB_DALParam("StkLName", request.StkLName ?? (object)DBNull.Value),
+	            new LB_DALParam("StkSName", request.StkSName ?? (object)DBNull.Value),
+	            new LB_DALParam("StkLastDonePrice", request.StkLastDonePrice ?? (object)DBNull.Value),
+	            new LB_DALParam("StkClosePrice", request.StkClosePrice ?? (object)DBNull.Value),
+	            new LB_DALParam("StkRefPrc", request.StkRefPrc ?? (object)DBNull.Value),
+	            new LB_DALParam("StkUpperLmtPrice", request.StkUpperLmtPrice ?? (object)DBNull.Value),
+	            new LB_DALParam("StkLowerLmtPrice", request.StkLowerLmtPrice ?? (object)DBNull.Value),
+	            new LB_DALParam("StkIsSyariah", request.StkIsSyariah ?? (object)DBNull.Value),
+	            new LB_DALParam("StkLot", request.StkLot ?? (object)DBNull.Value),
+	            new LB_DALParam("LastUpdateDate", (object)DBNull.Value), // Explicitly DBNull in source
+                new LB_DALParam("ISIN", request.ISIN ?? (object)DBNull.Value),
+	            new LB_DALParam("Currency", request.Currency ?? (object)DBNull.Value),
+	            new LB_DALParam("StkParValue", request.StkParValue ?? (object)DBNull.Value),
+	            new LB_DALParam("StkVolumeTraded", request.StkVolumeTraded ?? (object)DBNull.Value),
+	            new LB_DALParam("YearHigh", request.YearHigh ?? (object)DBNull.Value),
+	            new LB_DALParam("YearLow", request.YearLow ?? (object)DBNull.Value),
+	            new LB_DALParam("SecurityType", request.SecurityType ?? (object)DBNull.Value),
+	            new LB_DALParam("ListingDate", request.ListingDate ?? (object)DBNull.Value),
+
+                // Audit Parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("MakerId", _currentUserService.UserId),
+	            new LB_DALParam("ActionDt", (object)DBNull.Value),
+	            new LB_DALParam("TransDt", (object)DBNull.Value),
+	            new LB_DALParam("ActionType", (byte)ActionTypeEnum.UPDATE),
+
+                // Authorization/Workflow Parameters
+                new LB_DALParam("AuthId", (object)DBNull.Value),
+	            new LB_DALParam("AuthDt", (object)DBNull.Value),
+	            new LB_DALParam("AuthTransDt", (object)DBNull.Value),
+	            new LB_DALParam("IsAuth", (byte)AuthTypeEnum.UnAuthorize), // Reset to unauthorized for workflow
+                new LB_DALParam("AuthLevel", (byte)AuthLevelEnum.Level1),
+	            new LB_DALParam("IsDel", (byte)DeleteStatusEnum.Active),
+	            new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
-            _logger.LogDebug("Calling LB_SP_CrudMstStk for UPDATE with XchgCode={XchgCode}, StkCode={StkCode}",
+			_logger.LogDebug("Calling LB_SP_CrudMstStk for UPDATE with XchgCode={XchgCode}, StkCode={StkCode}",
                 xchgCode, stkCode);
 
             var result = await _repository.ExecuteWithOutputAsync(
@@ -387,47 +410,58 @@ public class StockService : IStockService
 
         try
         {
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["Action"] = (int)ActionTypeEnum.DELETE,
-                ["XchgCode"] = xchgCode,
-                ["StkCode"] = stkCode,
-                ["StkBrdCode"] = (object)DBNull.Value,
-                ["StkSectCode"] = (object)DBNull.Value,
-                ["StkLName"] = (object)DBNull.Value,
-                ["StkSName"] = (object)DBNull.Value,
-                ["StkLastDonePrice"] = (object)DBNull.Value,
-                ["StkClosePrice"] = (object)DBNull.Value,
-                ["StkRefPrc"] = (object)DBNull.Value,
-                ["StkUpperLmtPrice"] = (object)DBNull.Value,
-                ["StkLowerLmtPrice"] = (object)DBNull.Value,
-                ["StkIsSyariah"] = (object)DBNull.Value,
-                ["StkLot"] = (object)DBNull.Value,
-                ["LastUpdateDate"] = (object)DBNull.Value,
-                ["ISIN"] = (object)DBNull.Value,
-                ["Currency"] = (object)DBNull.Value,
-                ["StkParValue"] = (object)DBNull.Value,
-                ["StkVolumeTraded"] = (object)DBNull.Value,
-                ["YearHigh"] = (object)DBNull.Value,
-                ["YearLow"] = (object)DBNull.Value,
-                ["SecurityType"] = (object)DBNull.Value,
-                ["ListingDate"] = (object)DBNull.Value,
-                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
-                ["MakerId"] = _currentUserService.UserId,
-                ["ActionDt"] = (object)DBNull.Value,
-                ["TransDt"] = (object)DBNull.Value,
-                ["ActionType"] = (byte)ActionTypeEnum.DELETE,
-                ["AuthId"] = (object)DBNull.Value,
-                ["AuthDt"] = (object)DBNull.Value,
-                ["AuthTransDt"] = (object)DBNull.Value,
-                ["IsAuth"] = (object)DBNull.Value, // SP handles deletion logic
-                ["AuthLevel"] = (object)DBNull.Value,
-                ["IsDel"] = (object)DBNull.Value, // SP sets this to 1
-                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["RowsAffected"] = 0
+                // Primary Action and Key Parameters
+                new LB_DALParam("Action", (int)ActionTypeEnum.DELETE),
+	            new LB_DALParam("XchgCode", xchgCode),
+	            new LB_DALParam("StkCode", stkCode),
+
+                // Data Parameters
+                new LB_DALParam("StkBrdCode", (object)DBNull.Value),
+	            new LB_DALParam("StkSectCode", (object)DBNull.Value),
+	            new LB_DALParam("StkLName", (object)DBNull.Value),
+	            new LB_DALParam("StkSName", (object)DBNull.Value),
+	            new LB_DALParam("StkLastDonePrice", (object)DBNull.Value),
+	            new LB_DALParam("StkClosePrice", (object)DBNull.Value),
+	            new LB_DALParam("StkRefPrc", (object)DBNull.Value),
+	            new LB_DALParam("StkUpperLmtPrice", (object)DBNull.Value),
+	            new LB_DALParam("StkLowerLmtPrice", (object)DBNull.Value),
+	            new LB_DALParam("StkIsSyariah", (object)DBNull.Value),
+	            new LB_DALParam("StkLot", (object)DBNull.Value),
+	            new LB_DALParam("LastUpdateDate", (object)DBNull.Value),
+	            new LB_DALParam("ISIN", (object)DBNull.Value),
+	            new LB_DALParam("Currency", (object)DBNull.Value),
+	            new LB_DALParam("StkParValue", (object)DBNull.Value),
+	            new LB_DALParam("StkVolumeTraded", (object)DBNull.Value),
+	            new LB_DALParam("YearHigh", (object)DBNull.Value),
+	            new LB_DALParam("YearLow", (object)DBNull.Value),
+	            new LB_DALParam("SecurityType", (object)DBNull.Value),
+	            new LB_DALParam("ListingDate", (object)DBNull.Value),
+
+                // Audit Parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("MakerId", _currentUserService.UserId),
+	            new LB_DALParam("ActionDt", (object)DBNull.Value),
+	            new LB_DALParam("TransDt", (object)DBNull.Value),
+	            new LB_DALParam("ActionType", (byte)ActionTypeEnum.DELETE),
+
+                // Authorization/Workflow Parameters (Explicitly DBNull in source)
+                new LB_DALParam("AuthId", (object)DBNull.Value),
+	            new LB_DALParam("AuthDt", (object)DBNull.Value),
+	            new LB_DALParam("AuthTransDt", (object)DBNull.Value),
+	            new LB_DALParam("IsAuth", (object)DBNull.Value),
+	            new LB_DALParam("AuthLevel", (object)DBNull.Value),
+	            new LB_DALParam("IsDel", (object)DBNull.Value),
+
+                // Remarks
+                new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
-            _logger.LogDebug("Calling LB_SP_CrudMstStk for DELETE with XchgCode={XchgCode}, StkCode={StkCode}",
+			_logger.LogDebug("Calling LB_SP_CrudMstStk for DELETE with XchgCode={XchgCode}, StkCode={StkCode}",
                 xchgCode, stkCode);
 
             var result = await _repository.ExecuteWithOutputAsync(
@@ -517,27 +551,31 @@ public class StockService : IStockService
 
         try
         {
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                XchgCode = (object)DBNull.Value,
-                StkCode = (object)DBNull.Value,
-                isAuth = (byte)isAuth,
-                MakerId = _currentUserService.UserId,
-                SearchText = searchTerm,
-                SortColumn = sortColumn,
-                SortDirection = sortDirection,
-                TotalCount = 0
+                // Pagination Parameters
+                new LB_DALParam("PageNumber", pageNumber),
+	            new LB_DALParam("PageSize", pageSize),
+
+                // Filter Parameters (explicitly DBNull in source for no initial filtering)
+                new LB_DALParam("XchgCode", (object)DBNull.Value),
+	            new LB_DALParam("StkCode", (object)DBNull.Value),
+
+                // Control and Audit Parameters
+                new LB_DALParam("isAuth", (byte)isAuth),
+	            new LB_DALParam("MakerId", _currentUserService.UserId),
+
+                // Search and Sorting Parameters (assuming they can be null/optional)
+                new LB_DALParam("SearchText", searchTerm ?? (object)DBNull.Value),
+	            new LB_DALParam("SortColumn", sortColumn ?? (object)DBNull.Value),
+	            new LB_DALParam("SortDirection", sortDirection ?? (object)DBNull.Value)
             };
 
-            _logger.LogDebug("Calling LB_SP_GetMstStkListWF with parameters: PageNumber={PageNumber}, PageSize={PageSize}, isAuth={IsAuth}, MakerId={MakerId}",
+			_logger.LogDebug("Calling LB_SP_GetMstStkListWF with parameters: PageNumber={PageNumber}, PageSize={PageSize}, isAuth={IsAuth}, MakerId={MakerId}",
                 pageNumber, pageSize, isAuth, _currentUserService.UserId);
 
             var result = await _repository.QueryPagedAsync<StockDto>(
                 sqlOrSp: "LB_SP_GetMstStkListWF",
-                pageNumber: pageNumber,
-                pageSize: pageSize,
                 parameters: parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
@@ -582,21 +620,28 @@ public class StockService : IStockService
 
         try
         {
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["Action"] = (int)ActionTypeEnum.UPDATE, // Always 2 for AUTH operation as per SP
-                ["XchgCode"] = xchgCode,
-                ["StkCode"] = stkCode,
-                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
-                ["AuthId"] = _currentUserService.UserId,
-                ["AuthDt"] = (object)DBNull.Value,
-                ["IsAuth"] = request.IsAuth,
-                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["ActionType"] = (int)ActionTypeEnum.UPDATE,
-                ["RowsAffected"] = 0
+                // Primary Action and Key Parameters
+                new LB_DALParam("Action", (int)ActionTypeEnum.UPDATE), // Input: UPDATE for Authorization action
+                new LB_DALParam("XchgCode", xchgCode),
+	            new LB_DALParam("StkCode", stkCode),
+
+                // Authorization/Audit Parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("AuthId", _currentUserService.UserId), // The user performing the authorization
+                new LB_DALParam("AuthDt", (object)DBNull.Value),       // Placeholder, likely set by SP
+                new LB_DALParam("IsAuth", request.IsAuth),             // Authorization status (e.g., Authorized, Denied)
+                new LB_DALParam("ActionType", (int)ActionTypeEnum.UPDATE),
+
+                // Remarks
+                new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
-            _logger.LogDebug("Calling LB_SP_AuthMstStk for {authAction} with XchgCode={XchgCode}, StkCode={StkCode}, IsAuth={IsAuth}",
+			_logger.LogDebug("Calling LB_SP_AuthMstStk for {authAction} with XchgCode={XchgCode}, StkCode={StkCode}, IsAuth={IsAuth}",
                 authAction, xchgCode, stkCode, request.IsAuth);
 
             var result = await _repository.ExecuteWithOutputAsync(

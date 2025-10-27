@@ -3,15 +3,17 @@ using Microsoft.Extensions.Logging;
 using SimRMS.Application.Interfaces.Services;
 using SimRMS.Application.Models.DTOs;
 using SimRMS.Application.Models.Requests;
-using SimRMS.Domain.Interfaces.Common;
+using SimRMS.Infrastructure.Interfaces.Common;
 using SimRMS.Shared.Models;
-using SimRMS.Domain.Exceptions;
+using SimRMS.Application.Exceptions;
 using SimRMS.Application.Interfaces;
 using SimRMS.Shared.Constants;
-using SimRMS.Domain.Common;
-using ValidationException = SimRMS.Domain.Exceptions.ValidationException;
+using SimRMS.Application.Common;
+using ValidationException = SimRMS.Application.Exceptions.ValidationException;
 using System.Data;
 using System.Text.Json;
+using LB.DAL.Core.Common;
+using System;
 
 /// <summary>
 /// <para>
@@ -72,22 +74,22 @@ public class OrderGroupService : IOrderGroupService
         {
             _logger.LogInformation("Getting Order Group(User Group) list - Page: {PageNumber}, Size: {PageSize}, Search: {SearchText}", pageNumber, pageSize, SearchText);
 
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                SearchText = SearchText,
-                UsrId = (object)DBNull.Value,
-                SortColumn = "GroupCode",
-                SortDirection = "ASC",
-                TotalCount = 0 // output param
+                // Pagination and Sorting Parameters
+                new LB_DALParam("PageNumber", pageNumber),
+	            new LB_DALParam("PageSize", pageSize),
+	            new LB_DALParam("SortColumn", "GroupDesc"),
+	            new LB_DALParam("SortDirection", "ASC"),
+
+                // Filter Parameters (Handling potential nulls)
+                new LB_DALParam("SearchText", SearchText ?? (object)DBNull.Value),
+	            new LB_DALParam("UsrId", (object)DBNull.Value),
             };
 
-            // Get flat data from SP using proper DTO
-            var flatResults = await _repository.QueryPagedAsync<OrderGroupCombinedDto>(
+			// Get flat data from SP using proper DTO
+			var flatResults = await _repository.QueryPagedAsync<OrderGroupCombinedDto>(
                 "LB_SP_GetOrderGroupList",
-                pageNumber,
-                pageSize,
                 parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
@@ -157,15 +159,18 @@ public class OrderGroupService : IOrderGroupService
         {
             _logger.LogInformation("Getting Order Group(User Group) user by code: {GroupCode}, User: {UsrId}", groupCode, usrId);
 
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                GroupCode = groupCode,
-                UsrId = usrId ?? (object)DBNull.Value,
-                statusCode = string.Empty, //output param
-                statusMsg = string.Empty // output param
+                // Input Parameters
+                new LB_DALParam("GroupCode", groupCode),
+                new LB_DALParam("UsrId", usrId ?? (object)DBNull.Value),
+
+                // Output Parameters (Status Code and Message)
+                new LB_DALParam("statusCode", string.Empty, ParameterDirection.Output),
+	            new LB_DALParam("statusMsg", string.Empty, ParameterDirection.Output)
             };
 
-            var orderGroups = await _repository.QueryAsync<OrderGroupUserDto>(
+			var orderGroups = await _repository.QueryAsync<OrderGroupUserDto>(
                 "LB_SP_GetOrderGroupByCode",
                 parameters,
                 isStoredProcedure: true,
@@ -186,16 +191,19 @@ public class OrderGroupService : IOrderGroupService
         {
             _logger.LogInformation("Getting Order Group(User Group) by code: {GroupCode}", groupCode);
 
-            var parameters = new
-            {
-                GroupCode = groupCode,
-                UsrId = (object)DBNull.Value,
-                statusCode = string.Empty, //output param
-                statusMsg = string.Empty // output param
-            };
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
+			{
+                // Input Parameters
+                new LB_DALParam("GroupCode", groupCode),
+				new LB_DALParam("UsrId", (object)DBNull.Value),
 
-            // Get flat data from SP using proper DTO
-            var flatResults = await _repository.QueryAsync<OrderGroupCombinedDto>(
+                // Output Parameters (Status Code and Message)
+                new LB_DALParam("statusCode", string.Empty, ParameterDirection.Output),
+				new LB_DALParam("statusMsg", string.Empty, ParameterDirection.Output)
+			};
+
+			// Get flat data from SP using proper DTO
+			var flatResults = await _repository.QueryAsync<OrderGroupCombinedDto>(
                 "LB_SP_GetOrderGroupByCode",
                 parameters,
                 isStoredProcedure: true,
@@ -345,31 +353,38 @@ public class OrderGroupService : IOrderGroupService
                 _logger.LogInformation("Serialized user data for Order Group(User Group): {UserData}", orderGroupDtlData);
             }
 
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                Action = (int)ActionTypeEnum.INSERT,
-                GroupCode = (object)DBNull.Value,
-                GroupDesc = request.GroupDesc,
-                GroupType = request.GroupType,
-                GroupValue = request.GroupValue,
-                DateFrom = request.DateFrom ?? (object)DBNull.Value,
-                DateTo = request.DateTo ?? (object)DBNull.Value,
-                OrderGroupDtlData = orderGroupDtlData ?? (object)DBNull.Value,
-                // No legacy single user properties
-                UsrID = (object)DBNull.Value,
-                ViewOrder = (object)DBNull.Value,
-                PlaceOrder = (object)DBNull.Value,
-                ViewClient = (object)DBNull.Value,
-                ModifyOrder = (object)DBNull.Value,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                TransDt = DateTime.Now,
-                Remarks = request.Remarks,
-                RowsAffected = 0,
-                NewGroupCode = 0
+                // Primary Action and Data Parameters
+                new LB_DALParam("Action", (int)ActionTypeEnum.INSERT),
+	            new LB_DALParam("GroupCode", (object)DBNull.Value),
+                new LB_DALParam("GroupDesc", request.GroupDesc),
+	            new LB_DALParam("GroupType", request.GroupType),
+	            new LB_DALParam("GroupValue", request.GroupValue),
+
+                // Date/Data Parameters with Null Checks
+                new LB_DALParam("DateFrom", request.DateFrom ?? (object)DBNull.Value),
+	            new LB_DALParam("DateTo", request.DateTo ?? (object)DBNull.Value),
+	            new LB_DALParam("OrderGroupDtlData", orderGroupDtlData ?? (object)DBNull.Value), 
+
+                new LB_DALParam("UsrID", (object)DBNull.Value),
+	            new LB_DALParam("ViewOrder", (object)DBNull.Value),
+	            new LB_DALParam("PlaceOrder", (object)DBNull.Value),
+	            new LB_DALParam("ViewClient", (object)DBNull.Value),
+	            new LB_DALParam("ModifyOrder", (object)DBNull.Value),
+
+                // Audit Parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("MakerId", _currentUserService.UserId),
+	            new LB_DALParam("TransDt", DateTime.Now),
+	            new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value), // Added null check for robustness
+
+                // Output Parameters
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output),
+	            new LB_DALParam("NewGroupCode", 0, ParameterDirection.Output) // Likely returns the newly created ID
             };
 
-            var result = await _repository.ExecuteWithOutputAsync(
+			var result = await _repository.ExecuteWithOutputAsync(
                 "LB_SP_CrudOrderGroup",
                 parameters,
                 cancellationToken);
@@ -428,31 +443,42 @@ public class OrderGroupService : IOrderGroupService
                 _logger.LogInformation("Serialized user data for Order Group(User Group) update: {UserData}", orderGroupDtlData);
             }
 
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                Action = (int)ActionTypeEnum.UPDATE,
-                GroupCode = groupCode,
-                GroupDesc = request.GroupDesc,
-                GroupType = request.GroupType,
-                GroupValue = request.GroupValue,
-                DateFrom = request.DateFrom ?? (object)DBNull.Value,
-                DateTo = request.DateTo ?? (object)DBNull.Value,
-                OrderGroupDtlData = orderGroupDtlData ?? (object)DBNull.Value,
-                // No legacy single user properties
-                UsrID = (object)DBNull.Value,
-                ViewOrder = (object)DBNull.Value,
-                PlaceOrder = (object)DBNull.Value,
-                ViewClient = (object)DBNull.Value,
-                ModifyOrder = (object)DBNull.Value,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                TransDt = DateTime.Now,
-                Remarks = request.Remarks,
-                RowsAffected = 0, // output param
-                NewGroupCode = 0  // output param
+                // Primary Action and Key Parameters
+                new LB_DALParam("Action", (int)ActionTypeEnum.UPDATE),
+	            new LB_DALParam("GroupCode", groupCode), // The key for UPDATE
+
+                // Data Parameters
+                new LB_DALParam("GroupDesc", request.GroupDesc ?? (object)DBNull.Value), // Added null check for safety
+                new LB_DALParam("GroupType", request.GroupType ?? (object)DBNull.Value),
+	            new LB_DALParam("GroupValue", request.GroupValue ?? (object)DBNull.Value),
+
+                // Date/Detail Parameters
+                new LB_DALParam("DateFrom", request.DateFrom ?? (object)DBNull.Value),
+	            new LB_DALParam("DateTo", request.DateTo ?? (object)DBNull.Value),
+	            new LB_DALParam("OrderGroupDtlData", orderGroupDtlData ?? (object)DBNull.Value),
+
+                // Legacy/Unused/Defaulted Parameters
+                new LB_DALParam("UsrID", (object)DBNull.Value),
+	            new LB_DALParam("ViewOrder", (object)DBNull.Value),
+	            new LB_DALParam("PlaceOrder", (object)DBNull.Value),
+	            new LB_DALParam("ViewClient", (object)DBNull.Value),
+	            new LB_DALParam("ModifyOrder", (object)DBNull.Value),
+
+                // Audit Parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("MakerId", _currentUserService.UserId),
+	            new LB_DALParam("TransDt", DateTime.Now),
+	            new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Output Parameters
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output),
+                // Although it's an UPDATE, sometimes the SP returns the ID, so treating as output based on the source:
+                new LB_DALParam("NewGroupCode", 0, ParameterDirection.Output)
             };
 
-            var result = await _repository.ExecuteWithOutputAsync(
+			var result = await _repository.ExecuteWithOutputAsync(
                 "LB_SP_CrudOrderGroup",
                 parameters,
                 cancellationToken);
@@ -509,29 +535,41 @@ public class OrderGroupService : IOrderGroupService
         try
         {
             // For legacy delete, we delete the entire group (master + all details)
-            var parameters = new
+           
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                Action = (int)ActionTypeEnum.DELETE,
-                GroupCode = groupCode,
-                GroupDesc = (object)DBNull.Value,
-                GroupType = (object)DBNull.Value,
-                GroupValue = (object)DBNull.Value,
-                DateFrom = (object)DBNull.Value,
-                DateTo = (object)DBNull.Value,
-                UsrID = request.UsrID, // No specific user = delete entire group
-                ViewOrder = (object)DBNull.Value,
-                PlaceOrder = (object)DBNull.Value,
-                ViewClient = (object)DBNull.Value,
-                ModifyOrder = (object)DBNull.Value,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                TransDt = DateTime.Now,
-                Remarks = request.Remarks,
-                RowsAffected = 0,
-                NewGroupCode = 0
+                // Primary Action and Key Parameters
+                new LB_DALParam("Action", (int)ActionTypeEnum.DELETE),
+	            new LB_DALParam("GroupCode", groupCode), // The key for DELETE
+
+                // Data/Detail Parameters (Set to DBNull as only the key is needed for deletion)
+                new LB_DALParam("GroupDesc", (object)DBNull.Value),
+	            new LB_DALParam("GroupType", (object)DBNull.Value),
+	            new LB_DALParam("GroupValue", (object)DBNull.Value),
+	            new LB_DALParam("DateFrom", (object)DBNull.Value),
+	            new LB_DALParam("DateTo", (object)DBNull.Value),
+
+                // User ID (Used to determine scope of deletion: entire group or specific user from group)
+                new LB_DALParam("UsrID", request.UsrID ?? (object)DBNull.Value),
+
+                // Legacy/Unused Parameters (Explicitly set to DBNull.Value)
+                new LB_DALParam("ViewOrder", (object)DBNull.Value),
+	            new LB_DALParam("PlaceOrder", (object)DBNull.Value),
+	            new LB_DALParam("ViewClient", (object)DBNull.Value),
+	            new LB_DALParam("ModifyOrder", (object)DBNull.Value),
+
+                // Audit Parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("MakerId", _currentUserService.UserId),
+	            new LB_DALParam("TransDt", DateTime.Now),
+	            new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value), // Added null check for safety
+
+                // Output Parameters (RowsAffected is the main result for DELETE)
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output),
+	            new LB_DALParam("NewGroupCode", 0, ParameterDirection.Output)
             };
 
-            var result = await _repository.ExecuteWithOutputAsync(
+			var result = await _repository.ExecuteWithOutputAsync(
                 "LB_SP_CrudOrderGroup",
                 parameters,
                 cancellationToken);
@@ -568,24 +606,28 @@ public class OrderGroupService : IOrderGroupService
         {
             _logger.LogInformation("Getting Order Group(User Group) Workflow List - Page: {PageNumber}, IsAuth: {IsAuth}, GroupCode: {GroupCode}", request.PageNumber, request.IsAuth, request.UsrID);
 
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                PageNumber = request.PageNumber,
-                PageSize = request.PageSize,
-                SearchText = request.SearchTerm,
-                DateFromStart = request.DateFromStart ?? (object)DBNull.Value,
-                DateFromEnd = request.DateFromEnd ?? (object)DBNull.Value,
-                SortColumn = request.SortColumn,
-                SortDirection = request.SortDirection,
-                IsAuth = request.IsAuth,
-                MakerId = _currentUserService.UserId,
-                TotalCount = 0
+                // Pagination Parameters
+                new LB_DALParam("PageNumber", request.PageNumber),
+	            new LB_DALParam("PageSize", request.PageSize),
+
+                // Filter Parameters
+                new LB_DALParam("SearchText", request.SearchTerm ?? (object)DBNull.Value), // Assuming SearchTerm can be null
+                new LB_DALParam("DateFromStart", request.DateFromStart ?? (object)DBNull.Value),
+	            new LB_DALParam("DateFromEnd", request.DateFromEnd ?? (object)DBNull.Value),
+
+                // Sorting Parameters
+                new LB_DALParam("SortColumn", request.SortColumn ?? (object)DBNull.Value),
+	            new LB_DALParam("SortDirection", request.SortDirection ?? (object)DBNull.Value),
+
+                // Control/Audit Parameters
+                new LB_DALParam("IsAuth", request.IsAuth),
+	            new LB_DALParam("MakerId", _currentUserService.UserId)
             };
 
-            var pagedResult = await _repository.QueryPagedAsync<OrderGroupDto>(
+			var pagedResult = await _repository.QueryPagedAsync<OrderGroupDto>(
                 "LB_SP_GetMasterGroupListWF",
-                request.PageNumber,
-                request.PageSize,
                 parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
@@ -607,19 +649,25 @@ public class OrderGroupService : IOrderGroupService
 
         try
         {
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["Action"] = request.ActionType,
-                ["GroupCode"] = groupCode,
-                ["ActionType"] = request.ActionType,
-                ["IsAuth"] = request.IsAuth,
-                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
-                ["AuthID"] = _currentUserService.UserId,
-                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["RowsAffected"] = 0
+                // Action and Key Parameters
+                new LB_DALParam("Action", request.ActionType),
+	            new LB_DALParam("GroupCode", groupCode),
+	            new LB_DALParam("ActionType", request.ActionType), 
+                // Authorization/Audit Parameters
+                new LB_DALParam("IsAuth", request.IsAuth),
+	            new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("AuthID", _currentUserService.UserId),
+    
+                // Remarks
+                new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
-            var result = await _repository.ExecuteWithOutputAsync(
+			var result = await _repository.ExecuteWithOutputAsync(
                 "LB_SP_AuthOrderGroup", // Correct SP name for master authorization
                 parameters,
                 cancellationToken);
@@ -653,25 +701,29 @@ public class OrderGroupService : IOrderGroupService
         {
             _logger.LogInformation("Getting Order Group(User Group)User Workflow List - GroupCode: {GroupCode}, Page: {PageNumber}, IsAuth: {IsAuth}", request.PageNumber, request.IsAuth);
 
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                PageNumber = request.PageNumber,
-                PageSize = request.PageSize,
-                SearchText = request.SearchTerm,
-                UsrID = request.UsrID ?? (object)DBNull.Value,
-                DateFromStart = request.DateFromStart ?? (object)DBNull.Value,
-                DateFromEnd = request.DateFromEnd ?? (object)DBNull.Value,
-                SortColumn = request.SortColumn,
-                SortDirection = request.SortDirection,
-                IsAuth = request.IsAuth,
-                MakerId = _currentUserService.UserId,
-                TotalCount = 0
+                // Pagination Parameters
+                new LB_DALParam("PageNumber", request.PageNumber),
+	            new LB_DALParam("PageSize", request.PageSize),
+
+                // Filter Parameters
+                new LB_DALParam("SearchText", request.SearchTerm ?? (object)DBNull.Value), // Added null check for safety
+                new LB_DALParam("UsrID", request.UsrID ?? (object)DBNull.Value),
+	            new LB_DALParam("DateFromStart", request.DateFromStart ?? (object)DBNull.Value),
+	            new LB_DALParam("DateFromEnd", request.DateFromEnd ?? (object)DBNull.Value),
+
+                // Sorting Parameters
+                new LB_DALParam("SortColumn", request.SortColumn ?? (object)DBNull.Value),
+	            new LB_DALParam("SortDirection", request.SortDirection ?? (object)DBNull.Value),
+
+                // Control/Audit Parameters
+                new LB_DALParam("IsAuth", request.IsAuth),
+	            new LB_DALParam("MakerId", _currentUserService.UserId)
             };
 
-            var pagedResult = await _repository.QueryPagedAsync<OrderGroupUserDto>(
+			var pagedResult = await _repository.QueryPagedAsync<OrderGroupUserDto>(
                 "LB_SP_GetOrderGroupDtlListWF",
-                request.PageNumber,
-                request.PageSize,
                 parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
@@ -693,20 +745,27 @@ public class OrderGroupService : IOrderGroupService
 
         try
         {
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["Action"] = request.ActionType,
-                ["GroupCode"] = groupCode,
-                ["UsrID"] = usrId,
-                ["ActionType"] = request.ActionType,
-                ["IsAuth"] = request.IsAuth,
-                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
-                ["AuthID"] = _currentUserService.UserId,
-                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["RowsAffected"] = 0
+                // Action and Key Parameters
+                new LB_DALParam("Action", request.ActionType),
+	            new LB_DALParam("GroupCode", groupCode ),
+                new LB_DALParam("UsrID", usrId ?? (object)DBNull.Value),         // Added null check for safety
+                new LB_DALParam("ActionType", request.ActionType), // Redundant parameter, but included as per source
+
+                // Authorization/Audit Parameters
+                new LB_DALParam("IsAuth", request.IsAuth),
+	            new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("AuthID", _currentUserService.UserId),
+
+                // Remarks
+                new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
-            var result = await _repository.ExecuteWithOutputAsync(
+			var result = await _repository.ExecuteWithOutputAsync(
                 "LB_SP_AuthOrderGroupDtl", // Correct SP name for detail authorization
                 parameters,
                 cancellationToken);

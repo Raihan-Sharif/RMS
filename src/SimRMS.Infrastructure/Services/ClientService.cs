@@ -3,13 +3,16 @@ using Microsoft.Extensions.Logging;
 using SimRMS.Application.Interfaces.Services;
 using SimRMS.Application.Models.DTOs;
 using SimRMS.Application.Models.Requests;
-using SimRMS.Domain.Interfaces.Common;
+using SimRMS.Infrastructure.Interfaces.Common;
 using SimRMS.Shared.Models;
-using SimRMS.Domain.Exceptions;
+using SimRMS.Application.Exceptions;
 using SimRMS.Application.Interfaces;
 using SimRMS.Shared.Constants;
-using SimRMS.Domain.Common;
-using ValidationException = SimRMS.Domain.Exceptions.ValidationException;
+using SimRMS.Application.Common;
+using ValidationException = SimRMS.Application.Exceptions.ValidationException;
+using LB.DAL.Core.Common;
+using System.Data;
+using Azure.Core;
 
 /// <summary>
 /// <para>
@@ -32,650 +35,670 @@ namespace SimRMS.Infrastructure.Services;
 
 public class ClientService : IClientService
 {
-    private readonly IGenericRepository _repository;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IValidator<CreateClientRequest> _createValidator;
-    private readonly IValidator<UpdateClientRequest> _updateValidator;
-    private readonly IValidator<DeleteClientRequest> _deleteValidator;
-    private readonly IValidator<AuthorizeClientRequest> _authorizeValidator;
-    private readonly IValidator<GetClientWorkflowListRequest> _workflowListValidator;
-    private readonly ICurrentUserService _currentUserService;
-    private readonly ILogger<ClientService> _logger;
+	private readonly IGenericRepository _repository;
+	private readonly IUnitOfWork _unitOfWork;
+	private readonly IValidator<CreateClientRequest> _createValidator;
+	private readonly IValidator<UpdateClientRequest> _updateValidator;
+	private readonly IValidator<DeleteClientRequest> _deleteValidator;
+	private readonly IValidator<AuthorizeClientRequest> _authorizeValidator;
+	private readonly IValidator<GetClientWorkflowListRequest> _workflowListValidator;
+	private readonly ICurrentUserService _currentUserService;
+	private readonly ILogger<ClientService> _logger;
 
-    public ClientService(
-        IGenericRepository repository,
-        IUnitOfWork unitOfWork,
-        IValidator<CreateClientRequest> createValidator,
-        IValidator<UpdateClientRequest> updateValidator,
-        IValidator<DeleteClientRequest> deleteValidator,
-        IValidator<AuthorizeClientRequest> authorizeValidator,
-        IValidator<GetClientWorkflowListRequest> workflowListValidator,
-        ICurrentUserService currentUserService,
-        ILogger<ClientService> logger)
-    {
-        _repository = repository;
-        _unitOfWork = unitOfWork;
-        _createValidator = createValidator;
-        _updateValidator = updateValidator;
-        _deleteValidator = deleteValidator;
-        _authorizeValidator = authorizeValidator;
-        _workflowListValidator = workflowListValidator;
-        _currentUserService = currentUserService;
-        _logger = logger;
-    }
+	public ClientService(
+		IGenericRepository repository,
+		IUnitOfWork unitOfWork,
+		IValidator<CreateClientRequest> createValidator,
+		IValidator<UpdateClientRequest> updateValidator,
+		IValidator<DeleteClientRequest> deleteValidator,
+		IValidator<AuthorizeClientRequest> authorizeValidator,
+		IValidator<GetClientWorkflowListRequest> workflowListValidator,
+		ICurrentUserService currentUserService,
+		ILogger<ClientService> logger)
+	{
+		_repository = repository;
+		_unitOfWork = unitOfWork;
+		_createValidator = createValidator;
+		_updateValidator = updateValidator;
+		_deleteValidator = deleteValidator;
+		_authorizeValidator = authorizeValidator;
+		_workflowListValidator = workflowListValidator;
+		_currentUserService = currentUserService;
+		_logger = logger;
+	}
 
-    #region Main CRUD Operations
+	#region Main CRUD Operations
 
-    public async Task<PagedResult<ClientDto>> GetClientListAsync(int pageNumber = 1, int pageSize = 10,
-        string? searchTerm = null, string? gcif = null, string? clntName = null, string? clntCode = null, CancellationToken cancellationToken = default)
-    {
-        _logger.LogInformation("Retrieving paged Client list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+	public async Task<PagedResult<ClientDto>> GetClientListAsync(int pageNumber = 1, int pageSize = 10,
+		string? searchTerm = null, string? gcif = null, string? clntName = null, string? clntCode = null, CancellationToken cancellationToken = default)
+	{
+		_logger.LogInformation("Retrieving paged Client list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
-        // Validate and sanitize inputs
-        if (pageNumber < 1) pageNumber = 1;
-        if (pageSize < 1 || pageSize > 100) pageSize = 10;
+		// Validate and sanitize inputs
+		if (pageNumber < 1) pageNumber = 1;
+		if (pageSize < 1 || pageSize > 100) pageSize = 10;
 
-        try
-        {
-            var parameters = new
-            {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                GCIF = gcif,
-                ClntName = clntName,
-                ClntCode = clntCode,
-                SortBy = "GCIF",
-                SortOrder = "ASC",
-                TotalCount = 0
-            };
+		try
+		{
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
+			{
+				new LB_DALParam("PageNumber", pageNumber),
+				new LB_DALParam("PageSize", pageSize),
+				new LB_DALParam("GCIF", gcif ?? (object)DBNull.Value),
+				new LB_DALParam("ClntName", clntName ?? (object)DBNull.Value),
+				new LB_DALParam("ClntCode", clntCode ?? (object)DBNull.Value),
+				new LB_DALParam("SortBy", "GCIF"),
+				new LB_DALParam("SortOrder", "ASC")
+			};
 
-            _logger.LogDebug("Calling LB_SP_GetClientMstAccList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, GCIF={GCIF}, ClntName={ClntName}, ClntCode={ClntCode}",
-                pageNumber, pageSize, gcif, clntName, clntCode);
 
-            var result = await _repository.QueryPagedAsync<ClientDto>(
-                sqlOrSp: "LB_SP_GetClientMstAccList",
-                pageNumber: pageNumber,
-                pageSize: pageSize,
-                parameters: parameters,
-                isStoredProcedure: true,
-                cancellationToken: cancellationToken);
+			_logger.LogDebug("Calling LB_SP_GetClientMstAccList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, GCIF={GCIF}, ClntName={ClntName}, ClntCode={ClntCode}",
+				pageNumber, pageSize, gcif, clntName, clntCode);
 
-            _logger.LogDebug("SP returned TotalCount: {TotalCount}, Data count: {DataCount}",
-                result.TotalCount, result.Data.Count());
+			var result = await _repository.QueryPagedAsync<ClientDto>(
+				sqlOrSp: "LB_SP_GetClientMstAccList",
+				parameters: parameters,
+				isStoredProcedure: true,
+				cancellationToken: cancellationToken);
 
-            return result;
-        }
-        catch (ArgumentException ex)
-        {
-            _logger.LogError(ex, "Invalid arguments were provided for Client listretrieval");
-            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
-        }
-        catch (InvalidOperationException ex)
-        {
-            _logger.LogError(ex, "Database operation encountered an error while retrieving Client list");
-            throw new DomainException($"The database operation failed: {ex.Message}");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "An unexpected error occurred while retrieving Client list");
-            throw new DomainException($"The client list retrieval failed: {ex.Message}");
-        }
-    }
+			_logger.LogDebug("SP returned TotalCount: {TotalCount}, Data count: {DataCount}",
+				result.TotalCount, result.Data.Count());
 
-    public async Task<ClientDto?> GetClientByIdAsync(string gcif, CancellationToken cancellationToken = default)
-    {
-        _logger.LogInformation("Retrieving Client by GCIF: {GCIF}", gcif);
+			return result;
+		}
+		catch (ArgumentException ex)
+		{
+			_logger.LogError(ex, "Invalid arguments were provided for Client listretrieval");
+			throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
+		}
+		catch (InvalidOperationException ex)
+		{
+			_logger.LogError(ex, "Database operation encountered an error while retrieving Client list");
+			throw new DomainException($"The database operation failed: {ex.Message}");
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(ex, "An unexpected error occurred while retrieving Client list");
+			throw new DomainException($"The client list retrieval failed: {ex.Message}");
+		}
+	}
 
-        try
-        {
-            var parameters = new
-            {
-                GCIF = gcif,
-                StatusCode = 0, // output param
-                StatusMsg = "" // output param
-            };
+	public async Task<ClientDto?> GetClientByIdAsync(string gcif, CancellationToken cancellationToken = default)
+	{
+		_logger.LogInformation("Retrieving Client by GCIF: {GCIF}", gcif);
 
-            var result = await _repository.QuerySingleAsync<ClientDto>(
-                sqlOrSp: "LB_SP_GetClientMstAccByClientID",
-                parameters: parameters,
-                isStoredProcedure: true,
-                cancellationToken: cancellationToken);
+		try
+		{
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
+			{
+				new LB_DALParam("GCIF", gcif),
 
-            _logger.LogDebug("Retrieved client: {Found}", result != null ? "Found" : "Not Found");
-            return result;
-        }
-        catch (ArgumentException ex)
-        {
-            _logger.LogError(ex, "Invalid arguments were provided for Client retrieval: {GCIF}", gcif);
-            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
-        }
-        catch (InvalidOperationException ex)
-        {
-            _logger.LogError(ex, "Database operation encountered an error while retrieving Client: {GCIF}", gcif);
-            throw new DomainException($"The database operation failed: {ex.Message}");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "An unexpected error occurred while retrieving Client by GCIF: {GCIF}", gcif);
-            throw new DomainException($"The client retrieval failed: {ex.Message}");
-        }
-    }
+                //  Output parameters
+                new LB_DALParam("StatusCode", 0, ParameterDirection.Output),
+				new LB_DALParam("StatusMsg", string.Empty, ParameterDirection.Output)
+			};
 
-    public async Task<ClientDto> CreateClientAsync(CreateClientRequest request, CancellationToken cancellationToken = default)
-    {
-        _logger.LogInformation("Creating Client with ClntCode: {ClntCode}", request.ClntCode);
 
-        // Validate the request
-        var validationResult = await _createValidator.ValidateAsync(request, cancellationToken);
-        if (!validationResult.IsValid)
-        {
-            _logger.LogWarning("Validation failed for creating Client: {Errors}", string.Join(", ", validationResult.Errors));
-            throw new ValidationException(string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage)));
-        }
+			var result = await _repository.QuerySingleAsync<ClientDto>(
+				sqlOrSp: "LB_SP_GetClientMstAccByClientID",
+				parameters: parameters,
+				isStoredProcedure: true,
+				cancellationToken: cancellationToken);
 
-        try
-        {
-            await _unitOfWork.BeginTransactionAsync(cancellationToken);
+			_logger.LogDebug("Retrieved client: {Found}", result != null ? "Found" : "Not Found");
+			return result;
+		}
+		catch (ArgumentException ex)
+		{
+			_logger.LogError(ex, "Invalid arguments were provided for Client retrieval: {GCIF}", gcif);
+			throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
+		}
+		catch (InvalidOperationException ex)
+		{
+			_logger.LogError(ex, "Database operation encountered an error while retrieving Client: {GCIF}", gcif);
+			throw new DomainException($"The database operation failed: {ex.Message}");
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(ex, "An unexpected error occurred while retrieving Client by GCIF: {GCIF}", gcif);
+			throw new DomainException($"The client retrieval failed: {ex.Message}");
+		}
+	}
 
-            var parameters = new
-            {
-                Action = (int)ActionTypeEnum.INSERT,
-                // ClntMaster parameters (GCIF will be auto-generated by SP)
-                GCIF = (string?)null,
-                ClntCode = request.ClntCode,
-                ClntName = request.ClntName,
-                ClntNICNo = request.ClntNICNo,
-                ClntAddr = request.ClntAddr,
-                ClntPhone = request.ClntPhone,
-                ClntMobile = request.ClntMobile,
-                Gender = request.Gender,
-                Nationality = request.Nationality,
-                ClntOffice = request.ClntOffice,
-                ClntFax = request.ClntFax,
-                ClntEmail = request.ClntEmail,
-                CountryCode = request.CountryCode,
-                // ClntAcct parameters
-                CoBrchCode = request.CoBrchCode,
-                ClntStat = request.ClntStat,
-                ClntTrdgStat = request.ClntTrdgStat,
-                ClntAcctType = request.ClntAcctType,
-                ClntCDSNo = request.ClntCDSNo,
-                ClntDlrCode = request.ClntDlrCode,
-                ClntAllowAssociate = request.ClntAllowAssociate,
-                ClntDlrReassign = request.ClntDlrReassign,
-                ClntReassignDlrCode = request.ClntReassignDlrCode,
-                ClientCommission = request.ClientCommission,
-                AllowSME = request.AllowSME,
-                // Common parameters
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                ActionDt = DateTime.Now,
-                TransDt = DateTime.Today,
-                ActionType = (byte)ActionTypeEnum.INSERT,
-                AuthId = _currentUserService.UserId,
-                AuthDt = DateTime.Now,
-                AuthTransDt = DateTime.Today,
-                IsAuth = (byte)AuthTypeEnum.UnAuthorize,
-                AuthLevel = (byte)AuthLevelEnum.Level1,
-                IsDel = (byte)DeleteStatusEnum.Active,
-                Remarks = request.Remarks,
-                // Output parameters
-                RowsAffected = 0,
-                AffectedRowsClntMaster = 0,
-                AffectedRowsClntAcct = 0,
-                TotalAffectedRows = 0
-            };
+	public async Task<ClientDto> CreateClientAsync(CreateClientRequest request, CancellationToken cancellationToken = default)
+	{
+		_logger.LogInformation("Creating Client with ClntCode: {ClntCode}", request.ClntCode);
 
-            var result = await _repository.ExecuteWithOutputAsync(
-                "LB_SP_CrudClientMstAcc",
-                parameters,
-                cancellationToken);
+		// Validate the request
+		var validationResult = await _createValidator.ValidateAsync(request, cancellationToken);
+		if (!validationResult.IsValid)
+		{
+			_logger.LogWarning("Validation failed for creating Client: {Errors}", string.Join(", ", validationResult.Errors));
+			throw new ValidationException(string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage)));
+		}
 
-            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
-            if (rowsAffected <= 0)
-            {
-                _logger.LogWarning("Client creation failed - No rows affected for ClntCode: {ClntCode}", request.ClntCode);
-                throw new DomainException("Failed to create client - no rows affected");
-            }
+		try
+		{
+			await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
-            await _unitOfWork.CommitTransactionAsync(cancellationToken);
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
+			{
+                // Action
+                new LB_DALParam("Action", (int)ActionTypeEnum.INSERT),
 
-            _logger.LogInformation("Successfully created Client with ClntCode: {ClntCode}", request.ClntCode);
-
-            string gcifId = await GetGCIFByClientCodeAsync(request.CoBrchCode,request.ClntCode);
-
-            var createdClient = await GetClientByIdAsync(gcifId);
-
-            return createdClient ?? throw new DomainException("Failed to retrieve created client");
-        }
-        catch (ValidationException)
-        {
-            throw;
-        }
-        catch (ArgumentException ex)
-        {
-            _logger.LogError(ex, "Invalid arguments were provided for Client creation");
-            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
-        }
-        catch (InvalidOperationException ex)
-        {
-            _logger.LogError(ex, "Database operation encountered an error while creating Client");
-            throw new DomainException($"The database operation failed: {ex.Message}");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "An unexpected error occurred while creating Client");
-            throw new DomainException($"The client creation failed: {ex.Message}");
-        }
-    }
-
-    public async Task<ClientDto> UpdateClientAsync(string gcif, UpdateClientRequest request, CancellationToken cancellationToken = default)
-    {
-        _logger.LogInformation("Updating Client with GCIF: {GCIF}", gcif);
-
-        // Validate the request
-        var validationResult = await _updateValidator.ValidateAsync(request, cancellationToken);
-        if (!validationResult.IsValid)
-        {
-            _logger.LogWarning("Validation failed for updating Client: {Errors}", string.Join(", ", validationResult.Errors));
-            throw new ValidationException(string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage)));
-        }
-
-        // Check if client exists
-        var existingClient = await GetClientByIdAsync(gcif, cancellationToken);
-        if (existingClient == null)
-        {
-            _logger.LogWarning("The Client with GCIF {GCIF} not found for update", gcif);
-            throw new NotFoundException("Client", gcif);
-        }
-
-        try
-        {
-            await _unitOfWork.BeginTransactionAsync(cancellationToken);
-
-            var parameters = new
-            {
-                Action = (int)ActionTypeEnum.UPDATE,
                 // ClntMaster parameters
-                GCIF = gcif,
-                ClntCode = request.ClntCode,
-                ClntName = request.ClntName,
-                ClntNICNo = request.ClntNICNo,
-                ClntAddr = request.ClntAddr,
-                ClntPhone = request.ClntPhone,
-                ClntMobile = request.ClntMobile,
-                Gender = request.Gender,
-                Nationality = request.Nationality,
-                ClntOffice = request.ClntOffice,
-                ClntFax = request.ClntFax,
-                ClntEmail = request.ClntEmail,
-                CountryCode = request.CountryCode,
+                new LB_DALParam("GCIF", (string?)null), // SP will auto-generate
+                new LB_DALParam("ClntCode", request.ClntCode),
+				new LB_DALParam("ClntName", request.ClntName),
+				new LB_DALParam("ClntNICNo", request.ClntNICNo),
+				new LB_DALParam("ClntAddr", request.ClntAddr),
+				new LB_DALParam("ClntPhone", request.ClntPhone),
+				new LB_DALParam("ClntMobile", request.ClntMobile),
+				new LB_DALParam("Gender", request.Gender),
+				new LB_DALParam("Nationality", request.Nationality),
+				new LB_DALParam("ClntOffice", request.ClntOffice),
+				new LB_DALParam("ClntFax", request.ClntFax),
+				new LB_DALParam("ClntEmail", request.ClntEmail),
+				new LB_DALParam("CountryCode", request.CountryCode),
+
                 // ClntAcct parameters
-                CoBrchCode = request.CoBrchCode,
-                ClntStat = request.ClntStat,
-                ClntTrdgStat = request.ClntTrdgStat,
-                ClntAcctType = request.ClntAcctType,
-                ClntCDSNo = request.ClntCDSNo,
-                ClntDlrCode = request.ClntDlrCode,
-                ClntAllowAssociate = request.ClntAllowAssociate,
-                ClntDlrReassign = request.ClntDlrReassign,
-                ClntReassignDlrCode = request.ClntReassignDlrCode,
-                ClientCommission = request.ClientCommission,
-                AllowSME = request.AllowSME,
-                // Common parameters
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                ActionDt = DateTime.Now,
-                TransDt = DateTime.Today,
-                ActionType = (byte)ActionTypeEnum.UPDATE,
-                AuthId = _currentUserService.UserId,
-                AuthDt = DateTime.Now,
-                AuthTransDt = DateTime.Today,
-                IsAuth = (byte)AuthTypeEnum.UnAuthorize,
-                AuthLevel = (byte)AuthLevelEnum.Level1,
-                IsDel = (byte)DeleteStatusEnum.Active,
-                Remarks = request.Remarks,
+                new LB_DALParam("CoBrchCode", request.CoBrchCode),
+				new LB_DALParam("ClntStat", request.ClntStat),
+				new LB_DALParam("ClntTrdgStat", request.ClntTrdgStat),
+				new LB_DALParam("ClntAcctType", request.ClntAcctType),
+				new LB_DALParam("ClntCDSNo", request.ClntCDSNo),
+				new LB_DALParam("ClntDlrCode", request.ClntDlrCode),
+				new LB_DALParam("ClntAllowAssociate", request.ClntAllowAssociate),
+				new LB_DALParam("ClntDlrReassign", request.ClntDlrReassign),
+				new LB_DALParam("ClntReassignDlrCode", request.ClntReassignDlrCode),
+				new LB_DALParam("ClientCommission", request.ClientCommission),
+				new LB_DALParam("AllowSME", request.AllowSME),
+
+                // Common audit & workflow parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+				new LB_DALParam("MakerId", _currentUserService.UserId),
+				new LB_DALParam("ActionDt", DateTime.Now),
+				new LB_DALParam("TransDt", DateTime.Today),
+				new LB_DALParam("ActionType", (byte)ActionTypeEnum.INSERT),
+				new LB_DALParam("AuthId", _currentUserService.UserId),
+				new LB_DALParam("AuthDt", DateTime.Now),
+				new LB_DALParam("AuthTransDt", DateTime.Today),
+				new LB_DALParam("IsAuth", (byte)AuthTypeEnum.UnAuthorize),
+				new LB_DALParam("AuthLevel", (byte)AuthLevelEnum.Level1),
+				new LB_DALParam("IsDel", (byte)DeleteStatusEnum.Active),
+				new LB_DALParam("Remarks", request.Remarks),
+
                 // Output parameters
-                RowsAffected = 0,
-                AffectedRowsClntMaster = 0,
-                AffectedRowsClntAcct = 0,
-                TotalAffectedRows = 0
-            };
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output),
+				new LB_DALParam("AffectedRowsClntMaster", 0, ParameterDirection.Output),
+				new LB_DALParam("AffectedRowsClntAcct", 0, ParameterDirection.Output),
+				new LB_DALParam("TotalAffectedRows", 0, ParameterDirection.Output)
+			};
 
-            var result = await _repository.ExecuteWithOutputAsync(
-                "LB_SP_CrudClientMstAcc",
-                parameters,
-                cancellationToken);
 
-            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
-            if (rowsAffected <= 0)
-            {
-                _logger.LogWarning("Client update failed - No rows affected for GCIF: {GCIF}", gcif);
-                throw new DomainException("The client update failed because no rows were affected");
-            }
+			var result = await _repository.ExecuteWithOutputAsync(
+				"LB_SP_CrudClientMstAcc",
+				parameters,
+				cancellationToken);
 
-            await _unitOfWork.CommitTransactionAsync(cancellationToken);
+			var rowsAffected = result.GetOutputValue<int>("RowsAffected");
+			if (rowsAffected <= 0)
+			{
+				_logger.LogWarning("Client creation failed - No rows affected for ClntCode: {ClntCode}", request.ClntCode);
+				throw new DomainException("Failed to create client - no rows affected");
+			}
 
-            _logger.LogInformation("Successfully updated Client with GCIF: {GCIF}", gcif);
+			await _unitOfWork.CommitTransactionAsync(cancellationToken);
 
-            // Return the updated client
-            var updatedClient = await GetClientByIdAsync(gcif, cancellationToken);
-            return updatedClient ?? throw new DomainException("Failed to retrieve updated client");
-        }
-        catch (ValidationException)
-        {
-            throw;
-        }
-        catch (ArgumentException ex)
-        {
-            _logger.LogError(ex, "Invalid arguments were provided for Client update");
-            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
-        }
-        catch (InvalidOperationException ex)
-        {
-            _logger.LogError(ex, "Database operation encountered an error while updating Client");
-            throw new DomainException($"The database operation failed: {ex.Message}");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "An unexpected error occurred while updating Client");
-            throw new DomainException($"The client update failed: {ex.Message}");
-        }
-    }
+			_logger.LogInformation("Successfully created Client with ClntCode: {ClntCode}", request.ClntCode);
 
-    public async Task<bool> DeleteClientAsync(string gcif, DeleteClientRequest request, CancellationToken cancellationToken = default)
-    {
-        _logger.LogInformation("Deleting Client with GCIF: {GCIF}", gcif);
+			string gcifId = await GetGCIFByClientCodeAsync(request.CoBrchCode, request.ClntCode);
 
-        // Validate the request
-        var validationResult = await _deleteValidator.ValidateAsync(request, cancellationToken);
-        if (!validationResult.IsValid)
-        {
-            _logger.LogWarning("Validation failed for deleting Client: {Errors}", string.Join(", ", validationResult.Errors));
-            throw new ValidationException(string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage)));
-        }
+			var createdClient = await GetClientByIdAsync(gcifId);
 
-        // Check if client exists
-        var existingClient = await GetClientByIdAsync(gcif, cancellationToken);
-        if (existingClient == null)
-        {
-            _logger.LogWarning("The Client with GCIF {GCIF} not found for deletion", gcif);
-            throw new NotFoundException("Client", gcif);
-        }
+			return createdClient ?? throw new DomainException("Failed to retrieve created client");
+		}
+		catch (ValidationException)
+		{
+			throw;
+		}
+		catch (ArgumentException ex)
+		{
+			_logger.LogError(ex, "Invalid arguments were provided for Client creation");
+			throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
+		}
+		catch (InvalidOperationException ex)
+		{
+			_logger.LogError(ex, "Database operation encountered an error while creating Client");
+			throw new DomainException($"The database operation failed: {ex.Message}");
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(ex, "An unexpected error occurred while creating Client");
+			throw new DomainException($"The client creation failed: {ex.Message}");
+		}
+	}
 
-        try
-        {
-            await _unitOfWork.BeginTransactionAsync(cancellationToken);
+	public async Task<ClientDto> UpdateClientAsync(string gcif, UpdateClientRequest request, CancellationToken cancellationToken = default)
+	{
+		_logger.LogInformation("Updating Client with GCIF: {GCIF}", gcif);
 
-            var parameters = new
-            {
-                Action = (int)ActionTypeEnum.DELETE,
-                GCIF = gcif,
-                ClntCode = request.ClntCode,
-                CoBrchCode = request.CoBrchCode,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                ActionDt = DateTime.Now,
-                TransDt = DateTime.Today,
-                ActionType = (byte)ActionTypeEnum.DELETE,
-                Remarks = request.Remarks ?? "Soft deleted",
+		// Validate the request
+		var validationResult = await _updateValidator.ValidateAsync(request, cancellationToken);
+		if (!validationResult.IsValid)
+		{
+			_logger.LogWarning("Validation failed for updating Client: {Errors}", string.Join(", ", validationResult.Errors));
+			throw new ValidationException(string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage)));
+		}
+
+		// Check if client exists
+		var existingClient = await GetClientByIdAsync(gcif, cancellationToken);
+		if (existingClient == null)
+		{
+			_logger.LogWarning("The Client with GCIF {GCIF} not found for update", gcif);
+			throw new NotFoundException("Client", gcif);
+		}
+
+		try
+		{
+			await _unitOfWork.BeginTransactionAsync(cancellationToken);
+
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
+			{
+                // Action
+                new LB_DALParam("Action", (int)ActionTypeEnum.UPDATE),
+
+                // ClntMaster parameters
+                new LB_DALParam("GCIF", gcif),
+				new LB_DALParam("ClntCode", request.ClntCode),
+				new LB_DALParam("ClntName", request.ClntName),
+				new LB_DALParam("ClntNICNo", request.ClntNICNo),
+				new LB_DALParam("ClntAddr", request.ClntAddr),
+				new LB_DALParam("ClntPhone", request.ClntPhone),
+				new LB_DALParam("ClntMobile", request.ClntMobile),
+				new LB_DALParam("Gender", request.Gender),
+				new LB_DALParam("Nationality", request.Nationality),
+				new LB_DALParam("ClntOffice", request.ClntOffice),
+				new LB_DALParam("ClntFax", request.ClntFax),
+				new LB_DALParam("ClntEmail", request.ClntEmail),
+				new LB_DALParam("CountryCode", request.CountryCode),
+
+                // ClntAcct parameters
+                new LB_DALParam("CoBrchCode", request.CoBrchCode),
+				new LB_DALParam("ClntStat", request.ClntStat),
+				new LB_DALParam("ClntTrdgStat", request.ClntTrdgStat),
+				new LB_DALParam("ClntAcctType", request.ClntAcctType),
+				new LB_DALParam("ClntCDSNo", request.ClntCDSNo),
+				new LB_DALParam("ClntDlrCode", request.ClntDlrCode),
+				new LB_DALParam("ClntAllowAssociate", request.ClntAllowAssociate),
+				new LB_DALParam("ClntDlrReassign", request.ClntDlrReassign),
+				new LB_DALParam("ClntReassignDlrCode", request.ClntReassignDlrCode),
+				new LB_DALParam("ClientCommission", request.ClientCommission),
+				new LB_DALParam("AllowSME", request.AllowSME),
+
+                // Common audit & workflow parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+				new LB_DALParam("MakerId", _currentUserService.UserId),
+				new LB_DALParam("ActionDt", DateTime.Now),
+				new LB_DALParam("TransDt", DateTime.Today),
+				new LB_DALParam("ActionType", (byte)ActionTypeEnum.UPDATE),
+				new LB_DALParam("AuthId", _currentUserService.UserId),
+				new LB_DALParam("AuthDt", DateTime.Now),
+				new LB_DALParam("AuthTransDt", DateTime.Today),
+				new LB_DALParam("IsAuth", (byte)AuthTypeEnum.UnAuthorize),
+				new LB_DALParam("AuthLevel", (byte)AuthLevelEnum.Level1),
+				new LB_DALParam("IsDel", (byte)DeleteStatusEnum.Active),
+				new LB_DALParam("Remarks", request.Remarks),
+
                 // Output parameters
-                RowsAffected = 0,
-                AffectedRowsClntMaster = 0,
-                AffectedRowsClntAcct = 0,
-                TotalAffectedRows = 0
-            };
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output),
+				new LB_DALParam("AffectedRowsClntMaster", 0, ParameterDirection.Output),
+				new LB_DALParam("AffectedRowsClntAcct", 0, ParameterDirection.Output),
+				new LB_DALParam("TotalAffectedRows", 0, ParameterDirection.Output)
+			};
 
-            var result = await _repository.ExecuteWithOutputAsync(
-                "LB_SP_CrudClientMstAcc",
-                parameters,
-                cancellationToken);
 
-            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
-            if (rowsAffected <= 0)
-            {
-                _logger.LogWarning("Client deletion failed - No rows affected for GCIF: {GCIF}", gcif);
-                throw new DomainException("The client deletion failed because no rows were affected");
-            }
+			var result = await _repository.ExecuteWithOutputAsync(
+				"LB_SP_CrudClientMstAcc",
+				parameters,
+				cancellationToken);
 
-            await _unitOfWork.CommitTransactionAsync(cancellationToken);
+			var rowsAffected = result.GetOutputValue<int>("RowsAffected");
+			if (rowsAffected <= 0)
+			{
+				_logger.LogWarning("Client update failed - No rows affected for GCIF: {GCIF}", gcif);
+				throw new DomainException("The client update failed because no rows were affected");
+			}
 
-            _logger.LogInformation("Successfully deleted Client with GCIF: {GCIF}", gcif);
-            return true;
-        }
-        catch (ValidationException)
-        {
-            throw;
-        }
-        catch (ArgumentException ex)
-        {
-            _logger.LogError(ex, "Invalid arguments were provided for Client deletion");
-            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
-        }
-        catch (InvalidOperationException ex)
-        {
-            _logger.LogError(ex, "Database operation encountered an error while deleting Client");
-            throw new DomainException($"The database operation failed: {ex.Message}");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "An unexpected error occurred while deleting Client");
-            throw new DomainException($"The client deletion failed: {ex.Message}");
-        }
-    }
+			await _unitOfWork.CommitTransactionAsync(cancellationToken);
 
-    public async Task<bool> ClientExistsAsync(string clntCode, CancellationToken cancellationToken = default)
-    {
-        _logger.LogDebug("Checking if Client exists with ClntCode: {ClntCode}", clntCode);
+			_logger.LogInformation("Successfully updated Client with GCIF: {GCIF}", gcif);
 
-        var exists = await GetClientByClientCodeAsync(clntCode, cancellationToken);
-        return exists;
-    }
+			// Return the updated client
+			var updatedClient = await GetClientByIdAsync(gcif, cancellationToken);
+			return updatedClient ?? throw new DomainException("Failed to retrieve updated client");
+		}
+		catch (ValidationException)
+		{
+			throw;
+		}
+		catch (ArgumentException ex)
+		{
+			_logger.LogError(ex, "Invalid arguments were provided for Client update");
+			throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
+		}
+		catch (InvalidOperationException ex)
+		{
+			_logger.LogError(ex, "Database operation encountered an error while updating Client");
+			throw new DomainException($"The database operation failed: {ex.Message}");
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(ex, "An unexpected error occurred while updating Client");
+			throw new DomainException($"The client update failed: {ex.Message}");
+		}
+	}
 
-    #endregion
+	public async Task<bool> DeleteClientAsync(string gcif, DeleteClientRequest request, CancellationToken cancellationToken = default)
+	{
+		_logger.LogInformation("Deleting Client with GCIF: {GCIF}", gcif);
 
-    #region Workflow Operations
+		// Validate the request
+		var validationResult = await _deleteValidator.ValidateAsync(request, cancellationToken);
+		if (!validationResult.IsValid)
+		{
+			_logger.LogWarning("Validation failed for deleting Client: {Errors}", string.Join(", ", validationResult.Errors));
+			throw new ValidationException(string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage)));
+		}
 
-    public async Task<PagedResult<ClientDto>> GetClientUnAuthDeniedListAsync(int pageNumber = 1, int pageSize = 10,
-        string? searchTerm = null, string? gcif = null, string? clntName = null, string? clntCode = null, int isAuth = 0, CancellationToken cancellationToken = default)
-    {
-        _logger.LogInformation("Retrieving paged Client workflow list - Page: {PageNumber}, Size: {PageSize}, IsAuth: {IsAuth}", pageNumber, pageSize, isAuth);
+		// Check if client exists
+		var existingClient = await GetClientByIdAsync(gcif, cancellationToken);
+		if (existingClient == null)
+		{
+			_logger.LogWarning("The Client with GCIF {GCIF} not found for deletion", gcif);
+			throw new NotFoundException("Client", gcif);
+		}
 
-        // Validate and sanitize inputs
-        if (pageNumber < 1) pageNumber = 1;
-        if (pageSize < 1 || pageSize > 100) pageSize = 10;
+		try
+		{
+			await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
-        try
-        {
-            var parameters = new
-            {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                GCIF = gcif,
-                ClntName = clntName,
-                ClntCode = clntCode,
-                MakerId = _currentUserService.UserId,
-                isAuth = (byte)isAuth,
-                SortBy = "GCIF",
-                SortOrder = "ASC",
-                TotalCount = 0
-            };
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
+			{
+                // Action
+                new LB_DALParam("Action", (int)ActionTypeEnum.DELETE),
 
-            _logger.LogDebug("Calling LB_SP_GetClientMstAccListWF with parameters: PageNumber={PageNumber}, PageSize={PageSize}, IsAuth={IsAuth}",
-                pageNumber, pageSize, isAuth);
+                // ClntMaster / ClntAcct identifiers
+                new LB_DALParam("GCIF", gcif),
+				new LB_DALParam("ClntCode", request.ClntCode),
+				new LB_DALParam("CoBrchCode", request.CoBrchCode),
 
-            var result = await _repository.QueryPagedAsync<ClientDto>(
-                sqlOrSp: "LB_SP_GetClientMstAccListWF",
-                pageNumber: pageNumber,
-                pageSize: pageSize,
-                parameters: parameters,
-                isStoredProcedure: true,
-                cancellationToken: cancellationToken);
+                // Common audit parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+				new LB_DALParam("MakerId", _currentUserService.UserId),
+				new LB_DALParam("ActionDt", DateTime.Now),
+				new LB_DALParam("TransDt", DateTime.Today),
+				new LB_DALParam("ActionType", (byte)ActionTypeEnum.DELETE),
+				new LB_DALParam("Remarks", request.Remarks ?? "Soft deleted"),
 
-            _logger.LogDebug("Workflow SP returned TotalCount: {TotalCount}, Data count: {DataCount}",
-                result.TotalCount, result.Data.Count());
+                // Output parameters
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output),
+				new LB_DALParam("AffectedRowsClntMaster", 0, ParameterDirection.Output),
+				new LB_DALParam("AffectedRowsClntAcct", 0, ParameterDirection.Output),
+				new LB_DALParam("TotalAffectedRows", 0, ParameterDirection.Output)
+			};
 
-            return result;
-        }
-        catch (ArgumentException ex)
-        {
-            _logger.LogError(ex, "Invalid arguments were provided for Client workflow listretrieval");
-            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
-        }
-        catch (InvalidOperationException ex)
-        {
-            _logger.LogError(ex, "Database operation encountered an error while retrieving Client workflow list");
-            throw new DomainException($"The database operation failed: {ex.Message}");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "An unexpected error occurred while retrieving Client workflow list");
-            throw new DomainException($"The client workflow list retrieval failed: {ex.Message}");
-        }
-    }
+			var result = await _repository.ExecuteWithOutputAsync(
+				"LB_SP_CrudClientMstAcc",
+				parameters,
+				cancellationToken);
 
-    public async Task<bool> AuthorizeClientAsync(string gcif, AuthorizeClientRequest request, CancellationToken cancellationToken = default)
-    {
-        _logger.LogInformation("Authorizing Client with GCIF: {GCIF}, IsAuth: {IsAuth}", gcif, request.IsAuth);
+			var rowsAffected = result.GetOutputValue<int>("RowsAffected");
+			if (rowsAffected <= 0)
+			{
+				_logger.LogWarning("Client deletion failed - No rows affected for GCIF: {GCIF}", gcif);
+				throw new DomainException("The client deletion failed because no rows were affected");
+			}
 
-        // Validate the request
-        var validationResult = await _authorizeValidator.ValidateAsync(request, cancellationToken);
-        if (!validationResult.IsValid)
-        {
-            _logger.LogWarning("Validation failed for authorizing Client: {Errors}", string.Join(", ", validationResult.Errors));
-            throw new ValidationException(string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage)));
-        }
+			await _unitOfWork.CommitTransactionAsync(cancellationToken);
 
-        // Check if client exists
-        var existingClient = await GetClientByIdAsync(gcif, cancellationToken);
-        if (existingClient == null)
-        {
-            _logger.LogWarning("The Client with GCIF {GCIF} not found for authorization", gcif);
-            throw new NotFoundException("Client", gcif);
-        }
+			_logger.LogInformation("Successfully deleted Client with GCIF: {GCIF}", gcif);
+			return true;
+		}
+		catch (ValidationException)
+		{
+			throw;
+		}
+		catch (ArgumentException ex)
+		{
+			_logger.LogError(ex, "Invalid arguments were provided for Client deletion");
+			throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
+		}
+		catch (InvalidOperationException ex)
+		{
+			_logger.LogError(ex, "Database operation encountered an error while deleting Client");
+			throw new DomainException($"The database operation failed: {ex.Message}");
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(ex, "An unexpected error occurred while deleting Client");
+			throw new DomainException($"The client deletion failed: {ex.Message}");
+		}
+	}
 
-        try
-        {
-            await _unitOfWork.BeginTransactionAsync(cancellationToken);
+	public async Task<bool> ClientExistsAsync(string clntCode, CancellationToken cancellationToken = default)
+	{
+		_logger.LogDebug("Checking if Client exists with ClntCode: {ClntCode}", clntCode);
 
-            var parameters = new
-            {
-                Action = (int)ActionTypeEnum.UPDATE,
-                GCIF = gcif,
-                ClntCode = request.ClntCode,
-                CoBrchCode = request.CoBrchCode,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                AuthID = _currentUserService.UserId,
-                IsAuth = request.IsAuth,
-                Remarks = request.Remarks,
-                ActionType = request.ActionType,
-                RowsAffected = 0
-            };
+		var exists = await GetClientByClientCodeAsync(clntCode, cancellationToken);
+		return exists;
+	}
 
-            var result = await _repository.ExecuteWithOutputAsync(
-                "LB_SP_AuthClientMstAcc",
-                parameters,
-                cancellationToken);
+	#endregion
 
-            var rowsAffected = result.GetOutputValue<int>("RowsAffected");
-            if (rowsAffected <= 0)
-            {
-                _logger.LogWarning("Client authorization failed - No rows affected for GCIF: {GCIF}", gcif);
-                throw new DomainException("The client authorization failed because no rows were affected");
-            }
+	#region Workflow Operations
 
-            await _unitOfWork.CommitTransactionAsync(cancellationToken);
+	public async Task<PagedResult<ClientDto>> GetClientUnAuthDeniedListAsync(int pageNumber = 1, int pageSize = 10,
+		string? searchTerm = null, string? gcif = null, string? clntName = null, string? clntCode = null, int isAuth = 0, CancellationToken cancellationToken = default)
+	{
+		_logger.LogInformation("Retrieving paged Client workflow list - Page: {PageNumber}, Size: {PageSize}, IsAuth: {IsAuth}", pageNumber, pageSize, isAuth);
 
-            _logger.LogInformation("Successfully authorized Client with GCIF: {GCIF}", gcif);
-            return true;
-        }
-        catch (ValidationException)
-        {
-            throw;
-        }
-        catch (ArgumentException ex)
-        {
-            _logger.LogError(ex, "Invalid arguments were provided for Client authorization");
-            throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
-        }
-        catch (InvalidOperationException ex)
-        {
-            _logger.LogError(ex, "Database operation encountered an error while authorizing Client");
-            throw new DomainException($"The database operation failed: {ex.Message}");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "An unexpected error occurred while authorizing Client");
-            throw new DomainException($"The client authorization failed: {ex.Message}");
-        }
-    }
+		// Validate and sanitize inputs
+		if (pageNumber < 1) pageNumber = 1;
+		if (pageSize < 1 || pageSize > 100) pageSize = 10;
 
-    #endregion
+		try
+		{
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
+			{
+				new LB_DALParam("PageNumber", pageNumber),
+				new LB_DALParam("PageSize", pageSize),
+				new LB_DALParam("GCIF", gcif ?? (object)DBNull.Value),
+				new LB_DALParam("ClntName", clntName ?? (object)DBNull.Value),
+				new LB_DALParam("ClntCode", clntCode ?? (object)DBNull.Value),
+				new LB_DALParam("MakerId", _currentUserService.UserId),
+				new LB_DALParam("isAuth", (byte)isAuth),
+				new LB_DALParam("SortBy", "ClntCode"),
+				new LB_DALParam("SortOrder", "ASC")
+			};
 
-    #region Private Methods
 
-    public async Task<string> GetGCIFByClientCodeAsync(string branchCode, string clientCode, CancellationToken cancellationToken = default)
-    {
-        var sql = @"
+			_logger.LogDebug("Calling LB_SP_GetClientMstAccListWF with parameters: PageNumber={PageNumber}, PageSize={PageSize}, IsAuth={IsAuth}",
+				pageNumber, pageSize, isAuth);
+
+			var result = await _repository.QueryPagedAsync<ClientDto>(
+				sqlOrSp: "LB_SP_GetClientMstAccListWF",
+				parameters: parameters,
+				isStoredProcedure: true,
+				cancellationToken: cancellationToken);
+
+			_logger.LogDebug("Workflow SP returned TotalCount: {TotalCount}, Data count: {DataCount}",
+				result.TotalCount, result.Data.Count());
+
+			return result;
+		}
+		catch (ArgumentException ex)
+		{
+			_logger.LogError(ex, "Invalid arguments were provided for Client workflow listretrieval");
+			throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
+		}
+		catch (InvalidOperationException ex)
+		{
+			_logger.LogError(ex, "Database operation encountered an error while retrieving Client workflow list");
+			throw new DomainException($"The database operation failed: {ex.Message}");
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(ex, "An unexpected error occurred while retrieving Client workflow list");
+			throw new DomainException($"The client workflow list retrieval failed: {ex.Message}");
+		}
+	}
+
+	public async Task<bool> AuthorizeClientAsync(string gcif, AuthorizeClientRequest request, CancellationToken cancellationToken = default)
+	{
+		_logger.LogInformation("Authorizing Client with GCIF: {GCIF}, IsAuth: {IsAuth}", gcif, request.IsAuth);
+
+		// Validate the request
+		var validationResult = await _authorizeValidator.ValidateAsync(request, cancellationToken);
+		if (!validationResult.IsValid)
+		{
+			_logger.LogWarning("Validation failed for authorizing Client: {Errors}", string.Join(", ", validationResult.Errors));
+			throw new ValidationException(string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage)));
+		}
+
+		// Check if client exists
+		var existingClient = await GetClientByIdAsync(gcif, cancellationToken);
+		if (existingClient == null)
+		{
+			_logger.LogWarning("The Client with GCIF {GCIF} not found for authorization", gcif);
+			throw new NotFoundException("Client", gcif);
+		}
+
+		try
+		{
+			await _unitOfWork.BeginTransactionAsync(cancellationToken);
+
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
+			{
+				new LB_DALParam("Action", (int)ActionTypeEnum.UPDATE),
+				new LB_DALParam("GCIF", gcif),
+				new LB_DALParam("ClntCode", request.ClntCode),
+				new LB_DALParam("CoBrchCode", request.CoBrchCode),
+				new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+				new LB_DALParam("AuthID", _currentUserService.UserId),
+				new LB_DALParam("IsAuth", request.IsAuth),
+				new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+				new LB_DALParam("ActionType", request.ActionType),
+
+                // Output parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
+			};
+
+			var result = await _repository.ExecuteWithOutputAsync(
+				"LB_SP_AuthClientMstAcc",
+				parameters,
+				cancellationToken);
+
+			var rowsAffected = result.GetOutputValue<int>("RowsAffected");
+			if (rowsAffected <= 0)
+			{
+				_logger.LogWarning("Client authorization failed - No rows affected for GCIF: {GCIF}", gcif);
+				throw new DomainException("The client authorization failed because no rows were affected");
+			}
+
+			await _unitOfWork.CommitTransactionAsync(cancellationToken);
+
+			_logger.LogInformation("Successfully authorized Client with GCIF: {GCIF}", gcif);
+			return true;
+		}
+		catch (ValidationException)
+		{
+			throw;
+		}
+		catch (ArgumentException ex)
+		{
+			_logger.LogError(ex, "Invalid arguments were provided for Client authorization");
+			throw new ValidationException($"Invalid parameters were provided: {ex.Message}");
+		}
+		catch (InvalidOperationException ex)
+		{
+			_logger.LogError(ex, "Database operation encountered an error while authorizing Client");
+			throw new DomainException($"The database operation failed: {ex.Message}");
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(ex, "An unexpected error occurred while authorizing Client");
+			throw new DomainException($"The client authorization failed: {ex.Message}");
+		}
+	}
+
+	#endregion
+
+	#region Private Methods
+
+	public async Task<string> GetGCIFByClientCodeAsync(string branchCode, string clientCode, CancellationToken cancellationToken = default)
+	{
+		var sql = @"
         SELECT CM.GCIF
         FROM CLNTMASTER CM
         INNER JOIN CLNTACCT CA ON CM.GCIF = CA.GCIF
         WHERE 1=1";
 
-        var parameters = new Dictionary<string, object>();
+		List<LB_DALParam> parameters = new List<LB_DALParam>();
 
-        if (!string.IsNullOrWhiteSpace(branchCode))
-        {
-            sql += " AND CA.COBRCHCODE = @BranchCode";
-            parameters.Add("BranchCode", branchCode);
-        }
+		if (!string.IsNullOrWhiteSpace(branchCode))
+		{
+			sql += " AND CA.COBRCHCODE = @BranchCode";
+			parameters.Add(new LB_DALParam("BranchCode", branchCode));
+		}
 
-        if (!string.IsNullOrWhiteSpace(clientCode))
-        {
-            sql += " AND CA.CLNTCODE = @ClientCode";
-            parameters.Add("ClientCode", clientCode);
-        }
+		if (!string.IsNullOrWhiteSpace(clientCode))
+		{
+			sql += " AND CA.CLNTCODE = @ClientCode";
+			parameters.Add(new LB_DALParam("ClientCode", clientCode));
 
-        try
-        {
-            // Use ExecuteScalarAsync for primitive/scalar types like string
-            var gcifResult = await _repository.ExecuteScalarAsync<string>(sql, parameters, false, cancellationToken);
+		}
 
-            return gcifResult ?? string.Empty;
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error getting GCIF by client code. BranchCode: {BranchCode}, ClientCode: {ClientCode}", branchCode, clientCode);
-            throw;
-        }
-    }
+		try
+		{
+			// Use ExecuteScalarAsync for primitive/scalar types like string
+			var gcifResult = await _repository.ExecuteScalarAsync<string>(sql, parameters, false, cancellationToken);
 
-    private async Task<bool> GetClientByClientCodeAsync(string clntCode, CancellationToken cancellationToken = default)
-    {
-        _logger.LogDebug("Checking client by ClntCode: {ClntCode}", clntCode);
+			return gcifResult ?? string.Empty;
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(ex, "Error getting GCIF by client code. BranchCode: {BranchCode}, ClientCode: {ClientCode}", branchCode, clientCode);
+			throw;
+		}
+	}
 
-        var sql = @"
+	private async Task<bool> GetClientByClientCodeAsync(string clntCode, CancellationToken cancellationToken = default)
+	{
+		_logger.LogDebug("Checking client by ClntCode: {ClntCode}", clntCode);
+
+		var sql = @"
             SELECT cm.GCIF
             FROM dbo.ClntMaster cm
             INNER JOIN dbo.ClntAcct ca ON cm.GCIF = ca.GCIF
             WHERE ca.ClntCode = @ClntCode";
 
-        var parameters = new Dictionary<string, object>
-        {
-            { "ClntCode", clntCode }
-        };
+		List<LB_DALParam> parameters = new List<LB_DALParam>()
+		{
+			new LB_DALParam("ClntCode", clntCode),
+		};
 
-        try
-        {
-            var result = await _repository.ExecuteScalarAsync<string>(sql, parameters, false, cancellationToken);
-            return !string.IsNullOrEmpty(result);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error getting client by client code: {ClntCode}", clntCode);
-            throw;
-        }
-    }
+		try
+		{
+			var result = await _repository.ExecuteScalarAsync<string>(sql, parameters, false, cancellationToken);
+			return !string.IsNullOrEmpty(result);
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(ex, "Error getting client by client code: {ClntCode}", clntCode);
+			throw;
+		}
+	}
 
-    #endregion
+	#endregion
 }

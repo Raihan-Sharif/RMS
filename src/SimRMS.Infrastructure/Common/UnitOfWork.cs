@@ -1,7 +1,7 @@
 ﻿using LB.DAL.Core.Common;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SimRMS.Domain.Interfaces.Common;
+using SimRMS.Infrastructure.Interfaces.Common;
 
 
 /// <summary>

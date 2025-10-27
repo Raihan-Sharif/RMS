@@ -16,7 +16,7 @@
 /// </summary>
 
 
-namespace SimRMS.Domain.Exceptions;
+namespace SimRMS.Application.Exceptions;
 
 public class FileOperationException : DomainException
 {

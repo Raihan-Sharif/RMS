@@ -3,13 +3,15 @@ using Microsoft.Extensions.Logging;
 using SimRMS.Application.Interfaces.Services;
 using SimRMS.Application.Models.DTOs;
 using SimRMS.Application.Models.Requests;
-using SimRMS.Domain.Interfaces.Common;
+using SimRMS.Infrastructure.Interfaces.Common;
 using SimRMS.Shared.Models;
-using SimRMS.Domain.Exceptions;
-using SimRMS.Domain.Common;
+using SimRMS.Application.Exceptions;
+using SimRMS.Application.Common;
 using SimRMS.Application.Interfaces;
 using SimRMS.Shared.Constants;
-using ValidationException = SimRMS.Domain.Exceptions.ValidationException;
+using ValidationException = SimRMS.Application.Exceptions.ValidationException;
+using LB.DAL.Core.Common;
+using System.Data;
 
 /// <summary>
 /// <para>
@@ -77,26 +79,28 @@ public class StockExposureService : IStockExposureService
 
         try
         {
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                UsrID = usrID,
-                ClntCode = clntCode,
-                StkCode = stkCode,
-                SearchText = searchTerm,
-                SortColumn = "StkCode",
-                SortDirection = "ASC",
-                TotalCount = 0
+                // Pagination Parameters
+                new LB_DALParam("PageNumber", pageNumber),
+	            new LB_DALParam("PageSize", pageSize),
+
+                // Filter Parameters (assuming all can be null and require DBNull handling)
+                new LB_DALParam("UsrID", usrID ?? (object)DBNull.Value),
+	            new LB_DALParam("ClntCode", clntCode ?? (object)DBNull.Value),
+	            new LB_DALParam("StkCode", stkCode ?? (object)DBNull.Value),
+	            new LB_DALParam("SearchText", searchTerm ?? (object)DBNull.Value),
+
+                // Sorting Parameters
+                new LB_DALParam("SortColumn", "StkCode"),
+	            new LB_DALParam("SortDirection", "ASC")
             };
 
-            _logger.LogDebug("Calling LB_SP_GetStkCtrlList with parameters: PageNumber={PageNumber}, PageSize={PageSize}",
+			_logger.LogDebug("Calling LB_SP_GetStkCtrlList with parameters: PageNumber={PageNumber}, PageSize={PageSize}",
                 pageNumber, pageSize);
 
             var result = await _repository.QueryPagedAsync<StockExposureDto>(
                 sqlOrSp: "LB_SP_GetStkCtrlList",
-                pageNumber: pageNumber,
-                pageSize: pageSize,
                 parameters: parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
@@ -130,23 +134,28 @@ public class StockExposureService : IStockExposureService
 
         try
         {
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                PageNumber = 1,
-                PageSize = 1,
-                request.DataType,
-                request.CtrlType,
-                request.StkCode,
-                request.CoCode,
-                request.CoBrchCode,
-                request.UsrID,
-                request.ClntCode,
-                request.ClntType,
-                StatusCode = 0, // output param
-                StatusMsg = "" // output param
+                // Pagination Parameters
+                new LB_DALParam("PageNumber", 1),
+	            new LB_DALParam("PageSize", 1),
+
+                // Filter/Input Parameters (Assuming properties taken directly from 'request' might be nullable)
+                new LB_DALParam("DataType", request.DataType ?? (object)DBNull.Value),
+	            new LB_DALParam("CtrlType", request.CtrlType ?? (object)DBNull.Value),
+	            new LB_DALParam("StkCode", request.StkCode ?? (object)DBNull.Value),
+	            new LB_DALParam("CoCode", request.CoCode ?? (object)DBNull.Value),
+	            new LB_DALParam("CoBrchCode", request.CoBrchCode ?? (object)DBNull.Value),
+	            new LB_DALParam("UsrID", request.UsrID ?? (object)DBNull.Value),
+	            new LB_DALParam("ClntCode", request.ClntCode ?? (object)DBNull.Value),
+	            new LB_DALParam("ClntType", request.ClntType ?? (object)DBNull.Value),
+
+                // Output Parameters
+                new LB_DALParam("StatusCode", 0, ParameterDirection.Output),
+	            new LB_DALParam("StatusMsg", string.Empty, ParameterDirection.Output)
             };
 
-            var result = await _repository.QuerySingleAsync<StockExposureDto>(
+			var result = await _repository.QuerySingleAsync<StockExposureDto>(
                 sqlOrSp: "LB_SP_GetStkCtrlByKey",
                 parameters: parameters,
                 isStoredProcedure: true,
@@ -180,35 +189,46 @@ public class StockExposureService : IStockExposureService
 
         try
         {
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["Action"] = (byte)ActionTypeEnum.INSERT,
-                ["DataType"] = request.DataType,
-                ["CtrlType"] = request.CtrlType,
-                ["StkCode"] = request.StkCode,
-                ["CoCode"] = request.CoCode ?? (object)DBNull.Value,
-                ["CoBrchCode"] = request.CoBrchCode ?? (object)DBNull.Value,
-                ["UsrID"] = request.UsrID ?? (object)DBNull.Value,
-                ["ClntCode"] = request.ClntCode ?? (object)DBNull.Value,
-                ["ClntType"] = request.ClntType ?? (object)DBNull.Value,
-                ["XchgCode"] = request.XchgCode ?? (object)DBNull.Value,
-                ["CtrlStatus"] = request.CtrlStatus,
-                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
-                ["MakerId"] = _currentUserService.UserId,
-                ["ActionDt"] = DateTime.Now,
-                ["TransDt"] = DateTime.Now.Date,
-                ["ActionType"] = (byte)ActionTypeEnum.INSERT,
-                ["AuthId"] = (object)DBNull.Value,
-                ["AuthDt"] = (object)DBNull.Value,
-                ["AuthTransDt"] = (object)DBNull.Value,
-                ["IsAuth"] = (byte)AuthTypeEnum.UnAuthorize,
-                ["AuthLevel"] = (byte)AuthLevelEnum.Level1,
-                ["IsDel"] = (byte)DeleteStatusEnum.Active,
-                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["RowsAffected"] = 0 // OUTPUT parameter
+                // Primary Action and Data Parameters
+                new LB_DALParam("Action", (byte)ActionTypeEnum.INSERT),
+	            new LB_DALParam("DataType", request.DataType),
+	            new LB_DALParam("CtrlType", request.CtrlType),
+	            new LB_DALParam("StkCode", request.StkCode),
+
+                // Conditional/Nullable Input Parameters (already include DBNull check from source)
+                new LB_DALParam("CoCode", request.CoCode ?? (object)DBNull.Value),
+	            new LB_DALParam("CoBrchCode", request.CoBrchCode ?? (object)DBNull.Value),
+	            new LB_DALParam("UsrID", request.UsrID ?? (object)DBNull.Value),
+	            new LB_DALParam("ClntCode", request.ClntCode ?? (object)DBNull.Value),
+	            new LB_DALParam("ClntType", request.ClntType ?? (object)DBNull.Value),
+	            new LB_DALParam("XchgCode", request.XchgCode ?? (object)DBNull.Value),
+
+                // Control and Audit Parameters
+                new LB_DALParam("CtrlStatus", request.CtrlStatus),
+	            new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("MakerId", _currentUserService.UserId),
+	            new LB_DALParam("ActionDt", DateTime.Now),
+	            new LB_DALParam("TransDt", DateTime.Now.Date),
+	            new LB_DALParam("ActionType", (byte)ActionTypeEnum.INSERT),
+
+                // Authorization/Workflow Parameters (Initial State)
+                new LB_DALParam("AuthId", (object)DBNull.Value),
+	            new LB_DALParam("AuthDt", (object)DBNull.Value),
+	            new LB_DALParam("AuthTransDt", (object)DBNull.Value),
+	            new LB_DALParam("IsAuth", (byte)AuthTypeEnum.UnAuthorize),
+	            new LB_DALParam("AuthLevel", (byte)AuthLevelEnum.Level1),
+	            new LB_DALParam("IsDel", (byte)DeleteStatusEnum.Active),
+
+                // Remarks
+                new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
-            _logger.LogDebug("Calling LB_SP_CrudStkCtrl with Action=1 (INSERT)");
+			_logger.LogDebug("Calling LB_SP_CrudStkCtrl with Action=1 (INSERT)");
 
             var result = await _repository.ExecuteWithOutputAsync(
                 "LB_SP_CrudStkCtrl",
@@ -284,35 +304,46 @@ public class StockExposureService : IStockExposureService
                 throw new DomainException($"Stock exposure not found");
             }
 
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["Action"] = (byte)ActionTypeEnum.UPDATE,
-                ["DataType"] = request.DataType,
-                ["CtrlType"] = request.CtrlType,
-                ["StkCode"] = request.StkCode,
-                ["CoCode"] = request.CoCode ?? (object)DBNull.Value,
-                ["CoBrchCode"] = request.CoBrchCode ?? (object)DBNull.Value,
-                ["UsrID"] = request.UsrID ?? (object)DBNull.Value,
-                ["ClntCode"] = request.ClntCode ?? (object)DBNull.Value,
-                ["ClntType"] = request.ClntType ?? (object)DBNull.Value,
-                ["XchgCode"] = (object)DBNull.Value,
-                ["CtrlStatus"] = request.CtrlStatus ?? (object)DBNull.Value,
-                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
-                ["MakerId"] = _currentUserService.UserId,
-                ["ActionDt"] = DateTime.Now,
-                ["TransDt"] = DateTime.Now.Date,
-                ["ActionType"] = (byte)ActionTypeEnum.UPDATE,
-                ["AuthId"] = (object)DBNull.Value,
-                ["AuthDt"] = (object)DBNull.Value,
-                ["AuthTransDt"] = (object)DBNull.Value,
-                ["IsAuth"] = (byte)AuthTypeEnum.UnAuthorize,
-                ["AuthLevel"] = (byte)AuthLevelEnum.Level1,
-                ["IsDel"] = (byte)DeleteStatusEnum.Active,
-                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["RowsAffected"] = 0 // OUTPUT parameter
+                // Primary Action and Data Parameters (Keys for the update)
+                new LB_DALParam("Action", (byte)ActionTypeEnum.UPDATE),
+	            new LB_DALParam("DataType", request.DataType),
+	            new LB_DALParam("CtrlType", request.CtrlType),
+	            new LB_DALParam("StkCode", request.StkCode),
+
+                // Conditional/Key Input Parameters (Retaining null checks from source)
+                new LB_DALParam("CoCode", request.CoCode ?? (object)DBNull.Value),
+	            new LB_DALParam("CoBrchCode", request.CoBrchCode ?? (object)DBNull.Value),
+	            new LB_DALParam("UsrID", request.UsrID ?? (object)DBNull.Value),
+	            new LB_DALParam("ClntCode", request.ClntCode ?? (object)DBNull.Value),
+	            new LB_DALParam("ClntType", request.ClntType ?? (object)DBNull.Value),
+	            new LB_DALParam("XchgCode", (object)DBNull.Value), // Explicitly DBNull
+                new LB_DALParam("CtrlStatus", request.CtrlStatus ?? (object)DBNull.Value), // The value being updated
+
+                // Audit Parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("MakerId", _currentUserService.UserId),
+	            new LB_DALParam("ActionDt", DateTime.Now),
+	            new LB_DALParam("TransDt", DateTime.Now.Date),
+	            new LB_DALParam("ActionType", (byte)ActionTypeEnum.UPDATE),
+
+                // Authorization/Workflow Parameters (Resetting to initial unauthorized state)
+                new LB_DALParam("AuthId", (object)DBNull.Value),
+	            new LB_DALParam("AuthDt", (object)DBNull.Value),
+	            new LB_DALParam("AuthTransDt", (object)DBNull.Value),
+	            new LB_DALParam("IsAuth", (byte)AuthTypeEnum.UnAuthorize),
+	            new LB_DALParam("AuthLevel", (byte)AuthLevelEnum.Level1),
+	            new LB_DALParam("IsDel", (byte)DeleteStatusEnum.Active),
+
+                // Remarks
+                new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
-            _logger.LogDebug("Calling LB_SP_CrudStkCtrl with Action=2 (UPDATE)");
+			_logger.LogDebug("Calling LB_SP_CrudStkCtrl with Action=2 (UPDATE)");
 
             var result = await _repository.ExecuteWithOutputAsync(
                 "LB_SP_CrudStkCtrl",
@@ -388,35 +419,48 @@ public class StockExposureService : IStockExposureService
                 throw new DomainException($"Stock exposure not found");
             }
 
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["Action"] = (byte)ActionTypeEnum.DELETE,
-                ["DataType"] = request.DataType,
-                ["CtrlType"] = request.CtrlType,
-                ["StkCode"] = request.StkCode,
-                ["CoCode"] = request.CoCode ?? (object)DBNull.Value,
-                ["CoBrchCode"] = request.CoBrchCode ?? (object)DBNull.Value,
-                ["UsrID"] = request.UsrID ?? (object)DBNull.Value,
-                ["ClntCode"] = request.ClntCode ?? (object)DBNull.Value,
-                ["ClntType"] = request.ClntType ?? (object)DBNull.Value,
-                ["XchgCode"] = (object)DBNull.Value,
-                ["CtrlStatus"] = (object)DBNull.Value,
-                ["IPAddress"] = _currentUserService.GetClientIPAddress(),
-                ["MakerId"] = _currentUserService.UserId,
-                ["ActionDt"] = DateTime.Now,
-                ["TransDt"] = DateTime.Now.Date,
-                ["ActionType"] = (byte)ActionTypeEnum.DELETE,
-                ["AuthId"] = (object)DBNull.Value,
-                ["AuthDt"] = (object)DBNull.Value,
-                ["AuthTransDt"] = (object)DBNull.Value,
-                ["IsAuth"] = (object)DBNull.Value,
-                ["AuthLevel"] = (object)DBNull.Value,
-                ["IsDel"] = (object)DBNull.Value,
-                ["Remarks"] = request.Remarks ?? (object)DBNull.Value,
-                ["RowsAffected"] = 0 // OUTPUT parameter
+                // Primary Action and Key Parameters
+                new LB_DALParam("Action", (byte)ActionTypeEnum.DELETE),
+	            new LB_DALParam("DataType", request.DataType),
+	            new LB_DALParam("CtrlType", request.CtrlType),
+	            new LB_DALParam("StkCode", request.StkCode),
+
+                // Conditional/Key Input Parameters (Retaining null checks from source)
+                new LB_DALParam("CoCode", request.CoCode ?? (object)DBNull.Value),
+	            new LB_DALParam("CoBrchCode", request.CoBrchCode ?? (object)DBNull.Value),
+	            new LB_DALParam("UsrID", request.UsrID ?? (object)DBNull.Value),
+	            new LB_DALParam("ClntCode", request.ClntCode ?? (object)DBNull.Value),
+	            new LB_DALParam("ClntType", request.ClntType ?? (object)DBNull.Value),
+
+                // Data/Status Parameters (Explicitly DBNull for DELETE operation)
+                new LB_DALParam("XchgCode", (object)DBNull.Value),
+	            new LB_DALParam("CtrlStatus", (object)DBNull.Value),
+
+                // Audit Parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("MakerId", _currentUserService.UserId),
+	            new LB_DALParam("ActionDt", DateTime.Now),
+	            new LB_DALParam("TransDt", DateTime.Now.Date),
+	            new LB_DALParam("ActionType", (byte)ActionTypeEnum.DELETE),
+
+                // Authorization/Workflow Parameters (Explicitly DBNull for DELETE operation)
+                new LB_DALParam("AuthId", (object)DBNull.Value),
+	            new LB_DALParam("AuthDt", (object)DBNull.Value),
+	            new LB_DALParam("AuthTransDt", (object)DBNull.Value),
+	            new LB_DALParam("IsAuth", (object)DBNull.Value),
+	            new LB_DALParam("AuthLevel", (object)DBNull.Value),
+	            new LB_DALParam("IsDel", (object)DBNull.Value),
+
+                // Remarks
+                new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
-            _logger.LogDebug("Calling LB_SP_CrudStkCtrl with Action=3 (DELETE)");
+			_logger.LogDebug("Calling LB_SP_CrudStkCtrl with Action=3 (DELETE)");
 
             var result = await _repository.ExecuteWithOutputAsync(
                 "LB_SP_CrudStkCtrl",
@@ -492,28 +536,30 @@ public class StockExposureService : IStockExposureService
 
         try
         {
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["PageNumber"] = pageNumber,
-                ["PageSize"] = pageSize,
-                ["UsrID"] = usrID ?? (object)DBNull.Value,
-                ["ClntCode"] = clntCode ?? (object)DBNull.Value,
-                ["StkCode"] = stkCode ?? (object)DBNull.Value,
-                ["SearchText"] = searchTerm ?? (object)DBNull.Value,
-                ["SortColumn"] = "StkCode",
-                ["SortDirection"] = "ASC",
-                ["isAuth"] = (byte)isAuth,
-                ["MakerId"] = _currentUserService.UserId,
-                ["TotalCount"] = 0
+                // Pagination Parameters
+                new LB_DALParam("PageNumber", pageNumber),
+	            new LB_DALParam("PageSize", pageSize),
+
+                // Filter Parameters (Already includes DBNull handling from the source Dictionary)
+                new LB_DALParam("UsrID", usrID ?? (object)DBNull.Value),
+	            new LB_DALParam("ClntCode", clntCode ?? (object)DBNull.Value),
+	            new LB_DALParam("StkCode", stkCode ?? (object)DBNull.Value),
+	            new LB_DALParam("SearchText", searchTerm ?? (object)DBNull.Value),
+
+                // Sorting and Control Parameters
+                new LB_DALParam("SortColumn", "StkCode"),
+	            new LB_DALParam("SortDirection", "ASC"),
+	            new LB_DALParam("isAuth", (byte)isAuth),
+	            new LB_DALParam("MakerId", _currentUserService.UserId)
             };
 
-            _logger.LogDebug("Calling SP {StoredProcedure} with parameters: PageNumber={PageNumber}, PageSize={PageSize}, isAuth={IsAuth}, MakerId={MakerId}",
+			_logger.LogDebug("Calling SP {StoredProcedure} with parameters: PageNumber={PageNumber}, PageSize={PageSize}, isAuth={IsAuth}, MakerId={MakerId}",
                 "LB_SP_GetStkCtrlListWF", pageNumber, pageSize, isAuth, _currentUserService.UserId);
 
             var result = await _repository.QueryPagedAsync<StockExposureDto>(
                 sqlOrSp: "LB_SP_GetStkCtrlListWF",
-                pageNumber: pageNumber,
-                pageSize: pageSize,
                 parameters: parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
@@ -550,28 +596,39 @@ public class StockExposureService : IStockExposureService
 
             var ipAddress = _currentUserService.GetClientIPAddress();
 
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["Action"] = request.ActionType,
-                ["DataType"] = request.DataType,
-                ["CtrlType"] = request.CtrlType,
-                ["StkCode"] = request.StkCode,
-                ["CoCode"] = request.CoCode ?? (object)DBNull.Value,
-                ["CoBrchCode"] = request.CoBrchCode ?? (object)DBNull.Value,
-                ["UsrID"] = request.UsrID ?? (object)DBNull.Value,
-                ["ClntCode"] = request.ClntCode ?? (object)DBNull.Value,
-                ["ClntType"] = request.ClntType ?? (object)DBNull.Value,
-                ["XchgCode"] = (object)DBNull.Value,
-                ["CtrlStatus"] = (object)DBNull.Value,
-                ["IPAddress"] = ipAddress,
-                ["AuthID"] = _currentUserService.UserId,
-                ["IsAuth"] = request.IsAuth,
-                ["ActionType"] = request.ActionType,
-                ["Remarks"] = !string.IsNullOrEmpty(request.Remarks) ? request.Remarks : (object)DBNull.Value,
-                ["RowsAffected"] = 0
+                // Action and Key Parameters
+                new LB_DALParam("Action", request.ActionType),
+	            new LB_DALParam("DataType", request.DataType),
+	            new LB_DALParam("CtrlType", request.CtrlType),
+	            new LB_DALParam("StkCode", request.StkCode),
+
+                // Filter/Key Parameters (Retaining null checks from source)
+                new LB_DALParam("CoCode", request.CoCode ?? (object)DBNull.Value),
+	            new LB_DALParam("CoBrchCode", request.CoBrchCode ?? (object)DBNull.Value),
+	            new LB_DALParam("UsrID", request.UsrID ?? (object)DBNull.Value),
+	            new LB_DALParam("ClntCode", request.ClntCode ?? (object)DBNull.Value),
+	            new LB_DALParam("ClntType", request.ClntType ?? (object)DBNull.Value),
+
+                // Data/Status Parameters (Explicitly DBNull in source)
+                new LB_DALParam("XchgCode", (object)DBNull.Value),
+	            new LB_DALParam("CtrlStatus", (object)DBNull.Value),
+
+                // Authorization/Audit Parameters
+                new LB_DALParam("IPAddress", ipAddress ?? (object)DBNull.Value), // Added null check for ipAddress
+                new LB_DALParam("AuthID", _currentUserService.UserId),
+	            new LB_DALParam("IsAuth", request.IsAuth),
+	            new LB_DALParam("ActionType", request.ActionType),
+
+                // Remarks (Handling empty string/null logic from source)
+                new LB_DALParam("Remarks", !string.IsNullOrEmpty(request.Remarks) ? (object)request.Remarks : (object)DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
-            var result = await _repository.ExecuteWithOutputAsync(
+			var result = await _repository.ExecuteWithOutputAsync(
                 "LB_SP_AuthStkCtrl",
                 parameters,
                 cancellationToken: cancellationToken);

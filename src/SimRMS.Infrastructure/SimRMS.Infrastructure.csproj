@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SimRMS.Application\SimRMS.Application.csproj" />
-    <ProjectReference Include="..\SimRMS.Domain\SimRMS.Domain.csproj" />
+    <!--<ProjectReference Include="..\SimRMS.Domain\SimRMS.Domain.csproj" />-->
   </ItemGroup>
 
   <ItemGroup>

@@ -15,7 +15,7 @@
 /// </para>
 /// </summary>
 
-using SimRMS.Domain.Common;
+using SimRMS.Application.Common;
 
 namespace SimRMS.Application.Models.DTOs
 {

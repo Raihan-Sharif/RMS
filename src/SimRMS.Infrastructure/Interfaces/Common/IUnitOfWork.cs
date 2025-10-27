@@ -15,7 +15,7 @@
 /// </para>
 /// </summary>
 
-namespace SimRMS.Domain.Interfaces.Common;
+namespace SimRMS.Infrastructure.Interfaces.Common;
 
 /// <summary>
 /// Simplified UnitOfWork interface with only common transaction operations

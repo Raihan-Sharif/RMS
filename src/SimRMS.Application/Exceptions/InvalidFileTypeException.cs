@@ -15,7 +15,7 @@
 /// </para>
 /// </summary>
 
-namespace SimRMS.Domain.Exceptions;
+namespace SimRMS.Application.Exceptions;
 
 public class InvalidFileTypeException : ValidationException
 {

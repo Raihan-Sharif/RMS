@@ -1,7 +1,8 @@
+using LB.DAL.Core.Common;
 using Microsoft.Extensions.Logging;
 using SimRMS.Application.Interfaces.Services;
 using SimRMS.Application.Models.DTOs;
-using SimRMS.Domain.Interfaces.Common;
+using SimRMS.Infrastructure.Interfaces.Common;
 
 /// <summary>
 /// <para>
@@ -45,12 +46,12 @@ public class CommonDataService : ICommonDataService
             FROM MstCoBrch
             WHERE IsAuth = 1 AND IsDel = 0";
 
-        object? parameters = null;
+        List<LB_DALParam> parameters = new List<LB_DALParam>();
 
         if (!string.IsNullOrWhiteSpace(companyCode))
         {
             sql += " AND CoCode = @CompanyCode";
-            parameters = new { CompanyCode = companyCode };
+            parameters.Add(new LB_DALParam("CompanyCode", companyCode));
         }
 
         sql += " ORDER BY CoCode, CoBrchCode";
@@ -102,12 +103,11 @@ public class CommonDataService : ICommonDataService
             FROM LBTrader
             WHERE IsAuth = 1 AND IsDel = 0";
 
-        object? parameters = null;
-
+        List<LB_DALParam> parameters = new List<LB_DALParam>();
         if (!string.IsNullOrWhiteSpace(exchangeCode))
         {
             sql += " AND XchgCode = @ExchangeCode";
-            parameters = new { ExchangeCode = exchangeCode };
+            parameters.Add(new LB_DALParam("ExchangeCode", exchangeCode));
         }
 
         sql += " ORDER BY XchgCode, DlrCode";
@@ -232,11 +232,12 @@ public class CommonDataService : ICommonDataService
             WHERE cm.IsDel = 0 AND cm.IsAuth = 1";
 
         // Add branch filter if branchCode is provided
-        var parameters = new Dictionary<string, object>();
+        List<LB_DALParam> parameters = new List<LB_DALParam>();
+
         if (!string.IsNullOrEmpty(branchCode))
         {
             sql += " AND ca.CoBrchCode = @BranchCode";
-            parameters.Add("BranchCode", branchCode);
+            parameters.Add(new LB_DALParam("BranchCode", branchCode));
         }
 
         sql += " ORDER BY cm.ClntName";
@@ -282,13 +283,14 @@ public class CommonDataService : ICommonDataService
     {
         _logger.LogInformation("Getting stock board list with exchangeCode filter: {ExchangeCode}", exchangeCode);
 
+        List<LB_DALParam> parameters = new List<LB_DALParam>();
         var sql = @"
             SELECT XchgCode, BrdCode, BrdDesc
             FROM MstStkBrd
             WHERE (XchgCode = @ExchangeCode OR @ExchangeCode IS NULL)
             ORDER BY XchgCode, BrdCode";
 
-        var parameters = new { ExchangeCode = exchangeCode };
+        parameters.Add(new LB_DALParam("ExchangeCode", exchangeCode));
 
         try
         {
@@ -314,7 +316,8 @@ public class CommonDataService : ICommonDataService
                 AND (BrdCode = @BoardCode OR @BoardCode IS NULL)
             ORDER BY XchgCode, BrdCode, SectCode";
 
-        var parameters = new { ExchangeCode = exchangeCode, BoardCode = boardCode };
+        List<LB_DALParam> parameters = new List<LB_DALParam>();
+        parameters.Add(new LB_DALParam("ExchangeCode", exchangeCode));
 
         try
         {
@@ -347,24 +350,27 @@ public class CommonDataService : ICommonDataService
             INNER JOIN MstStkSect mss ON ms.StkBrdCode = mss.BrdCode AND ms.StkSectCode = mss.SectCode
             WHERE ms.IsAuth = 1 AND ms.IsDel = 0";
 
-        var parameters = new Dictionary<string, object>();
+        List<LB_DALParam> parameters = new List<LB_DALParam>();
 
         if (!string.IsNullOrWhiteSpace(exchangeCode))
         {
             sql += " AND ms.XchgCode = @ExchangeCode";
-            parameters.Add("ExchangeCode", exchangeCode);
+            parameters.Add(new LB_DALParam("ExchangeCode", exchangeCode));
+
         }
 
         if (!string.IsNullOrWhiteSpace(boardCode))
         {
             sql += " AND ms.StkBrdCode = @BoardCode";
-            parameters.Add("BoardCode", boardCode);
+            parameters.Add(new LB_DALParam("BoardCode", boardCode));
+
         }
 
         if (!string.IsNullOrWhiteSpace(sectorCode))
         {
             sql += " AND ms.StkSectCode = @SectorCode";
-            parameters.Add("SectorCode", sectorCode);
+            parameters.Add(new LB_DALParam("SectorCode", sectorCode));
+
         }
 
         sql += " ORDER BY ms.StkCode";

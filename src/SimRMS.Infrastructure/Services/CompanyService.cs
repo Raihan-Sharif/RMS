@@ -3,13 +3,15 @@ using Microsoft.Extensions.Logging;
 using SimRMS.Application.Interfaces.Services;
 using SimRMS.Application.Models.DTOs;
 using SimRMS.Application.Models.Requests;
-using SimRMS.Domain.Interfaces.Common;
+using SimRMS.Infrastructure.Interfaces.Common;
 using SimRMS.Shared.Models;
-using SimRMS.Domain.Exceptions;
+using SimRMS.Application.Exceptions;
 using SimRMS.Application.Interfaces;
 using SimRMS.Shared.Constants;
-using SimRMS.Domain.Common;
-using ValidationException = SimRMS.Domain.Exceptions.ValidationException;
+using SimRMS.Application.Common;
+using ValidationException = SimRMS.Application.Exceptions.ValidationException;
+using LB.DAL.Core.Common;
+using System.Data;
 
 /// <summary>
 /// <para>
@@ -71,15 +73,17 @@ public class CompanyService : ICompanyService
 
         try
         {
-            var parameters = new
+            List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                SortColumn = "CoDesc",
-                SortDirection = "ASC",
-                SearchTerm = searchTerm,
-                CoCode = coCode,
-                TotalCount = 0 // output param
+                // Input Parameters
+                new LB_DALParam("PageNumber", pageNumber),
+                new LB_DALParam("PageSize", pageSize),
+                new LB_DALParam("SortColumn", "CoDesc"),
+                new LB_DALParam("SortDirection", "ASC"),
+    
+                // Optional/Filter Parameters
+                new LB_DALParam("SearchTerm", searchTerm ?? (object)DBNull.Value),
+                new LB_DALParam("CoCode", coCode ?? (object)DBNull.Value)
             };
 
             _logger.LogDebug("Calling LB_SP_GetCompanyList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, SearchTerm={SearchTerm}",
@@ -87,8 +91,6 @@ public class CompanyService : ICompanyService
 
             var result = await _repository.QueryPagedAsync<CompanyDto>(
                 sqlOrSp: "LB_SP_GetCompanyList",
-                pageNumber: pageNumber,
-                pageSize: pageSize,
                 parameters: parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
@@ -121,11 +123,15 @@ public class CompanyService : ICompanyService
 
         try
         {
-            var parameters = new
+
+            List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                CoCode = coCode,
-                statusCode = 0, // output param
-                statusMsg = "" // output param
+                // Input Parameter
+                new LB_DALParam("CoCode", coCode ?? (object)DBNull.Value),
+
+                // Output Parameters
+                new LB_DALParam("statusCode", 0, ParameterDirection.Output),
+                new LB_DALParam("statusMsg", string.Empty, ParameterDirection.Output)
             };
 
             var result = await _repository.QuerySingleAsync<CompanyDto>(
@@ -169,20 +175,29 @@ public class CompanyService : ICompanyService
                 throw new DomainException($"The Company was not found: {coCode}");
             }
 
-            var parameters = new
+            List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                Action = (byte)ActionTypeEnum.UPDATE,
-                CoCode = coCode,
-                CoDesc = request.CoDesc,
-                EnableExchangeWideSellProceed = request.EnableExchangeWideSellProceed,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                ActionDt = DateTime.Now,
-                TransDt = DateTime.Now.Date,
-                ActionType = (byte)ActionTypeEnum.UPDATE,
-                IsDel = (byte)DeleteStatusEnum.Active,
-                Remarks = request.Remarks,
-                RowsAffected = 0
+                // Primary Action/Key Parameters
+                new LB_DALParam("Action", (byte)ActionTypeEnum.UPDATE),
+                new LB_DALParam("CoCode", coCode), // Input Key
+    
+                // Data/Update Parameters
+                new LB_DALParam("CoDesc", request.CoDesc ?? (object)DBNull.Value),
+                new LB_DALParam("EnableExchangeWideSellProceed", request.EnableExchangeWideSellProceed),
+    
+                // Audit/Control Parameters
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+                new LB_DALParam("MakerId", _currentUserService.UserId),
+                new LB_DALParam("ActionDt", DateTime.Now),
+                new LB_DALParam("TransDt", DateTime.Now.Date),
+                new LB_DALParam("ActionType", (byte)ActionTypeEnum.UPDATE),
+                new LB_DALParam("IsDel", (byte)DeleteStatusEnum.Active),
+    
+                // Optional Remarks Parameter
+                new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
             _logger.LogDebug("Calling LB_SP_CrudMstCo with Action=2 (UPDATE)");
@@ -261,18 +276,21 @@ public class CompanyService : ICompanyService
 
         try
         {
-            // FIXED: Proper parameter setup for OUTPUT parameter handling
-            var parameters = new Dictionary<string, object>
+            List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["PageNumber"] = pageNumber,
-                ["PageSize"] = pageSize,
-                ["SortColumn"] = "CoCode",
-                ["SortDirection"] = "ASC",
-                ["CoCode"] = coCode ?? (object)DBNull.Value,
-                ["SearchTerm"] = searchTerm ?? (object)DBNull.Value,
-                ["isAuth"] = (byte)isAuth, // 0: Unauthorized or 2: Denied records
-                ["MakerId"] = _currentUserService.UserId,
-                ["TotalCount"] = 0 // OUTPUT parameter - will be populated by SP
+                // Pagination and Sorting Parameters
+                new LB_DALParam("PageNumber", pageNumber),
+                new LB_DALParam("PageSize", pageSize),
+                new LB_DALParam("SortColumn", "CoDesc"),
+                new LB_DALParam("SortDirection", "ASC"),
+
+                // Filter Parameters (already includes DBNull handling from the source Dictionary)
+                new LB_DALParam("CoCode", coCode ?? (object)DBNull.Value),
+                new LB_DALParam("SearchTerm", searchTerm ?? (object)DBNull.Value),
+
+                // Control Parameters
+                new LB_DALParam("isAuth", (byte)isAuth),
+                new LB_DALParam("MakerId", _currentUserService.UserId)
             };
 
             _logger.LogDebug("Calling SP {StoredProcedure} with parameters: PageNumber={PageNumber}, PageSize={PageSize}, isAuth={IsAuth}, MakerId={MakerId}",
@@ -281,8 +299,6 @@ public class CompanyService : ICompanyService
             // FIXED: The GenericRepository now properly handles OUTPUT parameters in a single call
             var result = await _repository.QueryPagedAsync<CompanyDto>(
                 sqlOrSp: "LB_SP_GetCompanyListWF",
-                pageNumber: pageNumber,
-                pageSize: pageSize,
                 parameters: parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
@@ -325,18 +341,23 @@ public class CompanyService : ICompanyService
 
             var ipAddress = _currentUserService.GetClientIPAddress();
 
-            var parameters = new Dictionary<string, object>
+            List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                ["Action"] = request.ActionType,
-                ["CoCode"] = coCode,
-                ["IPAddress"] = ipAddress,
-                ["AuthID"] = _currentUserService.UserId,
-                ["IsAuth"] = request.IsAuth,
-                ["ActionType"] = request.ActionType,
-                ["Remarks"] = !string.IsNullOrEmpty(request.Remarks) ? request.Remarks : DBNull.Value,
-                ["RowsAffected"] = 0 // OUTPUT parameter
+                // Input Parameters
+                new LB_DALParam("Action", request.ActionType), 
+                new LB_DALParam("CoCode", coCode ?? (object)DBNull.Value), // Added null check for safety
+                new LB_DALParam("IPAddress", ipAddress ?? (object)DBNull.Value),
+                new LB_DALParam("AuthID", _currentUserService.UserId),
+                new LB_DALParam("IsAuth", request.IsAuth),
+                new LB_DALParam("ActionType", request.ActionType),
+    
+                // Remarks handling the same logic as the source dictionary
+                new LB_DALParam("Remarks", !string.IsNullOrEmpty(request.Remarks) ? (object)request.Remarks : DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
-            
+
             var result = await _repository.ExecuteWithOutputAsync(
                 "LB_SP_AuthCompany",
                 parameters,

@@ -3,13 +3,17 @@ using Microsoft.Extensions.Logging;
 using SimRMS.Application.Interfaces.Services;
 using SimRMS.Application.Models.DTOs;
 using SimRMS.Application.Models.Requests;
-using SimRMS.Domain.Interfaces.Common;
+using SimRMS.Infrastructure.Interfaces.Common;
 using SimRMS.Shared.Models;
-using SimRMS.Domain.Exceptions;
+using SimRMS.Application.Exceptions;
 using SimRMS.Application.Interfaces;
 using SimRMS.Shared.Constants;
-using SimRMS.Domain.Common;
-using ValidationException = SimRMS.Domain.Exceptions.ValidationException;
+using SimRMS.Application.Common;
+using ValidationException = SimRMS.Application.Exceptions.ValidationException;
+using LB.DAL.Core.Common;
+using System.Data;
+using Azure;
+using System.Reflection;
 
 /// <summary>
 /// <para>
@@ -92,24 +96,21 @@ public class ClientStockService : IClientStockService
 
         try
         {
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                PageNumber = request.PageNumber,
-                PageSize = request.PageSize,
-                BranchCode = request.BranchCode,
-                ClientCode = request.ClientCode,
-                StockCode = request.StockCode,
-                XchgCode = request.XchgCode,
-                SearchText = request.SearchText,
-                SortColumn = request.SortColumn ?? "ClientCode",
-                SortDirection = request.SortDirection ?? "ASC",
-                TotalCount = 0
+	            new LB_DALParam("PageNumber", request.PageNumber),
+	            new LB_DALParam("PageSize", request.PageSize),
+	            new LB_DALParam("BranchCode", request.BranchCode ?? (object)DBNull.Value),
+	            new LB_DALParam("ClientCode", request.ClientCode ?? (object)DBNull.Value),
+	            new LB_DALParam("StockCode", request.StockCode ?? (object)DBNull.Value),
+	            new LB_DALParam("XchgCode", request.XchgCode ?? (object)DBNull.Value),
+	            new LB_DALParam("SearchText", request.SearchText ?? (object)DBNull.Value),
+	            new LB_DALParam("SortColumn", request.SortColumn ?? "ClientCode"),
+	            new LB_DALParam("SortDirection", request.SortDirection ?? "ASC")
             };
 
-            var result = await _repository.QueryPagedAsync<ClientStockDto>(
+			var result = await _repository.QueryPagedAsync<ClientStockDto>(
                 sqlOrSp: "LB_SP_GetShareInfoList",
-                pageNumber: request.PageNumber,
-                pageSize: request.PageSize,
                 parameters: parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
@@ -147,16 +148,17 @@ public class ClientStockService : IClientStockService
 
         try
         {
-            var parameters = new
-            {
-                BranchCode = request.BranchCode,
-                ClientCode = request.ClientCode,
-                StockCode = request.StockCode,
-                StatusCode = 0, // output param
-                StatusMsg = "" // output param
-            };
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
+			{
+				new LB_DALParam("BranchCode", request.BranchCode ?? (object)DBNull.Value),
+				new LB_DALParam("ClientCode", request.ClientCode ?? (object)DBNull.Value),
+				new LB_DALParam("StockCode", request.StockCode ?? (object)DBNull.Value),
+                // Output parameters
+				new LB_DALParam("StatusCode", 0, ParameterDirection.Output),
+				new LB_DALParam("StatusMsg", string.Empty, ParameterDirection.Output)
+			};
 
-            var result = await _repository.QuerySingleAsync<ClientStockDto>(
+			var result = await _repository.QuerySingleAsync<ClientStockDto>(
                 sqlOrSp: "LB_SP_GetShareInfoByKey",
                 parameters: parameters,
                 isStoredProcedure: true,
@@ -205,30 +207,33 @@ public class ClientStockService : IClientStockService
         {
             await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                Action = (int)ActionTypeEnum.INSERT,
-                BranchCode = request.BranchCode,
-                ClientCode = request.ClientCode,
-                StockCode = request.StockCode,
-                XchgCode = request.XchgCode,
-                OpenFreeBalance = request.OpenFreeBalance,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                ActionDt = (object)DBNull.Value,
-                TransDt = (object)DBNull.Value,
-                ActionType = (byte)ActionTypeEnum.INSERT,
-                AuthId = (object)DBNull.Value,
-                AuthDt = (object)DBNull.Value,
-                AuthTransDt = (object)DBNull.Value,
-                IsAuth = (byte)AuthTypeEnum.UnAuthorize, // Always start unauthorized
-                AuthLevel = (byte)AuthLevelEnum.Level1,
-                IsDel = (byte)DeleteStatusEnum.Active,
-                Remarks = request.Remarks ?? (object)DBNull.Value,
-                RowsAffected = 0
+                // Input Parameters
+                new LB_DALParam("Action", (int)ActionTypeEnum.INSERT),
+	            new LB_DALParam("BranchCode", request.BranchCode),
+	            new LB_DALParam("ClientCode", request.ClientCode),
+	            new LB_DALParam("StockCode", request.StockCode),
+	            new LB_DALParam("XchgCode", request.XchgCode),
+	            new LB_DALParam("OpenFreeBalance", request.OpenFreeBalance),
+	            new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("MakerId", _currentUserService.UserId),
+	            new LB_DALParam("ActionDt", (object)DBNull.Value),
+	            new LB_DALParam("TransDt", (object)DBNull.Value),
+	            new LB_DALParam("ActionType", (byte)ActionTypeEnum.INSERT),
+	            new LB_DALParam("AuthId", (object)DBNull.Value),
+	            new LB_DALParam("AuthDt", (object)DBNull.Value),
+	            new LB_DALParam("AuthTransDt", (object)DBNull.Value),
+	            new LB_DALParam("IsAuth", (byte)AuthTypeEnum.UnAuthorize), // Always start unauthorized
+                new LB_DALParam("AuthLevel", (byte)AuthLevelEnum.Level1),
+	            new LB_DALParam("IsDel", (byte)DeleteStatusEnum.Active),
+	            new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Output Parameter (RowsAffected)
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
-            var result = await _repository.ExecuteAsync("LB_SP_CrudShareInfo", parameters, true, cancellationToken);
+			var result = await _repository.ExecuteAsync("LB_SP_CrudShareInfo", parameters, true, cancellationToken);
 
             if (result <= 0)
             {
@@ -285,30 +290,32 @@ public class ClientStockService : IClientStockService
         {
             await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                Action = (int)ActionTypeEnum.UPDATE,
-                BranchCode = request.BranchCode,
-                ClientCode = request.ClientCode,
-                StockCode = request.StockCode,
-                PendingFreeBalance = request.PendingFreeBalance,
+                // Input Parameters
+                new LB_DALParam("Action", (int)ActionTypeEnum.UPDATE),
+	            new LB_DALParam("BranchCode", request.BranchCode),
+	            new LB_DALParam("ClientCode", request.ClientCode),
+	            new LB_DALParam("StockCode", request.StockCode),
+	            new LB_DALParam("PendingFreeBalance", request.PendingFreeBalance),
 
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                ActionDt = (object)DBNull.Value,
-                TransDt = (object)DBNull.Value,
-                ActionType = (byte)ActionTypeEnum.UPDATE,
-                AuthId = (object)DBNull.Value,
-                AuthDt = (object)DBNull.Value,
-                AuthTransDt = (object)DBNull.Value,
-                IsAuth = (byte)AuthTypeEnum.UnAuthorize, // Reset to unauthorized for workflow
-                AuthLevel = (byte)AuthLevelEnum.Level1,
-                IsDel = (byte)DeleteStatusEnum.Active,
-                Remarks = request.Remarks ?? (object)DBNull.Value,
-                RowsAffected = 0
+	            new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("MakerId", _currentUserService.UserId),
+	            new LB_DALParam("ActionDt", (object)DBNull.Value),
+	            new LB_DALParam("TransDt", (object)DBNull.Value),
+	            new LB_DALParam("ActionType", (byte)ActionTypeEnum.UPDATE),
+	            new LB_DALParam("AuthId", (object)DBNull.Value),
+	            new LB_DALParam("AuthDt", (object)DBNull.Value),
+	            new LB_DALParam("AuthTransDt", (object)DBNull.Value),
+	            new LB_DALParam("IsAuth", (byte)AuthTypeEnum.UnAuthorize), // Reset to unauthorized for workflow
+                new LB_DALParam("AuthLevel", (byte)AuthLevelEnum.Level1),
+	            new LB_DALParam("IsDel", (byte)DeleteStatusEnum.Active),
+	            new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
-
-            var result = await _repository.ExecuteAsync("LB_SP_CrudShareInfo", parameters, true, cancellationToken);
+			var result = await _repository.ExecuteAsync("LB_SP_CrudShareInfo", parameters, true, cancellationToken);
 
             if (result <= 0)
             {
@@ -365,19 +372,23 @@ public class ClientStockService : IClientStockService
         {
             await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                Action = (int)ActionTypeEnum.DELETE,
-                BranchCode = request.BranchCode,
-                ClientCode = request.ClientCode,
-                StockCode = request.StockCode,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                MakerId = _currentUserService.UserId,
-                Remarks = request.Remarks,
-                RowsAffected = 0
+                // Input Parameters
+                new LB_DALParam("Action", (int)ActionTypeEnum.DELETE),
+	            new LB_DALParam("BranchCode", request.BranchCode),
+	            new LB_DALParam("ClientCode", request.ClientCode),
+	            new LB_DALParam("StockCode", request.StockCode),
+	            new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+	            new LB_DALParam("MakerId", _currentUserService.UserId),
+                // Assuming Remarks can be null and should be converted to DBNull.Value
+                new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Output Parameter
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
-            var result = await _repository.ExecuteAsync("LB_SP_CrudShareInfo", parameters, true, cancellationToken);
+			var result = await _repository.ExecuteAsync("LB_SP_CrudShareInfo", parameters, true, cancellationToken);
 
             if (result <= 0)
             {
@@ -416,14 +427,15 @@ public class ClientStockService : IClientStockService
                   AND si.ClientCode = @clientCode
                   AND si.StockCode = @stockCode";
 
-            var parameters = new Dictionary<string, object>
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                { "branchCode", request.BranchCode },
-                { "clientCode", request.ClientCode },
-                { "stockCode", request.StockCode }
+                // Input Parameters
+                new LB_DALParam("branchCode", request.BranchCode ?? (object)DBNull.Value),
+	            new LB_DALParam("clientCode", request.ClientCode ?? (object)DBNull.Value),
+	            new LB_DALParam("stockCode", request.StockCode ?? (object)DBNull.Value)
             };
 
-            var result = await _repository.ExecuteScalarAsync<string>(sql, parameters, false, cancellationToken);
+			var result = await _repository.ExecuteScalarAsync<string>(sql, parameters, false, cancellationToken);
             return !string.IsNullOrEmpty(result);
         }
         catch (Exception ex)
@@ -459,26 +471,30 @@ public class ClientStockService : IClientStockService
 
         try
         {
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                PageNumber = request.PageNumber,
-                PageSize = request.PageSize,
-                BranchCode = request.BranchCode,
-                ClientCode = request.ClientCode,
-                StockCode = request.StockCode,
-                XchgCode = request.XchgCode,
-                SearchText = request.SearchText,
-                SortColumn = request.SortColumn ?? "ClientCode",
-                SortDirection = request.SortDirection ?? "ASC",
-                IsAuth = (int)request.IsAuth,
-                MakerId = _currentUserService.UserId,
-                TotalCount = 0
+                // Pagination and Sorting Parameters
+                new LB_DALParam("PageNumber", request.PageNumber),
+	            new LB_DALParam("PageSize", request.PageSize),
+    
+                // Filtering Parameters (assuming they can be nullable and need DBNull)
+                new LB_DALParam("BranchCode", request.BranchCode ?? (object)DBNull.Value),
+	            new LB_DALParam("ClientCode", request.ClientCode ?? (object)DBNull.Value),
+	            new LB_DALParam("StockCode", request.StockCode ?? (object)DBNull.Value),
+	            new LB_DALParam("XchgCode", request.XchgCode ?? (object)DBNull.Value),
+	            new LB_DALParam("SearchText", request.SearchText ?? (object)DBNull.Value),
+    
+                // Defaulted Parameters
+                new LB_DALParam("SortColumn", request.SortColumn ?? "ClientCode"),
+	            new LB_DALParam("SortDirection", request.SortDirection ?? "ASC"),
+    
+                // Status and User Parameter
+                new LB_DALParam("IsAuth", (int)request.IsAuth),
+	            new LB_DALParam("MakerId", _currentUserService.UserId)
             };
 
-            var result = await _repository.QueryPagedAsync<ClientStockDto>(
+			var result = await _repository.QueryPagedAsync<ClientStockDto>(
                 sqlOrSp: "LB_SP_GetShareInfoListWF",
-                pageNumber: request.PageNumber,
-                pageSize: request.PageSize,
                 parameters: parameters,
                 isStoredProcedure: true,
                 cancellationToken: cancellationToken);
@@ -518,23 +534,31 @@ public class ClientStockService : IClientStockService
         {
             await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
-            var parameters = new
+			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
-                Action = (int)ActionTypeEnum.UPDATE,
-                BranchCode = request.BranchCode,
-                ClientCode = request.ClientCode,
-                StockCode = request.StockCode,
-                PendingFreeBal = request.PendingFreeBalance,
-                ActionType = (int)ActionTypeEnum.UPDATE,
-                //AuthAction = (int)request.AuthAction, // not passed in the AuthShareInfo SP
-                IsAuth = request.IsAuth,
-                AuthId = _currentUserService.UserId,
-                IPAddress = _currentUserService.GetClientIPAddress(),
-                Remarks = request.Remarks,
-                RowsAffected = 0
+                // Primary Key/Action Parameters
+                new LB_DALParam("Action", (int)ActionTypeEnum.UPDATE),
+	            new LB_DALParam("BranchCode", request.BranchCode),
+	            new LB_DALParam("ClientCode", request.ClientCode),
+	            new LB_DALParam("StockCode", request.StockCode),
+    
+                // Data/Balance Parameter (Note the name change from request to DAL)
+                new LB_DALParam("PendingFreeBal", request.PendingFreeBalance),
+    
+                // Control/Audit Parameters
+                new LB_DALParam("ActionType", (int)ActionTypeEnum.UPDATE),
+	            new LB_DALParam("IsAuth", request.IsAuth), // Authorization status (e.g., 1 for Authorized)
+                new LB_DALParam("AuthId", _currentUserService.UserId), // The user performing the authorization
+                new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
+    
+                // Remarks (Ensuring null is passed as DBNull)
+                new LB_DALParam("Remarks", request.Remarks ?? (object)DBNull.Value),
+
+                // Output Parameter for Rows Affected
+                new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)
             };
 
-            var result = await _repository.ExecuteAsync("LB_SP_AuthShareInfo", parameters, true, cancellationToken);
+			var result = await _repository.ExecuteAsync("LB_SP_AuthShareInfo", parameters, true, cancellationToken);
 
             if (result <= 0)
             {

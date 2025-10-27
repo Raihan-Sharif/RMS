@@ -1,4 +1,4 @@
-using SimRMS.Domain.Common;
+using SimRMS.Application.Common;
 
 /// <summary>
 /// <para>
