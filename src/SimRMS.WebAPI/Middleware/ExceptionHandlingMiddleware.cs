@@ -81,14 +81,6 @@ namespace SimRMS.WebAPI.Middleware
             // Log based on exception severity and type with configuration control
             switch (exception)
             {
-                // File operation exceptions
-                case FileSizeExceededException fileSizeEx:
-                case InvalidFileTypeException fileTypeEx:
-                case FileOperationException fileOpEx:
-                    _logger.LogWarning("📁 FILE ERROR: {ExceptionType} in {Endpoint} | User: {UserId}", 
-                        exception.GetType().Name, endpoint, userId);
-                    break;
-
                 case NotFoundException notFoundEx:
                     _logger.LogWarning("🔍 NOT FOUND: {Resource} in {Endpoint} | User: {UserId}", 
                         notFoundEx.Message, endpoint, userId);
@@ -165,29 +157,6 @@ namespace SimRMS.WebAPI.Middleware
                 {
                     Success = false,
                     Message = notFoundEx.Message,
-                    Data = null,
-                    TraceId = context.TraceIdentifier
-                },
-                FileSizeExceededException fileSizeEx => new ApiResponse<object>
-                {
-                    Success = false,
-                    Message = fileSizeEx.Message,
-                    Data = null,
-                    Errors = new List<string> { $"Max allowed: {fileSizeEx.MaxAllowedSize:N0} bytes", $"Actual: {fileSizeEx.ActualSize:N0} bytes" },
-                    TraceId = context.TraceIdentifier
-                },
-                InvalidFileTypeException fileTypeEx => new ApiResponse<object>
-                {
-                    Success = false,
-                    Message = fileTypeEx.Message,
-                    Data = null,
-                    Errors = new List<string> { $"File extension: {fileTypeEx.FileExtension}", $"Allowed: {string.Join(", ", fileTypeEx.AllowedExtensions)}" },
-                    TraceId = context.TraceIdentifier
-                },
-                FileOperationException fileOpEx => new ApiResponse<object>
-                {
-                    Success = false,
-                    Message = fileOpEx.Message,
                     Data = null,
                     TraceId = context.TraceIdentifier
                 },
@@ -270,9 +239,6 @@ namespace SimRMS.WebAPI.Middleware
             context.Response.StatusCode = exception switch
             {
                 NotFoundException => (int)HttpStatusCode.NotFound,
-                FileSizeExceededException => (int)HttpStatusCode.BadRequest,
-                InvalidFileTypeException => (int)HttpStatusCode.BadRequest,
-                FileOperationException => (int)HttpStatusCode.InternalServerError,
                 ValidationException => (int)HttpStatusCode.BadRequest,
                 DomainException => (int)HttpStatusCode.BadRequest,
                 InvalidOperationException invalidOpEx when invalidOpEx.Message.Contains("authenticationScheme") || 
