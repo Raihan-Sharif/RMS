@@ -68,11 +68,11 @@ public class OrderGroupService : IOrderGroupService
 
     #region Common Operations
 
-    public async Task<PagedResult<OrderGroupDto>> GetOrderGroupListAsync(int pageNumber = 1, int pageSize = 10, string? SearchText = null, CancellationToken cancellationToken = default)
+    public async Task<PagedResult<OrderGroupDto>> GetOrderGroupListAsync(int pageNumber = 1, int pageSize = 10, string? SearchText = null, string? searchColumn = null, CancellationToken cancellationToken = default)
     {
         try
         {
-            _logger.LogInformation("Getting Order Group(User Group) list - Page: {PageNumber}, Size: {PageSize}, Search: {SearchText}", pageNumber, pageSize, SearchText);
+            _logger.LogInformation("Getting Order Group(User Group) list - Page: {PageNumber}, Size: {PageSize}, Search: {SearchText}, Search Column: {searchColumn}", pageNumber, pageSize, SearchText, searchColumn);
 
 			List<LB_DALParam> parameters = new List<LB_DALParam>()
             {
@@ -84,7 +84,8 @@ public class OrderGroupService : IOrderGroupService
 
                 // Filter Parameters (Handling potential nulls)
                 new LB_DALParam("SearchText", SearchText ?? (object)DBNull.Value),
-	            new LB_DALParam("UsrId", (object)DBNull.Value),
+                new LB_DALParam("SearchColumn", searchColumn ?? (object)DBNull.Value),
+                new LB_DALParam("UsrId", (object)DBNull.Value),
             };
 
 			// Get flat data from SP using proper DTO
@@ -122,18 +123,19 @@ public class OrderGroupService : IOrderGroupService
                         AuthTransDt = first.AuthTransDt,
                         RecordStatus = first.RecordStatus,
                         UserCount = first.UserCount,
-                        Users = group.Where(x => !string.IsNullOrEmpty(x.UsrID))
+                        Users = group.Where(x => !string.IsNullOrEmpty(x.UsrID) && x.User_IsDel == (byte)DeleteStatusEnum.Active && x.User_IsAuth == (byte)AuthTypeEnum.Approve)
                             .Select(user => new OrderGroupUserDto
                             {
                                 GroupCode = first.GroupCode,
+                                GroupDesc = first.GroupDesc,
                                 UsrID = user.UsrID ?? string.Empty,
                                 UsrName = user.UsrName ?? string.Empty,
                                 ViewOrder = user.ViewOrder ?? false,
                                 PlaceOrder = user.PlaceOrder ?? false,
                                 ViewClient = user.ViewClient ?? false,
-                                ModifyOrder = user.ModifyOrder ?? false
-                                //MakeBy = user.MakeBy,
-                                //AuthBy = user.AuthBy
+                                ModifyOrder = user.ModifyOrder ?? false,
+                                MakeBy = user.User_MakeBy,
+                                AuthBy = user.User_AuthBy
                             }).ToList()
                     };
                 }).ToList();
@@ -237,18 +239,19 @@ public class OrderGroupService : IOrderGroupService
                         AuthDt = first.AuthDt,
                         AuthTransDt = first.AuthTransDt,
                         UserCount = first.UserCount,
-                        Users = group.Where(x => !string.IsNullOrEmpty(x.UsrID))
+                        Users = group.Where(x => !string.IsNullOrEmpty(x.UsrID) && x.User_IsDel == (byte)DeleteStatusEnum.Active)
                             .Select(user => new OrderGroupUserDto
                             {
                                 GroupCode = first.GroupCode,
+                                GroupDesc = first.GroupDesc,
                                 UsrID = user.UsrID ?? string.Empty,
                                 UsrName = user.UsrName ?? string.Empty,
                                 ViewOrder = user.ViewOrder ?? false,
                                 PlaceOrder = user.PlaceOrder ?? false,
                                 ViewClient = user.ViewClient ?? false,
-                                ModifyOrder = user.ModifyOrder ?? false
-                                //MakeBy = user.MakeBy,
-                                //AuthBy = user.AuthBy
+                                ModifyOrder = user.ModifyOrder ?? false,
+                                MakeBy = user.User_MakeBy,
+                                AuthBy = user.User_AuthBy
                             }).ToList()
                     };
                 }).ToList();

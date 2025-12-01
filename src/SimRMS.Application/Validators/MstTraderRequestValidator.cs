@@ -30,6 +30,8 @@ namespace SimRMS.Application.Validators
         {
             RuleFor(x => x.XchgCode).ValidXchgCode();
             RuleFor(x => x.DlrCode).ValidDlrCode();
+            RuleFor(x => x.BrokerCode).ValidBrokerCode();
+            RuleFor(x => x.XchgPrefix).ValidXchgPrefix();
             RuleFor(x => x.Remarks).ValidRemarks()
                 .When(x => !string.IsNullOrEmpty(x.Remarks));
         }
@@ -44,6 +46,8 @@ namespace SimRMS.Application.Validators
         {
             RuleFor(x => x.XchgCode).ValidXchgCode();
             RuleFor(x => x.DlrCode).ValidDlrCode();
+            RuleFor(x => x.BrokerCode).ValidBrokerCode();
+            RuleFor(x => x.XchgPrefix).ValidXchgPrefix();
             RuleFor(x => x.Remarks).ValidRemarks()
                 .When(x => !string.IsNullOrEmpty(x.Remarks));
         }

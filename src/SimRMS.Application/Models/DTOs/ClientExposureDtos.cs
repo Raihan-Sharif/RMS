@@ -35,7 +35,7 @@ namespace SimRMS.Application.Models.DTOs
         public DateTime? ClntExpsBuyAmtTopUpExpiry { get; set; }
 
         // Computed fields from stored procedures
-        public decimal TotalBuyLimit { get; set; }
+        //public decimal TotalBuyLimit { get; set; }
         public string TopUpStatus { get; set; } = string.Empty;
         public string HasLimit { get; set; } = string.Empty;
         public string HasShareLimit { get; set; } = string.Empty;

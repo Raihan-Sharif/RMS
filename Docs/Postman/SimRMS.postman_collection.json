@@ -1,11 +1,11 @@
 {
 	"info": {
-		"_postman_id": "86100f99-3962-4573-a1d3-fe1aeddf863f",
+		"_postman_id": "dcbab132-3a2c-43a9-831a-ae2079013439",
 		"name": "SimRMS",
 		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29700469",
-		"_collection_link": "https://dd5555-8190.postman.co/workspace/RMS~e831403f-5c1c-492b-b213-42fb5f089c5d/collection/29700469-86100f99-3962-4573-a1d3-fe1aeddf863f?action=share&source=collection_link&creator=29700469"
+		"_collection_link": "https://dd5555-8190.postman.co/workspace/RMS~e831403f-5c1c-492b-b213-42fb5f089c5d/collection/29700469-dcbab132-3a2c-43a9-831a-ae2079013439?action=share&source=collection_link&creator=29700469"
 	},
 	"item": [
 		{
@@ -235,7 +235,7 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/company/company-list?pageNumber=1&pageSize=20&searchTerm&coCode",
+									"raw": "{{base_url}}/api/v1/company/company-list?pageNumber=1&pageSize=20&searchText=LankaBangla&searchColumn=coDesc&coCode",
 									"host": [
 										"{{base_url}}"
 									],
@@ -255,8 +255,12 @@
 											"value": "20"
 										},
 										{
-											"key": "searchTerm",
-											"value": null
+											"key": "searchText",
+											"value": "LankaBangla"
+										},
+										{
+											"key": "searchColumn",
+											"value": "coDesc"
 										},
 										{
 											"key": "coCode",
@@ -264,7 +268,7 @@
 										},
 										{
 											"key": "coDesc",
-											"value": null,
+											"value": "",
 											"disabled": true
 										}
 									]
@@ -802,7 +806,7 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/broker-branch/branch-list?pageNumber=1&pageSize=10&searchTerm&coCode=073",
+									"raw": "{{base_url}}/api/v1/broker-branch/branch-list?pageNumber=1&pageSize=10&searchText=Motiheel&searchColumn=coBrchAddr&searchColumn=coDesc",
 									"host": [
 										"{{base_url}}"
 									],
@@ -822,12 +826,21 @@
 											"value": "10"
 										},
 										{
-											"key": "searchTerm",
-											"value": null
+											"key": "searchText",
+											"value": "Motiheel"
+										},
+										{
+											"key": "searchColumn",
+											"value": "coBrchAddr"
+										},
+										{
+											"key": "searchColumn",
+											"value": "coDesc"
 										},
 										{
 											"key": "coCode",
-											"value": "073"
+											"value": "073",
+											"disabled": true
 										}
 									]
 								}
@@ -1501,7 +1514,7 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/trader/trader-list?pageNumber=1&pageSize=10",
+									"raw": "{{base_url}}/api/v1/trader/trader-list?pageNumber=1&pageSize=10&searchText=CSE&searchColumn=xchgCode",
 									"host": [
 										"{{base_url}}"
 									],
@@ -1521,10 +1534,13 @@
 											"value": "10"
 										},
 										{
-											"key": "searchTerm",
-											"value": "TRD",
-											"description": "search traders using any terms",
-											"disabled": true
+											"key": "searchText",
+											"value": "CSE",
+											"description": "search traders using any terms"
+										},
+										{
+											"key": "searchColumn",
+											"value": "xchgCode"
 										},
 										{
 											"key": "xchgCode",
@@ -1639,7 +1655,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n \"xchgCode\": \"CSE\",\n \"dlrCode\": \"CTG009\",\n \"remarks\": \"Created dealer in CSE to test\"\n}"
+									"raw": "{\n \"xchgCode\": \"CSE\",\n \"xchgPrefix\": \"230\",\n \"brokerCode\": \"LANKA\",\n \"dlrCode\": \"CTG009\",\n \"remarks\": \"Created dealer in CSE to test\"\n}"
 								},
 								"url": {
 									"raw": "{{base_url}}/api/v1/trader/create-trader",
@@ -1689,7 +1705,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n \"remarks\":\"updated test\"\n}"
+									"raw": "{\n \"xchgPrefix\": \"230\",\n \"brokerCode\": \"LANKA\",\n \"remarks\":\"updated test\"\n}"
 								},
 								"url": {
 									"raw": "{{base_url}}/api/v1/trader/update-trader/:xchgCode/:dlrCode",
@@ -2625,6 +2641,100 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get Exchange Broker List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `\r",
+									"<style type=\"text/css\">\r",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+									"    .tftable tr {background-color:#ffffff;}\r",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+									"    .tftable tr:hover {background-color:#e0ffff;}\r",
+									"</style>\r",
+									"\r",
+									"<table class=\"tftable\" border=\"1\">\r",
+									"    <tr>\r",
+									"        <th>Exchange Code</th>\r",
+									"        <th>Board Code</th>\r",
+									"        <th>Board Description</th>\r",
+									"        <th>Sector Code</th>\r",
+									"        <th>Sector Description</th>\r",
+									"        <th>Stock Code</th>\r",
+									"        <th>Stock Long Name</th>\r",
+									"        <th>Stock Short Name</th>\r",
+									"    </tr>\r",
+									"    \r",
+									"    {{#each response.data}}\r",
+									"        <tr>\r",
+									"            <td>{{xchgCode}}</td>\r",
+									"            <td>{{stkBrdCode}}</td>\r",
+									"            <td>{{brdDesc}}</td>\r",
+									"            <td>{{stkSectCode}}</td>\r",
+									"            <td>{{sectDesc}}</td>\r",
+									"            <td>{{stkCode}}</td>\r",
+									"            <td>{{stkLName}}</td>\r",
+									"            <td>{{stkSName}}</td>\r",
+									"        </tr>\r",
+									"    {{/each}}\r",
+									"</table>\r",
+									"`;\r",
+									"\r",
+									"function constructVisualizerPayload() {\r",
+									"    return {response: pm.response.json()};\r",
+									"}\r",
+									"\r",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Handshake-Token",
+								"value": "{{handshake_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/common-data/exchange-broker-list?exchangeCode=CSE",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"common-data",
+								"exchange-broker-list"
+							],
+							"query": [
+								{
+									"key": "exchangeCode",
+									"value": "CSE",
+									"description": " exchange code"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -2654,7 +2764,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/api/v1/user/user-list?pageNumber=1&pageSize=10",
+									"raw": "{{base_url}}/api/v1/user/user-list?pageNumber=1&pageSize=10&searchText=Sy&searchColumn=UsrAddr&sortColumn=UsrID",
 									"host": [
 										"{{base_url}}"
 									],
@@ -2675,9 +2785,12 @@
 										},
 										{
 											"key": "searchText",
-											"value": "02",
-											"description": "Filtering with the search text\n",
-											"disabled": true
+											"value": "Sy",
+											"description": "Filtering with the search text\n"
+										},
+										{
+											"key": "searchColumn",
+											"value": "UsrAddr"
 										},
 										{
 											"key": "usrStatus",
@@ -2706,8 +2819,7 @@
 										{
 											"key": "sortColumn",
 											"value": "UsrID",
-											"description": "Sort column wise",
-											"disabled": true
+											"description": "Sort column wise"
 										},
 										{
 											"key": "sortDirection",
@@ -2980,7 +3092,7 @@
 									"variable": [
 										{
 											"key": "usrId",
-											"value": "USR001",
+											"value": "Ashraf",
 											"description": "User ID (max 50 chars)"
 										}
 									]
@@ -4000,7 +4112,7 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/order-group/group-list?pageNumber=1&pageSize=10&searchText=",
+									"raw": "{{base_url}}/api/v1/order-group/group-list?pageNumber=1&pageSize=10&searchText=FT&searchColumn=groupDesc",
 									"host": [
 										"{{base_url}}"
 									],
@@ -4021,7 +4133,11 @@
 										},
 										{
 											"key": "searchText",
-											"value": ""
+											"value": "FT"
+										},
+										{
+											"key": "searchColumn",
+											"value": "groupDesc"
 										}
 									]
 								}
@@ -4118,7 +4234,7 @@
 									"variable": [
 										{
 											"key": "groupCode",
-											"value": "14"
+											"value": "44"
 										}
 									]
 								}
@@ -4178,11 +4294,11 @@
 									"variable": [
 										{
 											"key": "groupCode",
-											"value": "1"
+											"value": "45"
 										},
 										{
 											"key": "userId",
-											"value": "EFTEST03"
+											"value": "shafquat"
 										}
 									]
 								}
@@ -5361,7 +5477,7 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/client/client-list?pageNumber=1&pageSize=10&searchTerm=",
+									"raw": "{{base_url}}/api/v1/client/client-list?pageNumber=1&pageSize=15&searchText=Mo&searchColumn=clntName",
 									"host": [
 										"{{base_url}}"
 									],
@@ -5378,11 +5494,15 @@
 										},
 										{
 											"key": "pageSize",
-											"value": "10"
+											"value": "15"
 										},
 										{
-											"key": "searchTerm",
-											"value": ""
+											"key": "searchText",
+											"value": "Mo"
+										},
+										{
+											"key": "searchColumn",
+											"value": "clntName"
 										}
 									]
 								}
@@ -5481,7 +5601,7 @@
 									"variable": [
 										{
 											"key": "gcif",
-											"value": "14"
+											"value": "29"
 										}
 									]
 								}
@@ -6023,7 +6143,7 @@
 									"raw": "{\n \n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/client-exposure/exposure-list?pageNumber=1&pageSize=10&clntCode=&coBrchCode=&searchTerm=",
+									"raw": "{{base_url}}/api/v1/client-exposure/exposure-list?pageNumber=1&pageSize=10&clntCode=&coBrchCode=&searchTerm=Ashik&searchColumn=clntName",
 									"host": [
 										"{{base_url}}"
 									],
@@ -6056,8 +6176,12 @@
 										},
 										{
 											"key": "searchTerm",
-											"value": "",
+											"value": "Ashik",
 											"description": "Optional: Search term (max 100 characters)"
+										},
+										{
+											"key": "searchColumn",
+											"value": "clntName"
 										}
 									]
 								}
@@ -6360,7 +6484,7 @@
 									"variable": [
 										{
 											"key": "clntCode",
-											"value": "CLI001",
+											"value": "ashraf",
 											"description": "Client Code (max 50 chars, alphanumeric)"
 										},
 										{
@@ -6630,7 +6754,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/api/v1/stock/stock-list?pageNumber=1&pageSize=10&xchgCode=&stkCode=&searchTerm=&sortColumn=StkCode&sortDirection=ASC",
+									"raw": "{{base_url}}/api/v1/stock/stock-list?pageNumber=1&pageSize=10&xchgCode=&stkCode=&searchText=ZEALBANGLA&searchColumn=StkCode&sortColumn=StkCode&sortDirection=ASC",
 									"host": [
 										"{{base_url}}"
 									],
@@ -6658,8 +6782,12 @@
 											"value": ""
 										},
 										{
-											"key": "searchTerm",
-											"value": ""
+											"key": "searchText",
+											"value": "ZEALBANGLA"
+										},
+										{
+											"key": "searchColumn",
+											"value": "StkCode"
 										},
 										{
 											"key": "sortColumn",
@@ -8846,7 +8974,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"username\": \"EFTEST03\",\n  \"password\": \"password\"\n}",
+							"raw": "{\n  \"username\": \"EFTEST02\",\n  \"password\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

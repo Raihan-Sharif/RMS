@@ -70,7 +70,8 @@ public class StockController : BaseController
         [FromQuery, Range(1, 100)] int pageSize = 10,
         [FromQuery, MaxLength(10)] string? xchgCode = null,
         [FromQuery, MaxLength(20)] string? stkCode = null,
-        [FromQuery] string? searchTerm = null,
+        [FromQuery] string? searchText = null,
+        [FromQuery] string? searchColumn = null,
         [FromQuery] string sortColumn = "StkCode",
         [FromQuery] string sortDirection = "ASC",
         CancellationToken cancellationToken = default)
@@ -82,7 +83,8 @@ public class StockController : BaseController
             pageSize: pageSize,
             xchgCode: xchgCode,
             stkCode: stkCode,
-            searchTerm: searchTerm,
+            searchText: searchText,
+            searchColumn: searchColumn,
             sortColumn: sortColumn,
             sortDirection: sortDirection,
             cancellationToken: cancellationToken);

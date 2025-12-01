@@ -25,6 +25,7 @@ namespace SimRMS.Application.Models.Requests
         public string? StockCode { get; set; }
         public string? XchgCode { get; set; }
         public string? SearchText { get; set; }
+        public string? SearchColumn { get; set; }
         public string? SortColumn { get; set; } = "ClientCode";
         public string? SortDirection { get; set; } = "ASC";
         public int PageNumber { get; set; } = 1;

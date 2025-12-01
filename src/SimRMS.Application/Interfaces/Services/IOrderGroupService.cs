@@ -35,7 +35,7 @@ namespace SimRMS.Application.Interfaces.Services
         /// Get Order Group list with nested user data structure
         /// Uses LB_SP_GetOrderGroupList and groups results
         /// </summary>
-        Task<PagedResult<OrderGroupDto>> GetOrderGroupListAsync(int pageNumber = 1, int pageSize = 10, string? searchText = null, CancellationToken cancellationToken = default);
+        Task<PagedResult<OrderGroupDto>> GetOrderGroupListAsync(int pageNumber = 1, int pageSize = 10, string? searchText = null, string? searchColumn = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Order Group by code - returns all users in the group (list format)

@@ -10,7 +10,7 @@ namespace SimRMS.Application.Interfaces.Services
     /// </summary>
     public interface IUserExposureService
     {
-        Task<PagedResult<UserExposureDto>> GetUserExposureListAsync(int pageNumber = 1, int pageSize = 10, string? searchTerm = null, CancellationToken cancellationToken = default);
+        Task<PagedResult<UserExposureDto>> GetUserExposureListAsync(int pageNumber = 1, int pageSize = 10, string? searchText = null, string? searchColumn = null, CancellationToken cancellationToken = default);
         Task<UserExposureDto?> GetUserExposureByIdAsync(string usrId, CancellationToken cancellationToken = default);
         Task<UserExposureDto> CreateUserExposureAsync(CreateUserExposureRequest request, CancellationToken cancellationToken = default);
         Task<UserExposureDto> UpdateUserExposureAsync(string usrId, UpdateUserExposureRequest request, CancellationToken cancellationToken = default);

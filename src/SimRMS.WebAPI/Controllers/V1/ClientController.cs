@@ -67,7 +67,8 @@ public class ClientController : BaseController
     public async Task<ActionResult<ApiResponse<IEnumerable<ClientDto>>>> GetClientList(
         [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1,
         [FromQuery, Range(1, 100)] int pageSize = 10,
-        [FromQuery] string? searchTerm = null,
+        [FromQuery] string? searchText = null,
+        [FromQuery] string? searchColumn = null,
         [FromQuery] string? gcif = null,
         [FromQuery] string? clntName = null,
         [FromQuery] string? clntCode = null,
@@ -78,7 +79,8 @@ public class ClientController : BaseController
         var result = await _clientService.GetClientListAsync(
             pageNumber: pageNumber,
             pageSize: pageSize,
-            searchTerm: searchTerm,
+            searchText: searchText,
+            searchColumn: searchColumn,
             gcif: gcif,
             clntName: clntName,
             clntCode: clntCode,

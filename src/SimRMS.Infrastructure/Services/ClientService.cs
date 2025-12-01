@@ -24,6 +24,8 @@ using Azure.Core;
 /// ===================================================================
 /// Modification History
 /// Author             Date         Description of Change
+/// Asif Zaman      11/Nov/2025  TpOms integration for client updates and client user mapping update (New user's client list)
+/// Asif Zaman      20/Nov/2025  TpOms updating all the affected user's client mapping during client create, update and approval
 /// -------------------------------------------------------------------
 /// 
 ///
@@ -42,7 +44,9 @@ public class ClientService : IClientService
 	private readonly IValidator<DeleteClientRequest> _deleteValidator;
 	private readonly IValidator<AuthorizeClientRequest> _authorizeValidator;
 	private readonly IValidator<GetClientWorkflowListRequest> _workflowListValidator;
-	private readonly ICurrentUserService _currentUserService;
+	private readonly ICommonDataService _commonDataService;
+    private readonly ITpOmsService _tpOmsService; //tpoms injection
+    private readonly ICurrentUserService _currentUserService;
 	private readonly ILogger<ClientService> _logger;
 
 	public ClientService(
@@ -53,7 +57,9 @@ public class ClientService : IClientService
 		IValidator<DeleteClientRequest> deleteValidator,
 		IValidator<AuthorizeClientRequest> authorizeValidator,
 		IValidator<GetClientWorkflowListRequest> workflowListValidator,
-		ICurrentUserService currentUserService,
+		ICommonDataService commonDataService,
+        ITpOmsService tpOmsService,
+        ICurrentUserService currentUserService,
 		ILogger<ClientService> logger)
 	{
 		_repository = repository;
@@ -63,14 +69,16 @@ public class ClientService : IClientService
 		_deleteValidator = deleteValidator;
 		_authorizeValidator = authorizeValidator;
 		_workflowListValidator = workflowListValidator;
-		_currentUserService = currentUserService;
+		_commonDataService = commonDataService;
+        _tpOmsService = tpOmsService;
+        _currentUserService = currentUserService;
 		_logger = logger;
 	}
 
 	#region Main CRUD Operations
 
 	public async Task<PagedResult<ClientDto>> GetClientListAsync(int pageNumber = 1, int pageSize = 10,
-		string? searchTerm = null, string? gcif = null, string? clntName = null, string? clntCode = null, CancellationToken cancellationToken = default)
+		string? searchText = null, string? searchColumn = null, string? gcif = null, string? clntName = null, string? clntCode = null, CancellationToken cancellationToken = default)
 	{
 		_logger.LogInformation("Retrieving paged Client list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
@@ -87,7 +95,12 @@ public class ClientService : IClientService
 				new LB_DALParam("GCIF", gcif ?? (object)DBNull.Value),
 				new LB_DALParam("ClntName", clntName ?? (object)DBNull.Value),
 				new LB_DALParam("ClntCode", clntCode ?? (object)DBNull.Value),
-				new LB_DALParam("SortBy", "GCIF"),
+				new LB_DALParam("SearchText", searchText ?? (object)DBNull.Value),
+				new LB_DALParam("SearchColumn", searchColumn ?? (object)DBNull.Value),
+
+                
+
+                new LB_DALParam("SortBy", "GCIF"),
 				new LB_DALParam("SortOrder", "ASC")
 			};
 
@@ -255,8 +268,63 @@ public class ClientService : IClientService
 			string gcifId = await GetGCIFByClientCodeAsync(request.CoBrchCode, request.ClntCode);
 
 			var createdClient = await GetClientByIdAsync(gcifId);
+            var wfExist = _commonDataService.CheckWorkFlowExistAsync(WorkflowEnum.User.ToString());
 
-			return createdClient ?? throw new DomainException("Failed to retrieve created client");
+			if (wfExist != null && !wfExist.Result)
+			{
+                var getAffectedDealers = await _commonDataService.GetClientAssociateDealerListAsync(createdClient?.ClntCode ?? "", cancellationToken);
+                //tpoms calling for updating client info
+                var tpOmsUpdateClientRequest = new TpOmsUpdateClientRequest
+				{
+					branchId = Convert.ToInt32(request.CoBrchCode),
+					ClientOrUserId = createdClient?.ClntCode?? "",
+				};
+				var tpOmsUpdateClientResult = await _tpOmsService.UpdateClientAsync(tpOmsUpdateClientRequest, cancellationToken);
+
+
+                //tpOms calling for updating user-dealer maping (affected dealer list)
+                if (getAffectedDealers != null && getAffectedDealers.Any())
+                {
+                    _logger.LogInformation("TpOms calling to update affacted-user-client mapping (during creating client) - {ClntCode}", createdClient?.ClntCode);
+
+                    foreach (var dealer in getAffectedDealers)
+                    {
+                        try
+                        {
+                            var tpOmsUpdateAffectedDlrRequest = new TpOmsUpdateUserClientRequest
+                            {
+                                userId = dealer.UsrID,
+                            };
+                            _logger.LogInformation("Calling TpOms during creating client, for User - {UserId}", dealer.UsrID);
+                            TpOmsDto tpOmsUpdateAffectedDlrResult = await _tpOmsService.UpdateUserClientAsync(tpOmsUpdateAffectedDlrRequest, cancellationToken);
+
+                            if (tpOmsUpdateAffectedDlrResult.success)
+                            {
+                                _logger.LogInformation("Successfully TpOms updated affected-user-client mapping (during creating client), for User - {UserId}", dealer.UsrID);
+                            }
+                            else
+                            {
+                                _logger.LogWarning("Failed TpOms updating affected-user-client mapping (during creating client), for User - {UserId}, Message - {Message}", dealer.UsrID, tpOmsUpdateAffectedDlrResult.message);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.LogError(ex, "Error updating TpOms affected-user-client mapping (during creating client), for User - {UserId}", dealer.UsrID);
+                        }
+                    }
+                }
+                else
+                {
+                    _logger.LogInformation("No affected dealers found (during creating client), for Client - {ClntCode}", createdClient?.ClntCode);
+                }
+            }
+			else
+			{
+				_logger.LogInformation("TpOms call failed for creating client - {ClntCode}", request.ClntCode);
+				throw new DomainException("TpOms calling failed for creating client");
+            }
+
+				return createdClient ?? throw new DomainException("Failed to retrieve created client");
 		}
 		catch (ValidationException)
 		{
@@ -376,7 +444,63 @@ public class ClientService : IClientService
 
 			// Return the updated client
 			var updatedClient = await GetClientByIdAsync(gcif, cancellationToken);
-			return updatedClient ?? throw new DomainException("Failed to retrieve updated client");
+
+            var wfExist = _commonDataService.CheckWorkFlowExistAsync(WorkflowEnum.User.ToString());
+
+            if (wfExist != null && !wfExist.Result)
+            {
+                var getAffectedDealers = await _commonDataService.GetClientAssociateDealerListAsync(updatedClient?.ClntCode ?? "", cancellationToken);
+                //tpoms calling for updating client info
+                var tpOmsUpdateClientRequest = new TpOmsUpdateClientRequest
+                {
+                    branchId = Convert.ToInt32(request.CoBrchCode),
+                    ClientOrUserId = updatedClient?.ClntCode?? "",
+                };
+                var tpOmsUpdateClientResult = await _tpOmsService.UpdateClientAsync(tpOmsUpdateClientRequest, cancellationToken);
+
+                //tpOms calling for updating user-dealer maping (affected dealer list)
+                if (getAffectedDealers != null && getAffectedDealers.Any())
+                {
+                    _logger.LogInformation("TpOms calling to update affacted-user-client mapping (during updating client) - {ClntCode}", updatedClient?.ClntCode);
+
+                    foreach (var dealer in getAffectedDealers)
+                    {
+                        try
+                        {
+                            var tpOmsUpdateAffectedDlrRequest = new TpOmsUpdateUserClientRequest
+                            {
+                                userId = dealer.UsrID,
+                            };
+                            _logger.LogInformation("Calling TpOms during updating client - {UserId}", dealer.UsrID);
+                            TpOmsDto tpOmsUpdateAffectedDlrResult = await _tpOmsService.UpdateUserClientAsync(tpOmsUpdateAffectedDlrRequest, cancellationToken);
+
+                            if (tpOmsUpdateAffectedDlrResult.success)
+                            {
+                                _logger.LogInformation("Successfully TpOms updated affected-user-client mapping (during updating client), for User - {UserId}", dealer.UsrID);
+                            }
+                            else
+                            {
+                                _logger.LogWarning("Failed TpOms updating affected-user-client mapping (during updating client), for User - {UserId}, Message - {Message}", dealer.UsrID, tpOmsUpdateAffectedDlrResult.message);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.LogError(ex, "Error updating TpOms affected-user-client mapping (during updating client), for User - {UserId}", dealer.UsrID);
+                        }
+                    }
+                }
+                else
+                {
+                    _logger.LogInformation("No affected dealers found (during updating client), for Client - {ClntCode}", updatedClient?.ClntCode);
+                }
+            }
+            else
+            {
+                _logger.LogInformation("TpOms call failed for updating client - {ClntCode}", updatedClient?.ClntCode);
+                throw new DomainException("TpOms calling failed for updating client");
+            }
+
+            return updatedClient ?? throw new DomainException("Failed to retrieve updated client");
 		}
 		catch (ValidationException)
 		{
@@ -462,7 +586,36 @@ public class ClientService : IClientService
 
 			await _unitOfWork.CommitTransactionAsync(cancellationToken);
 
-			_logger.LogInformation("Successfully deleted Client with GCIF: {GCIF}", gcif);
+            _logger.LogInformation("Successfully deleted Client with GCIF: {GCIF}", gcif);
+
+			var deletedClient = await GetClientByIdAsync(gcif, cancellationToken);
+
+            var wfExist = _commonDataService.CheckWorkFlowExistAsync(WorkflowEnum.User.ToString());
+
+            if (wfExist != null && !wfExist.Result)
+            {
+                //tpoms calling for updating client info
+                var tpOmsUpdateClientRequest = new TpOmsUpdateClientRequest
+                {
+                    branchId = Convert.ToInt32(request.CoBrchCode),
+                    ClientOrUserId = deletedClient?.ClntCode??"",
+                };
+                var tpOmsUpdateClientResult = await _tpOmsService.UpdateClientAsync(tpOmsUpdateClientRequest, cancellationToken);
+
+
+                //tpOms calling for updating user-dealer maping (new user's client list)
+                var tpOmsUpdateUserClientRequest = new TpOmsUpdateUserClientRequest
+                {
+                    userId = deletedClient?.ClntDlrCode ?? "",
+                };
+                var tpOmsUpdateUserClientResult = await _tpOmsService.UpdateUserClientAsync(tpOmsUpdateUserClientRequest, cancellationToken);
+            }
+            else
+            {
+                _logger.LogInformation("TpOms call failed for deleting client - {ClntCode}", deletedClient?.ClntCode);
+                throw new DomainException("TpOms calling failed for deleting client");
+            }
+
 			return true;
 		}
 		catch (ValidationException)
@@ -609,7 +762,63 @@ public class ClientService : IClientService
 			await _unitOfWork.CommitTransactionAsync(cancellationToken);
 
 			_logger.LogInformation("Successfully authorized Client with GCIF: {GCIF}", gcif);
-			return true;
+
+			var approvedClient = await GetClientByIdAsync(gcif, cancellationToken);
+
+			if (approvedClient != null)
+			{
+				var getAffectedDealers = await _commonDataService.GetClientAssociateDealerListAsync(approvedClient?.ClntCode?? "", cancellationToken);
+               
+				//tpoms calling for updating client info
+                var tpOmsUpdateClientRequest = new TpOmsUpdateClientRequest
+				{
+					branchId = Convert.ToInt32(request.CoBrchCode),
+					ClientOrUserId = request.ClntCode,
+				};
+				var tpOmsUpdateClientResult = await _tpOmsService.UpdateClientAsync(tpOmsUpdateClientRequest, cancellationToken);
+
+                //tpOms calling for updating user-dealer maping (affected dealer list)
+                if (getAffectedDealers !=null && getAffectedDealers.Any())
+				{
+					_logger.LogInformation("TpOms calling to update affacted-user-client mapping (during approving client) - {ClntCode}", approvedClient?.ClntCode);
+
+					foreach (var dealer in getAffectedDealers)
+					{
+						try
+						{
+							var tpOmsUpdateAffectedDlrRequest = new TpOmsUpdateUserClientRequest
+							{
+								userId = dealer.UsrID,
+							};
+							_logger.LogInformation("Calling TpOms during approving client - {UserId}", dealer.UsrID);
+							TpOmsDto tpOmsUpdateAffectedDlrResult = await _tpOmsService.UpdateUserClientAsync(tpOmsUpdateAffectedDlrRequest, cancellationToken);
+
+							if(tpOmsUpdateAffectedDlrResult.success)
+							{
+								_logger.LogInformation("Successfully TpOms updated affected-user-client mapping (during approving client) - {UserId}", dealer.UsrID);
+							}
+							else
+							{
+								_logger.LogWarning("Failed TpOms updating affected-user-client mapping (during approving client) - {UserId}, Message - {Message}", dealer.UsrID, tpOmsUpdateAffectedDlrResult.message);
+                            }
+                        }
+                        catch (Exception ex)
+						{
+							_logger.LogError(ex, "Error updating TpOms affected-user-client mapping (during approving client) - {UserId}", dealer.UsrID);
+                        }
+					}
+                }
+				else
+				{
+					_logger.LogInformation("No affected dealers found (during approving client) - {ClntCode}", approvedClient?.ClntCode);
+                }
+            }
+            else
+			{
+                _logger.LogInformation("TpOms call failed for approving client - {ClntCode}", approvedClient?.ClntCode);
+                throw new DomainException("TpOms calling failed for approving client");
+            }
+            return true;
 		}
 		catch (ValidationException)
 		{

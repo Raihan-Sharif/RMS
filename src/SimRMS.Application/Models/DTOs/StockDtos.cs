@@ -34,6 +34,8 @@ namespace SimRMS.Application.Models.DTOs
         public string? Currency { get; set; }
         public string? SecurityType { get; set; }
         public string? StkIsSyariah { get; set; }
+        public string? StkIsMarginable { get; set; }
+        public string? StkIsScriptNetting { get; set; }
         public int? StkLot { get; set; }
         public decimal? StkParValue { get; set; }
 
@@ -57,6 +59,8 @@ namespace SimRMS.Application.Models.DTOs
 
         // Computed fields from SPs
         public string? IsSyariahDescription { get; set; }
+        public string? IsMarginableDescription { get; set; }
+        public string? IsScriptNettingDescription { get; set; }
         public string? SecurityTypeDescription { get; set; }
         public string? RecordStatus { get; set; }
         public string? ActionDescription { get; set; }
@@ -80,6 +84,8 @@ namespace SimRMS.Application.Models.DTOs
         public string? Currency { get; set; }
         public string? SecurityType { get; set; }
         public string? StkIsSyariah { get; set; }
+        public string? StkIsMarginable { get; set; }
+        public string? StkIsScriptNetting { get; set; }
         public int? StkLot { get; set; }
         public decimal? StkParValue { get; set; }
         public decimal? StkLastDonePrice { get; set; }

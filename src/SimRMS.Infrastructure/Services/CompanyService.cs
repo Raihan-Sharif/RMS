@@ -63,7 +63,7 @@ public class CompanyService : ICompanyService
     #region Main CRUD Operations
 
     public async Task<PagedResult<CompanyDto>> GetCompanyListAsync(int pageNumber = 1, int pageSize = 10,
-        string? searchTerm = null, string? coCode = null, CancellationToken cancellationToken = default)
+        string? searchText = null, string? searchColumn = null, string? coCode = null, CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Retrieving paged Company list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
@@ -82,12 +82,13 @@ public class CompanyService : ICompanyService
                 new LB_DALParam("SortDirection", "ASC"),
     
                 // Optional/Filter Parameters
-                new LB_DALParam("SearchTerm", searchTerm ?? (object)DBNull.Value),
+                new LB_DALParam("SearchText", searchText ?? (object)DBNull.Value),
+                new LB_DALParam("SearchColumn", searchColumn ?? (object)DBNull.Value),
                 new LB_DALParam("CoCode", coCode ?? (object)DBNull.Value)
             };
 
-            _logger.LogDebug("Calling LB_SP_GetCompanyList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, SearchTerm={SearchTerm}",
-                pageNumber, pageSize, searchTerm);
+            _logger.LogDebug("Calling LB_SP_GetCompanyList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, SearchTerm={searchText}, SearchColumn={searchColumn}",
+                pageNumber, pageSize, searchText, searchColumn);
 
             var result = await _repository.QueryPagedAsync<CompanyDto>(
                 sqlOrSp: "LB_SP_GetCompanyList",

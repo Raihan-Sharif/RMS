@@ -64,7 +64,8 @@ public class UserExposureController : BaseController
     public async Task<ActionResult<ApiResponse<IEnumerable<UserExposureDto>>>> GetUserExposureList(
         [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1,
         [FromQuery, Range(1, 100)] int pageSize = 10,
-        [FromQuery] string? searchTerm = null,
+        [FromQuery] string? searchText = null,
+        [FromQuery] string? searchColumn = null,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Getting UserExposure list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
@@ -72,7 +73,8 @@ public class UserExposureController : BaseController
         var result = await _userExposureService.GetUserExposureListAsync(
             pageNumber: pageNumber,
             pageSize: pageSize,
-            searchTerm: searchTerm,
+            searchText: searchText,
+            searchColumn: searchColumn,
             cancellationToken: cancellationToken);
 
         return Ok(result, "User Exposures retrieved successfully");

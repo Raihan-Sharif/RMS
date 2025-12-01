@@ -10,7 +10,7 @@ namespace SimRMS.Application.Interfaces.Services
     /// </summary>
     public interface IStockService
     {
-        Task<PagedResult<StockDto>> GetStockListAsync(int pageNumber = 1, int pageSize = 10, string? xchgCode = null, string? stkCode = null, string? searchTerm = null, string sortColumn = "StkCode", string sortDirection = "ASC", CancellationToken cancellationToken = default);
+        Task<PagedResult<StockDto>> GetStockListAsync(int pageNumber = 1, int pageSize = 10, string? xchgCode = null, string? stkCode = null, string? searchText = null, string? searchColumn = null, string sortColumn = "StkCode", string sortDirection = "ASC", CancellationToken cancellationToken = default);
         Task<StockDto?> GetStockByKeyAsync(string xchgCode, string stkCode, CancellationToken cancellationToken = default);
         Task<StockDto> CreateStockAsync(CreateStockRequest request, CancellationToken cancellationToken = default);
         Task<StockDto> UpdateStockAsync(string xchgCode, string stkCode, UpdateStockRequest request, CancellationToken cancellationToken = default);

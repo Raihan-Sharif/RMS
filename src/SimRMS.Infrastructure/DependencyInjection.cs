@@ -95,6 +95,9 @@ namespace SimRMS.Infrastructure
             // External Services
             services.AddHttpClient<IExternalTokenService, ExternalTokenService>();
 
+            // TpOms Service
+            services.AddHttpClient<ITpOmsService, TpOmsService>();
+
             // Background Services
             services.AddHostedService<CacheCleanupService>();
 

@@ -66,7 +66,7 @@ public class ClientExposureService : IClientExposureService
 	#region Main CRUD Operations
 
 	public async Task<PagedResult<ClientExposureDto>> GetClientExposureListAsync(int pageNumber = 1, int pageSize = 10,
-		string? clntCode = null, string? coBrchCode = null, string? searchTerm = null, CancellationToken cancellationToken = default)
+		string? clntCode = null, string? coBrchCode = null, string? searchText = null, string? searchColumn = null, CancellationToken cancellationToken = default)
 	{
 		_logger.LogInformation("Getting paged Client Exposure list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
@@ -82,13 +82,14 @@ public class ClientExposureService : IClientExposureService
 				new LB_DALParam("PageSize", pageSize),
 				new LB_DALParam("ClntCode", clntCode),
 				new LB_DALParam("CoBrchCode", coBrchCode),
-				new LB_DALParam("SearchText", searchTerm ?? (object)DBNull.Value),
-				new LB_DALParam("SortColumn", "ClntCode"),
+				new LB_DALParam("SearchText", searchText ?? (object)DBNull.Value),
+				new LB_DALParam("SearchColumn", searchColumn ?? (object)DBNull.Value),
+                new LB_DALParam("SortColumn", "ClntCode"),
 				new LB_DALParam("SortDirection", "ASC")
 			};
 
-			_logger.LogDebug("Calling LB_SP_GetMstClntExpsList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, ClntCode={ClntCode}, CoBrchCode={CoBrchCode}, SearchTerm={SearchTerm}",
-				pageNumber, pageSize, clntCode, coBrchCode, searchTerm);
+			_logger.LogDebug("Calling LB_SP_GetMstClntExpsList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, ClntCode={ClntCode}, CoBrchCode={CoBrchCode}, searchText={searchText}, Search Column={searchColumn}",
+				pageNumber, pageSize, clntCode, coBrchCode, searchText, searchColumn);
 
 			var result = await _repository.QueryPagedAsync<ClientExposureDto>(
 				sqlOrSp: "LB_SP_GetMstClntExpsList",

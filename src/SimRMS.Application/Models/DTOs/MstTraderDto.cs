@@ -22,5 +22,7 @@ namespace SimRMS.Application.Models.DTOs
     {
         public string XchgCode { get; set; } = string.Empty;
         public string DlrCode { get; set; } = string.Empty;
+        public int XchgPrefix { get; set; }
+        public string BrokerCode { get; set; } = string.Empty;
     }
 }

@@ -70,7 +70,8 @@ public class StockExposureController : BaseController
         [FromQuery] string? usrID = null,
         [FromQuery] string? clntCode = null,
         [FromQuery] string? stkCode = null,
-        [FromQuery] string? searchTerm = null,
+        [FromQuery] string? searchText = null,
+        [FromQuery] string? searchColumn = null,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Getting Stock Exposure list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
@@ -81,7 +82,8 @@ public class StockExposureController : BaseController
             usrID: usrID,
             clntCode: clntCode,
             stkCode: stkCode,
-            searchTerm: searchTerm,
+            searchText: searchText,
+            searchColumn: searchColumn,
             cancellationToken: cancellationToken);
 
         return Ok(result, "Stock Exposures retrieved successfully");

@@ -258,6 +258,21 @@ namespace SimRMS.Application.Validators
                 .Matches("^[A-Z0-9]+$").WithMessage("Dealer code can only contain uppercase letters and numbers");
         }
 
+        public static IRuleBuilderOptions<T, string> ValidBrokerCode<T>(this IRuleBuilder<T, string> ruleBuilder)
+        {
+            return ruleBuilder
+                .NotEmpty().WithMessage("Broker code is required")
+                .MaximumLength(10).WithMessage("Broker code cannot exceed 10 characters")
+                .Matches("^[A-Z0-9]+$").WithMessage("Dealer code can only contain uppercase letters and numbers");
+        }
+
+        public static IRuleBuilderOptions<T, int> ValidXchgPrefix<T>(this IRuleBuilder<T, int> ruleBuilder)
+        {
+            return ruleBuilder
+                .GreaterThanOrEqualTo(0).WithMessage("XchgPrefix cannot be negative")
+                .LessThanOrEqualTo(9999).WithMessage("XchgPrefix cannot exceed 4 digits");
+        }
+
         #endregion
 
         #region Client Validations

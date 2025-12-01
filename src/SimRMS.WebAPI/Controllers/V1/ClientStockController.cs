@@ -75,6 +75,7 @@ public class ClientStockController : BaseController
         [FromQuery] string? stockCode = null,
         [FromQuery] string? xchgCode = null,
         [FromQuery] string? searchText = null,
+        [FromQuery] string? searchColumn = null,
         [FromQuery] string? sortColumn = "ClientCode",
         [FromQuery] string? sortDirection = "ASC",
         CancellationToken cancellationToken = default)
@@ -90,6 +91,7 @@ public class ClientStockController : BaseController
             StockCode = stockCode,
             XchgCode = xchgCode,
             SearchText = searchText,
+            SearchColumn = searchColumn,
             SortColumn = sortColumn,
             SortDirection = sortDirection
         };

@@ -78,7 +78,13 @@ namespace SimRMS.Application.Models.DTOs
         public bool? PlaceOrder { get; set; }
         public bool? ViewClient { get; set; }
         public bool? ModifyOrder { get; set; }
-        
+
+        public byte? User_IsAuth { get; set; }
+        public byte? User_AuthLevel { get; set; }
+        public byte? User_IsDel { get; set; }
+        public string? User_MakeBy { get; set; }
+        public string? User_AuthBy { get; set; }
+
         // Computed properties from SP
         public string? GroupStatus { get; set; }
         public string? AuthorizationStatus { get; set; }

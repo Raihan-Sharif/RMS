@@ -26,8 +26,8 @@ using System.Reflection;
 /// Modification History
 /// Author             Date         Description of Change
 /// -------------------------------------------------------------------
-/// Asif Zaman         30-09-25     Aligned the parameters of workflow methods as per SP
-///
+/// Asif Zaman         30-Sep-25     Aligned the parameters of workflow methods as per SP
+/// Asif Zaman         11-Nov-25     TpOms integration for client share holding update   
 /// ===================================================================
 /// </para>
 /// </summary>
@@ -45,8 +45,10 @@ public class ClientStockService : IClientStockService
     private readonly IValidator<DeleteClientStockRequest> _deleteValidator;
     private readonly IValidator<AuthorizeClientStockRequest> _authorizeValidator;
     private readonly IValidator<GetClientStockWorkflowListRequest> _workflowListValidator;
+    private readonly ITpOmsService _tpOmsService; //tpoms injection
     private readonly ICurrentUserService _currentUserService;
     private readonly ILogger<ClientStockService> _logger;
+
 
     public ClientStockService(
         IGenericRepository repository,
@@ -58,6 +60,7 @@ public class ClientStockService : IClientStockService
         IValidator<DeleteClientStockRequest> deleteValidator,
         IValidator<AuthorizeClientStockRequest> authorizeValidator,
         IValidator<GetClientStockWorkflowListRequest> workflowListValidator,
+        ITpOmsService tpOmsService,
         ICurrentUserService currentUserService,
         ILogger<ClientStockService> logger)
     {
@@ -70,6 +73,7 @@ public class ClientStockService : IClientStockService
         _deleteValidator = deleteValidator;
         _authorizeValidator = authorizeValidator;
         _workflowListValidator = workflowListValidator;
+        _tpOmsService = tpOmsService;
         _currentUserService = currentUserService;
         _logger = logger;
     }
@@ -105,7 +109,8 @@ public class ClientStockService : IClientStockService
 	            new LB_DALParam("StockCode", request.StockCode ?? (object)DBNull.Value),
 	            new LB_DALParam("XchgCode", request.XchgCode ?? (object)DBNull.Value),
 	            new LB_DALParam("SearchText", request.SearchText ?? (object)DBNull.Value),
-	            new LB_DALParam("SortColumn", request.SortColumn ?? "ClientCode"),
+	            new LB_DALParam("SearchColumn", request.SearchColumn ?? (object)DBNull.Value),
+                new LB_DALParam("SortColumn", request.SortColumn ?? "ClientCode"),
 	            new LB_DALParam("SortDirection", request.SortDirection ?? "ASC")
             };
 
@@ -569,6 +574,17 @@ public class ClientStockService : IClientStockService
 
             _logger.LogInformation("Client Stock authorization completed successfully for Branch: {BranchCode}, Client: {ClientCode}, Stock: {StockCode}, Action: {AuthAction}",
                 request.BranchCode, request.ClientCode, request.StockCode, request.AuthAction);
+
+            //tpOms call to update share holding
+            var tpOmsRequest = new TpOmsUpdateShareHoldingRequest
+            {
+                clientId = request.ClientCode,
+                branchId = Convert.ToInt32(request.BranchCode),
+                stockCode = request.StockCode,
+                exchangeCode = "DSE",
+            };
+            var tpOmsResult = await _tpOmsService.UpdateShareHoldingAsync(tpOmsRequest, cancellationToken);
+
 
             return true;
         }

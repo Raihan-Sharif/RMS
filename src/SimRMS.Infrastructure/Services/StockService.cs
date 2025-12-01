@@ -75,7 +75,7 @@ public class StockService : IStockService
     #region Main CRUD Operations
 
     public async Task<PagedResult<StockDto>> GetStockListAsync(int pageNumber = 1, int pageSize = 10,
-        string? xchgCode = null, string? stkCode = null, string? searchTerm = null,
+        string? xchgCode = null, string? stkCode = null, string? searchText = null, string? searchColumn = null,
         string sortColumn = "StkCode", string sortDirection = "ASC", CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Retrieving paged Stock list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
@@ -87,7 +87,8 @@ public class StockService : IStockService
             PageSize = pageSize,
             XchgCode = xchgCode,
             StkCode = stkCode,
-            SearchText = searchTerm,
+            SearchText = searchText,
+            SearchColumn = searchColumn,
             SortColumn = sortColumn,
             SortDirection = sortDirection
         };
@@ -106,15 +107,16 @@ public class StockService : IStockService
                 // Filter Parameters (assuming these can be null/optional)
                 new LB_DALParam("XchgCode", xchgCode ?? (object)DBNull.Value),
 	            new LB_DALParam("StkCode", stkCode ?? (object)DBNull.Value),
-	            new LB_DALParam("SearchText", searchTerm ?? (object)DBNull.Value),
+	            new LB_DALParam("SearchText", searchText ?? (object)DBNull.Value),
+	            new LB_DALParam("SearchColumn", searchColumn ?? (object)DBNull.Value),
 
                 // Sorting Parameters (assuming these can be null/optional)
                 new LB_DALParam("SortColumn", sortColumn ?? (object)DBNull.Value),
 	            new LB_DALParam("SortDirection", sortDirection ?? (object)DBNull.Value)
             };
 
-			_logger.LogDebug("Calling LB_SP_GetMstStkList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, SearchText={SearchText}",
-                pageNumber, pageSize, searchTerm);
+			_logger.LogDebug("Calling LB_SP_GetMstStkList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, SearchText={searchText}, searchColumn= {searchColumn}",
+                pageNumber, pageSize, searchText, searchColumn);
 
             var result = await _repository.QueryPagedAsync<StockDto>(
                 sqlOrSp: "LB_SP_GetMstStkList",
@@ -224,7 +226,9 @@ public class StockService : IStockService
 	            new LB_DALParam("StkUpperLmtPrice", request.StkUpperLmtPrice ?? (object)DBNull.Value),
 	            new LB_DALParam("StkLowerLmtPrice", request.StkLowerLmtPrice ?? (object)DBNull.Value),
 	            new LB_DALParam("StkIsSyariah", request.StkIsSyariah ?? (object)DBNull.Value),
-	            new LB_DALParam("StkLot", request.StkLot),
+	            new LB_DALParam("StkIsMarginable", request.StkIsMarginable ?? (object)DBNull.Value),
+	            new LB_DALParam("StkIsScriptNetting", request.StkIsScriptNetting ?? (object)DBNull.Value),
+                new LB_DALParam("StkLot", request.StkLot),
 	            new LB_DALParam("LastUpdateDate", request.LastUpdateDate ?? (object)DBNull.Value),
 	            new LB_DALParam("ISIN", request.ISIN),
 	            new LB_DALParam("Currency", request.Currency ?? (object)DBNull.Value),
@@ -325,7 +329,9 @@ public class StockService : IStockService
 	            new LB_DALParam("StkUpperLmtPrice", request.StkUpperLmtPrice ?? (object)DBNull.Value),
 	            new LB_DALParam("StkLowerLmtPrice", request.StkLowerLmtPrice ?? (object)DBNull.Value),
 	            new LB_DALParam("StkIsSyariah", request.StkIsSyariah ?? (object)DBNull.Value),
-	            new LB_DALParam("StkLot", request.StkLot ?? (object)DBNull.Value),
+	            new LB_DALParam("StkIsMarginable", request.StkIsMarginable ?? (object)DBNull.Value),
+	            new LB_DALParam("StkIsScriptNetting", request.StkIsScriptNetting ?? (object)DBNull.Value),
+                new LB_DALParam("StkLot", request.StkLot ?? (object)DBNull.Value),
 	            new LB_DALParam("LastUpdateDate", (object)DBNull.Value), // Explicitly DBNull in source
                 new LB_DALParam("ISIN", request.ISIN ?? (object)DBNull.Value),
 	            new LB_DALParam("Currency", request.Currency ?? (object)DBNull.Value),
@@ -428,7 +434,9 @@ public class StockService : IStockService
 	            new LB_DALParam("StkUpperLmtPrice", (object)DBNull.Value),
 	            new LB_DALParam("StkLowerLmtPrice", (object)DBNull.Value),
 	            new LB_DALParam("StkIsSyariah", (object)DBNull.Value),
-	            new LB_DALParam("StkLot", (object)DBNull.Value),
+	            new LB_DALParam("StkIsMarginable", (object)DBNull.Value),
+	            new LB_DALParam("StkIsScriptNetting", (object)DBNull.Value),
+                new LB_DALParam("StkLot", (object)DBNull.Value),
 	            new LB_DALParam("LastUpdateDate", (object)DBNull.Value),
 	            new LB_DALParam("ISIN", (object)DBNull.Value),
 	            new LB_DALParam("Currency", (object)DBNull.Value),

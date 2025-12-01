@@ -14,6 +14,7 @@ namespace SimRMS.Application.Interfaces.Services
             int pageNumber = 1,
             int pageSize = 10,
             string? searchText = null,
+            string? searchColumn = null,
             string? usrStatus = null,
             string? dlrCode = null,
             string? coCode = null,

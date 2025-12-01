@@ -18,8 +18,8 @@ obj
 .env
 
 # Editor directories and files
+.vs
 .vs/*
-.vs\*
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -30,6 +30,16 @@ obj
 *.sln
 *.sw?
 
+# Visual Studio Publish Profiles
+Properties/PublishProfiles/
+*.pubxml
+*.pubxml.user
+*.publishsettings
+
+# Publish output
+/bin/Release/**/publish/
+/publish/
+
+
 # Sentry Config File
 .env.sentry-build-plugin
-nul

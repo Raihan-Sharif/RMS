@@ -2,6 +2,7 @@ using LB.DAL.Core.Common;
 using Microsoft.Extensions.Logging;
 using SimRMS.Application.Interfaces.Services;
 using SimRMS.Application.Models.DTOs;
+using SimRMS.Application.Models.DTOs.TpOms;
 using SimRMS.Infrastructure.Interfaces.Common;
 
 /// <summary>
@@ -318,6 +319,7 @@ public class CommonDataService : ICommonDataService
 
         List<LB_DALParam> parameters = new List<LB_DALParam>();
         parameters.Add(new LB_DALParam("ExchangeCode", exchangeCode));
+        parameters.Add(new LB_DALParam("BoardCode", boardCode));
 
         try
         {
@@ -387,4 +389,111 @@ public class CommonDataService : ICommonDataService
             throw;
         }
     }
+
+    public async Task<IEnumerable<ExchangeBrokerDTO>> GetExchangeWiseBrokerListAsync(string xchgCode, CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting Exchange wise Broker List for. xchgCode : {xchgCode}", xchgCode);
+
+        List<LB_DALParam> parameters = new List<LB_DALParam>();
+        var sql = @"SELECT XchgPrefix, BrokerCode, CONVERT(VARCHAR(4),XchgPrefix) +'-'+ BrokerCode BrokerCodeWithXchgPrefix
+                    FROM LBExchange
+                    WHERE LTRIM(RTRIM(XchgCode)) = LTRIM(RTRIM(@XchgCode))
+                    AND IsAuth = 1 AND IsDel = 0";
+
+        parameters.Add(new LB_DALParam("XchgCode", xchgCode));
+
+        try
+        {
+            var result = await _repository.QueryAsync<ExchangeBrokerDTO>(sql, parameters, false, cancellationToken);
+            _logger.LogInformation("Retrieved {Count} Exchange wise Broker List xchgCode: {xchgCode}", result.Count(), xchgCode);
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting Exchange wise Broker list");
+            throw;
+        }
+    }
+
+    public async Task<ExchangeBrokerDTO> GetBrokerWiseExchangePrefixAsync(string brokerCode, CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting Broker wise Exchange Prefix for. brokerCode : {brokerCode}", brokerCode);
+
+        List<LB_DALParam> parameters = new List<LB_DALParam>();
+        var sql = @"SELECT XchgPrefix,BrokerCode, CONVERT(VARCHAR(100),CONVERT(VARCHAR(4),XchgPrefix) +'-'+ BrokerCode ) BrokerCodeWithXchgPrefix
+                    FROM LBExchange
+                    WHERE LTRIM(RTRIM(BrokerCode)) = LTRIM(RTRIM(@BrokerCode))
+                    AND IsAuth = 1 AND IsDel = 0";
+
+        parameters.Add(new LB_DALParam("BrokerCode", brokerCode));
+
+        try
+        {
+            var result = await _repository.QuerySingleAsync<ExchangeBrokerDTO>(sql, parameters, false, cancellationToken);
+            _logger.LogInformation("Retrieved Getting Broker wise Exchange Prefix for. brokerCode : {brokerCode}", brokerCode);
+
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting Broker wise Exchange Prefix for");
+            throw;
+        }
+    }
+
+    #region TPOMS
+
+    /// <summary>
+    /// CheckWorkFlowExistAsync
+    /// </summary>
+    /// <param name="workflowName"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<bool> CheckWorkFlowExistAsync(string workflowName, CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Checking Workflow existance for : {Workflow Name}", workflowName);
+
+        List<LB_DALParam> parameters = new List<LB_DALParam>();
+        var sql = @"
+                    SELECT CASE WHEN WFLevel > 1 THEN 1 ELSE 0 END as HasWorkFlow
+                    FROM LBWF
+                    WHERE WFname  = @WorkFlowName";
+
+        parameters.Add(new LB_DALParam("WorkFlowName", workflowName));
+
+        try
+        {
+            bool wfExist = await _repository.ExecuteScalarAsync<bool>(sql, parameters, false, cancellationToken);
+            _logger.LogInformation("Checking Workflow existance {result}", wfExist);
+            return wfExist;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Checking Workflow existance");
+            throw;
+        }
+    }
+
+    public async Task<IEnumerable<ClientDealersDTO>> GetClientAssociateDealerListAsync(string clientCode = null, CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting Client Associate Dealer for TPOMS. Client : {clientCode}", clientCode);
+
+        List<LB_DALParam> parameters = new List<LB_DALParam>();
+        var sp = @"LB_SP_GetTPOMSClientsAllAssociateDealer";
+
+        parameters.Add(new LB_DALParam("ClntCode", clientCode));
+
+        try
+        {
+            var result = await _repository.QueryAsync<ClientDealersDTO>(sp, parameters, true, cancellationToken);
+            _logger.LogInformation("Retrieved {Count} Associate Dealer for TPOMS. Client: {clientCode}", result.Count(), clientCode);
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting Client Associate Dealer list for TPOMS");
+            throw;
+        }
+    }
+    #endregion
 }

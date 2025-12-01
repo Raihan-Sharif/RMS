@@ -10,7 +10,7 @@ namespace SimRMS.Application.Interfaces.Services
     public interface ITraderService
     {
         //Read operations
-        Task<PagedResult<MstTraderDto>> GetMstTraderListAsync(int pageNumber = 1, int pageSize = 10, string? searchTerm = null, string? xchgCode = null, string? sortDirection = null, CancellationToken cancellationToken = default);
+        Task<PagedResult<MstTraderDto>> GetMstTraderListAsync(int pageNumber = 1, int pageSize = 10, string? searchText = null, string? searchColumn = null, string? xchgCode = null, string? sortDirection = null, CancellationToken cancellationToken = default);
         Task<MstTraderDto> GetMstTraderByIdAsync(string xchgCode, string dlrCode, CancellationToken cancellationToken = default);
 
         //CRUD operations

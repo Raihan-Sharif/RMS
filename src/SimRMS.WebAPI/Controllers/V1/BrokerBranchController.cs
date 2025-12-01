@@ -54,7 +54,7 @@ public class BrokerBranchController : BaseController
     /// </summary>
     /// <param name="pageNumber">Page number (default: 1)</param>
     /// <param name="pageSize">Page size (default: 10, max: 100)</param>
-    /// <param name="searchTerm">Search term for branch code or description</param>
+    /// <param name="searchText">search Text for branch code or description</param>
     /// <param name="coCode">Filter by specific company code</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Paginated list of branches</returns>
@@ -65,16 +65,18 @@ public class BrokerBranchController : BaseController
     public async Task<ActionResult<ApiResponse<IEnumerable<MstCoBrchDto>>>> GetMstCoBrchList(
         [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1,
         [FromQuery, Range(1, 100)] int pageSize = 10,
-        [FromQuery] string? searchTerm = null,
+        [FromQuery] string? searchText = null,
+        [FromQuery] string? searchColumn = null,
         [FromQuery] string? coCode = null,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Getting Branches list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
+        _logger.LogInformation("Getting Branches list - Page: {PageNumber}, Size: {PageSize}, searchText: {searchText}, searchColumn: {searchColumn}", pageNumber, pageSize, searchText, searchColumn);
 
         var result = await _brokerBranchService.GetMstCoBrchListAsync(
             pageNumber: pageNumber,
             pageSize: pageSize,
-            searchTerm: searchTerm,
+            searchText: searchText,
+            searchColumn: searchColumn,
             coCode: coCode,
             cancellationToken: cancellationToken);
 

@@ -264,4 +264,44 @@ public class CommonDataController : BaseController
         var stocks = await _commonDataService.GetStockListAsync(exchangeCode, boardCode, sectorCode, cancellationToken);
         return Ok(stocks, "Stock list retrieved successfully");
     }
+
+    /// <summary>
+    /// Get Exchange Wise Broker List
+    /// </summary>
+    /// <param name="exchangeCode"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpGet("exchange-broker-list")]
+    [ProducesResponseType(typeof(ApiResponse<IEnumerable<StockListDto>>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 400)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 401)]
+    public async Task<ActionResult<ApiResponse<IEnumerable<ExchangeBrokerDTO>>>> GetExchangeWiseBrokerList(
+    [FromQuery] string? exchangeCode = null,
+    CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting exchange wise broker list with exchangeCode: {ExchangeCode}", exchangeCode);
+
+        var exchangeBrokers = await _commonDataService.GetExchangeWiseBrokerListAsync(exchangeCode, cancellationToken);
+        return Ok(exchangeBrokers, "Exchange wise broker list retrieved successfully");
+    }
+
+    /// <summary>
+    /// Get Broker wise exchange prefix
+    /// </summary>
+    /// <param name="brokerCode"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpGet("broker-exchange-prefix")]
+    [ProducesResponseType(typeof(ApiResponse<ExchangeBrokerDTO>), 200)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 400)]
+    [ProducesResponseType(typeof(ApiResponse<object>), 401)]
+    public async Task<ActionResult<ApiResponse<ExchangeBrokerDTO>>> GetBrokerWiseExchangePrefix(
+    [FromQuery] string? brokerCode = null,
+    CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting Broker wise exchange prefix with brokerCode: {brokerCode}", brokerCode);
+
+        var brokerPrefix = await _commonDataService.GetBrokerWiseExchangePrefixAsync(brokerCode, cancellationToken);
+        return Ok(brokerPrefix, "Broker wise exchange prefix retrieved successfully");
+    }
 }

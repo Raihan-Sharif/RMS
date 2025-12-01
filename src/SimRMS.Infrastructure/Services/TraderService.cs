@@ -72,7 +72,7 @@ public class TraderService : ITraderService
         _logger = logger;
     }
     #region Traders List Operations
-    public async Task<PagedResult<MstTraderDto>> GetMstTraderListAsync(int pageNumber = 1, int pageSize = 10, string? searchTerm = null, string? xchgCode = null, string? sortDirection = null, CancellationToken cancellationToken = default)
+    public async Task<PagedResult<MstTraderDto>> GetMstTraderListAsync(int pageNumber = 1, int pageSize = 10, string? searchText = null, string? searchColumn = null, string? xchgCode = null, string? sortDirection = null, CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Retrieving paged Trader list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
@@ -93,7 +93,8 @@ public class TraderService : ITraderService
 
                 // Filter Parameters
                 new LB_DALParam("XchgCode", xchgCode ?? (object)DBNull.Value), // Added null check for safety
-                new LB_DALParam("SearchTerm", searchTerm ?? (object)DBNull.Value), // Added null check for safety
+                new LB_DALParam("SearchText", searchText ?? (object)DBNull.Value), // Added null check for safety
+                new LB_DALParam("SearchColumn", searchColumn ?? (object)DBNull.Value), // Added null check for safety
 
                 // Control Parameter
                 new LB_DALParam("IsAuth", (byte)AuthTypeEnum.Approve) // Authorized records
@@ -206,6 +207,8 @@ public class TraderService : ITraderService
                 new LB_DALParam("Action", (byte)ActionTypeEnum.INSERT),
 	            new LB_DALParam("XchgCode", request.XchgCode ?? (object)DBNull.Value), // Added null check for safety
                 new LB_DALParam("DlrCode", request.DlrCode ?? (object)DBNull.Value),   // Added null check for safety
+                new LB_DALParam("XchgPrefix", request.XchgPrefix),  
+                new LB_DALParam("BrokerCode", request.BrokerCode ?? (object)DBNull.Value),   // Added null check for safety
 
                 // Audit Parameters
                 new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
@@ -274,7 +277,8 @@ public class TraderService : ITraderService
                 new LB_DALParam("Action", (byte)ActionTypeEnum.UPDATE),
 	            new LB_DALParam("XchgCode", xchgCode ?? (object)DBNull.Value), // Added null check for safety
                 new LB_DALParam("DlrCode", dlrCode ?? (object)DBNull.Value),   // Added null check for safety
-
+                new LB_DALParam("XchgPrefix", request.XchgPrefix),
+                new LB_DALParam("BrokerCode", request.BrokerCode ?? (object)DBNull.Value), 
                 // Audit Parameters
                 new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
 	            new LB_DALParam("MakerId", _currentUserService.GetCurrentUserId()),

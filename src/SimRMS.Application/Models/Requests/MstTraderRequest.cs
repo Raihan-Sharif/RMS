@@ -32,6 +32,8 @@ namespace SimRMS.Application.Models.Requests
     {
         public string XchgCode { get; set; } = string.Empty;
         public string DlrCode { get; set; } = string.Empty;
+        public int XchgPrefix { get; set; }
+        public string BrokerCode { get; set; } = string.Empty;
         public string? Remarks { get; set; }
     }
 
@@ -42,6 +44,8 @@ namespace SimRMS.Application.Models.Requests
     {
         public string XchgCode { get; set; } = string.Empty;
         public string DlrCode { get; set; } = string.Empty;
+        public int XchgPrefix { get; set; }
+        public string BrokerCode { get; set; } = string.Empty;
         public string? Remarks { get; set; }
     }
 

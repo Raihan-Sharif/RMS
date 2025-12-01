@@ -31,6 +31,8 @@ namespace SimRMS.Application.Models.Requests
         public string? XchgCode { get; set; }
         public string? StkCode { get; set; }
         public string? SearchText { get; set; }
+        public string? SearchColumn { get; set; }
+        
         public string SortColumn { get; set; } = "StkCode";
         public string SortDirection { get; set; } = "ASC";
     }
@@ -54,6 +56,8 @@ namespace SimRMS.Application.Models.Requests
         public decimal? StkUpperLmtPrice { get; set; }
         public decimal? StkLowerLmtPrice { get; set; }
         public string? StkIsSyariah { get; set; }
+        public string? StkIsMarginable { get; set; }
+        public string? StkIsScriptNetting { get; set; }
         public DateTime? LastUpdateDate { get; set; }
         public string? Currency { get; set; }
         public decimal? StkParValue { get; set; }
@@ -77,6 +81,8 @@ namespace SimRMS.Application.Models.Requests
         public string? Currency { get; set; }
         public string? SecurityType { get; set; }
         public string? StkIsSyariah { get; set; }
+        public string? StkIsMarginable { get; set; }
+        public string? StkIsScriptNetting { get; set; }
         public int? StkLot { get; set; }
         public decimal? StkParValue { get; set; }
         public decimal? StkLastDonePrice { get; set; }

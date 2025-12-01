@@ -10,7 +10,7 @@ namespace SimRMS.Application.Interfaces.Services
     /// </summary>
     public interface IStockExposureService
     {
-        Task<PagedResult<StockExposureDto>> GetStockExposureListAsync(int pageNumber = 1, int pageSize = 10, string? usrID = null, string? clntCode = null, string? stkCode = null, string? searchTerm = null, CancellationToken cancellationToken = default);
+        Task<PagedResult<StockExposureDto>> GetStockExposureListAsync(int pageNumber = 1, int pageSize = 10, string? usrID = null, string? clntCode = null, string? stkCode = null, string? searchText = null, string? searchColumn = null, CancellationToken cancellationToken = default);
         Task<StockExposureDto?> GetStockExposureByKeyAsync(GetStockExposureByKeyRequest request, CancellationToken cancellationToken = default);
         Task<StockExposureDto> CreateStockExposureAsync(CreateStockExposureRequest request, CancellationToken cancellationToken = default);
         Task<StockExposureDto> UpdateStockExposureAsync(UpdateStockExposureRequest request, CancellationToken cancellationToken = default);

@@ -10,7 +10,7 @@ namespace SimRMS.Application.Interfaces.Services
     /// </summary>
     public interface ICompanyService
     {
-        Task<PagedResult<CompanyDto>> GetCompanyListAsync(int pageNumber = 1, int pageSize = 10, string? searchTerm = null, string? coCode = null, CancellationToken cancellationToken = default);
+        Task<PagedResult<CompanyDto>> GetCompanyListAsync(int pageNumber = 1, int pageSize = 10, string? searchText = null, string? SearchColumn = null,  string? coCode = null, CancellationToken cancellationToken = default);
         Task<CompanyDto?> GetCompanyByIdAsync(string coCode, CancellationToken cancellationToken = default);
         Task<CompanyDto> UpdateCompanyAsync(string coCode, UpdateCompanyRequest request, CancellationToken cancellationToken = default);
 

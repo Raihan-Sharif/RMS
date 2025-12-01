@@ -69,7 +69,7 @@ public class StockExposureService : IStockExposureService
     #region Main CRUD Operations
 
     public async Task<PagedResult<StockExposureDto>> GetStockExposureListAsync(int pageNumber = 1, int pageSize = 10,
-        string? usrID = null, string? clntCode = null, string? stkCode = null, string? searchTerm = null, CancellationToken cancellationToken = default)
+        string? usrID = null, string? clntCode = null, string? stkCode = null, string? searchText = null, string? searchColumn = null, CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Getting paged Stock Exposure list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
@@ -89,7 +89,8 @@ public class StockExposureService : IStockExposureService
                 new LB_DALParam("UsrID", usrID ?? (object)DBNull.Value),
 	            new LB_DALParam("ClntCode", clntCode ?? (object)DBNull.Value),
 	            new LB_DALParam("StkCode", stkCode ?? (object)DBNull.Value),
-	            new LB_DALParam("SearchText", searchTerm ?? (object)DBNull.Value),
+	            new LB_DALParam("SearchText", searchText ?? (object)DBNull.Value),
+	            new LB_DALParam("SearchColumn", searchColumn ?? (object)DBNull.Value),
 
                 // Sorting Parameters
                 new LB_DALParam("SortColumn", "StkCode"),

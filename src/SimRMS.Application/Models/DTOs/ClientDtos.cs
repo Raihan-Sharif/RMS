@@ -13,6 +13,7 @@
 ///
 /// ===================================================================
 /// </para>
+/// Test for Commit test in new TFS
 /// </summary>
 
 namespace SimRMS.Application.Models.DTOs
@@ -45,6 +46,12 @@ namespace SimRMS.Application.Models.DTOs
         public bool ClntAllowAssociate { get; set; }
         public bool? ClntDlrReassign { get; set; }
         public string? ClntReassignDlrCode { get; set; }
+
+        public string? OldClntDlrCode { get; set; }
+        public bool? OldClntAllowAssociate { get; set; }
+        public bool? OldClntDlrReassign { get; set; }
+        public string? OldClntReassignDlrCode { get; set; }
+
         public decimal ClientCommission { get; set; }
         public bool AllowSME { get; set; }
 

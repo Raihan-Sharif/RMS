@@ -75,7 +75,7 @@ public class BrokerBranchService : IBrokerBranchService
     #region Main CRUD Operations
 
     public async Task<PagedResult<MstCoBrchDto>> GetMstCoBrchListAsync(int pageNumber = 1, int pageSize = 10,
-        string? searchTerm = null, string? coCode = null, CancellationToken cancellationToken = default)
+        string? searchText = null, string? searchColumn = null, string? coCode = null, CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Retrieving paged branch list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
@@ -91,12 +91,14 @@ public class BrokerBranchService : IBrokerBranchService
                 new LB_DALParam("SortColumn", "CoBrchDesc"),
                 new LB_DALParam("SortDirection", "ASC"),
                 new LB_DALParam("CoCode", !string.IsNullOrEmpty(coCode) ? coCode : DBNull.Value),
-                new LB_DALParam("searchTerm", !string.IsNullOrEmpty(searchTerm) ? searchTerm : DBNull.Value),
+                new LB_DALParam("SearchText", !string.IsNullOrEmpty(searchText) ? searchText : DBNull.Value),
+                new LB_DALParam("SearchColumn", !string.IsNullOrEmpty(searchColumn) ? searchColumn : DBNull.Value),
+
                 new LB_DALParam("isAuth", (byte)AuthTypeEnum.Approve)
             };
 
-            _logger.LogDebug("Calling LB_SP_GetBrokerBranchList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, CoCode={CoCode}, SearchTerm={SearchTerm}, isAuth={IsAuth}",
-                pageNumber, pageSize, coCode, searchTerm, 1);
+            _logger.LogDebug("Calling LB_SP_GetBrokerBranchList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, CoCode={CoCode}, Search Text={searchText}, isAuth={IsAuth}",
+                pageNumber, pageSize, coCode, searchText, 1);
 
             var result = await _repository.QueryPagedAsync<MstCoBrchDto>(
                 sqlOrSp: "LB_SP_GetBrokerBranchList",
@@ -713,7 +715,7 @@ public class BrokerBranchService : IBrokerBranchService
                 throw new DomainException("Company code cannot be null or empty");
             }
 
-            var sql = @"DECLARE @CoCode varchar(10) = @InpCoCode
+            var sql = @"
                     DECLARE @NextCode INT
                     ,@GENERATEDCODE VARCHAR(6)
                     SELECT @NextCode = ISNULL(MAX(CAST([CoBrchCode] AS INT)), 0) + 1

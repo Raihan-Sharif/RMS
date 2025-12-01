@@ -63,6 +63,7 @@ namespace SimRMS.WebAPI.Controllers.V1
             [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1,
             [FromQuery, Range(1, 100)] int pageSize = 10,
             [FromQuery] string? searchText = null,
+            [FromQuery] string? searchColumn = null,
             CancellationToken cancellationToken = default)
         {
             _logger.LogInformation("Getting Order Group(User Group) list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
@@ -71,6 +72,7 @@ namespace SimRMS.WebAPI.Controllers.V1
                 pageNumber: pageNumber,
                 pageSize: pageSize,
                 searchText: searchText,
+                searchColumn: searchColumn,
                 cancellationToken: cancellationToken);
 
             return Ok(result, "Order Groups(User Groups) retrieved successfully");

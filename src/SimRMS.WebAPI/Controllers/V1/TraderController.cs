@@ -67,7 +67,8 @@ public class TraderController : BaseController
     public async Task<ActionResult<ApiResponse<IEnumerable<MstTraderDto>>>> GetMstTraderList(
         [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1,
         [FromQuery, Range(1, 100)] int pageSize = 10,
-        [FromQuery] string? searchTerm = null,
+        [FromQuery] string? searchText = null,
+        [FromQuery] string? searchColumn = null,
         [FromQuery] string? xchgCode = null,
         [FromQuery] string? sortDirection = "ASC",
         CancellationToken cancellationToken = default)
@@ -77,7 +78,8 @@ public class TraderController : BaseController
         var result = await _traderService.GetMstTraderListAsync(
             pageNumber: pageNumber,
             pageSize: pageSize,
-            searchTerm: searchTerm,
+            searchText: searchText,
+            searchColumn: searchColumn,
             xchgCode: xchgCode,
             sortDirection: sortDirection,
             cancellationToken: cancellationToken);

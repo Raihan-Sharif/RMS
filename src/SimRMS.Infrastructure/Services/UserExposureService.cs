@@ -69,7 +69,7 @@ public class UserExposureService : IUserExposureService
     #region Main CRUD Operations
 
     public async Task<PagedResult<UserExposureDto>> GetUserExposureListAsync(int pageNumber = 1, int pageSize = 10,
-        string? searchTerm = null, CancellationToken cancellationToken = default)
+        string? searchText = null, string? searchColumn = null, CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Getting paged UserExposure list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
 
@@ -86,15 +86,16 @@ public class UserExposureService : IUserExposureService
 	            new LB_DALParam("PageSize", pageSize),
 
                 // Filter Parameter (assuming it can be null/optional)
-                new LB_DALParam("SearchText", searchTerm ?? (object)DBNull.Value),
+                new LB_DALParam("SearchText", searchText ?? (object)DBNull.Value),
+                new LB_DALParam("SearchColumn", searchColumn ?? (object)DBNull.Value),
 
                 // Sorting Parameters
                 new LB_DALParam("SortColumn", "UsrID"),
 	            new LB_DALParam("SortDirection", "ASC")
             };
 
-			_logger.LogDebug("Calling LB_SP_GetUserExpsList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, SearchTerm={SearchTerm}",
-                pageNumber, pageSize, searchTerm);
+			_logger.LogDebug("Calling LB_SP_GetUserExpsList with parameters: PageNumber={PageNumber}, PageSize={PageSize}, searchText={searchText},SearchColumn={searchColumn} ",
+                pageNumber, pageSize, searchText, searchColumn);
 
             var result = await _repository.QueryPagedAsync<UserExposureDto>(
                 sqlOrSp: "LB_SP_GetUserExpsList",
@@ -388,7 +389,6 @@ public class UserExposureService : IUserExposureService
 	            new LB_DALParam("UsrExpsSellAmt", (object)DBNull.Value),
 	            new LB_DALParam("UsrExpsCheckTotal", (object)DBNull.Value),
 	            new LB_DALParam("UsrExpsTotalAmt", (object)DBNull.Value),
-	            new LB_DALParam("UsrExpsWithShrLimit", (object)DBNull.Value),
 
                 // Audit Parameters
                 new LB_DALParam("IPAddress", _currentUserService.GetClientIPAddress()),
@@ -404,7 +404,7 @@ public class UserExposureService : IUserExposureService
 	            new LB_DALParam("AuthTransDt", (object)DBNull.Value),
 	            new LB_DALParam("IsAuth", (object)DBNull.Value),
 	            new LB_DALParam("AuthLevel", (object)DBNull.Value),
-	            new LB_DALParam("IsDel", (object)DBNull.Value),
+	            new LB_DALParam("IsDel", (byte)DeleteStatusEnum.Deleted), //used Enum
 
                 // Output Parameter
                 new LB_DALParam("RowsAffected", 0, ParameterDirection.Output)

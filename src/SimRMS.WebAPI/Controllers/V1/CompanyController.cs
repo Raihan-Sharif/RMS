@@ -66,7 +66,8 @@ public class CompanyController : BaseController
     public async Task<ActionResult<ApiResponse<IEnumerable<CompanyDto>>>> GetCompanyList(
         [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1,
         [FromQuery, Range(1, 100)] int pageSize = 10,
-        [FromQuery] string? searchTerm = null,
+        [FromQuery] string? SearchText = null,
+        [FromQuery] string? searchColumn = null,
         [FromQuery] string? coCode = null,
         CancellationToken cancellationToken = default)
     {
@@ -75,7 +76,8 @@ public class CompanyController : BaseController
         var result = await _companyService.GetCompanyListAsync(
             pageNumber: pageNumber,
             pageSize: pageSize,
-            searchTerm: searchTerm,
+            searchText: SearchText,
+            SearchColumn: searchColumn,
             coCode: coCode,
             cancellationToken: cancellationToken);
 

@@ -10,7 +10,7 @@ namespace SimRMS.Application.Interfaces.Services
     /// </summary>
     public interface IClientService
     {
-        Task<PagedResult<ClientDto>> GetClientListAsync(int pageNumber = 1, int pageSize = 10, string? searchTerm = null, string? gcif = null, string? clntName = null, string? clntCode = null, CancellationToken cancellationToken = default);
+        Task<PagedResult<ClientDto>> GetClientListAsync(int pageNumber = 1, int pageSize = 10, string? searchText = null, string? searchColumn = null, string? gcif = null, string? clntName = null, string? clntCode = null, CancellationToken cancellationToken = default);
         Task<ClientDto?> GetClientByIdAsync(string gcif, CancellationToken cancellationToken = default);
         Task<ClientDto> CreateClientAsync(CreateClientRequest request, CancellationToken cancellationToken = default);
         Task<ClientDto> UpdateClientAsync(string gcif, UpdateClientRequest request, CancellationToken cancellationToken = default);

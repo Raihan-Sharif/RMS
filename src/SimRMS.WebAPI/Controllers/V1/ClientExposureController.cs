@@ -68,7 +68,8 @@ public class ClientExposureController : BaseController
         [FromQuery, Range(1, 100)] int pageSize = 10,
         [FromQuery] string? clntCode = null,
         [FromQuery] string? coBrchCode = null,
-        [FromQuery] string? searchTerm = null,
+        [FromQuery] string? searchText = null,
+        [FromQuery] string? searchColumn = null,
         CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Getting Client Exposure list - Page: {PageNumber}, Size: {PageSize}", pageNumber, pageSize);
@@ -78,7 +79,8 @@ public class ClientExposureController : BaseController
             pageSize: pageSize,
             clntCode: clntCode,
             coBrchCode: coBrchCode,
-            searchTerm: searchTerm,
+            searchText: searchText,
+            searchColumn: searchColumn,
             cancellationToken: cancellationToken);
 
         return Ok(result, "Client Exposures retrieved successfully");
