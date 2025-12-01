@@ -85,6 +85,9 @@ namespace SimRMS.Infrastructure
             // Common data service for read-only operations
             services.AddScoped<ICommonDataService, CommonDataService>();
 
+            // Exchange Service
+            services.AddScoped<IExchangeService, ExchangeService>();
+
             // Application Infrastructure Services
             services.AddScoped<IConfigurationService, ConfigurationService>();
             services.AddScoped<ICacheService, CacheService>();
